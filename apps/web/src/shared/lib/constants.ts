@@ -1,5 +1,26 @@
 /** Navbar links + CTA typography (excludes LumenLA wordmark). */
-export const NAV_ITEM_TEXT_CLASS = "text-[15px] font-semibold leading-snug";
+export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
+
+/** Navbar row height (Tailwind class). */
+export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
+
+/** Pixels scrolled before navbar glass effect activates. */
+export const NAVBAR_SCROLL_OFFSET_PX = 8;
+
+/**
+ * Home hero background (public path).
+ * Use ≥2560px width source for sharp full-screen + Retina (current export may be ~1024px).
+ */
+export const HOME_HERO_IMAGE_PATH = "/images/hero-home.jpg";
+
+/** Bump when replacing hero-home.jpg so browser/Next image cache refreshes. */
+export const HOME_HERO_CACHE_VERSION = "20260518-hero-la";
+
+export const HOME_HERO_IMAGE_ALT =
+  "Aerial view of a luxury Los Angeles hillside home at golden hour";
+
+/** Minimum recommended hero source width (px). */
+export const HOME_HERO_MIN_SOURCE_WIDTH_PX = 2560;
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;

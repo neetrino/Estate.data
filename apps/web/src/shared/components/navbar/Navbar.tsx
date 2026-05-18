@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { NAVBAR_SCROLL_OFFSET_PX } from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import { PhoneNavLink } from "@/shared/components/navbar/PhoneNavLink";
 import {
@@ -10,19 +11,53 @@ import {
   NAV_CTA_LINKS,
   type NavLink,
 } from "@/shared/components/navbar/navConfig";
-import { NAV_ITEM_TEXT_CLASS } from "@/shared/lib/constants";
+import {
+  NAV_ITEM_TEXT_CLASS,
+  NAVBAR_HEIGHT_CLASS,
+} from "@/shared/lib/constants";
 import { AccentButtonLink } from "@/shared/ui/button";
 
-const NAVBAR_HEIGHT_CLASS = "h-16";
+const NAVBAR_SURFACE_BASE =
+  "sticky top-0 z-50 transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
 
-export function Navbar() {
+const NAVBAR_TRANSPARENT_CLASS = "bg-transparent";
+
+const NAVBAR_GLASS_CLASS =
+  "bg-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl backdrop-saturate-150";
+
+const NAVBAR_SOLID_CLASS = "bg-white";
+
+type NavbarProps = {
+  /** Transparent at top; liquid glass after scroll (home hero). */
+  overlay?: boolean;
+};
+
+export function Navbar({ overlay = false }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
+  useEffect(() => {
+    const updateScrolled = () => {
+      setScrolled(window.scrollY > NAVBAR_SCROLL_OFFSET_PX);
+    };
+
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
+
+  const headerSurfaceClass = (() => {
+    if (overlay) {
+      return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_TRANSPARENT_CLASS;
+    }
+    return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_SOLID_CLASS;
+  })();
+
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/95 backdrop-blur-sm dark:border-zinc-800/80 dark:bg-zinc-950/95">
+    <header className={`${NAVBAR_SURFACE_BASE} ${headerSurfaceClass}`}>
       <nav
         className={`mx-auto flex ${NAVBAR_HEIGHT_CLASS} max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8`}
         aria-label="Main"
@@ -41,7 +76,7 @@ export function Navbar() {
           </ul>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-5 sm:gap-6">
           <PhoneNavLink
             className="hidden sm:inline-flex"
             onNavigate={closeMobile}
@@ -55,7 +90,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-zinc-700 hover:bg-zinc-100 lg:hidden dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-black/5 lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((open) => !open)}
@@ -71,7 +106,7 @@ export function Navbar() {
       {mobileOpen ? (
         <div
           id="mobile-nav"
-          className="border-t border-zinc-200 bg-white px-4 py-4 lg:hidden dark:border-zinc-800 dark:bg-zinc-950"
+          className="border-t border-zinc-200/80 bg-white/95 px-4 py-4 backdrop-blur-xl lg:hidden"
         >
           <ul className="flex flex-col gap-1">
             {MAIN_NAV_LINKS.map((link) => (
@@ -88,7 +123,7 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex flex-col gap-2 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+          <div className="mt-4 flex flex-col gap-3 border-t border-zinc-200 pt-4">
             <PhoneNavLink
               className="justify-center py-2.5"
               onNavigate={closeMobile}
@@ -129,7 +164,7 @@ function desktopNavLinkClass(active: boolean): string {
   if (active) {
     return `${base} text-accent`;
   }
-  return `${base} text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50`;
+  return `${base} text-black hover:text-black/80`;
 }
 
 function mobileNavLinkClass(active: boolean): string {
@@ -137,14 +172,14 @@ function mobileNavLinkClass(active: boolean): string {
   if (active) {
     return `${base} bg-accent/10 text-accent`;
   }
-  return `${base} text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-900`;
+  return `${base} text-black hover:bg-zinc-50`;
 }
 
 function MenuIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="26"
+      height="26"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -160,8 +195,8 @@ function MenuIcon() {
 function CloseIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="26"
+      height="26"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

@@ -22,7 +22,7 @@ export function LogoLink({ onNavigate }: LogoLinkProps) {
       >
         {LOGO_MARK}
       </span>
-      <span className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+      <span className="text-lg font-semibold tracking-tight text-zinc-900">
         {LOGO_WORDMARK}
       </span>
     </Link>
