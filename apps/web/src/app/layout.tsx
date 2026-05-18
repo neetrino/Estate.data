@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Estate.data",
-  description: "Real estate data platform",
+  title: "LumenLA",
+  description: "Real estate media, data, and BIM solutions",
 };
 
 export default function RootLayout({
