@@ -4,6 +4,7 @@ import {
 } from "@/features/home/components/HomeHeroContent";
 import { HomeHero } from "@/features/home/components/HomeHero";
 import { HomeTrustedStrip } from "@/features/home/components/HomeTrustedStrip";
+import { HomeWhatWeDo } from "@/features/home/components/HomeWhatWeDo";
 import { Navbar } from "@/shared/components/navbar";
 
 export function HomePage() {
@@ -16,6 +17,7 @@ export function HomePage() {
         <Navbar overlay />
       </section>
       <HomeTrustedStrip />
+      <HomeWhatWeDo />
     </>
   );
 }

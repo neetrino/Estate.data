@@ -50,6 +50,16 @@ export const HOME_HERO_IMAGE_ALT =
 /** Minimum recommended hero source width (px). */
 export const HOME_HERO_MIN_SOURCE_WIDTH_PX = 2560;
 
+/** What we do — service card dimensions (px). */
+export const WHAT_WE_DO_CARD_WIDTH_PX = 330;
+export const WHAT_WE_DO_CARD_HEIGHT_PX = 285;
+
+/** Figma Card 6 (165:692) — corner radius. */
+export const WHAT_WE_DO_CARD_RADIUS_PX = 38;
+
+/** What we do card — nudge content block upward (px). */
+export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
+
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
 
