@@ -4,6 +4,9 @@ export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
 
+/** Space between viewport top and navbar row. */
+export const NAVBAR_TOP_PADDING_CLASS = "pt-2";
+
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
 

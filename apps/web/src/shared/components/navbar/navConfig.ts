@@ -1,6 +1,7 @@
 export const SITE_NAME = "LumenLA";
-export const LOGO_MARK = "L";
-export const LOGO_WORDMARK = "LumenLA";
+export const SITE_LOGO_PATH = "/images/logo-estatedata.png";
+export const SITE_LOGO_CACHE_VERSION = "20260519-removebg";
+export const SITE_LOGO_ALT = "Estate Data";
 
 export type NavLink = {
   label: string;

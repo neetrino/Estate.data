@@ -14,6 +14,7 @@ import {
 import {
   NAV_ITEM_TEXT_CLASS,
   NAVBAR_HEIGHT_CLASS,
+  NAVBAR_TOP_PADDING_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
@@ -58,8 +59,12 @@ export function Navbar({ overlay = false }: NavbarProps) {
     return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_SOLID_CLASS;
   })();
 
+  const navTone = overlay && !scrolled ? "light" : "dark";
+
   return (
-    <header className={`${NAVBAR_SURFACE_BASE} ${headerSurfaceClass}`}>
+    <header
+      className={`${NAVBAR_SURFACE_BASE} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
+    >
       <nav
         className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center gap-4 ${PAGE_GUTTER_CLASS}`}
         aria-label="Main"
@@ -73,6 +78,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 key={link.href}
                 link={link}
                 active={isActivePath(pathname, link.href)}
+                tone={navTone}
               />
             ))}
           </ul>
@@ -81,6 +87,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         <div className="flex shrink-0 items-center gap-5 sm:gap-6">
           <PhoneNavLink
             className="hidden sm:inline-flex"
+            tone={navTone}
             onNavigate={closeMobile}
           />
           <AccentButtonLink
@@ -92,7 +99,11 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-black/5 lg:hidden"
+            className={`inline-flex items-center justify-center rounded-md p-2 lg:hidden ${
+              navTone === "light"
+                ? "text-white hover:bg-white/10"
+                : "text-black hover:bg-black/5"
+            }`}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((open) => !open)}
@@ -144,10 +155,20 @@ export function Navbar({ overlay = false }: NavbarProps) {
   );
 }
 
-function NavItem({ link, active }: { link: NavLink; active: boolean }) {
+type NavTone = "light" | "dark";
+
+function NavItem({
+  link,
+  active,
+  tone,
+}: {
+  link: NavLink;
+  active: boolean;
+  tone: NavTone;
+}) {
   return (
     <li>
-      <Link href={link.href} className={desktopNavLinkClass(active)}>
+      <Link href={link.href} className={desktopNavLinkClass(active, tone)}>
         {link.label}
       </Link>
     </li>
@@ -161,10 +182,13 @@ function isActivePath(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function desktopNavLinkClass(active: boolean): string {
+function desktopNavLinkClass(active: boolean, tone: NavTone): string {
   const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors`;
   if (active) {
     return `${base} text-accent`;
+  }
+  if (tone === "light") {
+    return `${base} text-white hover:text-white/80`;
   }
   return `${base} text-black hover:text-black/80`;
 }

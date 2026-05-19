@@ -68,7 +68,7 @@ export function HomeHeroContent() {
           </AccentButtonLink>
           <Link
             href={secondaryCta.href}
-            className="inline-flex h-12 items-center justify-center rounded-button border border-white/80 bg-white/10 px-6 text-base font-semibold text-white transition-colors hover:bg-white/20"
+            className="inline-flex h-12 items-center justify-center rounded-button border border-white/80 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
           >
             {secondaryCta.label}
           </Link>

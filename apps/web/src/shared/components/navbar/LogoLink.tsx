@@ -1,30 +1,35 @@
+import Image from "next/image";
 import Link from "next/link";
-import { LOGO_MARK, LOGO_WORDMARK } from "@/shared/components/navbar/navConfig";
+import {
+  SITE_LOGO_ALT,
+  SITE_LOGO_CACHE_VERSION,
+  SITE_LOGO_PATH,
+} from "@/shared/components/navbar/navConfig";
 
-const LOGO_MARK_SIZE_CLASS = "size-8";
-const LOGO_MARK_RADIUS_CLASS = "rounded-[12px]";
+/** Intrinsic dimensions for Next Image (source 637×392). Display: `h-14` (56px). */
+const LOGO_SOURCE_WIDTH_PX = 637;
+const LOGO_SOURCE_HEIGHT_PX = 392;
 
 type LogoLinkProps = {
   onNavigate?: () => void;
 };
 
-/** Orange rounded mark (Figma 178:526) + LumenLA wordmark. */
 export function LogoLink({ onNavigate }: LogoLinkProps) {
   return (
     <Link
       href="/"
-      className="flex shrink-0 items-center gap-2.5"
+      className="inline-flex shrink-0 items-center"
       onClick={onNavigate}
     >
-      <span
-        className={`flex ${LOGO_MARK_SIZE_CLASS} ${LOGO_MARK_RADIUS_CLASS} items-center justify-center bg-accent text-sm font-bold text-white shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)]`}
-        aria-hidden
-      >
-        {LOGO_MARK}
-      </span>
-      <span className="text-lg font-semibold tracking-tight text-zinc-900">
-        {LOGO_WORDMARK}
-      </span>
+      <Image
+        src={`${SITE_LOGO_PATH}?v=${SITE_LOGO_CACHE_VERSION}`}
+        alt={SITE_LOGO_ALT}
+        width={LOGO_SOURCE_WIDTH_PX}
+        height={LOGO_SOURCE_HEIGHT_PX}
+        priority
+        unoptimized
+        className="h-14 w-auto drop-shadow-sm"
+      />
     </Link>
   );
 }
