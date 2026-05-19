@@ -13,7 +13,7 @@ export function HomeWhatWeDo() {
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
         <h2
           id="what-we-do-heading"
-          className="text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl lg:text-[2.5rem]"
+          className="text-4xl font-bold tracking-tight text-what-we-do-title sm:text-5xl lg:text-[3rem]"
         >
           {title}
         </h2>

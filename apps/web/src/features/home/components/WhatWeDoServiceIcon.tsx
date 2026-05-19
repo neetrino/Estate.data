@@ -3,19 +3,19 @@ import type { WhatWeDoServiceIconId } from "@/features/home/content/whatWeDoCopy
 
 type WhatWeDoServiceIconProps = {
   icon: WhatWeDoServiceIconId;
+  className?: string;
 };
 
-export function WhatWeDoServiceIcon({ icon }: WhatWeDoServiceIconProps) {
+export function WhatWeDoServiceIcon({ icon, className }: WhatWeDoServiceIconProps) {
   return (
     <svg
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className={className}
       aria-hidden
     >
       {iconPaths[icon]}

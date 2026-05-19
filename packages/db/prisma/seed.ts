@@ -1,0 +1,106 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { PrismaClient } from "@prisma/client";
+import { ASSET_KEYS } from "../src/asset-keys";
+
+const prisma = new PrismaClient();
+
+const SEED_DIR = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../../apps/web/public",
+);
+
+type SeedAsset = {
+  key: string;
+  relativePath: string;
+  mimeType: string;
+};
+
+const SEED_ASSETS: readonly SeedAsset[] = [
+  {
+    key: ASSET_KEYS.siteLogo,
+    relativePath: "images/logo-estatedata.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.siteLogoDark,
+    relativePath: "images/logo-estatedata-dark.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.homeHero,
+    relativePath: "images/hero-home.jpg",
+    mimeType: "image/jpeg",
+  },
+  {
+    key: ASSET_KEYS.navPhoneIcon,
+    relativePath: "icons/phone.svg",
+    mimeType: "image/svg+xml",
+  },
+  {
+    key: ASSET_KEYS.whatWeDoPhotographyIcon,
+    relativePath: "icons/what-we-do/photography.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.whatWeDoCinematicVideoIcon,
+    relativePath: "icons/what-we-do/cinematic-video.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.whatWeDoDroneAerialIcon,
+    relativePath: "icons/what-we-do/drone-aerial.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.whatWeDoToursFloorplansIcon,
+    relativePath: "icons/what-we-do/tours-floorplans.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.whatWeDoMarketIntelligenceIcon,
+    relativePath: "icons/what-we-do/market-intelligence.png",
+    mimeType: "image/png",
+  },
+] as const;
+
+async function seedAsset(entry: SeedAsset): Promise<void> {
+  const filePath = path.join(SEED_DIR, entry.relativePath);
+  const data = await readFile(filePath);
+  const fileName = path.basename(filePath);
+
+  await prisma.asset.upsert({
+    where: { key: entry.key },
+    create: {
+      key: entry.key,
+      mimeType: entry.mimeType,
+      fileName,
+      data,
+      byteSize: data.byteLength,
+    },
+    update: {
+      mimeType: entry.mimeType,
+      fileName,
+      data,
+      byteSize: data.byteLength,
+    },
+  });
+
+  console.info(`Seeded asset: ${entry.key} (${data.byteLength} bytes)`);
+}
+
+async function main(): Promise<void> {
+  for (const entry of SEED_ASSETS) {
+    await seedAsset(entry);
+  }
+}
+
+main()
+  .catch((error: unknown) => {
+    console.error(error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

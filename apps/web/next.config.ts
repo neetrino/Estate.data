@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
  * Uncomment rewrites when you want same-origin /api/* proxy in dev.
  */
 export const nextConfig: NextConfig = {
+  transpilePackages: ["@estate/db"],
   // async rewrites() {
   //   const apiOrigin = process.env.API_DEV_ORIGIN ?? "http://localhost:3001";
   //   return [

@@ -1,6 +1,8 @@
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
 export const SITE_NAME = "LumenLA";
-export const SITE_LOGO_PATH = "/images/logo-estatedata.png";
-export const SITE_LOGO_DARK_PATH = "/images/logo-estatedata-dark.png";
+export const SITE_LOGO_PATH = assetUrl(ASSET_KEYS.siteLogo);
+export const SITE_LOGO_DARK_PATH = assetUrl(ASSET_KEYS.siteLogoDark);
 export const SITE_LOGO_CACHE_VERSION = "20260519-removebg";
 export const SITE_LOGO_DARK_CACHE_VERSION = "20260519-dark";
 export const SITE_LOGO_ALT = "Estate Data";

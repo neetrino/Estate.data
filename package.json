@@ -7,7 +7,10 @@
     "dev:api": "pnpm --filter @estate/api dev",
     "build": "pnpm -r --if-present build",
     "lint": "pnpm -r --if-present lint",
-    "typecheck": "pnpm -r --if-present typecheck"
+    "typecheck": "pnpm -r --if-present typecheck",
+    "db:generate": "pnpm --filter @estate/db generate",
+    "db:migrate": "pnpm --filter @estate/db migrate:dev",
+    "db:seed": "pnpm --filter @estate/db seed"
   },
   "engines": {
     "node": ">=20"

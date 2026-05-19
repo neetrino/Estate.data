@@ -41,15 +41,26 @@
   --accent: #c364be;
   --accent-foreground: #ffffff;
   --green-dark: #14532d;
-  --what-we-do-title: #c364be;
-  --what-we-do-subtitle: #873c83;
+  --what-we-do-title: #873c83;
+  --what-we-do-subtitle: #c364be;
   --what-we-do-surface: #f7f4ef;
   --what-we-do-card-radius: 38px;
-  --what-we-do-card-inset-shadow: inset 0 -1px 10.8px 0 rgba(238, 54, 255, 0.2),
-    inset 0 -23px 12px -1px rgba(111, 27, 255, 0.17),
+  --what-we-do-card-gradient: linear-gradient(180deg, #100b16 0%, #0f0220 100%);
+  --what-we-do-card-corner-gradient: radial-gradient(
+    ellipse 30% 40% at 0% 0%,
+    rgba(255, 54, 242, 0.45) 0%,
+    rgba(255, 27, 244, 0.22) 38%,
+    rgba(46, 9, 43, 0.35) 58%,
+    transparent 72%
+  );
+  --what-we-do-card-background: var(--what-we-do-card-corner-gradient),
+    var(--what-we-do-card-gradient);
+  --what-we-do-card-inset-shadow: inset 0 -1px 10.8px 0 rgba(255, 54, 242, 0.2),
+    inset 0 -23px 12px -1px rgba(255, 27, 244, 0.17),
     inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7),
-    inset 0 -30px 26.7px -27px rgba(72, 48, 207, 0.5),
-    inset 0 -40px 46.3px -30px #305fcc;
+    inset 0 -30px 26.7px -27px rgba(46, 9, 43, 0.5),
+    inset 0 -40px 46.3px -30px #ff0890;
+  --what-we-do-card-description: #d1d5dc;
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
@@ -65,6 +76,7 @@
   --color-what-we-do-title: var(--what-we-do-title);
   --color-what-we-do-subtitle: var(--what-we-do-subtitle);
   --color-what-we-do-surface: var(--what-we-do-surface);
+  --color-what-we-do-card-description: var(--what-we-do-card-description);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;

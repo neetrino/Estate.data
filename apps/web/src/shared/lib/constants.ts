@@ -1,3 +1,5 @@
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
 /** Proxima Nova — Tailwind `font-sans` (see globals.css). */
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
@@ -39,7 +41,7 @@ export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl";
  * Home hero background (public path).
  * Use ≥2560px width source for sharp full-screen + Retina (current export may be ~1024px).
  */
-export const HOME_HERO_IMAGE_PATH = "/images/hero-home.jpg";
+export const HOME_HERO_IMAGE_PATH = assetUrl(ASSET_KEYS.homeHero);
 
 /** Bump when replacing hero-home.jpg so browser/Next image cache refreshes. */
 export const HOME_HERO_CACHE_VERSION = "20260518-hero-la";
@@ -59,6 +61,9 @@ export const WHAT_WE_DO_CARD_RADIUS_PX = 38;
 
 /** What we do card — nudge content block upward (px). */
 export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
+
+/** What we do — icon box / image asset size (px), matches `size-12`. */
+export const WHAT_WE_DO_ICON_SIZE_PX = 48;
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;

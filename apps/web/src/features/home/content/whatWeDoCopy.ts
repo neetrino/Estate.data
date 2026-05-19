@@ -1,3 +1,5 @@
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
 export type WhatWeDoServiceIconId =
   | "photography"
   | "cinematic-video"
@@ -11,6 +13,9 @@ export type WhatWeDoService = {
   readonly title: string;
   readonly description: string;
   readonly icon: WhatWeDoServiceIconId;
+  readonly iconSrc?: string;
+  /** SVG icon at full size, no colored wrapper (e.g. scan-to-bim). */
+  readonly iconPlain?: boolean;
 };
 
 export const HOME_WHAT_WE_DO_COPY = {
@@ -26,36 +31,42 @@ export const HOME_WHAT_WE_DO_COPY = {
       title: "Photography",
       description: "Interior, exterior, twilight & virtual twilight.",
       icon: "photography",
+      iconSrc: assetUrl(ASSET_KEYS.whatWeDoPhotographyIcon),
     },
     {
       id: "cinematic-video",
       title: "Cinematic Video",
       description: "Walkthroughs and bespoke property films.",
       icon: "cinematic-video",
+      iconSrc: assetUrl(ASSET_KEYS.whatWeDoCinematicVideoIcon),
     },
     {
       id: "drone-aerial",
       title: "Drone & Aerial",
       description: "FAA Part 107 licensed pilots.",
       icon: "drone-aerial",
+      iconSrc: assetUrl(ASSET_KEYS.whatWeDoDroneAerialIcon),
     },
     {
       id: "tours-floorplans",
       title: "3D Tours & Floorplans",
       description: "Matterport, dollhouse, schematic plans.",
       icon: "tours-floorplans",
+      iconSrc: assetUrl(ASSET_KEYS.whatWeDoToursFloorplansIcon),
     },
     {
       id: "scan-to-bim",
       title: "Scan to BIM",
       description: "LiDAR scanning, Revit BIM deliverables.",
       icon: "scan-to-bim",
+      iconPlain: true,
     },
     {
       id: "market-intelligence",
       title: "Market Intelligence",
       description: "Listings data, valuations, CRM integrations.",
       icon: "market-intelligence",
+      iconSrc: assetUrl(ASSET_KEYS.whatWeDoMarketIntelligenceIcon),
     },
   ] as const satisfies readonly WhatWeDoService[],
 } as const;
