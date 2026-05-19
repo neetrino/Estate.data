@@ -4,8 +4,17 @@ export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
 
-/** Space between viewport top and navbar row. */
-export const NAVBAR_TOP_PADDING_CLASS = "pt-2";
+/** Space between viewport top and navbar row (6px; 2px above pt-2). */
+export const NAVBAR_TOP_PADDING_CLASS = "pt-[1px]";
+
+/** Home hero overlay navbar — out of flow so hero stays full viewport. */
+export const NAVBAR_OVERLAY_POSITION_CLASS = "fixed inset-x-0 top-0 z-50";
+
+/**
+ * Hero copy top bound — matches overlay navbar (NAVBAR_TOP_PADDING + NAVBAR_HEIGHT).
+ * 1px + 4.5rem = 73px.
+ */
+export const HERO_CONTENT_TOP_INSET_CLASS = "top-[73px]";
 
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
@@ -15,6 +24,10 @@ export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8";
 
 /** Shared centered content width (navbar + hero). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl";
+
+/** Trusted partners strip — full width, wider side gutters than hero. */
+export const TRUSTED_STRIP_GUTTER_CLASS =
+  "px-6 sm:px-10 lg:px-16 xl:px-24";
 
 /**
  * Home hero background (public path).

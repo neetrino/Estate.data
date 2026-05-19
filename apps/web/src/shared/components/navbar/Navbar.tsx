@@ -14,14 +14,17 @@ import {
 import {
   NAV_ITEM_TEXT_CLASS,
   NAVBAR_HEIGHT_CLASS,
+  NAVBAR_OVERLAY_POSITION_CLASS,
   NAVBAR_TOP_PADDING_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
 import { AccentButtonLink } from "@/shared/ui/button";
 
-const NAVBAR_SURFACE_BASE =
-  "sticky top-0 z-50 transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
+const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-50";
+
+const NAVBAR_SURFACE_TRANSITION_CLASS =
+  "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
 
 const NAVBAR_TRANSPARENT_CLASS = "bg-transparent";
 
@@ -61,9 +64,13 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
   const navTone = overlay && !scrolled ? "light" : "dark";
 
+  const positionClass = overlay
+    ? NAVBAR_OVERLAY_POSITION_CLASS
+    : NAVBAR_STICKY_POSITION_CLASS;
+
   return (
     <header
-      className={`${NAVBAR_SURFACE_BASE} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
+      className={`${positionClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
     >
       <nav
         className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center gap-4 ${PAGE_GUTTER_CLASS}`}
