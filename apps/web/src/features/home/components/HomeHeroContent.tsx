@@ -64,7 +64,6 @@ export function HomeHeroContent() {
             className="h-12 justify-center px-6 text-base"
           >
             {primaryCta.label}
-            <span aria-hidden>→</span>
           </AccentButtonLink>
           <Link
             href={secondaryCta.href}

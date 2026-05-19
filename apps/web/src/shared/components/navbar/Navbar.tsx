@@ -93,6 +93,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
           <AccentButtonLink
             href={NAV_CTA_LINKS.bookShoot.href}
             className="hidden sm:inline-flex"
+            showArrow={false}
           >
             {NAV_CTA_LINKS.bookShoot.label}
           </AccentButtonLink>
@@ -144,6 +145,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             <AccentButtonLink
               href={NAV_CTA_LINKS.bookShoot.href}
               className="w-full py-2.5"
+              showArrow={false}
               onClick={closeMobile}
             >
               {NAV_CTA_LINKS.bookShoot.label}
@@ -183,22 +185,22 @@ function isActivePath(pathname: string, href: string): boolean {
 }
 
 function desktopNavLinkClass(active: boolean, tone: NavTone): string {
-  const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors`;
+  const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
   if (active) {
     return `${base} text-accent`;
   }
   if (tone === "light") {
-    return `${base} text-white hover:text-white/80`;
+    return `${base} text-white`;
   }
-  return `${base} text-black hover:text-black/80`;
+  return `${base} text-black`;
 }
 
 function mobileNavLinkClass(active: boolean): string {
-  const base = `block rounded-md px-3 py-2.5 ${NAV_ITEM_TEXT_CLASS}`;
+  const base = `block rounded-md px-3 py-2.5 ${NAV_ITEM_TEXT_CLASS} transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
   if (active) {
     return `${base} bg-accent/10 text-accent`;
   }
-  return `${base} text-black hover:bg-zinc-50`;
+  return `${base} text-black hover:bg-accent/10`;
 }
 
 function MenuIcon() {
