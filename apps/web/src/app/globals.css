@@ -41,6 +41,7 @@
   --accent: #c364be;
   --accent-foreground: #ffffff;
   --green-dark: #14532d;
+  --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
 
@@ -52,6 +53,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-green-dark: var(--green-dark);
+  --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;
   --font-sans: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -62,6 +64,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --muted-foreground: #a1a1aa;
   }
 }
 

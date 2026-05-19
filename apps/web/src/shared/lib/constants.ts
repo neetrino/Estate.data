@@ -1,5 +1,11 @@
+/** Proxima Nova — Tailwind `font-sans` (see globals.css). */
+export const SITE_FONT_SANS_CLASS = "font-sans";
+
 /** Navbar links + CTA typography (excludes LumenLA wordmark). */
 export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
+
+/** Trusted partners strip — same sans stack as navbar/hero. */
+export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-xs font-semibold uppercase tracking-widest text-muted-foreground`;
 
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
@@ -24,10 +30,6 @@ export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8";
 
 /** Shared centered content width (navbar + hero). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl";
-
-/** Trusted partners strip — full width, wider side gutters than hero. */
-export const TRUSTED_STRIP_GUTTER_CLASS =
-  "px-6 sm:px-10 lg:px-16 xl:px-24";
 
 /**
  * Home hero background (public path).
