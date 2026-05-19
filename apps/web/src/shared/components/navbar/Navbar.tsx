@@ -76,7 +76,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center gap-4 ${PAGE_GUTTER_CLASS}`}
         aria-label="Main"
       >
-        <LogoLink onNavigate={closeMobile} />
+        <LogoLink tone={navTone} onNavigate={closeMobile} />
 
         <div className="flex min-w-0 flex-1 justify-center px-4">
           <ul className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
