@@ -1,7 +1,10 @@
 import { HOME_TRUSTED_PARTNERS_COPY } from "@/features/home/content/trustedPartnersCopy";
-import { TRUSTED_STRIP_TEXT_CLASS } from "@/shared/lib/constants";
+import {
+  TRUSTED_STRIP_LAYOUT_CLASS,
+  TRUSTED_STRIP_TEXT_CLASS,
+} from "@/shared/lib/constants";
 
-const TRUSTED_STRIP_INNER_CLASS = `container mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 px-4 py-6 ${TRUSTED_STRIP_TEXT_CLASS}`;
+const TRUSTED_STRIP_INNER_CLASS = `${TRUSTED_STRIP_LAYOUT_CLASS} ${TRUSTED_STRIP_TEXT_CLASS}`;
 
 export function HomeTrustedStrip() {
   const { label, partners } = HOME_TRUSTED_PARTNERS_COPY;

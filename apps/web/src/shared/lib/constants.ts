@@ -5,7 +5,11 @@ export const SITE_FONT_SANS_CLASS = "font-sans";
 export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
-export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-xs font-semibold uppercase tracking-widest text-muted-foreground`;
+export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-muted-foreground`;
+
+/** Trusted partners strip layout (width + spacing). */
+export const TRUSTED_STRIP_LAYOUT_CLASS =
+  "mx-auto flex w-full max-w-screen-2xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-6 py-7 sm:px-10 sm:py-8 lg:px-16";
 
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
