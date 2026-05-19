@@ -7,6 +7,12 @@ export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
 
+/** Shared horizontal page gutters (navbar + hero). */
+export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8";
+
+/** Shared centered content width (navbar + hero). */
+export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl";
+
 /**
  * Home hero background (public path).
  * Use ≥2560px width source for sharp full-screen + Retina (current export may be ~1024px).

@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
+import {
+  PAGE_CONTAINER_CLASS,
+  PAGE_GUTTER_CLASS,
+} from "@/shared/lib/constants";
 import { AccentButtonLink } from "@/shared/ui/button";
 
 const HERO_OVERLAY_CLASS = "bg-black/45";
@@ -23,8 +27,8 @@ export function HomeHeroContent() {
   } = HOME_HERO_COPY;
 
   return (
-    <section className="relative z-10 flex h-full -translate-y-22 items-center px-4 pt-28 text-left sm:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-7xl">
+    <section className="relative z-10 flex h-full -translate-y-27 items-center pt-28 text-left">
+      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
         <p className="inline-flex items-center gap-2 rounded-full border border-white/70 px-4 py-1.5 text-sm font-medium text-white">
           <LocationPinIcon />
           {locationBadge}

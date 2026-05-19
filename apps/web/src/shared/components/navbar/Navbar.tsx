@@ -14,6 +14,8 @@ import {
 import {
   NAV_ITEM_TEXT_CLASS,
   NAVBAR_HEIGHT_CLASS,
+  PAGE_CONTAINER_CLASS,
+  PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
 import { AccentButtonLink } from "@/shared/ui/button";
 
@@ -59,13 +61,13 @@ export function Navbar({ overlay = false }: NavbarProps) {
   return (
     <header className={`${NAVBAR_SURFACE_BASE} ${headerSurfaceClass}`}>
       <nav
-        className={`mx-auto flex ${NAVBAR_HEIGHT_CLASS} max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8`}
+        className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center gap-4 ${PAGE_GUTTER_CLASS}`}
         aria-label="Main"
       >
-        <div className="flex min-w-0 flex-1 items-center gap-8 lg:gap-10">
-          <LogoLink onNavigate={closeMobile} />
+        <LogoLink onNavigate={closeMobile} />
 
-          <ul className="hidden items-center gap-5 lg:flex xl:gap-6">
+        <div className="flex min-w-0 flex-1 justify-center px-4">
+          <ul className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
             {MAIN_NAV_LINKS.map((link) => (
               <NavItem
                 key={link.href}
