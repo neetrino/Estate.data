@@ -1,7 +1,30 @@
 import Link from "next/link";
 import type { ComponentProps } from "react";
+import {
+  ESTATE_CTA_BUTTON_CLASS,
+  ESTATE_CTA_BUTTON_PADDING_CLASS,
+  ESTATE_CTA_ICON_DISC_OFFSET_CLASS,
+  ESTATE_CTA_LABEL_OFFSET_CLASS,
+} from "@/shared/lib/constants";
 
 const ACCENT_BUTTON_TEXT_CLASS = "text-sm font-semibold leading-snug";
+
+const ESTATE_PILL_BUTTON_TEXT_CLASS = "text-base font-bold leading-6";
+
+/** Estate.data pill CTA — purple surface, icon disc + arrow (Figma 305:2096, compact). */
+export const estatePillButtonClassName = [
+  ESTATE_CTA_BUTTON_CLASS,
+  "inline-flex items-center gap-2 whitespace-nowrap",
+  "bg-estate-cta text-estate-cta-foreground",
+  ESTATE_CTA_BUTTON_PADDING_CLASS,
+  "transition-opacity hover:opacity-90",
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+  "disabled:pointer-events-none disabled:opacity-50",
+  ESTATE_PILL_BUTTON_TEXT_CLASS,
+].join(" ");
+
+const ESTATE_CTA_ICON_DISC_CLASS =
+  "flex size-9 shrink-0 items-center justify-center rounded-full bg-estate-cta-icon-surface text-estate-cta-icon-foreground";
 
 /** shadcn-style accent CTA — matches design system reference. */
 export const accentButtonClassName =
@@ -43,6 +66,49 @@ function CtaArrowIcon() {
     >
       <path d="M5 12h14" />
       <path d="m13 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+type EstatePillButtonLinkProps = ComponentProps<typeof Link>;
+
+export function EstatePillButtonLink({
+  className,
+  children,
+  ...props
+}: EstatePillButtonLinkProps) {
+  const mergedClassName = className
+    ? `${estatePillButtonClassName} ${className}`
+    : estatePillButtonClassName;
+
+  return (
+    <Link className={mergedClassName} {...props}>
+      <span className={ESTATE_CTA_LABEL_OFFSET_CLASS}>{children}</span>
+      <span
+        className={`${ESTATE_CTA_ICON_DISC_CLASS} ${ESTATE_CTA_ICON_DISC_OFFSET_CLASS}`}
+        aria-hidden
+      >
+        <EstatePillArrowIcon />
+      </span>
+    </Link>
+  );
+}
+
+/** Diagonal arrow in the icon disc (Figma 305:2100, −45°). */
+function EstatePillArrowIcon() {
+  return (
+    <svg
+      className="size-4"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M3 13 13 3" />
+      <path d="M6 3h7v7" />
     </svg>
   );
 }

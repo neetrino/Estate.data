@@ -5,6 +5,7 @@ import {
 import { HomeHero } from "@/features/home/components/HomeHero";
 import { HomeTrustedStrip } from "@/features/home/components/HomeTrustedStrip";
 import { HomeStatsStrip } from "@/features/home/components/HomeStatsStrip";
+import { HomeRecentWork } from "@/features/home/components/HomeRecentWork";
 import { HomeWhatWeDo } from "@/features/home/components/HomeWhatWeDo";
 import { Navbar } from "@/shared/components/navbar";
 
@@ -20,6 +21,7 @@ export function HomePage() {
       <HomeTrustedStrip />
       <HomeWhatWeDo />
       <HomeStatsStrip />
+      <HomeRecentWork />
     </>
   );
 }

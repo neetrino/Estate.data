@@ -40,6 +40,10 @@
   --primary-foreground: #fafafa;
   --accent: #c364be;
   --accent-foreground: #ffffff;
+  --estate-cta: #c364be;
+  --estate-cta-foreground: #ffffff;
+  --estate-cta-icon-surface: #000000;
+  --estate-cta-icon-foreground: #ffffff;
   --green-dark: #14532d;
   --what-we-do-title: #873c83;
   --what-we-do-subtitle: #c364be;
@@ -73,6 +77,10 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-estate-cta: var(--estate-cta);
+  --color-estate-cta-foreground: var(--estate-cta-foreground);
+  --color-estate-cta-icon-surface: var(--estate-cta-icon-surface);
+  --color-estate-cta-icon-foreground: var(--estate-cta-icon-foreground);
   --color-green-dark: var(--green-dark);
   --color-what-we-do-title: var(--what-we-do-title);
   --color-what-we-do-subtitle: var(--what-we-do-subtitle);

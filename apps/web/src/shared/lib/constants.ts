@@ -68,6 +68,27 @@ export const WHAT_WE_DO_ICON_SIZE_PX = 48;
 /** Home stats strip — equal row/column gap (matches What we do card grid). */
 export const HOME_STATS_GRID_GAP_CLASS = "gap-6";
 
+/** Recent work project tile — design size (px); grid uses full column width up to this. */
+export const RECENT_WORK_PROJECT_WIDTH_PX = 592;
+export const RECENT_WORK_PROJECT_HEIGHT_PX = 444;
+
+/** Tailwind aspect ratio class (matches original 486×365). */
+export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
+
+/** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
+export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
+
+/** Nudge label + icon disc right inside the pill (px). */
+
+/** pl-8 (32px) + {@link ESTATE_CTA_CONTENT_OFFSET_PX}. */
+export const ESTATE_CTA_BUTTON_PADDING_CLASS = "py-0.5 pl-[35px] pr-0.5";
+
+/** Label-only nudge left inside the pill (5px). */
+export const ESTATE_CTA_LABEL_OFFSET_CLASS = "-translate-x-[10px]";
+
+/** Icon disc-only nudge left inside the pill (10px). */
+export const ESTATE_CTA_ICON_DISC_OFFSET_CLASS = "-translate-x-[5px]";
+
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
 
