@@ -147,6 +147,27 @@ export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 /** Property intelligence — scan-to-bim hero image (1024×716 source). */
 export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 
+/** Property intelligence pages (/data-bim, /media) — page header typography. */
+export const PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-property-intelligence-accent sm:text-base";
+
+export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS =
+  "mt-3 text-4xl font-bold tracking-tight text-property-intelligence-navy sm:text-5xl lg:text-[3rem]";
+
+export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
+  "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
+
+/** Media services cards — black surface + blue glow. */
+export const MEDIA_SERVICE_CARD_SURFACE_STYLE = {
+  borderRadius: WHAT_WE_DO_CARD_RADIUS_PX,
+  background: "var(--media-service-card-background)",
+  boxShadow:
+    "var(--media-service-card-outer-shadow), var(--media-service-card-inset-shadow)",
+} as const;
+
+/** Media services cards — matches What we do tile height (px). */
+export const MEDIA_SERVICE_CARD_MIN_HEIGHT_PX = 285;
+
 /** Client voices testimonial cards — star rating count. */
 export const CLIENT_VOICES_STAR_COUNT = 5;
 

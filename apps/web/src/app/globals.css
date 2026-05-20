@@ -67,7 +67,28 @@
   --what-we-do-card-description: #d1d5dc;
   --home-stats-text: #ead8e8;
   --property-intelligence-accent: #16c0da;
+  /** Slightly darker accent — primary CTAs on /media. */
+  --property-intelligence-accent-dark: #12a8bc;
   --property-intelligence-navy: #2e4873;
+  --media-service-card-radius: 38px;
+  --media-service-card-gradient: linear-gradient(180deg, #121212 0%, #050505 100%);
+  --media-service-card-corner-gradient: radial-gradient(
+    ellipse 32% 42% at 0% 0%,
+    rgba(22, 192, 218, 0.55) 0%,
+    rgba(59, 130, 246, 0.28) 40%,
+    rgba(0, 0, 0, 0.65) 62%,
+    transparent 78%
+  );
+  --media-service-card-background: var(--media-service-card-corner-gradient),
+    var(--media-service-card-gradient);
+  --media-service-card-outer-shadow: 0 0 28px rgba(22, 192, 218, 0.18),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  --media-service-card-inset-shadow: inset 0 -1px 12px 0 rgba(22, 192, 218, 0.35),
+    inset 0 -24px 14px -2px rgba(22, 192, 218, 0.22),
+    inset 0 -48px 18px -34px rgba(59, 130, 246, 0.12),
+    inset 0 -32px 28px -28px rgba(0, 0, 0, 0.85),
+    inset 0 -42px 48px -32px rgba(22, 192, 218, 0.4);
+  --media-service-card-description: #b8c8d6;
   --client-voices-accent: oklch(0.72 0.16 55);
   --client-voices-card-shadow: 0 4px 24px rgb(0 0 0 / 8%);
   --gradient-accent: linear-gradient(
@@ -101,7 +122,9 @@
   --color-what-we-do-card-description: var(--what-we-do-card-description);
   --color-home-stats-text: var(--home-stats-text);
   --color-property-intelligence-accent: var(--property-intelligence-accent);
+  --color-property-intelligence-accent-dark: var(--property-intelligence-accent-dark);
   --color-property-intelligence-navy: var(--property-intelligence-navy);
+  --color-media-service-card-description: var(--media-service-card-description);
   --color-client-voices-accent: var(--client-voices-accent);
   --color-home-listing-cta-description: var(--home-listing-cta-description);
   --color-home-listing-cta-book: var(--home-listing-cta-book);

@@ -1,5 +1,5 @@
-import { DataServicesBody } from "@/features/services/data/components/DataServicesBody";
-import { DATA_SERVICES_PAGE_COPY } from "@/features/services/data/content/dataServicesCopy";
+import { MediaServicesSection } from "@/features/media/components/MediaServicesSection";
+import { MEDIA_PAGE_COPY } from "@/features/media/content/mediaPageCopy";
 import { Navbar } from "@/shared/components/navbar";
 import {
   PAGE_CONTAINER_CLASS,
@@ -10,8 +10,8 @@ import {
   WHAT_WE_DO_SECTION_SURFACE_CLASS,
 } from "@/shared/lib/constants";
 
-export function DataServicesPage() {
-  const { eyebrow, title, subtitle } = DATA_SERVICES_PAGE_COPY;
+export function MediaPage() {
+  const { eyebrow, title, subtitle } = MEDIA_PAGE_COPY;
 
   return (
     <>
@@ -23,7 +23,7 @@ export function DataServicesPage() {
             <h1 className={PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS}>{title}</h1>
             <p className={PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
           </header>
-          <DataServicesBody />
+          <MediaServicesSection />
         </div>
       </main>
     </>
