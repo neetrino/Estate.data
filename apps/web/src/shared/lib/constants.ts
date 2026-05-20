@@ -30,17 +30,36 @@ export const LOGO_FOOTER_OFFSET_CLASS = "-translate-x-[3px] translate-y-[2px]";
 /** Footer tagline — space below logo (px). */
 export const FOOTER_BRAND_TAGLINE_OFFSET_CLASS = "mt-[31px]";
 
-/** Space between viewport top and navbar row (6px; 2px above pt-2). */
-export const NAVBAR_TOP_PADDING_CLASS = "pt-[1px]";
+/** Space between viewport top and navbar row (safe area + 1px). */
+export const NAVBAR_TOP_PADDING_CLASS = "pt-[max(1px,env(safe-area-inset-top))]";
 
-/** Home hero overlay navbar — out of flow so hero stays full viewport. */
-export const NAVBAR_OVERLAY_POSITION_CLASS = "fixed inset-x-0 top-0 z-50";
+/** Home hero overlay navbar — fixed to viewport (must sit outside overflow-hidden hero). */
+export const NAVBAR_OVERLAY_POSITION_CLASS = "fixed inset-x-0 top-0 z-[100]";
+
+/** Sticky navbar on inner pages — above page content, below mobile menu layer. */
+export const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-[100]";
+
+/** Viewport ≤1399px — burger control (phone, tablet, iPad Pro). */
+export const NAVBAR_MOBILE_BURGER_CLASS = "hidden max-[1399px]:inline-flex min-[1400px]:hidden";
+
+/** Viewport ≤1399px — mobile menu layers. */
+export const NAVBAR_MOBILE_MENU_CLASS = "max-[1399px]:block min-[1400px]:hidden";
+
+/** Viewport ≥1400px — full desktop nav. */
+export const NAVBAR_DESKTOP_ONLY_CLASS = "hidden min-[1400px]:flex";
 
 /**
- * Hero copy top bound — matches overlay navbar (NAVBAR_TOP_PADDING + NAVBAR_HEIGHT).
- * 1px + 4.5rem = 73px.
+ * Mobile menu panel top — navbar row + safe area.
+ * Keep in sync with NAVBAR_TOP_PADDING + NAVBAR_HEIGHT + safe-area.
  */
-export const HERO_CONTENT_TOP_INSET_CLASS = "top-[73px]";
+export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
+  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px))]";
+
+/**
+ * Hero copy top bound — matches overlay navbar (safe area + 1px + 4.5rem).
+ */
+export const HERO_CONTENT_TOP_INSET_CLASS =
+  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px))]";
 
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
@@ -106,24 +125,44 @@ export const PRICING_MEDIA_CTA_LIFT_PX = 17;
 /** Analytics — gap above CTA (px). */
 export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 
-/**
- * Pricing: desktop Figma at lg+ (≥1024px); iPad Pro (≤1399px) overrides to 2-col + pill CTAs.
- */
-/** Pricing package grids — lg 3-col desktop; 2-col on iPad Pro via max-[1399px]. */
-export const PRICING_PACKAGE_GRID_CLASS =
-  "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-[1399px]:!grid-cols-2";
+/** Pricing — phone + tablet/iPad (≤1399px). Tune mobile here; leave desktop block below. */
+export const PRICING_GRID_MOBILE_TABLET_CLASS =
+  "grid grid-cols-1 md:grid-cols-2 md:max-[1399px]:!grid-cols-2";
 
-/** Pricing card CTAs — Figma inset from lg; pill width on iPad Pro only. */
-export const PRICING_PACKAGE_CTA_BUTTON_CLASS = [
-  "max-w-full justify-center self-center",
-  "w-[calc(100%-2rem)] sm:w-[calc(100%-4.5rem)] lg:w-[calc(100%-7.25rem)]",
-  "max-[1399px]:!w-auto",
+export const PRICING_CTA_MOBILE_TABLET_CLASS =
+  "max-w-full justify-center self-center max-[1399px]:!w-auto";
+
+/** Media packages — phone only: CTA +5px (md+ uses tablet/desktop rules below). */
+export const PRICING_MEDIA_CTA_MOBILE_ONLY_CLASS = "max-md:-translate-y-[5px]";
+
+/** Pricing — desktop Figma (lg+, iPad stays 2-col via max-[1399px] overrides). */
+export const PRICING_GRID_DESKTOP_CLASS = "lg:grid-cols-3";
+
+export const PRICING_CTA_DESKTOP_CLASS = [
+  "w-[calc(100%-2rem)]",
+  "sm:w-[calc(100%-4.5rem)]",
+  "lg:w-[calc(100%-7.25rem)]",
 ].join(" ");
 
-/** Media packages — upward nudge from lg; off on iPad Pro. */
+export const PRICING_MEDIA_CTA_DESKTOP_CLASS = [
+  "lg:-translate-y-[17px]",
+  "max-[1399px]:!translate-y-0",
+].join(" ");
+
+export const PRICING_PACKAGE_GRID_CLASS = [
+  PRICING_GRID_MOBILE_TABLET_CLASS,
+  PRICING_GRID_DESKTOP_CLASS,
+].join(" ");
+
+export const PRICING_PACKAGE_CTA_BUTTON_CLASS = [
+  PRICING_CTA_MOBILE_TABLET_CLASS,
+  PRICING_CTA_DESKTOP_CLASS,
+].join(" ");
+
 export const PRICING_MEDIA_CTA_BUTTON_CLASS = [
   PRICING_PACKAGE_CTA_BUTTON_CLASS,
-  "max-[1399px]:!translate-y-0 lg:-translate-y-[17px]",
+  PRICING_MEDIA_CTA_MOBILE_ONLY_CLASS,
+  PRICING_MEDIA_CTA_DESKTOP_CLASS,
 ].join(" ");
 
 /** Pricing card CTA row — centered; spacing via Tailwind (32px / 16px). */

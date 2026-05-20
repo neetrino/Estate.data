@@ -15,11 +15,11 @@ import { Navbar } from "@/shared/components/navbar";
 export function HomePage() {
   return (
     <>
+      <Navbar overlay />
       <section className="relative h-svh min-h-svh overflow-hidden bg-black">
         <HomeHero />
         <HomeHeroOverlay />
         <HomeHeroContent />
-        <Navbar overlay />
       </section>
       <HomeTrustedStrip />
       <HomeWhatWeDo />

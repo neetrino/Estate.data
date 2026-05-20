@@ -14,15 +14,18 @@ import {
 import { DATA_BIM_PATH, isDataBimRoute } from "@/shared/lib/routes";
 import {
   NAV_ITEM_TEXT_CLASS,
+  NAVBAR_DESKTOP_ONLY_CLASS,
   NAVBAR_HEIGHT_CLASS,
+  NAVBAR_MOBILE_BURGER_CLASS,
+  NAVBAR_MOBILE_MENU_CLASS,
+  NAVBAR_MOBILE_PANEL_TOP_CLASS,
   NAVBAR_OVERLAY_POSITION_CLASS,
+  NAVBAR_STICKY_POSITION_CLASS,
   NAVBAR_TOP_PADDING_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
 import { navbarBookShootButtonClassName } from "@/shared/ui/button";
-
-const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-50";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -33,6 +36,27 @@ const NAVBAR_GLASS_CLASS =
   "bg-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl backdrop-saturate-150";
 
 const NAVBAR_SOLID_CLASS = "bg-white";
+
+const NAVBAR_BURGER_BUTTON_CLASS =
+  "relative z-[101] min-h-11 min-w-11 shrink-0 touch-manipulation cursor-pointer items-center justify-center rounded-md p-2 [-webkit-tap-highlight-color:transparent]";
+
+const NAVBAR_MOBILE_PANEL_CLASS = [
+  "fixed inset-x-0",
+  NAVBAR_MOBILE_PANEL_TOP_CLASS,
+  "z-[100]",
+  "max-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
+  "overflow-y-auto overscroll-contain",
+  "border-t border-zinc-200/80 bg-white shadow-lg",
+  "px-4 py-4",
+  NAVBAR_MOBILE_MENU_CLASS,
+].join(" ");
+
+const NAVBAR_MOBILE_BACKDROP_CLASS = [
+  "fixed inset-0",
+  NAVBAR_MOBILE_PANEL_TOP_CLASS,
+  "z-[99] bg-black/30",
+  NAVBAR_MOBILE_MENU_CLASS,
+].join(" ");
 
 type NavbarProps = {
   /** Transparent at top; liquid glass after scroll (home hero). */
@@ -57,14 +81,24 @@ export function Navbar({ overlay = false }: NavbarProps) {
   }, []);
 
   useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     if (!mobileOpen) {
       return;
     }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = previousOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
     };
   }, [mobileOpen]);
 
@@ -77,35 +111,36 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
   const navTone = overlay && !scrolled ? "light" : "dark";
 
-  const positionClass = overlay
-    ? NAVBAR_OVERLAY_POSITION_CLASS
-    : NAVBAR_STICKY_POSITION_CLASS;
+  const positionClass = overlay ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
+
+  const headerSurfaceWhenMenuOpen =
+    mobileOpen && !overlay ? NAVBAR_SOLID_CLASS : headerSurfaceClass;
 
   return (
-    <header
-      className={`${positionClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
-    >
-      <nav
-        className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center gap-4 ${PAGE_GUTTER_CLASS}`}
-        aria-label="Main"
+    <>
+      <header
+        className={`${positionClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceWhenMenuOpen}`}
       >
-        <LogoLink tone={navTone} onNavigate={closeMobile} />
+        <nav
+          className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center justify-between gap-3 ${PAGE_GUTTER_CLASS}`}
+          aria-label="Main"
+        >
+          <LogoLink tone={navTone} onNavigate={closeMobile} />
 
-        <div className="flex min-w-0 flex-1 justify-center px-4">
-          <ul className="hidden items-center justify-center gap-6 lg:flex lg:gap-8 max-[1399px]:!hidden">
-            {MAIN_NAV_LINKS.map((link) => (
-              <NavItem
-                key={link.href}
-                link={link}
-                active={isActivePath(pathname, link.href)}
-                tone={navTone}
-              />
-            ))}
-          </ul>
-        </div>
+          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
+            <ul className="flex items-center justify-center gap-6 xl:gap-8">
+              {MAIN_NAV_LINKS.map((link) => (
+                <NavItem
+                  key={link.href}
+                  link={link}
+                  active={isActivePath(pathname, link.href)}
+                  tone={navTone}
+                />
+              ))}
+            </ul>
+          </div>
 
-        <div className="ms-auto flex shrink-0 items-center gap-5 lg:ms-0 lg:gap-6">
-          <div className="hidden items-center gap-5 lg:flex lg:gap-6 max-[1399px]:!hidden">
+          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center gap-6`}>
             <PhoneNavLink tone={navTone} onNavigate={closeMobile} />
             <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
               {NAV_CTA_LINKS.bookShoot.label}
@@ -114,7 +149,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
           <button
             type="button"
-            className={`inline-flex min-[1400px]:hidden cursor-pointer items-center justify-center rounded-md p-2 ${
+            className={`${NAVBAR_BURGER_BUTTON_CLASS} ${NAVBAR_MOBILE_BURGER_CLASS} ${
               navTone === "light"
                 ? "text-white hover:bg-white/10"
                 : "text-black hover:bg-black/5"
@@ -128,32 +163,35 @@ export function Navbar({ overlay = false }: NavbarProps) {
             </span>
             {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
-        </div>
-      </nav>
+        </nav>
+      </header>
 
       {mobileOpen ? (
-        <div
-          id="mobile-nav"
-          className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-zinc-200/80 bg-white/95 px-4 py-4 backdrop-blur-xl min-[1400px]:hidden"
-        >
-          <ul className="flex flex-col gap-1">
-            {MAIN_NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={mobileNavLinkClass(
-                    isActivePath(pathname, link.href),
-                  )}
-                  onClick={closeMobile}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <>
+          <button
+            type="button"
+            className={NAVBAR_MOBILE_BACKDROP_CLASS}
+            aria-label="Close menu"
+            onClick={closeMobile}
+          />
+          <div id="mobile-nav" className={NAVBAR_MOBILE_PANEL_CLASS}>
+            <ul className="flex flex-col gap-1">
+              {MAIN_NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={mobileNavLinkClass(isActivePath(pathname, link.href))}
+                    onClick={closeMobile}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
       ) : null}
-    </header>
+    </>
   );
 }
 
@@ -199,7 +237,7 @@ function desktopNavLinkClass(active: boolean, tone: NavTone): string {
 }
 
 function mobileNavLinkClass(active: boolean): string {
-  const base = `block rounded-md px-3 py-2.5 ${NAV_ITEM_TEXT_CLASS} transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
+  const base = `block rounded-md px-3 py-3 ${NAV_ITEM_TEXT_CLASS} transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
   if (active) {
     return `${base} bg-accent/10 text-accent`;
   }
