@@ -1,3 +1,4 @@
+import { DATA_BIM_PATH } from "@/shared/lib/routes";
 import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
 
 export type FooterNavLink = {
@@ -12,7 +13,7 @@ export const FOOTER_BRAND_TAGLINE =
 export const FOOTER_SERVICES_LINKS = [
   { id: "photography-video", label: "Photography & Video", href: "/media" },
   { id: "drone-tours", label: "Drone & 3D Tours", href: "/media" },
-  { id: "scan-to-bim", label: "Scan to BIM", href: "/data-bim" },
+  { id: "scan-to-bim", label: "Scan to BIM", href: DATA_BIM_PATH },
   { id: "market-reports", label: "Market Reports", href: "/solutions" },
 ] as const satisfies readonly FooterNavLink[];
 

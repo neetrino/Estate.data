@@ -1,4 +1,5 @@
 import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { DATA_BIM_PATH } from "@/shared/lib/routes";
 
 export const PROPERTY_INTELLIGENCE_IMAGE_PATH = assetUrl(
   ASSET_KEYS.propertyIntelligenceHero,
@@ -19,5 +20,5 @@ export const HOME_PROPERTY_INTELLIGENCE_COPY = {
     "MLS / IDX & CRM integrations",
   ],
   ctaLabel: "Explore data services",
-  ctaHref: "/services/data",
+  ctaHref: DATA_BIM_PATH,
 } as const;

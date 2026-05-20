@@ -11,6 +11,7 @@ import {
   NAV_CTA_LINKS,
   type NavLink,
 } from "@/shared/components/navbar/navConfig";
+import { DATA_BIM_PATH, isDataBimRoute } from "@/shared/lib/routes";
 import {
   NAV_ITEM_TEXT_CLASS,
   NAVBAR_HEIGHT_CLASS,
@@ -187,6 +188,9 @@ function NavItem({
 function isActivePath(pathname: string, href: string): boolean {
   if (href === "/") {
     return pathname === "/";
+  }
+  if (href === DATA_BIM_PATH) {
+    return isDataBimRoute(pathname);
   }
   return pathname === href || pathname.startsWith(`${href}/`);
 }

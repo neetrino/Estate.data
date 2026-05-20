@@ -1,4 +1,5 @@
 import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { DATA_BIM_PATH } from "@/shared/lib/routes";
 
 export const SITE_NAME = "LumenLA";
 export const SITE_LOGO_PATH = assetUrl(ASSET_KEYS.siteLogo);
@@ -15,7 +16,7 @@ export type NavLink = {
 export const MAIN_NAV_LINKS: readonly NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Media", href: "/media" },
-  { label: "Data & BIM", href: "/data-bim" },
+  { label: "Data & BIM", href: DATA_BIM_PATH },
   { label: "Solutions", href: "/solutions" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },

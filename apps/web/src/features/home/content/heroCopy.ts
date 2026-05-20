@@ -1,3 +1,5 @@
+import { DATA_BIM_PATH } from "@/shared/lib/routes";
+
 type HeroTextSegment = {
   text: string;
   accent?: boolean;
@@ -28,5 +30,5 @@ export const HOME_HERO_COPY = {
     "developers, and investors close deals with confidence.",
   ] as const,
   primaryCta: { label: "Book a Shoot", href: "/contact" },
-  secondaryCta: { label: "Request a Market Report", href: "/market-report" },
+  secondaryCta: { label: "Request a Market Report", href: DATA_BIM_PATH },
 } as const;

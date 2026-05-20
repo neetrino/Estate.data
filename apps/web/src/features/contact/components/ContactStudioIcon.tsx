@@ -7,7 +7,11 @@ import Image from "next/image";
 /** Matches `size-14` (56px) for `next/image` width/height. */
 const CONTACT_STUDIO_ICON_DIMENSION_PX = 56;
 
-const CONTACT_STUDIO_ICON_CLASS = "size-12 shrink-0 sm:size-14";
+const CONTACT_STUDIO_ICON_CLASS = "size-full object-contain";
+
+/** Clips export letterboxing; squircle art fills the box. */
+const CONTACT_STUDIO_ICON_FRAME_CLASS =
+  "size-12 shrink-0 overflow-hidden rounded-[28%] sm:size-14";
 
 type ContactStudioIconProps = {
   kind: ContactStudioIconKind;
@@ -16,13 +20,16 @@ type ContactStudioIconProps = {
 
 export function ContactStudioIcon({ kind, label }: ContactStudioIconProps) {
   return (
-    <Image
-      src={CONTACT_STUDIO_ICON_PATHS[kind]}
-      alt=""
-      aria-label={label}
-      width={CONTACT_STUDIO_ICON_DIMENSION_PX}
-      height={CONTACT_STUDIO_ICON_DIMENSION_PX}
-      className={CONTACT_STUDIO_ICON_CLASS}
-    />
+    <span className={CONTACT_STUDIO_ICON_FRAME_CLASS}>
+      <Image
+        src={CONTACT_STUDIO_ICON_PATHS[kind]}
+        alt=""
+        aria-label={label}
+        width={CONTACT_STUDIO_ICON_DIMENSION_PX}
+        height={CONTACT_STUDIO_ICON_DIMENSION_PX}
+        className={CONTACT_STUDIO_ICON_CLASS}
+        unoptimized
+      />
+    </span>
   );
 }
