@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import { PortfolioFilter } from "@/features/portfolio/components/PortfolioFilter";
 import { PortfolioPagination } from "@/features/portfolio/components/PortfolioPagination";
@@ -46,9 +46,10 @@ export function PortfolioWorkSection() {
     [filteredProjects, safePage],
   );
 
-  useEffect(() => {
+  const handleFilterChange = (id: PortfolioFilterId) => {
+    setActiveFilterId(id);
     setCurrentPage(1);
-  }, [activeFilterId]);
+  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -57,7 +58,7 @@ export function PortfolioWorkSection() {
 
   return (
     <>
-      <PortfolioFilter activeId={activeFilterId} onFilterChange={setActiveFilterId} />
+      <PortfolioFilter activeId={activeFilterId} onFilterChange={handleFilterChange} />
       <ul ref={gridRef} className={PORTFOLIO_GRID_CLASS}>
         {paginatedProjects.map((project) => (
           <li key={project.id}>

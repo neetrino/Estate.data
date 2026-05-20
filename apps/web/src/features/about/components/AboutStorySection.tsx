@@ -41,8 +41,8 @@ export function AboutStorySection() {
       </div>
       <div className={ABOUT_STORY_BODY_CLASS}>
         <div className={ABOUT_STORY_COPY_BLOCK_CLASS}>
-          {paragraphs.map((paragraph, index) => (
-            <p key={aboutStoryParagraphKey(paragraph, index)} className={ABOUT_STORY_PARAGRAPH_CLASS}>
+          {paragraphs.map((paragraph) => (
+            <p key={aboutStoryParagraphKey(paragraph)} className={ABOUT_STORY_PARAGRAPH_CLASS}>
               <AboutStoryParagraphContent paragraph={paragraph} />
             </p>
           ))}
@@ -53,7 +53,7 @@ export function AboutStorySection() {
   );
 }
 
-function aboutStoryParagraphKey(paragraph: AboutStoryParagraph, index: number): string {
+function aboutStoryParagraphKey(paragraph: AboutStoryParagraph): string {
   if (typeof paragraph === "string") {
     return paragraph;
   }

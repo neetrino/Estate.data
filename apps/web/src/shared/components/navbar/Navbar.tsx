@@ -65,10 +65,25 @@ type NavbarProps = {
 
 export function Navbar({ overlay = false }: NavbarProps) {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
-  const closeMobile = useCallback(() => setMobileOpen(false), []);
+  const isMobileMenuVisible = mobileMenuOpen && mobileMenuPath === pathname;
+
+  const closeMobile = useCallback(() => {
+    setMobileMenuOpen(false);
+    setMobileMenuPath(null);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    if (isMobileMenuVisible) {
+      closeMobile();
+      return;
+    }
+    setMobileMenuPath(pathname);
+    setMobileMenuOpen(true);
+  };
 
   useEffect(() => {
     const updateScrolled = () => {
@@ -81,11 +96,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
   }, []);
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!mobileOpen) {
+    if (!isMobileMenuVisible) {
       return;
     }
 
@@ -100,7 +111,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
       html.style.overflow = previousHtmlOverflow;
       body.style.overflow = previousBodyOverflow;
     };
-  }, [mobileOpen]);
+  }, [isMobileMenuVisible]);
 
   const headerSurfaceClass = (() => {
     if (overlay) {
@@ -114,7 +125,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
   const positionClass = overlay ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
 
   const headerSurfaceWhenMenuOpen =
-    mobileOpen && !overlay ? NAVBAR_SOLID_CLASS : headerSurfaceClass;
+    isMobileMenuVisible && !overlay ? NAVBAR_SOLID_CLASS : headerSurfaceClass;
 
   return (
     <>
@@ -154,19 +165,19 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 ? "text-white hover:bg-white/10"
                 : "text-black hover:bg-black/5"
             }`}
-            aria-expanded={mobileOpen}
+            aria-expanded={isMobileMenuVisible}
             aria-controls="mobile-nav"
-            onClick={() => setMobileOpen((open) => !open)}
+            onClick={toggleMobileMenu}
           >
             <span className="sr-only">
-              {mobileOpen ? "Close menu" : "Open menu"}
+              {isMobileMenuVisible ? "Close menu" : "Open menu"}
             </span>
-            {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+            {isMobileMenuVisible ? <CloseIcon /> : <MenuIcon />}
           </button>
         </nav>
       </header>
 
-      {mobileOpen ? (
+      {isMobileMenuVisible ? (
         <>
           <button
             type="button"
