@@ -1,4 +1,5 @@
 import type { PricingPackage } from "@/features/pricing/content/pricingPackageTypes";
+import { PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS } from "@/shared/lib/constants";
 
 export const PRICING_MEDIA_PACKAGES_COPY = {
   sectionTitle: "Media packages",
@@ -46,6 +47,7 @@ export const PRICING_MEDIA_PACKAGES_COPY = {
       ],
       bookLabel: "Book Cinematic+",
       bookHref: "/contact",
+      bookCtaExtraClassName: PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS,
     },
   ] as const satisfies readonly PricingPackage[],
 } as const;

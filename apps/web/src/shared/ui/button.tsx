@@ -30,6 +30,10 @@ const ESTATE_CTA_ICON_DISC_CLASS =
 export const accentButtonClassName =
   `inline-flex h-9 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-button px-4 ${ACCENT_BUTTON_TEXT_CLASS} text-black shadow transition-colors bg-accent hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`;
 
+/** Navbar “Book a Shoot” — #C364BE (`--accent`), white label. */
+export const navbarBookShootButtonClassName =
+  `inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap rounded-button px-5 ${ACCENT_BUTTON_TEXT_CLASS} font-semibold text-white shadow bg-accent transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring`;
+
 const CLIENT_VOICES_BUTTON_TEXT_CLASS = "text-base font-semibold leading-snug";
 
 /** Orange CTA — `client-voices-accent` (contact form submit). */

@@ -57,6 +57,9 @@ export function PricingPackageCard({
     : PRICING_PACKAGE_FEATURES_COMPACT_CLASS;
   const resolvedCtaStyle =
     ctaButtonStyle ?? (pinCtaToBottom ? PRICING_MEDIA_CTA_BUTTON_STYLE : PRICING_ANALYTICS_CTA_BUTTON_STYLE);
+  const resolvedCtaClassName = [ctaButtonClassName, pkg.bookCtaExtraClassName]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <article
@@ -84,7 +87,7 @@ export function PricingPackageCard({
       </ul>
       <EstatePillButtonLink
         href={pkg.bookHref}
-        className={ctaButtonClassName}
+        className={resolvedCtaClassName}
         style={resolvedCtaStyle}
       >
         {pkg.bookLabel}

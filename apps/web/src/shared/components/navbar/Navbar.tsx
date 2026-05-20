@@ -20,7 +20,7 @@ import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
-import { AccentButtonLink } from "@/shared/ui/button";
+import { navbarBookShootButtonClassName } from "@/shared/ui/button";
 
 const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-50";
 
@@ -98,13 +98,12 @@ export function Navbar({ overlay = false }: NavbarProps) {
             tone={navTone}
             onNavigate={closeMobile}
           />
-          <AccentButtonLink
+          <Link
             href={NAV_CTA_LINKS.bookShoot.href}
-            className="hidden sm:inline-flex"
-            showArrow={false}
+            className={`${navbarBookShootButtonClassName} hidden sm:inline-flex`}
           >
             {NAV_CTA_LINKS.bookShoot.label}
-          </AccentButtonLink>
+          </Link>
 
           <button
             type="button"
@@ -150,14 +149,13 @@ export function Navbar({ overlay = false }: NavbarProps) {
               className="justify-center py-2.5"
               onNavigate={closeMobile}
             />
-            <AccentButtonLink
+            <Link
               href={NAV_CTA_LINKS.bookShoot.href}
-              className="w-full py-2.5"
-              showArrow={false}
+              className={`${navbarBookShootButtonClassName} w-full py-2.5`}
               onClick={closeMobile}
             >
               {NAV_CTA_LINKS.bookShoot.label}
-            </AccentButtonLink>
+            </Link>
           </div>
         </div>
       ) : null}

@@ -9,4 +9,6 @@ export type PricingPackage = {
   readonly badgeLabel?: string;
   /** Overrides section `priceSuffix`; use `""` to hide (e.g. Enterprise “Custom”). */
   readonly priceSuffix?: string;
+  /** Extra classes on book CTA (e.g. icon disc offset). */
+  readonly bookCtaExtraClassName?: string;
 };

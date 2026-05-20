@@ -82,10 +82,13 @@ export const WHAT_WE_DO_CARD_SURFACE_STYLE = {
 /** Pricing package cards — min height for price + features + CTA (px). */
 export const PRICING_PACKAGE_CARD_MIN_HEIGHT_PX = 340;
 
-/** Pricing package card — horizontal inset for book CTA on each side (px). */
-export const PRICING_PACKAGE_CTA_INSET_X_PX = 20;
+/** Media packages — horizontal inset for book CTA on each side (px). */
+export const PRICING_MEDIA_CTA_INSET_X_PX = 58;
 
-/** Media packages — gap above CTA (px); layout, not Tailwind (see PRICING_MEDIA_CTA_BUTTON_STYLE). */
+/** Analytics “Talk to sales” — horizontal inset on each side (px). */
+export const PRICING_ANALYTICS_CTA_INSET_X_PX = 65;
+
+/** Media packages — gap above CTA (px). */
 export const PRICING_MEDIA_CTA_MARGIN_TOP_PX = 32;
 
 /** Media packages — extra upward nudge via transform (px). */
@@ -94,20 +97,22 @@ export const PRICING_MEDIA_CTA_LIFT_PX = 17;
 /** Analytics — gap above CTA (px). */
 export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 
-/** Shared static classes for pricing card CTAs (dynamic spacing uses inline style). */
+/** Shared static classes for pricing card CTAs. */
 export const PRICING_PACKAGE_CTA_BUTTON_CLASS = "max-w-full justify-center self-center";
 
-/** Media packages — CTA position; tweak PRICING_MEDIA_CTA_* constants above. */
+/** Media packages — CTA position (inline style; Tailwind-safe). */
 export const PRICING_MEDIA_CTA_BUTTON_STYLE = {
   marginTop: PRICING_MEDIA_CTA_MARGIN_TOP_PX,
   transform: `translateY(-${PRICING_MEDIA_CTA_LIFT_PX}px)`,
-  width: `calc(100% - ${PRICING_PACKAGE_CTA_INSET_X_PX * 2}px)`,
+  width: `calc(100% - ${PRICING_MEDIA_CTA_INSET_X_PX * 2}px)`,
+  alignSelf: "center",
 } as const;
 
-/** Analytics — CTA position; tweak PRICING_ANALYTICS_CTA_MARGIN_TOP_PX above. */
+/** Analytics — CTA position (inline style). */
 export const PRICING_ANALYTICS_CTA_BUTTON_STYLE = {
   marginTop: PRICING_ANALYTICS_CTA_MARGIN_TOP_PX,
-  width: `calc(100% - ${PRICING_PACKAGE_CTA_INSET_X_PX * 2}px)`,
+  width: `calc(100% - ${PRICING_ANALYTICS_CTA_INSET_X_PX * 2}px)`,
+  alignSelf: "center",
 } as const;
 
 /** What we do card — nudge content block upward (px). */
@@ -216,6 +221,9 @@ export const ESTATE_CTA_LABEL_OFFSET_CLASS = "-translate-x-[10px]";
 
 /** Icon disc-only nudge left inside the pill (10px). */
 export const ESTATE_CTA_ICON_DISC_OFFSET_CLASS = "-translate-x-[5px]";
+
+/** Book Cinematic+ pricing CTA — icon disc further left (long label). */
+export const PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS = "[&>span:last-child]:-translate-x-[14px]";
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
