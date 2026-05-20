@@ -4,14 +4,14 @@ import { ASSET_KEYS, assetUrl } from "@estate/db";
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
 /** Navbar links + CTA typography (excludes ESTATEDATA wordmark). */
-export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
+export const NAV_ITEM_TEXT_CLASS = "text-base font-semibold leading-snug sm:text-lg";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
 export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-what-we-do-subtitle`;
 
 /** Trusted partners strip layout (width + spacing). */
 export const TRUSTED_STRIP_LAYOUT_CLASS =
-  "mx-auto flex w-full max-w-screen-2xl flex-wrap items-center justify-center gap-x-12 gap-y-4 px-6 py-7 sm:px-10 sm:py-8 lg:px-16";
+  "mx-auto flex w-full max-w-screen-2xl flex-wrap items-center justify-center gap-x-6 gap-y-3 px-4 py-6 sm:gap-x-10 sm:gap-y-4 sm:px-8 sm:py-7 md:gap-x-12 lg:px-16 lg:py-8";
 
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
@@ -46,10 +46,19 @@ export const HERO_CONTENT_TOP_INSET_CLASS = "top-[73px]";
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
 
 /** Shared horizontal page gutters (navbar + hero). */
-export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8";
+export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8 xl:px-10";
 
 /** Shared centered content width (navbar + hero). */
-export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl";
+export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl 2xl:max-w-[90rem]";
+
+/** Section vertical rhythm — mobile through desktop. */
+export const SECTION_VERTICAL_PADDING_CLASS = "py-12 sm:py-14 md:py-16 lg:py-20";
+
+/** Dark gradient marketing cards (What we do, media, pricing). */
+export const GRADIENT_CARD_PADDING_CLASS = "px-5 py-6 sm:px-8 sm:py-8";
+
+/** Pricing package cards — slightly tighter vertical padding. */
+export const PRICING_CARD_PADDING_CLASS = "px-5 py-6 sm:px-8 sm:py-7";
 
 /**
  * Home hero background (public path).
@@ -97,23 +106,30 @@ export const PRICING_MEDIA_CTA_LIFT_PX = 17;
 /** Analytics — gap above CTA (px). */
 export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 
-/** Shared static classes for pricing card CTAs. */
-export const PRICING_PACKAGE_CTA_BUTTON_CLASS = "max-w-full justify-center self-center";
+/**
+ * Pricing: desktop Figma at lg+ (≥1024px); iPad Pro (≤1399px) overrides to 2-col + pill CTAs.
+ */
+/** Pricing package grids — lg 3-col desktop; 2-col on iPad Pro via max-[1399px]. */
+export const PRICING_PACKAGE_GRID_CLASS =
+  "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-[1399px]:!grid-cols-2";
 
-/** Media packages — CTA position (inline style; Tailwind-safe). */
-export const PRICING_MEDIA_CTA_BUTTON_STYLE = {
-  marginTop: PRICING_MEDIA_CTA_MARGIN_TOP_PX,
-  transform: `translateY(-${PRICING_MEDIA_CTA_LIFT_PX}px)`,
-  width: `calc(100% - ${PRICING_MEDIA_CTA_INSET_X_PX * 2}px)`,
-  alignSelf: "center",
-} as const;
+/** Pricing card CTAs — Figma inset from lg; pill width on iPad Pro only. */
+export const PRICING_PACKAGE_CTA_BUTTON_CLASS = [
+  "max-w-full justify-center self-center",
+  "w-[calc(100%-2rem)] sm:w-[calc(100%-4.5rem)] lg:w-[calc(100%-7.25rem)]",
+  "max-[1399px]:!w-auto",
+].join(" ");
 
-/** Analytics — CTA position (inline style). */
-export const PRICING_ANALYTICS_CTA_BUTTON_STYLE = {
-  marginTop: PRICING_ANALYTICS_CTA_MARGIN_TOP_PX,
-  width: `calc(100% - ${PRICING_ANALYTICS_CTA_INSET_X_PX * 2}px)`,
-  alignSelf: "center",
-} as const;
+/** Media packages — upward nudge from lg; off on iPad Pro. */
+export const PRICING_MEDIA_CTA_BUTTON_CLASS = [
+  PRICING_PACKAGE_CTA_BUTTON_CLASS,
+  "max-[1399px]:!translate-y-0 lg:-translate-y-[17px]",
+].join(" ");
+
+/** Pricing card CTA row — centered; spacing via Tailwind (32px / 16px). */
+export const PRICING_MEDIA_CTA_WRAP_CLASS = "mt-8 flex w-full justify-center";
+
+export const PRICING_ANALYTICS_CTA_WRAP_CLASS = "mt-4 flex w-full justify-center";
 
 /** What we do card — nudge content block upward (px). */
 export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
@@ -126,17 +142,20 @@ export const HOME_STATS_GRID_GAP_CLASS = "gap-8";
 
 /** What we do — uniform row/column/section spacing (px via Tailwind scale). */
 export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
-  "gap-x-11 gap-y-11 lg:gap-x-14 lg:gap-y-14";
+  "gap-x-6 gap-y-6 sm:gap-x-11 sm:gap-y-11 lg:gap-x-14 lg:gap-y-14";
 
-/** Site footer — Services & Company columns nudge left (px). */
-export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "-translate-x-[20px]";
+/** Site footer — Services & Company columns nudge left on large screens only. */
+export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "lg:-translate-x-[20px]";
 
 /** Site footer — top edge line separating footer from page content. */
 export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-foreground/10";
 
-/** Site footer — main row; matches navbar width, equal space between columns. */
+/** Site footer — main row; stacked mobile, 2-col tablet, spread desktop. */
 export const FOOTER_MAIN_ROW_CLASS =
-  "flex w-full flex-col gap-10 pt-10 pb-4 sm:pt-12 sm:pb-6 lg:flex-row lg:items-start lg:justify-between lg:gap-0";
+  "grid w-full grid-cols-1 gap-10 pt-10 pb-4 sm:grid-cols-2 sm:pt-12 sm:pb-6 lg:flex lg:items-start lg:justify-between lg:gap-0";
+
+/** Site footer — brand block spans full width below sm, single column on lg row. */
+export const FOOTER_BRAND_COLUMN_CLASS = "sm:col-span-2 lg:col-span-1 lg:max-w-xs";
 
 /** Site footer — divider + copyright block below main row. */
 export const FOOTER_DIVIDER_CLASS =
@@ -157,7 +176,7 @@ export const PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-property-intelligence-accent sm:text-base";
 
 export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-property-intelligence-navy sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-property-intelligence-navy sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
@@ -167,7 +186,7 @@ export const SOLUTIONS_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
 
 export const SOLUTIONS_PAGE_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 export const SOLUTIONS_PAGE_SUBTITLE_CLASS = "mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl";
 
@@ -176,7 +195,7 @@ export const CONTACT_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
 
 export const CONTACT_PAGE_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 export const CONTACT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-home-listing-cta-book sm:text-xl";
@@ -186,7 +205,7 @@ export const ABOUT_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
 
 export const ABOUT_PAGE_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-foreground sm:text-xl";
@@ -223,19 +242,19 @@ export const CLIENT_VOICES_EYEBROW_CLASS =
 
 /** Client voices section — main heading typography. */
 export const CLIENT_VOICES_SECTION_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-black sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-black sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 /** Client voices section — white surface + vertical rhythm. */
 export const CLIENT_VOICES_SECTION_SURFACE_CLASS =
-  "bg-white py-14 sm:py-16 lg:py-20";
+  `bg-white ${SECTION_VERTICAL_PADDING_CLASS}`;
 
 /** What we do / recent work sections — warm off-white surface + vertical rhythm. */
 export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
-  "bg-what-we-do-surface py-14 sm:py-16 lg:py-20";
+  `bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`;
 
 /** Home listing CTA — gradient panel below client voices. */
 export const HOME_LISTING_CTA_PANEL_CLASS =
-  "home-listing-cta-panel overflow-hidden rounded-3xl p-10 md:p-16";
+  "home-listing-cta-panel overflow-hidden rounded-2xl p-6 sm:rounded-3xl sm:p-10 md:p-16";
 
 /** Estate pill — gold surface for listing CTA “Book a Shoot”. */
 export const HOME_LISTING_CTA_BOOK_BUTTON_CLASS = [

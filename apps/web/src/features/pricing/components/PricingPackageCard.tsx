@@ -1,16 +1,16 @@
-import type { CSSProperties } from "react";
 import type { PricingPackage } from "@/features/pricing/content/pricingPackageTypes";
 import {
-  PRICING_ANALYTICS_CTA_BUTTON_STYLE,
-  PRICING_MEDIA_CTA_BUTTON_STYLE,
+  PRICING_ANALYTICS_CTA_WRAP_CLASS,
+  PRICING_CARD_PADDING_CLASS,
+  PRICING_MEDIA_CTA_BUTTON_CLASS,
+  PRICING_MEDIA_CTA_WRAP_CLASS,
   PRICING_PACKAGE_CARD_MIN_HEIGHT_PX,
   PRICING_PACKAGE_CTA_BUTTON_CLASS,
   WHAT_WE_DO_CARD_SURFACE_STYLE,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
-const PRICING_PACKAGE_CARD_BASE_CLASS =
-  "relative flex w-full flex-col overflow-hidden px-8 py-7 text-left";
+const PRICING_PACKAGE_CARD_BASE_CLASS = `relative flex w-full flex-col overflow-hidden text-left ${PRICING_CARD_PADDING_CLASS}`;
 
 const PRICING_PACKAGE_FEATURES_GROW_CLASS = "mt-5 flex flex-1 flex-col gap-2";
 
@@ -35,7 +35,6 @@ type PricingPackageCardProps = {
   package: PricingPackage;
   priceSuffix: string;
   ctaButtonClassName?: string;
-  ctaButtonStyle?: CSSProperties;
   /** When true, flex-1 + min-height pin CTA to card bottom (media grid). */
   pinCtaToBottom?: boolean;
 };
@@ -43,8 +42,7 @@ type PricingPackageCardProps = {
 export function PricingPackageCard({
   package: pkg,
   priceSuffix,
-  ctaButtonClassName = PRICING_PACKAGE_CTA_BUTTON_CLASS,
-  ctaButtonStyle,
+  ctaButtonClassName,
   pinCtaToBottom = true,
 }: PricingPackageCardProps) {
   const highlighted = pkg.highlighted === true;
@@ -55,9 +53,13 @@ export function PricingPackageCard({
   const featuresClassName = pinCtaToBottom
     ? PRICING_PACKAGE_FEATURES_GROW_CLASS
     : PRICING_PACKAGE_FEATURES_COMPACT_CLASS;
-  const resolvedCtaStyle =
-    ctaButtonStyle ?? (pinCtaToBottom ? PRICING_MEDIA_CTA_BUTTON_STYLE : PRICING_ANALYTICS_CTA_BUTTON_STYLE);
-  const resolvedCtaClassName = [ctaButtonClassName, pkg.bookCtaExtraClassName]
+  const ctaWrapClassName = pinCtaToBottom
+    ? PRICING_MEDIA_CTA_WRAP_CLASS
+    : PRICING_ANALYTICS_CTA_WRAP_CLASS;
+  const defaultCtaClassName = pinCtaToBottom
+    ? PRICING_MEDIA_CTA_BUTTON_CLASS
+    : PRICING_PACKAGE_CTA_BUTTON_CLASS;
+  const resolvedCtaClassName = [ctaButtonClassName ?? defaultCtaClassName, pkg.bookCtaExtraClassName]
     .filter(Boolean)
     .join(" ");
 
@@ -85,13 +87,11 @@ export function PricingPackageCard({
           </li>
         ))}
       </ul>
-      <EstatePillButtonLink
-        href={pkg.bookHref}
-        className={resolvedCtaClassName}
-        style={resolvedCtaStyle}
-      >
-        {pkg.bookLabel}
-      </EstatePillButtonLink>
+      <div className={ctaWrapClassName}>
+        <EstatePillButtonLink href={pkg.bookHref} className={resolvedCtaClassName}>
+          {pkg.bookLabel}
+        </EstatePillButtonLink>
+      </div>
     </article>
   );
 }

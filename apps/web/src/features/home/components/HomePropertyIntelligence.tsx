@@ -8,6 +8,7 @@ import {
   HOME_STATS_GRID_GAP_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
+  SECTION_VERTICAL_PADDING_CLASS,
   PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
@@ -16,7 +17,7 @@ const PROPERTY_INTELLIGENCE_EYEBROW_CLASS =
   "text-lg font-semibold tracking-tight text-property-intelligence-accent sm:text-xl";
 
 const PROPERTY_INTELLIGENCE_TITLE_CLASS =
-  "mt-2 text-3xl font-bold tracking-tight text-property-intelligence-navy sm:text-4xl";
+  "mt-2 text-3xl font-bold tracking-tight text-property-intelligence-navy sm:text-4xl md:text-[2rem]";
 
 const PROPERTY_INTELLIGENCE_DESCRIPTION_CLASS =
   "mt-4 text-base leading-relaxed text-property-intelligence-navy";
@@ -25,7 +26,7 @@ const PROPERTY_INTELLIGENCE_FEATURE_CLASS =
   "text-sm leading-relaxed text-property-intelligence-navy sm:text-base";
 
 const PROPERTY_INTELLIGENCE_CTA_CLASS =
-  "mt-8 bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
+  "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
 
 export function HomePropertyIntelligence() {
   const { eyebrow, title, description, features, ctaLabel, ctaHref } =
@@ -33,7 +34,7 @@ export function HomePropertyIntelligence() {
 
   return (
     <section
-      className="bg-what-we-do-surface py-14 sm:py-16 lg:py-20"
+      className={`bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`}
       aria-labelledby="property-intelligence-heading"
     >
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
@@ -77,9 +78,11 @@ export function HomePropertyIntelligence() {
                 </li>
               ))}
             </ul>
-            <EstatePillButtonLink href={ctaHref} className={PROPERTY_INTELLIGENCE_CTA_CLASS}>
-              {ctaLabel}
-            </EstatePillButtonLink>
+            <div className="mt-8 flex justify-start">
+              <EstatePillButtonLink href={ctaHref} className={PROPERTY_INTELLIGENCE_CTA_CLASS}>
+                {ctaLabel}
+              </EstatePillButtonLink>
+            </div>
           </div>
         </div>
       </div>

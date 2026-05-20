@@ -1,7 +1,9 @@
-import type { CSSProperties } from "react";
 import { PricingPackageCard } from "@/features/pricing/components/PricingPackageCard";
 import type { PricingPackage } from "@/features/pricing/content/pricingPackageTypes";
-import { WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
+import {
+  PRICING_PACKAGE_GRID_CLASS,
+  WHAT_WE_DO_CARD_GRID_GAP_CLASS,
+} from "@/shared/lib/constants";
 
 const PRICING_SECTION_TITLE_CLASS =
   "text-2xl font-bold tracking-tight text-what-we-do-title sm:text-3xl";
@@ -12,7 +14,6 @@ type PricingPackageSectionProps = {
   priceSuffix: string;
   packages: readonly PricingPackage[];
   ctaButtonClassName?: string;
-  ctaButtonStyle?: CSSProperties;
   pinCtaToBottom?: boolean;
 };
 
@@ -22,7 +23,6 @@ export function PricingPackageSection({
   priceSuffix,
   packages,
   ctaButtonClassName,
-  ctaButtonStyle,
   pinCtaToBottom = true,
 }: PricingPackageSectionProps) {
   const headingId = `${sectionId}-heading`;
@@ -34,7 +34,7 @@ export function PricingPackageSection({
         {sectionTitle}
       </h2>
       <ul
-        className={`mt-8 grid grid-cols-1 md:grid-cols-3 ${gridAlignClass} ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`}
+        className={`mt-8 ${PRICING_PACKAGE_GRID_CLASS} ${gridAlignClass} ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`}
       >
         {packages.map((pkg) => (
           <li key={pkg.id} className="min-w-0">
@@ -42,7 +42,6 @@ export function PricingPackageSection({
               package={pkg}
               priceSuffix={priceSuffix}
               ctaButtonClassName={ctaButtonClassName}
-              ctaButtonStyle={ctaButtonStyle}
               pinCtaToBottom={pinCtaToBottom}
             />
           </li>

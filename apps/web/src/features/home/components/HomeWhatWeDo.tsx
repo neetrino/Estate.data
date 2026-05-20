@@ -3,6 +3,7 @@ import { WhatWeDoServiceCard } from "@/features/home/components/WhatWeDoServiceC
 import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
+  SECTION_VERTICAL_PADDING_CLASS,
   WHAT_WE_DO_CARD_GRID_GAP_CLASS,
 } from "@/shared/lib/constants";
 
@@ -11,7 +12,7 @@ export function HomeWhatWeDo() {
 
   return (
     <section
-      className="bg-what-we-do-surface py-14 sm:py-16 lg:py-20"
+      className={`bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`}
       aria-labelledby="what-we-do-heading"
     >
       <div
@@ -20,7 +21,7 @@ export function HomeWhatWeDo() {
         <div>
           <h2
             id="what-we-do-heading"
-            className="text-4xl font-bold tracking-tight text-what-we-do-title sm:text-5xl lg:text-[3rem]"
+            className="text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl md:text-5xl lg:text-[3rem]"
           >
             {title}
           </h2>

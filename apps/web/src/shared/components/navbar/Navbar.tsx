@@ -56,6 +56,18 @@ export function Navbar({ overlay = false }: NavbarProps) {
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
+
   const headerSurfaceClass = (() => {
     if (overlay) {
       return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_TRANSPARENT_CLASS;
@@ -80,7 +92,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
         <LogoLink tone={navTone} onNavigate={closeMobile} />
 
         <div className="flex min-w-0 flex-1 justify-center px-4">
-          <ul className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
+          <ul className="hidden items-center justify-center gap-6 lg:flex lg:gap-8 max-[1399px]:!hidden">
             {MAIN_NAV_LINKS.map((link) => (
               <NavItem
                 key={link.href}
@@ -92,22 +104,17 @@ export function Navbar({ overlay = false }: NavbarProps) {
           </ul>
         </div>
 
-        <div className="flex shrink-0 items-center gap-5 sm:gap-6">
-          <PhoneNavLink
-            className="hidden sm:inline-flex"
-            tone={navTone}
-            onNavigate={closeMobile}
-          />
-          <Link
-            href={NAV_CTA_LINKS.bookShoot.href}
-            className={`${navbarBookShootButtonClassName} hidden sm:inline-flex`}
-          >
-            {NAV_CTA_LINKS.bookShoot.label}
-          </Link>
+        <div className="ms-auto flex shrink-0 items-center gap-5 lg:ms-0 lg:gap-6">
+          <div className="hidden items-center gap-5 lg:flex lg:gap-6 max-[1399px]:!hidden">
+            <PhoneNavLink tone={navTone} onNavigate={closeMobile} />
+            <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
+              {NAV_CTA_LINKS.bookShoot.label}
+            </Link>
+          </div>
 
           <button
             type="button"
-            className={`inline-flex cursor-pointer items-center justify-center rounded-md p-2 lg:hidden ${
+            className={`inline-flex min-[1400px]:hidden cursor-pointer items-center justify-center rounded-md p-2 ${
               navTone === "light"
                 ? "text-white hover:bg-white/10"
                 : "text-black hover:bg-black/5"
@@ -127,7 +134,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
       {mobileOpen ? (
         <div
           id="mobile-nav"
-          className="border-t border-zinc-200/80 bg-white/95 px-4 py-4 backdrop-blur-xl lg:hidden"
+          className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain border-t border-zinc-200/80 bg-white/95 px-4 py-4 backdrop-blur-xl min-[1400px]:hidden"
         >
           <ul className="flex flex-col gap-1">
             {MAIN_NAV_LINKS.map((link) => (
@@ -144,19 +151,6 @@ export function Navbar({ overlay = false }: NavbarProps) {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex flex-col gap-3 border-t border-zinc-200 pt-4">
-            <PhoneNavLink
-              className="justify-center py-2.5"
-              onNavigate={closeMobile}
-            />
-            <Link
-              href={NAV_CTA_LINKS.bookShoot.href}
-              className={`${navbarBookShootButtonClassName} w-full py-2.5`}
-              onClick={closeMobile}
-            >
-              {NAV_CTA_LINKS.bookShoot.label}
-            </Link>
-          </div>
         </div>
       ) : null}
     </header>

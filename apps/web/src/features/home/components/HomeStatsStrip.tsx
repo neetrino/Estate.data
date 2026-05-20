@@ -3,6 +3,7 @@ import {
   HOME_STATS_GRID_GAP_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
+  SECTION_VERTICAL_PADDING_CLASS,
 } from "@/shared/lib/constants";
 
 export function HomeStatsStrip() {
@@ -10,7 +11,7 @@ export function HomeStatsStrip() {
 
   return (
     <section className="bg-white" aria-label="Key metrics">
-      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS} py-14`}>
+      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS} ${SECTION_VERTICAL_PADDING_CLASS}`}>
         <ul
           className={`flex w-full flex-col ${HOME_STATS_GRID_GAP_CLASS} md:flex-row md:items-start`}
         >

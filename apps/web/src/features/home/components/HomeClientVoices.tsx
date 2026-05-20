@@ -29,7 +29,7 @@ export function HomeClientVoices() {
         </header>
 
         <ul
-          className={`mt-12 grid grid-cols-1 md:grid-cols-3 ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`}
+          className={`mt-10 grid grid-cols-1 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`}
         >
           {testimonials.map((voice) => (
             <li key={voice.id} className="flex h-full min-w-0">

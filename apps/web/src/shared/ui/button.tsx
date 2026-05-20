@@ -9,12 +9,12 @@ import {
 
 const ACCENT_BUTTON_TEXT_CLASS = "text-sm font-semibold leading-snug";
 
-const ESTATE_PILL_BUTTON_TEXT_CLASS = "text-base font-bold leading-6";
+const ESTATE_PILL_BUTTON_TEXT_CLASS = "text-sm font-bold leading-6 sm:text-base";
 
 /** Estate.data pill CTA — purple surface, icon disc + arrow (Figma 305:2096, compact). */
 export const estatePillButtonClassName = [
   ESTATE_CTA_BUTTON_CLASS,
-  "inline-flex items-center gap-2 whitespace-nowrap",
+  "inline-flex max-w-full items-center gap-2 whitespace-nowrap",
   "bg-estate-cta text-estate-cta-foreground",
   ESTATE_CTA_BUTTON_PADDING_CLASS,
   "cursor-pointer transition-opacity hover:opacity-90",

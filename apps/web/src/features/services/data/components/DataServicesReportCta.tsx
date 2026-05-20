@@ -21,7 +21,7 @@ const DATA_SERVICES_REPORT_CTA_TITLE_CLASS =
 const DATA_SERVICES_REPORT_CTA_DESCRIPTION_CLASS =
   "mt-3 max-w-md text-base leading-relaxed text-white/90";
 
-const DATA_SERVICES_REPORT_CTA_BUTTON_CLASS = `mt-4 w-fit self-start ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`;
+const DATA_SERVICES_REPORT_CTA_BUTTON_CLASS = `max-w-full ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`;
 
 export function DataServicesReportCta() {
   const { title, description, buttonLabel, buttonHref } = DATA_SERVICES_REPORT_CTA_COPY;
@@ -35,9 +35,11 @@ export function DataServicesReportCta() {
         {title}
       </h2>
       <p className={DATA_SERVICES_REPORT_CTA_DESCRIPTION_CLASS}>{description}</p>
-      <EstatePillButtonLink href={buttonHref} className={DATA_SERVICES_REPORT_CTA_BUTTON_CLASS}>
-        {buttonLabel}
-      </EstatePillButtonLink>
+      <div className="mt-4 flex justify-start">
+        <EstatePillButtonLink href={buttonHref} className={DATA_SERVICES_REPORT_CTA_BUTTON_CLASS}>
+          {buttonLabel}
+        </EstatePillButtonLink>
+      </div>
     </section>
   );
 }

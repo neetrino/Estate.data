@@ -1,13 +1,13 @@
 import { MediaServiceIcon } from "@/features/media/components/MediaServiceIcon";
 import type { MediaService } from "@/features/media/content/mediaServicesCopy";
 import {
+  GRADIENT_CARD_PADDING_CLASS,
   MEDIA_SERVICE_CARD_MIN_HEIGHT_PX,
   MEDIA_SERVICE_CARD_SURFACE_STYLE,
   WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
 } from "@/shared/lib/constants";
 
-const MEDIA_SERVICE_CARD_CLASS =
-  "relative flex w-full flex-col overflow-hidden px-8 py-8 text-left";
+const MEDIA_SERVICE_CARD_CLASS = `relative flex w-full flex-col overflow-hidden text-left ${GRADIENT_CARD_PADDING_CLASS}`;
 
 const MEDIA_SERVICE_TITLE_CLASS = "mt-5 text-xl font-bold text-white";
 

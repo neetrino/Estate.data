@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { WhatWeDoService } from "@/features/home/content/whatWeDoCopy";
 import { WhatWeDoServiceIcon } from "@/features/home/components/WhatWeDoServiceIcon";
 import {
+  GRADIENT_CARD_PADDING_CLASS,
   WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
   WHAT_WE_DO_CARD_HEIGHT_PX,
   WHAT_WE_DO_CARD_SURFACE_STYLE,
@@ -22,7 +23,7 @@ type WhatWeDoServiceCardProps = {
 export function WhatWeDoServiceCard({ service }: WhatWeDoServiceCardProps) {
   return (
     <article
-      className="relative flex w-full flex-col justify-center overflow-hidden px-8 py-8 text-left"
+      className={`relative flex w-full flex-col justify-center overflow-hidden text-left ${GRADIENT_CARD_PADDING_CLASS}`}
       style={{
         minHeight: WHAT_WE_DO_CARD_HEIGHT_PX,
         ...WHAT_WE_DO_CARD_SURFACE_STYLE,

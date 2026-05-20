@@ -4,6 +4,7 @@ import {
   HOME_LISTING_CTA_PANEL_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
+  SECTION_VERTICAL_PADDING_CLASS,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
@@ -19,7 +20,7 @@ export function HomeListingCta() {
 
   return (
     <section
-      className="bg-what-we-do-surface py-14 sm:py-16 lg:py-20"
+      className={`bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`}
       aria-labelledby="listing-cta-heading"
     >
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
@@ -31,16 +32,16 @@ export function HomeListingCta() {
               </h2>
               <p className={HOME_LISTING_CTA_DESCRIPTION_CLASS}>{description}</p>
             </div>
-            <div className="flex flex-wrap gap-3 md:justify-end">
+            <div className="flex flex-col items-start gap-3 md:flex-row md:flex-wrap md:justify-end">
               <EstatePillButtonLink
                 href={primaryHref}
-                className={HOME_LISTING_CTA_BOOK_BUTTON_CLASS}
+                className={`max-w-full ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`}
               >
                 {primaryLabel}
               </EstatePillButtonLink>
               <EstatePillButtonLink
                 href={secondaryHref}
-                className={HOME_LISTING_CTA_BOOK_BUTTON_CLASS}
+                className={`max-w-full ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`}
               >
                 {secondaryLabel}
               </EstatePillButtonLink>

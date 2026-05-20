@@ -29,7 +29,7 @@ export function HomeHeroContent() {
 
   return (
     <section
-      className={`absolute inset-x-0 bottom-0 z-10 flex items-center text-left ${HERO_CONTENT_TOP_INSET_CLASS}`}
+      className={`absolute inset-x-0 bottom-0 z-10 flex items-center pb-[max(1.25rem,env(safe-area-inset-bottom))] text-left ${HERO_CONTENT_TOP_INSET_CLASS}`}
     >
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
         <p className="inline-flex items-center gap-2 rounded-full border border-white/70 px-4 py-1.5 text-sm font-medium text-white">
@@ -37,7 +37,7 @@ export function HomeHeroContent() {
           {locationBadge}
         </p>
 
-        <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.12] tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 className="mt-6 max-w-4xl text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
           {headlineLines.map((line) => (
             <span key={line.segments.map((s) => s.text).join("")} className="block">
               {line.segments.map((segment) => (
@@ -61,16 +61,16 @@ export function HomeHeroContent() {
           ))}
         </p>
 
-        <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div className="mt-8 flex w-full max-w-lg flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
           <AccentButtonLink
             href={primaryCta.href}
-            className="h-12 justify-center px-6 text-base"
+            className="h-12 w-full justify-center px-6 text-base sm:w-auto"
           >
             {primaryCta.label}
           </AccentButtonLink>
           <Link
             href={secondaryCta.href}
-            className="inline-flex h-12 items-center justify-center rounded-button border border-white/80 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            className="inline-flex h-12 w-full items-center justify-center rounded-button border border-white/80 bg-white/10 px-6 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:w-auto"
           >
             {secondaryCta.label}
           </Link>

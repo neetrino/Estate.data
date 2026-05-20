@@ -12,7 +12,7 @@ const PRICING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-what-we-do-subtitle sm:text-base";
 
 const PRICING_TITLE_CLASS =
-  "mt-3 text-4xl font-bold tracking-tight text-what-we-do-title sm:text-5xl lg:text-[3rem]";
+  "mt-3 text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 const PRICING_SUBTITLE_CLASS = "mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl";
 
