@@ -66,6 +66,8 @@
     inset 0 -40px 46.3px -30px #ff0890;
   --what-we-do-card-description: #d1d5dc;
   --home-stats-text: #ead8e8;
+  --property-intelligence-accent: #16c0da;
+  --property-intelligence-navy: #2e4873;
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
@@ -87,6 +89,8 @@
   --color-what-we-do-surface: var(--what-we-do-surface);
   --color-what-we-do-card-description: var(--what-we-do-card-description);
   --color-home-stats-text: var(--home-stats-text);
+  --color-property-intelligence-accent: var(--property-intelligence-accent);
+  --color-property-intelligence-navy: var(--property-intelligence-navy);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;

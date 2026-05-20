@@ -78,6 +78,9 @@ export const RECENT_WORK_PROJECT_HEIGHT_PX = 444;
 /** Tailwind aspect ratio class (matches original 486×365). */
 export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 
+/** Property intelligence — scan-to-bim hero image (1024×716 source). */
+export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
+
 /** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
 
