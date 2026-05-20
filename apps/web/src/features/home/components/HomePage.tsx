@@ -6,6 +6,7 @@ import { HomeHero } from "@/features/home/components/HomeHero";
 import { HomeTrustedStrip } from "@/features/home/components/HomeTrustedStrip";
 import { HomeStatsStrip } from "@/features/home/components/HomeStatsStrip";
 import { HomeClientVoices } from "@/features/home/components/HomeClientVoices";
+import { HomeListingCta } from "@/features/home/components/HomeListingCta";
 import { HomePropertyIntelligence } from "@/features/home/components/HomePropertyIntelligence";
 import { HomeRecentWork } from "@/features/home/components/HomeRecentWork";
 import { HomeWhatWeDo } from "@/features/home/components/HomeWhatWeDo";
@@ -26,6 +27,7 @@ export function HomePage() {
       <HomeRecentWork />
       <HomePropertyIntelligence />
       <HomeClientVoices />
+      <HomeListingCta />
     </>
   );
 }

@@ -70,6 +70,15 @@
   --property-intelligence-navy: #2e4873;
   --client-voices-accent: oklch(0.72 0.16 55);
   --client-voices-card-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+  --gradient-accent: linear-gradient(
+    135deg,
+    #fdba2c 0%,
+    #e55100 45%,
+    #c44600 100%
+  );
+  --home-listing-cta-description: #fbe293;
+  --home-listing-cta-book: #fdba2c;
+  --home-listing-cta-book-foreground: #171717;
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
@@ -94,6 +103,9 @@
   --color-property-intelligence-accent: var(--property-intelligence-accent);
   --color-property-intelligence-navy: var(--property-intelligence-navy);
   --color-client-voices-accent: var(--client-voices-accent);
+  --color-home-listing-cta-description: var(--home-listing-cta-description);
+  --color-home-listing-cta-book: var(--home-listing-cta-book);
+  --color-home-listing-cta-book-foreground: var(--home-listing-cta-book-foreground);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;
@@ -113,4 +125,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+.home-listing-cta-panel {
+  background: var(--gradient-accent);
 }

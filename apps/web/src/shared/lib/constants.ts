@@ -90,6 +90,16 @@ export const CLIENT_VOICES_STAR_LIFT_CLASS = "-translate-y-[5px]";
 /** Client voices — shift quote glyphs left to align with quote text. */
 export const CLIENT_VOICES_QUOTE_OFFSET_CLASS = "-ml-[14px]";
 
+/** Home listing CTA — gradient panel below client voices. */
+export const HOME_LISTING_CTA_PANEL_CLASS =
+  "home-listing-cta-panel overflow-hidden rounded-3xl p-10 md:p-16";
+
+/** Estate pill — gold surface for listing CTA “Book a Shoot”. */
+export const HOME_LISTING_CTA_BOOK_BUTTON_CLASS = [
+  "bg-home-listing-cta-book text-home-listing-cta-book-foreground",
+  "[&>span:last-child]:text-home-listing-cta-book",
+].join(" ");
+
 /** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
 
