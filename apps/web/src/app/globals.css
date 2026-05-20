@@ -89,6 +89,9 @@
     inset 0 -32px 28px -28px rgba(0, 0, 0, 0.85),
     inset 0 -42px 48px -32px rgba(22, 192, 218, 0.4);
   --media-service-card-description: #b8c8d6;
+  --solutions-role-card-orange-shadow: 0 8px 32px oklch(0.72 0.16 55 / 0.14),
+    0 2px 12px oklch(0.72 0.16 55 / 0.08);
+  --solutions-role-card-orange-ring: oklch(0.72 0.16 55 / 0.22);
   --client-voices-accent: oklch(0.72 0.16 55);
   --client-voices-card-shadow: 0 4px 24px rgb(0 0 0 / 8%);
   --gradient-accent: linear-gradient(

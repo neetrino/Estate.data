@@ -162,6 +162,31 @@ export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS =
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
 
+/** Solutions page — #FDBA2C eyebrow; subtitle uses gold + client-voices-accent. */
+export const SOLUTIONS_PAGE_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+
+export const SOLUTIONS_PAGE_TITLE_CLASS =
+  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+
+export const SOLUTIONS_PAGE_SUBTITLE_CLASS = "mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl";
+
+/** Contact page — yellow eyebrow, orange title, yellow subtitle. */
+export const CONTACT_PAGE_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+
+export const CONTACT_PAGE_TITLE_CLASS =
+  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+
+export const CONTACT_PAGE_SUBTITLE_CLASS =
+  "mt-5 max-w-3xl text-lg leading-relaxed text-home-listing-cta-book sm:text-xl";
+
+/** Solutions role cards — white shell + orange glow (px radius matches pricing cards). */
+export const SOLUTIONS_ROLE_CARD_SHELL_CLASS = [
+  "rounded-[38px] border border-[var(--solutions-role-card-orange-ring)] bg-white",
+  "shadow-[var(--solutions-role-card-orange-shadow)]",
+].join(" ");
+
 /** Media services cards — black surface + blue glow. */
 export const MEDIA_SERVICE_CARD_SURFACE_STYLE = {
   borderRadius: WHAT_WE_DO_CARD_RADIUS_PX,

@@ -4,14 +4,14 @@ import {
 } from "@/features/contact/content/contactIconAssets";
 import Image from "next/image";
 
-/** Matches `size-14` (56px) for `next/image` width/height. */
-const CONTACT_STUDIO_ICON_DIMENSION_PX = 56;
+/** Matches largest frame size for `next/image` width/height. */
+const CONTACT_STUDIO_ICON_DIMENSION_PX = 44;
 
 const CONTACT_STUDIO_ICON_CLASS = "size-full object-contain";
 
 /** Clips export letterboxing; squircle art fills the box. */
 const CONTACT_STUDIO_ICON_FRAME_CLASS =
-  "size-12 shrink-0 overflow-hidden rounded-[28%] sm:size-14";
+  "size-10 shrink-0 overflow-hidden rounded-[28%] sm:size-11";
 
 type ContactStudioIconProps = {
   kind: ContactStudioIconKind;
