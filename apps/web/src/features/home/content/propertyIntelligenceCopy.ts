@@ -1,5 +1,8 @@
-export const PROPERTY_INTELLIGENCE_IMAGE_PATH =
-  "/images/property-intelligence/scan-to-bim.jpg";
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
+export const PROPERTY_INTELLIGENCE_IMAGE_PATH = assetUrl(
+  ASSET_KEYS.propertyIntelligenceHero,
+);
 
 export const PROPERTY_INTELLIGENCE_IMAGE_ALT =
   "Wireframe 3D BIM model of a classical building on a digital grid";

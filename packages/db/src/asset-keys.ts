@@ -9,6 +9,9 @@ export const ASSET_KEYS = {
   whatWeDoDroneAerialIcon: "what-we-do-drone-aerial-icon",
   whatWeDoToursFloorplansIcon: "what-we-do-tours-floorplans-icon",
   whatWeDoMarketIntelligenceIcon: "what-we-do-market-intelligence-icon",
+  propertyIntelligenceHero: "property-intelligence-hero",
+  recentWorkPlaceholder: "recent-work-placeholder",
+  clientVoicesQuoteMarks: "client-voices-quote-marks",
 } as const;
 
 export type AssetKey = (typeof ASSET_KEYS)[keyof typeof ASSET_KEYS];

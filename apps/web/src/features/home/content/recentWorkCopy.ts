@@ -1,3 +1,5 @@
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
 export type RecentWorkProject = {
   readonly id: string;
   readonly imageSrc: string;
@@ -5,7 +7,7 @@ export type RecentWorkProject = {
 };
 
 /** Placeholder image until admin panel supplies project assets. */
-const RECENT_WORK_PLACEHOLDER_IMAGE = "/images/recent-work/placeholder.jpg";
+const RECENT_WORK_PLACEHOLDER_IMAGE = assetUrl(ASSET_KEYS.recentWorkPlaceholder);
 
 const RECENT_WORK_PLACEHOLDER_ALT =
   "Luxury hillside home overlooking the ocean at sunset";

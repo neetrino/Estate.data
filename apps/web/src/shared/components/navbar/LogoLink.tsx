@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  LOGO_FOOTER_HEIGHT_CLASS,
+  LOGO_FOOTER_WIDTH_CLASS,
+  LOGO_NAV_HEIGHT_CLASS,
+  LOGO_NAV_WIDTH_CLASS,
+} from "@/shared/lib/constants";
+import {
   SITE_LOGO_ALT,
   SITE_LOGO_CACHE_VERSION,
   SITE_LOGO_DARK_CACHE_VERSION,
@@ -12,38 +18,50 @@ import {
 const LOGO_SOURCE_WIDTH_PX = 637;
 const LOGO_SOURCE_HEIGHT_PX = 392;
 
-/** Display box — fixed so light/dark assets swap without layout shift. */
-const LOGO_DISPLAY_HEIGHT_CLASS = "h-14";
-const LOGO_DISPLAY_WIDTH_CLASS = "w-[5.6875rem]";
-
-const LOGO_LAYER_LIGHT_CLASS = `absolute inset-0 ${LOGO_DISPLAY_HEIGHT_CLASS} w-full object-contain object-left`;
-
-/** Dark asset crop alignment vs light version (px). */
-const LOGO_DARK_OFFSET_CLASS = "-left-[4px] -top-[3px]";
-
-const LOGO_LAYER_DARK_CLASS = `absolute ${LOGO_DARK_OFFSET_CLASS} ${LOGO_DISPLAY_HEIGHT_CLASS} w-full object-contain object-left`;
-
 const LOGO_LAYER_TRANSITION_CLASS =
   "transition-opacity duration-300 ease-out";
 
 type NavTone = "light" | "dark";
 
+type LogoSize = "nav" | "footer";
+
+type LogoDisplaySpec = {
+  readonly linkClass: string;
+  readonly layerLightClass: string;
+  readonly layerDarkClass: string;
+};
+
+const LOGO_SIZE_SPECS: Record<LogoSize, LogoDisplaySpec> = {
+  nav: {
+    linkClass: `${LOGO_NAV_HEIGHT_CLASS} ${LOGO_NAV_WIDTH_CLASS}`,
+    layerLightClass: `absolute inset-0 ${LOGO_NAV_HEIGHT_CLASS} w-full object-contain object-left`,
+    layerDarkClass: `absolute -left-[4px] -top-[3px] ${LOGO_NAV_HEIGHT_CLASS} w-full object-contain object-left`,
+  },
+  footer: {
+    linkClass: `${LOGO_FOOTER_HEIGHT_CLASS} ${LOGO_FOOTER_WIDTH_CLASS}`,
+    layerLightClass: `absolute inset-0 ${LOGO_FOOTER_HEIGHT_CLASS} w-full object-contain object-left`,
+    layerDarkClass: `absolute -left-[6px] -top-[4px] ${LOGO_FOOTER_HEIGHT_CLASS} w-full object-contain object-left`,
+  },
+};
+
 type LogoLinkProps = {
   onNavigate?: () => void;
   tone?: NavTone;
+  size?: LogoSize;
 };
 
 function logoLayerOpacityClass(visible: boolean): string {
   return visible ? "opacity-100" : "opacity-0";
 }
 
-export function LogoLink({ onNavigate, tone = "dark" }: LogoLinkProps) {
+export function LogoLink({ onNavigate, tone = "dark", size = "nav" }: LogoLinkProps) {
   const isLight = tone === "light";
+  const { linkClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
 
   return (
     <Link
       href="/"
-      className={`relative inline-flex shrink-0 ${LOGO_DISPLAY_HEIGHT_CLASS} ${LOGO_DISPLAY_WIDTH_CLASS}`}
+      className={`relative inline-flex shrink-0 ${linkClass}`}
       onClick={onNavigate}
     >
       <Image
@@ -53,7 +71,7 @@ export function LogoLink({ onNavigate, tone = "dark" }: LogoLinkProps) {
         height={LOGO_SOURCE_HEIGHT_PX}
         priority
         unoptimized
-        className={`${LOGO_LAYER_LIGHT_CLASS} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(isLight)}`}
+        className={`${layerLightClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(isLight)}`}
       />
       <Image
         src={`${SITE_LOGO_DARK_PATH}?v=${SITE_LOGO_DARK_CACHE_VERSION}`}
@@ -63,7 +81,7 @@ export function LogoLink({ onNavigate, tone = "dark" }: LogoLinkProps) {
         height={LOGO_SOURCE_HEIGHT_PX}
         priority
         unoptimized
-        className={`${LOGO_LAYER_DARK_CLASS} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(!isLight)}`}
+        className={`${layerDarkClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(!isLight)}`}
       />
     </Link>
   );

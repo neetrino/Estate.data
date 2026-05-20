@@ -16,6 +16,20 @@ export const TRUSTED_STRIP_LAYOUT_CLASS =
 /** Navbar row height (Tailwind class). */
 export const NAVBAR_HEIGHT_CLASS = "h-[4.5rem]";
 
+/** Logo display — navbar (px: 56×91). */
+export const LOGO_NAV_HEIGHT_CLASS = "h-14";
+export const LOGO_NAV_WIDTH_CLASS = "w-[5.6875rem]";
+
+/** Logo display — footer (~43% larger than nav). */
+export const LOGO_FOOTER_HEIGHT_CLASS = "h-20";
+export const LOGO_FOOTER_WIDTH_CLASS = "w-[8.125rem]";
+
+/** Footer logo — nudge right and down (px). */
+export const LOGO_FOOTER_OFFSET_CLASS = "-translate-x-[3px] translate-y-[2px]";
+
+/** Footer tagline — space below logo (px). */
+export const FOOTER_BRAND_TAGLINE_OFFSET_CLASS = "mt-[31px]";
+
 /** Space between viewport top and navbar row (6px; 2px above pt-2). */
 export const NAVBAR_TOP_PADDING_CLASS = "pt-[1px]";
 
@@ -70,6 +84,17 @@ export const HOME_STATS_GRID_GAP_CLASS = "gap-8";
 /** What we do — uniform row/column/section spacing (px via Tailwind scale). */
 export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
   "gap-x-11 gap-y-11 lg:gap-x-14 lg:gap-y-14";
+
+/** Site footer — Services & Company columns nudge left (px). */
+export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "-translate-x-[20px]";
+
+/** Site footer — main row; matches navbar width, equal space between columns. */
+export const FOOTER_MAIN_ROW_CLASS =
+  "flex w-full flex-col gap-10 pt-10 pb-4 sm:pt-12 sm:pb-6 lg:flex-row lg:items-start lg:justify-between lg:gap-0";
+
+/** Site footer — divider + copyright block below main row. */
+export const FOOTER_DIVIDER_CLASS =
+  "mt-3 border-t border-foreground/10 bg-white pt-6 pb-10 sm:pb-12";
 
 /** Recent work project tile — design size (px); grid uses full column width up to this. */
 export const RECENT_WORK_PROJECT_WIDTH_PX = 592;

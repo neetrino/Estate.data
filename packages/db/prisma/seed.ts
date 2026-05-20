@@ -63,6 +63,21 @@ const SEED_ASSETS: readonly SeedAsset[] = [
     relativePath: "icons/what-we-do/market-intelligence.png",
     mimeType: "image/png",
   },
+  {
+    key: ASSET_KEYS.propertyIntelligenceHero,
+    relativePath: "images/property-intelligence/scan-to-bim.jpg",
+    mimeType: "image/jpeg",
+  },
+  {
+    key: ASSET_KEYS.recentWorkPlaceholder,
+    relativePath: "images/recent-work/placeholder.jpg",
+    mimeType: "image/jpeg",
+  },
+  {
+    key: ASSET_KEYS.clientVoicesQuoteMarks,
+    relativePath: "images/client-voices/quote-marks.png",
+    mimeType: "image/png",
+  },
 ] as const;
 
 async function seedAsset(entry: SeedAsset): Promise<void> {
