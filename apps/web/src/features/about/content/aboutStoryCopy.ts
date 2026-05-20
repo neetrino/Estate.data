@@ -1,4 +1,6 @@
-export const ABOUT_STORY_IMAGE_PATH = "/images/about/team-collaboration.png";
+import { ASSET_KEYS, assetUrl } from "@estate/db";
+
+export const ABOUT_STORY_IMAGE_PATH = assetUrl(ASSET_KEYS.aboutTeamCollaboration);
 
 export const ABOUT_STORY_IMAGE_ALT =
   "Diverse team of real estate media and data specialists collaborating in a bright office";

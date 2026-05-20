@@ -11,10 +11,13 @@ const SEED_DIR = path.resolve(
   "../../../apps/web/public",
 );
 
+const WEB_APP_DIR = path.resolve(SEED_DIR, "..");
+
 type SeedAsset = {
   key: string;
-  relativePath: string;
   mimeType: string;
+  relativePath?: string;
+  absolutePath?: string;
 };
 
 const SEED_ASSETS: readonly SeedAsset[] = [
@@ -78,10 +81,50 @@ const SEED_ASSETS: readonly SeedAsset[] = [
     relativePath: "images/client-voices/quote-marks.png",
     mimeType: "image/png",
   },
+  {
+    key: ASSET_KEYS.aboutTeamCollaboration,
+    relativePath: "images/about/team-collaboration.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.contactLocationIcon,
+    relativePath: "images/contact/location.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.contactPhoneIcon,
+    relativePath: "images/contact/phone.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.contactEmailIcon,
+    relativePath: "images/contact/mail.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.siteFavicon,
+    absolutePath: path.join(WEB_APP_DIR, "src/app/icon.png"),
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.siteAppleIcon,
+    absolutePath: path.join(WEB_APP_DIR, "src/app/apple-icon.png"),
+    mimeType: "image/png",
+  },
 ] as const;
 
+function resolveSeedFilePath(entry: SeedAsset): string {
+  if (entry.absolutePath) {
+    return entry.absolutePath;
+  }
+  if (entry.relativePath) {
+    return path.join(SEED_DIR, entry.relativePath);
+  }
+  throw new Error(`Seed asset "${entry.key}" has no file path`);
+}
+
 async function seedAsset(entry: SeedAsset): Promise<void> {
-  const filePath = path.join(SEED_DIR, entry.relativePath);
+  const filePath = resolveSeedFilePath(entry);
   const data = await readFile(filePath);
   const fileName = path.basename(filePath);
 

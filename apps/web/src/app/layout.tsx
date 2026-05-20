@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
 import { SiteFooter } from "@/shared/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ESTATEDATA",
+  title: {
+    default: SITE_DISPLAY_NAME,
+    template: `%s | ${SITE_DISPLAY_NAME}`,
+  },
   description: "Real estate media, data, and BIM solutions",
 };
 

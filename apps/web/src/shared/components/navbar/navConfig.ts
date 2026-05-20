@@ -2,6 +2,9 @@ import { ASSET_KEYS, assetUrl } from "@estate/db";
 import { DATA_BIM_PATH, PRICING_PATH } from "@/shared/lib/routes";
 
 export const SITE_NAME = "ESTATEDATA";
+
+/** Browser tab / SEO titles (spaced brand name). */
+export const SITE_DISPLAY_NAME = "Estate Data";
 export const SITE_LOGO_PATH = assetUrl(ASSET_KEYS.siteLogo);
 export const SITE_LOGO_DARK_PATH = assetUrl(ASSET_KEYS.siteLogoDark);
 export const SITE_LOGO_CACHE_VERSION = "20260519-removebg";

@@ -12,6 +12,12 @@ export const ASSET_KEYS = {
   propertyIntelligenceHero: "property-intelligence-hero",
   recentWorkPlaceholder: "recent-work-placeholder",
   clientVoicesQuoteMarks: "client-voices-quote-marks",
+  aboutTeamCollaboration: "about-team-collaboration",
+  contactLocationIcon: "contact-location-icon",
+  contactPhoneIcon: "contact-phone-icon",
+  contactEmailIcon: "contact-email-icon",
+  siteFavicon: "site-favicon",
+  siteAppleIcon: "site-apple-icon",
 } as const;
 
 export type AssetKey = (typeof ASSET_KEYS)[keyof typeof ASSET_KEYS];

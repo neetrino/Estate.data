@@ -14,7 +14,7 @@ pnpm db:migrate
 pnpm db:seed
 ```
 
-`db:seed` reads files from `apps/web/public/` and upserts into the `assets` table.
+`db:seed` reads files from `apps/web/public/` (and favicons from `apps/web/src/app/`) and upserts into the `assets` table.
 
 ## Usage
 

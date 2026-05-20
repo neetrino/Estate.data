@@ -56,6 +56,30 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     publicPath: "images/client-voices/quote-marks.png",
     mimeType: "image/png",
   },
+  [ASSET_KEYS.aboutTeamCollaboration]: {
+    publicPath: "images/about/team-collaboration.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.contactLocationIcon]: {
+    publicPath: "images/contact/location.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.contactPhoneIcon]: {
+    publicPath: "images/contact/phone.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.contactEmailIcon]: {
+    publicPath: "images/contact/mail.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.siteFavicon]: {
+    publicPath: "images/site-favicon.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.siteAppleIcon]: {
+    publicPath: "images/site-apple-icon.png",
+    mimeType: "image/png",
+  },
 };
 
 export function isAssetKey(value: string): value is AssetKey {
