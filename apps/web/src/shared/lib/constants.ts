@@ -88,13 +88,16 @@ export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
 /** Site footer — Services & Company columns nudge left (px). */
 export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "-translate-x-[20px]";
 
+/** Site footer — top edge line separating footer from page content. */
+export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-foreground/10";
+
 /** Site footer — main row; matches navbar width, equal space between columns. */
 export const FOOTER_MAIN_ROW_CLASS =
   "flex w-full flex-col gap-10 pt-10 pb-4 sm:pt-12 sm:pb-6 lg:flex-row lg:items-start lg:justify-between lg:gap-0";
 
 /** Site footer — divider + copyright block below main row. */
 export const FOOTER_DIVIDER_CLASS =
-  "mt-3 border-t border-foreground/10 bg-white pt-6 pb-10 sm:pb-12";
+  `mt-3 ${FOOTER_TOP_SEPARATOR_CLASS} bg-white pt-6 pb-10 sm:pb-12`;
 
 /** Recent work project tile — design size (px); grid uses full column width up to this. */
 export const RECENT_WORK_PROJECT_WIDTH_PX = 592;
@@ -114,6 +117,22 @@ export const CLIENT_VOICES_STAR_LIFT_CLASS = "-translate-y-[5px]";
 
 /** Client voices — shift quote glyphs left to align with quote text. */
 export const CLIENT_VOICES_QUOTE_OFFSET_CLASS = "-ml-[14px]";
+
+/** Client voices section — eyebrow label typography. */
+export const CLIENT_VOICES_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-client-voices-accent sm:text-base";
+
+/** Client voices section — main heading typography. */
+export const CLIENT_VOICES_SECTION_TITLE_CLASS =
+  "mt-3 text-4xl font-bold tracking-tight text-black sm:text-5xl lg:text-[3rem]";
+
+/** Client voices section — white surface + vertical rhythm. */
+export const CLIENT_VOICES_SECTION_SURFACE_CLASS =
+  "bg-white py-14 sm:py-16 lg:py-20";
+
+/** What we do / recent work sections — warm off-white surface + vertical rhythm. */
+export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
+  "bg-what-we-do-surface py-14 sm:py-16 lg:py-20";
 
 /** Home listing CTA — gradient panel below client voices. */
 export const HOME_LISTING_CTA_PANEL_CLASS =

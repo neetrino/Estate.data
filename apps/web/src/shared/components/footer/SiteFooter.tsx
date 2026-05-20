@@ -12,6 +12,7 @@ import {
   FOOTER_DIVIDER_CLASS,
   FOOTER_LINK_COLUMNS_OFFSET_CLASS,
   FOOTER_MAIN_ROW_CLASS,
+  FOOTER_TOP_SEPARATOR_CLASS,
   LOGO_FOOTER_OFFSET_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
@@ -21,7 +22,7 @@ const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-muted-for
 
 export function SiteFooter() {
   return (
-    <footer className="bg-white">
+    <footer className={`bg-white ${FOOTER_TOP_SEPARATOR_CLASS}`}>
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
         <div className={FOOTER_MAIN_ROW_CLASS}>
           <div className="shrink-0 lg:max-w-xs">
