@@ -1,6 +1,7 @@
 import type { ClientVoice } from "@/features/home/content/clientVoicesCopy";
 import {
   CLIENT_VOICES_STAR_COUNT,
+  CLIENT_VOICES_QUOTE_OFFSET_CLASS,
   CLIENT_VOICES_STAR_LIFT_CLASS,
 } from "@/shared/lib/constants";
 
@@ -34,7 +35,7 @@ const CLIENT_VOICE_QUOTE_PATH =
 function ClientVoiceQuoteMark() {
   return (
     <div
-      className="flex items-end gap-0 text-client-voices-accent"
+      className={`flex shrink-0 -space-x-2 text-client-voices-accent ${CLIENT_VOICES_QUOTE_OFFSET_CLASS}`}
       aria-hidden
     >
       <ClientVoiceQuoteBubble />

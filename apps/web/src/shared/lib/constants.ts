@@ -87,6 +87,9 @@ export const CLIENT_VOICES_STAR_COUNT = 5;
 /** Client voices — nudge star row above role baseline (px). */
 export const CLIENT_VOICES_STAR_LIFT_CLASS = "-translate-y-[5px]";
 
+/** Client voices — shift quote glyphs left to align with quote text. */
+export const CLIENT_VOICES_QUOTE_OFFSET_CLASS = "-ml-[14px]";
+
 /** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
 
