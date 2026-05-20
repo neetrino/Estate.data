@@ -68,6 +68,8 @@
   --home-stats-text: #ead8e8;
   --property-intelligence-accent: #16c0da;
   --property-intelligence-navy: #2e4873;
+  --client-voices-accent: oklch(0.72 0.16 55);
+  --client-voices-card-shadow: 0 4px 24px rgb(0 0 0 / 8%);
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
@@ -91,6 +93,7 @@
   --color-home-stats-text: var(--home-stats-text);
   --color-property-intelligence-accent: var(--property-intelligence-accent);
   --color-property-intelligence-navy: var(--property-intelligence-navy);
+  --color-client-voices-accent: var(--client-voices-accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;

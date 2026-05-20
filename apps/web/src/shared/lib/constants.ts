@@ -81,6 +81,12 @@ export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 /** Property intelligence — scan-to-bim hero image (1024×716 source). */
 export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 
+/** Client voices testimonial cards — star rating count. */
+export const CLIENT_VOICES_STAR_COUNT = 5;
+
+/** Client voices — nudge star row above role baseline (px). */
+export const CLIENT_VOICES_STAR_LIFT_CLASS = "-translate-y-[5px]";
+
 /** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
 
