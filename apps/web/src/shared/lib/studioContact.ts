@@ -7,8 +7,8 @@ export const STUDIO_CONTACT = {
     href: "tel:+13235550142",
   },
   email: {
-    label: "hello@lumenla.com",
-    href: "mailto:hello@lumenla.com",
+    label: "hello@estatedata.com",
+    href: "mailto:hello@estatedata.com",
   },
 } as const;
 

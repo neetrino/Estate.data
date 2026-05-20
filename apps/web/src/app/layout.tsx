@@ -3,7 +3,7 @@ import { SiteFooter } from "@/shared/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LumenLA",
+  title: "ESTATEDATA",
   description: "Real estate media, data, and BIM solutions",
 };
 

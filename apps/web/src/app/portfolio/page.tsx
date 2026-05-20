@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PortfolioPage } from "@/features/portfolio";
 
 export const metadata: Metadata = {
-  title: "Portfolio | LumenLA",
+  title: "Portfolio | ESTATEDATA",
   description:
     "Selected real estate media work across Los Angeles — photography, video, drone, and 3D tours.",
 };

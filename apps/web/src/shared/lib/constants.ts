@@ -3,7 +3,7 @@ import { ASSET_KEYS, assetUrl } from "@estate/db";
 /** Proxima Nova — Tailwind `font-sans` (see globals.css). */
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
-/** Navbar links + CTA typography (excludes LumenLA wordmark). */
+/** Navbar links + CTA typography (excludes ESTATEDATA wordmark). */
 export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
@@ -180,6 +180,16 @@ export const CONTACT_PAGE_TITLE_CLASS =
 
 export const CONTACT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-home-listing-cta-book sm:text-xl";
+
+/** About page — yellow eyebrow, orange title, black body copy. */
+export const ABOUT_PAGE_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+
+export const ABOUT_PAGE_TITLE_CLASS =
+  "mt-3 text-4xl font-bold tracking-tight text-client-voices-accent sm:text-5xl lg:text-[3rem]";
+
+export const ABOUT_PAGE_SUBTITLE_CLASS =
+  "mt-5 max-w-3xl text-lg leading-relaxed text-foreground sm:text-xl";
 
 /** Solutions role cards — white shell + orange glow (px radius matches pricing cards). */
 export const SOLUTIONS_ROLE_CARD_SHELL_CLASS = [

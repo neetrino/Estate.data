@@ -26,7 +26,7 @@ export const HOME_HERO_COPY = {
     },
   ] as const satisfies readonly HeroHeadlineLine[],
   descriptionLines: [
-    "LumenLA pairs cinematic real estate media with property intelligence — so brokers,",
+    "ESTATEDATA pairs cinematic real estate media with property intelligence — so brokers,",
     "developers, and investors close deals with confidence.",
   ] as const,
   primaryCta: { label: "Book a Shoot", href: "/contact" },
