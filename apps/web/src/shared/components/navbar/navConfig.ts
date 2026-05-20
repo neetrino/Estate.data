@@ -27,6 +27,22 @@ export const MAIN_NAV_LINKS: readonly NavLink[] = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+/** Mobile drawer — always visible links (matches primary nav pattern). */
+export const MOBILE_NAV_PRIMARY_LINKS: readonly NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/media" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+/** Mobile drawer — expandable “More” section. */
+export const MOBILE_NAV_MORE_LINKS: readonly NavLink[] = [
+  { label: "Data & BIM", href: DATA_BIM_PATH },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Pricing", href: PRICING_PATH },
+] as const;
+
 export const NAV_CTA_LINKS = {
   phone: { label: "(323) 555-0142", href: "tel:+13235550142" },
   bookShoot: { label: "Book a Shoot", href: "/contact" },

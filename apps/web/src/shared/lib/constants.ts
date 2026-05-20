@@ -39,6 +39,15 @@ export const NAVBAR_OVERLAY_POSITION_CLASS = "fixed inset-x-0 top-0 z-[100]";
 /** Sticky navbar on inner pages — above page content, below mobile menu layer. */
 export const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-[100]";
 
+/** Header while mobile menu is open — above drawer + backdrop. */
+export const NAVBAR_HEADER_MENU_OPEN_Z_CLASS = "z-[110]";
+
+/** Mobile menu backdrop — below drawer, below header when open. */
+export const NAVBAR_MOBILE_BACKDROP_Z_CLASS = "z-[105]";
+
+/** Mobile menu drawer — below open header. */
+export const NAVBAR_MOBILE_PANEL_Z_CLASS = "z-[108]";
+
 /** Viewport ≤1399px — burger control (phone, tablet, iPad Pro). */
 export const NAVBAR_MOBILE_BURGER_CLASS = "hidden max-[1399px]:inline-flex min-[1400px]:hidden";
 
@@ -49,11 +58,17 @@ export const NAVBAR_MOBILE_MENU_CLASS = "max-[1399px]:block min-[1400px]:hidden"
 export const NAVBAR_DESKTOP_ONLY_CLASS = "hidden min-[1400px]:flex";
 
 /**
- * Mobile menu panel top — navbar row + safe area.
+ * Mobile menu panel — nudge up under navbar (px).
+ * Keep in sync with {@link NAVBAR_MOBILE_PANEL_TOP_CLASS}.
+ */
+export const NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX = 12;
+
+/**
+ * Mobile menu panel top — navbar row + safe area, minus {@link NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX}.
  * Keep in sync with NAVBAR_TOP_PADDING + NAVBAR_HEIGHT + safe-area.
  */
 export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
-  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px))]";
+  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-12px)]";
 
 /**
  * Hero copy top bound — matches overlay navbar (safe area + 1px + 4.5rem).
@@ -63,6 +78,28 @@ export const HERO_CONTENT_TOP_INSET_CLASS =
 
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
+
+/** Navbar + mobile menu — liquid glass surface (keep in sync). */
+export const NAVBAR_GLASS_SURFACE_CLASS =
+  "bg-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl backdrop-saturate-150";
+
+/** Mobile burger drawer — solid white panel. */
+export const NAVBAR_MOBILE_PANEL_SURFACE_CLASS =
+  "border-t border-zinc-200/80 bg-white shadow-lg";
+
+/** Mobile burger menu panel — corner radius (px). */
+export const NAVBAR_MOBILE_MENU_RADIUS_PX = 15;
+
+/** Mobile burger menu panel — corner radius (Tailwind). */
+export const NAVBAR_MOBILE_MENU_RADIUS_CLASS = "rounded-[15px]";
+
+/** Mobile drawer — scrollable link list area. */
+export const NAVBAR_MOBILE_PANEL_SCROLL_CLASS =
+  "min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-5";
+
+/** Mobile drawer — stacked links with dividers. */
+export const NAVBAR_MOBILE_NAV_LIST_CLASS =
+  "flex w-full flex-col divide-y divide-zinc-200/80";
 
 /** Shared horizontal page gutters (navbar + hero). */
 export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8 xl:px-10";

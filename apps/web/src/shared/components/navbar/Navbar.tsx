@@ -11,14 +11,21 @@ import {
   NAV_CTA_LINKS,
   type NavLink,
 } from "@/shared/components/navbar/navConfig";
-import { DATA_BIM_PATH, isDataBimRoute } from "@/shared/lib/routes";
+import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
+import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import {
   NAV_ITEM_TEXT_CLASS,
   NAVBAR_DESKTOP_ONLY_CLASS,
+  NAVBAR_GLASS_SURFACE_CLASS,
   NAVBAR_HEIGHT_CLASS,
   NAVBAR_MOBILE_BURGER_CLASS,
   NAVBAR_MOBILE_MENU_CLASS,
+  NAVBAR_MOBILE_MENU_RADIUS_CLASS,
+  NAVBAR_HEADER_MENU_OPEN_Z_CLASS,
+  NAVBAR_MOBILE_BACKDROP_Z_CLASS,
+  NAVBAR_MOBILE_PANEL_SURFACE_CLASS,
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
+  NAVBAR_MOBILE_PANEL_Z_CLASS,
   NAVBAR_OVERLAY_POSITION_CLASS,
   NAVBAR_STICKY_POSITION_CLASS,
   NAVBAR_TOP_PADDING_CLASS,
@@ -32,9 +39,6 @@ const NAVBAR_SURFACE_TRANSITION_CLASS =
 
 const NAVBAR_TRANSPARENT_CLASS = "bg-transparent";
 
-const NAVBAR_GLASS_CLASS =
-  "bg-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-2xl backdrop-saturate-150";
-
 const NAVBAR_SOLID_CLASS = "bg-white";
 
 const NAVBAR_BURGER_BUTTON_CLASS =
@@ -43,18 +47,18 @@ const NAVBAR_BURGER_BUTTON_CLASS =
 const NAVBAR_MOBILE_PANEL_CLASS = [
   "fixed inset-x-0",
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
-  "z-[100]",
-  "max-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
-  "overflow-y-auto overscroll-contain",
-  "border-t border-zinc-200/80 bg-white shadow-lg",
-  "px-4 py-4",
+  NAVBAR_MOBILE_PANEL_Z_CLASS,
+  "flex max-h-[calc(100dvh-4.5rem+11px-env(safe-area-inset-top,0px))] flex-col overflow-hidden",
+  NAVBAR_MOBILE_PANEL_SURFACE_CLASS,
+  NAVBAR_MOBILE_MENU_RADIUS_CLASS,
   NAVBAR_MOBILE_MENU_CLASS,
 ].join(" ");
 
 const NAVBAR_MOBILE_BACKDROP_CLASS = [
   "fixed inset-0",
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
-  "z-[99] bg-black/30",
+  NAVBAR_MOBILE_BACKDROP_Z_CLASS,
+  "bg-black/30",
   NAVBAR_MOBILE_MENU_CLASS,
 ].join(" ");
 
@@ -100,37 +104,54 @@ export function Navbar({ overlay = false }: NavbarProps) {
       return;
     }
 
-    const html = document.documentElement;
-    const body = document.body;
-    const previousHtmlOverflow = html.style.overflow;
-    const previousBodyOverflow = body.style.overflow;
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
+    const scrollY = window.scrollY;
+    const { body } = document;
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
 
     return () => {
-      html.style.overflow = previousHtmlOverflow;
-      body.style.overflow = previousBodyOverflow;
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      window.scrollTo(0, scrollY);
     };
   }, [isMobileMenuVisible]);
 
   const headerSurfaceClass = (() => {
     if (overlay) {
-      return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_TRANSPARENT_CLASS;
+      return scrolled ? NAVBAR_GLASS_SURFACE_CLASS : NAVBAR_TRANSPARENT_CLASS;
     }
-    return scrolled ? NAVBAR_GLASS_CLASS : NAVBAR_SOLID_CLASS;
+    return scrolled ? NAVBAR_GLASS_SURFACE_CLASS : NAVBAR_SOLID_CLASS;
   })();
 
-  const navTone = overlay && !scrolled ? "light" : "dark";
+  const navTone =
+    isMobileMenuVisible || !overlay || scrolled ? "dark" : "light";
 
   const positionClass = overlay ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
 
-  const headerSurfaceWhenMenuOpen =
-    isMobileMenuVisible && !overlay ? NAVBAR_SOLID_CLASS : headerSurfaceClass;
+  const headerSurfaceWhenMenuOpen = isMobileMenuVisible
+    ? NAVBAR_SOLID_CLASS
+    : headerSurfaceClass;
+
+  const headerZClass = isMobileMenuVisible ? NAVBAR_HEADER_MENU_OPEN_Z_CLASS : "";
 
   return (
     <>
       <header
-        className={`${positionClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceWhenMenuOpen}`}
+        className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceWhenMenuOpen}`}
       >
         <nav
           className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center justify-between gap-3 ${PAGE_GUTTER_CLASS}`}
@@ -144,7 +165,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
                 <NavItem
                   key={link.href}
                   link={link}
-                  active={isActivePath(pathname, link.href)}
+                  active={isNavbarActivePath(pathname, link.href)}
                   tone={navTone}
                 />
               ))}
@@ -186,19 +207,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             onClick={closeMobile}
           />
           <div id="mobile-nav" className={NAVBAR_MOBILE_PANEL_CLASS}>
-            <ul className="flex flex-col gap-1">
-              {MAIN_NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={mobileNavLinkClass(isActivePath(pathname, link.href))}
-                    onClick={closeMobile}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <MobileNavMenu pathname={pathname} onNavigate={closeMobile} />
           </div>
         </>
       ) : null}
@@ -226,16 +235,6 @@ function NavItem({
   );
 }
 
-function isActivePath(pathname: string, href: string): boolean {
-  if (href === "/") {
-    return pathname === "/";
-  }
-  if (href === DATA_BIM_PATH) {
-    return isDataBimRoute(pathname);
-  }
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 function desktopNavLinkClass(active: boolean, tone: NavTone): string {
   const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
   if (active) {
@@ -245,14 +244,6 @@ function desktopNavLinkClass(active: boolean, tone: NavTone): string {
     return `${base} text-white`;
   }
   return `${base} text-black`;
-}
-
-function mobileNavLinkClass(active: boolean): string {
-  const base = `block rounded-md px-3 py-3 ${NAV_ITEM_TEXT_CLASS} transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
-  if (active) {
-    return `${base} bg-accent/10 text-accent`;
-  }
-  return `${base} text-black hover:bg-accent/10`;
 }
 
 function MenuIcon() {
