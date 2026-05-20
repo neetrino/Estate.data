@@ -5,7 +5,6 @@ import {
   WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
   WHAT_WE_DO_CARD_HEIGHT_PX,
   WHAT_WE_DO_CARD_RADIUS_PX,
-  WHAT_WE_DO_CARD_WIDTH_PX,
   WHAT_WE_DO_ICON_SIZE_PX,
 } from "@/shared/lib/constants";
 
@@ -29,9 +28,8 @@ type WhatWeDoServiceCardProps = {
 export function WhatWeDoServiceCard({ service }: WhatWeDoServiceCardProps) {
   return (
     <article
-      className="relative flex flex-col justify-center overflow-hidden px-8 py-8 text-left"
+      className="relative flex w-full flex-col justify-center overflow-hidden px-8 py-8 text-left"
       style={{
-        width: WHAT_WE_DO_CARD_WIDTH_PX,
         minHeight: WHAT_WE_DO_CARD_HEIGHT_PX,
         ...WHAT_WE_DO_CARD_SURFACE_STYLE,
       }}

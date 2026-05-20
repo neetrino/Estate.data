@@ -52,8 +52,7 @@ export const HOME_HERO_IMAGE_ALT =
 /** Minimum recommended hero source width (px). */
 export const HOME_HERO_MIN_SOURCE_WIDTH_PX = 2560;
 
-/** What we do — service card dimensions (px). */
-export const WHAT_WE_DO_CARD_WIDTH_PX = 330;
+/** What we do — card min height (px); width follows grid to navbar gutters. */
 export const WHAT_WE_DO_CARD_HEIGHT_PX = 285;
 
 /** Figma Card 6 (165:692) — corner radius. */
@@ -65,8 +64,12 @@ export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
 /** What we do — icon box / image asset size (px), matches `size-12`. */
 export const WHAT_WE_DO_ICON_SIZE_PX = 48;
 
-/** Home stats strip — equal row/column gap (matches What we do card grid). */
-export const HOME_STATS_GRID_GAP_CLASS = "gap-6";
+/** Home stats strip — equal row/column gap. */
+export const HOME_STATS_GRID_GAP_CLASS = "gap-8";
+
+/** What we do — uniform row/column/section spacing (px via Tailwind scale). */
+export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
+  "gap-x-11 gap-y-11 lg:gap-x-14 lg:gap-y-14";
 
 /** Recent work project tile — design size (px); grid uses full column width up to this. */
 export const RECENT_WORK_PROJECT_WIDTH_PX = 592;
