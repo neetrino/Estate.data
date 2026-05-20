@@ -72,6 +72,44 @@ export const WHAT_WE_DO_CARD_HEIGHT_PX = 285;
 /** Figma Card 6 (165:692) — corner radius. */
 export const WHAT_WE_DO_CARD_RADIUS_PX = 38;
 
+/** What we do / pricing package cards — dark gradient surface + inset glow. */
+export const WHAT_WE_DO_CARD_SURFACE_STYLE = {
+  borderRadius: WHAT_WE_DO_CARD_RADIUS_PX,
+  background: "var(--what-we-do-card-background)",
+  boxShadow: "var(--what-we-do-card-inset-shadow)",
+} as const;
+
+/** Pricing package cards — min height for price + features + CTA (px). */
+export const PRICING_PACKAGE_CARD_MIN_HEIGHT_PX = 340;
+
+/** Pricing package card — horizontal inset for book CTA on each side (px). */
+export const PRICING_PACKAGE_CTA_INSET_X_PX = 20;
+
+/** Media packages — gap above CTA (px); layout, not Tailwind (see PRICING_MEDIA_CTA_BUTTON_STYLE). */
+export const PRICING_MEDIA_CTA_MARGIN_TOP_PX = 32;
+
+/** Media packages — extra upward nudge via transform (px). */
+export const PRICING_MEDIA_CTA_LIFT_PX = 17;
+
+/** Analytics — gap above CTA (px). */
+export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
+
+/** Shared static classes for pricing card CTAs (dynamic spacing uses inline style). */
+export const PRICING_PACKAGE_CTA_BUTTON_CLASS = "max-w-full justify-center self-center";
+
+/** Media packages — CTA position; tweak PRICING_MEDIA_CTA_* constants above. */
+export const PRICING_MEDIA_CTA_BUTTON_STYLE = {
+  marginTop: PRICING_MEDIA_CTA_MARGIN_TOP_PX,
+  transform: `translateY(-${PRICING_MEDIA_CTA_LIFT_PX}px)`,
+  width: `calc(100% - ${PRICING_PACKAGE_CTA_INSET_X_PX * 2}px)`,
+} as const;
+
+/** Analytics — CTA position; tweak PRICING_ANALYTICS_CTA_MARGIN_TOP_PX above. */
+export const PRICING_ANALYTICS_CTA_BUTTON_STYLE = {
+  marginTop: PRICING_ANALYTICS_CTA_MARGIN_TOP_PX,
+  width: `calc(100% - ${PRICING_PACKAGE_CTA_INSET_X_PX * 2}px)`,
+} as const;
+
 /** What we do card — nudge content block upward (px). */
 export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
 

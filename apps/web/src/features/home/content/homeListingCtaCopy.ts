@@ -1,3 +1,5 @@
+import { PRICING_PATH } from "@/shared/lib/routes";
+
 export const HOME_LISTING_CTA_COPY = {
   title: "Ready to elevate your next listing?",
   description:
@@ -5,5 +7,5 @@ export const HOME_LISTING_CTA_COPY = {
   primaryLabel: "Book a Shoot",
   primaryHref: "/contact",
   secondaryLabel: "View Pricing",
-  secondaryHref: "/pricing",
+  secondaryHref: PRICING_PATH,
 } as const;

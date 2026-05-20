@@ -4,15 +4,9 @@ import { WhatWeDoServiceIcon } from "@/features/home/components/WhatWeDoServiceI
 import {
   WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
   WHAT_WE_DO_CARD_HEIGHT_PX,
-  WHAT_WE_DO_CARD_RADIUS_PX,
+  WHAT_WE_DO_CARD_SURFACE_STYLE,
   WHAT_WE_DO_ICON_SIZE_PX,
 } from "@/shared/lib/constants";
-
-const WHAT_WE_DO_CARD_SURFACE_STYLE = {
-  borderRadius: WHAT_WE_DO_CARD_RADIUS_PX,
-  background: "var(--what-we-do-card-background)",
-  boxShadow: "var(--what-we-do-card-inset-shadow)",
-} as const;
 
 const WHAT_WE_DO_ICON_WRAPPER_CLASS =
   "flex size-12 shrink-0 items-center justify-center";

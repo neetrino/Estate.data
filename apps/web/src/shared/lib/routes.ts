@@ -1,3 +1,6 @@
+/** Pricing page — navbar + “View Pricing” CTAs. */
+export const PRICING_PATH = "/pricing";
+
 /** Canonical Data & BIM services route (navbar + CTAs). */
 export const DATA_BIM_PATH = "/data-bim";
 
