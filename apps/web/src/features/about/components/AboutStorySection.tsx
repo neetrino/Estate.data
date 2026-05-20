@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { AboutStackCard } from "@/features/about/components/AboutStackCard";
 import {
+  ABOUT_STORY_BRAND_ACCENT_CLASS,
   ABOUT_STORY_COPY,
   ABOUT_STORY_IMAGE_ALT,
   ABOUT_STORY_IMAGE_PATH,
+  type AboutStoryParagraph,
 } from "@/features/about/content/aboutStoryCopy";
 
 const ABOUT_STORY_SECTION_CLASS =
@@ -26,7 +28,7 @@ export function AboutStorySection() {
   return (
     <section className={ABOUT_STORY_SECTION_CLASS} aria-labelledby="about-story-heading">
       <h2 id="about-story-heading" className="sr-only">
-        About ESTATEDATA
+        About Estate Data
       </h2>
       <div className={ABOUT_STORY_IMAGE_FRAME_CLASS}>
         <Image
@@ -39,14 +41,40 @@ export function AboutStorySection() {
       </div>
       <div className={ABOUT_STORY_BODY_CLASS}>
         <div className={ABOUT_STORY_COPY_BLOCK_CLASS}>
-          {paragraphs.map((paragraph) => (
-            <p key={paragraph} className={ABOUT_STORY_PARAGRAPH_CLASS}>
-              {paragraph}
+          {paragraphs.map((paragraph, index) => (
+            <p key={aboutStoryParagraphKey(paragraph, index)} className={ABOUT_STORY_PARAGRAPH_CLASS}>
+              <AboutStoryParagraphContent paragraph={paragraph} />
             </p>
           ))}
         </div>
         <AboutStackCard />
       </div>
     </section>
+  );
+}
+
+function aboutStoryParagraphKey(paragraph: AboutStoryParagraph, index: number): string {
+  if (typeof paragraph === "string") {
+    return paragraph;
+  }
+  return paragraph.segments.map((segment) => segment.text).join("");
+}
+
+function AboutStoryParagraphContent({ paragraph }: { paragraph: AboutStoryParagraph }) {
+  if (typeof paragraph === "string") {
+    return paragraph;
+  }
+
+  return (
+    <>
+      {paragraph.segments.map((segment) => (
+        <span
+          key={segment.text}
+          className={segment.accent ? ABOUT_STORY_BRAND_ACCENT_CLASS : undefined}
+        >
+          {segment.text}
+        </span>
+      ))}
+    </>
   );
 }
