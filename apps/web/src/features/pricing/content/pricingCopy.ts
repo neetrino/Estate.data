@@ -4,7 +4,7 @@ export type PricingSubtitleSegment = {
 };
 
 export const PRICING_PAGE_COPY = {
-  eyebrow: "Pricing",
+  eyebrow: "PRICING",
   title: "Clear packages. No surprises.",
   subtitleSegments: [
     { text: "Media tiers ship in 48 hours. ", tone: "subtitle" },

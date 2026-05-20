@@ -1,20 +1,12 @@
-import { Navbar } from "@/shared/components/navbar";
-import { PAGE_CONTAINER_CLASS, PAGE_GUTTER_CLASS } from "@/shared/lib/constants";
+import type { Metadata } from "next";
+import { PortfolioPage } from "@/features/portfolio";
 
-export default function PortfolioPage() {
-  return (
-    <>
-      <Navbar />
-      <main
-        className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS} py-16 sm:py-20`}
-      >
-        <h1 className="text-4xl font-bold tracking-tight text-what-we-do-title sm:text-5xl">
-          Portfolio
-        </h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Full portfolio page coming soon.
-        </p>
-      </main>
-    </>
-  );
+export const metadata: Metadata = {
+  title: "Portfolio | LumenLA",
+  description:
+    "Selected real estate media work across Los Angeles — photography, video, drone, and 3D tours.",
+};
+
+export default function PortfolioRoutePage() {
+  return <PortfolioPage />;
 }
