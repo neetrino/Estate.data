@@ -7,7 +7,7 @@ export const SITE_FONT_SANS_CLASS = "font-sans";
 export const NAV_ITEM_TEXT_CLASS = "text-lg font-semibold leading-snug";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
-export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-muted-foreground`;
+export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-what-we-do-subtitle`;
 
 /** Trusted partners strip layout (width + spacing). */
 export const TRUSTED_STRIP_LAYOUT_CLASS =
@@ -64,6 +64,9 @@ export const WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX = -5;
 
 /** What we do — icon box / image asset size (px), matches `size-12`. */
 export const WHAT_WE_DO_ICON_SIZE_PX = 48;
+
+/** Home stats strip — equal row/column gap (matches What we do card grid). */
+export const HOME_STATS_GRID_GAP_CLASS = "gap-6";
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;

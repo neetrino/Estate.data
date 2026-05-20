@@ -11,7 +11,7 @@ export function HomeTrustedStrip() {
 
   return (
     <section
-      className="border-t border-zinc-200/80 bg-white"
+      className="border-t border-zinc-200/80 bg-white text-what-we-do-subtitle"
       aria-label="Trusted real estate partners"
     >
       <div className={TRUSTED_STRIP_INNER_CLASS}>

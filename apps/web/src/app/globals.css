@@ -61,6 +61,7 @@
     inset 0 -30px 26.7px -27px rgba(46, 9, 43, 0.5),
     inset 0 -40px 46.3px -30px #ff0890;
   --what-we-do-card-description: #d1d5dc;
+  --home-stats-text: #ead8e8;
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
 }
@@ -77,6 +78,7 @@
   --color-what-we-do-subtitle: var(--what-we-do-subtitle);
   --color-what-we-do-surface: var(--what-we-do-surface);
   --color-what-we-do-card-description: var(--what-we-do-card-description);
+  --color-home-stats-text: var(--home-stats-text);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
   --radius-button: 15px;
