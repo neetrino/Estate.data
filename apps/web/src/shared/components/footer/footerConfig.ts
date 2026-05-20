@@ -1,4 +1,4 @@
-import { NAV_CTA_LINKS } from "@/shared/components/navbar/navConfig";
+import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
 
 export type FooterNavLink = {
   readonly id: string;
@@ -23,11 +23,7 @@ export const FOOTER_COMPANY_LINKS = [
   { id: "contact", label: "Contact", href: "/contact" },
 ] as const satisfies readonly FooterNavLink[];
 
-export const FOOTER_STUDIO = {
-  address: "1234 Sunset Blvd, Los Angeles, CA",
-  phone: NAV_CTA_LINKS.phone,
-  email: { label: "hello@lumenla.com", href: "mailto:hello@lumenla.com" },
-} as const;
+export const FOOTER_STUDIO = STUDIO_CONTACT;
 
 export const FOOTER_COPYRIGHT = {
   year: 2026,

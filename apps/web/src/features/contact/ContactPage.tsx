@@ -1,4 +1,6 @@
 import { ContactRequestForm } from "@/features/contact/components/ContactRequestForm";
+import { ContactStudioDetails } from "@/features/contact/components/ContactStudioDetails";
+import { ContactStudioMap } from "@/features/contact/components/ContactStudioMap";
 import { CONTACT_PAGE_COPY } from "@/features/contact/content/contactCopy";
 import { Navbar } from "@/shared/components/navbar";
 import {
@@ -25,7 +27,11 @@ export function ContactPage() {
                 {subtitle}
               </p>
             </header>
-            <div className="w-full lg:ml-auto lg:max-w-xl">
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-12 xl:gap-16">
+              <div className="flex min-h-0 flex-col gap-8 lg:h-full">
+                <ContactStudioDetails />
+                <ContactStudioMap />
+              </div>
               <ContactRequestForm />
             </div>
           </div>

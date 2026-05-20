@@ -127,6 +127,14 @@ body {
   font-family: var(--font-sans);
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 .home-listing-cta-panel {
   background: var(--gradient-accent);
 }

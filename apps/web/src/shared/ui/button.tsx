@@ -17,9 +17,9 @@ export const estatePillButtonClassName = [
   "inline-flex items-center gap-2 whitespace-nowrap",
   "bg-estate-cta text-estate-cta-foreground",
   ESTATE_CTA_BUTTON_PADDING_CLASS,
-  "transition-opacity hover:opacity-90",
+  "cursor-pointer transition-opacity hover:opacity-90",
   "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-  "disabled:pointer-events-none disabled:opacity-50",
+  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   ESTATE_PILL_BUTTON_TEXT_CLASS,
 ].join(" ");
 
@@ -28,7 +28,13 @@ const ESTATE_CTA_ICON_DISC_CLASS =
 
 /** shadcn-style accent CTA — matches design system reference. */
 export const accentButtonClassName =
-  `inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-button px-4 ${ACCENT_BUTTON_TEXT_CLASS} text-black shadow transition-colors bg-accent hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`;
+  `inline-flex h-9 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-button px-4 ${ACCENT_BUTTON_TEXT_CLASS} text-black shadow transition-colors bg-accent hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`;
+
+const CLIENT_VOICES_BUTTON_TEXT_CLASS = "text-base font-semibold leading-snug";
+
+/** Orange CTA — `client-voices-accent` (contact form submit). */
+export const clientVoicesButtonClassName =
+  `inline-flex h-12 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-button px-8 ${CLIENT_VOICES_BUTTON_TEXT_CLASS} text-white shadow transition-colors bg-client-voices-accent hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`;
 
 type ButtonLinkProps = ComponentProps<typeof Link> & {
   /** Show trailing arrow (hero CTA). Navbar uses `false`. */

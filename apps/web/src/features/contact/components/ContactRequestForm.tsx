@@ -1,10 +1,8 @@
 "use client";
 
-import {
-  CONTACT_FORM_COPY,
-  CONTACT_FORM_SERVICE_OPTIONS,
-} from "@/features/contact/content/contactFormCopy";
-import { accentButtonClassName } from "@/shared/ui/button";
+import { CONTACT_FORM_COPY } from "@/features/contact/content/contactFormCopy";
+import { ContactServiceSelect } from "@/features/contact/components/ContactServiceSelect";
+import { clientVoicesButtonClassName } from "@/shared/ui/button";
 import type { FormEvent, ReactNode } from "react";
 
 const CONTACT_FORM_CARD_CLASS =
@@ -91,22 +89,10 @@ export function ContactRequestForm() {
 
       <div className={`mt-5 ${CONTACT_FORM_ROW_CLASS}`}>
         <ContactFormField id="contact-service" label={fields.service.label}>
-          <select
+          <ContactServiceSelect
             id="contact-service"
-            name="service"
-            required
-            defaultValue=""
-            className={CONTACT_FORM_CONTROL_CLASS}
-          >
-            <option value="" disabled>
-              {fields.service.placeholder}
-            </option>
-            {CONTACT_FORM_SERVICE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            placeholder={fields.service.placeholder}
+          />
         </ContactFormField>
         <ContactFormField
           id="contact-preferred-date"
@@ -137,7 +123,10 @@ export function ContactRequestForm() {
       </div>
 
       <div className="mt-8">
-        <button type="submit" className={`${accentButtonClassName} w-full sm:w-auto`}>
+        <button
+          type="submit"
+          className={`${clientVoicesButtonClassName} w-full sm:w-auto`}
+        >
           {submitLabel}
         </button>
       </div>

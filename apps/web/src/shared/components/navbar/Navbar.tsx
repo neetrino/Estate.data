@@ -107,7 +107,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
 
           <button
             type="button"
-            className={`inline-flex items-center justify-center rounded-md p-2 lg:hidden ${
+            className={`inline-flex cursor-pointer items-center justify-center rounded-md p-2 lg:hidden ${
               navTone === "light"
                 ? "text-white hover:bg-white/10"
                 : "text-black hover:bg-black/5"
