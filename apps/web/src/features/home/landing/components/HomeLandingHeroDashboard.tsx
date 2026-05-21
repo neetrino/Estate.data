@@ -12,18 +12,20 @@ export function HomeLandingHeroDashboard() {
   const topStats = HOME_STATS_COPY.stats.slice(0, 3);
 
   return (
-    <div className={`${LANDING_GLASS_CARD_CLASS} overflow-hidden rounded-3xl p-4 sm:p-5`} aria-hidden>
-      <ul className="flex flex-wrap gap-3 border-b border-brand-navy/8 pb-3">
+    <div className={`${LANDING_GLASS_CARD_CLASS} overflow-hidden rounded-3xl p-5 sm:p-6`} aria-hidden>
+      <ul className="flex flex-wrap gap-3.5 border-b border-brand-navy/8 pb-3.5">
         {topStats.map((stat, index) => (
           <li key={stat.id} className="min-w-[5.5rem] flex-1">
-            <p className={`text-sm font-bold sm:text-base ${landingMetricValueClass(homeLandingAccentAt(index))}`}>
+            <p
+              className={`text-base font-bold sm:text-lg ${landingMetricValueClass(homeLandingAccentAt(index))}`}
+            >
               {formatStatCountValue(1, stat.count)}
             </p>
-            <p className="text-[10px] font-medium text-brand-navy/60 sm:text-xs">{stat.label}</p>
+            <p className="text-xs font-medium text-brand-navy/60 sm:text-sm">{stat.label}</p>
           </li>
         ))}
       </ul>
-      <div className="mt-4 grid gap-3 lg:grid-cols-[1.35fr_0.85fr]">
+      <div className="mt-5 grid gap-3.5 lg:grid-cols-[1.35fr_0.85fr]">
         <PropertyMapPanel />
         <div className="flex flex-col gap-3">
           <StorageChartPanel />

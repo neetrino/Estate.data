@@ -2,9 +2,15 @@ import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HomeLandingHeroDashboard } from "@/features/home/landing/components/HomeLandingHeroDashboard";
 import { HomeLandingTrustedPartners } from "@/features/home/landing/components/HomeLandingTrustedPartners";
 import {
+  HOME_LANDING_HERO_CTA_ROW_CLASS,
+  HOME_LANDING_HERO_DESCRIPTION_CLASS,
+  HOME_LANDING_HERO_GRID_CLASS,
+  HOME_LANDING_HERO_HEADLINE_CLASS,
+  HOME_LANDING_HERO_MAIN_OFFSET_CLASS,
   HOME_LANDING_HERO_MIN_HEIGHT_CLASS,
   HOME_LANDING_HERO_TOP_PADDING_CLASS,
   HOME_LANDING_LOCATION_BADGE_CLASS,
+  HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS,
   LANDING_CONTAINER_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
 import { EstatePillButtonLink, LandingOutlineButtonLink } from "@/shared/ui/button";
@@ -23,14 +29,14 @@ export function HomeLandingHero() {
     >
       <div className="home-landing-hero-bg pointer-events-none absolute inset-0 opacity-80" aria-hidden />
       <div className={`${LANDING_CONTAINER_CLASS} relative flex min-h-0 flex-1 flex-col justify-start pb-6 sm:pb-8`}>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+        <div className={`${HOME_LANDING_HERO_GRID_CLASS} ${HOME_LANDING_HERO_MAIN_OFFSET_CLASS}`}>
           <div>
             <p className={HOME_LANDING_LOCATION_BADGE_CLASS}>
               <LocationPinIcon />
               {locationBadge}
             </p>
 
-            <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-brand-navy sm:text-5xl lg:text-[3.25rem]">
+            <h1 className={HOME_LANDING_HERO_HEADLINE_CLASS}>
               {headlineLines.map((line) => (
                 <span key={line.segments.map((segment) => segment.text).join("")} className="block">
                   {line.segments.map((segment) => (
@@ -45,7 +51,7 @@ export function HomeLandingHero() {
               ))}
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className={HOME_LANDING_HERO_DESCRIPTION_CLASS}>
               {descriptionLines.map((line, index) => (
                 <span key={line}>
                   {line}
@@ -54,7 +60,7 @@ export function HomeLandingHero() {
               ))}
             </p>
 
-            <div className="mt-8 flex w-full max-w-lg flex-col gap-3 sm:flex-row sm:items-center">
+            <div className={HOME_LANDING_HERO_CTA_ROW_CLASS}>
               <EstatePillButtonLink href={primaryCta.href} fullWidth>
                 {primaryCta.label}
               </EstatePillButtonLink>
@@ -62,13 +68,13 @@ export function HomeLandingHero() {
                 {secondaryCta.label}
               </LandingOutlineButtonLink>
             </div>
-
-            <div className="mt-8">
-              <HomeLandingTrustedPartners />
-            </div>
           </div>
 
           <HomeLandingHeroDashboard />
+        </div>
+
+        <div className={HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS}>
+          <HomeLandingTrustedPartners />
         </div>
       </div>
     </section>
@@ -78,8 +84,8 @@ export function HomeLandingHero() {
 function LocationPinIcon() {
   return (
     <svg
-      width="14"
-      height="14"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

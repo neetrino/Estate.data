@@ -118,6 +118,7 @@
   --brand-orange: #e55100;
   --landing-surface: #f8f9fc;
   --landing-surface-muted: #f1f3f8;
+  --landing-trust-surface: #f9f4f9;
   --landing-card-border: rgba(46, 72, 115, 0.1);
   --landing-card-shadow: 0 10px 30px rgba(46, 72, 115, 0.08);
   --landing-hero-gradient: linear-gradient(
@@ -169,6 +170,7 @@
   --color-brand-orange: var(--brand-orange);
   --color-landing-surface: var(--landing-surface);
   --color-landing-surface-muted: var(--landing-surface-muted);
+  --color-landing-trust-surface: var(--landing-trust-surface);
   --radius-button: 15px;
   --font-sans: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;

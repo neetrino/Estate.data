@@ -13,6 +13,28 @@ export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION
 /** Space between sticky navbar and hero copy (below navbar row). */
 export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[22px] sm:pt-[38px] lg:pt-[52px]";
 
+/** Nudge hero main block (excludes trust strip) downward. */
+export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";
+
+export const HOME_LANDING_HERO_GRID_CLASS =
+  "grid items-center gap-11 lg:grid-cols-2 lg:gap-14 xl:gap-[4.5rem]";
+
+export const HOME_LANDING_HERO_HEADLINE_CLASS = [
+  "mt-7 text-[2.375rem] font-bold leading-[1.08] tracking-tight text-brand-navy",
+  "sm:mt-8 sm:text-5xl lg:text-[3.5rem]",
+].join(" ");
+
+export const HOME_LANDING_HERO_DESCRIPTION_CLASS = [
+  "mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground",
+  "sm:mt-7 sm:text-xl",
+].join(" ");
+
+export const HOME_LANDING_HERO_CTA_ROW_CLASS =
+  "mt-9 flex w-full max-w-lg flex-col gap-3.5 sm:flex-row sm:items-center";
+
+/** Lifts trust strip from hero bottom (works with mt-auto; padding-top does not). */
+export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = "mt-auto shrink-0 mb-[10px]";
+
 /**
  * Hero fills one viewport below the sticky navbar row (4.5rem + safe area + 1px).
  * Keep in sync with {@link NAVBAR_HEIGHT_CLASS} and {@link NAVBAR_TOP_PADDING_CLASS}.
@@ -25,7 +47,7 @@ export const LANDING_EYEBROW_CLASS =
 
 /** Hero location chip — smaller than section eyebrows. */
 export const HOME_LANDING_LOCATION_BADGE_CLASS =
-  "inline-flex items-center gap-1.5 rounded-full border border-brand-purple/25 bg-white px-3 py-1 text-xs font-semibold text-brand-purple-light shadow-sm";
+  "inline-flex items-center gap-2 rounded-full border border-brand-purple/25 bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-purple-light shadow-sm";
 
 export const LANDING_SECTION_TITLE_CLASS =
   "text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-[2.5rem] md:leading-tight";
@@ -80,15 +102,69 @@ export const LANDING_TRUST_PARTNER_CHIP_CLASS = [
   "text-sm font-semibold text-brand-navy shadow-sm",
 ].join(" ");
 
-export const LANDING_TRUST_PARTNERS_LABEL_CLASS =
-  "text-xs font-semibold uppercase tracking-[0.12em] text-brand-navy/55 sm:text-sm";
-
-/** Hero trusted partners — glass tiles in landing card style. */
-export const LANDING_TRUST_PARTNER_CARD_CLASS = [
-  LANDING_GLASS_CARD_CLASS,
-  "flex min-h-[3.5rem] items-center justify-center px-3 py-3",
-  "text-center text-xs font-semibold leading-snug text-brand-navy sm:min-h-[3.75rem] sm:text-sm",
+/** Hero trust strip — same white + gradient stack as hero (`home-landing-hero-bg`). */
+export const LANDING_TRUST_STRIP_PANEL_CLASS = [
+  "relative overflow-hidden rounded-2xl border border-brand-navy/[0.07] bg-white",
+  "shadow-[0_4px_24px_rgba(46,72,115,0.06)]",
 ].join(" ");
 
-export const LANDING_TRUST_PARTNERS_GRID_CLASS = "mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5";
+export const LANDING_TRUST_STRIP_PANEL_INNER_CLASS = "relative z-[1] px-4 py-4 sm:px-6 sm:py-5";
+
+export const LANDING_TRUST_STRIP_LABEL_CLASS = [
+  "text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-navy",
+  "sm:text-xs",
+].join(" ");
+
+export const LANDING_TRUST_STRIP_GRID_CLASS = [
+  "mt-3 grid grid-cols-2 gap-2",
+  "sm:mt-4 sm:grid-cols-3 sm:gap-2.5",
+  "lg:grid-cols-6 lg:gap-2",
+].join(" ");
+
+/** Last N trust cells use cyan hover; earlier cells use purple. */
+export const LANDING_TRUST_STRIP_BLUE_HOVER_TAIL_COUNT = 3;
+
+/** Stable hover target — does not move (prevents cursor flicker / jitter). */
+export const LANDING_TRUST_STRIP_CELL_HIT_CLASS =
+  "group relative min-h-[3.25rem] w-full pb-[3px] sm:min-h-[3.5rem]";
+
+const LANDING_TRUST_STRIP_CELL_SURFACE_BASE_CLASS = [
+  "flex h-full w-full items-center justify-center rounded-xl",
+  "border border-brand-navy/[0.06] bg-white px-2 py-3",
+  "shadow-[0_2px_10px_rgba(46,72,115,0.05)]",
+  "transition-[transform,box-shadow,border-color] duration-200 ease-out",
+  "will-change-transform motion-safe:group-hover:-translate-y-[3px]",
+  "sm:px-3",
+].join(" ");
+
+const LANDING_TRUST_STRIP_CELL_HOVER_PURPLE_CLASS = [
+  "group-hover:border-brand-purple-light/20",
+  "group-hover:shadow-[0_12px_28px_rgba(135,60,131,0.1)]",
+].join(" ");
+
+const LANDING_TRUST_STRIP_CELL_HOVER_CYAN_CLASS = [
+  "group-hover:border-brand-cyan/30",
+  "group-hover:shadow-[0_12px_28px_rgba(22,192,218,0.14)]",
+].join(" ");
+
+const LANDING_TRUST_STRIP_NAME_BASE_CLASS = [
+  "text-center text-xs font-medium leading-snug text-brand-navy/45",
+  "transition-colors duration-200 sm:text-sm",
+].join(" ");
+
+/** Trust cell visual surface — lifts inside fixed hit area on hover. */
+export function landingTrustStripCellSurfaceClass(blueHover: boolean): string {
+  return [
+    LANDING_TRUST_STRIP_CELL_SURFACE_BASE_CLASS,
+    blueHover ? LANDING_TRUST_STRIP_CELL_HOVER_CYAN_CLASS : LANDING_TRUST_STRIP_CELL_HOVER_PURPLE_CLASS,
+  ].join(" ");
+}
+
+/** Trust cell label — purple or cyan on hover. */
+export function landingTrustStripNameClass(blueHover: boolean): string {
+  return [
+    LANDING_TRUST_STRIP_NAME_BASE_CLASS,
+    blueHover ? "group-hover:text-brand-cyan" : "group-hover:text-brand-purple",
+  ].join(" ");
+}
 

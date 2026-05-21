@@ -1,5 +1,5 @@
 export const HOME_TRUSTED_PARTNERS_COPY = {
-  label: "Trusted by LA's top teams:",
+  label: "Trusted by leading real estate teams",
   partners: [
     "Compass",
     "Sotheby's",
