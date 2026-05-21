@@ -4,11 +4,11 @@ import {
   DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
   DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
 } from "@/features/services/data/content/dataServicesLayout";
-import { HOME_LISTING_CTA_BOOK_BUTTON_CLASS } from "@/shared/lib/constants";
+import { PROPERTY_INTELLIGENCE_CTA_CLASS } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
 const DATA_SERVICES_REPORT_CTA_SHELL_CLASS = [
-  "home-listing-cta-panel",
+  "data-services-report-cta-panel",
   DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
   DATA_SERVICES_BOTTOM_CARD_PADDING_CLASS,
   DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
@@ -16,12 +16,12 @@ const DATA_SERVICES_REPORT_CTA_SHELL_CLASS = [
 ].join(" ");
 
 const DATA_SERVICES_REPORT_CTA_TITLE_CLASS =
-  "text-2xl font-bold tracking-tight text-white sm:text-3xl";
+  "text-2xl font-bold tracking-tight text-property-intelligence-navy sm:text-3xl";
 
 const DATA_SERVICES_REPORT_CTA_DESCRIPTION_CLASS =
-  "mt-3 max-w-md text-base leading-relaxed text-white/90";
+  "mt-3 max-w-md text-base leading-relaxed text-property-intelligence-navy";
 
-const DATA_SERVICES_REPORT_CTA_BUTTON_CLASS = `max-w-full ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`;
+const DATA_SERVICES_REPORT_CTA_BUTTON_CLASS = `max-w-full ${PROPERTY_INTELLIGENCE_CTA_CLASS}`;
 
 export function DataServicesReportCta() {
   const { title, description, buttonLabel, buttonHref } = DATA_SERVICES_REPORT_CTA_COPY;

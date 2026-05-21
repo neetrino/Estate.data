@@ -257,6 +257,10 @@ export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS =
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
 
+/** Estate pill — “Explore data services” on home property intelligence block. */
+export const PROPERTY_INTELLIGENCE_CTA_CLASS =
+  "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
+
 /** Solutions page — #FDBA2C eyebrow; subtitle uses gold + client-voices-accent. */
 export const SOLUTIONS_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";

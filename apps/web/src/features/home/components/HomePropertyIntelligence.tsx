@@ -9,6 +9,7 @@ import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
   SECTION_VERTICAL_PADDING_CLASS,
+  PROPERTY_INTELLIGENCE_CTA_CLASS,
   PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
@@ -24,9 +25,6 @@ const PROPERTY_INTELLIGENCE_DESCRIPTION_CLASS =
 
 const PROPERTY_INTELLIGENCE_FEATURE_CLASS =
   "text-sm leading-relaxed text-property-intelligence-navy sm:text-base";
-
-const PROPERTY_INTELLIGENCE_CTA_CLASS =
-  "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
 
 export function HomePropertyIntelligence() {
   const { eyebrow, title, description, features, ctaLabel, ctaHref } =

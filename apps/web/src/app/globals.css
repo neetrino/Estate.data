@@ -70,6 +70,11 @@
   /** Slightly darker accent — primary CTAs on /media. */
   --property-intelligence-accent-dark: #12a8bc;
   --property-intelligence-navy: #2e4873;
+  --property-intelligence-report-cta-gradient: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    var(--property-intelligence-accent) 100%
+  );
   --media-service-card-radius: 38px;
   --media-service-card-gradient: linear-gradient(180deg, #121212 0%, #050505 100%);
   --media-service-card-corner-gradient: radial-gradient(
@@ -169,4 +174,8 @@ button:disabled {
 
 .home-listing-cta-panel {
   background: var(--gradient-accent);
+}
+
+.data-services-report-cta-panel {
+  background: var(--property-intelligence-report-cta-gradient);
 }
