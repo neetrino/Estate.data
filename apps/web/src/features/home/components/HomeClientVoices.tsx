@@ -1,29 +1,22 @@
 import { ClientVoiceCard } from "@/features/home/components/ClientVoiceCard";
 import { HOME_CLIENT_VOICES_COPY } from "@/features/home/content/clientVoicesCopy";
 import {
-  CLIENT_VOICES_EYEBROW_CLASS,
-  CLIENT_VOICES_SECTION_SURFACE_CLASS,
-  CLIENT_VOICES_SECTION_TITLE_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
-  WHAT_WE_DO_CARD_GRID_GAP_CLASS,
-} from "@/shared/lib/constants";
+  LANDING_CONTAINER_CLASS,
+  LANDING_EYEBROW_CLASS,
+  LANDING_SECTION_TITLE_CLASS,
+  LANDING_SECTION_WHITE_CLASS,
+} from "@/features/home/landing/lib/landingStyles";
+import { WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 export function HomeClientVoices() {
   const { eyebrow, title, testimonials } = HOME_CLIENT_VOICES_COPY;
 
   return (
-    <section
-      className={CLIENT_VOICES_SECTION_SURFACE_CLASS}
-      aria-labelledby="client-voices-heading"
-    >
-      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+    <section className={LANDING_SECTION_WHITE_CLASS} aria-labelledby="client-voices-heading">
+      <div className={LANDING_CONTAINER_CLASS}>
         <header className="text-center">
-          <p className={CLIENT_VOICES_EYEBROW_CLASS}>{eyebrow}</p>
-          <h2
-            id="client-voices-heading"
-            className={CLIENT_VOICES_SECTION_TITLE_CLASS}
-          >
+          <p className={LANDING_EYEBROW_CLASS}>{eyebrow}</p>
+          <h2 id="client-voices-heading" className={`mt-3 ${LANDING_SECTION_TITLE_CLASS}`}>
             {title}
           </h2>
         </header>

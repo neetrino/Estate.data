@@ -110,6 +110,28 @@
   --home-listing-cta-book-foreground: #171717;
   --muted-foreground: #71717a;
   --ring: #a1a1aa;
+  --brand-purple-light: #c364be;
+  --brand-purple: #873c83;
+  --brand-navy: #2e4873;
+  --brand-cyan: #16c0da;
+  --brand-yellow: #fdba2c;
+  --brand-orange: #e55100;
+  --landing-surface: #f8f9fc;
+  --landing-surface-muted: #f1f3f8;
+  --landing-card-border: rgba(46, 72, 115, 0.1);
+  --landing-card-shadow: 0 10px 30px rgba(46, 72, 115, 0.08);
+  --landing-hero-gradient: linear-gradient(
+    135deg,
+    rgba(195, 100, 190, 0.12) 0%,
+    rgba(135, 60, 131, 0.06) 40%,
+    rgba(22, 192, 218, 0.08) 100%
+  );
+  --landing-cta-gradient: linear-gradient(
+    120deg,
+    #873c83 0%,
+    #c364be 45%,
+    #9b4a96 100%
+  );
 }
 
 @theme inline {
@@ -139,6 +161,14 @@
   --color-home-listing-cta-book-foreground: var(--home-listing-cta-book-foreground);
   --color-muted-foreground: var(--muted-foreground);
   --color-ring: var(--ring);
+  --color-brand-purple-light: var(--brand-purple-light);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-orange: var(--brand-orange);
+  --color-landing-surface: var(--landing-surface);
+  --color-landing-surface-muted: var(--landing-surface-muted);
   --radius-button: 15px;
   --font-sans: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -178,4 +208,19 @@ button:disabled {
 
 .data-services-report-cta-panel {
   background: var(--property-intelligence-report-cta-gradient);
+}
+
+.home-landing-cta-panel {
+  background: var(--landing-cta-gradient);
+}
+
+.home-landing-glass-card {
+  border: 1px solid var(--landing-card-border);
+  box-shadow: var(--landing-card-shadow);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.home-landing-hero-bg {
+  background: var(--landing-hero-gradient);
 }

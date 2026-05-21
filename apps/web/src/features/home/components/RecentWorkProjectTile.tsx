@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
+import { LANDING_GLASS_CARD_CLASS } from "@/features/home/landing/lib/landingStyles";
 import { RECENT_WORK_PROJECT_ASPECT_CLASS } from "@/shared/lib/constants";
 
 type RecentWorkProjectTileProps = {
@@ -9,7 +10,7 @@ type RecentWorkProjectTileProps = {
 export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
   return (
     <article
-      className={`relative w-full overflow-hidden rounded-2xl bg-black/5 ${RECENT_WORK_PROJECT_ASPECT_CLASS}`}
+      className={`${LANDING_GLASS_CARD_CLASS} relative w-full overflow-hidden rounded-3xl ${RECENT_WORK_PROJECT_ASPECT_CLASS}`}
     >
       <Image
         src={project.imageSrc}

@@ -34,6 +34,34 @@ export const accentButtonClassName =
 export const navbarBookShootButtonClassName =
   `inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap rounded-button px-5 ${ACCENT_BUTTON_TEXT_CLASS} font-semibold text-white shadow bg-accent transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring`;
 
+/** Light landing — purple outline secondary (hero, sections on white). */
+export const landingOutlineButtonClassName = [
+  "inline-flex h-12 cursor-pointer items-center justify-center gap-1 whitespace-nowrap",
+  "rounded-[15px] border-2 border-brand-purple/30 bg-white px-6",
+  "text-sm font-semibold text-brand-purple sm:text-base",
+  "transition-colors hover:border-brand-purple hover:bg-brand-purple/5",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-light",
+].join(" ");
+
+/** Light landing — yellow primary on purple gradient panel. */
+export const landingGradientPrimaryButtonClassName = [
+  "inline-flex h-12 cursor-pointer items-center justify-center whitespace-nowrap",
+  "rounded-[15px] bg-brand-yellow px-6 text-sm font-bold text-brand-navy shadow-md sm:text-base",
+  "transition-opacity hover:opacity-90",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow",
+].join(" ");
+
+/** Light landing — white outline on purple gradient panel. */
+export const landingGradientOutlineButtonClassName = [
+  "inline-flex h-12 cursor-pointer items-center justify-center whitespace-nowrap",
+  "rounded-[15px] border-2 border-white/70 px-6",
+  "text-sm font-semibold text-white sm:text-base",
+  "transition-colors hover:bg-white/10",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
+].join(" ");
+
+const ESTATE_PILL_FULL_WIDTH_CLASS = "w-full max-w-full sm:w-auto";
+
 const CLIENT_VOICES_BUTTON_TEXT_CLASS = "text-base font-semibold leading-snug";
 
 /** Orange CTA — `client-voices-accent` (contact form submit). */
@@ -80,16 +108,21 @@ function CtaArrowIcon() {
   );
 }
 
-type EstatePillButtonLinkProps = ComponentProps<typeof Link>;
+type EstatePillButtonLinkProps = ComponentProps<typeof Link> & {
+  /** Stretch pill on mobile; auto width from sm+. */
+  fullWidth?: boolean;
+};
 
 export function EstatePillButtonLink({
   className,
   children,
+  fullWidth = false,
   ...props
 }: EstatePillButtonLinkProps) {
-  const mergedClassName = className
-    ? `${estatePillButtonClassName} ${className}`
-    : estatePillButtonClassName;
+  const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
+  const mergedClassName = [estatePillButtonClassName, widthClass, className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <Link className={mergedClassName} {...props}>
@@ -102,6 +135,63 @@ export function EstatePillButtonLink({
       </span>
     </Link>
   );
+}
+
+type LandingOutlineButtonLinkProps = ComponentProps<typeof Link> & {
+  showArrow?: boolean;
+  fullWidth?: boolean;
+};
+
+export function LandingOutlineButtonLink({
+  className,
+  children,
+  showArrow = true,
+  fullWidth = false,
+  ...props
+}: LandingOutlineButtonLinkProps) {
+  const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
+  const mergedClassName = [landingOutlineButtonClassName, widthClass, className]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <Link className={mergedClassName} {...props}>
+      {children}
+      {showArrow ? <span aria-hidden>→</span> : null}
+    </Link>
+  );
+}
+
+type LandingGradientButtonLinkProps = ComponentProps<typeof Link> & {
+  fullWidth?: boolean;
+};
+
+export function LandingGradientPrimaryButtonLink({
+  className,
+  children,
+  fullWidth = false,
+  ...props
+}: LandingGradientButtonLinkProps) {
+  const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
+  const mergedClassName = [landingGradientPrimaryButtonClassName, widthClass, className]
+    .filter(Boolean)
+    .join(" ");
+
+  return <Link className={mergedClassName} {...props}>{children}</Link>;
+}
+
+export function LandingGradientOutlineButtonLink({
+  className,
+  children,
+  fullWidth = false,
+  ...props
+}: LandingGradientButtonLinkProps) {
+  const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
+  const mergedClassName = [landingGradientOutlineButtonClassName, widthClass, className]
+    .filter(Boolean)
+    .join(" ");
+
+  return <Link className={mergedClassName} {...props}>{children}</Link>;
 }
 
 /** Diagonal arrow in the icon disc (Figma 305:2100, −45°). */

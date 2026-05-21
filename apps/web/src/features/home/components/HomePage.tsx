@@ -1,33 +1,5 @@
-import {
-  HomeHeroContent,
-  HomeHeroOverlay,
-} from "@/features/home/components/HomeHeroContent";
-import { HomeHero } from "@/features/home/components/HomeHero";
-import { HomeTrustedStrip } from "@/features/home/components/HomeTrustedStrip";
-import { HomeStatsStrip } from "@/features/home/components/HomeStatsStrip";
-import { HomeClientVoices } from "@/features/home/components/HomeClientVoices";
-import { HomeListingCta } from "@/features/home/components/HomeListingCta";
-import { HomePropertyIntelligence } from "@/features/home/components/HomePropertyIntelligence";
-import { HomeRecentWork } from "@/features/home/components/HomeRecentWork";
-import { HomeWhatWeDo } from "@/features/home/components/HomeWhatWeDo";
-import { Navbar } from "@/shared/components/navbar";
+import { HomeLandingPage } from "@/features/home/landing";
 
 export function HomePage() {
-  return (
-    <>
-      <Navbar overlay />
-      <section className="relative h-svh min-h-svh overflow-hidden bg-black">
-        <HomeHero />
-        <HomeHeroOverlay />
-        <HomeHeroContent />
-      </section>
-      <HomeTrustedStrip />
-      <HomeWhatWeDo />
-      <HomeStatsStrip />
-      <HomeRecentWork />
-      <HomePropertyIntelligence />
-      <HomeClientVoices />
-      <HomeListingCta />
-    </>
-  );
+  return <HomeLandingPage />;
 }
