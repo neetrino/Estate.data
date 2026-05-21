@@ -44,6 +44,5 @@ export const MOBILE_NAV_MORE_LINKS: readonly NavLink[] = [
 ] as const;
 
 export const NAV_CTA_LINKS = {
-  phone: { label: "(323) 555-0142", href: "tel:+13235550142" },
   bookShoot: { label: "Book a Shoot", href: "/contact" },
 } as const;

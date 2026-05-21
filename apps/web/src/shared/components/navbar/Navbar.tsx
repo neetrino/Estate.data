@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { NAVBAR_SCROLL_OFFSET_PX } from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
-import { PhoneNavLink } from "@/shared/components/navbar/PhoneNavLink";
 import {
   MAIN_NAV_LINKS,
   NAV_CTA_LINKS,
@@ -172,8 +171,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             </ul>
           </div>
 
-          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center gap-6`}>
-            <PhoneNavLink tone={navTone} onNavigate={closeMobile} />
+          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center`}>
             <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
               {NAV_CTA_LINKS.bookShoot.label}
             </Link>
