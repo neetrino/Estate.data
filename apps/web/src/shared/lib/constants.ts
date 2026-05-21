@@ -247,6 +247,10 @@ export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 /** Property intelligence — scan-to-bim hero image (1024×716 source). */
 export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 
+/** Home property intelligence — visual frame; lg height aligns with eyebrow through CTA. */
+export const PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS =
+  "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem] lg:aspect-auto lg:h-full lg:min-h-0";
+
 /** Property intelligence pages (/data-bim, /media) — page header typography. */
 export const PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-property-intelligence-accent sm:text-base";
@@ -338,15 +342,19 @@ export const CLIENT_VOICES_SECTION_SURFACE_CLASS =
 export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
   `bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`;
 
-/** Home listing CTA — gradient panel below client voices. */
+/** Home listing CTA — purple gradient panel below client voices. */
 export const HOME_LISTING_CTA_PANEL_CLASS =
-  "home-listing-cta-panel overflow-hidden rounded-2xl p-6 sm:rounded-3xl sm:p-10 md:p-16";
+  "home-listing-cta-panel overflow-hidden rounded-3xl px-6 py-10 sm:px-10 sm:py-12";
 
-/** Estate pill — gold surface for listing CTA “Book a Shoot”. */
-export const HOME_LISTING_CTA_BOOK_BUTTON_CLASS = [
-  "bg-home-listing-cta-book text-home-listing-cta-book-foreground",
-  "[&>span:last-child]:text-home-listing-cta-book",
+/** Estate pill — lavender surface, black label, purple icon disc (listing CTA). */
+export const HOME_LISTING_CTA_PRIMARY_BUTTON_CLASS = [
+  "bg-home-listing-cta-button text-home-listing-cta-button-foreground",
+  "[&>span:last-child]:bg-home-listing-cta-button-icon [&>span:last-child]:text-white",
 ].join(" ");
+
+/** Listing CTA — “View Pricing” outline; no hover fill/border change. */
+export const HOME_LISTING_CTA_SECONDARY_BUTTON_CLASS =
+  "hover:!border-brand-purple/30 hover:!bg-white";
 
 /** Estate.data pill CTA — 48px tall, fully rounded ends. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-full";

@@ -1,10 +1,11 @@
 import { HOME_LISTING_CTA_COPY } from "@/features/home/content/homeListingCtaCopy";
 import { LANDING_CONTAINER_CLASS, LANDING_SECTION_MUTED_CLASS } from "@/features/home/landing/lib/landingStyles";
-import { HOME_LISTING_CTA_BOOK_BUTTON_CLASS } from "@/shared/lib/constants";
 import {
-  EstatePillButtonLink,
-  LandingGradientOutlineButtonLink,
-} from "@/shared/ui/button";
+  HOME_LISTING_CTA_PANEL_CLASS,
+  HOME_LISTING_CTA_PRIMARY_BUTTON_CLASS,
+  HOME_LISTING_CTA_SECONDARY_BUTTON_CLASS,
+} from "@/shared/lib/constants";
+import { EstatePillButtonLink, LandingOutlineButtonLink } from "@/shared/ui/button";
 
 export function HomeListingCta() {
   const { title, description, primaryLabel, primaryHref, secondaryLabel, secondaryHref } =
@@ -13,15 +14,15 @@ export function HomeListingCta() {
   return (
     <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="listing-cta-heading">
       <div className={LANDING_CONTAINER_CLASS}>
-        <div className="home-landing-cta-panel grid items-center gap-8 overflow-hidden rounded-3xl px-6 py-10 sm:px-10 sm:py-12 md:grid-cols-2">
+        <div className={`${HOME_LISTING_CTA_PANEL_CLASS} grid items-center gap-8 md:grid-cols-2`}>
           <div>
             <h2
               id="listing-cta-heading"
-              className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl"
             >
               {title}
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-brand-navy/85 sm:text-lg">
               {description}
             </p>
           </div>
@@ -29,13 +30,18 @@ export function HomeListingCta() {
             <EstatePillButtonLink
               href={primaryHref}
               fullWidth
-              className={`sm:shrink-0 ${HOME_LISTING_CTA_BOOK_BUTTON_CLASS}`}
+              className={`sm:shrink-0 ${HOME_LISTING_CTA_PRIMARY_BUTTON_CLASS}`}
             >
               {primaryLabel}
             </EstatePillButtonLink>
-            <LandingGradientOutlineButtonLink href={secondaryHref} fullWidth className="sm:shrink-0">
+            <LandingOutlineButtonLink
+              href={secondaryHref}
+              fullWidth
+              className={`sm:shrink-0 ${HOME_LISTING_CTA_SECONDARY_BUTTON_CLASS}`}
+              showArrow={false}
+            >
               {secondaryLabel}
-            </LandingGradientOutlineButtonLink>
+            </LandingOutlineButtonLink>
           </div>
         </div>
       </div>

@@ -1,179 +1,112 @@
 import type { CSSProperties } from "react";
 import { PROPERTY_INTELLIGENCE_SCENE_ALT } from "@/features/home/content/propertyIntelligenceCopy";
+import {
+  SCAN_TO_BIM_SCENE_LABELS,
+  SCAN_TO_BIM_SCENE_TIMING,
+} from "@/features/home/content/scanToBimSceneCopy";
+import {
+  ScanToBimBuildingModel,
+  ScanToBimVolumePrism,
+} from "@/features/home/components/ScanToBimBuildingModel";
+import "@/features/home/styles/scan-to-bim-scene.css";
 
-const SCAN_CYCLE_S = 5.5;
-const ORBIT_CYCLE_S = 26;
-const POINT_COUNT = 36;
+const LABEL_POSITION_CLASS: Record<
+  (typeof SCAN_TO_BIM_SCENE_LABELS)[number]["position"],
+  string
+> = {
+  "top-left": "scan-to-bim-scene__label--top-left",
+  "top-right": "scan-to-bim-scene__label--top-right",
+  "mid-left": "scan-to-bim-scene__label--mid-left",
+  "mid-right": "scan-to-bim-scene__label--mid-right",
+  "bottom-left": "scan-to-bim-scene__label--bottom-left",
+  "bottom-right": "scan-to-bim-scene__label--bottom-right",
+};
+
+const LABEL_DOT_CLASS: Record<
+  (typeof SCAN_TO_BIM_SCENE_LABELS)[number]["accent"],
+  string
+> = {
+  cyan: "scan-to-bim-scene__label-dot--cyan",
+  purple: "scan-to-bim-scene__label-dot--purple",
+  yellow: "scan-to-bim-scene__label-dot--yellow",
+};
+
+const POINT_VARIANTS = ["cyan", "purple", "warm"] as const;
 
 export function ScanToBimBuildingAnimation() {
   const timingStyle = {
-    "--scan-cycle": `${SCAN_CYCLE_S}s`,
-    "--orbit-cycle": `${ORBIT_CYCLE_S}s`,
+    "--rotation-cycle": `${SCAN_TO_BIM_SCENE_TIMING.rotationCycleS}s`,
+    "--scan-cycle": `${SCAN_TO_BIM_SCENE_TIMING.scanCycleS}s`,
   } as CSSProperties;
 
   return (
     <div
-      className="scan-to-bim-scene relative size-full min-h-[16rem] sm:min-h-[18rem]"
+      className="scan-to-bim-scene relative h-full min-h-[17rem] w-full sm:min-h-[19rem] lg:min-h-0"
       style={timingStyle}
       role="img"
       aria-label={PROPERTY_INTELLIGENCE_SCENE_ALT}
     >
-      <div className="scan-to-bim-scene__grid" aria-hidden />
-      <div className="scan-to-bim-scene__orbit" aria-hidden>
-        <div className="scan-to-bim-scene__stack">
-          <div className="scan-to-bim-scene__volume scan-to-bim-scene__volume--rear">
-            <BuildingSvg variant="wireframe" />
-          </div>
-          <div className="scan-to-bim-scene__volume scan-to-bim-scene__volume--main">
-            <div className="scan-to-bim-scene__shadow" aria-hidden />
-            <div className="scan-to-bim-scene__mass">
-              <BuildingVolumePrism />
-              <div className="scan-to-bim-scene__facade">
-                <BuildingSvg variant="wireframe" />
-                <div className="scan-to-bim-scene__reveal">
-                  <BuildingSvg variant="solid" />
-                </div>
-                <div className="scan-to-bim-scene__laser-trail" />
-                <div className="scan-to-bim-scene__laser" />
-                <ScanPointField />
+      <div className="scan-to-bim-scene__ambient" aria-hidden />
+      <div className="scan-to-bim-scene__holo-field" aria-hidden />
+
+      <div className="scan-to-bim-scene__stage" aria-hidden>
+        <div className="scan-to-bim-scene__pedestal" />
+        <div className="scan-to-bim-scene__turntable">
+          <div className="scan-to-bim-scene__shadow" />
+          <div className="scan-to-bim-scene__mass">
+            <ScanToBimVolumePrism />
+            <div className="scan-to-bim-scene__facade">
+              <div className="scan-to-bim-scene__holo-grid" />
+              <ScanToBimBuildingModel variant="wireframe" />
+              <div className="scan-to-bim-scene__bim-layer">
+                <ScanToBimBuildingModel variant="solid" />
               </div>
+              <div className="scan-to-bim-scene__wire-overlay">
+                <ScanToBimBuildingModel variant="wireframe" />
+              </div>
+              <div className="scan-to-bim-scene__beam-trail scan-to-bim-scene__beam-trail--v" />
+              <div className="scan-to-bim-scene__beam scan-to-bim-scene__beam--v" />
+              <div className="scan-to-bim-scene__beam-trail scan-to-bim-scene__beam-trail--h" />
+              <div className="scan-to-bim-scene__beam scan-to-bim-scene__beam--h" />
+              <ScanPointField />
             </div>
-          </div>
-          <div className="scan-to-bim-scene__volume scan-to-bim-scene__volume--front">
-            <BuildingSvg variant="wireframe" />
           </div>
         </div>
       </div>
+
+      <div className="scan-to-bim-scene__labels" aria-hidden>
+        {SCAN_TO_BIM_SCENE_LABELS.map((label) => (
+          <div
+            key={label.id}
+            className={`scan-to-bim-scene__label ${LABEL_POSITION_CLASS[label.position]}`}
+          >
+            <span className={`scan-to-bim-scene__label-dot ${LABEL_DOT_CLASS[label.accent]}`} />
+            <span>{label.text}</span>
+          </div>
+        ))}
+      </div>
+
       <p className="sr-only">{PROPERTY_INTELLIGENCE_SCENE_ALT}</p>
     </div>
   );
 }
 
-type BuildingVariant = "wireframe" | "solid";
-
-function BuildingVolumePrism() {
-  return (
-    <div className="scan-to-bim-scene__prism" aria-hidden>
-      <div className="scan-to-bim-scene__prism-wing">
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--wing-front" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--wing-side" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--wing-top" />
-      </div>
-      <div className="scan-to-bim-scene__prism-tower">
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--tower-front" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--tower-back" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--tower-left" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--tower-right" />
-        <div className="scan-to-bim-scene__face scan-to-bim-scene__face--tower-top" />
-      </div>
-    </div>
-  );
-}
-
-function BuildingSvg({ variant }: { variant: BuildingVariant }) {
-  const isWireframe = variant === "wireframe";
-
-  return (
-    <svg
-      className="scan-to-bim-scene__building-svg"
-      viewBox="0 0 240 280"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="bim-scan-front" x1="120" y1="50" x2="120" y2="248" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#16c0da" stopOpacity="0.75" />
-          <stop offset="50%" stopColor="#2e4873" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#873c83" stopOpacity="0.35" />
-        </linearGradient>
-        <linearGradient id="bim-scan-side" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#16c0da" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="#2e4873" stopOpacity="0.65" />
-        </linearGradient>
-        <linearGradient id="bim-scan-roof" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#16c0da" stopOpacity="0.85" />
-          <stop offset="100%" stopColor="#2e4873" stopOpacity="0.9" />
-        </linearGradient>
-      </defs>
-
-      <ellipse cx="120" cy="258" rx="90" ry="14" fill="#2e4873" fillOpacity={isWireframe ? 0.08 : 0.14} />
-
-      <g className={isWireframe ? "scan-to-bim-scene__wire" : undefined}>
-        <path
-          d="M44 248V104l28-20 48-10 48 10 28 20v124H44z"
-          fill={isWireframe ? "none" : "url(#bim-scan-side)"}
-          stroke="#2e4873"
-          strokeWidth={isWireframe ? 1.2 : 1.5}
-          strokeLinejoin="round"
-        />
-        <path
-          d="M72 84 120 74l48 10v164H72V84z"
-          fill={isWireframe ? "none" : "url(#bim-scan-front)"}
-          stroke="#16c0da"
-          strokeWidth={isWireframe ? 1.2 : 2}
-          strokeLinejoin="round"
-        />
-        <path
-          d="M72 84 120 74l48 10-28 20-48 10-48-10L72 84z"
-          fill={isWireframe ? "none" : "url(#bim-scan-roof)"}
-          stroke="#16c0da"
-          strokeWidth={isWireframe ? 1 : 1.5}
-          strokeLinejoin="round"
-        />
-        <path
-          d="M168 118 200 132v96l-32-16V118z"
-          fill={isWireframe ? "none" : "url(#bim-scan-side)"}
-          stroke="#2e4873"
-          strokeWidth={isWireframe ? 1 : 1.2}
-          strokeLinejoin="round"
-        />
-
-        {[88, 104, 120, 136, 152].map((x) => (
-          <path
-            key={x}
-            d={`M${x} 248V${x === 120 ? 98 : 108}`}
-            stroke="#16c0da"
-            strokeOpacity={isWireframe ? 0.55 : 0.35}
-            strokeWidth="1"
-          />
-        ))}
-
-        <path
-          d="M120 74v20M72 104l48-10 48 10M72 104l48 10 48 10"
-          stroke="#c364be"
-          strokeOpacity={isWireframe ? 0.5 : 0.25}
-          strokeWidth="1"
-          strokeDasharray={isWireframe ? "5 4" : "0"}
-        />
-
-        {!isWireframe ? (
-          <>
-            <rect x="84" y="162" width="20" height="24" rx="1" fill="#16c0da" fillOpacity="0.22" stroke="#2e4873" strokeWidth="1" />
-            <rect x="110" y="146" width="20" height="24" rx="1" fill="#16c0da" fillOpacity="0.3" stroke="#2e4873" strokeWidth="1" />
-            <rect x="136" y="162" width="20" height="24" rx="1" fill="#16c0da" fillOpacity="0.22" stroke="#2e4873" strokeWidth="1" />
-          </>
-        ) : null}
-      </g>
-    </svg>
-  );
-}
-
 function ScanPointField() {
-  const points = Array.from({ length: POINT_COUNT }, (_, index) => {
-    const left = 18 + (index * 17) % 64;
-    const top = 14 + (index * 23) % 72;
-    const delay = (index % 9) * 0.45;
+  const points = Array.from({ length: SCAN_TO_BIM_SCENE_TIMING.pointCount }, (_, index) => {
+    const left = 16 + (index * 19) % 68;
+    const top = 12 + (index * 21) % 74;
+    const delay = (index % 11) * 0.38;
+    const variant = POINT_VARIANTS[index % POINT_VARIANTS.length];
 
-    return { id: index, left, top, delay };
+    return { id: index, left, top, delay, variant };
   });
 
   return (
-    <div className="scan-to-bim-scene__points" aria-hidden>
+    <div className="scan-to-bim-scene__points">
       {points.map((point) => (
         <span
           key={point.id}
-          className="scan-to-bim-scene__point"
+          className={`scan-to-bim-scene__point scan-to-bim-scene__point--${point.variant}`}
           style={
             {
               left: `${point.left}%`,

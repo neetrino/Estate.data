@@ -13,7 +13,7 @@ import {
 import {
   HOME_STATS_GRID_GAP_CLASS,
   PROPERTY_INTELLIGENCE_CTA_CLASS,
-  PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS,
+  PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
@@ -27,15 +27,13 @@ export function HomePropertyIntelligence() {
     <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="property-intelligence-heading">
       <div className={LANDING_CONTAINER_CLASS}>
         <div
-          className={`grid grid-cols-1 items-center lg:grid-cols-2 ${HOME_STATS_GRID_GAP_CLASS} lg:gap-12`}
+          className={`grid grid-cols-1 items-stretch lg:grid-cols-2 ${HOME_STATS_GRID_GAP_CLASS} lg:gap-12`}
         >
-          <div
-            className={`${LANDING_GLASS_CARD_CLASS} relative w-full overflow-hidden rounded-3xl ${PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS}`}
-          >
+          <div className={`${LANDING_GLASS_CARD_CLASS} ${PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS}`}>
             <ScanToBimBuildingAnimation />
           </div>
 
-          <div>
+          <div className="flex min-h-full flex-col">
             <p className={LANDING_EYEBROW_CLASS}>{eyebrow}</p>
             <h2 id="property-intelligence-heading" className={`mt-3 ${LANDING_SECTION_TITLE_CLASS}`}>
               {title}
@@ -52,7 +50,7 @@ export function HomePropertyIntelligence() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
+            <div className="mt-8 lg:mt-auto lg:pt-6">
               <EstatePillButtonLink href={ctaHref} className={PROPERTY_INTELLIGENCE_CTA_CLASS}>
                 {ctaLabel}
               </EstatePillButtonLink>

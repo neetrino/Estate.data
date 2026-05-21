@@ -1,8 +1,10 @@
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HOME_WHAT_WE_DO_COPY } from "@/features/home/content/whatWeDoCopy";
 import { WhatWeDoServiceCard } from "@/features/home/components/WhatWeDoServiceCard";
-import { LANDING_CONTAINER_CLASS } from "@/features/home/landing/lib/landingStyles";
-import { WHAT_WE_DO_SECTION_SURFACE_CLASS } from "@/shared/lib/constants";
+import {
+  LANDING_CONTAINER_CLASS,
+  LANDING_SECTION_MUTED_CLASS,
+} from "@/features/home/landing/lib/landingStyles";
 import { LandingOutlineButtonLink } from "@/shared/ui/button";
 
 const WHAT_WE_DO_TITLE_CLASS =
@@ -17,7 +19,7 @@ export function HomeWhatWeDo() {
 
   return (
     <section
-      className={WHAT_WE_DO_SECTION_SURFACE_CLASS}
+      className={LANDING_SECTION_MUTED_CLASS}
       aria-labelledby="what-we-do-heading"
     >
       <div className={LANDING_CONTAINER_CLASS}>
