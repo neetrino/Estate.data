@@ -296,9 +296,9 @@ export const SOLUTIONS_ROLE_ICON_BOX_CLASS = [
   "shadow-[0_4px_14px_rgba(135,60,131,0.35)]",
 ].join(" ");
 
-/** Primary CTA surface — #C364BE (explicit hex so Tailwind always applies). */
+/** Primary CTA surface — #C364BE (Contact + Solutions submit/CTA). */
 export const WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS =
-  "!bg-[#c364be] !text-black transition-opacity hover:opacity-90";
+  "!bg-[#c364be] !text-white transition-opacity hover:opacity-90";
 
 export const SOLUTIONS_PAGE_CTA_CLASS = [
   "mt-10 inline-flex h-12 items-center justify-center rounded-button px-8",

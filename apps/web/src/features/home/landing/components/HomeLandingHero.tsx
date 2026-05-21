@@ -10,6 +10,7 @@ import {
   HOME_LANDING_HERO_GRID_CLASS,
   HOME_LANDING_HERO_HEADLINE_CLASS,
   HOME_LANDING_HERO_MAIN_OFFSET_CLASS,
+  HOME_LANDING_HERO_INNER_CLASS,
   HOME_LANDING_HERO_MIN_HEIGHT_CLASS,
   HOME_LANDING_HERO_TOP_PADDING_CLASS,
   HOME_LANDING_LOCATION_BADGE_CLASS,
@@ -31,7 +32,7 @@ export function HomeLandingHero() {
       className={`relative flex flex-col overflow-hidden bg-white ${HOME_LANDING_HERO_MIN_HEIGHT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
     >
       <div className="home-landing-hero-bg pointer-events-none absolute inset-0 opacity-80" aria-hidden />
-      <div className={`${LANDING_CONTAINER_CLASS} relative flex min-h-0 flex-1 flex-col justify-start pb-6 sm:pb-8`}>
+      <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
         <div className={`${HOME_LANDING_HERO_GRID_CLASS} ${HOME_LANDING_HERO_MAIN_OFFSET_CLASS}`}>
           <div>
             <p className={HOME_LANDING_LOCATION_BADGE_CLASS}>

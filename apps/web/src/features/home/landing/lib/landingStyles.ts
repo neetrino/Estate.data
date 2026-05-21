@@ -64,16 +64,32 @@ export const HOME_MOBILE_CTA_STACK_CLASS = "max-sm:w-full max-sm:flex-col max-sm
 
 export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 
-/** Lifts trust strip from hero bottom; extra top space on mobile (padding, not mt-auto). */
-export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS =
-  "mt-auto shrink-0 mb-[10px] max-sm:pt-8";
+/**
+ * Trust strip spacing — full-viewport pin only at xl+ (desktop).
+ * Below xl (incl. iPad Pro): natural flow so mt-auto does not create a huge gap.
+ */
+export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = [
+  "shrink-0 mb-[10px] max-sm:pt-8",
+  "mt-8 sm:mt-10",
+  "xl:mt-auto xl:pt-0",
+].join(" ");
+
+/** Hero inner stack — grows to fill viewport only on desktop (xl+). */
+export const HOME_LANDING_HERO_INNER_CLASS = [
+  "relative flex min-h-0 flex-col justify-start pb-6 sm:pb-8",
+  "max-xl:flex-none xl:flex-1",
+].join(" ");
 
 /**
  * Hero fills one viewport below the sticky navbar row (4.5rem + safe area + 1px).
+ * xl+ only — tablets keep content height (no empty gap above trust strip).
  * Keep in sync with {@link NAVBAR_HEIGHT_CLASS} and {@link NAVBAR_TOP_PADDING_CLASS}.
  */
-export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS =
-  "min-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))] min-h-[calc(100svh-4.5rem-1px-env(safe-area-inset-top,0px))]";
+export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
+  "max-xl:min-h-0",
+  "xl:min-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
+  "xl:min-h-[calc(100svh-4.5rem-1px-env(safe-area-inset-top,0px))]",
+].join(" ");
 
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
