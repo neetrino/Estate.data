@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { AboutStackCard } from "@/features/about/components/AboutStackCard";
 import {
-  ABOUT_STORY_BRAND_ACCENT_CLASS,
   ABOUT_STORY_COPY,
   ABOUT_STORY_IMAGE_ALT,
   ABOUT_STORY_IMAGE_PATH,
   type AboutStoryParagraph,
 } from "@/features/about/content/aboutStoryCopy";
+import { ABOUT_STORY_BRAND_ACCENT_CLASS } from "@/shared/lib/constants";
 
 const ABOUT_STORY_SECTION_CLASS =
   "mt-14 grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-12 xl:gap-16";

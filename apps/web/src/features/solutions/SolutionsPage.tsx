@@ -7,12 +7,14 @@ import {
   SOLUTIONS_PAGE_EYEBROW_CLASS,
   SOLUTIONS_PAGE_SUBTITLE_CLASS,
   SOLUTIONS_PAGE_TITLE_CLASS,
-  WHAT_WE_DO_SECTION_SURFACE_CLASS,
+  SOLUTIONS_SUBTITLE_ACCENT_CLASS,
+  SOLUTIONS_SUBTITLE_GOLD_CLASS,
+  INNER_PAGE_MAIN_CLASS,
 } from "@/shared/lib/constants";
 
 const SOLUTIONS_SUBTITLE_SEGMENT_CLASS = {
-  gold: "text-home-listing-cta-book",
-  accent: "font-semibold text-client-voices-accent",
+  gold: SOLUTIONS_SUBTITLE_GOLD_CLASS,
+  accent: SOLUTIONS_SUBTITLE_ACCENT_CLASS,
 } as const;
 
 export function SolutionsPage() {
@@ -21,7 +23,7 @@ export function SolutionsPage() {
   return (
     <>
       <Navbar />
-      <main className={WHAT_WE_DO_SECTION_SURFACE_CLASS}>
+      <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={SOLUTIONS_PAGE_EYEBROW_CLASS}>{eyebrow}</p>

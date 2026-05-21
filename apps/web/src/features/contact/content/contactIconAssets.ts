@@ -1,11 +1,16 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+/** Bump when replacing files under `public/images/contact/`. */
+const CONTACT_STUDIO_ICON_VERSION = "20260521";
 
-/** Studio contact row icons — served from DB via `/api/v1/assets/*`. */
+function contactStudioIconPath(filename: string): string {
+  return `/images/contact/${filename}?v=${CONTACT_STUDIO_ICON_VERSION}`;
+}
+
+/** Studio contact row icons — static files in `public/images/contact/`. */
 export const CONTACT_STUDIO_ICON_PATHS = {
-  location: assetUrl(ASSET_KEYS.contactLocationIcon),
-  phone: assetUrl(ASSET_KEYS.contactPhoneIcon),
-  /** `email` not `mail` in key — some ad blockers hide URLs containing `email`. */
-  email: assetUrl(ASSET_KEYS.contactEmailIcon),
+  location: contactStudioIconPath("location.png"),
+  phone: contactStudioIconPath("phone.png"),
+  /** `mail.png` — filename avoids `email` in URL (some ad blockers). */
+  email: contactStudioIconPath("mail.png"),
 } as const;
 
 export type ContactStudioIconKind = keyof typeof CONTACT_STUDIO_ICON_PATHS;

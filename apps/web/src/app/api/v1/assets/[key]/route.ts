@@ -24,12 +24,17 @@ export async function GET(
     return NextResponse.json({ error: "Asset not found" }, { status: 404 });
   }
 
+  const fromPublic = await loadAssetFromPublic(key);
+  if (fromPublic) {
+    return fromPublic;
+  }
+
   const fromDatabase = await loadAssetFromDatabase(key);
   if (fromDatabase) {
     return fromDatabase;
   }
 
-  return loadAssetFromPublic(key);
+  return NextResponse.json({ error: "Asset not found" }, { status: 404 });
 }
 
 async function loadAssetFromDatabase(
@@ -56,9 +61,9 @@ async function loadAssetFromDatabase(
   }
 }
 
-async function loadAssetFromPublic(key: string): Promise<NextResponse> {
+async function loadAssetFromPublic(key: string): Promise<NextResponse | null> {
   if (!isAssetKey(key)) {
-    return NextResponse.json({ error: "Asset not found" }, { status: 404 });
+    return null;
   }
 
   const fallback = ASSET_FALLBACK_BY_KEY[key];
@@ -73,6 +78,6 @@ async function loadAssetFromPublic(key: string): Promise<NextResponse> {
       },
     });
   } catch {
-    return NextResponse.json({ error: "Asset not found" }, { status: 404 });
+    return null;
   }
 }

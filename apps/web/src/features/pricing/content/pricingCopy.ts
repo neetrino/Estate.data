@@ -8,6 +8,6 @@ export const PRICING_PAGE_COPY = {
   title: "Clear packages. No surprises.",
   subtitleSegments: [
     { text: "Media tiers ship in 48 hours. ", tone: "subtitle" },
-    { text: "Add analytics anytime.", tone: "title" },
+    { text: "Add analytics anytime.", tone: "subtitle" },
   ] as const satisfies readonly PricingSubtitleSegment[],
 } as const;

@@ -9,7 +9,7 @@ import {
   CONTACT_PAGE_TITLE_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
-  WHAT_WE_DO_SECTION_SURFACE_CLASS,
+  INNER_PAGE_MAIN_CLASS,
 } from "@/shared/lib/constants";
 
 export function ContactPage() {
@@ -18,7 +18,7 @@ export function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className={WHAT_WE_DO_SECTION_SURFACE_CLASS}>
+      <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <div className="flex flex-col gap-10 lg:gap-12">
             <header>

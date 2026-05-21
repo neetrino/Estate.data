@@ -2,7 +2,10 @@
 
 import { CONTACT_FORM_COPY } from "@/features/contact/content/contactFormCopy";
 import { ContactServiceSelect } from "@/features/contact/components/ContactServiceSelect";
-import { clientVoicesButtonClassName } from "@/shared/ui/button";
+import {
+  CONTACT_FORM_CONTROL_FOCUS_CLASS,
+  CONTACT_FORM_SUBMIT_BUTTON_CLASS,
+} from "@/shared/lib/constants";
 import type { FormEvent, ReactNode } from "react";
 
 const CONTACT_FORM_CARD_CLASS =
@@ -10,8 +13,11 @@ const CONTACT_FORM_CARD_CLASS =
 
 const CONTACT_FORM_LABEL_CLASS = "text-sm font-semibold text-black";
 
-const CONTACT_FORM_CONTROL_CLASS =
-  "w-full rounded-xl border border-foreground/15 bg-white px-4 py-3 text-base text-black placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-client-voices-accent/40";
+const CONTACT_FORM_CONTROL_CLASS = [
+  "w-full rounded-xl border border-foreground/15 bg-white px-4 py-3 text-base text-black",
+  "placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2",
+  CONTACT_FORM_CONTROL_FOCUS_CLASS,
+].join(" ");
 
 const CONTACT_FORM_ROW_CLASS = "grid gap-5 sm:grid-cols-2";
 
@@ -123,10 +129,7 @@ export function ContactRequestForm() {
       </div>
 
       <div className="mt-8">
-        <button
-          type="submit"
-          className={`${clientVoicesButtonClassName} w-full sm:w-auto`}
-        >
+        <button type="submit" className={CONTACT_FORM_SUBMIT_BUTTON_CLASS}>
           {submitLabel}
         </button>
       </div>

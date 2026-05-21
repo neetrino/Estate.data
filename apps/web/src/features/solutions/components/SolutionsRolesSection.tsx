@@ -4,12 +4,9 @@ import {
   SOLUTIONS_PAGE_CTA,
   SOLUTIONS_ROLES,
 } from "@/features/solutions/content/solutionsRolesCopy";
-import { WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
+import { SOLUTIONS_PAGE_CTA_CLASS, WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 const SOLUTIONS_ROLES_GRID_CLASS = `mt-14 grid grid-cols-1 items-start md:grid-cols-2 ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`;
-
-const SOLUTIONS_ROLES_CTA_CLASS =
-  "mt-10 inline-flex h-12 items-center justify-center rounded-button bg-client-voices-accent px-8 text-base font-semibold text-white shadow transition-colors hover:bg-home-listing-cta-book hover:text-home-listing-cta-book-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
 
 export function SolutionsRolesSection() {
   const { label, href } = SOLUTIONS_PAGE_CTA;
@@ -26,7 +23,7 @@ export function SolutionsRolesSection() {
           </li>
         ))}
       </ul>
-      <Link href={href} className={SOLUTIONS_ROLES_CTA_CLASS}>
+      <Link href={href} className={SOLUTIONS_PAGE_CTA_CLASS}>
         {label}
       </Link>
     </section>

@@ -265,46 +265,99 @@ export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
 export const PROPERTY_INTELLIGENCE_CTA_CLASS =
   "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
 
-/** Solutions page — #FDBA2C eyebrow; subtitle uses gold + client-voices-accent. */
-export const SOLUTIONS_PAGE_EYEBROW_CLASS =
-  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+/** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#873C83). */
+export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
+  "text-sm font-semibold uppercase tracking-[0.2em] text-what-we-do-subtitle sm:text-base";
 
-export const SOLUTIONS_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const WHAT_WE_DO_PAGE_TITLE_CLASS =
+  "mt-3 text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl md:text-5xl lg:text-[3rem]";
 
-export const SOLUTIONS_PAGE_SUBTITLE_CLASS = "mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl";
+export const WHAT_WE_DO_PAGE_SUBTITLE_CLASS =
+  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
 
-/** Contact page — yellow eyebrow, orange title, yellow subtitle. */
-export const CONTACT_PAGE_EYEBROW_CLASS =
-  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+/** Solutions page — same purple typography as Portfolio. */
+export const SOLUTIONS_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 
-export const CONTACT_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const SOLUTIONS_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 
-export const CONTACT_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-home-listing-cta-book sm:text-xl";
+export const SOLUTIONS_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
-/** About page — yellow eyebrow, orange title, black body copy. */
-export const ABOUT_PAGE_EYEBROW_CLASS =
-  "text-sm font-semibold uppercase tracking-[0.2em] text-home-listing-cta-book sm:text-base";
+export const SOLUTIONS_SUBTITLE_GOLD_CLASS = "text-what-we-do-subtitle";
 
-export const ABOUT_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-client-voices-accent sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const SOLUTIONS_SUBTITLE_ACCENT_CLASS = "font-semibold text-what-we-do-subtitle";
+
+export const SOLUTIONS_ROLE_TITLE_CLASS = "text-lg font-bold text-what-we-do-title";
+
+export const SOLUTIONS_ROLE_PRICE_CLASS =
+  "mt-0.5 text-xl font-bold text-what-we-do-subtitle sm:text-2xl";
+
+export const SOLUTIONS_ROLE_ICON_BOX_CLASS = [
+  "flex size-12 shrink-0 items-center justify-center rounded-2xl bg-what-we-do-title text-white",
+  "shadow-[0_4px_14px_rgba(135,60,131,0.35)]",
+].join(" ");
+
+/** Primary CTA surface — #C364BE (explicit hex so Tailwind always applies). */
+export const WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS =
+  "!bg-[#c364be] !text-black transition-opacity hover:opacity-90";
+
+export const SOLUTIONS_PAGE_CTA_CLASS = [
+  "mt-10 inline-flex h-12 items-center justify-center rounded-button px-8",
+  "text-base font-semibold shadow",
+  WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS,
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+].join(" ");
+
+/** Contact page — same purple typography as Portfolio / Solutions. */
+export const CONTACT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
+
+export const CONTACT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
+
+export const CONTACT_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
+
+export const CONTACT_FORM_SUBMIT_BUTTON_CLASS = [
+  "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap",
+  "rounded-button px-8 text-base font-semibold leading-snug shadow sm:w-auto",
+  WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS,
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+].join(" ");
+
+export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-what-we-do-subtitle/40";
+
+export const CONTACT_STUDIO_LINK_CLASS =
+  "text-base leading-relaxed text-black transition-colors hover:text-what-we-do-title sm:text-lg";
+
+/** About page — same header colors as Portfolio / Pricing. */
+export const ABOUT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
+
+export const ABOUT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-foreground sm:text-xl";
+  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
 
-/** About page main — tighter top gap below sticky navbar. */
-export const ABOUT_PAGE_MAIN_CLASS = [
+/** About story — accent spans in body copy (#C364BE). */
+export const ABOUT_STORY_BRAND_ACCENT_CLASS = "font-semibold text-what-we-do-subtitle";
+
+/** About stack card — white shell + purple glow. */
+export const ABOUT_STACK_CARD_SHELL_CLASS = [
+  "rounded-[38px] border border-brand-purple/20 bg-white",
+  "shadow-[0_8px_32px_rgba(135,60,131,0.14),0_2px_12px_rgba(195,100,190,0.1)]",
+].join(" ");
+
+export const ABOUT_STACK_TITLE_CLASS = "text-lg font-bold text-what-we-do-title lg:text-base";
+
+export const ABOUT_STACK_CHECK_ICON_CLASS = "text-what-we-do-subtitle";
+
+/** Inner pages (not home) — top gap below sticky navbar; matches About. */
+export const INNER_PAGE_MAIN_CLASS = [
   "bg-what-we-do-surface",
   "pt-5 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20",
 ].join(" ");
 
-/** Solutions role cards — white shell + orange glow (px radius matches pricing cards). */
-export const SOLUTIONS_ROLE_CARD_SHELL_CLASS = [
-  "rounded-[38px] border border-[var(--solutions-role-card-orange-ring)] bg-white",
-  "shadow-[var(--solutions-role-card-orange-shadow)]",
-].join(" ");
+export const ABOUT_PAGE_MAIN_CLASS = INNER_PAGE_MAIN_CLASS;
+
+/** Solutions role cards — white shell + purple glow (matches About stack card). */
+export const SOLUTIONS_ROLE_CARD_SHELL_CLASS = ABOUT_STACK_CARD_SHELL_CLASS;
 
 /** Media services cards — black surface + blue glow. */
 export const MEDIA_SERVICE_CARD_SURFACE_STYLE = {

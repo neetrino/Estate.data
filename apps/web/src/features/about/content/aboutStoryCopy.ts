@@ -14,8 +14,6 @@ export type AboutStoryParagraph =
   | string
   | { readonly segments: readonly AboutStorySegment[] };
 
-export const ABOUT_STORY_BRAND_ACCENT_CLASS = "font-semibold text-client-voices-accent";
-
 export const ABOUT_STORY_COPY = {
   paragraphs: [
     {

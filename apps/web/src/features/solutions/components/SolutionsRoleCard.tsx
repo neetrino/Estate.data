@@ -1,13 +1,15 @@
 import { SolutionsRoleIcon } from "@/features/solutions/components/SolutionsRoleIcon";
 import type { SolutionsRole } from "@/features/solutions/content/solutionsRolesCopy";
-import { SOLUTIONS_ROLE_CARD_SHELL_CLASS } from "@/shared/lib/constants";
+import {
+  SOLUTIONS_ROLE_CARD_SHELL_CLASS,
+  SOLUTIONS_ROLE_PRICE_CLASS,
+  SOLUTIONS_ROLE_TITLE_CLASS,
+} from "@/shared/lib/constants";
 
 const SOLUTIONS_ROLE_CARD_CLASS =
   "relative flex w-full flex-col overflow-hidden px-6 py-5 text-left sm:px-7 sm:py-6";
 
 const SOLUTIONS_ROLE_HEADER_CLASS = "flex items-center gap-3";
-
-const SOLUTIONS_ROLE_TITLE_CLASS = "text-lg font-bold text-property-intelligence-navy";
 
 const SOLUTIONS_ROLE_DESCRIPTION_CLASS =
   "mt-2.5 text-sm leading-relaxed text-muted-foreground sm:text-base";
@@ -18,8 +20,6 @@ const SOLUTIONS_ROLE_META_LABEL_CLASS = "text-xs font-medium text-muted-foregrou
 
 const SOLUTIONS_ROLE_DELIVERABLES_CLASS =
   "mt-0.5 text-sm leading-snug text-property-intelligence-navy sm:text-base";
-
-const SOLUTIONS_ROLE_PRICE_CLASS = "mt-0.5 text-xl font-bold text-home-listing-cta-book sm:text-2xl";
 
 type SolutionsRoleCardProps = {
   role: SolutionsRole;

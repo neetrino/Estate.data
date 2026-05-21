@@ -5,7 +5,7 @@ import { Navbar } from "@/shared/components/navbar";
 import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
-  WHAT_WE_DO_SECTION_SURFACE_CLASS,
+  INNER_PAGE_MAIN_CLASS,
 } from "@/shared/lib/constants";
 
 const PRICING_EYEBROW_CLASS =
@@ -27,7 +27,7 @@ export function PricingPage() {
   return (
     <>
       <Navbar />
-      <main className={WHAT_WE_DO_SECTION_SURFACE_CLASS}>
+      <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={PRICING_EYEBROW_CLASS}>{eyebrow}</p>

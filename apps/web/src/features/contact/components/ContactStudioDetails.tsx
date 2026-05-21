@@ -1,13 +1,11 @@
 import Link from "next/link";
 import { ContactStudioIcon } from "@/features/contact/components/ContactStudioIcon";
+import { CONTACT_STUDIO_LINK_CLASS } from "@/shared/lib/constants";
 import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
 
 const CONTACT_STUDIO_ROW_CLASS = "flex items-center gap-4";
 
 const CONTACT_STUDIO_TEXT_CLASS = "text-base leading-relaxed text-black sm:text-lg";
-
-const CONTACT_STUDIO_LINK_CLASS =
-  "text-base leading-relaxed text-black transition-colors hover:text-client-voices-accent sm:text-lg";
 
 export function ContactStudioDetails() {
   const { address, phone, email } = STUDIO_CONTACT;
