@@ -29,11 +29,44 @@ export const HOME_LANDING_HERO_DESCRIPTION_CLASS = [
   "sm:mt-7 sm:text-xl",
 ].join(" ");
 
-export const HOME_LANDING_HERO_CTA_ROW_CLASS =
-  "mt-9 flex w-full max-w-lg flex-col gap-3.5 sm:flex-row sm:items-center";
+export const HOME_LANDING_HERO_CTA_ROW_CLASS = [
+  "mt-9 flex w-full max-w-lg flex-col gap-3.5",
+  "max-sm:max-w-none max-sm:items-stretch",
+  "sm:flex-row sm:items-center",
+].join(" ");
 
-/** Lifts trust strip from hero bottom (works with mt-auto; padding-top does not). */
-export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = "mt-auto shrink-0 mb-[10px]";
+/** Home — mobile-only outline CTAs full width (desktop unchanged). */
+export const HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS = "max-sm:w-full max-sm:max-w-full";
+
+/** Home — pill + icon disc: natural width, centered (not stretched full width). */
+export const HOME_MOBILE_PILL_BUTTON_CLASS = [
+  "max-sm:!w-auto max-sm:max-w-full max-sm:mx-auto",
+  "max-sm:justify-center max-sm:gap-2",
+  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
+  "max-sm:[&>span:first-child]:!translate-x-0",
+  "max-sm:[&>span:last-child]:!translate-x-0",
+].join(" ");
+
+/** Home — primary pill CTAs (Book a Shoot, Explore data services), left on mobile. */
+export const HOME_MOBILE_LEFT_PILL_CLASS = [
+  HOME_MOBILE_PILL_BUTTON_CLASS,
+  "max-sm:!mx-0 max-sm:self-start",
+].join(" ");
+
+export const HOME_MOBILE_BOOK_SHOOT_PILL_CLASS = HOME_MOBILE_LEFT_PILL_CLASS;
+
+export const HOME_MOBILE_OUTLINE_BUTTON_CLASS = [
+  HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS,
+  "max-sm:justify-center",
+].join(" ");
+
+export const HOME_MOBILE_CTA_STACK_CLASS = "max-sm:w-full max-sm:flex-col max-sm:items-stretch max-sm:gap-3";
+
+export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
+
+/** Lifts trust strip from hero bottom; extra top space on mobile (padding, not mt-auto). */
+export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS =
+  "mt-auto shrink-0 mb-[10px] max-sm:pt-8";
 
 /**
  * Hero fills one viewport below the sticky navbar row (4.5rem + safe area + 1px).
@@ -56,6 +89,19 @@ export const LANDING_SECTION_SUBTITLE_CLASS =
   "mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg";
 
 export const LANDING_GLASS_CARD_CLASS = "home-landing-glass-card rounded-2xl";
+
+/** Home stats strip — equal-height cards in 2×2 grid on mobile. */
+export const HOME_STATS_STRIP_GRID_CLASS = [
+  "grid grid-cols-2 gap-4 max-sm:auto-rows-fr",
+  "sm:grid-cols-2 lg:grid-cols-4 lg:gap-6",
+].join(" ");
+
+export const HOME_STATS_CARD_CLASS = [
+  LANDING_GLASS_CARD_CLASS,
+  "flex h-full flex-col items-center px-4 py-5 text-center",
+  "max-sm:min-h-[10.75rem]",
+  "sm:px-5 sm:py-6",
+].join(" ");
 
 export type LandingAccent = "purple" | "cyan" | "yellow" | "orange" | "navy";
 
@@ -116,7 +162,7 @@ export const LANDING_TRUST_STRIP_LABEL_CLASS = [
 ].join(" ");
 
 export const LANDING_TRUST_STRIP_GRID_CLASS = [
-  "mt-3 grid grid-cols-2 gap-2",
+  "mt-4 grid grid-cols-2 gap-2 max-sm:mt-5",
   "sm:mt-4 sm:grid-cols-3 sm:gap-2.5",
   "lg:grid-cols-6 lg:gap-2",
 ].join(" ");

@@ -2,6 +2,7 @@ import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HOME_WHAT_WE_DO_COPY } from "@/features/home/content/whatWeDoCopy";
 import { WhatWeDoServiceCard } from "@/features/home/components/WhatWeDoServiceCard";
 import {
+  HOME_MOBILE_OUTLINE_BUTTON_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_SECTION_MUTED_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
@@ -36,7 +37,12 @@ export function HomeWhatWeDo() {
                 </span>
               ))}
             </p>
-            <LandingOutlineButtonLink href={secondaryCta.href} className="mt-8" showArrow={false}>
+            <LandingOutlineButtonLink
+              href={secondaryCta.href}
+              fullWidth
+              className={`mt-8 ${HOME_MOBILE_OUTLINE_BUTTON_CLASS}`}
+              showArrow={false}
+            >
               {secondaryCta.label}
             </LandingOutlineButtonLink>
           </header>

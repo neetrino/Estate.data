@@ -9,8 +9,9 @@ import { easeOutCubic, formatStatCountValue } from "@/features/home/lib/formatSt
 import { LandingModuleIcon } from "@/features/home/landing/components/LandingModuleIcon";
 import {
   homeLandingAccentAt,
+  HOME_STATS_CARD_CLASS,
+  HOME_STATS_STRIP_GRID_CLASS,
   LANDING_CONTAINER_CLASS,
-  LANDING_GLASS_CARD_CLASS,
   LANDING_SECTION_WHITE_CLASS,
   landingIconSurfaceClass,
   landingMetricValueClass,
@@ -75,17 +76,15 @@ export function HomeStatsStrip() {
       aria-label="Key metrics"
     >
       <div className={LANDING_CONTAINER_CLASS}>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        <ul className={HOME_STATS_STRIP_GRID_CLASS}>
           {stats.map((stat, index) => {
             const accent = homeLandingAccentAt(index);
             const displayValue = formatStatCountValue(progress, stat.count);
             const finalValue = formatStatCountValue(1, stat.count);
 
             return (
-              <li key={stat.id}>
-                <article
-                  className={`${LANDING_GLASS_CARD_CLASS} flex flex-col items-center px-4 py-5 text-center sm:px-5 sm:py-6`}
-                >
+              <li key={stat.id} className="h-full min-h-0">
+                <article className={HOME_STATS_CARD_CLASS}>
                   <span className={landingIconSurfaceClass(accent)}>
                     <LandingModuleIcon accent={accent} variant={index} />
                   </span>

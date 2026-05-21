@@ -3,6 +3,7 @@ import {
 } from "@/features/home/content/propertyIntelligenceCopy";
 import { ScanToBimBuildingAnimation } from "@/features/home/components/ScanToBimBuildingAnimation";
 import {
+  HOME_MOBILE_LEFT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_EYEBROW_CLASS,
   LANDING_GLASS_CARD_CLASS,
@@ -51,7 +52,11 @@ export function HomePropertyIntelligence() {
               ))}
             </ul>
             <div className="mt-8 lg:mt-auto lg:pt-6">
-              <EstatePillButtonLink href={ctaHref} className={PROPERTY_INTELLIGENCE_CTA_CLASS}>
+              <EstatePillButtonLink
+                href={ctaHref}
+                fullWidth
+                className={`${PROPERTY_INTELLIGENCE_CTA_CLASS} ${HOME_MOBILE_LEFT_PILL_CLASS}`}
+              >
                 {ctaLabel}
               </EstatePillButtonLink>
             </div>

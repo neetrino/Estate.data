@@ -1,6 +1,7 @@
 import { HOME_RECENT_WORK_COPY } from "@/features/home/content/recentWorkCopy";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import {
+  HOME_MOBILE_PILL_BUTTON_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_EYEBROW_CLASS,
   LANDING_SECTION_MUTED_CLASS,
@@ -36,7 +37,7 @@ export function HomeRecentWork() {
         </ul>
 
         <div className="mt-8 flex justify-center lg:hidden">
-          <EstatePillButtonLink href={viewAllHref} fullWidth>
+          <EstatePillButtonLink href={viewAllHref} fullWidth className={HOME_MOBILE_PILL_BUTTON_CLASS}>
             {viewAllLabel}
           </EstatePillButtonLink>
         </div>
