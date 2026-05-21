@@ -37,7 +37,7 @@ export const navbarBookShootButtonClassName =
 /** Light landing — purple outline secondary (hero, sections on white). */
 export const landingOutlineButtonClassName = [
   "inline-flex h-12 cursor-pointer items-center justify-center gap-1 whitespace-nowrap",
-  "rounded-[15px] border-2 border-brand-purple/30 bg-white px-6",
+  "rounded-full border-2 border-brand-purple/30 bg-white px-6",
   "text-sm font-semibold text-brand-purple sm:text-base",
   "transition-colors hover:border-brand-purple hover:bg-brand-purple/5",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-light",
@@ -46,7 +46,7 @@ export const landingOutlineButtonClassName = [
 /** Light landing — yellow primary on purple gradient panel. */
 export const landingGradientPrimaryButtonClassName = [
   "inline-flex h-12 cursor-pointer items-center justify-center whitespace-nowrap",
-  "rounded-[15px] bg-brand-yellow px-6 text-sm font-bold text-brand-navy shadow-md sm:text-base",
+  "rounded-full bg-brand-yellow px-6 text-sm font-bold text-brand-navy shadow-md sm:text-base",
   "transition-opacity hover:opacity-90",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow",
 ].join(" ");
@@ -54,7 +54,7 @@ export const landingGradientPrimaryButtonClassName = [
 /** Light landing — white outline on purple gradient panel. */
 export const landingGradientOutlineButtonClassName = [
   "inline-flex h-12 cursor-pointer items-center justify-center whitespace-nowrap",
-  "rounded-[15px] border-2 border-white/70 px-6",
+  "rounded-full border-2 border-white/70 px-6",
   "text-sm font-semibold text-white sm:text-base",
   "transition-colors hover:bg-white/10",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",

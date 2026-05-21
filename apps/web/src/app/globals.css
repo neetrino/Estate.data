@@ -171,7 +171,7 @@
   --color-landing-surface: var(--landing-surface);
   --color-landing-surface-muted: var(--landing-surface-muted);
   --color-landing-trust-surface: var(--landing-trust-surface);
-  --radius-button: 15px;
+  --radius-button: 9999px;
   --font-sans: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }

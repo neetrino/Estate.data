@@ -342,8 +342,8 @@ export const HOME_LISTING_CTA_BOOK_BUTTON_CLASS = [
   "[&>span:last-child]:text-home-listing-cta-book",
 ].join(" ");
 
-/** Estate.data pill CTA — 48px tall pill, 36px icon disc. */
-export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-[52px]";
+/** Estate.data pill CTA — 48px tall, fully rounded ends. */
+export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-full";
 
 /** Nudge label + icon disc right inside the pill (px). */
 
