@@ -13,20 +13,17 @@ export const HOME_HERO_COPY = {
   locationBadge: "Serving Greater Los Angeles",
   headlineLines: [
     {
-      segments: [
-        { text: "Stunning visuals. ", accent: false },
-        { text: "Actionable", accent: true },
-      ],
+      segments: [{ text: "Stunning visuals.", accent: false }],
     },
     {
-      segments: [
-        { text: "insights.", accent: true },
-        { text: " Faster sales in LA.", accent: false },
-      ],
+      segments: [{ text: "Actionable insights.", accent: true }],
+    },
+    {
+      segments: [{ text: "Faster sales in LA.", accent: false }],
     },
   ] as const satisfies readonly HeroHeadlineLine[],
   descriptionLines: [
-    "ESTATEDATA pairs cinematic real estate media with property intelligence — so brokers,",
+    "Estate Data pairs cinematic real estate media with property intelligence — so brokers,",
     "developers, and investors close deals with confidence.",
   ] as const,
   primaryCta: { label: "Book a Shoot", href: "/contact" },

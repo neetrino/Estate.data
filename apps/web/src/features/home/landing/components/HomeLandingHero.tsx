@@ -1,10 +1,11 @@
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
-import { HOME_TRUSTED_PARTNERS_COPY } from "@/features/home/content/trustedPartnersCopy";
 import { HomeLandingHeroDashboard } from "@/features/home/landing/components/HomeLandingHeroDashboard";
+import { HomeLandingTrustedPartners } from "@/features/home/landing/components/HomeLandingTrustedPartners";
 import {
+  HOME_LANDING_HERO_MIN_HEIGHT_CLASS,
+  HOME_LANDING_HERO_TOP_PADDING_CLASS,
+  HOME_LANDING_LOCATION_BADGE_CLASS,
   LANDING_CONTAINER_CLASS,
-  LANDING_EYEBROW_CLASS,
-  LANDING_TRUST_PARTNER_CHIP_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
 import { EstatePillButtonLink, LandingOutlineButtonLink } from "@/shared/ui/button";
 
@@ -16,17 +17,15 @@ export function HomeLandingHero() {
     primaryCta,
     secondaryCta,
   } = HOME_HERO_COPY;
-  const { label: trustLabel, partners } = HOME_TRUSTED_PARTNERS_COPY;
-
   return (
-    <section className="relative overflow-hidden bg-white pb-10 pt-6 sm:pb-14 sm:pt-10 lg:pb-20">
+    <section
+      className={`relative flex flex-col overflow-hidden bg-white ${HOME_LANDING_HERO_MIN_HEIGHT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
+    >
       <div className="home-landing-hero-bg pointer-events-none absolute inset-0 opacity-80" aria-hidden />
-      <div className={`${LANDING_CONTAINER_CLASS} relative`}>
+      <div className={`${LANDING_CONTAINER_CLASS} relative flex min-h-0 flex-1 flex-col justify-start pb-6 sm:pb-8`}>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
           <div>
-            <p
-              className={`inline-flex items-center gap-2 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm ${LANDING_EYEBROW_CLASS} normal-case tracking-normal`}
-            >
+            <p className={HOME_LANDING_LOCATION_BADGE_CLASS}>
               <LocationPinIcon />
               {locationBadge}
             </p>
@@ -64,15 +63,8 @@ export function HomeLandingHero() {
               </LandingOutlineButtonLink>
             </div>
 
-            <div className="mt-10 border-t border-brand-navy/8 pt-6">
-              <p className="text-sm font-medium text-brand-navy/70">{trustLabel}</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {partners.map((name) => (
-                  <li key={name}>
-                    <span className={LANDING_TRUST_PARTNER_CHIP_CLASS}>{name}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-8">
+              <HomeLandingTrustedPartners />
             </div>
           </div>
 
@@ -86,8 +78,8 @@ export function HomeLandingHero() {
 function LocationPinIcon() {
   return (
     <svg
-      width="16"
-      height="16"
+      width="14"
+      height="14"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

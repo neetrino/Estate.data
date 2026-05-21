@@ -26,7 +26,7 @@ export const HOME_CLIENT_VOICES_COPY = {
     {
       id: "priya-shah",
       quote:
-        "I trust ESTATEDATA's market intel. The data layer is what makes them different.",
+        "I trust Estate Data's market intel. The data layer is what makes them different.",
       name: "Priya Shah",
       role: "Investor",
     },

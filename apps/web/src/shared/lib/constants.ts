@@ -3,7 +3,7 @@ import { ASSET_KEYS, assetUrl } from "@estate/db";
 /** Proxima Nova — Tailwind `font-sans` (see globals.css). */
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
-/** Navbar links + CTA typography (excludes ESTATEDATA wordmark). */
+/** Navbar links + CTA typography (excludes Estate Data wordmark). */
 export const NAV_ITEM_TEXT_CLASS = "text-base font-semibold leading-snug sm:text-lg";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */

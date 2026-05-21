@@ -1,7 +1,7 @@
 import { ASSET_KEYS, assetUrl } from "@estate/db";
 import { DATA_BIM_PATH, PRICING_PATH } from "@/shared/lib/routes";
 
-export const SITE_NAME = "ESTATEDATA";
+export const SITE_NAME = "Estate Data";
 
 /** Browser tab / SEO titles (spaced brand name). */
 export const SITE_DISPLAY_NAME = "Estate Data";
