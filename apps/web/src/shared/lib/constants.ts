@@ -290,6 +290,12 @@ export const ABOUT_PAGE_TITLE_CLASS =
 export const ABOUT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-foreground sm:text-xl";
 
+/** About page main — tighter top gap below sticky navbar. */
+export const ABOUT_PAGE_MAIN_CLASS = [
+  "bg-what-we-do-surface",
+  "pt-5 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20",
+].join(" ");
+
 /** Solutions role cards — white shell + orange glow (px radius matches pricing cards). */
 export const SOLUTIONS_ROLE_CARD_SHELL_CLASS = [
   "rounded-[38px] border border-[var(--solutions-role-card-orange-ring)] bg-white",

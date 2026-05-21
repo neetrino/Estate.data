@@ -1,9 +1,7 @@
-import Image from "next/image";
 import {
   HOME_PROPERTY_INTELLIGENCE_COPY,
-  PROPERTY_INTELLIGENCE_IMAGE_ALT,
-  PROPERTY_INTELLIGENCE_IMAGE_PATH,
 } from "@/features/home/content/propertyIntelligenceCopy";
+import { ScanToBimBuildingAnimation } from "@/features/home/components/ScanToBimBuildingAnimation";
 import {
   LANDING_CONTAINER_CLASS,
   LANDING_EYEBROW_CLASS,
@@ -34,13 +32,7 @@ export function HomePropertyIntelligence() {
           <div
             className={`${LANDING_GLASS_CARD_CLASS} relative w-full overflow-hidden rounded-3xl ${PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS}`}
           >
-            <Image
-              src={PROPERTY_INTELLIGENCE_IMAGE_PATH}
-              alt={PROPERTY_INTELLIGENCE_IMAGE_ALT}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            <ScanToBimBuildingAnimation />
           </div>
 
           <div>
