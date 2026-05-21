@@ -75,7 +75,7 @@ export function HomeStatsStrip() {
       aria-label="Key metrics"
     >
       <div className={LANDING_CONTAINER_CLASS}>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {stats.map((stat, index) => {
             const accent = homeLandingAccentAt(index);
             const displayValue = formatStatCountValue(progress, stat.count);

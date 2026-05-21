@@ -16,29 +16,24 @@ export const HOME_STATS_COUNT_UP_DURATION_MS = 2_000;
 export const HOME_STATS_COPY = {
   stats: [
     {
-      id: "storage",
-      label: "Cloud storage delivered",
-      count: { end: 2.4, decimals: 1, suffix: "TB+" },
-    },
-    {
       id: "properties-shot",
       label: "Properties shot",
       count: { end: 1200, decimals: 0, suffix: "+", useGrouping: true },
     },
     {
-      id: "data-sources",
-      label: "Data sources integrated",
-      count: { end: 300, decimals: 0, suffix: "+", useGrouping: true },
+      id: "days-on-market",
+      label: "Avg. faster days-on-market",
+      count: { end: 38, decimals: 0, suffix: "%" },
     },
     {
-      id: "bim-models",
-      label: "3D/BIM deliverables",
-      count: { end: 48.7, decimals: 1, suffix: "K+" },
+      id: "client-satisfaction",
+      label: "Client satisfaction",
+      count: { end: 4.9, decimals: 1, suffix: "/5" },
     },
     {
-      id: "platform-uptime",
-      label: "Delivery reliability",
-      count: { end: 99.9, decimals: 1, suffix: "%" },
+      id: "turnaround",
+      label: "Standard turnaround",
+      count: { end: 48, decimals: 0, suffix: " hr" },
     },
   ] as const satisfies readonly HomeStat[],
 } as const;

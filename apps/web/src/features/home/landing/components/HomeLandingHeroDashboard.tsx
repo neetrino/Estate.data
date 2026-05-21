@@ -84,11 +84,14 @@ function MapPin({ x, y, hot = false }: { x: number; y: number; hot?: boolean }) 
 function StorageChartPanel() {
   const circumference = 2 * Math.PI * 36;
   const offset = circumference * (1 - STORAGE_CHART_PERCENT / 100);
-  const storageStat = HOME_STATS_COPY.stats[0];
+  const daysOnMarketStat = HOME_STATS_COPY.stats.find((s) => s.id === "days-on-market");
+  if (!daysOnMarketStat) {
+    return null;
+  }
 
   return (
     <div className="rounded-2xl border border-brand-navy/8 bg-white p-3">
-      <p className="text-xs font-semibold text-brand-navy">{storageStat.label}</p>
+      <p className="text-xs font-semibold text-brand-navy">{daysOnMarketStat.label}</p>
       <div className="mt-2 flex items-center gap-3">
         <svg width="80" height="80" viewBox="0 0 88 88" aria-hidden>
           <circle cx="44" cy="44" r="36" fill="none" stroke="#f1f3f8" strokeWidth="10" />
@@ -107,7 +110,7 @@ function StorageChartPanel() {
         </svg>
         <div>
           <p className="text-lg font-bold text-brand-yellow">
-            {formatStatCountValue(1, storageStat.count)}
+            {formatStatCountValue(1, daysOnMarketStat.count)}
           </p>
         </div>
       </div>
@@ -116,13 +119,16 @@ function StorageChartPanel() {
 }
 
 function MarketTrendsPanel() {
-  const uptimeStat = HOME_STATS_COPY.stats[4];
+  const turnaroundStat = HOME_STATS_COPY.stats.find((s) => s.id === "turnaround");
+  if (!turnaroundStat) {
+    return null;
+  }
 
   return (
     <div className="rounded-2xl border border-brand-navy/8 bg-white p-3">
-      <p className="text-xs font-semibold text-brand-navy">{uptimeStat.label}</p>
+      <p className="text-xs font-semibold text-brand-navy">{turnaroundStat.label}</p>
       <p className="mt-1 text-2xl font-bold text-brand-cyan">
-        {formatStatCountValue(1, uptimeStat.count)}
+        {formatStatCountValue(1, turnaroundStat.count)}
       </p>
       <svg className="mt-2 w-full" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden>
         <polyline
