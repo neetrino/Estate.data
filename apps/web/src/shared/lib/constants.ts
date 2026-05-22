@@ -501,6 +501,21 @@ export const HOME_LISTING_CTA_PILL_BUTTON_CLASS = [
   "[&>span:last-child]:!bg-home-listing-cta-button-icon [&>span:last-child]:!text-white",
 ].join(" ");
 
+/** Listing CTA — side-by-side pills on mobile; end-aligned from md. */
+export const HOME_LISTING_CTA_BUTTONS_WRAP_CLASS = [
+  "flex flex-row flex-wrap items-center justify-center gap-2",
+  "sm:gap-3 sm:flex-row md:justify-end",
+].join(" ");
+
+/** Listing CTA — compact pill width on mobile (pair in one row). */
+export const HOME_LISTING_CTA_MOBILE_PILL_CLASS = [
+  "max-sm:!w-auto max-sm:max-w-full",
+  "max-sm:gap-2",
+  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
+  "max-sm:[&>span:first-child]:!translate-x-0",
+  "max-sm:[&>span:last-child]:!translate-x-0",
+].join(" ");
+
 /** Estate.data pill CTA — 48px tall, fully rounded ends. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-full";
 

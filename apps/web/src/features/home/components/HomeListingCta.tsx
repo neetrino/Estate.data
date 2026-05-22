@@ -1,11 +1,8 @@
 import { HOME_LISTING_CTA_COPY } from "@/features/home/content/homeListingCtaCopy";
+import { LANDING_CONTAINER_CLASS, LANDING_SECTION_MUTED_CLASS } from "@/features/home/landing/lib/landingStyles";
 import {
-  HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
-  HOME_MOBILE_CTA_STACK_CLASS,
-  LANDING_CONTAINER_CLASS,
-  LANDING_SECTION_MUTED_CLASS,
-} from "@/features/home/landing/lib/landingStyles";
-import {
+  HOME_LISTING_CTA_BUTTONS_WRAP_CLASS,
+  HOME_LISTING_CTA_MOBILE_PILL_CLASS,
   HOME_LISTING_CTA_PANEL_CLASS,
   HOME_LISTING_CTA_PILL_BUTTON_CLASS,
 } from "@/shared/lib/constants";
@@ -30,20 +27,16 @@ export function HomeListingCta() {
               {description}
             </p>
           </div>
-          <div
-            className={`flex flex-col gap-3 sm:flex-row md:justify-end ${HOME_MOBILE_CTA_STACK_CLASS}`}
-          >
+          <div className={HOME_LISTING_CTA_BUTTONS_WRAP_CLASS}>
             <EstatePillButtonLink
               href={primaryHref}
-              fullWidth
-              className={`sm:shrink-0 ${HOME_LISTING_CTA_PILL_BUTTON_CLASS} ${HOME_MOBILE_BOOK_SHOOT_PILL_CLASS}`}
+              className={`shrink-0 ${HOME_LISTING_CTA_PILL_BUTTON_CLASS} ${HOME_LISTING_CTA_MOBILE_PILL_CLASS}`}
             >
               {primaryLabel}
             </EstatePillButtonLink>
             <EstatePillButtonLink
               href={secondaryHref}
-              fullWidth
-              className={`sm:shrink-0 ${HOME_LISTING_CTA_PILL_BUTTON_CLASS} ${HOME_MOBILE_BOOK_SHOOT_PILL_CLASS}`}
+              className={`shrink-0 ${HOME_LISTING_CTA_PILL_BUTTON_CLASS} ${HOME_LISTING_CTA_MOBILE_PILL_CLASS}`}
             >
               {secondaryLabel}
             </EstatePillButtonLink>
