@@ -37,6 +37,7 @@ export function HomePropertyIntelligence() {
               src={PROPERTY_INTELLIGENCE_IMAGE_PATH}
               alt={PROPERTY_INTELLIGENCE_IMAGE_ALT}
               fill
+              loading="lazy"
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

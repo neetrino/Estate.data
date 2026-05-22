@@ -6,6 +6,9 @@ import type { NextConfig } from "next";
  */
 export const nextConfig: NextConfig = {
   transpilePackages: ["@estate/db"],
+  experimental: {
+    optimizePackageImports: ["zod"],
+  },
   // async rewrites() {
   //   const apiOrigin = process.env.API_DEV_ORIGIN ?? "http://localhost:3001";
   //   return [

@@ -496,3 +496,10 @@ export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
 
 /** API version prefix — keep in sync with apps/api routes. */
 export const API_VERSION_PREFIX = "/v1";
+
+/** Lazy-loaded section shell — reserves vertical space to limit CLS. */
+export const LAZY_SECTION_PLACEHOLDER_MIN_HEIGHT_CLASS = "min-h-[20rem] sm:min-h-[22rem]";
+
+/** Lazy-loaded section shell — inner pulse block. */
+export const LAZY_SECTION_PLACEHOLDER_PULSE_CLASS =
+  "min-h-[12rem] animate-pulse rounded-2xl bg-brand-navy/[0.04]";

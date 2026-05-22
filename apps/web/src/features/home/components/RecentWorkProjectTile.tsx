@@ -16,6 +16,7 @@ export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
         src={project.imageSrc}
         alt={project.imageAlt}
         fill
+        loading="lazy"
         className="object-cover"
         sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 592px"
       />

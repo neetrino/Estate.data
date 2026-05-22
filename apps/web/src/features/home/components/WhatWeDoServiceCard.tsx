@@ -54,6 +54,7 @@ function WhatWeDoServiceIconBox({ service }: { service: WhatWeDoService }) {
           alt=""
           width={WHAT_WE_DO_ICON_SIZE_PX}
           height={WHAT_WE_DO_ICON_SIZE_PX}
+          loading="lazy"
           className={WHAT_WE_DO_ICON_IMAGE_WHITE_CLASS}
         />
       </div>

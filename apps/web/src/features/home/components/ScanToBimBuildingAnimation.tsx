@@ -1,3 +1,5 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import { PROPERTY_INTELLIGENCE_SCENE_ALT } from "@/features/home/content/propertyIntelligenceCopy";
 import {
