@@ -99,11 +99,11 @@ export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
 
-/** Hero location chip — Serving Greater Los Angeles (original eyebrow chip styling). */
+/** Hero location chip — Serving Greater Los Angeles (compact). */
 export const HOME_LANDING_LOCATION_BADGE_CLASS = [
-  "inline-flex w-fit items-center gap-2 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm",
-  LANDING_EYEBROW_CLASS,
-  "normal-case tracking-normal",
+  "inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm",
+  "text-xs font-semibold normal-case tracking-normal text-brand-purple-light",
+  "[&_svg]:size-3.5",
 ].join(" ");
 
 export const LANDING_SECTION_TITLE_CLASS =
