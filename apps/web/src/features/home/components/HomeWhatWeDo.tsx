@@ -25,7 +25,7 @@ export function HomeWhatWeDo() {
     >
       <div className={LANDING_CONTAINER_CLASS}>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_1.15fr] lg:items-start lg:gap-14">
-          <header className="lg:sticky lg:top-28">
+          <header className="self-start lg:sticky lg:top-28">
             <h2 id="what-we-do-heading" className={WHAT_WE_DO_TITLE_CLASS}>
               {title}
             </h2>

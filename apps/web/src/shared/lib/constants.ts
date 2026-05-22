@@ -416,7 +416,7 @@ export const ABOUT_STACK_CHECK_ICON_CLASS = "text-what-we-do-subtitle";
 
 /** Inner pages — vertical rhythm below sticky navbar. */
 export const INNER_PAGE_MAIN_SPACING_CLASS =
-  "pt-5 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20";
+  "pt-12 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20";
 
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [

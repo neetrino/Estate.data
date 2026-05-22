@@ -5,8 +5,7 @@ import {
   SECTION_VERTICAL_PADDING_CLASS,
 } from "@/shared/lib/constants";
 
-export const LANDING_PAGE_CLASS =
-  "overflow-x-hidden bg-white text-brand-navy [color-scheme:light]";
+export const LANDING_PAGE_CLASS = "bg-white text-brand-navy [color-scheme:light]";
 
 export const LANDING_SECTION_CLASS = SECTION_VERTICAL_PADDING_CLASS;
 
@@ -17,7 +16,7 @@ export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
 /** Space between sticky navbar and hero copy (below navbar row). */
-export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[22px] sm:pt-[38px] lg:pt-[52px]";
+export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[42px] sm:pt-[38px] lg:pt-[52px]";
 
 /** Nudge hero main block (excludes trust strip) downward. */
 export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";

@@ -8,13 +8,26 @@ import { WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 const MEDIA_SERVICES_GRID_CLASS = `mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`;
 
-const MEDIA_SERVICES_CTA_ROW_CLASS = "mt-10 flex flex-wrap gap-3";
+const MEDIA_SERVICES_CTA_ROW_CLASS = [
+  "mt-10 flex flex-wrap gap-3",
+  "max-sm:w-full max-sm:flex-nowrap max-sm:justify-center max-sm:gap-2.5",
+].join(" ");
 
-const MEDIA_SERVICES_PRIMARY_CTA_CLASS =
-  "inline-flex h-12 items-center justify-center rounded-button bg-property-intelligence-accent-dark px-8 text-base font-semibold text-white shadow transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
+const MEDIA_SERVICES_CTA_BUTTON_BASE_CLASS = [
+  "inline-flex h-12 items-center justify-center rounded-button px-8 text-base font-semibold",
+  "max-sm:shrink-0 max-sm:px-6",
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+].join(" ");
 
-const MEDIA_SERVICES_SECONDARY_CTA_CLASS =
-  "inline-flex h-12 items-center justify-center rounded-button border border-foreground/15 bg-white px-8 text-base font-semibold text-property-intelligence-navy transition-colors hover:border-property-intelligence-accent/50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
+const MEDIA_SERVICES_PRIMARY_CTA_CLASS = [
+  MEDIA_SERVICES_CTA_BUTTON_BASE_CLASS,
+  "bg-property-intelligence-accent-dark text-white shadow transition-opacity hover:opacity-90",
+].join(" ");
+
+const MEDIA_SERVICES_SECONDARY_CTA_CLASS = [
+  MEDIA_SERVICES_CTA_BUTTON_BASE_CLASS,
+  "border border-foreground/15 bg-white text-property-intelligence-navy transition-colors hover:border-property-intelligence-accent/50",
+].join(" ");
 
 export function MediaServicesSection() {
   const { pricingLabel, pricingHref, bookLabel, bookHref } = MEDIA_PAGE_CTAS;
