@@ -77,12 +77,13 @@ export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = [
   "shrink-0 mb-[10px] max-sm:pt-8",
   "mt-8 sm:mt-10",
   "xl:mt-auto xl:pt-0",
+  "2xl:mt-10 2xl:pt-0",
 ].join(" ");
 
-/** Hero inner stack — grows to fill viewport only on desktop (xl+). */
+/** Hero inner stack — grows to fill viewport on xl laptops only; 2xl+ uses natural flow. */
 export const HOME_LANDING_HERO_INNER_CLASS = [
   "relative flex min-h-0 flex-col justify-start pb-6 sm:pb-8",
-  "max-xl:flex-none xl:flex-1",
+  "max-xl:flex-none xl:flex-1 2xl:flex-none",
 ].join(" ");
 
 /**
@@ -94,6 +95,7 @@ export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
   "max-xl:min-h-0",
   "xl:min-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
   "xl:min-h-[calc(100svh-4.5rem-1px-env(safe-area-inset-top,0px))]",
+  "2xl:min-h-0",
 ].join(" ");
 
 export const LANDING_EYEBROW_CLASS =
