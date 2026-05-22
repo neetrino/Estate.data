@@ -1,18 +1,9 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
-
 export const DATA_SERVICES_PAGE_COPY = {
   eyebrow: "Services",
   title: "Scan to BIM. Data that drives decisions.",
   subtitle:
     "From LiDAR captures to live dashboards — the data layer behind every confident deal in Los Angeles.",
 } as const;
-
-export const DATA_SERVICES_FEATURE_IMAGE_PATH = assetUrl(
-  ASSET_KEYS.propertyIntelligenceHero,
-);
-
-export const DATA_SERVICES_FEATURE_IMAGE_ALT =
-  "Wireframe 3D BIM model of a classical building on a digital grid";
 
 export const DATA_SERVICES_OFFERING_ICON_IDS = [
   "lidar-scanning",

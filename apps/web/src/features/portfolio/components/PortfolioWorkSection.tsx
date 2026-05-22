@@ -14,9 +14,9 @@ import {
   shouldShowPortfolioPagination,
   slicePortfolioPage,
 } from "@/features/portfolio/lib/portfolioPagination";
-import { HOME_STATS_GRID_GAP_CLASS } from "@/shared/lib/constants";
+import { PORTFOLIO_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
-const PORTFOLIO_GRID_CLASS = `mt-10 grid grid-cols-1 lg:grid-cols-3 ${HOME_STATS_GRID_GAP_CLASS} sm:grid-cols-2`;
+const PORTFOLIO_GRID_CLASS = `mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${PORTFOLIO_GRID_GAP_CLASS}`;
 
 function filterPortfolioProjects(activeId: PortfolioFilterId) {
   const { projects } = PORTFOLIO_PAGE_COPY;

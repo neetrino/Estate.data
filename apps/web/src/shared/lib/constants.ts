@@ -216,6 +216,9 @@ export const WHAT_WE_DO_ICON_SIZE_PX = 48;
 /** Home stats strip — equal row/column gap. */
 export const HOME_STATS_GRID_GAP_CLASS = "gap-8";
 
+/** Portfolio grid — tighter gap so three-up tiles use maximum column width. */
+export const PORTFOLIO_GRID_GAP_CLASS = "gap-5 sm:gap-6 lg:gap-5";
+
 /** What we do — uniform row/column/section spacing (px via Tailwind scale). */
 export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
   "gap-x-6 gap-y-6 sm:gap-x-11 sm:gap-y-11 lg:gap-x-14 lg:gap-y-14";
