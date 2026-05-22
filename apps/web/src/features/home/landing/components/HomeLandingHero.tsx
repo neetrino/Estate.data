@@ -7,6 +7,8 @@ import {
   HOME_MOBILE_OUTLINE_BUTTON_CLASS,
   HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS,
   HOME_LANDING_HERO_DESCRIPTION_CLASS,
+  HOME_LANDING_HERO_COPY_COLUMN_CLASS,
+  HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS,
   HOME_LANDING_HERO_GRID_CLASS,
   HOME_LANDING_HERO_HEADLINE_CLASS,
   HOME_LANDING_HERO_MAIN_OFFSET_CLASS,
@@ -34,7 +36,7 @@ export function HomeLandingHero() {
       <div className="home-landing-hero-bg pointer-events-none absolute inset-0 opacity-80" aria-hidden />
       <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
         <div className={`${HOME_LANDING_HERO_GRID_CLASS} ${HOME_LANDING_HERO_MAIN_OFFSET_CLASS}`}>
-          <div>
+          <div className={HOME_LANDING_HERO_COPY_COLUMN_CLASS}>
             <p className={HOME_LANDING_LOCATION_BADGE_CLASS}>
               <LocationPinIcon />
               {locationBadge}
@@ -83,7 +85,9 @@ export function HomeLandingHero() {
             </div>
           </div>
 
-          <HomeLandingHeroDashboard />
+          <div className={HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS}>
+            <HomeLandingHeroDashboard />
+          </div>
         </div>
 
         <div className={HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS}>

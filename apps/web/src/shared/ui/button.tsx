@@ -11,17 +11,31 @@ const ACCENT_BUTTON_TEXT_CLASS = "text-sm font-semibold leading-snug";
 
 const ESTATE_PILL_BUTTON_TEXT_CLASS = "text-sm font-bold leading-6 sm:text-base";
 
-/** Estate.data pill CTA — purple surface, icon disc + arrow (Figma 305:2096, compact). */
-export const estatePillButtonClassName = [
+export type EstatePillCtaAccent = "purple" | "blue" | "orange";
+
+const ESTATE_PILL_SURFACE_BY_ACCENT: Record<EstatePillCtaAccent, string> = {
+  purple: "bg-estate-cta text-estate-cta-foreground",
+  blue: "bg-property-intelligence-accent-dark text-white",
+  orange: "bg-brand-orange text-white",
+};
+
+const ESTATE_PILL_BUTTON_BASE_CLASS = [
   ESTATE_CTA_BUTTON_CLASS,
   "inline-flex max-w-full items-center gap-2 whitespace-nowrap",
-  "bg-estate-cta text-estate-cta-foreground",
   ESTATE_CTA_BUTTON_PADDING_CLASS,
   "cursor-pointer transition-opacity hover:opacity-90",
   "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   ESTATE_PILL_BUTTON_TEXT_CLASS,
 ].join(" ");
+
+/** Estate.data pill CTA — surface accent + icon disc + arrow (Figma 305:2096). */
+export function estatePillButtonClassNameForAccent(accent: EstatePillCtaAccent = "purple"): string {
+  return [ESTATE_PILL_BUTTON_BASE_CLASS, ESTATE_PILL_SURFACE_BY_ACCENT[accent]].join(" ");
+}
+
+/** Default purple pill (pricing analytics, home, etc.). */
+export const estatePillButtonClassName = estatePillButtonClassNameForAccent("purple");
 
 const ESTATE_CTA_ICON_DISC_CLASS =
   "flex size-9 shrink-0 items-center justify-center rounded-full bg-estate-cta-icon-surface text-estate-cta-icon-foreground";
@@ -111,16 +125,19 @@ function CtaArrowIcon() {
 type EstatePillButtonLinkProps = ComponentProps<typeof Link> & {
   /** Stretch pill on mobile; auto width from sm+. */
   fullWidth?: boolean;
+  /** Pill fill color — media pricing packages use blue / purple / orange. */
+  accent?: EstatePillCtaAccent;
 };
 
 export function EstatePillButtonLink({
   className,
   children,
   fullWidth = false,
+  accent = "purple",
   ...props
 }: EstatePillButtonLinkProps) {
   const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
-  const mergedClassName = [estatePillButtonClassName, widthClass, className]
+  const mergedClassName = [estatePillButtonClassNameForAccent(accent), widthClass, className]
     .filter(Boolean)
     .join(" ");
 

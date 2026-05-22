@@ -1,4 +1,9 @@
-import { PAGE_CONTAINER_CLASS, PAGE_GUTTER_CLASS, SECTION_VERTICAL_PADDING_CLASS } from "@/shared/lib/constants";
+import {
+  ESTATE_PILL_HERO_MOBILE_CLASS,
+  PAGE_CONTAINER_CLASS,
+  PAGE_GUTTER_CLASS,
+  SECTION_VERTICAL_PADDING_CLASS,
+} from "@/shared/lib/constants";
 
 export const LANDING_PAGE_CLASS = "bg-white text-brand-navy [color-scheme:light]";
 
@@ -17,7 +22,13 @@ export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[22px] sm:pt-[38px] lg:pt
 export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";
 
 export const HOME_LANDING_HERO_GRID_CLASS =
-  "grid items-center gap-11 lg:grid-cols-2 lg:gap-14 xl:gap-[4.5rem]";
+  "grid items-start gap-11 lg:grid-cols-2 lg:items-stretch lg:gap-14 xl:gap-[4.5rem]";
+
+/** Hero copy column — sets row height on lg+; items-start keeps location chip shrink-wrapped. */
+export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = "flex flex-col items-start";
+
+/** Hero dashboard column — stretches to match copy column height. */
+export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS = "flex min-h-0 flex-col lg:h-full";
 
 export const HOME_LANDING_HERO_HEADLINE_CLASS = [
   "mt-7 text-[2.375rem] font-bold leading-[1.08] tracking-tight text-brand-navy",
@@ -39,13 +50,7 @@ export const HOME_LANDING_HERO_CTA_ROW_CLASS = [
 export const HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS = "max-sm:w-full max-sm:max-w-full";
 
 /** Home — pill + icon disc: natural width, centered (not stretched full width). */
-export const HOME_MOBILE_PILL_BUTTON_CLASS = [
-  "max-sm:!w-auto max-sm:max-w-full max-sm:mx-auto",
-  "max-sm:justify-center max-sm:gap-2",
-  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
-  "max-sm:[&>span:first-child]:!translate-x-0",
-  "max-sm:[&>span:last-child]:!translate-x-0",
-].join(" ");
+export const HOME_MOBILE_PILL_BUTTON_CLASS = ESTATE_PILL_HERO_MOBILE_CLASS;
 
 /** Home — primary pill CTAs (Book a Shoot, Explore data services), left on mobile. */
 export const HOME_MOBILE_LEFT_PILL_CLASS = [
@@ -94,9 +99,12 @@ export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
 
-/** Hero location chip — smaller than section eyebrows. */
-export const HOME_LANDING_LOCATION_BADGE_CLASS =
-  "inline-flex items-center gap-2 rounded-full border border-brand-purple/25 bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-purple-light shadow-sm";
+/** Hero location chip — Serving Greater Los Angeles (original eyebrow chip styling). */
+export const HOME_LANDING_LOCATION_BADGE_CLASS = [
+  "inline-flex w-fit items-center gap-2 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm",
+  LANDING_EYEBROW_CLASS,
+  "normal-case tracking-normal",
+].join(" ");
 
 export const LANDING_SECTION_TITLE_CLASS =
   "text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-[2.5rem] md:leading-tight";

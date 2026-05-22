@@ -166,24 +166,24 @@ export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 export const PRICING_GRID_MOBILE_TABLET_CLASS =
   "grid grid-cols-1 md:grid-cols-2 md:max-[1399px]:!grid-cols-2";
 
-export const PRICING_CTA_MOBILE_TABLET_CLASS =
-  "max-w-full justify-center self-center max-[1399px]:!w-auto";
-
 /** Media packages — phone only: CTA +5px (md+ uses tablet/desktop rules below). */
 export const PRICING_MEDIA_CTA_MOBILE_ONLY_CLASS = "max-md:-translate-y-[5px]";
 
 /** Pricing — desktop Figma (lg+, iPad stays 2-col via max-[1399px] overrides). */
 export const PRICING_GRID_DESKTOP_CLASS = "lg:grid-cols-3";
 
-export const PRICING_CTA_DESKTOP_CLASS = [
-  "w-[calc(100%-2rem)]",
-  "sm:w-[calc(100%-4.5rem)]",
-  "lg:w-[calc(100%-7.25rem)]",
-].join(" ");
-
 export const PRICING_MEDIA_CTA_DESKTOP_CLASS = [
   "lg:-translate-y-[17px]",
   "max-[1399px]:!translate-y-0",
+].join(" ");
+
+/** Estate pill on hero — mobile layout; sm+ natural width via `fullWidth` on the link. */
+export const ESTATE_PILL_HERO_MOBILE_CLASS = [
+  "max-sm:!w-auto max-sm:max-w-full max-sm:mx-auto",
+  "max-sm:justify-center max-sm:gap-2",
+  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
+  "max-sm:[&>span:first-child]:!translate-x-0",
+  "max-sm:[&>span:last-child]:!translate-x-0",
 ].join(" ");
 
 export const PRICING_PACKAGE_GRID_CLASS = [
@@ -191,13 +191,11 @@ export const PRICING_PACKAGE_GRID_CLASS = [
   PRICING_GRID_DESKTOP_CLASS,
 ].join(" ");
 
-export const PRICING_PACKAGE_CTA_BUTTON_CLASS = [
-  PRICING_CTA_MOBILE_TABLET_CLASS,
-  PRICING_CTA_DESKTOP_CLASS,
-].join(" ");
+/** Analytics subscriptions — hero-style pill (natural width). */
+export const PRICING_ANALYTICS_CTA_BUTTON_CLASS = ESTATE_PILL_HERO_MOBILE_CLASS;
 
 export const PRICING_MEDIA_CTA_BUTTON_CLASS = [
-  PRICING_PACKAGE_CTA_BUTTON_CLASS,
+  ESTATE_PILL_HERO_MOBILE_CLASS,
   PRICING_MEDIA_CTA_MOBILE_ONLY_CLASS,
   PRICING_MEDIA_CTA_DESKTOP_CLASS,
 ].join(" ");
@@ -429,6 +427,32 @@ export const MEDIA_SERVICE_CARD_SURFACE_STYLE = {
     "var(--media-service-card-outer-shadow), var(--media-service-card-inset-shadow)",
 } as const;
 
+/** Pricing /media packages — orange gradient card (Cinematic+). */
+export const PRICING_MEDIA_CARD_ORANGE_SURFACE_STYLE = {
+  borderRadius: WHAT_WE_DO_CARD_RADIUS_PX,
+  background: "var(--pricing-media-card-orange-background)",
+  boxShadow:
+    "var(--pricing-media-card-orange-outer-shadow), var(--pricing-media-card-orange-inset-shadow)",
+} as const;
+
+export type PricingMediaCardAccent = "blue" | "purple" | "orange";
+
+type PricingMediaCardSurfaceStyle = {
+  readonly borderRadius: number;
+  readonly background: string;
+  readonly boxShadow: string;
+};
+
+/** Pricing media packages — per-card accent surfaces. */
+export const PRICING_MEDIA_CARD_SURFACE_BY_ACCENT: Record<
+  PricingMediaCardAccent,
+  PricingMediaCardSurfaceStyle
+> = {
+  blue: MEDIA_SERVICE_CARD_SURFACE_STYLE,
+  purple: WHAT_WE_DO_CARD_SURFACE_STYLE,
+  orange: PRICING_MEDIA_CARD_ORANGE_SURFACE_STYLE,
+};
+
 /** Media services cards — matches What we do tile height (px). */
 export const MEDIA_SERVICE_CARD_MIN_HEIGHT_PX = 285;
 
@@ -487,9 +511,6 @@ export const ESTATE_CTA_LABEL_OFFSET_CLASS = "-translate-x-[10px]";
 
 /** Icon disc-only nudge left inside the pill (10px). */
 export const ESTATE_CTA_ICON_DISC_OFFSET_CLASS = "-translate-x-[5px]";
-
-/** Book Cinematic+ pricing CTA — icon disc further left (long label). */
-export const PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS = "[&>span:last-child]:-translate-x-[14px]";
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;

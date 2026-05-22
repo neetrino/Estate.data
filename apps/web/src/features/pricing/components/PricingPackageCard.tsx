@@ -2,10 +2,12 @@ import type { PricingPackage } from "@/features/pricing/content/pricingPackageTy
 import {
   PRICING_ANALYTICS_CTA_WRAP_CLASS,
   PRICING_CARD_PADDING_CLASS,
+  PRICING_MEDIA_CARD_SURFACE_BY_ACCENT,
   PRICING_MEDIA_CTA_BUTTON_CLASS,
   PRICING_MEDIA_CTA_WRAP_CLASS,
   PRICING_PACKAGE_CARD_MIN_HEIGHT_PX,
-  PRICING_PACKAGE_CTA_BUTTON_CLASS,
+  PRICING_ANALYTICS_CTA_BUTTON_CLASS,
+  type PricingMediaCardAccent,
   WHAT_WE_DO_CARD_SURFACE_STYLE,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
@@ -30,6 +32,12 @@ const PRICING_PACKAGE_PRICE_SUFFIX_CLASS = "text-base font-medium text-what-we-d
 
 const PRICING_PACKAGE_FEATURE_CLASS =
   "flex items-start gap-2.5 text-base leading-relaxed text-what-we-do-card-description";
+
+const PRICING_PACKAGE_CHECK_ICON_BY_ACCENT: Record<PricingMediaCardAccent, string> = {
+  blue: "text-property-intelligence-accent",
+  purple: "text-what-we-do-subtitle",
+  orange: "text-brand-orange",
+};
 
 type PricingPackageCardProps = {
   package: PricingPackage;
@@ -58,17 +66,23 @@ export function PricingPackageCard({
     : PRICING_ANALYTICS_CTA_WRAP_CLASS;
   const defaultCtaClassName = pinCtaToBottom
     ? PRICING_MEDIA_CTA_BUTTON_CLASS
-    : PRICING_PACKAGE_CTA_BUTTON_CLASS;
+    : PRICING_ANALYTICS_CTA_BUTTON_CLASS;
   const resolvedCtaClassName = [ctaButtonClassName ?? defaultCtaClassName, pkg.bookCtaExtraClassName]
     .filter(Boolean)
     .join(" ");
+  const cardSurfaceStyle = pkg.cardAccent
+    ? PRICING_MEDIA_CARD_SURFACE_BY_ACCENT[pkg.cardAccent]
+    : WHAT_WE_DO_CARD_SURFACE_STYLE;
+  const checkIconClassName = pkg.cardAccent
+    ? PRICING_PACKAGE_CHECK_ICON_BY_ACCENT[pkg.cardAccent]
+    : PRICING_PACKAGE_CHECK_ICON_BY_ACCENT.purple;
 
   return (
     <article
       className={`${cardClassName}${highlighted ? ` ${PRICING_PACKAGE_HIGHLIGHTED_CLASS}` : ""}`}
       style={{
         ...(pinCtaToBottom ? { minHeight: PRICING_PACKAGE_CARD_MIN_HEIGHT_PX } : {}),
-        ...WHAT_WE_DO_CARD_SURFACE_STYLE,
+        ...cardSurfaceStyle,
       }}
     >
       {pkg.badgeLabel ? <span className={PRICING_PACKAGE_BADGE_CLASS}>{pkg.badgeLabel}</span> : null}
@@ -82,13 +96,18 @@ export function PricingPackageCard({
       <ul className={featuresClassName}>
         {pkg.features.map((feature) => (
           <li key={feature} className={PRICING_PACKAGE_FEATURE_CLASS}>
-            <PricingFeatureCheckIcon />
+            <PricingFeatureCheckIcon className={checkIconClassName} />
             <span>{feature}</span>
           </li>
         ))}
       </ul>
       <div className={ctaWrapClassName}>
-        <EstatePillButtonLink href={pkg.bookHref} className={resolvedCtaClassName}>
+        <EstatePillButtonLink
+          href={pkg.bookHref}
+          fullWidth
+          className={resolvedCtaClassName}
+          accent={pkg.cardAccent ?? "purple"}
+        >
           {pkg.bookLabel}
         </EstatePillButtonLink>
       </div>
@@ -96,12 +115,12 @@ export function PricingPackageCard({
   );
 }
 
-function PricingFeatureCheckIcon() {
+function PricingFeatureCheckIcon({ className }: { className: string }) {
   return (
     <svg
       viewBox="0 0 16 16"
       fill="none"
-      className="mt-0.5 size-4 shrink-0 text-what-we-do-subtitle"
+      className={`mt-0.5 size-4 shrink-0 ${className}`}
       aria-hidden
     >
       <path

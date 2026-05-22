@@ -12,8 +12,11 @@ export function HomeLandingHeroDashboard() {
   const topStats = HOME_STATS_COPY.stats.slice(0, 3);
 
   return (
-    <div className={`${LANDING_GLASS_CARD_CLASS} overflow-hidden rounded-3xl p-5 sm:p-6`} aria-hidden>
-      <ul className="flex flex-wrap gap-3.5 border-b border-brand-navy/8 pb-3.5">
+    <div
+      className={`${LANDING_GLASS_CARD_CLASS} flex h-full min-h-0 flex-col overflow-hidden rounded-3xl p-5 sm:p-6`}
+      aria-hidden
+    >
+      <ul className="flex shrink-0 flex-wrap gap-3.5 border-b border-brand-navy/8 pb-3.5">
         {topStats.map((stat, index) => (
           <li key={stat.id} className="min-w-[5.5rem] flex-1">
             <p
@@ -25,9 +28,9 @@ export function HomeLandingHeroDashboard() {
           </li>
         ))}
       </ul>
-      <div className="mt-5 grid gap-3.5 lg:grid-cols-[1.35fr_0.85fr]">
+      <div className="mt-5 grid min-h-0 flex-1 gap-3.5 lg:grid-cols-[1.35fr_0.85fr]">
         <PropertyMapPanel />
-        <div className="flex flex-col gap-3">
+        <div className="flex min-h-0 flex-col gap-3">
           <StorageChartPanel />
           <MarketTrendsPanel />
         </div>
@@ -38,9 +41,9 @@ export function HomeLandingHeroDashboard() {
 
 function PropertyMapPanel() {
   return (
-    <div className="rounded-2xl border border-brand-navy/8 bg-gradient-to-br from-brand-cyan/8 via-white to-brand-purple/5 p-3">
-      <p className="text-xs font-semibold text-brand-navy">Media + data overview</p>
-      <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-xl bg-brand-navy/[0.04]">
+    <div className="flex min-h-0 flex-col rounded-2xl border border-brand-navy/8 bg-gradient-to-br from-brand-cyan/8 via-white to-brand-purple/5 p-3">
+      <p className="shrink-0 text-xs font-semibold text-brand-navy">Media + data overview</p>
+      <div className="relative mt-2 min-h-0 flex-1 overflow-hidden rounded-xl bg-brand-navy/[0.04]">
         <svg className="absolute inset-0 size-full" viewBox="0 0 320 240" aria-hidden>
           <defs>
             <linearGradient id="hero-map-sky" x1="0" y1="0" x2="0" y2="1">
@@ -92,8 +95,8 @@ function StorageChartPanel() {
   }
 
   return (
-    <div className="rounded-2xl border border-brand-navy/8 bg-white p-3">
-      <p className="text-xs font-semibold text-brand-navy">{daysOnMarketStat.label}</p>
+    <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-brand-navy/8 bg-white p-3">
+      <p className="shrink-0 text-xs font-semibold text-brand-navy">{daysOnMarketStat.label}</p>
       <div className="mt-2 flex items-center gap-3">
         <svg width="80" height="80" viewBox="0 0 88 88" aria-hidden>
           <circle cx="44" cy="44" r="36" fill="none" stroke="#f1f3f8" strokeWidth="10" />
@@ -127,8 +130,8 @@ function MarketTrendsPanel() {
   }
 
   return (
-    <div className="rounded-2xl border border-brand-navy/8 bg-white p-3">
-      <p className="text-xs font-semibold text-brand-navy">{turnaroundStat.label}</p>
+    <div className="flex min-h-0 flex-1 flex-col rounded-2xl border border-brand-navy/8 bg-white p-3">
+      <p className="shrink-0 text-xs font-semibold text-brand-navy">{turnaroundStat.label}</p>
       <p className="mt-1 text-2xl font-bold text-brand-cyan">
         {formatStatCountValue(1, turnaroundStat.count)}
       </p>

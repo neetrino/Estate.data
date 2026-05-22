@@ -1,5 +1,4 @@
 import type { PricingPackage } from "@/features/pricing/content/pricingPackageTypes";
-import { PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS } from "@/shared/lib/constants";
 
 export const PRICING_MEDIA_PACKAGES_COPY = {
   sectionTitle: "Media packages",
@@ -9,6 +8,7 @@ export const PRICING_MEDIA_PACKAGES_COPY = {
       id: "essential",
       name: "Essential",
       price: "$549",
+      cardAccent: "blue",
       features: [
         "25 HDR photos",
         "Basic floorplan",
@@ -22,6 +22,7 @@ export const PRICING_MEDIA_PACKAGES_COPY = {
       id: "signature",
       name: "Signature",
       price: "$1,249",
+      cardAccent: "purple",
       highlighted: true,
       badgeLabel: "Most popular",
       features: [
@@ -38,6 +39,7 @@ export const PRICING_MEDIA_PACKAGES_COPY = {
       id: "cinematic-plus",
       name: "Cinematic+",
       price: "$2,499",
+      cardAccent: "orange",
       features: [
         "Full photo set",
         "2-min cinematic film",
@@ -47,7 +49,6 @@ export const PRICING_MEDIA_PACKAGES_COPY = {
       ],
       bookLabel: "Book Cinematic+",
       bookHref: "/contact",
-      bookCtaExtraClassName: PRICING_CINEMATIC_PLUS_CTA_ICON_DISC_CLASS,
     },
   ] as const satisfies readonly PricingPackage[],
 } as const;
