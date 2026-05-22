@@ -20,7 +20,7 @@ const ABOUT_STORY_COPY_BLOCK_CLASS =
   "flex flex-col gap-6 text-left lg:flex-1 lg:justify-center lg:gap-6";
 
 const ABOUT_STORY_PARAGRAPH_CLASS =
-  "text-base leading-relaxed text-foreground sm:text-lg";
+  "text-base leading-relaxed text-brand-navy sm:text-lg";
 
 export function AboutStorySection() {
   const { paragraphs } = ABOUT_STORY_COPY;

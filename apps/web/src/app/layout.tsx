@@ -23,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className="flex min-h-full flex-col overflow-x-hidden font-sans">
+    <html lang="en" className="h-full antialiased [color-scheme:light]">
+      <body className="flex min-h-full flex-col overflow-x-hidden bg-white font-sans text-foreground">
         <div className="flex-1">{children}</div>
         <SiteFooter />
       </body>

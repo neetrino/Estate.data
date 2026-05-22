@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { FOOTER_STUDIO } from "@/shared/components/footer/footerConfig";
 
-const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-foreground";
+const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-navy";
 
-const FOOTER_STUDIO_TEXT_CLASS = "text-sm text-muted-foreground";
+const FOOTER_STUDIO_TEXT_CLASS = "text-sm text-brand-navy/70";
 
 const FOOTER_STUDIO_LINK_CLASS =
-  "text-sm text-muted-foreground transition-colors hover:text-foreground";
+  "text-sm text-brand-navy/70 transition-colors hover:text-brand-navy";
 
 export function FooterStudioColumn() {
   const { address, phone, email } = FOOTER_STUDIO;

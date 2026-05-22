@@ -19,11 +19,13 @@ import {
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
 
-const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-muted-foreground ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
+const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-brand-navy/70 ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
 
 export function SiteFooter() {
   return (
-    <footer className={`hidden bg-white lg:block ${FOOTER_TOP_SEPARATOR_CLASS}`}>
+    <footer
+      className={`hidden bg-white text-brand-navy [color-scheme:light] lg:block ${FOOTER_TOP_SEPARATOR_CLASS}`}
+    >
       <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
         <div className={FOOTER_MAIN_ROW_CLASS}>
           <div className={FOOTER_BRAND_COLUMN_CLASS}>

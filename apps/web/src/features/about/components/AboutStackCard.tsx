@@ -11,7 +11,7 @@ const ABOUT_STACK_CARD_CLASS =
 const ABOUT_STACK_LIST_CLASS = "mt-4 flex flex-col gap-2.5 lg:mt-3 lg:gap-2";
 
 const ABOUT_STACK_ITEM_CLASS =
-  "flex items-start gap-2.5 text-base leading-snug text-foreground lg:gap-2 lg:text-sm";
+  "flex items-start gap-2.5 text-base leading-snug text-brand-navy lg:gap-2 lg:text-sm";
 
 function AboutStackCheckIcon() {
   return (

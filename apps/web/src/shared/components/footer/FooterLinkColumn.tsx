@@ -1,10 +1,10 @@
 import Link from "next/link";
 import type { FooterNavLink } from "@/shared/components/footer/footerConfig";
 
-const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-foreground";
+const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-navy";
 
 const FOOTER_LINK_CLASS =
-  "text-sm text-muted-foreground transition-colors hover:text-foreground";
+  "text-sm text-brand-navy/70 transition-colors hover:text-brand-navy";
 
 type FooterLinkColumnProps = {
   title: string;

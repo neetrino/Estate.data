@@ -496,8 +496,9 @@ export const HOME_LISTING_CTA_PANEL_CLASS =
 
 /** Estate pill — lavender surface, black label, purple icon disc (listing CTA). */
 export const HOME_LISTING_CTA_PRIMARY_BUTTON_CLASS = [
-  "bg-home-listing-cta-button text-home-listing-cta-button-foreground",
-  "[&>span:last-child]:bg-home-listing-cta-button-icon [&>span:last-child]:text-white",
+  "!bg-home-listing-cta-button !text-home-listing-cta-button-foreground",
+  "[&>span:first-child]:!text-home-listing-cta-button-foreground",
+  "[&>span:last-child]:!bg-home-listing-cta-button-icon [&>span:last-child]:!text-white",
 ].join(" ");
 
 /** Listing CTA — “View Pricing” outline; no hover fill/border change. */
