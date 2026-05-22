@@ -174,69 +174,55 @@ export const LANDING_TRUST_PARTNER_CHIP_CLASS = [
   "text-sm font-semibold text-brand-navy shadow-sm",
 ].join(" ");
 
-/** Hero trust strip — same white + gradient stack as hero (`home-landing-hero-bg`). */
-export const LANDING_TRUST_STRIP_PANEL_CLASS = [
-  "relative overflow-hidden rounded-2xl border border-brand-navy/[0.07] bg-white",
-  "shadow-[0_4px_24px_rgba(46,72,115,0.06)]",
-].join(" ");
+/** Hero trust strip — no panel background; cards only. */
+export const LANDING_TRUST_STRIP_PANEL_CLASS = "relative";
 
-export const LANDING_TRUST_STRIP_PANEL_INNER_CLASS = "relative z-[1] px-4 py-4 sm:px-6 sm:py-5";
+export const LANDING_TRUST_STRIP_PANEL_INNER_CLASS = "px-0 py-0";
+
+export const LANDING_TRUST_STRIP_HEADER_CLASS =
+  "flex items-center justify-center gap-3 sm:gap-5";
+
+export const LANDING_TRUST_STRIP_HEADER_LINE_CLASS =
+  "h-px w-10 bg-brand-navy/20 sm:w-14";
 
 export const LANDING_TRUST_STRIP_LABEL_CLASS = [
-  "text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-navy",
+  "shrink-0 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-navy",
   "sm:text-xs",
 ].join(" ");
 
 export const LANDING_TRUST_STRIP_GRID_CLASS = [
-  "mt-4 grid grid-cols-2 gap-2 max-sm:mt-5",
-  "sm:mt-4 sm:grid-cols-3 sm:gap-2.5",
-  "lg:grid-cols-6 lg:gap-2",
+  "mt-5 grid grid-cols-2 gap-3",
+  "sm:grid-cols-3 sm:gap-3",
+  "lg:mt-6 lg:grid-cols-6 lg:gap-3",
 ].join(" ");
 
-/** Last N trust cells use cyan hover; earlier cells use purple. */
+/** Last N trust cards use cyan hover; earlier cards use purple. */
 export const LANDING_TRUST_STRIP_BLUE_HOVER_TAIL_COUNT = 3;
 
-/** Stable hover target — does not move (prevents cursor flicker / jitter). */
-export const LANDING_TRUST_STRIP_CELL_HIT_CLASS =
-  "group relative min-h-[3.25rem] w-full pb-[3px] sm:min-h-[3.5rem]";
+/** Fixed hit area — card lifts inside on hover (no layout shift). */
+export const LANDING_TRUST_STRIP_CARD_HIT_CLASS = "group relative w-full pb-[3px]";
 
-const LANDING_TRUST_STRIP_CELL_SURFACE_BASE_CLASS = [
-  "flex h-full w-full items-center justify-center rounded-xl",
-  "border border-brand-navy/[0.06] bg-white px-2 py-3",
-  "shadow-[0_2px_10px_rgba(46,72,115,0.05)]",
-  "transition-[transform,box-shadow,border-color] duration-200 ease-out",
+const LANDING_TRUST_STRIP_CARD_SURFACE_BASE_CLASS = [
+  "relative w-full overflow-hidden rounded-xl",
+  "transition-[transform,box-shadow] duration-200 ease-out",
   "will-change-transform motion-safe:group-hover:-translate-y-[3px]",
-  "sm:px-3",
 ].join(" ");
 
-const LANDING_TRUST_STRIP_CELL_HOVER_PURPLE_CLASS = [
-  "group-hover:border-brand-purple-light/20",
-  "group-hover:shadow-[0_12px_28px_rgba(135,60,131,0.1)]",
+const LANDING_TRUST_STRIP_CARD_HOVER_PURPLE_CLASS = [
+  "group-hover:shadow-[0_12px_28px_rgba(135,60,131,0.14)]",
+  "group-hover:ring-1 group-hover:ring-brand-purple-light/30",
 ].join(" ");
 
-const LANDING_TRUST_STRIP_CELL_HOVER_CYAN_CLASS = [
-  "group-hover:border-brand-cyan/30",
-  "group-hover:shadow-[0_12px_28px_rgba(22,192,218,0.14)]",
+const LANDING_TRUST_STRIP_CARD_HOVER_CYAN_CLASS = [
+  "group-hover:shadow-[0_12px_28px_rgba(22,192,218,0.18)]",
+  "group-hover:ring-1 group-hover:ring-brand-cyan/35",
 ].join(" ");
 
-const LANDING_TRUST_STRIP_NAME_BASE_CLASS = [
-  "text-center text-xs font-medium leading-snug text-brand-navy/45",
-  "transition-colors duration-200 sm:text-sm",
-].join(" ");
-
-/** Trust cell visual surface — lifts inside fixed hit area on hover. */
-export function landingTrustStripCellSurfaceClass(blueHover: boolean): string {
+/** Trust partner card — purple or cyan highlight on hover. */
+export function landingTrustStripCardSurfaceClass(blueHover: boolean): string {
   return [
-    LANDING_TRUST_STRIP_CELL_SURFACE_BASE_CLASS,
-    blueHover ? LANDING_TRUST_STRIP_CELL_HOVER_CYAN_CLASS : LANDING_TRUST_STRIP_CELL_HOVER_PURPLE_CLASS,
-  ].join(" ");
-}
-
-/** Trust cell label — purple or cyan on hover. */
-export function landingTrustStripNameClass(blueHover: boolean): string {
-  return [
-    LANDING_TRUST_STRIP_NAME_BASE_CLASS,
-    blueHover ? "group-hover:text-brand-cyan" : "group-hover:text-brand-purple",
+    LANDING_TRUST_STRIP_CARD_SURFACE_BASE_CLASS,
+    blueHover ? LANDING_TRUST_STRIP_CARD_HOVER_CYAN_CLASS : LANDING_TRUST_STRIP_CARD_HOVER_PURPLE_CLASS,
   ].join(" ");
 }
 

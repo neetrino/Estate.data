@@ -6,6 +6,12 @@ import type { NextConfig } from "next";
  */
 export const nextConfig: NextConfig = {
   transpilePackages: ["@estate/db"],
+  images: {
+    localPatterns: [
+      { pathname: "/images/**" },
+      { pathname: "/api/v1/assets/**" },
+    ],
+  },
   experimental: {
     optimizePackageImports: ["zod"],
   },

@@ -16,9 +16,9 @@ export function HomeTrustedStrip() {
       <div className={`${LANDING_CONTAINER_CLASS} text-center`}>
         <p className={LANDING_EYEBROW_CLASS}>{label}</p>
         <ul className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          {partners.map((name) => (
-            <li key={name}>
-              <span className={LANDING_TRUST_PARTNER_CHIP_CLASS}>{name}</span>
+          {partners.map((partner) => (
+            <li key={partner.id}>
+              <span className={LANDING_TRUST_PARTNER_CHIP_CLASS}>{partner.name}</span>
             </li>
           ))}
         </ul>
