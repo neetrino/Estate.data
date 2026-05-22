@@ -7,12 +7,16 @@ import {
   RESOURCES_SECTION_CONTENT_OFFSET_CLASS,
   RESOURCES_SECTION_TITLE_CLASS,
 } from "@/features/resources/content/resourcesLayout";
-import { SOLUTIONS_ROLE_CARD_SHELL_CLASS } from "@/shared/lib/constants";
+import {
+  ESTATE_PILL_CONTENT_WIDTH_CLASS,
+  SOLUTIONS_ROLE_CARD_SHELL_CLASS,
+} from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
-const RESOURCES_FAQ_CARD_CLASS = "flex w-full flex-col px-6 py-6 sm:px-7 sm:py-7";
+const RESOURCES_FAQ_CARD_CLASS =
+  "flex w-full flex-col items-start px-6 py-6 sm:px-7 sm:py-7";
 
-const RESOURCES_FAQ_LIST_CLASS = "flex flex-col gap-6 sm:gap-7";
+const RESOURCES_FAQ_LIST_CLASS = "flex w-full flex-col gap-6 sm:gap-7";
 
 const RESOURCES_FAQ_QUESTION_CLASS =
   "text-base font-bold text-what-we-do-title sm:text-lg";
@@ -20,7 +24,7 @@ const RESOURCES_FAQ_QUESTION_CLASS =
 const RESOURCES_FAQ_ANSWER_CLASS =
   "mt-2 text-base leading-relaxed text-muted-foreground sm:text-lg";
 
-const RESOURCES_ASK_QUESTION_BUTTON_CLASS = "mt-8 w-auto self-start";
+const RESOURCES_ASK_QUESTION_BUTTON_CLASS = `mt-8 ${ESTATE_PILL_CONTENT_WIDTH_CLASS}`;
 
 export function ResourcesFaqPanel() {
   return (
