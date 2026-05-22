@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
-import { NAVBAR_SCROLL_OFFSET_PX } from "@/shared/lib/constants";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  NAVBAR_BURGER_TOGGLE_DEBOUNCE_MS,
+  NAVBAR_SCROLL_OFFSET_PX,
+} from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import {
   MAIN_NAV_LINKS,
@@ -69,24 +72,42 @@ type NavbarProps = {
 export function Navbar({ overlay = false }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const previousPathnameRef = useRef<string | null>(null);
+  const lastBurgerToggleAtRef = useRef(0);
 
-  const isMobileMenuVisible = mobileMenuOpen && mobileMenuPath === pathname;
+  const isMobileMenuVisible = mobileMenuOpen;
 
   const closeMobile = useCallback(() => {
     setMobileMenuOpen(false);
-    setMobileMenuPath(null);
   }, []);
 
-  const toggleMobileMenu = () => {
-    if (isMobileMenuVisible) {
-      closeMobile();
+  const handleBurgerActivate = useCallback(() => {
+    const now = Date.now();
+    if (now - lastBurgerToggleAtRef.current < NAVBAR_BURGER_TOGGLE_DEBOUNCE_MS) {
       return;
     }
-    setMobileMenuPath(pathname);
-    setMobileMenuOpen(true);
+    lastBurgerToggleAtRef.current = now;
+    setMobileMenuOpen((open) => !open);
+  }, []);
+
+  const handleBurgerPointerUp = (event: React.PointerEvent<HTMLButtonElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) {
+      return;
+    }
+    handleBurgerActivate();
   };
+
+  useEffect(() => {
+    if (previousPathnameRef.current === null) {
+      previousPathnameRef.current = pathname;
+      return;
+    }
+    if (previousPathnameRef.current !== pathname) {
+      previousPathnameRef.current = pathname;
+      setMobileMenuOpen(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const updateScrolled = () => {
@@ -186,7 +207,8 @@ export function Navbar({ overlay = false }: NavbarProps) {
             }`}
             aria-expanded={isMobileMenuVisible}
             aria-controls="mobile-nav"
-            onClick={toggleMobileMenu}
+            onPointerUp={handleBurgerPointerUp}
+            onClick={handleBurgerActivate}
           >
             <span className="sr-only">
               {isMobileMenuVisible ? "Close menu" : "Open menu"}

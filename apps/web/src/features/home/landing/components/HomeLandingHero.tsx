@@ -3,9 +3,8 @@ import { HomeLandingHeroDashboard } from "@/features/home/landing/components/Hom
 import { HomeLandingTrustedPartners } from "@/features/home/landing/components/HomeLandingTrustedPartners";
 import {
   HOME_LANDING_HERO_CTA_ROW_CLASS,
-  HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
-  HOME_MOBILE_OUTLINE_BUTTON_CLASS,
-  HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS,
+  HOME_LANDING_HERO_OUTLINE_CTA_CLASS,
+  HOME_LANDING_HERO_PRIMARY_CTA_CLASS,
   HOME_LANDING_HERO_DESCRIPTION_CLASS,
   HOME_LANDING_HERO_COPY_COLUMN_CLASS,
   HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS,
@@ -69,16 +68,14 @@ export function HomeLandingHero() {
             <div className={HOME_LANDING_HERO_CTA_ROW_CLASS}>
               <EstatePillButtonLink
                 href={primaryCta.href}
-                fullWidth
-                className={HOME_MOBILE_BOOK_SHOOT_PILL_CLASS}
+                className={HOME_LANDING_HERO_PRIMARY_CTA_CLASS}
               >
                 {primaryCta.label}
               </EstatePillButtonLink>
               <LandingOutlineButtonLink
                 href={secondaryCta.href}
-                fullWidth
                 showArrow={false}
-                className={`${HOME_MOBILE_OUTLINE_BUTTON_CLASS} ${HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS}`}
+                className={HOME_LANDING_HERO_OUTLINE_CTA_CLASS}
               >
                 {secondaryCta.label}
               </LandingOutlineButtonLink>

@@ -5,7 +5,8 @@ import {
   SECTION_VERTICAL_PADDING_CLASS,
 } from "@/shared/lib/constants";
 
-export const LANDING_PAGE_CLASS = "bg-white text-brand-navy [color-scheme:light]";
+export const LANDING_PAGE_CLASS =
+  "overflow-x-hidden bg-white text-brand-navy [color-scheme:light]";
 
 export const LANDING_SECTION_CLASS = SECTION_VERTICAL_PADDING_CLASS;
 
@@ -41,10 +42,24 @@ export const HOME_LANDING_HERO_DESCRIPTION_CLASS = [
   "sm:mt-7 sm:text-xl",
 ].join(" ");
 
+/** Hero CTAs — row when space allows; wrapped rows stay left (no mx-auto centering). */
 export const HOME_LANDING_HERO_CTA_ROW_CLASS = [
-  "mt-9 flex w-full max-w-lg flex-col gap-3.5",
-  "max-sm:max-w-none max-sm:items-stretch",
-  "sm:flex-row sm:items-center",
+  "mt-9 flex w-full max-w-lg flex-row flex-wrap content-start items-start justify-start gap-2.5",
+  "sm:items-center sm:justify-start sm:gap-3.5",
+].join(" ");
+
+/** Hero primary pill — left-aligned; overrides ESTATE_PILL_HERO_MOBILE mx-auto. */
+export const HOME_LANDING_HERO_PRIMARY_CTA_CLASS = [
+  "shrink-0 self-start !mx-0 w-auto max-w-full",
+  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2 max-sm:gap-2",
+  "max-sm:[&>span:first-child]:!translate-x-0",
+  "max-sm:[&>span:last-child]:!translate-x-0",
+].join(" ");
+
+/** Hero outline CTA — full-size outline, left when wrapped. */
+export const HOME_LANDING_HERO_OUTLINE_CTA_CLASS = [
+  "shrink-0 self-start !mx-0 w-auto max-w-full",
+  "h-12 justify-center px-4 text-sm sm:px-6 sm:text-base",
 ].join(" ");
 
 /** Home — mobile-only outline CTAs full width (desktop unchanged). */

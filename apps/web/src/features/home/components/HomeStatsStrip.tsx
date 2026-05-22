@@ -17,7 +17,7 @@ import {
   landingMetricValueClass,
 } from "@/features/home/landing/lib/landingStyles";
 
-const STATS_INTERSECTION_THRESHOLD = 0.2;
+const STATS_INTERSECTION_THRESHOLD = 0;
 
 function subscribePrefersReducedMotion(onStoreChange: () => void): () => void {
   const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -52,35 +52,67 @@ export function HomeStatsStrip() {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasStartedRef.current) {
+    let observer: IntersectionObserver | null = null;
+
+    const startCountUp = () => {
+      if (hasStartedRef.current) {
+        return;
+      }
+      hasStartedRef.current = true;
+      observer?.disconnect();
+
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        const elapsed = now - startTime;
+        const t = Math.min(elapsed / HOME_STATS_COUNT_UP_DURATION_MS, 1);
+        setAnimatedProgress(easeOutCubic(t));
+        if (t < 1) {
+          frameRef.current = requestAnimationFrame(tick);
+        }
+      };
+
+      frameRef.current = requestAnimationFrame(tick);
+    };
+
+    const isSectionVisible = () => {
+      const rect = section.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      if (viewHeight <= 0) {
+        return false;
+      }
+      const visibleHeight =
+        Math.min(rect.bottom, viewHeight) - Math.max(rect.top, 0);
+      return visibleHeight > 0 && rect.top < viewHeight * 0.92;
+    };
+
+    const tryStartFromScroll = () => {
+      if (!isSectionVisible()) {
+        return;
+      }
+      startCountUp();
+    };
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry?.isIntersecting || hasStartedRef.current) {
           return;
         }
-        hasStartedRef.current = true;
-        observer.disconnect();
-
-        const startTime = performance.now();
-
-        const tick = (now: number) => {
-          const elapsed = now - startTime;
-          const t = Math.min(elapsed / HOME_STATS_COUNT_UP_DURATION_MS, 1);
-          setAnimatedProgress(easeOutCubic(t));
-          if (t < 1) {
-            frameRef.current = requestAnimationFrame(tick);
-          }
-        };
-
-        frameRef.current = requestAnimationFrame(tick);
+        startCountUp();
       },
       { threshold: STATS_INTERSECTION_THRESHOLD },
     );
 
     observer.observe(section);
+    tryStartFromScroll();
+    window.addEventListener("scroll", tryStartFromScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect();
+      window.removeEventListener("scroll", tryStartFromScroll);
       cancelAnimationFrame(frameRef.current);
+      hasStartedRef.current = false;
     };
   }, [prefersReducedMotion]);
 

@@ -24,8 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased [color-scheme:light]">
-      <body className="flex min-h-full flex-col overflow-x-hidden bg-white font-sans text-foreground">
-        <div className="flex-1">{children}</div>
+      <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
+        <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         <SiteFooter />
       </body>
     </html>

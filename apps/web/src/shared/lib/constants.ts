@@ -37,7 +37,7 @@ export const NAVBAR_TOP_PADDING_CLASS = "pt-[max(1px,env(safe-area-inset-top))]"
 export const NAVBAR_OVERLAY_POSITION_CLASS = "fixed inset-x-0 top-0 z-[100]";
 
 /** Sticky navbar on inner pages — above page content, below mobile menu layer. */
-export const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-[100]";
+export const NAVBAR_STICKY_POSITION_CLASS = "sticky top-0 z-[100] w-full self-start";
 
 /** Header while mobile menu is open — above drawer + backdrop. */
 export const NAVBAR_HEADER_MENU_OPEN_Z_CLASS = "z-[110]";
@@ -78,6 +78,9 @@ export const HERO_CONTENT_TOP_INSET_CLASS =
 
 /** Pixels scrolled before navbar glass effect activates. */
 export const NAVBAR_SCROLL_OFFSET_PX = 8;
+
+/** Burger tap — ignore duplicate pointer/click within this window (iOS Chrome/Safari). */
+export const NAVBAR_BURGER_TOGGLE_DEBOUNCE_MS = 400;
 
 /** Navbar + mobile menu — liquid glass surface (keep in sync). */
 export const NAVBAR_GLASS_SURFACE_CLASS =
@@ -417,13 +420,13 @@ export const INNER_PAGE_MAIN_SPACING_CLASS =
 
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [
-  "page-hero-background",
+  "page-hero-background overflow-x-hidden",
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** Media / Data & BIM — reversed gradient (cyan left, magenta right). */
 export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
-  "page-hero-background page-hero-background--cyan-left",
+  "page-hero-background page-hero-background--cyan-left overflow-x-hidden",
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
@@ -508,17 +511,16 @@ export const HOME_LISTING_CTA_PILL_BUTTON_CLASS = [
   "[&>span:last-child]:!bg-home-listing-cta-button-icon [&>span:last-child]:!text-white",
 ].join(" ");
 
-/** Listing CTA — side-by-side pills on mobile; end-aligned from md. */
+/** Listing CTA — one row on phone, centered (equal side margins); end-aligned from md. */
 export const HOME_LISTING_CTA_BUTTONS_WRAP_CLASS = [
-  "flex flex-row flex-wrap items-center justify-center gap-2",
-  "sm:gap-3 sm:flex-row md:justify-end",
+  "flex w-full flex-row flex-nowrap items-center justify-center gap-2",
+  "sm:gap-3 md:justify-end",
 ].join(" ");
 
-/** Listing CTA — compact pill width on mobile (pair in one row). */
+/** Listing CTA — full-size pills; compact padding only (fits iPhone row with nowrap). */
 export const HOME_LISTING_CTA_MOBILE_PILL_CLASS = [
-  "max-sm:!w-auto max-sm:max-w-full",
-  "max-sm:gap-2",
-  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
+  "max-sm:!w-auto max-sm:shrink-0",
+  "max-sm:gap-2 max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2",
   "max-sm:[&>span:first-child]:!translate-x-0",
   "max-sm:[&>span:last-child]:!translate-x-0",
 ].join(" ");
