@@ -1,3 +1,6 @@
+/** Contact page — forms, studio details, “Book a Shoot” CTAs. */
+export const CONTACT_PATH = "/contact";
+
 /** Pricing page — navbar + “View Pricing” CTAs. */
 export const PRICING_PATH = "/pricing";
 
