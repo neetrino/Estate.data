@@ -7,7 +7,7 @@ import {
   PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS,
-  INNER_PAGE_MAIN_CLASS,
+  PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS,
 } from "@/shared/lib/constants";
 
 export function MediaPage() {
@@ -16,7 +16,7 @@ export function MediaPage() {
   return (
     <>
       <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
+      <main className={PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS}>{eyebrow}</p>

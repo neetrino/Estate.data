@@ -128,6 +128,13 @@
     rgba(135, 60, 131, 0.06) 40%,
     rgba(22, 192, 218, 0.08) 100%
   );
+  /** Media / Data & BIM — reversed stops: cyan on the left, magenta on the right. */
+  --property-intelligence-page-gradient: linear-gradient(
+    135deg,
+    rgba(22, 192, 218, 0.12) 0%,
+    rgba(135, 60, 131, 0.06) 40%,
+    rgba(195, 100, 190, 0.1) 100%
+  );
   --landing-cta-gradient: linear-gradient(
     120deg,
     #873c83 0%,
@@ -235,4 +242,29 @@ button:disabled {
 
 .home-landing-hero-bg {
   background: var(--landing-hero-gradient);
+}
+
+/** Inner routes — same stack as {@link HomeLandingHero}: white base + hero gradient at 80%. */
+.page-hero-background {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.page-hero-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--landing-hero-gradient);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.page-hero-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero-background--cyan-left::before {
+  background: var(--property-intelligence-page-gradient);
 }

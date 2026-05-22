@@ -254,12 +254,15 @@ export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 export const PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS =
   "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem] lg:aspect-auto lg:h-full lg:min-h-0";
 
+/** Inner page `<h1>` — brand navy (#2E4873); not used on home. */
+export const INNER_PAGE_TITLE_CLASS =
+  "mt-3 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-5xl lg:text-[3rem]";
+
 /** Property intelligence pages (/data-bim, /media) — page header typography. */
 export const PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-property-intelligence-accent sm:text-base";
 
-export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-property-intelligence-navy sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
@@ -268,12 +271,11 @@ export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
 export const PROPERTY_INTELLIGENCE_CTA_CLASS =
   "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
 
-/** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#873C83). */
+/** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#2E4873). */
 export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-what-we-do-subtitle sm:text-base";
 
-export const WHAT_WE_DO_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const WHAT_WE_DO_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 
 export const WHAT_WE_DO_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
@@ -380,8 +382,7 @@ export const CONTACT_STUDIO_LINK_CLASS =
 /** About page — eyebrow matches Portfolio / Pricing; title uses brand navy (#2E4873). */
 export const ABOUT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 
-export const ABOUT_PAGE_TITLE_CLASS =
-  "mt-3 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-5xl lg:text-[3rem]";
+export const ABOUT_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
@@ -399,10 +400,20 @@ export const ABOUT_STACK_TITLE_CLASS = "text-lg font-bold text-what-we-do-title 
 
 export const ABOUT_STACK_CHECK_ICON_CLASS = "text-what-we-do-subtitle";
 
-/** Inner pages (not home) — top gap below sticky navbar; matches About. */
+/** Inner pages — vertical rhythm below sticky navbar. */
+export const INNER_PAGE_MAIN_SPACING_CLASS =
+  "pt-5 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20";
+
+/** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [
-  "bg-what-we-do-surface",
-  "pt-5 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20",
+  "page-hero-background",
+  INNER_PAGE_MAIN_SPACING_CLASS,
+].join(" ");
+
+/** Media / Data & BIM — reversed gradient (cyan left, magenta right). */
+export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
+  "page-hero-background page-hero-background--cyan-left",
+  INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 export const ABOUT_PAGE_MAIN_CLASS = INNER_PAGE_MAIN_CLASS;
