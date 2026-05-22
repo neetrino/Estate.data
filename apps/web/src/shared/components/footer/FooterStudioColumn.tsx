@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { FOOTER_STUDIO } from "@/shared/components/footer/footerConfig";
-
-const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-navy";
+import { FOOTER_COLUMN_TITLE_CLASS, FOOTER_LINK_CLASS } from "@/shared/lib/constants";
 
 const FOOTER_STUDIO_TEXT_CLASS = "text-sm text-brand-navy/70";
-
-const FOOTER_STUDIO_LINK_CLASS =
-  "text-sm text-brand-navy/70 transition-colors hover:text-brand-navy";
 
 export function FooterStudioColumn() {
   const { address, phone, email } = FOOTER_STUDIO;
@@ -17,12 +13,12 @@ export function FooterStudioColumn() {
       <ul className="mt-4 space-y-2.5">
         <li className={FOOTER_STUDIO_TEXT_CLASS}>{address}</li>
         <li>
-          <Link href={phone.href} className={FOOTER_STUDIO_LINK_CLASS}>
+          <Link href={phone.href} className={FOOTER_LINK_CLASS}>
             {phone.label}
           </Link>
         </li>
         <li>
-          <Link href={email.href} className={FOOTER_STUDIO_LINK_CLASS}>
+          <Link href={email.href} className={FOOTER_LINK_CLASS}>
             {email.label}
           </Link>
         </li>

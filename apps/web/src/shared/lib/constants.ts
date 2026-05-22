@@ -230,6 +230,13 @@ export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
 /** Site footer — Services & Company columns nudge left on large screens only. */
 export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "lg:-translate-x-[20px]";
 
+/** Site footer — column headings (Services, Company, Studio) — #873C83. */
+export const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-purple";
+
+/** Site footer — nav + studio links; hover #C364BE. */
+export const FOOTER_LINK_CLASS =
+  "text-sm text-brand-navy/70 transition-colors hover:text-brand-purple-light";
+
 /** Site footer — top edge line separating footer from page content. */
 export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-foreground/10";
 
