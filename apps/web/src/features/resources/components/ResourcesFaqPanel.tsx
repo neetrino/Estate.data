@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   RESOURCES_ASK_QUESTION_CTA,
   RESOURCES_FAQ_ITEMS,
@@ -9,6 +8,7 @@ import {
   RESOURCES_SECTION_TITLE_CLASS,
 } from "@/features/resources/content/resourcesLayout";
 import { SOLUTIONS_ROLE_CARD_SHELL_CLASS } from "@/shared/lib/constants";
+import { EstatePillButtonLink } from "@/shared/ui/button";
 
 const RESOURCES_FAQ_CARD_CLASS = "flex w-full flex-col px-6 py-6 sm:px-7 sm:py-7";
 
@@ -20,11 +20,7 @@ const RESOURCES_FAQ_QUESTION_CLASS =
 const RESOURCES_FAQ_ANSWER_CLASS =
   "mt-2 text-base leading-relaxed text-muted-foreground sm:text-lg";
 
-const RESOURCES_ASK_QUESTION_LINK_CLASS = [
-  "mt-8 inline-flex items-center gap-1.5 text-base font-semibold text-what-we-do-subtitle",
-  "transition-colors hover:text-what-we-do-title sm:text-lg",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-what-we-do-subtitle/40 focus-visible:ring-offset-2",
-].join(" ");
+const RESOURCES_ASK_QUESTION_BUTTON_CLASS = "mt-8 w-auto self-start";
 
 export function ResourcesFaqPanel() {
   return (
@@ -43,10 +39,12 @@ export function ResourcesFaqPanel() {
             </div>
           ))}
         </dl>
-        <Link href={RESOURCES_ASK_QUESTION_CTA.href} className={RESOURCES_ASK_QUESTION_LINK_CLASS}>
+        <EstatePillButtonLink
+          href={RESOURCES_ASK_QUESTION_CTA.href}
+          className={RESOURCES_ASK_QUESTION_BUTTON_CLASS}
+        >
           {RESOURCES_ASK_QUESTION_CTA.label}
-          <span aria-hidden>→</span>
-        </Link>
+        </EstatePillButtonLink>
       </article>
     </section>
   );
