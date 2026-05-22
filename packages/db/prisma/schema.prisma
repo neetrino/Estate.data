@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+/// Binary site assets (icons, hero, logos) — single source of truth for URLs served via API.
+model Asset {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  mimeType  String   @map("mime_type")
+  fileName  String   @map("file_name")
+  data      Bytes
+  byteSize  Int      @map("byte_size")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("assets")
+}

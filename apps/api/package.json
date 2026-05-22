@@ -1,0 +1,12 @@
+{
+  "name": "@estate/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Next.js API app (scaffold when backend work starts)",
+  "scripts": {
+    "dev": "node -e \"console.log('@estate/api: not scaffolded yet — see apps/api/README.md')\"",
+    "build": "node -e \"process.exit(0)\"",
+    "lint": "node -e \"process.exit(0)\"",
+    "typecheck": "node -e \"process.exit(0)\""
+  }
+}

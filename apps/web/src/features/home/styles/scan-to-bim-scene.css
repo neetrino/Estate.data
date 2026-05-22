@@ -1,0 +1,687 @@
+/* Scan to BIM — premium turntable + holographic scan (CSS only). */
+
+.scan-to-bim-scene {
+  --rotation-cycle: 32s;
+  --scan-cycle: 8s;
+  --prism-tower-w: 7.75rem;
+  --prism-tower-h: 12.5rem;
+  --prism-tower-d: 5.25rem;
+  --prism-podium-w: 10.5rem;
+  --prism-podium-h: 2.75rem;
+  --prism-podium-d: 6.75rem;
+  --color-scan-cyan: #16c0da;
+  --color-scan-purple: #c364be;
+  --color-scan-navy: #2e4873;
+  --color-accent-yellow: #fdba2c;
+  --color-accent-orange: #e55100;
+  perspective: 720px;
+  perspective-origin: 50% 42%;
+  overflow: hidden;
+  background: linear-gradient(
+    165deg,
+    rgba(22, 192, 218, 0.1) 0%,
+    rgba(255, 255, 255, 0.98) 42%,
+    rgba(195, 100, 190, 0.06) 72%,
+    rgba(46, 72, 115, 0.08) 100%
+  );
+}
+
+.scan-to-bim-scene__ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 55% at 50% 58%, rgba(22, 192, 218, 0.12) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__holo-field {
+  position: absolute;
+  inset: 18% 8% 22%;
+  background-image:
+    linear-gradient(rgba(22, 192, 218, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(195, 100, 190, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  transform: perspective(800px) rotateX(74deg);
+  transform-origin: center center;
+  opacity: 0.55;
+  animation: scan-to-bim-holo-field var(--scan-cycle) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-to-bim-scene__pedestal {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  width: min(68%, 16rem);
+  height: 0.65rem;
+  margin-left: -34%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(46, 72, 115, 0.2) 20%,
+    rgba(22, 192, 218, 0.35) 50%,
+    rgba(46, 72, 115, 0.2) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(22, 192, 218, 0.25);
+  transform: rotateX(82deg);
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__turntable {
+  position: relative;
+  width: min(78%, 20rem);
+  min-height: 14rem;
+  transform-style: preserve-3d;
+  animation: scan-to-bim-turntable var(--rotation-cycle) linear infinite;
+}
+
+.scan-to-bim-scene__shadow {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  width: 74%;
+  height: 2.5rem;
+  margin-left: -37%;
+  border-radius: 9999px;
+  background: radial-gradient(ellipse, rgba(46, 72, 115, 0.28) 0%, transparent 70%);
+  transform: rotateX(78deg) translateZ(-14px);
+  filter: blur(4px);
+}
+
+.scan-to-bim-scene__mass {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transform: rotateX(11deg);
+}
+
+.scan-to-bim-scene__prism {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  width: var(--prism-podium-w);
+  height: calc(var(--prism-podium-h) + var(--prism-tower-h));
+  margin-left: calc(var(--prism-podium-w) / -2);
+  transform-style: preserve-3d;
+}
+
+.scan-to-bim-scene__prism-tower,
+.scan-to-bim-scene__prism-podium {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.scan-to-bim-scene__prism-podium {
+  left: 0;
+  bottom: 0;
+  width: var(--prism-podium-w);
+  height: var(--prism-podium-h);
+}
+
+.scan-to-bim-scene__prism-tower {
+  left: 50%;
+  bottom: var(--prism-podium-h);
+  width: var(--prism-tower-w);
+  height: var(--prism-tower-h);
+  margin-left: calc(var(--prism-tower-w) / -2);
+}
+
+.scan-to-bim-scene__face {
+  position: absolute;
+  backface-visibility: hidden;
+  border: 1px solid rgba(46, 72, 115, 0.32);
+}
+
+.scan-to-bim-scene__face--tower-front {
+  inset: 0;
+  width: var(--prism-tower-w);
+  height: var(--prism-tower-h);
+  background: linear-gradient(
+    175deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(22, 192, 218, 0.28) 35%,
+    rgba(46, 72, 115, 0.42) 100%
+  );
+  transform: translateZ(calc(var(--prism-tower-d) / 2));
+  box-shadow: inset 0 0 32px rgba(22, 192, 218, 0.14);
+}
+
+.scan-to-bim-scene__face--tower-back {
+  inset: 0;
+  width: var(--prism-tower-w);
+  height: var(--prism-tower-h);
+  background: linear-gradient(168deg, rgba(46, 72, 115, 0.48) 0%, rgba(135, 60, 131, 0.18) 100%);
+  transform: rotateY(180deg) translateZ(calc(var(--prism-tower-d) / 2));
+}
+
+.scan-to-bim-scene__face--tower-left {
+  width: var(--prism-tower-d);
+  height: var(--prism-tower-h);
+  left: 0;
+  top: 0;
+  background: linear-gradient(90deg, rgba(46, 72, 115, 0.58) 0%, rgba(22, 192, 218, 0.26) 100%);
+  transform: rotateY(-90deg) translateZ(calc(var(--prism-tower-w) / 2));
+}
+
+.scan-to-bim-scene__face--tower-right {
+  width: var(--prism-tower-d);
+  height: var(--prism-tower-h);
+  left: 0;
+  top: 0;
+  background: linear-gradient(270deg, rgba(22, 192, 218, 0.32) 0%, rgba(195, 100, 190, 0.2) 100%);
+  transform: rotateY(90deg) translateZ(calc(var(--prism-tower-w) / 2));
+}
+
+.scan-to-bim-scene__face--tower-top {
+  width: var(--prism-tower-w);
+  height: var(--prism-tower-d);
+  left: 0;
+  top: 0;
+  background: linear-gradient(180deg, rgba(22, 192, 218, 0.5) 0%, rgba(46, 72, 115, 0.42) 100%);
+  transform: rotateX(90deg) translateZ(var(--prism-tower-h));
+}
+
+.scan-to-bim-scene__face--podium-front {
+  inset: 0;
+  width: var(--prism-podium-w);
+  height: var(--prism-podium-h);
+  background: linear-gradient(180deg, rgba(22, 192, 218, 0.22) 0%, rgba(46, 72, 115, 0.48) 100%);
+  transform: translateZ(calc(var(--prism-podium-d) / 2));
+}
+
+.scan-to-bim-scene__face--podium-side {
+  width: var(--prism-podium-d);
+  height: var(--prism-podium-h);
+  left: 0;
+  top: 0;
+  background: linear-gradient(270deg, rgba(46, 72, 115, 0.58) 0%, rgba(22, 192, 218, 0.16) 100%);
+  transform: rotateY(90deg) translateZ(calc(var(--prism-podium-w) / 2));
+}
+
+.scan-to-bim-scene__face--podium-top {
+  width: var(--prism-podium-w);
+  height: var(--prism-podium-d);
+  left: 0;
+  top: 0;
+  background: linear-gradient(180deg, rgba(22, 192, 218, 0.38) 0%, rgba(46, 72, 115, 0.42) 100%);
+  transform: rotateX(90deg) translateZ(var(--prism-podium-h));
+}
+
+.scan-to-bim-scene__facade {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  transform: translateZ(calc(var(--prism-tower-d) / 2 + 0.4rem));
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 28px 48px rgba(46, 72, 115, 0.22));
+}
+
+.scan-to-bim-scene__building-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.scan-to-bim-scene__holo-grid {
+  position: absolute;
+  inset: 6% 8% 10%;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 11px,
+      rgba(22, 192, 218, 0.22) 11px,
+      rgba(22, 192, 218, 0.22) 12px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 11px,
+      rgba(195, 100, 190, 0.18) 11px,
+      rgba(195, 100, 190, 0.18) 12px
+    );
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: scan-to-bim-holo-grid var(--scan-cycle) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__wire-group {
+  stroke-dasharray: 5 4;
+}
+
+.scan-to-bim-scene__wire-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  animation: scan-to-bim-wire-overlay var(--scan-cycle) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__bim-layer {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(100% 0 0 0);
+  animation: scan-to-bim-bim-reveal var(--scan-cycle) ease-in-out infinite;
+}
+
+.scan-to-bim-scene__beam {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+}
+
+.scan-to-bim-scene__beam--v {
+  left: -5%;
+  width: 110%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(22, 192, 218, 0.4) 15%,
+    #ffffff 50%,
+    rgba(195, 100, 190, 0.45) 85%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 16px rgba(22, 192, 218, 0.9),
+    0 0 32px rgba(195, 100, 190, 0.35);
+  animation: scan-to-bim-beam-v var(--scan-cycle) ease-in-out infinite;
+}
+
+.scan-to-bim-scene__beam--h {
+  top: auto;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(195, 100, 190, 0.5) 20%,
+    #ffffff 50%,
+    rgba(22, 192, 218, 0.5) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 14px rgba(195, 100, 190, 0.75);
+  animation: scan-to-bim-beam-h var(--scan-cycle) ease-in-out infinite;
+  animation-delay: calc(var(--scan-cycle) * -0.5);
+}
+
+.scan-to-bim-scene__beam-trail {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.scan-to-bim-scene__beam-trail--v {
+  left: -3%;
+  width: 106%;
+  height: 24%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(22, 192, 218, 0.06) 35%,
+    rgba(22, 192, 218, 0.28) 100%
+  );
+  animation: scan-to-bim-trail-v var(--scan-cycle) ease-in-out infinite;
+}
+
+.scan-to-bim-scene__beam-trail--h {
+  top: auto;
+  left: 0;
+  width: 28%;
+  height: 106%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(195, 100, 190, 0.08) 40%,
+    rgba(195, 100, 190, 0.26) 100%
+  );
+  animation: scan-to-bim-trail-h var(--scan-cycle) ease-in-out infinite;
+  animation-delay: calc(var(--scan-cycle) * -0.5);
+}
+
+.scan-to-bim-scene__points {
+  position: absolute;
+  inset: 7% 9% 12%;
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__point {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  opacity: 0;
+  animation: scan-to-bim-point var(--scan-cycle) ease-in-out infinite;
+}
+
+.scan-to-bim-scene__point--cyan {
+  background: var(--color-scan-cyan);
+  box-shadow: 0 0 8px rgba(22, 192, 218, 0.95);
+}
+
+.scan-to-bim-scene__point--purple {
+  background: var(--color-scan-purple);
+  box-shadow: 0 0 8px rgba(195, 100, 190, 0.9);
+}
+
+.scan-to-bim-scene__point--warm {
+  background: var(--color-accent-yellow);
+  box-shadow: 0 0 8px rgba(253, 186, 44, 0.85);
+}
+
+.scan-to-bim-scene__labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scan-to-bim-scene__label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-scan-navy);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(46, 72, 115, 0.12);
+  box-shadow:
+    0 4px 18px rgba(46, 72, 115, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  backdrop-filter: blur(8px);
+  animation: scan-to-bim-label-float var(--scan-cycle) ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.scan-to-bim-scene__label-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.scan-to-bim-scene__label-dot--cyan {
+  background: var(--color-scan-cyan);
+  box-shadow: 0 0 6px rgba(22, 192, 218, 0.8);
+}
+
+.scan-to-bim-scene__label-dot--purple {
+  background: var(--color-scan-purple);
+  box-shadow: 0 0 6px rgba(195, 100, 190, 0.75);
+}
+
+.scan-to-bim-scene__label-dot--yellow {
+  background: var(--color-accent-yellow);
+  box-shadow: 0 0 6px rgba(253, 186, 44, 0.75);
+}
+
+.scan-to-bim-scene__label--top-left {
+  top: 10%;
+  left: 4%;
+  animation-delay: 0s;
+}
+
+.scan-to-bim-scene__label--top-right {
+  top: 12%;
+  right: 3%;
+  animation-delay: 0.6s;
+}
+
+.scan-to-bim-scene__label--mid-left {
+  top: 42%;
+  left: 2%;
+  animation-delay: 1.2s;
+}
+
+.scan-to-bim-scene__label--mid-right {
+  top: 44%;
+  right: 2%;
+  animation-delay: 1.8s;
+}
+
+.scan-to-bim-scene__label--bottom-left {
+  bottom: 16%;
+  left: 6%;
+  animation-delay: 2.4s;
+}
+
+.scan-to-bim-scene__label--bottom-right {
+  bottom: 14%;
+  right: 5%;
+  animation-delay: 3s;
+}
+
+@keyframes scan-to-bim-turntable {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes scan-to-bim-holo-field {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes scan-to-bim-holo-grid {
+  0%,
+  8%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+
+  25%,
+  75% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes scan-to-bim-wire-overlay {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  20%,
+  40% {
+    opacity: 1;
+  }
+
+  55%,
+  75% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scan-to-bim-bim-reveal {
+  0%,
+  5% {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  85%,
+  100% {
+    clip-path: inset(0% 0 0 0);
+  }
+}
+
+@keyframes scan-to-bim-beam-v {
+  0%,
+  4% {
+    top: 92%;
+    opacity: 0.3;
+  }
+
+  10%,
+  86% {
+    opacity: 1;
+  }
+
+  92%,
+  100% {
+    top: 6%;
+    opacity: 0.3;
+  }
+}
+
+@keyframes scan-to-bim-beam-h {
+  0%,
+  4% {
+    left: -8%;
+    opacity: 0.25;
+  }
+
+  10%,
+  86% {
+    opacity: 1;
+  }
+
+  92%,
+  100% {
+    left: 108%;
+    opacity: 0.25;
+  }
+}
+
+@keyframes scan-to-bim-trail-v {
+  0%,
+  4% {
+    top: 70%;
+    opacity: 0.15;
+  }
+
+  10%,
+  86% {
+    opacity: 0.8;
+  }
+
+  92%,
+  100% {
+    top: 0%;
+    opacity: 0.12;
+  }
+}
+
+@keyframes scan-to-bim-trail-h {
+  0%,
+  4% {
+    top: 38%;
+    opacity: 0.12;
+  }
+
+  10%,
+  86% {
+    opacity: 0.7;
+  }
+
+  92%,
+  100% {
+    top: 38%;
+    opacity: 0.1;
+  }
+}
+
+@keyframes scan-to-bim-point {
+  0%,
+  18% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+
+  32%,
+  58% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+@keyframes scan-to-bim-label-float {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-to-bim-scene__turntable,
+  .scan-to-bim-scene__bim-layer,
+  .scan-to-bim-scene__wire-overlay,
+  .scan-to-bim-scene__beam,
+  .scan-to-bim-scene__beam-trail,
+  .scan-to-bim-scene__point,
+  .scan-to-bim-scene__holo-grid,
+  .scan-to-bim-scene__holo-field,
+  .scan-to-bim-scene__label {
+    animation: none;
+  }
+
+  .scan-to-bim-scene__turntable {
+    transform: rotateY(-28deg);
+  }
+
+  .scan-to-bim-scene__bim-layer {
+    clip-path: inset(40% 0 0 0);
+  }
+
+  .scan-to-bim-scene__beam--v {
+    top: 38%;
+    opacity: 0.85;
+  }
+
+  .scan-to-bim-scene__beam--h {
+    left: 42%;
+    top: 52%;
+    opacity: 0.7;
+  }
+
+  .scan-to-bim-scene__wire-overlay {
+    opacity: 0.75;
+  }
+}
+
+@media (min-width: 640px) {
+  .scan-to-bim-scene__label {
+    font-size: 0.6875rem;
+    padding: 0.4rem 0.75rem;
+  }
+}

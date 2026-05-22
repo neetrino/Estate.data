@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* Licensed Proxima Nova woff2 files → apps/web/public/fonts/ */
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --accent: #c364be;
+  --accent-foreground: #ffffff;
+  --estate-cta: #c364be;
+  --estate-cta-foreground: #ffffff;
+  --estate-cta-icon-surface: #000000;
+  --estate-cta-icon-foreground: #ffffff;
+  --green-dark: #14532d;
+  --what-we-do-title: #873c83;
+  --what-we-do-subtitle: #c364be;
+  --what-we-do-surface: #f7f4ef;
+  --what-we-do-card-radius: 38px;
+  --what-we-do-card-gradient: linear-gradient(180deg, #100b16 0%, #0f0220 100%);
+  --what-we-do-card-corner-gradient: radial-gradient(
+    ellipse 30% 40% at 0% 0%,
+    rgba(255, 54, 242, 0.45) 0%,
+    rgba(255, 27, 244, 0.22) 38%,
+    rgba(46, 9, 43, 0.35) 58%,
+    transparent 72%
+  );
+  --what-we-do-card-background: var(--what-we-do-card-corner-gradient),
+    var(--what-we-do-card-gradient);
+  --what-we-do-card-inset-shadow: inset 0 -1px 10.8px 0 rgba(255, 54, 242, 0.2),
+    inset 0 -23px 12px -1px rgba(255, 27, 244, 0.17),
+    inset 0 -47px 16px -33px rgba(255, 255, 255, 0.7),
+    inset 0 -30px 26.7px -27px rgba(46, 9, 43, 0.5),
+    inset 0 -40px 46.3px -30px #ff0890;
+  --what-we-do-card-description: #d1d5dc;
+  --home-stats-text: #ead8e8;
+  --property-intelligence-accent: #16c0da;
+  /** Slightly darker accent — primary CTAs on /media. */
+  --property-intelligence-accent-dark: #12a8bc;
+  --property-intelligence-navy: #2e4873;
+  --property-intelligence-report-cta-gradient: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    var(--property-intelligence-accent) 100%
+  );
+  --media-service-card-radius: 38px;
+  --media-service-card-gradient: linear-gradient(180deg, #121212 0%, #050505 100%);
+  --media-service-card-corner-gradient: radial-gradient(
+    ellipse 32% 42% at 0% 0%,
+    rgba(22, 192, 218, 0.55) 0%,
+    rgba(59, 130, 246, 0.28) 40%,
+    rgba(0, 0, 0, 0.65) 62%,
+    transparent 78%
+  );
+  --media-service-card-background: var(--media-service-card-corner-gradient),
+    var(--media-service-card-gradient);
+  --media-service-card-outer-shadow: 0 0 28px rgba(22, 192, 218, 0.18),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  --media-service-card-inset-shadow: inset 0 -1px 12px 0 rgba(22, 192, 218, 0.35),
+    inset 0 -24px 14px -2px rgba(22, 192, 218, 0.22),
+    inset 0 -48px 18px -34px rgba(59, 130, 246, 0.12),
+    inset 0 -32px 28px -28px rgba(0, 0, 0, 0.85),
+    inset 0 -42px 48px -32px rgba(22, 192, 218, 0.4);
+  --media-service-card-description: #b8c8d6;
+  --pricing-media-card-orange-gradient: linear-gradient(180deg, #1a1008 0%, #0c0704 100%);
+  --pricing-media-card-orange-corner-gradient: radial-gradient(
+    ellipse 30% 40% at 0% 0%,
+    rgba(253, 186, 44, 0.52) 0%,
+    rgba(229, 81, 0, 0.34) 38%,
+    rgba(80, 32, 8, 0.42) 58%,
+    transparent 72%
+  );
+  --pricing-media-card-orange-background: var(--pricing-media-card-orange-corner-gradient),
+    var(--pricing-media-card-orange-gradient);
+  --pricing-media-card-orange-outer-shadow: 0 0 28px rgba(229, 81, 0, 0.22),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  --pricing-media-card-orange-inset-shadow: inset 0 -1px 12px 0 rgba(253, 186, 44, 0.38),
+    inset 0 -24px 14px -2px rgba(229, 81, 0, 0.26),
+    inset 0 -48px 18px -34px rgba(196, 70, 0, 0.14),
+    inset 0 -32px 28px -28px rgba(0, 0, 0, 0.82),
+    inset 0 -42px 48px -32px rgba(229, 81, 0, 0.42);
+  --solutions-role-price-surface: #f7f2f9;
+  --solutions-role-card-orange-shadow: 0 8px 32px oklch(0.72 0.16 55 / 0.14),
+    0 2px 12px oklch(0.72 0.16 55 / 0.08);
+  --solutions-role-card-orange-ring: oklch(0.72 0.16 55 / 0.22);
+  --client-voices-accent: oklch(0.72 0.16 55);
+  --client-voices-card-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+  --gradient-accent: linear-gradient(
+    135deg,
+    #fdba2c 0%,
+    #e55100 45%,
+    #c44600 100%
+  );
+  --home-listing-cta-description: #fbe293;
+  --home-listing-cta-book: #fdba2c;
+  --home-listing-cta-book-foreground: #171717;
+  --muted-foreground: #71717a;
+  --ring: #a1a1aa;
+  --brand-purple-light: #c364be;
+  --brand-purple: #873c83;
+  --brand-navy: #2e4873;
+  --brand-cyan: #16c0da;
+  --brand-yellow: #fdba2c;
+  --brand-orange: #e55100;
+  --landing-surface: #f8f9fc;
+  --landing-surface-muted: #f1f3f8;
+  --landing-trust-surface: #f9f4f9;
+  --landing-card-border: rgba(46, 72, 115, 0.1);
+  --landing-card-shadow: 0 10px 30px rgba(46, 72, 115, 0.08);
+  --landing-hero-gradient: linear-gradient(
+    135deg,
+    rgba(195, 100, 190, 0.12) 0%,
+    rgba(135, 60, 131, 0.06) 40%,
+    rgba(22, 192, 218, 0.08) 100%
+  );
+  /** Media / Data & BIM — reversed stops: cyan on the left, magenta on the right. */
+  --property-intelligence-page-gradient: linear-gradient(
+    135deg,
+    rgba(22, 192, 218, 0.12) 0%,
+    rgba(135, 60, 131, 0.06) 40%,
+    rgba(195, 100, 190, 0.1) 100%
+  );
+  --landing-cta-gradient: linear-gradient(
+    120deg,
+    #873c83 0%,
+    #c364be 45%,
+    #9b4a96 100%
+  );
+  --home-listing-cta-gradient: linear-gradient(
+    120deg,
+    #ead8e8 0%,
+    #c364be 48%,
+    #873c83 100%
+  );
+  --home-listing-cta-button: #ffffff;
+  --home-listing-cta-button-foreground: #873c83;
+  --home-listing-cta-button-icon: #c364be;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-estate-cta: var(--estate-cta);
+  --color-estate-cta-foreground: var(--estate-cta-foreground);
+  --color-estate-cta-icon-surface: var(--estate-cta-icon-surface);
+  --color-estate-cta-icon-foreground: var(--estate-cta-icon-foreground);
+  --color-green-dark: var(--green-dark);
+  --color-what-we-do-title: var(--what-we-do-title);
+  --color-what-we-do-subtitle: var(--what-we-do-subtitle);
+  --color-what-we-do-surface: var(--what-we-do-surface);
+  --color-what-we-do-card-description: var(--what-we-do-card-description);
+  --color-home-stats-text: var(--home-stats-text);
+  --color-property-intelligence-accent: var(--property-intelligence-accent);
+  --color-property-intelligence-accent-dark: var(--property-intelligence-accent-dark);
+  --color-property-intelligence-navy: var(--property-intelligence-navy);
+  --color-media-service-card-description: var(--media-service-card-description);
+  --color-client-voices-accent: var(--client-voices-accent);
+  --color-home-listing-cta-description: var(--home-listing-cta-description);
+  --color-home-listing-cta-book: var(--home-listing-cta-book);
+  --color-home-listing-cta-book-foreground: var(--home-listing-cta-book-foreground);
+  --color-home-listing-cta-button: var(--home-listing-cta-button);
+  --color-home-listing-cta-button-foreground: var(--home-listing-cta-button-foreground);
+  --color-home-listing-cta-button-icon: var(--home-listing-cta-button-icon);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  --color-brand-purple-light: var(--brand-purple-light);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-orange: var(--brand-orange);
+  --color-solutions-role-price-surface: var(--solutions-role-price-surface);
+  --color-landing-surface: var(--landing-surface);
+  --color-landing-surface-muted: var(--landing-surface-muted);
+  --color-landing-trust-surface: var(--landing-trust-surface);
+  --radius-button: 9999px;
+  --font-sans: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.home-listing-cta-panel {
+  background: var(--home-listing-cta-gradient);
+}
+
+.data-services-report-cta-panel {
+  background: var(--property-intelligence-report-cta-gradient);
+}
+
+.home-landing-glass-card {
+  border: 1px solid var(--landing-card-border);
+  box-shadow: var(--landing-card-shadow);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.home-landing-hero-bg {
+  background: var(--landing-hero-gradient);
+}
+
+/** Inner routes — same stack as {@link HomeLandingHero}: white base + hero gradient at 80%. */
+.page-hero-background {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.page-hero-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--landing-hero-gradient);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.page-hero-background > * {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero-background--cyan-left::before {
+  background: var(--property-intelligence-page-gradient);
+}
