@@ -94,6 +94,7 @@
     inset 0 -32px 28px -28px rgba(0, 0, 0, 0.85),
     inset 0 -42px 48px -32px rgba(22, 192, 218, 0.4);
   --media-service-card-description: #b8c8d6;
+  --solutions-role-price-surface: #f7f2f9;
   --solutions-role-card-orange-shadow: 0 8px 32px oklch(0.72 0.16 55 / 0.14),
     0 2px 12px oklch(0.72 0.16 55 / 0.08);
   --solutions-role-card-orange-ring: oklch(0.72 0.16 55 / 0.22);
@@ -180,6 +181,7 @@
   --color-brand-cyan: var(--brand-cyan);
   --color-brand-yellow: var(--brand-yellow);
   --color-brand-orange: var(--brand-orange);
+  --color-solutions-role-price-surface: var(--solutions-role-price-surface);
   --color-landing-surface: var(--landing-surface);
   --color-landing-surface-muted: var(--landing-surface-muted);
   --color-landing-trust-surface: var(--landing-trust-surface);

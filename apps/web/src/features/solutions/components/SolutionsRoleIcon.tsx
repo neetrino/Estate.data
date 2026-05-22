@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { SolutionsRoleIconId } from "@/features/solutions/content/solutionsRolesCopy";
 import { SOLUTIONS_ROLE_ICON_BOX_CLASS } from "@/shared/lib/constants";
 
-const SOLUTIONS_ROLE_ICON_SVG_CLASS = "size-6";
+const SOLUTIONS_ROLE_ICON_SVG_CLASS = "size-7";
 
 type SolutionsRoleIconProps = {
   icon: SolutionsRoleIconId;

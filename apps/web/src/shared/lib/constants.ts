@@ -289,15 +289,62 @@ export const SOLUTIONS_SUBTITLE_GOLD_CLASS = "text-what-we-do-subtitle";
 
 export const SOLUTIONS_SUBTITLE_ACCENT_CLASS = "font-semibold text-what-we-do-subtitle";
 
-export const SOLUTIONS_ROLE_TITLE_CLASS = "text-lg font-bold text-what-we-do-title";
+export const SOLUTIONS_ROLE_TITLE_CLASS = "text-xl font-bold text-what-we-do-title sm:text-2xl";
+
+export const SOLUTIONS_ROLE_TITLE_ACCENT_CLASS =
+  "mt-1.5 h-1 w-10 rounded-full bg-what-we-do-title";
 
 export const SOLUTIONS_ROLE_PRICE_CLASS =
-  "mt-0.5 text-xl font-bold text-what-we-do-subtitle sm:text-2xl";
+  "text-2xl font-bold tracking-tight text-what-we-do-title sm:text-3xl";
 
 export const SOLUTIONS_ROLE_ICON_BOX_CLASS = [
-  "flex size-12 shrink-0 items-center justify-center rounded-2xl bg-what-we-do-title text-white",
+  "flex size-14 shrink-0 items-center justify-center rounded-2xl bg-what-we-do-title text-white",
   "shadow-[0_4px_14px_rgba(135,60,131,0.35)]",
 ].join(" ");
+
+export const SOLUTIONS_ROLE_DELIVERABLES_LABEL_CLASS =
+  "text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
+
+/** Solutions role card — nudge deliverables icon row left (px). */
+export const SOLUTIONS_ROLE_DELIVERABLES_OFFSET_X_PX = 10;
+
+/** Matches {@link SOLUTIONS_ROLE_DELIVERABLES_OFFSET_X_PX} via Tailwind spacing scale. */
+export const SOLUTIONS_ROLE_DELIVERABLES_LIST_OFFSET_CLASS = "-ml-2.5";
+
+/** Solutions role card 2 — extra nudge deliverables row right (px). */
+export const SOLUTIONS_ROLE_DELIVERABLES_OFFSET_RIGHT_X_PX = 2;
+
+/** Matches {@link SOLUTIONS_ROLE_DELIVERABLES_OFFSET_RIGHT_X_PX} via Tailwind spacing scale. */
+export const SOLUTIONS_ROLE_DELIVERABLES_LIST_OFFSET_RIGHT_CLASS = "ml-1";
+
+export const SOLUTIONS_ROLE_DELIVERABLES_OFFSET_RIGHT_ROLE_ID = "developers";
+
+/**
+ * Deliverable icon stroke colors — #C364BE, #FDBA2C, #16C0DA, #E55100, #2E4873, #873C83.
+ * Light purple and dark purple are not adjacent; yellow replaces dark purple on early slots.
+ * Cycles by index when a card has more than six deliverables.
+ */
+export const SOLUTIONS_DELIVERABLE_ICON_COLOR_CLASSES = [
+  "text-what-we-do-subtitle",
+  "text-brand-yellow",
+  "text-brand-cyan",
+  "text-brand-orange",
+  "text-brand-navy",
+  "text-what-we-do-title",
+] as const;
+
+export function getSolutionsDeliverableIconColorClass(index: number): string {
+  const palette = SOLUTIONS_DELIVERABLE_ICON_COLOR_CLASSES;
+  return palette[index % palette.length] ?? palette[0];
+}
+
+export const SOLUTIONS_ROLE_PRICE_BOX_CLASS = [
+  "flex shrink-0 flex-col items-center justify-center rounded-xl",
+  "bg-solutions-role-price-surface px-5 py-4 text-center sm:min-w-[7.5rem]",
+].join(" ");
+
+export const SOLUTIONS_ROLE_PRICE_LABEL_CLASS =
+  "text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground";
 
 /** Primary CTA surface — #C364BE (Contact + Solutions submit/CTA). */
 export const WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS =
@@ -330,10 +377,11 @@ export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-what-we-do-s
 export const CONTACT_STUDIO_LINK_CLASS =
   "text-base leading-relaxed text-black transition-colors hover:text-what-we-do-title sm:text-lg";
 
-/** About page — same header colors as Portfolio / Pricing. */
+/** About page — eyebrow matches Portfolio / Pricing; title uses brand navy (#2E4873). */
 export const ABOUT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 
-export const ABOUT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
+export const ABOUT_PAGE_TITLE_CLASS =
+  "mt-3 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
