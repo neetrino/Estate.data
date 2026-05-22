@@ -494,16 +494,12 @@ export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
 export const HOME_LISTING_CTA_PANEL_CLASS =
   "home-listing-cta-panel overflow-hidden rounded-3xl px-6 py-10 sm:px-10 sm:py-12";
 
-/** Estate pill — lavender surface, black label, purple icon disc (listing CTA). */
-export const HOME_LISTING_CTA_PRIMARY_BUTTON_CLASS = [
+/** Estate pill — white surface, #873C83 label, #C364BE icon disc (listing CTA above footer). */
+export const HOME_LISTING_CTA_PILL_BUTTON_CLASS = [
   "!bg-home-listing-cta-button !text-home-listing-cta-button-foreground",
   "[&>span:first-child]:!text-home-listing-cta-button-foreground",
   "[&>span:last-child]:!bg-home-listing-cta-button-icon [&>span:last-child]:!text-white",
 ].join(" ");
-
-/** Listing CTA — “View Pricing” outline; no hover fill/border change. */
-export const HOME_LISTING_CTA_SECONDARY_BUTTON_CLASS =
-  "hover:!border-brand-purple/30 hover:!bg-white";
 
 /** Estate.data pill CTA — 48px tall, fully rounded ends. */
 export const ESTATE_CTA_BUTTON_CLASS = "h-12 rounded-full";

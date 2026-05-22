@@ -164,9 +164,9 @@
     #c364be 48%,
     #873c83 100%
   );
-  --home-listing-cta-button: #ead8e8;
-  --home-listing-cta-button-foreground: #000000;
-  --home-listing-cta-button-icon: #873c83;
+  --home-listing-cta-button: #ffffff;
+  --home-listing-cta-button-foreground: #873c83;
+  --home-listing-cta-button-icon: #c364be;
 }
 
 @theme inline {
