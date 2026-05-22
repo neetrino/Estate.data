@@ -27,8 +27,9 @@ export const HOME_LANDING_HERO_GRID_CLASS =
 /** Hero copy column — sets row height on lg+; items-start keeps location chip shrink-wrapped. */
 export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = "flex flex-col items-start";
 
-/** Hero dashboard column — stretches to match copy column height. */
-export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS = "flex min-h-0 flex-col lg:h-full";
+/** Hero dashboard column — desktop only; hidden below lg (incl. 1,200+ preview card). */
+export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS =
+  "hidden min-h-0 flex-col lg:flex lg:h-full";
 
 export const HOME_LANDING_HERO_HEADLINE_CLASS = [
   "mt-7 text-[2.375rem] font-bold leading-[1.08] tracking-tight text-brand-navy",
@@ -72,10 +73,12 @@ export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 /**
  * Trust strip spacing — full-viewport pin only at xl+ (desktop).
  * Below xl (incl. iPad Pro): natural flow so mt-auto does not create a huge gap.
+ * md–xl: extra space above trusted partners on tablet / iPad Pro only.
  */
 export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = [
   "shrink-0 mb-[10px] max-sm:pt-8",
   "mt-8 sm:mt-10",
+  "md:max-xl:mt-12 lg:max-xl:mt-14",
   "xl:mt-auto xl:pt-0",
   "2xl:mt-10 2xl:pt-0",
 ].join(" ");

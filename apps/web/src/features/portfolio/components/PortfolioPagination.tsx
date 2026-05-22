@@ -25,19 +25,21 @@ const PORTFOLIO_PAGINATION_ELLIPSIS_CLASS =
 type PortfolioPaginationProps = {
   currentPage: number;
   totalItems: number;
+  itemsPerPage: number;
   onPageChange: (page: number) => void;
 };
 
 export function PortfolioPagination({
   currentPage,
   totalItems,
+  itemsPerPage,
   onPageChange,
 }: PortfolioPaginationProps) {
-  if (!shouldShowPortfolioPagination(totalItems)) {
+  if (!shouldShowPortfolioPagination(totalItems, itemsPerPage)) {
     return null;
   }
 
-  const totalPages = getPortfolioPageCount(totalItems);
+  const totalPages = getPortfolioPageCount(totalItems, itemsPerPage);
 
   const safePage = clampPortfolioPage(currentPage, totalPages);
   const pageNumbers = buildPageNumbers(safePage, totalPages);
