@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   HOME_STATS_COPY,
   HOME_STATS_COUNT_UP_DURATION_MS,
@@ -19,21 +19,36 @@ import {
 
 const STATS_INTERSECTION_THRESHOLD = 0.2;
 
+function subscribePrefersReducedMotion(onStoreChange: () => void): () => void {
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", onStoreChange);
+  return () => mediaQuery.removeEventListener("change", onStoreChange);
+}
+
+function getPrefersReducedMotionSnapshot(): boolean {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function HomeStatsStrip() {
   const { stats } = HOME_STATS_COPY;
   const sectionRef = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribePrefersReducedMotion,
+    getPrefersReducedMotionSnapshot,
+    () => false,
+  );
+  const [animatedProgress, setAnimatedProgress] = useState(0);
+  const progress = prefersReducedMotion ? 1 : animatedProgress;
   const hasStartedRef = useRef(false);
   const frameRef = useRef(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) {
+    if (prefersReducedMotion) {
       return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setProgress(1);
+    const section = sectionRef.current;
+    if (!section) {
       return;
     }
 
@@ -50,7 +65,7 @@ export function HomeStatsStrip() {
         const tick = (now: number) => {
           const elapsed = now - startTime;
           const t = Math.min(elapsed / HOME_STATS_COUNT_UP_DURATION_MS, 1);
-          setProgress(easeOutCubic(t));
+          setAnimatedProgress(easeOutCubic(t));
           if (t < 1) {
             frameRef.current = requestAnimationFrame(tick);
           }
@@ -67,7 +82,7 @@ export function HomeStatsStrip() {
       observer.disconnect();
       cancelAnimationFrame(frameRef.current);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section

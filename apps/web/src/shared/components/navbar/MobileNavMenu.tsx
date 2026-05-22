@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   MOBILE_NAV_MORE_LINKS,
   MOBILE_NAV_PRIMARY_LINKS,
@@ -29,12 +29,14 @@ function isMoreSectionActive(pathname: string): boolean {
 export function MobileNavMenu({ pathname, onNavigate }: MobileNavMenuProps) {
   const moreSectionActive = isMoreSectionActive(pathname);
   const [moreOpen, setMoreOpen] = useState(() => moreSectionActive);
+  const [prevMoreSectionActive, setPrevMoreSectionActive] = useState(moreSectionActive);
 
-  useEffect(() => {
+  if (moreSectionActive !== prevMoreSectionActive) {
+    setPrevMoreSectionActive(moreSectionActive);
     if (moreSectionActive) {
       setMoreOpen(true);
     }
-  }, [moreSectionActive]);
+  }
 
   return (
     <div className={NAVBAR_MOBILE_PANEL_SCROLL_CLASS}>
