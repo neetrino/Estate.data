@@ -1,8 +1,9 @@
 import type { ClientVoice } from "@/features/home/content/clientVoicesCopy";
 import { LANDING_GLASS_CARD_CLASS } from "@/features/home/landing/lib/landingStyles";
 import {
-  CLIENT_VOICES_STAR_COUNT,
+  CLIENT_VOICES_QUOTE_MARK_CLASS,
   CLIENT_VOICES_QUOTE_OFFSET_CLASS,
+  CLIENT_VOICES_STAR_COUNT,
   CLIENT_VOICES_STAR_LIFT_CLASS,
 } from "@/shared/lib/constants";
 
@@ -34,7 +35,7 @@ const CLIENT_VOICE_QUOTE_PATH =
 function ClientVoiceQuoteMark() {
   return (
     <div
-      className={`flex shrink-0 -space-x-2 text-brand-purple-light ${CLIENT_VOICES_QUOTE_OFFSET_CLASS}`}
+      className={`flex shrink-0 -space-x-2 ${CLIENT_VOICES_QUOTE_MARK_CLASS} ${CLIENT_VOICES_QUOTE_OFFSET_CLASS}`}
       aria-hidden
     >
       <ClientVoiceQuoteBubble />

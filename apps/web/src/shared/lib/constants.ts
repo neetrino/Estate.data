@@ -445,6 +445,9 @@ export const CLIENT_VOICES_QUOTE_OFFSET_CLASS = "-ml-[14px]";
 export const CLIENT_VOICES_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.2em] text-client-voices-accent sm:text-base";
 
+/** Client voices — decorative quote marks (#FDBA2C). */
+export const CLIENT_VOICES_QUOTE_MARK_CLASS = "text-brand-yellow";
+
 /** Client voices section — main heading typography. */
 export const CLIENT_VOICES_SECTION_TITLE_CLASS =
   "mt-3 text-3xl font-bold tracking-tight text-black sm:text-4xl md:text-5xl lg:text-[3rem]";
