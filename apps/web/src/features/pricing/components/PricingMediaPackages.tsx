@@ -10,6 +10,7 @@ export function PricingMediaPackages() {
       sectionTitle={sectionTitle}
       priceSuffix={priceSuffix}
       packages={packages}
+      afterPageHeader
     />
   );
 }

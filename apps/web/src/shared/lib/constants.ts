@@ -162,6 +162,12 @@ export const PRICING_MEDIA_CTA_LIFT_PX = 17;
 /** Analytics — gap above CTA (px). */
 export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 
+/** Pricing section — below page header (Media packages). */
+export const PRICING_SECTION_AFTER_HEADER_CLASS = "mt-8 sm:mt-10 lg:mt-12";
+
+/** Pricing section — below another pricing section (Analytics). */
+export const PRICING_SECTION_MARGIN_TOP_CLASS = "mt-14 sm:mt-16 lg:mt-20";
+
 /** Pricing — phone + tablet/iPad (≤1399px). Tune mobile here; leave desktop block below. */
 export const PRICING_GRID_MOBILE_TABLET_CLASS =
   "grid grid-cols-1 md:grid-cols-2 md:max-[1399px]:!grid-cols-2";
