@@ -11,8 +11,6 @@ const SEED_DIR = path.resolve(
   "../../../apps/web/public",
 );
 
-const WEB_APP_DIR = path.resolve(SEED_DIR, "..");
-
 type SeedAsset = {
   key: string;
   mimeType: string;
@@ -103,12 +101,42 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.siteFavicon,
-    absolutePath: path.join(WEB_APP_DIR, "src/app/icon.png"),
+    relativePath: "images/site-favicon.png",
     mimeType: "image/png",
   },
   {
     key: ASSET_KEYS.siteAppleIcon,
-    absolutePath: path.join(WEB_APP_DIR, "src/app/apple-icon.png"),
+    relativePath: "images/site-apple-icon.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedCompass,
+    relativePath: "images/trusted/compass.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedSothebys,
+    relativePath: "images/trusted/sothebys.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedTheAgency,
+    relativePath: "images/trusted/the-agency.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedDouglasElliman,
+    relativePath: "images/trusted/douglas-elliman.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedColdwellBanker,
+    relativePath: "images/trusted/coldwell-banker.png",
+    mimeType: "image/png",
+  },
+  {
+    key: ASSET_KEYS.trustedHiltonHyland,
+    relativePath: "images/trusted/hilton-hyland.png",
     mimeType: "image/png",
   },
 ] as const;

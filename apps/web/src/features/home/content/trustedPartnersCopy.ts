@@ -1,7 +1,5 @@
-import {
-  TRUSTED_PARTNER_IMAGE_PATHS,
-  type TrustedPartnerImageKey,
-} from "@/features/home/content/trustedPartnerAssets";
+import type { TrustedPartnerImageKey } from "@/features/home/content/trustedPartnerAssets";
+import { TRUSTED_PARTNER_IMAGE_PATHS } from "@/features/home/content/trustedPartnerAssets";
 
 export type TrustedPartnerId = TrustedPartnerImageKey;
 

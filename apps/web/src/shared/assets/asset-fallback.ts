@@ -80,6 +80,30 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     publicPath: "images/site-apple-icon.png",
     mimeType: "image/png",
   },
+  [ASSET_KEYS.trustedCompass]: {
+    publicPath: "images/trusted/compass.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.trustedSothebys]: {
+    publicPath: "images/trusted/sothebys.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.trustedTheAgency]: {
+    publicPath: "images/trusted/the-agency.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.trustedDouglasElliman]: {
+    publicPath: "images/trusted/douglas-elliman.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.trustedColdwellBanker]: {
+    publicPath: "images/trusted/coldwell-banker.png",
+    mimeType: "image/png",
+  },
+  [ASSET_KEYS.trustedHiltonHyland]: {
+    publicPath: "images/trusted/hilton-hyland.png",
+    mimeType: "image/png",
+  },
 };
 
 export function isAssetKey(value: string): value is AssetKey {

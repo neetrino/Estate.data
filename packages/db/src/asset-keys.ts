@@ -18,6 +18,12 @@ export const ASSET_KEYS = {
   contactEmailIcon: "contact-email-icon",
   siteFavicon: "site-favicon",
   siteAppleIcon: "site-apple-icon",
+  trustedCompass: "trusted-compass",
+  trustedSothebys: "trusted-sothebys",
+  trustedTheAgency: "trusted-the-agency",
+  trustedDouglasElliman: "trusted-douglas-elliman",
+  trustedColdwellBanker: "trusted-coldwell-banker",
+  trustedHiltonHyland: "trusted-hilton-hyland",
 } as const;
 
 export type AssetKey = (typeof ASSET_KEYS)[keyof typeof ASSET_KEYS];
