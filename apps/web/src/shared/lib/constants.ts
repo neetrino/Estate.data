@@ -539,6 +539,11 @@ export const ESTATE_CTA_LABEL_OFFSET_CLASS = "-translate-x-[10px]";
 /** Icon disc-only nudge left inside the pill (10px). */
 export const ESTATE_CTA_ICON_DISC_OFFSET_CLASS = "-translate-x-[5px]";
 
+/** Pill CTA in a flex column — natural width (matches hero Book a Shoot). */
+export const ESTATE_PILL_CONTENT_WIDTH_CLASS = [
+  "shrink-0 w-auto max-w-full self-start !mx-0",
+].join(" ");
+
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
 
