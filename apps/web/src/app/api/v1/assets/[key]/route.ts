@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { getPrisma } from "@estate/db";
+import { getPrisma } from "@estate/db/server";
 import { NextResponse } from "next/server";
 import {
   ASSET_FALLBACK_BY_KEY,
