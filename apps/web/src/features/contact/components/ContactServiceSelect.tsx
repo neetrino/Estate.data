@@ -3,6 +3,7 @@
 import {
   CONTACT_FORM_SERVICE_OPTIONS,
 } from "@/features/contact/content/contactFormCopy";
+import { CONTACT_FORM_LIGHT_PURPLE_HOVER_CLASS } from "@/features/contact/lib/contactFormStyles";
 import { useEffect, useId, useRef, useState } from "react";
 
 const CONTACT_SERVICE_TRIGGER_CLASS =
@@ -14,10 +15,14 @@ const CONTACT_SERVICE_CHEVRON_CLASS =
   "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-black transition-transform duration-200";
 
 const CONTACT_SERVICE_LIST_CLASS =
-  "absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-xl border border-foreground/15 bg-white py-1 shadow-[var(--client-voices-card-shadow)]";
+  "w-full rounded-xl border border-foreground/15 bg-white py-1 shadow-[var(--client-voices-card-shadow)]";
 
-const CONTACT_SERVICE_OPTION_CLASS =
-  "block w-full cursor-pointer px-4 py-2.5 text-left text-base text-black transition-colors hover:bg-what-we-do-surface";
+const CONTACT_SERVICE_OPTION_CLASS = [
+  "block w-full cursor-pointer px-4 py-2.5 text-left text-base text-black transition-colors",
+  CONTACT_FORM_LIGHT_PURPLE_HOVER_CLASS,
+].join(" ");
+
+const CONTACT_SERVICE_DROPDOWN_OFFSET_CLASS = "pt-1";
 
 type ContactServiceSelectProps = {
   id: string;
@@ -40,22 +45,14 @@ export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectPr
       return;
     }
 
-    function handlePointerDown(event: MouseEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handlePointerDown);
     document.addEventListener("keydown", handleEscape);
     return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleEscape);
     };
   }, [open]);
@@ -66,7 +63,12 @@ export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectPr
   }
 
   return (
-    <div ref={rootRef} className="relative">
+    <div
+      ref={rootRef}
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <input type="hidden" name="service" value={value} required />
 
       <button
@@ -74,9 +76,10 @@ export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectPr
         id={id}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-controls={listboxId}
+        aria-controls={open ? listboxId : undefined}
         className={CONTACT_SERVICE_TRIGGER_CLASS}
-        onClick={() => setOpen((isOpen) => !isOpen)}
+        onClick={() => setOpen(true)}
+        onFocus={() => setOpen(true)}
       >
         <span
           className={selectedOption ? undefined : CONTACT_SERVICE_PLACEHOLDER_CLASS}
@@ -87,29 +90,33 @@ export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectPr
       </button>
 
       {open ? (
-        <ul
-          id={listboxId}
-          role="listbox"
-          aria-labelledby={id}
-          className={CONTACT_SERVICE_LIST_CLASS}
+        <div
+          className={`absolute inset-x-0 top-full z-20 ${CONTACT_SERVICE_DROPDOWN_OFFSET_CLASS}`}
         >
-          {CONTACT_FORM_SERVICE_OPTIONS.map((option) => (
-            <li
-              key={option.value}
-              role="option"
-              aria-selected={value === option.value}
-              className="w-full"
-            >
-              <button
-                type="button"
-                className={CONTACT_SERVICE_OPTION_CLASS}
-                onClick={() => selectOption(option.value)}
+          <ul
+            id={listboxId}
+            role="listbox"
+            aria-labelledby={id}
+            className={CONTACT_SERVICE_LIST_CLASS}
+          >
+            {CONTACT_FORM_SERVICE_OPTIONS.map((option) => (
+              <li
+                key={option.value}
+                role="option"
+                aria-selected={value === option.value}
+                className="w-full"
               >
-                {option.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+                <button
+                  type="button"
+                  className={CONTACT_SERVICE_OPTION_CLASS}
+                  onClick={() => selectOption(option.value)}
+                >
+                  {option.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
     </div>
   );

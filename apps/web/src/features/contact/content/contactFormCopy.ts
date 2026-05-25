@@ -19,7 +19,7 @@ export const CONTACT_FORM_COPY = {
       label: "Service needed",
       placeholder: "Select a service",
     },
-    preferredDate: { label: "Preferred date", placeholder: "" },
+    preferredDate: { label: "Preferred date", placeholder: "Select a date" },
     projectDetails: {
       label: "Project details",
       placeholder: "Square footage, timeline, deliverables, or anything else we should know.",

@@ -1,6 +1,7 @@
 "use client";
 
 import { CONTACT_FORM_COPY } from "@/features/contact/content/contactFormCopy";
+import { ContactDatePicker } from "@/features/contact/components/ContactDatePicker";
 import { ContactServiceSelect } from "@/features/contact/components/ContactServiceSelect";
 import {
   CONTACT_FORM_CONTROL_FOCUS_CLASS,
@@ -29,7 +30,7 @@ type ContactFormFieldProps = {
 
 function ContactFormField({ id, label, children }: ContactFormFieldProps) {
   return (
-    <div>
+    <div className="min-w-0">
       <label htmlFor={id} className={CONTACT_FORM_LABEL_CLASS}>
         {label}
       </label>
@@ -104,11 +105,9 @@ export function ContactRequestForm() {
           id="contact-preferred-date"
           label={fields.preferredDate.label}
         >
-          <input
+          <ContactDatePicker
             id="contact-preferred-date"
-            name="preferredDate"
-            type="date"
-            className={CONTACT_FORM_CONTROL_CLASS}
+            placeholder={fields.preferredDate.placeholder}
           />
         </ContactFormField>
       </div>
