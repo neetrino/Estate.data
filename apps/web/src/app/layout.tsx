@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
-import { SiteFooter } from "@/shared/components/footer";
+import { ConditionalSiteFooter } from "@/shared/components/layout/ConditionalSiteFooter";
 import { siteFont } from "./site-font";
 import "./globals.css";
 
@@ -30,7 +30,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
         <div className="flex min-h-0 flex-1 flex-col">{children}</div>
-        <SiteFooter />
+        <ConditionalSiteFooter />
       </body>
     </html>
   );

@@ -14,6 +14,8 @@ export const API_ROUTES = {
   faq: `${API_VERSION_PREFIX}/faq`,
   i18nLocales: `${API_VERSION_PREFIX}/i18n/locales`,
   pricing: `${API_VERSION_PREFIX}/pricing`,
+  adminAuthLogin: `${API_VERSION_PREFIX}/admin/auth/login`,
+  adminAuthRefresh: `${API_VERSION_PREFIX}/admin/auth/refresh`,
 } as const;
 
 export type ApiRouteKey = keyof typeof API_ROUTES;
