@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import { PortfolioFilter } from "@/features/portfolio/components/PortfolioFilter";
 import { PortfolioPagination } from "@/features/portfolio/components/PortfolioPagination";
@@ -42,10 +42,6 @@ export function PortfolioWorkSection() {
 
   const totalPages = getPortfolioPageCount(filteredProjects.length, itemsPerPage);
   const safePage = clampPortfolioPage(currentPage, totalPages);
-
-  useEffect(() => {
-    setCurrentPage((page) => clampPortfolioPage(page, totalPages));
-  }, [itemsPerPage, totalPages]);
 
   const paginatedProjects = useMemo(
     () => slicePortfolioPage(filteredProjects, safePage, itemsPerPage),

@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "generate": "prisma generate",
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
@@ -14,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.0"
+    "@prisma/client": "^6.19.3"
   },
   "devDependencies": {
     "@types/node": "^20",
