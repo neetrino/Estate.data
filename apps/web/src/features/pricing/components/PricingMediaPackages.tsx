@@ -1,8 +1,12 @@
 import { PricingPackageSection } from "@/features/pricing/components/PricingPackageSection";
-import { PRICING_MEDIA_PACKAGES_COPY } from "@/features/pricing/content/pricingMediaPackagesCopy";
+import type { PricingCategoryData } from "@/features/pricing/services/fetchPricingPage";
 
-export function PricingMediaPackages() {
-  const { sectionTitle, priceSuffix, packages } = PRICING_MEDIA_PACKAGES_COPY;
+type PricingMediaPackagesProps = {
+  category: PricingCategoryData;
+};
+
+export function PricingMediaPackages({ category }: PricingMediaPackagesProps) {
+  const { sectionTitle, priceSuffix, packages } = category;
 
   return (
     <PricingPackageSection

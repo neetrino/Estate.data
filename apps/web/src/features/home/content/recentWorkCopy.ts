@@ -1,4 +1,5 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS } from "@estate/db";
+import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 
 export type RecentWorkProject = {
   readonly id: string;
@@ -7,7 +8,7 @@ export type RecentWorkProject = {
 };
 
 /** Placeholder image until admin panel supplies project assets. */
-const RECENT_WORK_PLACEHOLDER_IMAGE = assetUrl(ASSET_KEYS.recentWorkPlaceholder);
+const RECENT_WORK_PLACEHOLDER_IMAGE = resolveAssetUrl(ASSET_KEYS.recentWorkPlaceholder);
 
 const RECENT_WORK_PLACEHOLDER_ALT =
   "Luxury hillside home overlooking the ocean at sunset";
@@ -17,6 +18,7 @@ export const HOME_RECENT_WORK_COPY = {
   title: "Selected LA projects",
   viewAllLabel: "View all",
   viewAllHref: "/portfolio",
+  /** Static mock tiles when `NEXT_PUBLIC_USE_MOCK_API=true`. */
   projects: [
     {
       id: "project-1",

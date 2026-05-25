@@ -1,7 +1,8 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS } from "@estate/db";
+import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 import { DATA_BIM_PATH } from "@/shared/lib/routes";
 
-export const PROPERTY_INTELLIGENCE_IMAGE_PATH = assetUrl(
+export const PROPERTY_INTELLIGENCE_IMAGE_PATH = resolveAssetUrl(
   ASSET_KEYS.propertyIntelligenceHero,
 );
 

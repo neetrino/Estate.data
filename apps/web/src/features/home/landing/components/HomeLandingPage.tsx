@@ -9,9 +9,14 @@ import {
   LazyHomeWhatWeDo,
 } from "@/features/home/landing/lib/lazyHomeSections";
 import { LANDING_PAGE_CLASS } from "@/features/home/landing/lib/landingStyles";
+import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import { Navbar } from "@/shared/components/navbar";
 
-export function HomeLandingPage() {
+type HomeLandingPageProps = {
+  projects: readonly RecentWorkProject[];
+};
+
+export function HomeLandingPage({ projects }: HomeLandingPageProps) {
   return (
     <>
       <Navbar />
@@ -20,7 +25,7 @@ export function HomeLandingPage() {
           <HomeLandingHero />
           <LazyHomeWhatWeDo />
           <LazyHomeHowItWorks />
-          <LazyHomeRecentWork />
+          <LazyHomeRecentWork projects={projects} />
           <LazyHomeStatsStrip />
           <LazyHomePropertyIntelligence />
           <LazyHomeClientVoices />

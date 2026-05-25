@@ -1,6 +1,7 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS } from "@estate/db";
+import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 
-/** Proxima Nova — Tailwind `font-sans` (see globals.css). */
+/** Montserrat (next/font) — Tailwind `font-sans` (see site-font.ts, globals.css). */
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
 /** Navbar links + CTA typography (excludes Estate Data wordmark). */
@@ -123,7 +124,7 @@ export const PRICING_CARD_PADDING_CLASS = "px-5 py-6 sm:px-8 sm:py-7";
  * Home hero background (public path).
  * Use ≥2560px width source for sharp full-screen + Retina (current export may be ~1024px).
  */
-export const HOME_HERO_IMAGE_PATH = assetUrl(ASSET_KEYS.homeHero);
+export const HOME_HERO_IMAGE_PATH = resolveAssetUrl(ASSET_KEYS.homeHero);
 
 /** Bump when replacing hero-home.jpg so browser/Next image cache refreshes. */
 export const HOME_HERO_CACHE_VERSION = "20260518-hero-la";
@@ -546,9 +547,6 @@ export const ESTATE_PILL_CONTENT_WIDTH_CLASS = [
 
 /** Default fetch timeout for API client (ms). */
 export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
-
-/** API version prefix — keep in sync with apps/api routes. */
-export const API_VERSION_PREFIX = "/v1";
 
 /** Lazy-loaded section shell — reserves vertical space to limit CLS. */
 export const LAZY_SECTION_PLACEHOLDER_MIN_HEIGHT_CLASS = "min-h-[20rem] sm:min-h-[22rem]";

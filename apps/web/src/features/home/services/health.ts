@@ -1,14 +1,13 @@
 import { clientEnv } from "@/config/env";
 import { apiClient, API_ROUTES } from "@/shared/api";
+import type { HealthStatus } from "@/shared/api/types";
 
-export type HealthStatus = {
-  status: "ok";
-};
+export type { HealthStatus };
 
-/** Example: mock until apps/api implements GET /v1/health. */
+/** Calls `GET /api/v1/health` on the API app, or returns mock when configured. */
 export async function fetchHealth(): Promise<HealthStatus> {
   if (clientEnv.NEXT_PUBLIC_USE_MOCK_API) {
-    return { status: "ok" };
+    return { status: "ok", db: "ok" };
   }
 
   return apiClient.get<HealthStatus>(API_ROUTES.health);

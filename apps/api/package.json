@@ -1,12 +1,33 @@
 {
   "name": "@estate/api",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "Next.js API app (scaffold when backend work starts)",
   "scripts": {
-    "dev": "node -e \"console.log('@estate/api: not scaffolded yet — see apps/api/README.md')\"",
-    "build": "node -e \"process.exit(0)\"",
-    "lint": "node -e \"process.exit(0)\"",
-    "typecheck": "node -e \"process.exit(0)\""
+    "dev": "next dev --port 3001",
+    "build": "pnpm --filter @estate/db generate && next build",
+    "start": "next start --port 3001",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
+    "@estate/db": "workspace:*",
+    "@node-rs/argon2": "^2.0.2",
+    "@upstash/ratelimit": "^2.0.6",
+    "@upstash/redis": "^1.35.3",
+    "jose": "^6.2.3",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "resend": "^6.12.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "typescript": "^5"
   }
 }
