@@ -1,8 +1,6 @@
+import { ClientVoiceDecorIcon } from "@/features/home/components/ClientVoiceCardIcons";
 import type { ClientVoice } from "@/features/home/content/clientVoicesCopy";
-import { LANDING_GLASS_CARD_CLASS } from "@/features/home/landing/lib/landingStyles";
 import {
-  CLIENT_VOICES_QUOTE_MARK_CLASS,
-  CLIENT_VOICES_QUOTE_OFFSET_CLASS,
   CLIENT_VOICES_STAR_COUNT,
   CLIENT_VOICES_STAR_LIFT_CLASS,
 } from "@/shared/lib/constants";
@@ -13,42 +11,26 @@ type ClientVoiceCardProps = {
 
 export function ClientVoiceCard({ voice }: ClientVoiceCardProps) {
   return (
-    <article className={`${LANDING_GLASS_CARD_CLASS} flex h-full w-full flex-col p-6 sm:p-7`}>
-      <ClientVoiceQuoteMark />
-      <blockquote className="mt-4 flex-1 text-base leading-relaxed text-brand-navy">
-        {voice.quote}
+    <article className="home-client-voice-card h-full">
+      <div className="home-client-voice-card__top">
+        <span className="home-client-voice-card__quote-mark" aria-hidden>
+          &ldquo;
+        </span>
+        <ClientVoiceDecorIcon icon={voice.icon} className="home-client-voice-card__icon" />
+      </div>
+
+      <blockquote className="home-client-voice-card__quote">
+        <p>{voice.quote}</p>
       </blockquote>
-      <footer className="mt-6 flex items-end justify-between gap-4">
-        <div className="min-w-0">
-          <p className="font-bold text-brand-navy">{voice.name}</p>
-          <p className="mt-0.5 text-sm text-muted-foreground">{voice.role}</p>
+
+      <footer className="home-client-voice-card__footer">
+        <div className="home-client-voice-card__author">
+          <p className="home-client-voice-card__name">{voice.name}</p>
+          <p className="home-client-voice-card__role">{voice.role}</p>
         </div>
-        <ClientVoiceStarRating className={`shrink-0 ${CLIENT_VOICES_STAR_LIFT_CLASS}`} />
+        <ClientVoiceStarRating className={CLIENT_VOICES_STAR_LIFT_CLASS} />
       </footer>
     </article>
-  );
-}
-
-const CLIENT_VOICE_QUOTE_PATH =
-  "M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z";
-
-function ClientVoiceQuoteMark() {
-  return (
-    <div
-      className={`flex shrink-0 -space-x-2 ${CLIENT_VOICES_QUOTE_MARK_CLASS} ${CLIENT_VOICES_QUOTE_OFFSET_CLASS}`}
-      aria-hidden
-    >
-      <ClientVoiceQuoteBubble />
-      <ClientVoiceQuoteBubble />
-    </div>
-  );
-}
-
-function ClientVoiceQuoteBubble() {
-  return (
-    <svg className="size-6 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-      <path d={CLIENT_VOICE_QUOTE_PATH} />
-    </svg>
   );
 }
 
@@ -57,27 +39,28 @@ type ClientVoiceStarRatingProps = {
 };
 
 function ClientVoiceStarRating({ className }: ClientVoiceStarRatingProps) {
-  const stars = Array.from({ length: CLIENT_VOICES_STAR_COUNT }, (_, index) => (
-    <StarIcon key={index} />
-  ));
-
   return (
     <div
-      className={className}
+      className={["home-client-voice-card__stars", className].filter(Boolean).join(" ")}
       role="img"
       aria-label={`${CLIENT_VOICES_STAR_COUNT} out of ${CLIENT_VOICES_STAR_COUNT} stars`}
     >
-      <ul className="flex gap-0.5">{stars}</ul>
+      {Array.from({ length: CLIENT_VOICES_STAR_COUNT }, (_, index) => (
+        <StarIcon key={index} />
+      ))}
     </div>
   );
 }
 
 function StarIcon() {
   return (
-    <li aria-hidden>
-      <svg className="size-4 text-brand-yellow" viewBox="0 0 20 20" fill="currentColor">
-        <path d="M10 1.5 12.472 7.236l6.364.925-4.604 4.486 1.086 6.338L10 15.773l-5.318 2.794 1.086-6.338-4.604-4.486 6.364-.925L10 1.5Z" />
-      </svg>
-    </li>
+    <svg
+      className="home-client-voice-card__star size-4"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M10 1.5 12.472 7.236l6.364.925-4.604 4.486 1.086 6.338L10 15.773l-5.318 2.794 1.086-6.338-4.604-4.486 6.364-.925L10 1.5Z" />
+    </svg>
   );
 }

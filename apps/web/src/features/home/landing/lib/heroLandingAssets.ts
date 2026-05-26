@@ -28,3 +28,10 @@ export const HOME_PROPERTY_INTELLIGENCE_VISUAL_SOURCES = {
   default: "/images/property-intelligence/home-visual-1024.webp",
   retina: "/images/property-intelligence/home-visual-1536.webp",
 } as const;
+
+/** Pastel wave section behind Client voices (What clients say). */
+export const HOME_CLIENT_VOICES_BG_SOURCES = {
+  mobile: "/images/client-voices/home-section-bg-1024.webp",
+  tablet: "/images/client-voices/home-section-bg-1920.webp",
+  desktop: "/images/client-voices/home-section-bg-2560.webp",
+} as const;

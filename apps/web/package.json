@@ -12,6 +12,7 @@
     "optimize:what-we-do-bg": "node scripts/optimize-what-we-do-bg.mjs",
     "optimize:home-stats-bg": "node scripts/optimize-home-stats-bg.mjs",
     "optimize:home-property-intelligence": "node scripts/optimize-home-property-intelligence.mjs",
+    "optimize:home-client-voices-bg": "node scripts/optimize-home-client-voices-bg.mjs",
     "optimize:how-it-works-assets": "node scripts/optimize-how-it-works-assets.mjs"
   },
   "dependencies": {
