@@ -1,46 +1,111 @@
 import { HOME_HOW_IT_WORKS_COPY } from "@/features/home/content/howItWorksCopy";
+import { HowItWorksConnector } from "@/features/home/landing/components/HowItWorksConnector";
 import { HowItWorksStepIcon } from "@/features/home/landing/components/HowItWorksStepIcon";
 import {
-  LANDING_CONTAINER_CLASS,
-  LANDING_EYEBROW_CLASS,
-  LANDING_SECTION_TITLE_CLASS,
-  LANDING_SECTION_WHITE_CLASS,
-  landingIconSurfaceClass,
-} from "@/features/home/landing/lib/landingStyles";
+  HowItWorksBackgroundDecor,
+  HowItWorksEyebrowDecor,
+  HowItWorksHeaderDecor,
+} from "@/features/home/landing/components/HowItWorksSectionDecor";
+import { HOW_IT_WORKS_BG_SOURCES } from "@/features/home/landing/lib/howItWorksAssets";
+import { howItWorksStepBadgeClass } from "@/features/home/landing/lib/howItWorksStepAccent";
+import { LANDING_CONTAINER_CLASS, LANDING_SECTION_CLASS } from "@/features/home/landing/lib/landingStyles";
+import "@/features/home/styles/how-it-works-section.css";
 
-const STEP_TITLE_CLASS = "mt-4 text-base font-bold text-brand-navy";
-
-const STEP_DESCRIPTION_CLASS = "mt-2 text-sm leading-relaxed text-muted-foreground";
-
-const STEP_CONNECTOR_CLASS =
-  "absolute top-6 left-[calc(50%+2.25rem)] hidden h-px w-[calc(100%-4.5rem)] border-t border-dashed border-brand-navy/20 lg:block";
+const HOW_IT_WORKS_SECTION_CLASS = `how-it-works-section relative isolate overflow-hidden ${LANDING_SECTION_CLASS}`;
 
 export function HomeHowItWorks() {
-  const { eyebrow, title, steps } = HOME_HOW_IT_WORKS_COPY;
+  const { eyebrow, titleLines, steps } = HOME_HOW_IT_WORKS_COPY;
 
   return (
-    <section className={LANDING_SECTION_WHITE_CLASS} aria-labelledby="how-it-works-heading">
-      <div className={LANDING_CONTAINER_CLASS}>
-        <header className="text-center">
-          <p className={LANDING_EYEBROW_CLASS}>{eyebrow}</p>
-          <h2 id="how-it-works-heading" className={`mt-3 ${LANDING_SECTION_TITLE_CLASS}`}>
-            {title}
+    <section className={HOW_IT_WORKS_SECTION_CLASS} aria-labelledby="how-it-works-heading">
+      <HowItWorksBackgroundLayer />
+
+      <div className={`${LANDING_CONTAINER_CLASS} relative z-10`}>
+        <header className="how-it-works-header relative text-center">
+          <HowItWorksHeaderDecor />
+          <div className="how-it-works-eyebrow-wrap relative inline-flex">
+            <HowItWorksEyebrowDecor />
+            <p className="how-it-works-eyebrow-pill">{eyebrow}</p>
+          </div>
+          <h2 id="how-it-works-heading" className="how-it-works-title">
+            <span className="how-it-works-title-line">
+              {titleLines.map((line, index) => (
+                <span key={line}>
+                  {line}
+                  {index < titleLines.length - 1 ? <br className="hidden sm:block" /> : null}
+                </span>
+              ))}
+            </span>
+            <span className="how-it-works-title-accent-dot" aria-hidden />
           </h2>
+          <HowItWorksTitleDivider />
         </header>
 
-        <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
-          {steps.map((step, index) => (
-            <li key={step.id} className="relative flex flex-col items-center text-center">
-              {index < steps.length - 1 ? <span className={STEP_CONNECTOR_CLASS} aria-hidden /> : null}
-              <span className={landingIconSurfaceClass(step.accent)}>
-                <HowItWorksStepIcon icon={step.icon} accent={step.accent} />
-              </span>
-              <h3 className={STEP_TITLE_CLASS}>{step.title}</h3>
-              <p className={STEP_DESCRIPTION_CLASS}>{step.description}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="how-it-works-steps">
+          <div className="how-it-works-grid-wrap">
+            <HowItWorksConnector />
+            <ol className="how-it-works-grid">
+              {steps.map((step, index) => (
+                <li key={step.id} className="how-it-works-step">
+                  <div className="how-it-works-step-icon-wrap">
+                    <HowItWorksStepIcon icon={step.icon} />
+                  </div>
+                  <article className="how-it-works-step-card">
+                    <h3 className="how-it-works-step-title">{step.title}</h3>
+                    <p className="how-it-works-step-description">{step.description}</p>
+                    <span
+                      className={`how-it-works-step-badge ${howItWorksStepBadgeClass(step.accent)}`}
+                      aria-label={`Step ${index + 1}`}
+                    >
+                      {index + 1}
+                    </span>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function HowItWorksTitleDivider() {
+  return (
+    <div className="how-it-works-title-divider" aria-hidden>
+      <span className="how-it-works-title-divider__line" />
+      <span className="how-it-works-title-divider__dot how-it-works-title-divider__dot--purple" />
+      <span className="how-it-works-title-divider__dot how-it-works-title-divider__dot--cyan" />
+      <span className="how-it-works-title-divider__dot how-it-works-title-divider__dot--navy" />
+    </div>
+  );
+}
+
+function HowItWorksBackgroundLayer() {
+  return (
+    <div
+      className="home-how-it-works-bg-layer pointer-events-none absolute inset-0 z-0 size-full min-h-full overflow-hidden"
+      aria-hidden
+    >
+      <HowItWorksBackgroundPicture />
+      <HowItWorksBackgroundDecor />
+    </div>
+  );
+}
+
+function HowItWorksBackgroundPicture() {
+  return (
+    <picture className="absolute inset-0 block size-full min-h-full" aria-hidden>
+      <source media="(min-width: 1280px)" srcSet={HOW_IT_WORKS_BG_SOURCES.desktop} type="image/webp" />
+      <source media="(min-width: 768px)" srcSet={HOW_IT_WORKS_BG_SOURCES.tablet} type="image/webp" />
+      <img
+        src={HOW_IT_WORKS_BG_SOURCES.mobile}
+        alt=""
+        width={2560}
+        height={1440}
+        decoding="async"
+        className="how-it-works-bg-image size-full min-h-full"
+      />
+    </picture>
   );
 }

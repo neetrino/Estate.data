@@ -302,6 +302,11 @@ button:disabled {
   );
 }
 
+/** How it works — fallback while the background photo loads. */
+.home-how-it-works-bg-layer {
+  background: linear-gradient(180deg, #fff 0%, #f8f9fc 55%, #f3f0fa 100%);
+}
+
 .hero-headline-gradient {
   background: var(--brand-marketing-gradient);
   -webkit-background-clip: text;

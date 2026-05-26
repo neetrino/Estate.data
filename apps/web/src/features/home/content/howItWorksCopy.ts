@@ -1,4 +1,4 @@
-export type HowItWorksAccent = "purple" | "cyan" | "yellow" | "orange" | "navy";
+export type HowItWorksAccent = "purple" | "cyan" | "teal" | "orange" | "pink";
 
 export type HowItWorksIconId =
   | "upload-data"
@@ -17,7 +17,7 @@ export type HowItWorksStep = {
 
 export const HOME_HOW_IT_WORKS_COPY = {
   eyebrow: "How it works",
-  title: "From raw data to intelligent real estate operations.",
+  titleLines: ["From raw data to intelligent", "real estate operations."] as const,
   steps: [
     {
       id: "upload-data",
@@ -37,7 +37,7 @@ export const HOME_HOW_IT_WORKS_COPY = {
       id: "process-store",
       title: "Process & Store",
       description: "Assets are processed, secured, and stored for easy access.",
-      accent: "yellow",
+      accent: "teal",
       icon: "process-store",
     },
     {
@@ -51,7 +51,7 @@ export const HOME_HOW_IT_WORKS_COPY = {
       id: "scale-grow",
       title: "Scale & Grow",
       description: "Collaborate across teams and scale your operations.",
-      accent: "yellow",
+      accent: "pink",
       icon: "scale-grow",
     },
   ] as const satisfies readonly HowItWorksStep[],

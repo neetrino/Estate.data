@@ -9,7 +9,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "optimize:hero-bg": "node scripts/optimize-hero-landing-bg.mjs",
-    "optimize:what-we-do-bg": "node scripts/optimize-what-we-do-bg.mjs"
+    "optimize:what-we-do-bg": "node scripts/optimize-what-we-do-bg.mjs",
+    "optimize:how-it-works-assets": "node scripts/optimize-how-it-works-assets.mjs"
   },
   "dependencies": {
     "@estate/db": "workspace:*",
