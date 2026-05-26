@@ -1,6 +1,5 @@
 import { LazyPortfolioWorkSection } from "@/features/portfolio/lib/lazyPortfolioComponents";
 import { PORTFOLIO_PAGE_COPY } from "@/features/portfolio/content/portfolioCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
@@ -14,9 +13,7 @@ export function PortfolioPage() {
   const { eyebrow, title, subtitle } = PORTFOLIO_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
+    <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={WHAT_WE_DO_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -25,7 +22,6 @@ export function PortfolioPage() {
           </header>
           <LazyPortfolioWorkSection />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

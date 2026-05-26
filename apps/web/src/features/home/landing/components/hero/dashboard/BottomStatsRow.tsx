@@ -1,5 +1,7 @@
 import { HERO_DASHBOARD_COPY } from "@/features/home/content/heroDashboardCopy";
 import type { HeroDashboardBottomStat } from "@/features/home/content/heroDashboardCopy";
+import { dashboardChartStatEnterClass } from "@/features/home/landing/lib/dashboardChartBarStyles";
+import "@/features/home/landing/styles/dashboard-chart-enter.css";
 import {
   BOTTOM_STATS_ITEM_CLASS,
   BOTTOM_STATS_LABEL_CLASS,
@@ -13,8 +15,11 @@ export function BottomStatsRow() {
   return (
     <div className={BOTTOM_STATS_ROW_CARD_CLASS}>
       <ul className={BOTTOM_STATS_ROW_GRID_CLASS} aria-label="Summary statistics">
-        {HERO_DASHBOARD_COPY.bottomStats.map((stat) => (
-          <li key={stat.id} className={BOTTOM_STATS_ITEM_CLASS}>
+        {HERO_DASHBOARD_COPY.bottomStats.map((stat, index) => (
+          <li
+            key={stat.id}
+            className={`${BOTTOM_STATS_ITEM_CLASS} ${dashboardChartStatEnterClass(index)}`}
+          >
             <BottomStatItem stat={stat} />
           </li>
         ))}

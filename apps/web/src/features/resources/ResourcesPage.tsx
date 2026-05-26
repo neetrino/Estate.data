@@ -1,6 +1,5 @@
 import { ResourcesBodySection } from "@/features/resources/components/ResourcesBodySection";
 import { RESOURCES_PAGE_COPY } from "@/features/resources/content/resourcesPageCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   ABOUT_PAGE_EYEBROW_CLASS,
   ABOUT_PAGE_MAIN_CLASS,
@@ -14,9 +13,7 @@ export function ResourcesPage() {
   const { eyebrow, title, subtitle } = RESOURCES_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={ABOUT_PAGE_MAIN_CLASS}>
+    <main className={ABOUT_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -25,7 +22,6 @@ export function ResourcesPage() {
           </header>
           <ResourcesBodySection />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

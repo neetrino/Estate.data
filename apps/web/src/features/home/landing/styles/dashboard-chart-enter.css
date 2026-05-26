@@ -1,0 +1,71 @@
+@keyframes dashboard-chart-bar-rise {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes dashboard-chart-series-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.dashboard-chart-bar-rise {
+  transform-box: fill-box;
+  transform-origin: center 100%;
+  transform: scaleY(0);
+  animation: dashboard-chart-bar-rise 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.dashboard-chart-bar-col-0 {
+  animation-delay: 360ms;
+}
+
+.dashboard-chart-bar-col-1 {
+  animation-delay: 440ms;
+}
+
+.dashboard-chart-bar-col-2 {
+  animation-delay: 520ms;
+}
+
+.dashboard-chart-bar-col-3 {
+  animation-delay: 600ms;
+}
+
+.dashboard-chart-bar-col-4 {
+  animation-delay: 680ms;
+}
+
+.dashboard-chart-series-reveal {
+  opacity: 0;
+  animation: dashboard-chart-series-fade 0.48s ease-out forwards;
+  animation-delay: 760ms;
+}
+
+.dashboard-chart-stat-rise {
+  transform-origin: center bottom;
+  transform: scaleY(0);
+  animation: dashboard-chart-bar-rise 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-chart-bar-rise,
+  .dashboard-chart-stat-rise {
+    animation: none;
+    transform: none;
+  }
+
+  .dashboard-chart-series-reveal {
+    animation: none;
+    opacity: 1;
+  }
+}

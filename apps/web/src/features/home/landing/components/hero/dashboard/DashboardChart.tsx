@@ -1,4 +1,14 @@
+import "@/features/home/landing/styles/dashboard-chart-enter.css";
+
 import { HERO_DASHBOARD_COPY } from "@/features/home/content/heroDashboardCopy";
+import {
+  DASHBOARD_CHART_BAR_FILL_OPACITY,
+  DASHBOARD_CHART_BAR_GAP,
+  DASHBOARD_CHART_BAR_RADIUS,
+  DASHBOARD_CHART_BAR_WIDTH,
+  DASHBOARD_CHART_SERIES_REVEAL_CLASS,
+  dashboardChartBarEnterClass,
+} from "@/features/home/landing/lib/dashboardChartBarStyles";
 import {
   DASHBOARD_CHART_CARD_CLASS,
   DASHBOARD_CHART_FILTER_CLASS,
@@ -120,39 +130,45 @@ export function DashboardChart() {
             </text>
           ))}
 
-          {seriesPaths.map((series) => (
-            <path
-              key={`${series.id}-area`}
-              d={series.areaPath}
-              fill={`url(#dashboard-chart-area-${series.id})`}
-            />
-          ))}
+          <g aria-hidden>
+            {renderChartBars(chart.series, xPositions)}
+          </g>
 
-          {seriesPaths.map((series) => (
-            <path
-              key={`${series.id}-line`}
-              d={series.linePath}
-              fill="none"
-              stroke={series.color}
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          ))}
-
-          {seriesPaths.map((series) =>
-            series.points.map((point, pointIndex) => (
-              <circle
-                key={`${series.id}-point-${pointIndex}`}
-                cx={point.x}
-                cy={point.y}
-                r={pointIndex === chart.tooltipIndex ? 4.5 : 3.5}
-                fill="white"
-                stroke={series.color}
-                strokeWidth="2"
+          <g className={DASHBOARD_CHART_SERIES_REVEAL_CLASS}>
+            {seriesPaths.map((series) => (
+              <path
+                key={`${series.id}-area`}
+                d={series.areaPath}
+                fill={`url(#dashboard-chart-area-${series.id})`}
               />
-            )),
-          )}
+            ))}
+
+            {seriesPaths.map((series) => (
+              <path
+                key={`${series.id}-line`}
+                d={series.linePath}
+                fill="none"
+                stroke={series.color}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            ))}
+
+            {seriesPaths.map((series) =>
+              series.points.map((point, pointIndex) => (
+                <circle
+                  key={`${series.id}-point-${pointIndex}`}
+                  cx={point.x}
+                  cy={point.y}
+                  r={pointIndex === chart.tooltipIndex ? 4.5 : 3.5}
+                  fill="white"
+                  stroke={series.color}
+                  strokeWidth="2"
+                />
+              )),
+            )}
+          </g>
 
           <line
             className={DASHBOARD_CHART_GUIDE_LINE_CLASS}
@@ -204,6 +220,38 @@ function ChartTooltip({ tooltipX }: { tooltipX: number }) {
 function getXPositions(): number[] {
   const span = PLOT_RIGHT - PLOT_LEFT;
   return Array.from({ length: POINT_COUNT }, (_, index) => PLOT_LEFT + (span * index) / (POINT_COUNT - 1));
+}
+
+type ChartSeries = (typeof HERO_DASHBOARD_COPY.chart.series)[number];
+
+function renderChartBars(seriesList: readonly ChartSeries[], xPositions: readonly number[]) {
+  const seriesCount = seriesList.length;
+  const step = DASHBOARD_CHART_BAR_WIDTH + DASHBOARD_CHART_BAR_GAP;
+  const centerOffset = ((seriesCount - 1) * step) / 2;
+
+  return seriesList.flatMap((series, seriesIndex) =>
+    series.values.map((value, pointIndex) => {
+      const x = xPositions[pointIndex] ?? PLOT_LEFT;
+      const y = valueToY(value);
+      const height = PLOT_BOTTOM - y;
+      const barX =
+        x + seriesIndex * step - centerOffset - DASHBOARD_CHART_BAR_WIDTH / 2;
+
+      return (
+        <rect
+          key={`bar-${series.id}-${pointIndex}`}
+          x={barX}
+          y={y}
+          width={DASHBOARD_CHART_BAR_WIDTH}
+          height={height}
+          rx={DASHBOARD_CHART_BAR_RADIUS}
+          fill={series.color}
+          fillOpacity={DASHBOARD_CHART_BAR_FILL_OPACITY}
+          className={dashboardChartBarEnterClass(pointIndex)}
+        />
+      );
+    }),
+  );
 }
 
 function valueToY(value: number): number {

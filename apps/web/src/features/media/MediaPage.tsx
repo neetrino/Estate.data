@@ -1,6 +1,5 @@
 import { MediaServicesSection } from "@/features/media/components/MediaServicesSection";
 import { MEDIA_PAGE_COPY } from "@/features/media/content/mediaPageCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
@@ -14,9 +13,7 @@ export function MediaPage() {
   const { eyebrow, title, subtitle } = MEDIA_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS}>
+    <main className={PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -25,7 +22,6 @@ export function MediaPage() {
           </header>
           <MediaServicesSection />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

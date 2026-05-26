@@ -1,6 +1,5 @@
 import { AboutStorySection } from "@/features/about/components/AboutStorySection";
 import { ABOUT_PAGE_COPY } from "@/features/about/content/aboutPageCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   ABOUT_PAGE_EYEBROW_CLASS,
   ABOUT_PAGE_SUBTITLE_CLASS,
@@ -14,9 +13,7 @@ export function AboutPage() {
   const { eyebrow, title, subtitle } = ABOUT_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={ABOUT_PAGE_MAIN_CLASS}>
+    <main className={ABOUT_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -25,7 +22,6 @@ export function AboutPage() {
           </header>
           <AboutStorySection />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

@@ -1,9 +1,12 @@
+import "@/features/home/landing/styles/hero-dashboard-enter.css";
+
 import { HERO_DASHBOARD_COPY } from "@/features/home/content/heroDashboardCopy";
 import { DashboardChart } from "@/features/home/landing/components/hero/dashboard/DashboardChart";
 import { BottomStatsRow } from "@/features/home/landing/components/hero/dashboard/BottomStatsRow";
 import { DonutMetricCard } from "@/features/home/landing/components/hero/dashboard/DonutMetricCard";
 import { KpiCard } from "@/features/home/landing/components/hero/dashboard/KpiCard";
 import { SparklineCard } from "@/features/home/landing/components/hero/dashboard/SparklineCard";
+import { heroDashboardEnterClass } from "@/features/home/landing/lib/heroDashboardEnterStyles";
 import {
   HERO_DASHBOARD_BOTTOM_CLASS,
   HERO_DASHBOARD_GLOW_CLASS,
@@ -29,8 +32,8 @@ export function HeroDashboard() {
         <div className={HERO_DASHBOARD_INNER_CLASS}>
           <section aria-label="Key performance indicators">
             <ul className={HERO_DASHBOARD_KPI_GRID_CLASS}>
-              {HERO_DASHBOARD_COPY.topMetrics.map((metric) => (
-                <li key={metric.id} className="min-w-0">
+              {HERO_DASHBOARD_COPY.topMetrics.map((metric, index) => (
+                <li key={metric.id} className={`min-w-0 ${heroDashboardEnterClass(index)}`}>
                   <KpiCard metric={metric} />
                 </li>
               ))}
@@ -41,7 +44,7 @@ export function HeroDashboard() {
             <div className={HERO_DASHBOARD_CHART_COLUMN_CLASS}>
               <DashboardChart />
             </div>
-            <div className={HERO_DASHBOARD_MINI_COLUMN_CLASS}>
+            <div className={`${HERO_DASHBOARD_MINI_COLUMN_CLASS} ${heroDashboardEnterClass(3)}`}>
               <DonutMetricCard />
               <SparklineCard />
             </div>

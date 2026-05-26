@@ -71,6 +71,21 @@ export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
   "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-12px)]";
 
 /**
+ * Mobile menu panel top — landing pill navbar (safe area + pill + vertical padding).
+ * Keep in sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
+ */
+export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
+  "top-[calc(6.25rem+env(safe-area-inset-top,0px)-12px)]",
+  "sm:top-[calc(6.75rem+env(safe-area-inset-top,0px)-12px)]",
+].join(" ");
+
+/** Main content offset below fixed landing pill navbar. */
+export const NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS = [
+  "pt-[calc(6.25rem+env(safe-area-inset-top,0px))]",
+  "sm:pt-[calc(6.75rem+env(safe-area-inset-top,0px))]",
+].join(" ");
+
+/**
  * Hero copy top bound — matches overlay navbar (safe area + 1px + 4.5rem).
  */
 export const HERO_CONTENT_TOP_INSET_CLASS =
@@ -432,8 +447,10 @@ export const ABOUT_STACK_TITLE_CLASS = "text-lg font-bold text-what-we-do-title 
 export const ABOUT_STACK_CHECK_ICON_CLASS = "text-what-we-do-subtitle";
 
 /** Inner pages — vertical rhythm below sticky navbar. */
-export const INNER_PAGE_MAIN_SPACING_CLASS =
-  "pt-12 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20";
+export const INNER_PAGE_MAIN_SPACING_CLASS = [
+  NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS,
+  "pb-12 sm:pb-14 md:pb-16 lg:pb-20",
+].join(" ");
 
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [

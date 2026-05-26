@@ -1,6 +1,5 @@
 import { SolutionsRolesSection } from "@/features/solutions/components/SolutionsRolesSection";
 import { SOLUTIONS_PAGE_COPY } from "@/features/solutions/content/solutionsPageCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
@@ -21,9 +20,7 @@ export function SolutionsPage() {
   const { eyebrow, title, subtitleSegments } = SOLUTIONS_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
+    <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <header>
             <p className={SOLUTIONS_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -41,7 +38,6 @@ export function SolutionsPage() {
           </header>
           <SolutionsRolesSection />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

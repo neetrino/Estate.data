@@ -18,10 +18,12 @@ export function HeroCopy() {
       </p>
 
       <h1 className={HERO_COPY_HEADLINE_CLASS}>
-        {headlineLines.map((line) => (
+        {headlineLines.map((line) => {
+          const isAccentLine = line.segments.some((segment) => segment.accent);
+          return (
           <span
             key={line.segments.map((segment) => segment.text).join("")}
-            className="block [overflow-wrap:anywhere]"
+            className={isAccentLine ? "block whitespace-nowrap" : "block [overflow-wrap:anywhere]"}
           >
             {line.segments.map((segment) => (
               <span
@@ -32,7 +34,8 @@ export function HeroCopy() {
               </span>
             ))}
           </span>
-        ))}
+          );
+        })}
       </h1>
 
       <p className={HERO_COPY_SUBTITLE_CLASS}>{subtitle}</p>

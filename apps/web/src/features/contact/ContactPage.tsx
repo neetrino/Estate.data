@@ -4,7 +4,6 @@ import {
   LazyContactStudioMap,
 } from "@/features/contact/lib/lazyContactComponents";
 import { CONTACT_PAGE_COPY } from "@/features/contact/content/contactCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   CONTACT_PAGE_EYEBROW_CLASS,
   CONTACT_PAGE_SUBTITLE_CLASS,
@@ -18,9 +17,7 @@ export function ContactPage() {
   const { eyebrow, title, subtitle } = CONTACT_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
+    <main className={INNER_PAGE_MAIN_CLASS}>
         <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <div className="flex flex-col gap-10 lg:gap-12">
             <header>
@@ -37,7 +34,6 @@ export function ContactPage() {
             </div>
           </div>
         </div>
-      </main>
-    </>
+    </main>
   );
 }
