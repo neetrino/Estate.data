@@ -2,6 +2,8 @@
 
 export const ADMIN_LOGIN_PAGE_CLASS = "admin-login-page";
 
+export const ADMIN_LOGIN_HOME_LINK_CLASS = "admin-login-home-link";
+
 export const ADMIN_LOGIN_CONTENT_CLASS = "admin-login-content";
 
 export const ADMIN_LOGIN_BRAND_CLASS = "admin-login-brand";

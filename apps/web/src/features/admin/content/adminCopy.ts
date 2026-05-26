@@ -15,6 +15,7 @@ export const ADMIN_LOGIN_COPY = {
   hidePasswordLabel: "Hide password",
   rememberMeLabel: "Remember me",
   forgotPasswordLabel: "Forgot password?",
+  homeButtonLabel: "Back to home",
   genericError: "Invalid email or password. Please try again.",
 } as const;
 

@@ -3,6 +3,7 @@
 import { AdminLoginBackground } from "@/features/admin/components/AdminLoginBackground";
 import { AdminLoginDecorShapes } from "@/features/admin/components/AdminLoginDecorShapes";
 import { AdminLoginForm } from "@/features/admin/components/AdminLoginForm";
+import { AdminLoginHomeLink } from "@/features/admin/components/AdminLoginHomeLink";
 import { SUPERSUDO_PANEL_PATH } from "@/features/admin/lib/admin-paths";
 import {
   ADMIN_LOGIN_CONTENT_CLASS,
@@ -30,6 +31,7 @@ export function AdminLoginPage() {
 
   return (
     <main className={ADMIN_LOGIN_PAGE_CLASS}>
+      <AdminLoginHomeLink />
       <AdminLoginBackground />
       <AdminLoginDecorShapes />
       <div className={ADMIN_LOGIN_CONTENT_CLASS}>
