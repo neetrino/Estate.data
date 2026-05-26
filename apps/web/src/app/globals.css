@@ -279,14 +279,25 @@ button:disabled {
   );
 }
 
-/** What we do — light wash so headline and cards stay readable over the skyline art. */
+/** What we do — fallback while the photo loads. */
+.home-what-we-do-bg-layer {
+  background-color: var(--landing-surface);
+}
+
+/** Cover the full section through the bottom; keep the lower skyline in frame. */
+.home-what-we-do-bg-image {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/** What we do — subtle left wash so copy stays readable; photo remains the section surface. */
 .home-what-we-do-photo-scrim {
   background: linear-gradient(
     105deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.2) 42%,
-    rgba(255, 255, 255, 0.08) 68%,
-    rgba(255, 255, 255, 0.18) 100%
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.1) 38%,
+    rgba(255, 255, 255, 0.02) 62%,
+    rgba(255, 255, 255, 0.06) 100%
   );
 }
 

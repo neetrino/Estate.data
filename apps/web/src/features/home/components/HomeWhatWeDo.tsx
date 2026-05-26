@@ -2,7 +2,7 @@ import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HOME_WHAT_WE_DO_COPY } from "@/features/home/content/whatWeDoCopy";
 import { WhatWeDoServiceCardsGrid } from "@/features/home/components/WhatWeDoServiceCardsGrid";
 import {
-  HOME_MOBILE_LEFT_PILL_CLASS,
+  HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_SECTION_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
@@ -18,16 +18,15 @@ const WHAT_WE_DO_BG_SOURCES = {
   desktop: "/images/what-we-do-bg-2560.webp",
 } as const;
 
-const WHAT_WE_DO_SECTION_CLASS = `relative isolate bg-landing-surface ${LANDING_SECTION_CLASS}`;
+const WHAT_WE_DO_SECTION_CLASS = `relative isolate ${LANDING_SECTION_CLASS}`;
 
-const WHAT_WE_DO_STICKY_HEADER_CLASS =
-  "relative z-20 self-start lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:overflow-y-auto";
+const WHAT_WE_DO_STICKY_HEADER_CLASS = "relative z-20 self-start lg:sticky lg:top-28";
 
 const WHAT_WE_DO_TITLE_CLASS =
   "hero-headline-gradient text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 const WHAT_WE_DO_SUBTITLE_CLASS =
-  "mt-4 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
+  "mt-4 max-w-3xl text-lg leading-relaxed text-brand-navy sm:text-xl";
 
 export function HomeWhatWeDo() {
   const { title, subtitleLines, services } = HOME_WHAT_WE_DO_COPY;
@@ -59,7 +58,7 @@ export function HomeWhatWeDo() {
               fullWidth
               className={[
                 "mt-8",
-                HOME_MOBILE_LEFT_PILL_CLASS,
+                HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
                 LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
                 LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
               ].join(" ")}
@@ -77,7 +76,10 @@ export function HomeWhatWeDo() {
 
 function WhatWeDoBackgroundLayer() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+    <div
+      className="home-what-we-do-bg-layer pointer-events-none absolute inset-0 z-0 size-full min-h-full overflow-hidden"
+      aria-hidden
+    >
       <WhatWeDoBackgroundPicture />
       <div className="home-what-we-do-photo-scrim absolute inset-0" />
     </div>
@@ -86,7 +88,7 @@ function WhatWeDoBackgroundLayer() {
 
 function WhatWeDoBackgroundPicture() {
   return (
-    <picture className="block size-full" aria-hidden>
+    <picture className="absolute inset-0 block size-full min-h-full" aria-hidden>
       <source media="(min-width: 1280px)" srcSet={WHAT_WE_DO_BG_SOURCES.desktop} type="image/webp" />
       <source media="(min-width: 768px)" srcSet={WHAT_WE_DO_BG_SOURCES.tablet} type="image/webp" />
       <img
@@ -95,7 +97,7 @@ function WhatWeDoBackgroundPicture() {
         width={2560}
         height={1440}
         decoding="async"
-        className="size-full object-cover object-left object-bottom"
+        className="home-what-we-do-bg-image size-full min-h-full"
       />
     </picture>
   );
