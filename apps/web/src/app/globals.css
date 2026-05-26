@@ -49,6 +49,7 @@
   --what-we-do-subtitle: #c364be;
   --what-we-do-surface: #f7f4ef;
   --what-we-do-card-radius: 38px;
+  --what-we-do-card-min-height: 285px;
   --what-we-do-card-gradient: linear-gradient(180deg, #100b16 0%, #0f0220 100%);
   --what-we-do-card-corner-gradient: radial-gradient(
     ellipse 30% 40% at 0% 0%,

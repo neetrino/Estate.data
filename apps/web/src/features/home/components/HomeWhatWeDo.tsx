@@ -5,6 +5,7 @@ import {
   HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_SECTION_CLASS,
+  WHAT_WE_DO_CTA_ICON_DISC_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
 import {
   LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
@@ -61,6 +62,7 @@ export function HomeWhatWeDo() {
                 HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
                 LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
                 LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
+                WHAT_WE_DO_CTA_ICON_DISC_CLASS,
               ].join(" ")}
             >
               {secondaryCta.label}

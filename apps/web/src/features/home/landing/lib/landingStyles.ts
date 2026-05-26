@@ -50,6 +50,12 @@ export const HOME_MOBILE_LEFT_PILL_CLASS = [
 
 export const HOME_MOBILE_BOOK_SHOOT_PILL_CLASS = HOME_MOBILE_LEFT_PILL_CLASS;
 
+/** What we do CTA — white icon disc, black arrow (gradient pill label unchanged). */
+export const WHAT_WE_DO_CTA_ICON_DISC_CLASS = [
+  "[&>span:last-child]:!bg-white",
+  "[&>span:last-child]:!text-black",
+].join(" ");
+
 export const HOME_MOBILE_OUTLINE_BUTTON_CLASS = [
   HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS,
   "max-sm:justify-center",

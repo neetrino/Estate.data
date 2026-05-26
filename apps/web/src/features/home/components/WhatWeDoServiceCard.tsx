@@ -1,20 +1,32 @@
 import Image from "next/image";
-import type { WhatWeDoService } from "@/features/home/content/whatWeDoCopy";
+import { WhatWeDoNeonCardDecor } from "@/features/home/components/WhatWeDoNeonCardDecor";
 import { WhatWeDoServiceIcon } from "@/features/home/components/WhatWeDoServiceIcon";
 import {
-  GRADIENT_CARD_PADDING_CLASS,
-  WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
-  WHAT_WE_DO_CARD_HEIGHT_PX,
-  WHAT_WE_DO_CARD_SURFACE_STYLE,
-  WHAT_WE_DO_ICON_SIZE_PX,
-} from "@/shared/lib/constants";
+  whatWeDoNeonCardClassName,
+  whatWeDoNeonCardUsesCompactIcon,
+} from "@/features/home/lib/whatWeDoCardAccent";
+import type { WhatWeDoService } from "@/features/home/content/whatWeDoCopy";
+import "@/features/home/styles/what-we-do-neon-card.css";
+import { WHAT_WE_DO_ICON_SIZE_PX } from "@/shared/lib/constants";
+
+const WHAT_WE_DO_ICON_SIZE_DEFAULT_PX = WHAT_WE_DO_ICON_SIZE_PX;
+const WHAT_WE_DO_ICON_SIZE_COMPACT_PX = 40;
 
 const WHAT_WE_DO_ICON_WRAPPER_CLASS =
-  "flex size-12 shrink-0 items-center justify-center";
+  "flex size-11 shrink-0 items-center justify-center sm:size-12";
 
-const WHAT_WE_DO_ICON_IMAGE_WHITE_CLASS = "size-12 object-contain brightness-0 invert";
+const WHAT_WE_DO_ICON_WRAPPER_COMPACT_CLASS =
+  "flex size-9 shrink-0 items-center justify-center sm:size-10";
 
-const WHAT_WE_DO_ICON_SVG_CLASS = "size-12 text-white";
+const WHAT_WE_DO_ICON_IMAGE_WHITE_CLASS =
+  "size-11 object-contain brightness-0 invert sm:size-12";
+
+const WHAT_WE_DO_ICON_IMAGE_WHITE_COMPACT_CLASS =
+  "size-9 object-contain brightness-0 invert sm:size-10";
+
+const WHAT_WE_DO_ICON_SVG_CLASS = "size-11 text-white sm:size-12";
+
+const WHAT_WE_DO_ICON_SVG_COMPACT_CLASS = "size-9 text-white sm:size-10";
 
 type WhatWeDoServiceCardProps = {
   service: WhatWeDoService;
@@ -22,48 +34,60 @@ type WhatWeDoServiceCardProps = {
 
 export function WhatWeDoServiceCard({ service }: WhatWeDoServiceCardProps) {
   return (
-    <article
-      className={`relative flex w-full flex-col justify-center overflow-hidden text-left ${GRADIENT_CARD_PADDING_CLASS}`}
-      style={{
-        minHeight: WHAT_WE_DO_CARD_HEIGHT_PX,
-        ...WHAT_WE_DO_CARD_SURFACE_STYLE,
-      }}
-    >
-      <div
-        className="flex flex-col"
-        style={{
-          transform: `translateY(${WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX}px)`,
-        }}
-      >
-        <WhatWeDoServiceIconBox service={service} />
-        <h3 className="mt-7 text-xl font-bold text-white">{service.title}</h3>
-        <p className="mt-2 text-base leading-relaxed text-what-we-do-card-description">
-          {service.description}
-        </p>
+    <article className={whatWeDoNeonCardClassName(service.id)}>
+      <div className="what-we-do-neon-card__surface">
+        <WhatWeDoNeonCardDecor />
+        <WhatWeDoServiceIconBox service={service} className="what-we-do-neon-card__icon-slot" />
+        <div className="what-we-do-neon-card__content">
+          <h3 className="text-lg font-bold leading-snug text-white sm:text-xl">{service.title}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-what-we-do-card-description sm:text-base">
+            {service.description}
+          </p>
+        </div>
       </div>
     </article>
   );
 }
 
-function WhatWeDoServiceIconBox({ service }: { service: WhatWeDoService }) {
+function WhatWeDoServiceIconBox({
+  service,
+  className,
+}: {
+  service: WhatWeDoService;
+  className?: string;
+}) {
+  const isCompactIcon = whatWeDoNeonCardUsesCompactIcon(service.id);
+  const iconSizePx = isCompactIcon ? WHAT_WE_DO_ICON_SIZE_COMPACT_PX : WHAT_WE_DO_ICON_SIZE_DEFAULT_PX;
+  const wrapperClass = [
+    isCompactIcon ? WHAT_WE_DO_ICON_WRAPPER_COMPACT_CLASS : WHAT_WE_DO_ICON_WRAPPER_CLASS,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   if (service.iconSrc) {
     return (
-      <div className={WHAT_WE_DO_ICON_WRAPPER_CLASS}>
+      <div className={wrapperClass}>
         <Image
           src={service.iconSrc}
           alt=""
-          width={WHAT_WE_DO_ICON_SIZE_PX}
-          height={WHAT_WE_DO_ICON_SIZE_PX}
+          width={iconSizePx}
+          height={iconSizePx}
           loading="lazy"
-          className={WHAT_WE_DO_ICON_IMAGE_WHITE_CLASS}
+          className={
+            isCompactIcon ? WHAT_WE_DO_ICON_IMAGE_WHITE_COMPACT_CLASS : WHAT_WE_DO_ICON_IMAGE_WHITE_CLASS
+          }
         />
       </div>
     );
   }
 
   return (
-    <div className={WHAT_WE_DO_ICON_WRAPPER_CLASS}>
-      <WhatWeDoServiceIcon icon={service.icon} className={WHAT_WE_DO_ICON_SVG_CLASS} />
+    <div className={wrapperClass}>
+      <WhatWeDoServiceIcon
+        icon={service.icon}
+        className={isCompactIcon ? WHAT_WE_DO_ICON_SVG_COMPACT_CLASS : WHAT_WE_DO_ICON_SVG_CLASS}
+      />
     </div>
   );
 }

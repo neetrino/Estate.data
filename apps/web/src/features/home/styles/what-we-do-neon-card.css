@@ -1,0 +1,232 @@
+/**
+ * What we do — neon space cards (reference: gradient border, planet ring, orbital arcs).
+ * Accent modifiers: --purple | --cyan | --sunset
+ */
+.what-we-do-neon-card {
+  --neon-card-radius: var(--what-we-do-card-radius, 38px);
+  --what-we-do-card-min-height: 228px;
+  --neon-card-planet-inset: 0.9rem;
+  --neon-card-planet-size: 4.25rem;
+  --neon-card-icon-size: 2.75rem;
+  --neon-card-text-gap: 0.2rem;
+  --neon-card-text-offset-y: 30px;
+  --neon-card-accent-rgb: 195, 100, 190;
+  --neon-card-border-gradient: linear-gradient(
+    145deg,
+    rgba(232, 121, 249, 0.95) 0%,
+    rgba(168, 85, 247, 0.88) 45%,
+    rgba(139, 92, 246, 0.75) 100%
+  );
+  --neon-card-bg:
+    radial-gradient(ellipse 90% 70% at 100% 100%, rgba(var(--neon-card-accent-rgb), 0.24) 0%, transparent 58%),
+    radial-gradient(ellipse 48% 42% at 0% 0%, rgba(var(--neon-card-accent-rgb), 0.14) 0%, transparent 62%),
+    linear-gradient(165deg, #0c0818 0%, #050510 48%, #0a0614 100%);
+  --neon-card-outer-shadow:
+    0 0 22px rgba(var(--neon-card-accent-rgb), 0.32),
+    0 0 44px rgba(var(--neon-card-accent-rgb), 0.14);
+
+  position: relative;
+  min-height: var(--what-we-do-card-min-height);
+  border-radius: var(--neon-card-radius);
+  padding: 1px;
+  background: var(--neon-card-border-gradient);
+  box-shadow: var(--neon-card-outer-shadow);
+}
+
+.what-we-do-neon-card--purple {
+  --neon-card-accent-rgb: 195, 100, 190;
+  --neon-card-border-gradient: linear-gradient(
+    145deg,
+    rgba(232, 121, 249, 0.95) 0%,
+    rgba(195, 100, 190, 0.9) 40%,
+    rgba(139, 92, 246, 0.78) 100%
+  );
+}
+
+.what-we-do-neon-card--cyan {
+  --neon-card-accent-rgb: 22, 192, 218;
+  --neon-card-border-gradient: linear-gradient(
+    145deg,
+    rgba(103, 232, 249, 0.95) 0%,
+    rgba(22, 192, 218, 0.92) 45%,
+    rgba(14, 165, 233, 0.8) 100%
+  );
+  --neon-card-bg:
+    radial-gradient(ellipse 92% 72% at 100% 100%, rgba(22, 192, 218, 0.26) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 44% at 0% 0%, rgba(103, 232, 249, 0.12) 0%, transparent 62%),
+    linear-gradient(165deg, #061018 0%, #03060c 48%, #081420 100%);
+  --neon-card-outer-shadow:
+    0 0 22px rgba(22, 192, 218, 0.34),
+    0 0 48px rgba(14, 165, 233, 0.16);
+}
+
+.what-we-do-neon-card--sunset {
+  --neon-card-accent-rgb: 255, 99, 71;
+  --neon-card-border-gradient: linear-gradient(
+    145deg,
+    rgba(255, 51, 153, 0.96) 0%,
+    rgba(255, 99, 71, 0.92) 52%,
+    rgba(255, 69, 0, 0.88) 100%
+  );
+  --neon-card-bg:
+    radial-gradient(ellipse 88% 68% at 100% 100%, rgba(255, 99, 71, 0.3) 0%, transparent 56%),
+    radial-gradient(ellipse 46% 40% at 0% 0%, rgba(255, 51, 153, 0.16) 0%, transparent 62%),
+    linear-gradient(165deg, #12060e 0%, #050510 48%, #140812 100%);
+  --neon-card-outer-shadow:
+    0 0 22px rgba(255, 51, 153, 0.28),
+    0 0 40px rgba(255, 99, 71, 0.22);
+}
+
+.what-we-do-neon-card__surface {
+  position: relative;
+  display: flex;
+  min-height: calc(var(--what-we-do-card-min-height) - 2px);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: calc(var(--neon-card-radius) - 1px);
+  background: var(--neon-card-bg);
+}
+
+.what-we-do-neon-card__decor {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.what-we-do-neon-card__icon-slot {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--neon-card-planet-inset) + var(--neon-card-planet-size) / 2);
+  left: calc(var(--neon-card-planet-inset) + var(--neon-card-planet-size) / 2);
+  display: flex;
+  width: var(--neon-card-icon-size);
+  height: var(--neon-card-icon-size);
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+
+.what-we-do-neon-card--compact-icon {
+  --neon-card-icon-size: 2.35rem;
+}
+
+.what-we-do-neon-card--compact-icon .what-we-do-neon-card__icon-slot :is(img, svg) {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+@media (min-width: 640px) {
+  .what-we-do-neon-card--compact-icon {
+    --neon-card-icon-size: 2.5rem;
+  }
+
+  .what-we-do-neon-card--compact-icon .what-we-do-neon-card__icon-slot :is(img, svg) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.what-we-do-neon-card__planet {
+  position: absolute;
+  top: var(--neon-card-planet-inset);
+  left: var(--neon-card-planet-inset);
+  width: var(--neon-card-planet-size);
+  height: var(--neon-card-planet-size);
+  border-radius: 50%;
+  border: 1px solid rgba(var(--neon-card-accent-rgb), 0.72);
+  box-shadow:
+    0 0 14px rgba(var(--neon-card-accent-rgb), 0.45),
+    inset 0 0 18px rgba(var(--neon-card-accent-rgb), 0.12);
+}
+
+.what-we-do-neon-card__arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+
+.what-we-do-neon-card__arc--outer {
+  right: -38%;
+  bottom: -52%;
+  width: 17rem;
+  height: 17rem;
+  border-color: rgba(var(--neon-card-accent-rgb), 0.55) transparent transparent transparent;
+  transform: rotate(-18deg);
+  box-shadow: 0 0 10px rgba(var(--neon-card-accent-rgb), 0.2);
+}
+
+.what-we-do-neon-card__arc--inner {
+  right: -28%;
+  bottom: -42%;
+  width: 12.5rem;
+  height: 12.5rem;
+  border-color: rgba(var(--neon-card-accent-rgb), 0.38) transparent transparent transparent;
+  transform: rotate(-12deg);
+}
+
+.what-we-do-neon-card__star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(var(--neon-card-accent-rgb), 0.95);
+  box-shadow: 0 0 6px rgba(var(--neon-card-accent-rgb), 0.85);
+}
+
+.what-we-do-neon-card__star--a {
+  top: 22%;
+  right: 18%;
+  width: 3px;
+  height: 3px;
+}
+
+.what-we-do-neon-card__star--b {
+  right: 12%;
+  bottom: 28%;
+  width: 2px;
+  height: 2px;
+  opacity: 0.85;
+}
+
+.what-we-do-neon-card__star--c {
+  right: 26%;
+  bottom: 18%;
+  width: 2px;
+  height: 2px;
+  opacity: 0.7;
+}
+
+.what-we-do-neon-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: calc(var(--what-we-do-card-min-height) - 2px);
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1.125rem;
+  padding-right: 1.25rem;
+  padding-bottom: 1.125rem;
+  padding-left: calc(var(--neon-card-planet-inset) + var(--neon-card-planet-size) * 0.35);
+  transform: translateY(var(--neon-card-text-offset-y));
+}
+
+@media (min-width: 640px) {
+  .what-we-do-neon-card__content {
+    padding-top: 1.125rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.125rem;
+    padding-left: calc(var(--neon-card-planet-inset) + var(--neon-card-planet-size) * 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .what-we-do-neon-card {
+    transition: box-shadow 0.35s ease;
+  }
+
+  .what-we-do-neon-card:hover {
+    box-shadow:
+      0 0 28px rgba(var(--neon-card-accent-rgb), 0.42),
+      0 0 56px rgba(var(--neon-card-accent-rgb), 0.2);
+  }
+}
