@@ -1,5 +1,8 @@
-import { HOME_RECENT_WORK_COPY } from "@/features/home/content/recentWorkCopy";
+"use client";
+
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
+import { HOME_RECENT_WORK_COPY } from "@/features/home/content/recentWorkCopy";
+import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import {
   HOME_MOBILE_PILL_BUTTON_CLASS,
   LANDING_CONTAINER_CLASS,
@@ -31,6 +34,12 @@ const VIEW_ALL_BUTTON_CLASS = [
 
 export function HomeRecentWork() {
   const { eyebrow, title, viewAllLabel, viewAllHref, projects } = HOME_RECENT_WORK_COPY;
+type HomeRecentWorkProps = {
+  projects: readonly RecentWorkProject[];
+};
+
+export function HomeRecentWork({ projects }: HomeRecentWorkProps) {
+  const { eyebrow, title, viewAllLabel, viewAllHref } = HOME_RECENT_WORK_COPY;
 
   return (
     <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="recent-work-heading">

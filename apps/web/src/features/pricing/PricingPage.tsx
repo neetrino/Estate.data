@@ -1,6 +1,7 @@
 import { PricingAnalyticsSubscriptions } from "@/features/pricing/components/PricingAnalyticsSubscriptions";
 import { PricingMediaPackages } from "@/features/pricing/components/PricingMediaPackages";
 import { PRICING_PAGE_COPY } from "@/features/pricing/content/pricingCopy";
+import { fetchPricingPage } from "@/features/pricing/services/fetchPricingPage";
 import {
   INNER_PAGE_TITLE_CLASS,
   SITE_PAGE_SHELL_CLASS,
@@ -17,8 +18,9 @@ const PRICING_SUBTITLE_SEGMENT_CLASS = {
   title: "font-semibold text-what-we-do-title",
 } as const;
 
-export function PricingPage() {
+export async function PricingPage() {
   const { eyebrow, title, subtitleSegments } = PRICING_PAGE_COPY;
+  const pricing = await fetchPricingPage();
 
   return (
     <main className={INNER_PAGE_MAIN_CLASS}>
@@ -37,8 +39,8 @@ export function PricingPage() {
               ))}
             </p>
           </header>
-          <PricingMediaPackages />
-          <PricingAnalyticsSubscriptions />
+          <PricingMediaPackages category={pricing.media} />
+          <PricingAnalyticsSubscriptions category={pricing.analytics} />
         </div>
     </main>
   );

@@ -1,5 +1,7 @@
 import { ResourcesBodySection } from "@/features/resources/components/ResourcesBodySection";
 import { RESOURCES_PAGE_COPY } from "@/features/resources/content/resourcesPageCopy";
+import { fetchResourcesArticles } from "@/features/resources/services/fetchResourcesArticles";
+import { fetchResourcesFaqItems } from "@/features/resources/services/fetchResourcesFaqItems";
 import {
   ABOUT_PAGE_EYEBROW_CLASS,
   ABOUT_PAGE_MAIN_CLASS,
@@ -8,8 +10,12 @@ import {
   SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
-export function ResourcesPage() {
+export async function ResourcesPage() {
   const { eyebrow, title, subtitle } = RESOURCES_PAGE_COPY;
+  const [articles, faqItems] = await Promise.all([
+    fetchResourcesArticles(),
+    fetchResourcesFaqItems(),
+  ]);
 
   return (
     <main className={ABOUT_PAGE_MAIN_CLASS}>
@@ -19,7 +25,7 @@ export function ResourcesPage() {
             <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>
             <p className={ABOUT_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
           </header>
-          <ResourcesBodySection />
+          <ResourcesBodySection articles={articles} faqItems={faqItems} />
         </div>
     </main>
   );

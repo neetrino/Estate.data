@@ -1,5 +1,5 @@
-import type { AssetKey } from "@estate/db";
-import { ASSET_KEYS } from "@estate/db";
+import type { AssetKey } from "./asset-keys";
+import { ASSET_KEYS } from "./asset-keys";
 
 type AssetFallback = {
   readonly publicPath: string;

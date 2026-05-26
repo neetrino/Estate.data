@@ -1,7 +1,7 @@
 import {
   RESOURCES_ASK_QUESTION_CTA,
-  RESOURCES_FAQ_ITEMS,
   RESOURCES_FAQ_SECTION_TITLE,
+  type ResourceFaqItem,
 } from "@/features/resources/content/resourcesContentCopy";
 import {
   RESOURCES_SECTION_CONTENT_OFFSET_CLASS,
@@ -26,7 +26,11 @@ const RESOURCES_FAQ_ANSWER_CLASS =
 
 const RESOURCES_ASK_QUESTION_BUTTON_CLASS = `mt-8 ${ESTATE_PILL_CONTENT_WIDTH_CLASS}`;
 
-export function ResourcesFaqPanel() {
+type ResourcesFaqPanelProps = {
+  faqItems: readonly ResourceFaqItem[];
+};
+
+export function ResourcesFaqPanel({ faqItems }: ResourcesFaqPanelProps) {
   return (
     <section aria-labelledby="resources-faq-heading">
       <h2 id="resources-faq-heading" className={RESOURCES_SECTION_TITLE_CLASS}>
@@ -36,7 +40,7 @@ export function ResourcesFaqPanel() {
         className={`${RESOURCES_SECTION_CONTENT_OFFSET_CLASS} ${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_FAQ_CARD_CLASS}`}
       >
         <dl className={RESOURCES_FAQ_LIST_CLASS}>
-          {RESOURCES_FAQ_ITEMS.map((item) => (
+          {faqItems.map((item) => (
             <div key={item.id}>
               <dt className={RESOURCES_FAQ_QUESTION_CLASS}>{item.question}</dt>
               <dd className={RESOURCES_FAQ_ANSWER_CLASS}>{item.answer}</dd>

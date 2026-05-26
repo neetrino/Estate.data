@@ -1,11 +1,18 @@
 # @estate/db
 
-PostgreSQL storage for site assets (hero, logos, What we do icons).
+PostgreSQL storage for site assets and contact form submissions.
+
+## Models
+
+- `Asset` — binary site images (seeded from `apps/web/public`)
+- `ContactInquiry` — rows from `POST /api/v1/contact`
 
 ## Setup
 
-1. Set `DATABASE_URL` (pooled `app_user`) and `DIRECT_URL` (owner, migrations only) in repo or `apps/web/.env.local`.
-2. From repo root:
+1. Copy repo root `.env.example` → `.env` and set Neon `DATABASE_URL` (pooled) + `DIRECT_URL` (direct).
+2. Copy `apps/web/.env.example` → `apps/web/.env.local` (include the same `DATABASE_*` values).
+3. When `apps/api` is scaffolded: copy `apps/api/.env.example` → `apps/api/.env.local`.
+4. Verify: `pnpm env:check` then from repo root:
 
 ```bash
 pnpm install
@@ -24,4 +31,21 @@ import { ASSET_KEYS, assetUrl } from "@estate/db";
 const src = assetUrl(ASSET_KEYS.homeHero); // → /api/v1/assets/home-hero
 ```
 
-The web app serves bytes at `GET /api/v1/assets/[key]`. Without `DATABASE_URL`, the same route falls back to `public/` files.
+Server-only (API routes, scripts):
+
+```ts
+import {
+  getPrisma,
+  loadAsset,
+  parseDatabaseEnv,
+  pingDatabase,
+  tryGetPrisma,
+} from "@estate/db/server";
+```
+
+Pool limits — set in env (appended to runtime `DATABASE_URL`):
+
+- `DATABASE_CONNECTION_LIMIT` (default `10`)
+- `DATABASE_POOL_TIMEOUT` (default `20`, seconds)
+
+The API app validates `DATABASE_URL` at boot (`apps/api/src/instrumentation.ts`) and serves assets from PostgreSQL first (`preferDatabase: true`).

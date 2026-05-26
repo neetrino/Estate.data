@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import { PortfolioFilter } from "@/features/portfolio/components/PortfolioFilter";
 import { PortfolioPagination } from "@/features/portfolio/components/PortfolioPagination";
 import {
-  PORTFOLIO_PAGE_COPY,
   type PortfolioFilterId,
+  type PortfolioProject,
 } from "@/features/portfolio/content/portfolioCopy";
 import {
   clampPortfolioPage,
@@ -19,9 +19,10 @@ import { PORTFOLIO_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 const PORTFOLIO_GRID_CLASS = `mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${PORTFOLIO_GRID_GAP_CLASS}`;
 
-function filterPortfolioProjects(activeId: PortfolioFilterId) {
-  const { projects } = PORTFOLIO_PAGE_COPY;
-
+function filterPortfolioProjects(
+  projects: readonly PortfolioProject[],
+  activeId: PortfolioFilterId,
+) {
   if (activeId === "all") {
     return projects;
   }
@@ -29,23 +30,23 @@ function filterPortfolioProjects(activeId: PortfolioFilterId) {
   return projects.filter((project) => project.category === activeId);
 }
 
-export function PortfolioWorkSection() {
+type PortfolioWorkSectionProps = {
+  projects: readonly PortfolioProject[];
+};
+
+export function PortfolioWorkSection({ projects }: PortfolioWorkSectionProps) {
   const [activeFilterId, setActiveFilterId] = useState<PortfolioFilterId>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const gridRef = useRef<HTMLUListElement>(null);
   const itemsPerPage = usePortfolioItemsPerPage();
 
   const filteredProjects = useMemo(
-    () => filterPortfolioProjects(activeFilterId),
-    [activeFilterId],
+    () => filterPortfolioProjects(projects, activeFilterId),
+    [projects, activeFilterId],
   );
 
   const totalPages = getPortfolioPageCount(filteredProjects.length, itemsPerPage);
   const safePage = clampPortfolioPage(currentPage, totalPages);
-
-  useEffect(() => {
-    setCurrentPage((page) => clampPortfolioPage(page, totalPages));
-  }, [itemsPerPage, totalPages]);
 
   const paginatedProjects = useMemo(
     () => slicePortfolioPage(filteredProjects, safePage, itemsPerPage),

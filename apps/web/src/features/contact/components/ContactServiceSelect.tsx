@@ -27,9 +27,14 @@ const CONTACT_SERVICE_DROPDOWN_OFFSET_CLASS = "pt-1";
 type ContactServiceSelectProps = {
   id: string;
   placeholder: string;
+  disabled?: boolean;
 };
 
-export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectProps) {
+export function ContactServiceSelect({
+  id,
+  placeholder,
+  disabled = false,
+}: ContactServiceSelectProps) {
   const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -69,17 +74,26 @@ export function ContactServiceSelect({ id, placeholder }: ContactServiceSelectPr
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <input type="hidden" name="service" value={value} required />
+      <input type="hidden" name="service" value={value} required disabled={disabled} />
 
       <button
         type="button"
         id={id}
+        disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}
         className={CONTACT_SERVICE_TRIGGER_CLASS}
-        onClick={() => setOpen(true)}
-        onFocus={() => setOpen(true)}
+        onClick={() => {
+          if (!disabled) {
+            setOpen(true);
+          }
+        }}
+        onFocus={() => {
+          if (!disabled) {
+            setOpen(true);
+          }
+        }}
       >
         <span
           className={selectedOption ? undefined : CONTACT_SERVICE_PLACEHOLDER_CLASS}

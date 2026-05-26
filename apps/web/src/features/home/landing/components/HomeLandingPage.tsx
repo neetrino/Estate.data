@@ -9,15 +9,20 @@ import {
   LazyHomeWhatWeDo,
 } from "@/features/home/landing/lib/lazyHomeSections";
 import { LANDING_PAGE_CLASS } from "@/features/home/landing/lib/landingStyles";
+import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 
-export function HomeLandingPage() {
+type HomeLandingPageProps = {
+  projects: readonly RecentWorkProject[];
+};
+
+export function HomeLandingPage({ projects }: HomeLandingPageProps) {
   return (
     <div className={LANDING_PAGE_CLASS}>
       <main>
         <HeroSection />
         <LazyHomeWhatWeDo />
         <LazyHomeHowItWorks />
-        <LazyHomeRecentWork />
+        <LazyHomeRecentWork projects={projects} />
         <LazyHomeStatsStrip />
         <LazyHomePropertyIntelligence />
         <LazyHomeClientVoices />

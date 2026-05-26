@@ -48,9 +48,14 @@ const CONTACT_DATE_DAY_DISABLED_CLASS = "cursor-default text-muted-foreground";
 type ContactDatePickerProps = {
   id: string;
   placeholder: string;
+  disabled?: boolean;
 };
 
-export function ContactDatePicker({ id, placeholder }: ContactDatePickerProps) {
+export function ContactDatePicker({
+  id,
+  placeholder,
+  disabled = false,
+}: ContactDatePickerProps) {
   const calendarId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const minDate = startOfDay(new Date());
@@ -111,11 +116,16 @@ export function ContactDatePicker({ id, placeholder }: ContactDatePickerProps) {
       <button
         type="button"
         id={id}
+        disabled={disabled}
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls={open ? calendarId : undefined}
         className={CONTACT_DATE_TRIGGER_CLASS}
-        onClick={() => setOpen((isOpen) => !isOpen)}
+        onClick={() => {
+          if (!disabled) {
+            setOpen((isOpen) => !isOpen);
+          }
+        }}
       >
         <span className={value ? undefined : CONTACT_DATE_PLACEHOLDER_CLASS}>
           {displayLabel}

@@ -1,54 +1,62 @@
-# Նախագծի տեխզադրանք
+# Estate.data — նախագծի տեխզադրանք
 
-> Լրացրու՛ այս ֆայլը զարգացումը սկսելուց առաջ։
-> Լրացնելուց հետո — ուղարկի՛ր AI-ասիստենտին անալիզի և մեկնարկի համար `21-project-onboarding.mdc`-ի համաձայն։
+> Լրացված՝ 2026-05-25 · հաստատված chat-ում
 
 ---
 
 ## Նկարագրություն
 
-[Ինչ նախագիծ է, 2–3 նախադասություն։ Ինչ խնդիր է լուծում։]
+Estate.data-ն անշարժ գույքի մարքեթինգային ստուգիա է (ֆոտո, վIDEO, drone, 3D турեր)։
+Նախագիծը ներառում է marketing frontend (`apps/web`) և առանձին REST API backend (`apps/api`, port 3001) CMS-ի, contact form-ի և ապագա վճարումների համար։
 
 ## Թիրախային լսարան
 
-[Ում համար է արտադրանքը։ Հիմնական օգտատիրոջ սցենարներ։]
+- Real estate agents և brokerages (ԱՄՆ / հայկական շուկա)
+- Property developers և marketing teams
+- Օգտատերեր, ովքեր փնտրում են portfolio, pricing, resources և contact
 
 ## Հիմնական ֆունկցիաներ (առաջնայնացված)
 
-1. [Ֆունկցիա] — առաջնայնություն. բարձր
-2. [Ֆունկցիա] — առաջնայնություն. միջին
-3. [Ֆունկցիա] — առաջնայնություն. ցածր
+1. **Marketing site** — home, portfolio, pricing, resources, contact — առաջնայնություն. բարձր
+2. **Contact form + email notification** — POST API + Resend — առաջնայնություն. բարձր
+3. **Admin CMS** — portfolio, articles, FAQ, pricing, assets — JWT auth — առաջնայնություն. միջին
+4. **i18n content** — articles/FAQ/portfolio/pricing (en + es) — առաջնայնություն. միջին
+5. **Payments (AM providers)** — sandbox init + webhooks — առաջնայնություն. ցածր (post-MVP)
 
-## Stack (եթե որոշված է)
+## Stack
 
-- **Տարբերակ A** — fullstack Next.js Vercel-ում
-- **Տարբերակ B** — Next.js frontend + NestJS backend (Render / Fly.io)
-- Եթե որոշված չէ — AI-ն կառաջարկի ֆունկցիաների հիման վրա
+- **Monorepo** — pnpm workspaces
+- **Frontend** — Next.js 16 App Router (`apps/web`, port 3000)
+- **Backend** — Next.js Route Handlers (`apps/api`, port 3001)
+- **DB** — PostgreSQL 17 (Neon) + Prisma 7
+- **Cache / rate limit** — Upstash Redis
 
 ## Դիզայն
 
-- Figma. [հղում]
-- UI Kit / դիզայն-համակարգ. [եթե կա]
+- Figma design system (plugin MCP)
+- Tailwind CSS 4, custom components
 
 ## Ինտեգրացիաներ
 
-- [ ] Վճարային համակարգ (Stripe / YooKassa / այլ)
-- [ ] Email  mailing (Resend / SendGrid / այլ)
-- [ ] Աուտենտիֆիկացիա (Auth.js / Clerk / այլ)
-- [ ] Ֆայլերի պահոց (Cloudflare R2 — լռելյայն)
-- [ ] Արտաքին API. [թվարկել]
+- [x] Email — Resend (contact notifications)
+- [x] Auth — JWT HS256 admin (argon2 passwords)
+- [x] Ֆайлերի պահոց — Cloudflare R2 (portfolio media)
+- [x] Cache — Upstash Redis
+- [ ] Վճարային համակարգ — Idram/Ameriabank sandbox (reference docs, minimal API stub)
+- [ ] Error tracking — Sentry (optional env)
 
 ## Կոնտենտի լեզու
 
-- Ինտերֆեյսի հիմնական լեզու. [hy / en / բազմալեզու]
-- Պե՞տք է ինտերնացիոնալացում (i18n). այո / ոչ
+- UI հիմնական լեզու. **en**
+- i18n. **այո** — en, es (CMS translations API)
 
 ## Սահմանափակումներ
 
-- Ժամկետներ. [ամսաթիվ կամ «առանց դեդլայնի»]
-- Բյուջե. [եթե կան սահմանափակումներ վճարովի սերվիսների համար]
-- Տեխնիկական. [եթե կան — օր. պարտադիր հոստինգ, legacy API]
+- Ժամկետներ. առանց դедлайնի
+- Dev. Neon free tier, mock API optional for zero-setup
+- Prod. Vercel (web + api), Neon, R2, Upstash, Resend
 
 ## Լրացուցիչ
 
-[Ցանկացած լրացուցիչ տեղեկություն, որը կարևոր է հաշվի առնել։]
+- Asset bytes (icons/logos) — PostgreSQL; large media — R2 CDN
+- Admin UI — future phase; dev uses `pnpm admin:token` + API scripts

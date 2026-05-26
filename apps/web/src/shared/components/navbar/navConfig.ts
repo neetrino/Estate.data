@@ -1,12 +1,13 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS } from "@estate/db";
+import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 import { DATA_BIM_PATH, PRICING_PATH } from "@/shared/lib/routes";
 
 export const SITE_NAME = "Estate Data";
 
 /** Browser tab / SEO titles (spaced brand name). */
 export const SITE_DISPLAY_NAME = "Estate Data";
-export const SITE_LOGO_PATH = assetUrl(ASSET_KEYS.siteLogo);
-export const SITE_LOGO_DARK_PATH = assetUrl(ASSET_KEYS.siteLogoDark);
+export const SITE_LOGO_PATH = resolveAssetUrl(ASSET_KEYS.siteLogo);
+export const SITE_LOGO_DARK_PATH = resolveAssetUrl(ASSET_KEYS.siteLogoDark);
 export const SITE_LOGO_CACHE_VERSION = "20260519-removebg";
 export const SITE_LOGO_DARK_CACHE_VERSION = "20260519-dark";
 export const SITE_LOGO_ALT = "Estate Data";
