@@ -33,10 +33,5 @@ export const HOME_RECENT_WORK_COPY = {
       imageSrc: RECENT_WORK_PLACEHOLDER_IMAGE,
       imageAlt: RECENT_WORK_PLACEHOLDER_ALT,
     },
-    {
-      id: "project-4",
-      imageSrc: RECENT_WORK_PLACEHOLDER_IMAGE,
-      imageAlt: RECENT_WORK_PLACEHOLDER_ALT,
-    },
   ] as const satisfies readonly RecentWorkProject[],
 } as const;

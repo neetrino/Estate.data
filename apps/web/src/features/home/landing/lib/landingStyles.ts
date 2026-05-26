@@ -15,6 +15,13 @@ export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
+/** Soft gradient overlap from the previous section background tone. */
+export const LANDING_SECTION_ENTER_FROM_SURFACE_CLASS =
+  "home-landing-section-enter home-landing-section-enter--from-surface";
+
+export const LANDING_SECTION_ENTER_FROM_WHITE_CLASS =
+  "home-landing-section-enter home-landing-section-enter--from-white";
+
 /** Space below fixed landing pill navbar (safe area + pill + gap). */
 export const HOME_LANDING_HERO_TOP_PADDING_CLASS = NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS;
 
@@ -72,7 +79,7 @@ export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 
 /** Hero main block — fills first screen; trust strip sits below (see {@link HOME_LANDING_TRUST_BELOW_HERO_CLASS}). */
 export const HOME_LANDING_HERO_INNER_CLASS = [
-  "relative flex min-h-0 flex-1 flex-col justify-center",
+  "relative z-10 flex min-h-0 flex-1 flex-col justify-center",
   "pb-6 sm:pb-8",
 ].join(" ");
 
@@ -84,10 +91,11 @@ export const HOME_LANDING_HERO_VIEWPORT_CLASS = [
   "min-h-[calc(100svh-env(safe-area-inset-top,0px))]",
 ].join(" ");
 
-/** Trusted partners — below the fold, after full-viewport hero. */
-export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = [
-  "bg-landing-surface pb-8 pt-10 sm:pt-12",
-].join(" ");
+/** Trusted partners — bridge section between hero and What we do. */
+export const HOME_LANDING_TRUST_BRIDGE_CLASS =
+  "home-landing-trust-bridge relative isolate overflow-hidden";
+
+export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = "relative z-10 pb-8 pt-10 sm:pt-12";
 
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";

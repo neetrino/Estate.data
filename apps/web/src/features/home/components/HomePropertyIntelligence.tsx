@@ -8,6 +8,7 @@ import {
   HOME_MOBILE_LEFT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_GLASS_CARD_CLASS,
+  LANDING_SECTION_ENTER_FROM_WHITE_CLASS,
   LANDING_SECTION_MUTED_CLASS,
   LANDING_SECTION_SUBTITLE_CLASS,
   LANDING_SECTION_TITLE_CLASS,
@@ -27,7 +28,10 @@ export function HomePropertyIntelligence() {
     HOME_PROPERTY_INTELLIGENCE_COPY;
 
   return (
-    <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="property-intelligence-heading">
+    <section
+      className={`${LANDING_SECTION_MUTED_CLASS} ${LANDING_SECTION_ENTER_FROM_WHITE_CLASS}`}
+      aria-labelledby="property-intelligence-heading"
+    >
       <div className={LANDING_CONTAINER_CLASS}>
         <div
           className={`grid grid-cols-1 items-stretch lg:grid-cols-2 ${HOME_STATS_GRID_GAP_CLASS} lg:gap-12`}

@@ -1,0 +1,85 @@
+/**
+ * Smooth gradient blends between landing sections and photo backgrounds.
+ */
+:root {
+  --landing-blend-tone-surface: var(--landing-surface);
+  --landing-blend-tone-white: #fff;
+  --landing-blend-tone-soft: #f7f8fd;
+  --landing-section-blend-height: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.home-landing-section-blend {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  left: 0;
+}
+
+.home-landing-section-blend--top {
+  top: 0;
+  height: var(--landing-section-blend-height);
+}
+
+.home-landing-section-blend--bottom {
+  bottom: 0;
+  height: calc(var(--landing-section-blend-height) * 1.2);
+}
+
+.home-landing-section-blend--top.home-landing-section-blend--tone-surface {
+  background: linear-gradient(180deg, var(--landing-blend-tone-surface) 0%, transparent 100%);
+}
+
+.home-landing-section-blend--top.home-landing-section-blend--tone-white {
+  background: linear-gradient(180deg, var(--landing-blend-tone-white) 0%, transparent 100%);
+}
+
+.home-landing-section-blend--top.home-landing-section-blend--tone-soft {
+  background: linear-gradient(180deg, var(--landing-blend-tone-soft) 0%, transparent 100%);
+}
+
+.home-landing-section-blend--bottom.home-landing-section-blend--tone-surface {
+  background: linear-gradient(180deg, transparent 0%, var(--landing-blend-tone-surface) 100%);
+}
+
+.home-landing-section-blend--bottom.home-landing-section-blend--tone-white {
+  background: linear-gradient(180deg, transparent 0%, var(--landing-blend-tone-white) 100%);
+}
+
+.home-landing-section-blend--bottom.home-landing-section-blend--tone-soft {
+  background: linear-gradient(180deg, transparent 0%, var(--landing-blend-tone-soft) 100%);
+}
+
+/** Solid section — soft top fade from the previous section tone. */
+.home-landing-section-enter {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-landing-section-enter::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--landing-section-blend-height);
+  content: "";
+}
+
+.home-landing-section-enter--from-surface::before {
+  background: linear-gradient(180deg, var(--landing-blend-tone-surface) 0%, transparent 100%);
+}
+
+.home-landing-section-enter--from-white::before {
+  background: linear-gradient(180deg, var(--landing-blend-tone-white) 0%, transparent 100%);
+}
+
+.home-landing-section-enter--from-soft::before {
+  background: linear-gradient(180deg, var(--landing-blend-tone-soft) 0%, transparent 100%);
+}
+
+.home-landing-section-enter__content {
+  position: relative;
+  z-index: 1;
+}

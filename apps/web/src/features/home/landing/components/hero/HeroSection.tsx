@@ -3,6 +3,9 @@ import { HeroCopy } from "@/features/home/landing/components/hero/HeroCopy";
 import { HeroFeatures } from "@/features/home/landing/components/hero/HeroFeatures";
 import { HeroDashboard } from "@/features/home/landing/components/hero/dashboard/HeroDashboard";
 import { TrustedLogos } from "@/features/home/landing/components/hero/TrustedLogos";
+import { HeroTrustBridgeBackground } from "@/features/home/landing/components/hero/HeroTrustBridgeBackground";
+import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
+import { HERO_LANDING_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
 import {
   HOME_LANDING_HERO_CONTAINER_CLASS,
   HOME_LANDING_HERO_COPY_COLUMN_CLASS,
@@ -13,14 +16,9 @@ import {
   HOME_LANDING_HERO_TOP_PADDING_CLASS,
   HOME_LANDING_HERO_VIEWPORT_CLASS,
   HOME_LANDING_TRUST_BELOW_HERO_CLASS,
+  HOME_LANDING_TRUST_BRIDGE_CLASS,
   LANDING_CONTAINER_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
-
-const HERO_BG_SOURCES = {
-  mobile: "/images/hero-landing-bg-1024.webp",
-  tablet: "/images/hero-landing-bg-1920.webp",
-  desktop: "/images/hero-landing-bg-2560.webp",
-} as const;
 
 export function HeroSection() {
   return (
@@ -30,6 +28,7 @@ export function HeroSection() {
       >
         <HeroBackgroundPicture />
         <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
+        <LandingSectionBlend edge="bottom" tone="surface" />
 
         <div className={`${HOME_LANDING_HERO_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
           <div className={HOME_LANDING_HERO_GRID_CLASS}>
@@ -48,8 +47,11 @@ export function HeroSection() {
         </div>
       </section>
 
-      <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_TRUST_BELOW_HERO_CLASS}`}>
-        <TrustedLogos />
+      <div className={HOME_LANDING_TRUST_BRIDGE_CLASS}>
+        <HeroTrustBridgeBackground />
+        <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_TRUST_BELOW_HERO_CLASS}`}>
+          <TrustedLogos />
+        </div>
       </div>
     </>
   );
@@ -58,10 +60,10 @@ export function HeroSection() {
 function HeroBackgroundPicture() {
   return (
     <picture className="pointer-events-none absolute inset-0 block size-full" aria-hidden>
-      <source media="(min-width: 1280px)" srcSet={HERO_BG_SOURCES.desktop} type="image/webp" />
-      <source media="(min-width: 768px)" srcSet={HERO_BG_SOURCES.tablet} type="image/webp" />
+      <source media="(min-width: 1280px)" srcSet={HERO_LANDING_BG_SOURCES.desktop} type="image/webp" />
+      <source media="(min-width: 768px)" srcSet={HERO_LANDING_BG_SOURCES.tablet} type="image/webp" />
       <img
-        src={HERO_BG_SOURCES.mobile}
+        src={HERO_LANDING_BG_SOURCES.mobile}
         alt=""
         width={2560}
         height={1440}

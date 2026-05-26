@@ -1,0 +1,57 @@
+/**
+ * Trusted partners — gradient bridge between hero and What we do backgrounds.
+ */
+.home-landing-trust-bridge {
+  background: var(--landing-surface);
+}
+
+.home-landing-trust-bridge__layer {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.home-landing-trust-bridge__hero-photo {
+  opacity: 0.5;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 42%, transparent 82%);
+}
+
+.home-landing-trust-bridge__hero-photo-image {
+  object-fit: cover;
+  object-position: center 78%;
+}
+
+.home-landing-trust-bridge__what-we-do-photo {
+  opacity: 0.38;
+  mask-image: linear-gradient(180deg, transparent 28%, #000 58%, #000 88%, transparent 100%);
+}
+
+.home-landing-trust-bridge__what-we-do-photo-image {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.home-landing-trust-bridge__mesh {
+  background:
+    linear-gradient(
+      180deg,
+      var(--landing-blend-tone-surface) 0%,
+      rgb(248 246 252 / 72%) 14%,
+      rgb(250 249 255 / 82%) 38%,
+      rgb(247 248 253 / 90%) 62%,
+      var(--landing-blend-tone-soft) 100%
+    ),
+    radial-gradient(ellipse 85% 55% at 14% 20%, rgb(139 92 246 / 8%) 0%, transparent 58%),
+    radial-gradient(ellipse 75% 50% at 86% 28%, rgb(59 130 246 / 6%) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 88%, rgb(195 100 190 / 7%) 0%, transparent 62%);
+}
+
+.home-landing-trust-bridge__top-fade {
+  z-index: 1;
+  background: linear-gradient(180deg, var(--landing-blend-tone-surface) 0%, transparent 42%);
+}
+
+.home-landing-trust-bridge__bottom-fade {
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 52%, var(--landing-blend-tone-soft) 100%);
+}

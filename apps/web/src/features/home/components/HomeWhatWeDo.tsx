@@ -1,6 +1,7 @@
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HOME_WHAT_WE_DO_COPY } from "@/features/home/content/whatWeDoCopy";
 import { WhatWeDoServiceCardsGrid } from "@/features/home/components/WhatWeDoServiceCardsGrid";
+import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
 import {
   HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
@@ -83,6 +84,8 @@ function WhatWeDoBackgroundLayer() {
       aria-hidden
     >
       <WhatWeDoBackgroundPicture />
+      <LandingSectionBlend edge="top" tone="soft" />
+      <LandingSectionBlend edge="bottom" tone="soft" />
       <div className="home-what-we-do-photo-scrim absolute inset-0" />
     </div>
   );

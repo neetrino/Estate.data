@@ -1,5 +1,6 @@
 import { HOME_HOW_IT_WORKS_COPY } from "@/features/home/content/howItWorksCopy";
 import { HowItWorksConnector } from "@/features/home/landing/components/HowItWorksConnector";
+import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
 import { HowItWorksStepIcon } from "@/features/home/landing/components/HowItWorksStepIcon";
 import {
   HowItWorksBackgroundDecor,
@@ -89,6 +90,8 @@ function HowItWorksBackgroundLayer() {
     >
       <HowItWorksBackgroundPicture />
       <HowItWorksBackgroundDecor />
+      <LandingSectionBlend edge="top" tone="soft" />
+      <LandingSectionBlend edge="bottom" tone="surface" />
     </div>
   );
 }

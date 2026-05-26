@@ -3,6 +3,7 @@ import { HOME_CLIENT_VOICES_COPY } from "@/features/home/content/clientVoicesCop
 import {
   LANDING_CONTAINER_CLASS,
   LANDING_EYEBROW_CLASS,
+  LANDING_SECTION_ENTER_FROM_SURFACE_CLASS,
   LANDING_SECTION_TITLE_CLASS,
   LANDING_SECTION_WHITE_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
@@ -12,7 +13,10 @@ export function HomeClientVoices() {
   const { eyebrow, title, testimonials } = HOME_CLIENT_VOICES_COPY;
 
   return (
-    <section className={LANDING_SECTION_WHITE_CLASS} aria-labelledby="client-voices-heading">
+    <section
+      className={`${LANDING_SECTION_WHITE_CLASS} ${LANDING_SECTION_ENTER_FROM_SURFACE_CLASS}`}
+      aria-labelledby="client-voices-heading"
+    >
       <div className={LANDING_CONTAINER_CLASS}>
         <header className="text-center">
           <p className={LANDING_EYEBROW_CLASS}>{eyebrow}</p>

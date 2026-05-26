@@ -15,6 +15,7 @@ import {
   HOME_STATS_CARD_CLASS,
   HOME_STATS_STRIP_GRID_CLASS,
   LANDING_CONTAINER_CLASS,
+  LANDING_SECTION_ENTER_FROM_SURFACE_CLASS,
   LANDING_SECTION_WHITE_CLASS,
   landingIconSurfaceClass,
   landingMetricValueClass,
@@ -125,7 +126,7 @@ export function HomeStatsStrip() {
   return (
     <section
       ref={sectionRef}
-      className={LANDING_SECTION_WHITE_CLASS}
+      className={`${LANDING_SECTION_WHITE_CLASS} ${LANDING_SECTION_ENTER_FROM_SURFACE_CLASS}`}
       aria-label="Key metrics"
     >
       <div className={LANDING_CONTAINER_CLASS}>
