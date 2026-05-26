@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
 import { SiteChrome } from "@/shared/components/navbar";
-import { SiteFooter } from "@/shared/components/footer";
+import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -29,7 +29,7 @@ export default function RootLayout({
         <SiteChrome>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         </SiteChrome>
-        <SiteFooter />
+        <SiteFooterGate />
       </body>
     </html>
   );

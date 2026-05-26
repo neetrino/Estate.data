@@ -7,6 +7,8 @@ import { API_VERSION_PREFIX } from "@/shared/lib/constants";
 export const API_ROUTES = {
   health: `${API_VERSION_PREFIX}/health`,
   assets: `${API_VERSION_PREFIX}/assets`,
+  adminAuthLogin: `${API_VERSION_PREFIX}/admin/auth/login`,
+  adminAuthRefresh: `${API_VERSION_PREFIX}/admin/auth/refresh`,
 } as const;
 
 export type ApiRouteKey = keyof typeof API_ROUTES;
