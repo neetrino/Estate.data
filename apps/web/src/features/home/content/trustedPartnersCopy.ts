@@ -10,7 +10,7 @@ export type TrustedPartner = {
 };
 
 export const HOME_TRUSTED_PARTNERS_COPY = {
-  label: "Trusted by leading real estate teams",
+  label: "TRUSTED BY LEADING REAL ESTATE TEAMS",
   partners: [
     { id: "compass", name: "Compass", imageSrc: TRUSTED_PARTNER_IMAGE_PATHS.compass },
     { id: "sothebys", name: "Sotheby's", imageSrc: TRUSTED_PARTNER_IMAGE_PATHS.sothebys },

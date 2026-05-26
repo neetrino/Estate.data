@@ -15,51 +15,28 @@ export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
-/** Space between sticky navbar and hero copy (below navbar row). */
-export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[42px] sm:pt-[38px] lg:pt-[52px]";
+/** Space below fixed landing pill navbar (safe area + pill + gap). */
+export const HOME_LANDING_HERO_TOP_PADDING_CLASS = [
+  "pt-[calc(8.25rem+env(safe-area-inset-top,0px))]",
+  "sm:pt-[calc(8.5rem+env(safe-area-inset-top,0px))]",
+  "lg:pt-[calc(8.75rem+env(safe-area-inset-top,0px))]",
+].join(" ");
 
 /** Nudge hero main block (excludes trust strip) downward. */
 export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";
 
-export const HOME_LANDING_HERO_GRID_CLASS =
-  "grid items-start gap-11 lg:grid-cols-2 lg:items-stretch lg:gap-14 xl:gap-[4.5rem]";
+export const HOME_LANDING_HERO_GRID_CLASS = [
+  "grid items-start gap-11",
+  "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-12",
+  "xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] xl:gap-14",
+].join(" ");
 
 /** Hero copy column — sets row height on lg+; items-start keeps location chip shrink-wrapped. */
 export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = "flex flex-col items-start";
 
-/** Hero dashboard column — desktop only; hidden below lg (incl. 1,200+ preview card). */
+/** Hero dashboard column — full width of its grid track. */
 export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS =
-  "hidden min-h-0 flex-col lg:flex lg:h-full";
-
-export const HOME_LANDING_HERO_HEADLINE_CLASS = [
-  "mt-7 text-[2.375rem] font-bold leading-[1.08] tracking-tight text-brand-navy",
-  "sm:mt-8 sm:text-5xl lg:text-[3.5rem]",
-].join(" ");
-
-export const HOME_LANDING_HERO_DESCRIPTION_CLASS = [
-  "mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground",
-  "sm:mt-7 sm:text-xl",
-].join(" ");
-
-/** Hero CTAs — row when space allows; wrapped rows stay left (no mx-auto centering). */
-export const HOME_LANDING_HERO_CTA_ROW_CLASS = [
-  "mt-9 flex w-full max-w-lg flex-row flex-wrap content-start items-start justify-start gap-2.5",
-  "sm:items-center sm:justify-start sm:gap-3.5",
-].join(" ");
-
-/** Hero primary pill — left-aligned; overrides ESTATE_PILL_HERO_MOBILE mx-auto. */
-export const HOME_LANDING_HERO_PRIMARY_CTA_CLASS = [
-  "shrink-0 self-start !mx-0 w-auto max-w-full",
-  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2 max-sm:gap-2",
-  "max-sm:[&>span:first-child]:!translate-x-0",
-  "max-sm:[&>span:last-child]:!translate-x-0",
-].join(" ");
-
-/** Hero outline CTA — full-size outline, left when wrapped. */
-export const HOME_LANDING_HERO_OUTLINE_CTA_CLASS = [
-  "shrink-0 self-start !mx-0 w-auto max-w-full",
-  "h-12 justify-center px-4 text-sm sm:px-6 sm:text-base",
-].join(" ");
+  "min-h-0 w-full min-w-0 flex flex-col lg:h-full";
 
 /** Home — mobile-only outline CTAs full width (desktop unchanged). */
 export const HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS = "max-sm:w-full max-sm:max-w-full";
@@ -117,13 +94,6 @@ export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
 
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
-
-/** Hero location chip — Serving Greater Los Angeles (compact). */
-export const HOME_LANDING_LOCATION_BADGE_CLASS = [
-  "inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm",
-  "text-xs font-semibold normal-case tracking-normal text-brand-purple-light",
-  "[&_svg]:size-3.5",
-].join(" ");
 
 export const LANDING_SECTION_TITLE_CLASS =
   "text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-[2.5rem] md:leading-tight";

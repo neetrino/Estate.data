@@ -140,10 +140,11 @@
   --landing-card-border: rgba(46, 72, 115, 0.1);
   --landing-card-shadow: 0 10px 30px rgba(46, 72, 115, 0.08);
   --landing-hero-gradient: linear-gradient(
-    135deg,
-    rgba(195, 100, 190, 0.12) 0%,
-    rgba(135, 60, 131, 0.06) 40%,
-    rgba(22, 192, 218, 0.08) 100%
+    160deg,
+    rgba(237, 233, 254, 0.95) 0%,
+    rgba(252, 231, 243, 0.85) 38%,
+    rgba(224, 242, 254, 0.9) 72%,
+    rgba(248, 250, 252, 0.98) 100%
   );
   /** Media / Data & BIM — reversed stops: cyan on the left, magenta on the right. */
   --property-intelligence-page-gradient: linear-gradient(
@@ -253,7 +254,41 @@ button:disabled {
   background: var(--landing-hero-gradient);
 }
 
-/** Inner routes — same stack as {@link HomeLandingHero}: white base + hero gradient at 80%. */
+.home-landing-hero-mesh {
+  background:
+    radial-gradient(ellipse 75% 55% at 12% 18%, rgba(139, 92, 246, 0.16), transparent 58%),
+    radial-gradient(ellipse 65% 50% at 88% 12%, rgba(236, 72, 153, 0.1), transparent 52%),
+    radial-gradient(ellipse 55% 45% at 55% 88%, rgba(59, 130, 246, 0.08), transparent 55%);
+}
+
+/** Soft scrim over hero photo — keeps copy/dashboard readable without hiding the artwork. */
+.home-landing-hero-photo-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.02) 35%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+.hero-headline-gradient {
+  background: linear-gradient(90deg, #8b5cf6 0%, #d946ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.navbar-landing-pill {
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 8px 32px rgba(139, 92, 246, 0.08),
+    0 2px 8px rgba(46, 72, 115, 0.06);
+  backdrop-filter: blur(16px) saturate(150%);
+}
+
+/** Inner routes — same stack as {@link HeroSection}: white base + hero gradient at 80%. */
 .page-hero-background {
   position: relative;
   background-color: #ffffff;

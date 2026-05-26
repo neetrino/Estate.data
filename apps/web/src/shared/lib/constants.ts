@@ -107,6 +107,23 @@ export const NAVBAR_MOBILE_NAV_LIST_CLASS =
 /** Shared horizontal page gutters (navbar + hero). */
 export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8 xl:px-10";
 
+/** Landing pill navbar — 5px wider per side than {@link PAGE_GUTTER_CLASS}. */
+export const NAVBAR_LANDING_PILL_GUTTER_CLASS = [
+  "px-[calc(1rem-5px)] sm:px-[calc(1.5rem-5px)]",
+  "lg:px-[calc(2rem-5px)] xl:px-[calc(2.5rem-5px)]",
+].join(" ");
+
+/** Landing “Book a Shoot” — purple→magenta gradient (navbar + hero). */
+export const LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS = [
+  "!bg-gradient-to-r !from-[#8B5CF6] !to-[#D946EF] !text-white",
+  "shadow-[0_8px_24px_rgba(139,92,246,0.28)]",
+].join(" ");
+
+export const LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS = [
+  "transition-[box-shadow,transform,opacity] duration-300",
+  "hover:-translate-y-0.5 hover:!opacity-100 hover:shadow-[0_12px_32px_rgba(139,92,246,0.32)]",
+].join(" ");
+
 /** Shared centered content width (navbar + hero). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl 2xl:max-w-[90rem]";
 

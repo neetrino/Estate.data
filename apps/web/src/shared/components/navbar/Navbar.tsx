@@ -30,10 +30,12 @@ import {
   NAVBAR_MOBILE_PANEL_Z_CLASS,
   NAVBAR_OVERLAY_POSITION_CLASS,
   NAVBAR_STICKY_POSITION_CLASS,
+  NAVBAR_LANDING_PILL_GUTTER_CLASS,
   NAVBAR_TOP_PADDING_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
 } from "@/shared/lib/constants";
+import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 import { navbarBookShootButtonClassName } from "@/shared/ui/button";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
@@ -67,9 +69,11 @@ const NAVBAR_MOBILE_BACKDROP_CLASS = [
 type NavbarProps = {
   /** Transparent at top; liquid glass after scroll (home hero). */
   overlay?: boolean;
+  /** Home landing — floating glass pill with gradient CTA. */
+  landingPill?: boolean;
 };
 
-export function Navbar({ overlay = false }: NavbarProps) {
+export function Navbar({ overlay = false, landingPill = false }: NavbarProps) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -151,6 +155,9 @@ export function Navbar({ overlay = false }: NavbarProps) {
   }, [isMobileMenuVisible]);
 
   const headerSurfaceClass = (() => {
+    if (landingPill) {
+      return NAVBAR_TRANSPARENT_CLASS;
+    }
     if (overlay) {
       return scrolled ? NAVBAR_GLASS_SURFACE_CLASS : NAVBAR_TRANSPARENT_CLASS;
     }
@@ -158,9 +165,10 @@ export function Navbar({ overlay = false }: NavbarProps) {
   })();
 
   const navTone =
-    isMobileMenuVisible || !overlay || scrolled ? "dark" : "light";
+    landingPill || isMobileMenuVisible || !overlay || scrolled ? "dark" : "light";
 
-  const positionClass = overlay ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
+  const positionClass =
+    overlay || landingPill ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
 
   const headerSurfaceWhenMenuOpen = isMobileMenuVisible
     ? NAVBAR_SOLID_CLASS
@@ -174,28 +182,47 @@ export function Navbar({ overlay = false }: NavbarProps) {
         className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceWhenMenuOpen}`}
       >
         <nav
-          className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center justify-between gap-3 ${PAGE_GUTTER_CLASS}`}
+          className={[
+            PAGE_CONTAINER_CLASS,
+            landingPill ? NAVBAR_LANDING_PILL_GUTTER_CLASS : PAGE_GUTTER_CLASS,
+            landingPill ? "py-3 sm:py-4" : "",
+          ].join(" ")}
           aria-label="Main"
         >
+          <div
+            className={
+              landingPill
+                ? "navbar-landing-pill flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6"
+                : `flex ${NAVBAR_HEIGHT_CLASS} items-center justify-between gap-3`
+            }
+          >
           <LogoLink tone={navTone} onNavigate={closeMobile} />
 
           <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
-            <ul className="flex items-center justify-center gap-6 xl:gap-8">
+            <ul className="flex items-center justify-center gap-5 xl:gap-7">
               {MAIN_NAV_LINKS.map((link) => (
                 <NavItem
                   key={link.href}
                   link={link}
                   active={isNavbarActivePath(pathname, link.href)}
                   tone={navTone}
+                  showActiveIndicator={landingPill}
                 />
               ))}
             </ul>
           </div>
 
           <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center`}>
-            <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
-              {NAV_CTA_LINKS.bookShoot.label}
-            </Link>
+            {landingPill ? (
+              <NavBookShootCta
+                href={NAV_CTA_LINKS.bookShoot.href}
+                label={NAV_CTA_LINKS.bookShoot.label}
+              />
+            ) : (
+              <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
+                {NAV_CTA_LINKS.bookShoot.label}
+              </Link>
+            )}
           </div>
 
           <button
@@ -215,6 +242,7 @@ export function Navbar({ overlay = false }: NavbarProps) {
             </span>
             {isMobileMenuVisible ? <CloseIcon /> : <MenuIcon />}
           </button>
+          </div>
         </nav>
       </header>
 
@@ -241,29 +269,52 @@ function NavItem({
   link,
   active,
   tone,
+  showActiveIndicator = false,
 }: {
   link: NavLink;
   active: boolean;
   tone: NavTone;
+  showActiveIndicator?: boolean;
 }) {
   return (
     <li>
-      <Link href={link.href} className={desktopNavLinkClass(active, tone)}>
+      <Link href={link.href} className={desktopNavLinkClass(active, tone, showActiveIndicator)}>
         {link.label}
+        {link.label === "Solutions" ? <SolutionsChevron /> : null}
       </Link>
     </li>
   );
 }
 
-function desktopNavLinkClass(active: boolean, tone: NavTone): string {
-  const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
-  if (active) {
+function desktopNavLinkClass(
+  active: boolean,
+  tone: NavTone,
+  showActiveIndicator: boolean,
+): string {
+  const base = [
+    NAV_ITEM_TEXT_CLASS,
+    "relative inline-flex items-center gap-1 whitespace-nowrap transition-colors",
+    "hover:text-[#8B5CF6] focus-visible:text-[#8B5CF6] focus-visible:outline-none",
+    showActiveIndicator && active
+      ? "text-[#8B5CF6] after:absolute after:-bottom-1 after:left-1/2 after:h-0.5 after:w-5 after:-translate-x-1/2 after:rounded-full after:bg-[#8B5CF6]"
+      : "",
+  ].join(" ");
+
+  if (active && !showActiveIndicator) {
     return `${base} text-accent`;
   }
   if (tone === "light") {
     return `${base} text-white`;
   }
-  return `${base} text-black`;
+  return `${base} text-slate-900`;
+}
+
+function SolutionsChevron() {
+  return (
+    <svg className="size-3.5 opacity-60" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 }
 
 function MenuIcon() {

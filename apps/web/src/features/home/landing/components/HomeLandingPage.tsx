@@ -1,4 +1,4 @@
-import { HomeLandingHero } from "@/features/home/landing/components/HomeLandingHero";
+import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
 import {
   LazyHomeClientVoices,
   LazyHomeHowItWorks,
@@ -14,10 +14,10 @@ import { Navbar } from "@/shared/components/navbar";
 export function HomeLandingPage() {
   return (
     <>
-      <Navbar />
+      <Navbar overlay landingPill />
       <div className={LANDING_PAGE_CLASS}>
         <main>
-          <HomeLandingHero />
+          <HeroSection />
           <LazyHomeWhatWeDo />
           <LazyHomeHowItWorks />
           <LazyHomeRecentWork />
