@@ -1,5 +1,6 @@
 import {
   ESTATE_PILL_HERO_MOBILE_CLASS,
+  NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS,
   PAGE_CONTAINER_CLASS,
   PAGE_GUTTER_CLASS,
   SECTION_VERTICAL_PADDING_CLASS,
@@ -16,14 +17,7 @@ export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
 /** Space below fixed landing pill navbar (safe area + pill + gap). */
-export const HOME_LANDING_HERO_TOP_PADDING_CLASS = [
-  "pt-[calc(8.25rem+env(safe-area-inset-top,0px))]",
-  "sm:pt-[calc(8.5rem+env(safe-area-inset-top,0px))]",
-  "lg:pt-[calc(8.75rem+env(safe-area-inset-top,0px))]",
-].join(" ");
-
-/** Nudge hero main block (excludes trust strip) downward. */
-export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";
+export const HOME_LANDING_HERO_TOP_PADDING_CLASS = NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS;
 
 export const HOME_LANDING_HERO_GRID_CLASS = [
   "grid items-start gap-11",
@@ -31,8 +25,13 @@ export const HOME_LANDING_HERO_GRID_CLASS = [
   "xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] xl:gap-14",
 ].join(" ");
 
-/** Hero copy column — sets row height on lg+; items-start keeps location chip shrink-wrapped. */
-export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = "flex flex-col items-start";
+/** Hero copy column — matches dashboard card height on lg+ (content top, features bottom). */
+export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = [
+  "flex min-h-0 w-full flex-col items-start",
+  "lg:h-full lg:justify-between",
+].join(" ");
+
+export const HOME_LANDING_HERO_COPY_TOP_CLASS = "flex w-full min-w-0 flex-col items-start";
 
 /** Hero dashboard column — full width of its grid track. */
 export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS =
@@ -61,35 +60,23 @@ export const HOME_MOBILE_CTA_STACK_CLASS = "max-sm:w-full max-sm:flex-col max-sm
 
 export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 
-/**
- * Trust strip spacing — full-viewport pin only at xl+ (desktop).
- * Below xl (incl. iPad Pro): natural flow so mt-auto does not create a huge gap.
- * md–xl: extra space above trusted partners on tablet / iPad Pro only.
- */
-export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = [
-  "shrink-0 mb-[10px] max-sm:pt-8",
-  "mt-8 sm:mt-10",
-  "md:max-xl:mt-12 lg:max-xl:mt-14",
-  "xl:mt-auto xl:pt-0",
-  "2xl:mt-10 2xl:pt-0",
-].join(" ");
-
-/** Hero inner stack — grows to fill viewport on xl laptops only; 2xl+ uses natural flow. */
+/** Hero main block — fills first screen; trust strip sits below (see {@link HOME_LANDING_TRUST_BELOW_HERO_CLASS}). */
 export const HOME_LANDING_HERO_INNER_CLASS = [
-  "relative flex min-h-0 flex-col justify-start pb-6 sm:pb-8",
-  "max-xl:flex-none xl:flex-1 2xl:flex-none",
+  "relative flex min-h-0 flex-1 flex-col justify-center",
+  "pb-6 sm:pb-8",
 ].join(" ");
 
 /**
- * Hero fills one viewport below the sticky navbar row (4.5rem + safe area + 1px).
- * xl+ only — tablets keep content height (no empty gap above trust strip).
- * Keep in sync with {@link NAVBAR_HEIGHT_CLASS} and {@link NAVBAR_TOP_PADDING_CLASS}.
+ * Hero = one viewport (all breakpoints). Sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
  */
-export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
-  "max-xl:min-h-0",
-  "xl:min-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
-  "xl:min-h-[calc(100svh-4.5rem-1px-env(safe-area-inset-top,0px))]",
-  "2xl:min-h-0",
+export const HOME_LANDING_HERO_VIEWPORT_CLASS = [
+  "flex min-h-[calc(100dvh-env(safe-area-inset-top,0px))]",
+  "min-h-[calc(100svh-env(safe-area-inset-top,0px))]",
+].join(" ");
+
+/** Trusted partners — below the fold, after full-viewport hero. */
+export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = [
+  "bg-landing-surface pb-8 pt-10 sm:pt-12",
 ].join(" ");
 
 export const LANDING_EYEBROW_CLASS =

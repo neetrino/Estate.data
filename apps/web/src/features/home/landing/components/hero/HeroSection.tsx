@@ -5,13 +5,13 @@ import { HeroDashboard } from "@/features/home/landing/components/hero/dashboard
 import { TrustedLogos } from "@/features/home/landing/components/hero/TrustedLogos";
 import {
   HOME_LANDING_HERO_COPY_COLUMN_CLASS,
+  HOME_LANDING_HERO_COPY_TOP_CLASS,
   HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS,
   HOME_LANDING_HERO_GRID_CLASS,
   HOME_LANDING_HERO_INNER_CLASS,
-  HOME_LANDING_HERO_MAIN_OFFSET_CLASS,
-  HOME_LANDING_HERO_MIN_HEIGHT_CLASS,
   HOME_LANDING_HERO_TOP_PADDING_CLASS,
-  HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS,
+  HOME_LANDING_HERO_VIEWPORT_CLASS,
+  HOME_LANDING_TRUST_BELOW_HERO_CLASS,
   LANDING_CONTAINER_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
 
@@ -23,30 +23,34 @@ const HERO_BG_SOURCES = {
 
 export function HeroSection() {
   return (
-    <section
-      className={`relative flex flex-col overflow-x-clip bg-landing-surface ${HOME_LANDING_HERO_MIN_HEIGHT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
-    >
-      <HeroBackgroundPicture />
-      <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
+    <>
+      <section
+        className={`relative flex flex-col overflow-x-clip bg-landing-surface ${HOME_LANDING_HERO_VIEWPORT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
+      >
+        <HeroBackgroundPicture />
+        <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
 
-      <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
-        <div className={`${HOME_LANDING_HERO_GRID_CLASS} ${HOME_LANDING_HERO_MAIN_OFFSET_CLASS}`}>
-          <div className={HOME_LANDING_HERO_COPY_COLUMN_CLASS}>
-            <HeroCopy />
-            <HeroActions />
-            <HeroFeatures />
-          </div>
+        <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
+          <div className={HOME_LANDING_HERO_GRID_CLASS}>
+            <div className={HOME_LANDING_HERO_COPY_COLUMN_CLASS}>
+              <div className={HOME_LANDING_HERO_COPY_TOP_CLASS}>
+                <HeroCopy />
+                <HeroActions />
+              </div>
+              <HeroFeatures />
+            </div>
 
-          <div className={HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS}>
-            <HeroDashboard />
+            <div className={HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS}>
+              <HeroDashboard />
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className={HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS}>
-          <TrustedLogos />
-        </div>
+      <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_TRUST_BELOW_HERO_CLASS}`}>
+        <TrustedLogos />
       </div>
-    </section>
+    </>
   );
 }
 

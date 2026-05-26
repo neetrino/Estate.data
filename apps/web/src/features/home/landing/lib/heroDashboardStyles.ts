@@ -1,5 +1,8 @@
 /** Root — fills right hero column edge-to-edge. */
-export const HERO_DASHBOARD_ROOT_CLASS = "relative w-full min-w-0 max-w-none";
+export const HERO_DASHBOARD_ROOT_CLASS = [
+  "relative flex min-h-0 w-full min-w-0 max-w-none flex-col",
+  "lg:h-full lg:flex-1",
+].join(" ");
 
 /** Ambient glow behind the panel. */
 export const HERO_DASHBOARD_GLOW_CLASS = [
@@ -10,8 +13,9 @@ export const HERO_DASHBOARD_GLOW_CLASS = [
 
 /** Outer glass panel. */
 export const HERO_DASHBOARD_PANEL_CLASS = [
-  "relative overflow-hidden rounded-[28px] border border-white/75",
-  "bg-white/72 shadow-[0_30px_80px_rgba(30,41,59,0.12)] backdrop-blur-xl",
+  "relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-[28px]",
+  "border border-white/75 bg-white/72",
+  "shadow-[0_30px_80px_rgba(30,41,59,0.12)] backdrop-blur-xl",
   "sm:rounded-[32px] lg:rounded-[36px]",
 ].join(" ");
 

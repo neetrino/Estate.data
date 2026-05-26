@@ -21,19 +21,19 @@ export function HeroCopy() {
         {headlineLines.map((line) => {
           const isAccentLine = line.segments.some((segment) => segment.accent);
           return (
-          <span
-            key={line.segments.map((segment) => segment.text).join("")}
-            className={isAccentLine ? "block whitespace-nowrap" : "block [overflow-wrap:anywhere]"}
-          >
-            {line.segments.map((segment) => (
-              <span
-                key={segment.text}
-                className={segment.accent ? "hero-headline-gradient" : undefined}
-              >
-                {segment.text}
-              </span>
-            ))}
-          </span>
+            <span
+              key={line.segments.map((segment) => segment.text).join("")}
+              className={isAccentLine ? "block whitespace-nowrap" : "block [overflow-wrap:anywhere]"}
+            >
+              {line.segments.map((segment) => (
+                <span
+                  key={segment.text}
+                  className={segment.accent ? "hero-headline-gradient" : undefined}
+                >
+                  {segment.text}
+                </span>
+              ))}
+            </span>
           );
         })}
       </h1>
@@ -46,8 +46,8 @@ export function HeroCopy() {
 function LocationPinIcon() {
   return (
     <svg
-      width="16"
-      height="16"
+      width="12"
+      height="12"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

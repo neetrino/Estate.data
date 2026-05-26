@@ -12,7 +12,7 @@ export const HOME_FEATURE_HIGHLIGHTS_COPY = {
   items: [
     {
       id: "cinematic-media",
-      title: "Cinematic Media",
+      title: "Stunning Media",
       subtitle: "That Sells",
       icon: "camera",
       accent: "purple",
