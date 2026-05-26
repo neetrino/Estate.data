@@ -14,9 +14,8 @@ export const DASHBOARD_CHART_FILTER_CLASS = [
 export const DASHBOARD_CHART_LEGEND_CLASS =
   "text-[10px] font-medium text-[#2e4873]/65 sm:text-[11px]";
 
-/** Plot height on lg+ — keeps the outer dashboard panel from growing when the chart widens. */
-export const DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS =
-  "min-[480px]:h-[10.5rem] xl:h-[11rem]";
+/** Plot height from min-[480px] — fixed so the outer panel does not grow when the chart widens. */
+export const DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS = "min-[480px]:h-[10.5rem]";
 
 export const DASHBOARD_CHART_PLOT_WRAPPER_CLASS = [
   "group relative mt-4 w-full min-w-0 overflow-hidden rounded-xl",

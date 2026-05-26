@@ -4,6 +4,7 @@ import { HeroFeatures } from "@/features/home/landing/components/hero/HeroFeatur
 import { HeroDashboard } from "@/features/home/landing/components/hero/dashboard/HeroDashboard";
 import { TrustedLogos } from "@/features/home/landing/components/hero/TrustedLogos";
 import {
+  HOME_LANDING_HERO_CONTAINER_CLASS,
   HOME_LANDING_HERO_COPY_COLUMN_CLASS,
   HOME_LANDING_HERO_COPY_TOP_CLASS,
   HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS,
@@ -30,7 +31,7 @@ export function HeroSection() {
         <HeroBackgroundPicture />
         <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
 
-        <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
+        <div className={`${HOME_LANDING_HERO_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
           <div className={HOME_LANDING_HERO_GRID_CLASS}>
             <div className={HOME_LANDING_HERO_COPY_COLUMN_CLASS}>
               <div className={HOME_LANDING_HERO_COPY_TOP_CLASS}>

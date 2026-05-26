@@ -21,7 +21,12 @@ export const HOME_LANDING_HERO_TOP_PADDING_CLASS = NAVBAR_LANDING_PILL_MAIN_OFFS
 export const HOME_LANDING_HERO_GRID_CLASS = [
   "grid items-start gap-11",
   "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-12",
-  "xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] xl:gap-14",
+].join(" ");
+
+/** Hero shell — same max width on ultrawide as lg desktop; mobile/tablet unchanged. */
+export const HOME_LANDING_HERO_CONTAINER_CLASS = [
+  LANDING_CONTAINER_CLASS,
+  "2xl:max-w-7xl",
 ].join(" ");
 
 /** Hero copy column — matches dashboard card height on lg+ (content top, features bottom). */
