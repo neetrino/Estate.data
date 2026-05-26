@@ -6,6 +6,7 @@ import {
   FOOTER_COMPANY_LINKS,
   FOOTER_SERVICES_LINKS,
 } from "@/shared/components/footer/footerConfig";
+import { SiteFooterBackground } from "@/shared/components/footer/SiteFooterBackground";
 import { LogoLink } from "@/shared/components/navbar";
 import {
   FOOTER_BRAND_COLUMN_CLASS,
@@ -15,6 +16,7 @@ import {
   FOOTER_MAIN_ROW_CLASS,
   FOOTER_TOP_SEPARATOR_CLASS,
   LOGO_FOOTER_OFFSET_CLASS,
+  SITE_FOOTER_CLASS,
   SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
@@ -23,9 +25,11 @@ const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-brand-nav
 export function SiteFooter() {
   return (
     <footer
-      className={`hidden bg-white text-brand-navy [color-scheme:light] lg:block ${FOOTER_TOP_SEPARATOR_CLASS}`}
+      className={`hidden lg:block ${SITE_FOOTER_CLASS} ${FOOTER_TOP_SEPARATOR_CLASS}`}
     >
-      <div className={SITE_PAGE_SHELL_CLASS}>
+      <SiteFooterBackground />
+
+      <div className={`${SITE_PAGE_SHELL_CLASS} site-footer__content`}>
         <div className={FOOTER_MAIN_ROW_CLASS}>
           <div className={FOOTER_BRAND_COLUMN_CLASS}>
             <div className={LOGO_FOOTER_OFFSET_CLASS}>

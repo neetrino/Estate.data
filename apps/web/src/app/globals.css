@@ -244,10 +244,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.home-listing-cta-panel {
-  background: var(--home-listing-cta-gradient);
-}
-
 .data-services-report-cta-panel {
   background: var(--property-intelligence-report-cta-gradient);
 }
