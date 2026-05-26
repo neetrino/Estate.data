@@ -32,8 +32,6 @@ const VIEW_ALL_BUTTON_CLASS = [
   LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
 ].join(" ");
 
-export function HomeRecentWork() {
-  const { eyebrow, title, viewAllLabel, viewAllHref, projects } = HOME_RECENT_WORK_COPY;
 type HomeRecentWorkProps = {
   projects: readonly RecentWorkProject[];
 };

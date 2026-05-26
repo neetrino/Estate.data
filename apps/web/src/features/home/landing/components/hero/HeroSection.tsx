@@ -62,9 +62,6 @@ function HeroBackgroundPicture() {
     <picture className="pointer-events-none absolute inset-0 block size-full" aria-hidden>
       <source media="(min-width: 1280px)" srcSet={HERO_LANDING_BG_SOURCES.desktop} type="image/webp" />
       <source media="(min-width: 768px)" srcSet={HERO_LANDING_BG_SOURCES.tablet} type="image/webp" />
-    <picture className="pointer-events-none absolute inset-0 block size-full">
-      <source media="(min-width: 1280px)" srcSet={HERO_BG_SOURCES.desktop} type="image/webp" />
-      <source media="(min-width: 768px)" srcSet={HERO_BG_SOURCES.tablet} type="image/webp" />
       <img
         src={HERO_LANDING_BG_SOURCES.mobile}
         alt=""

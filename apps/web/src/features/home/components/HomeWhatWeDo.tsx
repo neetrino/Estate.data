@@ -94,7 +94,6 @@ function WhatWeDoBackgroundLayer() {
 function WhatWeDoBackgroundPicture() {
   return (
     <picture className="absolute inset-0 block size-full min-h-full" aria-hidden>
-    <picture className="pointer-events-none absolute inset-0 block size-full">
       <source media="(min-width: 1280px)" srcSet={WHAT_WE_DO_BG_SOURCES.desktop} type="image/webp" />
       <source media="(min-width: 768px)" srcSet={WHAT_WE_DO_BG_SOURCES.tablet} type="image/webp" />
       <img
