@@ -1,7 +1,7 @@
-/** Hero CTA row — stack on mobile, row on desktop. */
+/** Hero CTA row — desktop side-by-side layout from md+. */
 export const HERO_ACTIONS_ROOT_CLASS = [
   "mt-9 flex w-full max-w-xl flex-col gap-3",
-  "sm:flex-row sm:flex-wrap sm:items-center sm:gap-3.5",
+  "md:flex-row md:flex-wrap md:items-center md:gap-3.5",
 ].join(" ");
 
 const HERO_CTA_PILL_BASE_CLASS = [

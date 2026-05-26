@@ -1,0 +1,40 @@
+/**
+ * Home stats strip — smooth pastel photo behind 1200+ / 38% / 4.9 / 48 hr metrics.
+ */
+.home-stats-strip {
+  --landing-section-blend-height: clamp(4rem, 10vw, 7.5rem);
+}
+
+.home-stats-strip-bg-layer {
+  background-color: var(--landing-surface);
+}
+
+.home-stats-strip-bg-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/** Soft wash so metric cards stay crisp on the bright center of the artwork. */
+.home-stats-strip-photo-scrim {
+  background:
+    linear-gradient(
+      180deg,
+      var(--landing-surface) 0%,
+      rgba(248, 249, 252, 0.55) 12%,
+      rgba(255, 255, 255, 0.2) 42%,
+      rgba(255, 255, 255, 0.12) 58%,
+      rgba(248, 249, 252, 0.5) 88%,
+      var(--landing-surface) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(248, 249, 252, 0.35) 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(248, 249, 252, 0.35) 100%
+    );
+}
+
+.home-stats-strip__content {
+  position: relative;
+  z-index: 10;
+}

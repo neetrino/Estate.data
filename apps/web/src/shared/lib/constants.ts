@@ -284,6 +284,10 @@ export const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-purple"
 export const FOOTER_LINK_CLASS =
   "text-sm text-brand-navy/70 transition-colors hover:text-brand-purple-light";
 
+/** Site footer — root shell with lavender artwork background. */
+export const SITE_FOOTER_CLASS =
+  "site-footer relative overflow-hidden text-brand-navy [color-scheme:light]";
+
 /** Site footer — top edge line separating footer from page content. */
 export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-foreground/10";
 
@@ -296,7 +300,7 @@ export const FOOTER_BRAND_COLUMN_CLASS = "sm:col-span-2 lg:col-span-1 lg:max-w-x
 
 /** Site footer — divider + copyright block below main row. */
 export const FOOTER_DIVIDER_CLASS =
-  `mt-3 ${FOOTER_TOP_SEPARATOR_CLASS} bg-white pt-6 pb-10 sm:pb-12`;
+  `mt-3 ${FOOTER_TOP_SEPARATOR_CLASS} pt-6 pb-10 sm:pb-12`;
 
 /** Recent work project tile — design size (px); grid uses full column width up to this. */
 export const RECENT_WORK_PROJECT_WIDTH_PX = 592;
@@ -308,9 +312,9 @@ export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 /** Property intelligence — scan-to-bim hero image (1024×716 source). */
 export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 
-/** Home property intelligence — visual frame; lg height aligns with eyebrow through CTA. */
+/** Home property intelligence — visual frame (4:3, matches original landing layout). */
 export const PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS =
-  "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem] lg:aspect-auto lg:h-full lg:min-h-0";
+  "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem]";
 
 /** Inner page `<h1>` — brand navy (#2E4873); not used on home. */
 export const INNER_PAGE_TITLE_CLASS =
@@ -325,9 +329,13 @@ export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
 
-/** Estate pill — “Explore data services” on home property intelligence block. */
+/** Estate pill — data services inner pages (report CTA, etc.). */
 export const PROPERTY_INTELLIGENCE_CTA_CLASS =
   "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
+
+/** Home property intelligence — “Explore data services” gradient pill (see home-property-intelligence-section.css). */
+export const HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS =
+  "home-property-intelligence-explore-cta";
 
 /** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#2E4873). */
 export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
@@ -546,9 +554,9 @@ export const CLIENT_VOICES_SECTION_SURFACE_CLASS =
 export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
   `bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`;
 
-/** Home listing CTA — purple gradient panel below client voices. */
+/** Home listing CTA — content block; section carries the gradient backdrop. */
 export const HOME_LISTING_CTA_PANEL_CLASS =
-  "home-listing-cta-panel overflow-hidden rounded-3xl px-6 py-10 sm:px-10 sm:py-12";
+  "home-listing-cta-panel px-6 py-10 sm:px-10 sm:py-12";
 
 /** Estate pill — white surface, #873C83 label, #C364BE icon disc (listing CTA above footer). */
 export const HOME_LISTING_CTA_PILL_BUTTON_CLASS = [

@@ -1,0 +1,85 @@
+/**
+ * Home listing CTA — gradient strip on the section; smooth edges into page + footer.
+ */
+.home-listing-cta-section {
+  --home-listing-cta-banner-fallback: #f6f4fb;
+  --home-listing-cta-edge-fade-height: clamp(4.5rem, 11vw, 7.5rem);
+  --home-listing-cta-footer-tone: #f4f1fb;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--home-listing-cta-banner-fallback);
+}
+
+.home-listing-cta-section__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-listing-cta-section__bg-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/** Dissolve banner art into footer lavender below. */
+.home-listing-cta-section__bg::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--home-listing-cta-edge-fade-height);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(244, 241, 251, 0.2) 30%,
+    rgba(244, 241, 251, 0.55) 58%,
+    var(--home-listing-cta-footer-tone) 100%
+  );
+  content: "";
+}
+
+/** Dissolve from white section above into the banner gradient. */
+.home-listing-cta-section__bg::after {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--home-listing-cta-edge-fade-height);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.9) 22%,
+    rgba(255, 255, 255, 0.55) 48%,
+    rgba(255, 255, 255, 0.15) 72%,
+    transparent 100%
+  );
+  content: "";
+}
+
+.home-listing-cta-section.home-landing-section-enter::before {
+  z-index: 2;
+  height: var(--home-listing-cta-edge-fade-height);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.82) 38%,
+    transparent 100%
+  );
+}
+
+.home-listing-cta-section__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.home-listing-cta-panel {
+  position: relative;
+}

@@ -1,11 +1,10 @@
-/** Feature list — stack on mobile, three columns on desktop. */
+/** Feature list — desktop 3-column layout from md+ (synced with hero). */
 export const HERO_FEATURES_ROOT_CLASS = [
-  "mt-8 grid min-w-0 max-w-full gap-8",
-  "sm:mt-10 sm:gap-10",
-  "lg:mt-0 lg:grid-cols-3 lg:gap-10",
+  "relative z-10 mt-8 grid min-w-0 max-w-full gap-8",
+  "md:mt-0 md:grid-cols-3 md:gap-10",
 ].join(" ");
 
-export const HERO_FEATURES_ITEM_CLASS = "flex min-w-0 flex-col items-start gap-3";
+export const HERO_FEATURES_ITEM_CLASS = "relative z-10 flex min-w-0 flex-col items-start gap-3";
 
 export const HERO_FEATURES_ICON_CLASS = "size-14 shrink-0 object-contain sm:size-[3.75rem]";
 

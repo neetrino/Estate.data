@@ -1,77 +1,72 @@
-import Image from "next/image";
+import { HomePropertyIntelligenceContentCard } from "@/features/home/components/HomePropertyIntelligenceContentCard";
+import { HomePropertyIntelligenceVisual } from "@/features/home/components/HomePropertyIntelligenceVisual";
+import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
+import { HOME_PROPERTY_INTELLIGENCE_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
 import {
-  HOME_PROPERTY_INTELLIGENCE_COPY,
-  PROPERTY_INTELLIGENCE_IMAGE_ALT,
-  PROPERTY_INTELLIGENCE_IMAGE_PATH,
-} from "@/features/home/content/propertyIntelligenceCopy";
-import {
-  HOME_MOBILE_LEFT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
-  LANDING_GLASS_CARD_CLASS,
-  LANDING_SECTION_MUTED_CLASS,
-  LANDING_SECTION_SUBTITLE_CLASS,
-  LANDING_SECTION_TITLE_CLASS,
+  LANDING_SECTION_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
-import {
-  HOME_STATS_GRID_GAP_CLASS,
-  PROPERTY_INTELLIGENCE_CTA_CLASS,
-  PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS,
-  PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS,
-} from "@/shared/lib/constants";
-import { EstatePillButtonLink } from "@/shared/ui/button";
+import "@/features/home/styles/home-property-intelligence-section.css";
+import { HOME_STATS_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
-const FEATURE_BULLET_CLASS = "mt-2 size-1.5 shrink-0 rounded-full bg-brand-cyan";
+const HOME_PROPERTY_INTELLIGENCE_SECTION_CLASS = [
+  "home-property-intelligence relative isolate overflow-hidden",
+  LANDING_SECTION_CLASS,
+].join(" ");
 
 export function HomePropertyIntelligence() {
-  const { eyebrow, title, description, features, ctaLabel, ctaHref } =
-    HOME_PROPERTY_INTELLIGENCE_COPY;
-
   return (
-    <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="property-intelligence-heading">
-      <div className={LANDING_CONTAINER_CLASS}>
-        <div
-          className={`grid grid-cols-1 items-stretch lg:grid-cols-2 ${HOME_STATS_GRID_GAP_CLASS} lg:gap-12`}
-        >
-          <div className={`${LANDING_GLASS_CARD_CLASS} ${PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS}`}>
-            <Image
-              src={PROPERTY_INTELLIGENCE_IMAGE_PATH}
-              alt={PROPERTY_INTELLIGENCE_IMAGE_ALT}
-              fill
-              loading="lazy"
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+    <section
+      className={HOME_PROPERTY_INTELLIGENCE_SECTION_CLASS}
+      aria-labelledby="property-intelligence-heading"
+    >
+      <HomePropertyIntelligenceBackground />
 
-          <div className="flex min-h-full flex-col">
-            <p className={PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
-            <h2 id="property-intelligence-heading" className={`mt-3 ${LANDING_SECTION_TITLE_CLASS}`}>
-              {title}
-            </h2>
-            <p className={LANDING_SECTION_SUBTITLE_CLASS}>{description}</p>
-            <ul className="mt-6 space-y-2.5">
-              {features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex gap-3 text-sm leading-relaxed text-brand-navy sm:text-base"
-                >
-                  <span className={FEATURE_BULLET_CLASS} aria-hidden />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 lg:mt-auto lg:pt-6">
-              <EstatePillButtonLink
-                href={ctaHref}
-                fullWidth
-                className={`${PROPERTY_INTELLIGENCE_CTA_CLASS} ${HOME_MOBILE_LEFT_PILL_CLASS}`}
-              >
-                {ctaLabel}
-              </EstatePillButtonLink>
-            </div>
+      <div className={`${LANDING_CONTAINER_CLASS} home-property-intelligence__content`}>
+        <div
+          className={`home-property-intelligence__grid grid grid-cols-1 items-stretch lg:grid-cols-2 lg:items-center ${HOME_STATS_GRID_GAP_CLASS} lg:gap-12`}
+        >
+          <div className="home-property-intelligence__visual-col">
+            <HomePropertyIntelligenceVisual />
+          </div>
+          <div className="home-property-intelligence__content-col">
+            <HomePropertyIntelligenceContentCard />
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function HomePropertyIntelligenceBackground() {
+  return (
+    <div
+      className="home-property-intelligence-bg-layer pointer-events-none absolute inset-0 z-0 size-full min-h-full overflow-hidden"
+      aria-hidden
+    >
+      <picture className="absolute inset-0 block size-full min-h-full">
+        <source
+          media="(min-width: 1280px)"
+          srcSet={HOME_PROPERTY_INTELLIGENCE_BG_SOURCES.desktop}
+          type="image/webp"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcSet={HOME_PROPERTY_INTELLIGENCE_BG_SOURCES.tablet}
+          type="image/webp"
+        />
+        <img
+          src={HOME_PROPERTY_INTELLIGENCE_BG_SOURCES.mobile}
+          alt=""
+          width={2560}
+          height={1440}
+          decoding="async"
+          className="home-property-intelligence-bg-image size-full min-h-full"
+        />
+      </picture>
+      <LandingSectionBlend edge="top" tone="surface" />
+      <LandingSectionBlend edge="bottom" tone="white" />
+      <div className="home-property-intelligence-photo-scrim absolute inset-0" />
+    </div>
   );
 }

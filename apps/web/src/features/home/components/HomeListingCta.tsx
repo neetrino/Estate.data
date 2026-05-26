@@ -1,5 +1,6 @@
+import { ListingCtaSectionBackground } from "@/features/home/components/ListingCtaSectionBackground";
 import { HOME_LISTING_CTA_COPY } from "@/features/home/content/homeListingCtaCopy";
-import { LANDING_CONTAINER_CLASS, LANDING_SECTION_MUTED_CLASS } from "@/features/home/landing/lib/landingStyles";
+import { LANDING_CONTAINER_CLASS, LANDING_SECTION_CLASS, LANDING_SECTION_ENTER_FROM_WHITE_CLASS } from "@/features/home/landing/lib/landingStyles";
 import {
   HOME_LISTING_CTA_BUTTONS_WRAP_CLASS,
   HOME_LISTING_CTA_MOBILE_PILL_CLASS,
@@ -8,14 +9,23 @@ import {
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
+import "@/features/home/styles/home-listing-cta-banner.css";
+
 export function HomeListingCta() {
   const { title, description, primaryLabel, primaryHref, secondaryLabel, secondaryHref } =
     HOME_LISTING_CTA_COPY;
 
   return (
-    <section className={LANDING_SECTION_MUTED_CLASS} aria-labelledby="listing-cta-heading">
-      <div className={LANDING_CONTAINER_CLASS}>
-        <div className={`${HOME_LISTING_CTA_PANEL_CLASS} grid items-center gap-8 md:grid-cols-2`}>
+    <section
+      className={`home-listing-cta-section ${LANDING_SECTION_CLASS} ${LANDING_SECTION_ENTER_FROM_WHITE_CLASS}`}
+      aria-labelledby="listing-cta-heading"
+    >
+      <ListingCtaSectionBackground />
+
+      <div className={`${LANDING_CONTAINER_CLASS} home-listing-cta-section__inner`}>
+        <div
+          className={`${HOME_LISTING_CTA_PANEL_CLASS} grid items-center gap-8 md:grid-cols-2`}
+        >
           <div>
             <h2
               id="listing-cta-heading"

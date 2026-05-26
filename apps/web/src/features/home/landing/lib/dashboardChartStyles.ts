@@ -1,5 +1,5 @@
 export const DASHBOARD_CHART_CARD_CLASS = [
-  "flex h-full min-w-0 flex-col rounded-[22px] border border-white/80",
+  "flex h-full w-full min-w-0 flex-col rounded-[22px] border border-white/80",
   "bg-white/90 p-5 shadow-[0_8px_28px_rgba(30,41,59,0.07)] backdrop-blur-sm",
   "sm:rounded-[24px] sm:p-6",
 ].join(" ");
@@ -14,11 +14,18 @@ export const DASHBOARD_CHART_FILTER_CLASS = [
 export const DASHBOARD_CHART_LEGEND_CLASS =
   "text-[10px] font-medium text-[#2e4873]/65 sm:text-[11px]";
 
+/** Plot height from min-[480px] — fixed so the outer panel does not grow when the chart widens. */
+export const DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS = "min-[480px]:h-[10.5rem]";
+
 export const DASHBOARD_CHART_PLOT_WRAPPER_CLASS = [
-  "group relative mt-4 min-w-0 overflow-hidden rounded-xl",
+  "group relative mt-4 w-full min-w-0 overflow-hidden rounded-xl",
+  DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS,
   "bg-gradient-to-b from-[#2e4873]/[0.02] to-[#8B5CF6]/[0.04]",
   "outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/35",
 ].join(" ");
+
+export const DASHBOARD_CHART_SVG_CLASS =
+  "h-auto w-full min-[480px]:h-full min-[480px]:min-h-0";
 
 export const DASHBOARD_CHART_TOOLTIP_CLASS = [
   "pointer-events-none absolute z-10 max-w-[10.5rem] rounded-lg",

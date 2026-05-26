@@ -15,13 +15,25 @@ export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
+/** Soft gradient overlap from the previous section background tone. */
+export const LANDING_SECTION_ENTER_FROM_SURFACE_CLASS =
+  "home-landing-section-enter home-landing-section-enter--from-surface";
+
+export const LANDING_SECTION_ENTER_FROM_WHITE_CLASS =
+  "home-landing-section-enter home-landing-section-enter--from-white";
+
 /** Space below fixed landing pill navbar (safe area + pill + gap). */
 export const HOME_LANDING_HERO_TOP_PADDING_CLASS = NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS;
 
 export const HOME_LANDING_HERO_GRID_CLASS = [
   "grid items-start gap-11",
   "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-12",
-  "xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] xl:gap-14",
+].join(" ");
+
+/** Hero shell — same max width on ultrawide as lg desktop; mobile/tablet unchanged. */
+export const HOME_LANDING_HERO_CONTAINER_CLASS = [
+  LANDING_CONTAINER_CLASS,
+  "2xl:max-w-7xl",
 ].join(" ");
 
 /** Hero copy column — matches dashboard card height on lg+ (content top, features bottom). */
@@ -50,6 +62,12 @@ export const HOME_MOBILE_LEFT_PILL_CLASS = [
 
 export const HOME_MOBILE_BOOK_SHOOT_PILL_CLASS = HOME_MOBILE_LEFT_PILL_CLASS;
 
+/** What we do CTA — white icon disc, black arrow (gradient pill label unchanged). */
+export const WHAT_WE_DO_CTA_ICON_DISC_CLASS = [
+  "[&>span:last-child]:!bg-white",
+  "[&>span:last-child]:!text-black",
+].join(" ");
+
 export const HOME_MOBILE_OUTLINE_BUTTON_CLASS = [
   HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS,
   "max-sm:justify-center",
@@ -61,7 +79,7 @@ export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 
 /** Hero main block — fills first screen; trust strip sits below (see {@link HOME_LANDING_TRUST_BELOW_HERO_CLASS}). */
 export const HOME_LANDING_HERO_INNER_CLASS = [
-  "relative flex min-h-0 flex-1 flex-col justify-center",
+  "relative z-10 flex min-h-0 flex-1 flex-col justify-center",
   "pb-6 sm:pb-8",
 ].join(" ");
 
@@ -73,10 +91,11 @@ export const HOME_LANDING_HERO_VIEWPORT_CLASS = [
   "min-h-[calc(100svh-env(safe-area-inset-top,0px))]",
 ].join(" ");
 
-/** Trusted partners — below the fold, after full-viewport hero. */
-export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = [
-  "bg-landing-surface pb-8 pt-10 sm:pt-12",
-].join(" ");
+/** Trusted partners — bridge section between hero and What we do. */
+export const HOME_LANDING_TRUST_BRIDGE_CLASS =
+  "home-landing-trust-bridge relative isolate overflow-hidden";
+
+export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = "relative z-10 pb-8 pt-10 sm:pt-12";
 
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
@@ -88,19 +107,6 @@ export const LANDING_SECTION_SUBTITLE_CLASS =
   "mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg";
 
 export const LANDING_GLASS_CARD_CLASS = "home-landing-glass-card rounded-2xl";
-
-/** Home stats strip — equal-height cards in 2×2 grid on mobile. */
-export const HOME_STATS_STRIP_GRID_CLASS = [
-  "grid grid-cols-2 gap-4 max-sm:auto-rows-fr",
-  "sm:grid-cols-2 lg:grid-cols-4 lg:gap-6",
-].join(" ");
-
-export const HOME_STATS_CARD_CLASS = [
-  LANDING_GLASS_CARD_CLASS,
-  "flex h-full flex-col items-center px-4 py-5 text-center",
-  "max-sm:min-h-[10.75rem]",
-  "sm:px-5 sm:py-6",
-].join(" ");
 
 export type LandingAccent = "purple" | "cyan" | "yellow" | "orange" | "navy";
 

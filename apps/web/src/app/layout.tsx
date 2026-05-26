@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
-import { ConditionalSiteFooter } from "@/shared/components/layout/ConditionalSiteFooter";
+import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
 import { SiteChrome } from "@/shared/components/navbar";
 import { siteFont } from "./site-font";
 import "./globals.css";
@@ -33,7 +33,7 @@ export default function RootLayout({
         <SiteChrome>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         </SiteChrome>
-        <ConditionalSiteFooter />
+        <SiteFooterGate />
       </body>
     </html>
   );

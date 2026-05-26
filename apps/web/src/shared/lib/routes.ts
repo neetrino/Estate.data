@@ -1,3 +1,6 @@
+/** Admin sign-in and panel — no marketing navbar/footer. */
+export const SUPERSUDO_PATH = "/supersudo";
+
 /** Contact page — forms, studio details, “Book a Shoot” CTAs. */
 export const CONTACT_PATH = "/contact";
 
@@ -18,4 +21,9 @@ export function isDataBimRoute(pathname: string): boolean {
     pathname.startsWith(`${DATA_BIM_PATH}/`) ||
     pathname.startsWith(`${DATA_BIM_LEGACY_PATH}/`)
   );
+}
+
+/** Whether `pathname` is the admin (supersudo) area. */
+export function isSupersudoRoute(pathname: string): boolean {
+  return pathname === SUPERSUDO_PATH || pathname.startsWith(`${SUPERSUDO_PATH}/`);
 }

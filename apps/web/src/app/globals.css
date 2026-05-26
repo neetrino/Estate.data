@@ -16,6 +16,7 @@
   --what-we-do-subtitle: #c364be;
   --what-we-do-surface: #f7f4ef;
   --what-we-do-card-radius: 38px;
+  --what-we-do-card-min-height: 285px;
   --what-we-do-card-gradient: linear-gradient(180deg, #100b16 0%, #0f0220 100%);
   --what-we-do-card-corner-gradient: radial-gradient(
     ellipse 30% 40% at 0% 0%,
@@ -210,10 +211,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.home-listing-cta-panel {
-  background: var(--home-listing-cta-gradient);
-}
-
 .data-services-report-cta-panel {
   background: var(--property-intelligence-report-cta-gradient);
 }
@@ -242,19 +239,37 @@ button:disabled {
     180deg,
     rgba(255, 255, 255, 0.12) 0%,
     rgba(255, 255, 255, 0.02) 35%,
-    rgba(255, 255, 255, 0.06) 100%
+    rgba(255, 255, 255, 0.04) 72%,
+    rgba(248, 249, 252, 0.35) 100%
   );
 }
 
-/** What we do — light wash so headline and cards stay readable over the skyline art. */
+/** What we do — fallback while the photo loads. */
+.home-what-we-do-bg-layer {
+  background-color: var(--landing-surface);
+}
+
+/** Cover the full section through the bottom; keep the lower skyline in frame. */
+.home-what-we-do-bg-image {
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+/** What we do — subtle left wash so copy stays readable; photo remains the section surface. */
 .home-what-we-do-photo-scrim {
   background: linear-gradient(
     105deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.2) 42%,
-    rgba(255, 255, 255, 0.08) 68%,
-    rgba(255, 255, 255, 0.18) 100%
-  );
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.1) 38%,
+    rgba(255, 255, 255, 0.02) 62%,
+    rgba(255, 255, 255, 0.06) 100%
+  ),
+  linear-gradient(180deg, transparent 0%, transparent 70%, rgba(247, 248, 253, 0.45) 100%);
+}
+
+/** How it works — fallback while the background photo loads. */
+.home-how-it-works-bg-layer {
+  background: linear-gradient(180deg, #fff 0%, #f8f9fc 55%, #f3f0fa 100%);
 }
 
 .hero-headline-gradient {
