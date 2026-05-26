@@ -10,7 +10,8 @@ export const HERO_FEATURES_ICON_CLASS = "size-14 shrink-0 object-contain sm:size
 
 export const HERO_FEATURES_COPY_CLASS = "min-w-0";
 
-export const HERO_FEATURES_TITLE_CLASS = "text-sm font-bold leading-snug text-[#2e4873] sm:text-base";
+export const HERO_FEATURES_TITLE_CLASS =
+  "whitespace-nowrap text-sm font-bold leading-snug text-[#2e4873] sm:text-base";
 
 export const HERO_FEATURES_SUBTITLE_CLASS =
   "mt-0.5 text-sm font-medium leading-snug text-[#2e4873]/55 sm:text-[0.9375rem]";
