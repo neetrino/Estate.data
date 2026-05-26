@@ -22,19 +22,27 @@ export const HERO_DASHBOARD_PANEL_CLASS = [
 /** Inner padding. */
 export const HERO_DASHBOARD_INNER_CLASS = "p-4 sm:p-5 lg:p-6";
 
+/** Shared gap between dashboard card columns (KPI row + middle chart/mini). */
+export const HERO_DASHBOARD_CARD_GRID_GAP_CLASS = "gap-3 min-[480px]:gap-4.5";
+
 /** Top KPI row — 3 cards. */
 export const HERO_DASHBOARD_KPI_GRID_CLASS = [
-  "grid min-w-0 grid-cols-1 items-start gap-3",
-  "min-[480px]:grid-cols-3 min-[480px]:gap-3.5",
+  "grid min-w-0 grid-cols-1 items-start",
+  HERO_DASHBOARD_CARD_GRID_GAP_CLASS,
+  "min-[480px]:grid-cols-3",
 ].join(" ");
 
 /** Middle — chart + mini cards (equal height on md+). */
 export const HERO_DASHBOARD_MIDDLE_CLASS = [
-  "mt-4 grid min-w-0 gap-3.5 sm:mt-5 sm:gap-4",
+  "mt-4 grid min-w-0 sm:mt-5",
+  HERO_DASHBOARD_CARD_GRID_GAP_CLASS,
   "md:grid-cols-[minmax(0,1.55fr)_minmax(0,0.95fr)] md:items-stretch",
+  "xl:grid-cols-[minmax(0,1.78fr)_minmax(0,0.72fr)]",
+  "2xl:grid-cols-[minmax(0,1.88fr)_minmax(0,0.62fr)]",
 ].join(" ");
 
-export const HERO_DASHBOARD_CHART_COLUMN_CLASS = "min-w-0 md:flex md:h-full";
+export const HERO_DASHBOARD_CHART_COLUMN_CLASS =
+  "min-w-0 w-full md:flex md:h-full md:flex-col";
 
 /** Right column — compact donut + sparkline, matches chart height. */
 export const HERO_DASHBOARD_MINI_COLUMN_CLASS = [

@@ -15,6 +15,7 @@ import {
   DASHBOARD_CHART_GUIDE_LINE_CLASS,
   DASHBOARD_CHART_LEGEND_CLASS,
   DASHBOARD_CHART_PLOT_WRAPPER_CLASS,
+  DASHBOARD_CHART_SVG_CLASS,
   DASHBOARD_CHART_TITLE_CLASS,
   DASHBOARD_CHART_TOOLTIP_CLASS,
 } from "@/features/home/landing/lib/dashboardChartStyles";
@@ -75,7 +76,7 @@ export function DashboardChart() {
 
       <div className={DASHBOARD_CHART_PLOT_WRAPPER_CLASS} tabIndex={0} aria-label="Chart details on hover">
         <svg
-          className="h-auto w-full"
+          className={DASHBOARD_CHART_SVG_CLASS}
           viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
           preserveAspectRatio="xMidYMid meet"
           role="img"
