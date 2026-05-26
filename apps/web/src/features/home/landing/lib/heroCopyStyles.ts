@@ -10,10 +10,10 @@ export const HERO_COPY_BADGE_CLASS = [
   "[&_svg]:size-3.5 [&_svg]:shrink-0",
 ].join(" ");
 
-/** Headline — ~38px mobile, ~48px tablet, ~64px desktop via clamp. */
+/** Headline — ~36px mobile, ~44px tablet, ~60px desktop via clamp. */
 export const HERO_COPY_HEADLINE_CLASS = [
   "mt-4 max-w-full font-bold tracking-tight text-[#2e4873] sm:mt-5",
-  "text-[clamp(2.375rem,1.1rem+2.75vw,4rem)] leading-[1.08]",
+  "text-[clamp(2.25rem,1rem+2.5vw,3.75rem)] leading-[1.08]",
 ].join(" ");
 
 /** Subtitle — muted, max ~560px, ~18px on desktop. */
