@@ -72,6 +72,23 @@ export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
   "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-12px)]";
 
 /**
+ * Mobile menu panel top — landing pill navbar (safe area + pill + vertical padding).
+ * Keep in sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
+ */
+export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
+  "top-[calc(7.75rem-7px+env(safe-area-inset-top,0px)-12px)]",
+  "sm:top-[calc(8rem-7px+env(safe-area-inset-top,0px)-12px)]",
+  "lg:top-[calc(8.25rem-7px+env(safe-area-inset-top,0px)-12px)]",
+].join(" ");
+
+/** Main content offset below fixed landing pill navbar (sync with home hero). */
+export const NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS = [
+  "pt-[calc(7.75rem-7px+env(safe-area-inset-top,0px))]",
+  "sm:pt-[calc(8rem-7px+env(safe-area-inset-top,0px))]",
+  "lg:pt-[calc(8.25rem-7px+env(safe-area-inset-top,0px))]",
+].join(" ");
+
+/**
  * Hero copy top bound — matches overlay navbar (safe area + 1px + 4.5rem).
  */
 export const HERO_CONTENT_TOP_INSET_CLASS =
@@ -105,11 +122,37 @@ export const NAVBAR_MOBILE_PANEL_SCROLL_CLASS =
 export const NAVBAR_MOBILE_NAV_LIST_CLASS =
   "flex w-full flex-col divide-y divide-zinc-200/80";
 
-/** Shared horizontal page gutters (navbar + hero). */
-export const PAGE_GUTTER_CLASS = "px-4 sm:px-6 lg:px-8 xl:px-10";
-
-/** Shared centered content width (navbar + hero). */
+/** Shared centered content width (navbar + pages + footer). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl 2xl:max-w-[90rem]";
+
+/**
+ * Horizontal inset — page content aligns with landing pill navbar outer edges.
+ * Single source for navbar nav + all page shells.
+ */
+export const SITE_HORIZONTAL_GUTTER_CLASS = [
+  "px-[calc(1rem-5px)] sm:px-[calc(1.5rem-5px)]",
+  "lg:px-[calc(2rem-5px)] xl:px-[calc(2.5rem-5px)]",
+].join(" ");
+
+/** Alias — same as {@link SITE_HORIZONTAL_GUTTER_CLASS}. */
+export const PAGE_GUTTER_CLASS = SITE_HORIZONTAL_GUTTER_CLASS;
+
+/** Alias — same as {@link SITE_HORIZONTAL_GUTTER_CLASS}. */
+export const NAVBAR_LANDING_PILL_GUTTER_CLASS = SITE_HORIZONTAL_GUTTER_CLASS;
+
+/** Centered page shell — max width + navbar-aligned horizontal gutter. */
+export const SITE_PAGE_SHELL_CLASS = [PAGE_CONTAINER_CLASS, SITE_HORIZONTAL_GUTTER_CLASS].join(" ");
+
+/** Landing “Book a Shoot” — purple→magenta gradient (navbar + hero). */
+export const LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS = [
+  "!bg-gradient-to-r !from-[#8B5CF6] !to-[#D946EF] !text-white",
+  "shadow-[0_8px_24px_rgba(139,92,246,0.28)]",
+].join(" ");
+
+export const LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS = [
+  "transition-[box-shadow,transform,opacity] duration-300",
+  "hover:-translate-y-0.5 hover:!opacity-100 hover:shadow-[0_12px_32px_rgba(139,92,246,0.32)]",
+].join(" ");
 
 /** Section vertical rhythm — mobile through desktop. */
 export const SECTION_VERTICAL_PADDING_CLASS = "py-12 sm:py-14 md:py-16 lg:py-20";
@@ -415,9 +458,11 @@ export const ABOUT_STACK_TITLE_CLASS = "text-lg font-bold text-what-we-do-title 
 
 export const ABOUT_STACK_CHECK_ICON_CLASS = "text-what-we-do-subtitle";
 
-/** Inner pages — vertical rhythm below sticky navbar. */
-export const INNER_PAGE_MAIN_SPACING_CLASS =
-  "pt-12 pb-12 sm:pt-6 sm:pb-14 md:pt-14 md:pb-16 lg:pb-20";
+/** Inner pages — vertical rhythm below fixed landing pill navbar. */
+export const INNER_PAGE_MAIN_SPACING_CLASS = [
+  NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS,
+  "pb-12 sm:pb-14 md:pb-16 lg:pb-20",
+].join(" ");
 
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [

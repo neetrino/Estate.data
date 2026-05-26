@@ -1,4 +1,4 @@
-import { HomeLandingHero } from "@/features/home/landing/components/HomeLandingHero";
+import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
 import {
   LazyHomeClientVoices,
   LazyHomeHowItWorks,
@@ -10,7 +10,6 @@ import {
 } from "@/features/home/landing/lib/lazyHomeSections";
 import { LANDING_PAGE_CLASS } from "@/features/home/landing/lib/landingStyles";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
-import { Navbar } from "@/shared/components/navbar";
 
 type HomeLandingPageProps = {
   projects: readonly RecentWorkProject[];
@@ -18,20 +17,17 @@ type HomeLandingPageProps = {
 
 export function HomeLandingPage({ projects }: HomeLandingPageProps) {
   return (
-    <>
-      <Navbar />
-      <div className={LANDING_PAGE_CLASS}>
-        <main>
-          <HomeLandingHero />
-          <LazyHomeWhatWeDo />
-          <LazyHomeHowItWorks />
-          <LazyHomeRecentWork projects={projects} />
-          <LazyHomeStatsStrip />
-          <LazyHomePropertyIntelligence />
-          <LazyHomeClientVoices />
-          <LazyHomeListingCta />
-        </main>
-      </div>
-    </>
+    <div className={LANDING_PAGE_CLASS}>
+      <main>
+        <HeroSection />
+        <LazyHomeWhatWeDo />
+        <LazyHomeHowItWorks />
+        <LazyHomeRecentWork projects={projects} />
+        <LazyHomeStatsStrip />
+        <LazyHomePropertyIntelligence />
+        <LazyHomeClientVoices />
+        <LazyHomeListingCta />
+      </main>
+    </div>
   );
 }

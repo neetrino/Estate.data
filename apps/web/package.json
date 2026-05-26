@@ -7,7 +7,9 @@
     "build": "pnpm --filter @estate/db generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "optimize:hero-bg": "node scripts/optimize-hero-landing-bg.mjs",
+    "optimize:what-we-do-bg": "node scripts/optimize-what-we-do-bg.mjs"
   },
   "dependencies": {
     "@estate/db": "workspace:*",

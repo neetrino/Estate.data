@@ -1,5 +1,7 @@
 "use client";
 
+import "@/features/home/landing/styles/hero-dashboard-enter.css";
+
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   HOME_STATS_COPY,
@@ -7,6 +9,7 @@ import {
 } from "@/features/home/content/homeStatsCopy";
 import { easeOutCubic, formatStatCountValue } from "@/features/home/lib/formatStatCountValue";
 import { LandingModuleIcon } from "@/features/home/landing/components/LandingModuleIcon";
+import { heroDashboardEnterClass } from "@/features/home/landing/lib/heroDashboardEnterStyles";
 import {
   homeLandingAccentAt,
   HOME_STATS_CARD_CLASS,
@@ -38,12 +41,14 @@ export function HomeStatsStrip() {
     () => false,
   );
   const [animatedProgress, setAnimatedProgress] = useState(0);
+  const [hasEntered, setHasEntered] = useState(false);
   const progress = prefersReducedMotion ? 1 : animatedProgress;
   const hasStartedRef = useRef(false);
   const frameRef = useRef(0);
 
   useEffect(() => {
     if (prefersReducedMotion) {
+      setHasEntered(true);
       return;
     }
 
@@ -59,6 +64,7 @@ export function HomeStatsStrip() {
         return;
       }
       hasStartedRef.current = true;
+      setHasEntered(true);
       observer?.disconnect();
 
       const startTime = performance.now();
@@ -130,7 +136,14 @@ export function HomeStatsStrip() {
             const finalValue = formatStatCountValue(1, stat.count);
 
             return (
-              <li key={stat.id} className="h-full min-h-0">
+              <li
+                key={stat.id}
+                className={
+                  hasEntered
+                    ? `h-full min-h-0 ${heroDashboardEnterClass(index)}`
+                    : "h-full min-h-0 opacity-0"
+                }
+              >
                 <article className={HOME_STATS_CARD_CLASS}>
                   <span className={landingIconSurfaceClass(accent)}>
                     <LandingModuleIcon accent={accent} variant={index} />

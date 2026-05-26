@@ -57,6 +57,10 @@ export const landingOutlineButtonClassName = [
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple-light",
 ].join(" ");
 
+/** Light landing — filled marketing gradient, white label. */
+export const landingBrandGradientOutlineButtonClassName =
+  "landing-brand-gradient-outline-button";
+
 /** Light landing — yellow primary on purple gradient panel. */
 export const landingGradientPrimaryButtonClassName = [
   "inline-flex h-12 cursor-pointer items-center justify-center whitespace-nowrap",
@@ -157,6 +161,8 @@ export function EstatePillButtonLink({
 type LandingOutlineButtonLinkProps = ComponentProps<typeof Link> & {
   showArrow?: boolean;
   fullWidth?: boolean;
+  /** Filled marketing gradient + white label. */
+  gradient?: boolean;
 };
 
 export function LandingOutlineButtonLink({
@@ -164,19 +170,23 @@ export function LandingOutlineButtonLink({
   children,
   showArrow = true,
   fullWidth = false,
+  gradient = false,
   ...props
 }: LandingOutlineButtonLinkProps) {
   const widthClass = fullWidth ? ESTATE_PILL_FULL_WIDTH_CLASS : "";
-  const mergedClassName = [landingOutlineButtonClassName, widthClass, className]
-    .filter(Boolean)
-    .join(" ");
+  const surfaceClass = gradient
+    ? landingBrandGradientOutlineButtonClassName
+    : landingOutlineButtonClassName;
+  const mergedClassName = [surfaceClass, widthClass, className].filter(Boolean).join(" ");
 
-  return (
-    <Link className={mergedClassName} {...props}>
+  const label = (
+    <>
       {children}
       {showArrow ? <span aria-hidden>→</span> : null}
-    </Link>
+    </>
   );
+
+  return <Link className={mergedClassName} {...props}>{label}</Link>;
 }
 
 type LandingGradientButtonLinkProps = ComponentProps<typeof Link> & {

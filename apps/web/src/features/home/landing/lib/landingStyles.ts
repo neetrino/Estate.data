@@ -1,7 +1,7 @@
 import {
   ESTATE_PILL_HERO_MOBILE_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   SECTION_VERTICAL_PADDING_CLASS,
 } from "@/shared/lib/constants";
 
@@ -9,57 +9,32 @@ export const LANDING_PAGE_CLASS = "bg-white text-brand-navy [color-scheme:light]
 
 export const LANDING_SECTION_CLASS = SECTION_VERTICAL_PADDING_CLASS;
 
-export const LANDING_CONTAINER_CLASS = `${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`;
+export const LANDING_CONTAINER_CLASS = SITE_PAGE_SHELL_CLASS;
 
 export const LANDING_SECTION_WHITE_CLASS = `bg-white ${LANDING_SECTION_CLASS}`;
 
 export const LANDING_SECTION_MUTED_CLASS = `bg-landing-surface ${LANDING_SECTION_CLASS}`;
 
-/** Space between sticky navbar and hero copy (below navbar row). */
-export const HOME_LANDING_HERO_TOP_PADDING_CLASS = "pt-[42px] sm:pt-[38px] lg:pt-[52px]";
+/** Space below fixed landing pill navbar (safe area + pill + gap). */
+export const HOME_LANDING_HERO_TOP_PADDING_CLASS = NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS;
 
-/** Nudge hero main block (excludes trust strip) downward. */
-export const HOME_LANDING_HERO_MAIN_OFFSET_CLASS = "mt-[15px]";
+export const HOME_LANDING_HERO_GRID_CLASS = [
+  "grid items-start gap-11",
+  "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.18fr)] lg:items-stretch lg:gap-12",
+  "xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.22fr)] xl:gap-14",
+].join(" ");
 
-export const HOME_LANDING_HERO_GRID_CLASS =
-  "grid items-start gap-11 lg:grid-cols-2 lg:items-stretch lg:gap-14 xl:gap-[4.5rem]";
+/** Hero copy column — matches dashboard card height on lg+ (content top, features bottom). */
+export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = [
+  "flex min-h-0 w-full flex-col items-start",
+  "lg:h-full lg:justify-between",
+].join(" ");
 
-/** Hero copy column — sets row height on lg+; items-start keeps location chip shrink-wrapped. */
-export const HOME_LANDING_HERO_COPY_COLUMN_CLASS = "flex flex-col items-start";
+export const HOME_LANDING_HERO_COPY_TOP_CLASS = "flex w-full min-w-0 flex-col items-start";
 
-/** Hero dashboard column — desktop only; hidden below lg (incl. 1,200+ preview card). */
+/** Hero dashboard column — full width of its grid track. */
 export const HOME_LANDING_HERO_DASHBOARD_COLUMN_CLASS =
-  "hidden min-h-0 flex-col lg:flex lg:h-full";
-
-export const HOME_LANDING_HERO_HEADLINE_CLASS = [
-  "mt-7 text-[2.375rem] font-bold leading-[1.08] tracking-tight text-brand-navy",
-  "sm:mt-8 sm:text-5xl lg:text-[3.5rem]",
-].join(" ");
-
-export const HOME_LANDING_HERO_DESCRIPTION_CLASS = [
-  "mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground",
-  "sm:mt-7 sm:text-xl",
-].join(" ");
-
-/** Hero CTAs — row when space allows; wrapped rows stay left (no mx-auto centering). */
-export const HOME_LANDING_HERO_CTA_ROW_CLASS = [
-  "mt-9 flex w-full max-w-lg flex-row flex-wrap content-start items-start justify-start gap-2.5",
-  "sm:items-center sm:justify-start sm:gap-3.5",
-].join(" ");
-
-/** Hero primary pill — left-aligned; overrides ESTATE_PILL_HERO_MOBILE mx-auto. */
-export const HOME_LANDING_HERO_PRIMARY_CTA_CLASS = [
-  "shrink-0 self-start !mx-0 w-auto max-w-full",
-  "max-sm:!py-0.5 max-sm:!pl-4 max-sm:!pr-2 max-sm:gap-2",
-  "max-sm:[&>span:first-child]:!translate-x-0",
-  "max-sm:[&>span:last-child]:!translate-x-0",
-].join(" ");
-
-/** Hero outline CTA — full-size outline, left when wrapped. */
-export const HOME_LANDING_HERO_OUTLINE_CTA_CLASS = [
-  "shrink-0 self-start !mx-0 w-auto max-w-full",
-  "h-12 justify-center px-4 text-sm sm:px-6 sm:text-base",
-].join(" ");
+  "min-h-0 w-full min-w-0 flex flex-col lg:h-full";
 
 /** Home — mobile-only outline CTAs full width (desktop unchanged). */
 export const HOME_MOBILE_FULL_WIDTH_BUTTON_CLASS = "max-sm:w-full max-sm:max-w-full";
@@ -84,46 +59,27 @@ export const HOME_MOBILE_CTA_STACK_CLASS = "max-sm:w-full max-sm:flex-col max-sm
 
 export const HOME_MOBILE_CTA_SECONDARY_CENTER_CLASS = "max-sm:self-center";
 
-/**
- * Trust strip spacing — full-viewport pin only at xl+ (desktop).
- * Below xl (incl. iPad Pro): natural flow so mt-auto does not create a huge gap.
- * md–xl: extra space above trusted partners on tablet / iPad Pro only.
- */
-export const HOME_LANDING_TRUST_STRIP_WRAPPER_CLASS = [
-  "shrink-0 mb-[10px] max-sm:pt-8",
-  "mt-8 sm:mt-10",
-  "md:max-xl:mt-12 lg:max-xl:mt-14",
-  "xl:mt-auto xl:pt-0",
-  "2xl:mt-10 2xl:pt-0",
-].join(" ");
-
-/** Hero inner stack — grows to fill viewport on xl laptops only; 2xl+ uses natural flow. */
+/** Hero main block — fills first screen; trust strip sits below (see {@link HOME_LANDING_TRUST_BELOW_HERO_CLASS}). */
 export const HOME_LANDING_HERO_INNER_CLASS = [
-  "relative flex min-h-0 flex-col justify-start pb-6 sm:pb-8",
-  "max-xl:flex-none xl:flex-1 2xl:flex-none",
+  "relative flex min-h-0 flex-1 flex-col justify-center",
+  "pb-6 sm:pb-8",
 ].join(" ");
 
 /**
- * Hero fills one viewport below the sticky navbar row (4.5rem + safe area + 1px).
- * xl+ only — tablets keep content height (no empty gap above trust strip).
- * Keep in sync with {@link NAVBAR_HEIGHT_CLASS} and {@link NAVBAR_TOP_PADDING_CLASS}.
+ * Hero = one viewport (all breakpoints). Sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
  */
-export const HOME_LANDING_HERO_MIN_HEIGHT_CLASS = [
-  "max-xl:min-h-0",
-  "xl:min-h-[calc(100dvh-4.5rem-1px-env(safe-area-inset-top,0px))]",
-  "xl:min-h-[calc(100svh-4.5rem-1px-env(safe-area-inset-top,0px))]",
-  "2xl:min-h-0",
+export const HOME_LANDING_HERO_VIEWPORT_CLASS = [
+  "flex min-h-[calc(100dvh-env(safe-area-inset-top,0px))]",
+  "min-h-[calc(100svh-env(safe-area-inset-top,0px))]",
+].join(" ");
+
+/** Trusted partners — below the fold, after full-viewport hero. */
+export const HOME_LANDING_TRUST_BELOW_HERO_CLASS = [
+  "bg-landing-surface pb-8 pt-10 sm:pt-12",
 ].join(" ");
 
 export const LANDING_EYEBROW_CLASS =
   "text-sm font-semibold uppercase tracking-[0.18em] text-brand-purple-light";
-
-/** Hero location chip — Serving Greater Los Angeles (compact). */
-export const HOME_LANDING_LOCATION_BADGE_CLASS = [
-  "inline-flex w-fit items-center gap-1.5 rounded-full border border-brand-purple/25 bg-white px-4 py-1.5 shadow-sm",
-  "text-xs font-semibold normal-case tracking-normal text-brand-purple-light",
-  "[&_svg]:size-3.5",
-].join(" ");
 
 export const LANDING_SECTION_TITLE_CLASS =
   "text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl md:text-[2.5rem] md:leading-tight";

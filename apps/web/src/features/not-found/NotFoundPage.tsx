@@ -7,11 +7,9 @@ import {
   NOT_FOUND_QUICK_LINKS_CARD_CLASS,
   NOT_FOUND_QUICK_LINKS_LIST_CLASS,
 } from "@/features/not-found/lib/notFoundStyles";
-import { Navbar } from "@/shared/components/navbar";
 import {
   INNER_PAGE_MAIN_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   WHAT_WE_DO_PAGE_EYEBROW_CLASS,
   WHAT_WE_DO_PAGE_SUBTITLE_CLASS,
   WHAT_WE_DO_PAGE_TITLE_CLASS,
@@ -23,10 +21,8 @@ export function NotFoundPage() {
     NOT_FOUND_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+    <main className={INNER_PAGE_MAIN_CLASS}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
             <header className="max-w-2xl">
               <p className={WHAT_WE_DO_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
@@ -62,7 +58,6 @@ export function NotFoundPage() {
             </ul>
           </section>
         </div>
-      </main>
-    </>
+    </main>
   );
 }

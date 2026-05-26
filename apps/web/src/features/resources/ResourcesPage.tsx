@@ -2,14 +2,12 @@ import { ResourcesBodySection } from "@/features/resources/components/ResourcesB
 import { RESOURCES_PAGE_COPY } from "@/features/resources/content/resourcesPageCopy";
 import { fetchResourcesArticles } from "@/features/resources/services/fetchResourcesArticles";
 import { fetchResourcesFaqItems } from "@/features/resources/services/fetchResourcesFaqItems";
-import { Navbar } from "@/shared/components/navbar";
 import {
   ABOUT_PAGE_EYEBROW_CLASS,
   ABOUT_PAGE_MAIN_CLASS,
   ABOUT_PAGE_SUBTITLE_CLASS,
   ABOUT_PAGE_TITLE_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
 export async function ResourcesPage() {
@@ -20,10 +18,8 @@ export async function ResourcesPage() {
   ]);
 
   return (
-    <>
-      <Navbar />
-      <main className={ABOUT_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+    <main className={ABOUT_PAGE_MAIN_CLASS}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <header>
             <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
             <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>
@@ -31,7 +27,6 @@ export async function ResourcesPage() {
           </header>
           <ResourcesBodySection articles={articles} faqItems={faqItems} />
         </div>
-      </main>
-    </>
+    </main>
   );
 }
