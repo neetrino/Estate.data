@@ -108,19 +108,6 @@ export const LANDING_SECTION_SUBTITLE_CLASS =
 
 export const LANDING_GLASS_CARD_CLASS = "home-landing-glass-card rounded-2xl";
 
-/** Home stats strip — equal-height cards in 2×2 grid on mobile. */
-export const HOME_STATS_STRIP_GRID_CLASS = [
-  "grid grid-cols-2 gap-4 max-sm:auto-rows-fr",
-  "sm:grid-cols-2 lg:grid-cols-4 lg:gap-6",
-].join(" ");
-
-export const HOME_STATS_CARD_CLASS = [
-  LANDING_GLASS_CARD_CLASS,
-  "flex h-full flex-col items-center px-4 py-5 text-center",
-  "max-sm:min-h-[10.75rem]",
-  "sm:px-5 sm:py-6",
-].join(" ");
-
 export type LandingAccent = "purple" | "cyan" | "yellow" | "orange" | "navy";
 
 const LANDING_ACCENT_CYCLE: readonly LandingAccent[] = [
