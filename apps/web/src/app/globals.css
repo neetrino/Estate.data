@@ -130,6 +130,14 @@
   --ring: #a1a1aa;
   --brand-purple-light: #c364be;
   --brand-purple: #873c83;
+  /** Marketing headline / outline CTA label gradient. */
+  --brand-marketing-gradient: linear-gradient(
+    90deg,
+    #6d2cff 0%,
+    #8b35ff 35%,
+    #c364be 65%,
+    #e83e9f 100%
+  );
   --brand-navy: #2e4873;
   --brand-cyan: #16c0da;
   --brand-yellow: #fdba2c;
@@ -271,11 +279,74 @@ button:disabled {
   );
 }
 
+/** What we do — light wash so headline and cards stay readable over the skyline art. */
+.home-what-we-do-photo-scrim {
+  background: linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.2) 42%,
+    rgba(255, 255, 255, 0.08) 68%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+}
+
 .hero-headline-gradient {
-  background: linear-gradient(90deg, #8b5cf6 0%, #d946ef 100%);
+  background: var(--brand-marketing-gradient);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+}
+
+.gradient-text {
+  background: var(--brand-marketing-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/** Filled marketing-gradient CTA — white label; hover brightens slightly. */
+.landing-brand-gradient-outline-button {
+  display: inline-flex;
+  height: 3rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background: var(--brand-marketing-gradient);
+  padding-inline: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgb(109 44 255 / 0.12);
+  transition:
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.landing-brand-gradient-outline-button:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 6px 28px rgb(109 44 255 / 0.22);
+}
+
+.landing-brand-gradient-outline-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px rgb(195 100 190 / 0.55),
+    0 4px 20px rgb(109 44 255 / 0.12);
+}
+
+@media (min-width: 640px) {
+  .landing-brand-gradient-outline-button {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
 .navbar-landing-pill {
