@@ -168,30 +168,29 @@
 
 .home-pi-content__footer {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.25rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
   margin-top: clamp(1.5rem, 3.5vw, 2rem);
 }
 
-@media (width >= 640px) {
-  .home-pi-content__footer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem 2rem;
-  }
+.home-pi-content__footer .home-property-intelligence-explore-cta {
+  flex-shrink: 0;
+  width: auto;
 }
 
-/* --- Trust row (inline, no mini card) --- */
+/* --- Trust row (inline beside CTA) --- */
 .home-pi-trust {
   display: flex;
-  flex-wrap: wrap;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
   align-items: center;
+  min-width: 0;
   margin: 0;
   padding: 0;
   list-style: none;
-  gap: 0.75rem 1.25rem;
+  gap: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 
 .home-pi-trust__item {
@@ -200,7 +199,7 @@
 }
 
 .home-pi-trust__item:not(:first-child) {
-  padding-left: 1.25rem;
+  padding-left: clamp(0.65rem, 1.5vw, 1.25rem);
   border-left: 1px solid rgba(15, 23, 42, 0.12);
 }
 
@@ -229,9 +228,10 @@
 }
 
 .home-pi-trust__label {
-  font-size: 0.8125rem;
+  font-size: clamp(0.6875rem, 1.6vw, 0.8125rem);
   font-weight: 600;
   color: #3d4f6f;
+  white-space: nowrap;
 }
 
 /** “Explore data services” — cyan → blue → violet gradient pill. */

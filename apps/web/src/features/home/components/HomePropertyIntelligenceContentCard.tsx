@@ -55,7 +55,6 @@ export function HomePropertyIntelligenceContentCard() {
       <div className="home-pi-content__footer">
         <EstatePillButtonLink
           href={ctaHref}
-          fullWidth
           className={`${HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS} ${HOME_MOBILE_LEFT_PILL_CLASS}`}
         >
           {ctaLabel}
