@@ -1,12 +1,16 @@
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import { HOME_WHAT_WE_DO_COPY } from "@/features/home/content/whatWeDoCopy";
-import { WhatWeDoServiceCard } from "@/features/home/components/WhatWeDoServiceCard";
+import { WhatWeDoServiceCardsGrid } from "@/features/home/components/WhatWeDoServiceCardsGrid";
 import {
-  HOME_MOBILE_OUTLINE_BUTTON_CLASS,
+  HOME_MOBILE_LEFT_PILL_CLASS,
   LANDING_CONTAINER_CLASS,
   LANDING_SECTION_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
-import { LandingOutlineButtonLink } from "@/shared/ui/button";
+import {
+  LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
+  LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
+} from "@/shared/lib/constants";
+import { EstatePillButtonLink } from "@/shared/ui/button";
 
 const WHAT_WE_DO_BG_SOURCES = {
   mobile: "/images/what-we-do-bg-1024.webp",
@@ -14,10 +18,13 @@ const WHAT_WE_DO_BG_SOURCES = {
   desktop: "/images/what-we-do-bg-2560.webp",
 } as const;
 
-const WHAT_WE_DO_SECTION_CLASS = `relative overflow-hidden bg-landing-surface ${LANDING_SECTION_CLASS}`;
+const WHAT_WE_DO_SECTION_CLASS = `relative isolate bg-landing-surface ${LANDING_SECTION_CLASS}`;
+
+const WHAT_WE_DO_STICKY_HEADER_CLASS =
+  "relative z-20 self-start lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:overflow-y-auto";
 
 const WHAT_WE_DO_TITLE_CLASS =
-  "text-3xl font-bold tracking-tight text-what-we-do-title sm:text-4xl md:text-5xl lg:text-[3rem]";
+  "hero-headline-gradient text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-[3rem]";
 
 const WHAT_WE_DO_SUBTITLE_CLASS =
   "mt-4 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
@@ -31,12 +38,11 @@ export function HomeWhatWeDo() {
       className={WHAT_WE_DO_SECTION_CLASS}
       aria-labelledby="what-we-do-heading"
     >
-      <WhatWeDoBackgroundPicture />
-      <div className="home-what-we-do-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
+      <WhatWeDoBackgroundLayer />
 
       <div className={`${LANDING_CONTAINER_CLASS} relative z-10`}>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_1.15fr] lg:items-start lg:gap-14">
-          <header className="self-start lg:sticky lg:top-28">
+          <header className={WHAT_WE_DO_STICKY_HEADER_CLASS}>
             <h2 id="what-we-do-heading" className={WHAT_WE_DO_TITLE_CLASS}>
               {title}
             </h2>
@@ -48,33 +54,39 @@ export function HomeWhatWeDo() {
                 </span>
               ))}
             </p>
-            <LandingOutlineButtonLink
+            <EstatePillButtonLink
               href={secondaryCta.href}
               fullWidth
-              gradient
-              className={`mt-8 ${HOME_MOBILE_OUTLINE_BUTTON_CLASS}`}
-              showArrow={false}
+              className={[
+                "mt-8",
+                HOME_MOBILE_LEFT_PILL_CLASS,
+                LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
+                LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
+              ].join(" ")}
             >
               {secondaryCta.label}
-            </LandingOutlineButtonLink>
+            </EstatePillButtonLink>
           </header>
 
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {services.map((service) => (
-              <li key={service.id} className="min-w-0">
-                <WhatWeDoServiceCard service={service} />
-              </li>
-            ))}
-          </ul>
+          <WhatWeDoServiceCardsGrid services={services} />
         </div>
       </div>
     </section>
   );
 }
 
+function WhatWeDoBackgroundLayer() {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+      <WhatWeDoBackgroundPicture />
+      <div className="home-what-we-do-photo-scrim absolute inset-0" />
+    </div>
+  );
+}
+
 function WhatWeDoBackgroundPicture() {
   return (
-    <picture className="pointer-events-none absolute inset-0 block size-full" aria-hidden>
+    <picture className="block size-full" aria-hidden>
       <source media="(min-width: 1280px)" srcSet={WHAT_WE_DO_BG_SOURCES.desktop} type="image/webp" />
       <source media="(min-width: 768px)" srcSet={WHAT_WE_DO_BG_SOURCES.tablet} type="image/webp" />
       <img
