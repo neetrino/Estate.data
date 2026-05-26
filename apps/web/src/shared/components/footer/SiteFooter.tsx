@@ -15,8 +15,7 @@ import {
   FOOTER_MAIN_ROW_CLASS,
   FOOTER_TOP_SEPARATOR_CLASS,
   LOGO_FOOTER_OFFSET_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
 const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-brand-navy/70 ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
@@ -26,7 +25,7 @@ export function SiteFooter() {
     <footer
       className={`hidden bg-white text-brand-navy [color-scheme:light] lg:block ${FOOTER_TOP_SEPARATOR_CLASS}`}
     >
-      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+      <div className={SITE_PAGE_SHELL_CLASS}>
         <div className={FOOTER_MAIN_ROW_CLASS}>
           <div className={FOOTER_BRAND_COLUMN_CLASS}>
             <div className={LOGO_FOOTER_OFFSET_CLASS}>

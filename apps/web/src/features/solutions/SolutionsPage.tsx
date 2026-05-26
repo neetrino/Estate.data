@@ -1,8 +1,7 @@
 import { SolutionsRolesSection } from "@/features/solutions/components/SolutionsRolesSection";
 import { SOLUTIONS_PAGE_COPY } from "@/features/solutions/content/solutionsPageCopy";
 import {
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   SOLUTIONS_PAGE_EYEBROW_CLASS,
   SOLUTIONS_PAGE_SUBTITLE_CLASS,
   SOLUTIONS_PAGE_TITLE_CLASS,
@@ -21,7 +20,7 @@ export function SolutionsPage() {
 
   return (
     <main className={INNER_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <header>
             <p className={SOLUTIONS_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
             <h1 className={SOLUTIONS_PAGE_TITLE_CLASS}>{title}</h1>

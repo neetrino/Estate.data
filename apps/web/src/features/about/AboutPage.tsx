@@ -5,8 +5,7 @@ import {
   ABOUT_PAGE_SUBTITLE_CLASS,
   ABOUT_PAGE_TITLE_CLASS,
   ABOUT_PAGE_MAIN_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
 export function AboutPage() {
@@ -14,7 +13,7 @@ export function AboutPage() {
 
   return (
     <main className={ABOUT_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <header>
             <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
             <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>

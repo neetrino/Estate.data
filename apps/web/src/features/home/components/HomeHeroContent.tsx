@@ -2,8 +2,7 @@ import Link from "next/link";
 import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import {
   HERO_CONTENT_TOP_INSET_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 import { AccentButtonLink } from "@/shared/ui/button";
 
@@ -31,7 +30,7 @@ export function HomeHeroContent() {
     <section
       className={`absolute inset-x-0 bottom-0 z-10 flex items-center pb-[max(1.25rem,env(safe-area-inset-bottom))] text-left ${HERO_CONTENT_TOP_INSET_CLASS}`}
     >
-      <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+      <div className={SITE_PAGE_SHELL_CLASS}>
         <p className="inline-flex items-center gap-2 rounded-full border border-white/70 px-4 py-1.5 text-sm font-medium text-white">
           <LocationPinIcon />
           {locationBadge}

@@ -8,8 +8,7 @@ import {
   CONTACT_PAGE_EYEBROW_CLASS,
   CONTACT_PAGE_SUBTITLE_CLASS,
   CONTACT_PAGE_TITLE_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   INNER_PAGE_MAIN_CLASS,
 } from "@/shared/lib/constants";
 
@@ -18,7 +17,7 @@ export function ContactPage() {
 
   return (
     <main className={INNER_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <div className="flex flex-col gap-10 lg:gap-12">
             <header>
               <p className={CONTACT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>

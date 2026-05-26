@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   NAVBAR_BURGER_TOGGLE_DEBOUNCE_MS,
-  NAVBAR_LANDING_PILL_GUTTER_CLASS,
   NAVBAR_MOBILE_BACKDROP_Z_CLASS,
   NAVBAR_MOBILE_MENU_CLASS,
   NAVBAR_MOBILE_MENU_RADIUS_CLASS,
@@ -19,7 +18,7 @@ import {
   NAVBAR_DESKTOP_ONLY_CLASS,
   NAVBAR_HEADER_MENU_OPEN_Z_CLASS,
   NAVBAR_MOBILE_BURGER_CLASS,
-  PAGE_CONTAINER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import {
@@ -174,9 +173,7 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
         className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
       >
         <nav
-          className={[PAGE_CONTAINER_CLASS, NAVBAR_LANDING_PILL_GUTTER_CLASS, "py-3 sm:py-4"].join(
-            " ",
-          )}
+          className={[SITE_PAGE_SHELL_CLASS, "py-3 sm:py-4"].join(" ")}
           aria-label="Main"
         >
           <div className="navbar-landing-pill flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6">
