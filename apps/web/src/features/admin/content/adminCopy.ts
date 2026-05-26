@@ -1,15 +1,25 @@
 export const ADMIN_LOGIN_COPY = {
-  eyebrow: "Admin access",
+  brandName: "ESTATE DATA",
+  eyebrow: "ADMIN ACCESS",
   title: "Sign in",
-  subtitle: "Use your admin email and password to open the control panel.",
+  subtitle:
+    "Use your admin email and password to access the control panel.",
   emailLabel: "Email",
   emailPlaceholder: "admin@estate.data",
   passwordLabel: "Password",
   passwordPlaceholder: "Enter your password",
   submitLabel: "Sign in",
   submittingLabel: "Signing in…",
+  securePortalLabel: "Secure admin portal",
+  showPasswordLabel: "Show password",
+  hidePasswordLabel: "Hide password",
+  rememberMeLabel: "Remember me",
+  forgotPasswordLabel: "Forgot password?",
   genericError: "Invalid email or password. Please try again.",
 } as const;
+
+/** localStorage key — email hint only; does not affect auth/session. */
+export const ADMIN_LOGIN_REMEMBER_EMAIL_KEY = "estate.admin-login.remember-email";
 
 export const ADMIN_PANEL_COPY = {
   title: "Admin panel",
