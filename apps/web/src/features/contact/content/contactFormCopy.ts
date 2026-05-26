@@ -26,4 +26,8 @@ export const CONTACT_FORM_COPY = {
     },
   },
   submitLabel: "Send request",
+  submittingLabel: "Sending…",
+  successMessage:
+    "Thanks — we received your request and will follow up shortly.",
+  errorMessage: "Something went wrong. Please try again in a moment.",
 } as const;

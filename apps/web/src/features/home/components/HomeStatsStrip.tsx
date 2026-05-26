@@ -41,14 +41,14 @@ export function HomeStatsStrip() {
     () => false,
   );
   const [animatedProgress, setAnimatedProgress] = useState(0);
-  const [hasEntered, setHasEntered] = useState(false);
+  const [animatedHasEntered, setAnimatedHasEntered] = useState(false);
+  const hasEntered = prefersReducedMotion || animatedHasEntered;
   const progress = prefersReducedMotion ? 1 : animatedProgress;
   const hasStartedRef = useRef(false);
   const frameRef = useRef(0);
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setHasEntered(true);
       return;
     }
 
@@ -64,7 +64,7 @@ export function HomeStatsStrip() {
         return;
       }
       hasStartedRef.current = true;
-      setHasEntered(true);
+      setAnimatedHasEntered(true);
       observer?.disconnect();
 
       const startTime = performance.now();

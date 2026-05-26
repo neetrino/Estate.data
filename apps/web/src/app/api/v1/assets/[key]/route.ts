@@ -1,18 +1,22 @@
-import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { getPrisma } from "@estate/db/server";
+import { ASSET_CACHE_CONTROL, isAssetKey } from "@estate/db";
+import { loadAsset } from "@estate/db/server";
 import { NextResponse } from "next/server";
-import {
-  ASSET_FALLBACK_BY_KEY,
-  isAssetKey,
-} from "@/shared/assets/asset-fallback";
 
-const CACHE_CONTROL = "public, max-age=31536000, immutable";
+const WEB_PUBLIC_DIR = path.join(process.cwd(), "public");
 
 type RouteContext = {
   params: Promise<{ key: string }>;
 };
 
+function assetNotFoundResponse(): NextResponse {
+  return NextResponse.json(
+    { error: { message: "Asset not found", code: "NOT_FOUND" } },
+    { status: 404, headers: { "Cache-Control": "no-store" } },
+  );
+}
+
+/** Mock-mode fallback when `NEXT_PUBLIC_USE_MOCK_API=true` (same-origin assets). */
 export async function GET(
   _request: Request,
   context: RouteContext,
@@ -21,63 +25,19 @@ export async function GET(
   const key = decodeURIComponent(rawKey);
 
   if (!isAssetKey(key)) {
-    return NextResponse.json({ error: "Asset not found" }, { status: 404 });
+    return assetNotFoundResponse();
   }
 
-  const fromPublic = await loadAssetFromPublic(key);
-  if (fromPublic) {
-    return fromPublic;
+  const asset = await loadAsset(key, { publicDir: WEB_PUBLIC_DIR });
+
+  if (!asset) {
+    return assetNotFoundResponse();
   }
 
-  const fromDatabase = await loadAssetFromDatabase(key);
-  if (fromDatabase) {
-    return fromDatabase;
-  }
-
-  return NextResponse.json({ error: "Asset not found" }, { status: 404 });
-}
-
-async function loadAssetFromDatabase(
-  key: string,
-): Promise<NextResponse | null> {
-  if (!process.env.DATABASE_URL) {
-    return null;
-  }
-
-  try {
-    const asset = await getPrisma().asset.findUnique({ where: { key } });
-    if (!asset) {
-      return null;
-    }
-
-    return new NextResponse(Buffer.from(asset.data), {
-      headers: {
-        "Content-Type": asset.mimeType,
-        "Cache-Control": CACHE_CONTROL,
-      },
-    });
-  } catch {
-    return null;
-  }
-}
-
-async function loadAssetFromPublic(key: string): Promise<NextResponse | null> {
-  if (!isAssetKey(key)) {
-    return null;
-  }
-
-  const fallback = ASSET_FALLBACK_BY_KEY[key];
-  const filePath = path.join(process.cwd(), "public", fallback.publicPath);
-
-  try {
-    const data = await readFile(filePath);
-    return new NextResponse(data, {
-      headers: {
-        "Content-Type": fallback.mimeType,
-        "Cache-Control": CACHE_CONTROL,
-      },
-    });
-  } catch {
-    return null;
-  }
+  return new NextResponse(new Uint8Array(asset.data), {
+    headers: {
+      "Content-Type": asset.mimeType,
+      "Cache-Control": ASSET_CACHE_CONTROL,
+    },
+  });
 }

@@ -10,10 +10,29 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "db:generate": "pnpm --filter @estate/db generate",
     "db:migrate": "pnpm --filter @estate/db migrate:dev",
-    "db:seed": "pnpm --filter @estate/db seed"
+    "db:seed": "pnpm --filter @estate/db seed",
+    "env:check": "node scripts/check-env.mjs",
+    "health:check": "node scripts/check-health.mjs",
+    "assets:check": "node scripts/check-assets.mjs",
+    "standards:check": "node scripts/check-api-standards.mjs",
+    "rate-limit:check": "node scripts/check-rate-limit.mjs",
+    "contact:check": "node scripts/check-contact.mjs",
+    "admin:token": "node scripts/issue-admin-token.mjs",
+    "admin-assets:check": "node scripts/check-admin-assets.mjs",
+    "portfolio:check": "node scripts/check-portfolio.mjs",
+    "recent-work:check": "node scripts/check-recent-work.mjs",
+    "resources:check": "node scripts/check-resources.mjs",
+    "i18n:check": "node scripts/check-i18n.mjs",
+    "pricing:check": "node scripts/check-pricing.mjs",
+    "auth:check": "node scripts/check-auth.mjs",
+    "payments:check": "node scripts/check-payments.mjs",
+    "cache:check": "node scripts/check-cache.mjs"
   },
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "pnpm@10.12.1"
+  "packageManager": "pnpm@10.12.1",
+  "devDependencies": {
+    "jose": "^6.2.3"
+  }
 }

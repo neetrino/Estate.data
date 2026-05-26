@@ -1,4 +1,5 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS, type PortfolioMediaCategory } from "@estate/db";
+import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 
 export const PORTFOLIO_FILTER_IDS = [
   "all",
@@ -10,7 +11,7 @@ export const PORTFOLIO_FILTER_IDS = [
 
 export type PortfolioFilterId = (typeof PORTFOLIO_FILTER_IDS)[number];
 
-export type PortfolioMediaCategory = Exclude<PortfolioFilterId, "all">;
+export type { PortfolioMediaCategory };
 
 export type PortfolioProject = {
   readonly id: string;
@@ -20,7 +21,7 @@ export type PortfolioProject = {
 };
 
 /** Placeholder until admin supplies portfolio assets. */
-const PORTFOLIO_PLACEHOLDER_IMAGE = assetUrl(ASSET_KEYS.recentWorkPlaceholder);
+const PORTFOLIO_PLACEHOLDER_IMAGE = resolveAssetUrl(ASSET_KEYS.recentWorkPlaceholder);
 
 const PORTFOLIO_PLACEHOLDER_ALT =
   "Luxury Los Angeles property — portfolio placeholder";
@@ -37,7 +38,7 @@ export const PORTFOLIO_PAGE_COPY = {
     { id: "drone", label: "Drone" },
     { id: "3d-tour", label: "3D Tour" },
   ] as const satisfies readonly { id: PortfolioFilterId; label: string }[],
-  /** Static seed data — replace via admin when CMS is wired. */
+  /** Static mock data when `NEXT_PUBLIC_USE_MOCK_API=true`. */
   projects: [
     {
       id: "portfolio-1",
