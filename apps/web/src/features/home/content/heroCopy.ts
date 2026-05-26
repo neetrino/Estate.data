@@ -23,8 +23,7 @@ export const HOME_HERO_COPY = {
     },
   ] as const satisfies readonly HeroHeadlineLine[],
   descriptionLines: [
-    "Estate Data pairs cinematic real estate media with property intelligence — so brokers,",
-    "developers, and investors close deals with confidence.",
+    "Estate Data pairs stunning real estate media with property intelligence — so brokers, developers, and investors close deals with confidence.",
   ] as const,
   primaryCta: { label: "Book a Shoot", href: "/contact" },
   secondaryCta: { label: "Request a Market Report", href: DATA_BIM_PATH },

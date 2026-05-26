@@ -5,7 +5,20 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   NAVBAR_BURGER_TOGGLE_DEBOUNCE_MS,
+  NAVBAR_MOBILE_BACKDROP_Z_CLASS,
+  NAVBAR_MOBILE_MENU_CLASS,
+  NAVBAR_MOBILE_MENU_RADIUS_CLASS,
+  NAVBAR_MOBILE_PANEL_SURFACE_CLASS,
+  NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS,
+  NAVBAR_MOBILE_PANEL_Z_CLASS,
+  NAVBAR_OVERLAY_POSITION_CLASS,
   NAVBAR_SCROLL_OFFSET_PX,
+  NAVBAR_TOP_PADDING_CLASS,
+  NAV_ITEM_TEXT_CLASS,
+  NAVBAR_DESKTOP_ONLY_CLASS,
+  NAVBAR_HEADER_MENU_OPEN_Z_CLASS,
+  NAVBAR_MOBILE_BURGER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import {
@@ -15,26 +28,7 @@ import {
 } from "@/shared/components/navbar/navConfig";
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
-import {
-  NAV_ITEM_TEXT_CLASS,
-  NAVBAR_DESKTOP_ONLY_CLASS,
-  NAVBAR_GLASS_SURFACE_CLASS,
-  NAVBAR_HEIGHT_CLASS,
-  NAVBAR_MOBILE_BURGER_CLASS,
-  NAVBAR_MOBILE_MENU_CLASS,
-  NAVBAR_MOBILE_MENU_RADIUS_CLASS,
-  NAVBAR_HEADER_MENU_OPEN_Z_CLASS,
-  NAVBAR_MOBILE_BACKDROP_Z_CLASS,
-  NAVBAR_MOBILE_PANEL_SURFACE_CLASS,
-  NAVBAR_MOBILE_PANEL_TOP_CLASS,
-  NAVBAR_MOBILE_PANEL_Z_CLASS,
-  NAVBAR_OVERLAY_POSITION_CLASS,
-  NAVBAR_STICKY_POSITION_CLASS,
-  NAVBAR_TOP_PADDING_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
-} from "@/shared/lib/constants";
-import { navbarBookShootButtonClassName } from "@/shared/ui/button";
+import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -46,11 +40,15 @@ const NAVBAR_SOLID_CLASS = "bg-white";
 const NAVBAR_BURGER_BUTTON_CLASS =
   "relative z-[101] min-h-11 min-w-11 shrink-0 touch-manipulation cursor-pointer items-center justify-center rounded-md p-2 [-webkit-tap-highlight-color:transparent]";
 
+const NAVBAR_MOBILE_PANEL_TOP_CLASS = NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS;
+
 const NAVBAR_MOBILE_PANEL_CLASS = [
   "fixed inset-x-0",
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
   NAVBAR_MOBILE_PANEL_Z_CLASS,
-  "flex max-h-[calc(100dvh-4.5rem+11px-env(safe-area-inset-top,0px))] flex-col overflow-hidden",
+  "flex max-h-[calc(100dvh-7.75rem+7px-env(safe-area-inset-top,0px))] flex-col overflow-hidden",
+  "sm:max-h-[calc(100dvh-8rem+7px-env(safe-area-inset-top,0px))]",
+  "lg:max-h-[calc(100dvh-8.25rem+7px-env(safe-area-inset-top,0px))]",
   NAVBAR_MOBILE_PANEL_SURFACE_CLASS,
   NAVBAR_MOBILE_MENU_RADIUS_CLASS,
   NAVBAR_MOBILE_MENU_CLASS,
@@ -65,12 +63,17 @@ const NAVBAR_MOBILE_BACKDROP_CLASS = [
 ].join(" ");
 
 type NavbarProps = {
-  /** Transparent at top; liquid glass after scroll (home hero). */
+  /** Fixed over hero (home). Defaults to home route. */
   overlay?: boolean;
+  /** Glass pill shell — links stay dark for contrast on the pill surface. */
+  landingPill?: boolean;
 };
 
-export function Navbar({ overlay = false }: NavbarProps) {
+export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   const pathname = usePathname();
+  const isHome = pathname === "/";
+  const isOverlay = overlay ?? isHome;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const previousPathnameRef = useRef<string | null>(null);
@@ -150,71 +153,70 @@ export function Navbar({ overlay = false }: NavbarProps) {
     };
   }, [isMobileMenuVisible]);
 
-  const headerSurfaceClass = (() => {
-    if (overlay) {
-      return scrolled ? NAVBAR_GLASS_SURFACE_CLASS : NAVBAR_TRANSPARENT_CLASS;
-    }
-    return scrolled ? NAVBAR_GLASS_SURFACE_CLASS : NAVBAR_SOLID_CLASS;
-  })();
+  const headerSurfaceClass =
+    isOverlay && !scrolled && !isMobileMenuVisible
+      ? NAVBAR_TRANSPARENT_CLASS
+      : isMobileMenuVisible
+        ? NAVBAR_SOLID_CLASS
+        : NAVBAR_TRANSPARENT_CLASS;
 
   const navTone =
-    isMobileMenuVisible || !overlay || scrolled ? "dark" : "light";
+    landingPill || isMobileMenuVisible || !isOverlay || scrolled ? "dark" : "light";
 
-  const positionClass = overlay ? NAVBAR_OVERLAY_POSITION_CLASS : NAVBAR_STICKY_POSITION_CLASS;
-
-  const headerSurfaceWhenMenuOpen = isMobileMenuVisible
-    ? NAVBAR_SOLID_CLASS
-    : headerSurfaceClass;
+  const positionClass = NAVBAR_OVERLAY_POSITION_CLASS;
 
   const headerZClass = isMobileMenuVisible ? NAVBAR_HEADER_MENU_OPEN_Z_CLASS : "";
 
   return (
     <>
       <header
-        className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceWhenMenuOpen}`}
+        className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
       >
         <nav
-          className={`${PAGE_CONTAINER_CLASS} flex ${NAVBAR_HEIGHT_CLASS} items-center justify-between gap-3 ${PAGE_GUTTER_CLASS}`}
+          className={[SITE_PAGE_SHELL_CLASS, "py-3 sm:py-4"].join(" ")}
           aria-label="Main"
         >
-          <LogoLink tone={navTone} onNavigate={closeMobile} />
+          <div className="navbar-landing-pill flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6">
+            <LogoLink tone={navTone} onNavigate={closeMobile} />
 
-          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
-            <ul className="flex items-center justify-center gap-6 xl:gap-8">
-              {MAIN_NAV_LINKS.map((link) => (
-                <NavItem
-                  key={link.href}
-                  link={link}
-                  active={isNavbarActivePath(pathname, link.href)}
-                  tone={navTone}
-                />
-              ))}
-            </ul>
+            <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
+              <ul className="flex items-center justify-center gap-5 xl:gap-7">
+                {MAIN_NAV_LINKS.map((link) => (
+                  <NavItem
+                    key={link.href}
+                    link={link}
+                    active={isNavbarActivePath(pathname, link.href)}
+                    tone={navTone}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center`}>
+              <NavBookShootCta
+                href={NAV_CTA_LINKS.bookShoot.href}
+                label={NAV_CTA_LINKS.bookShoot.label}
+              />
+            </div>
+
+            <button
+              type="button"
+              className={`${NAVBAR_BURGER_BUTTON_CLASS} ${NAVBAR_MOBILE_BURGER_CLASS} ${
+                navTone === "light"
+                  ? "text-white hover:bg-white/10"
+                  : "text-black hover:bg-black/5"
+              }`}
+              aria-expanded={isMobileMenuVisible}
+              aria-controls="mobile-nav"
+              onPointerUp={handleBurgerPointerUp}
+              onClick={handleBurgerActivate}
+            >
+              <span className="sr-only">
+                {isMobileMenuVisible ? "Close menu" : "Open menu"}
+              </span>
+              {isMobileMenuVisible ? <CloseIcon /> : <MenuIcon />}
+            </button>
           </div>
-
-          <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center`}>
-            <Link href={NAV_CTA_LINKS.bookShoot.href} className={navbarBookShootButtonClassName}>
-              {NAV_CTA_LINKS.bookShoot.label}
-            </Link>
-          </div>
-
-          <button
-            type="button"
-            className={`${NAVBAR_BURGER_BUTTON_CLASS} ${NAVBAR_MOBILE_BURGER_CLASS} ${
-              navTone === "light"
-                ? "text-white hover:bg-white/10"
-                : "text-black hover:bg-black/5"
-            }`}
-            aria-expanded={isMobileMenuVisible}
-            aria-controls="mobile-nav"
-            onPointerUp={handleBurgerPointerUp}
-            onClick={handleBurgerActivate}
-          >
-            <span className="sr-only">
-              {isMobileMenuVisible ? "Close menu" : "Open menu"}
-            </span>
-            {isMobileMenuVisible ? <CloseIcon /> : <MenuIcon />}
-          </button>
         </nav>
       </header>
 
@@ -248,7 +250,7 @@ function NavItem({
 }) {
   return (
     <li>
-      <Link href={link.href} className={desktopNavLinkClass(active, tone)}>
+      <Link href={link.href} className={desktopNavLinkClass(active, tone)} aria-current={active ? "page" : undefined}>
         {link.label}
       </Link>
     </li>
@@ -256,14 +258,19 @@ function NavItem({
 }
 
 function desktopNavLinkClass(active: boolean, tone: NavTone): string {
-  const base = `${NAV_ITEM_TEXT_CLASS} whitespace-nowrap transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none`;
+  const base = [
+    NAV_ITEM_TEXT_CLASS,
+    "relative inline-flex items-center whitespace-nowrap transition-colors",
+    "hover:text-[#8B5CF6] focus-visible:text-[#8B5CF6] focus-visible:outline-none",
+  ].join(" ");
+
   if (active) {
     return `${base} text-accent`;
   }
   if (tone === "light") {
     return `${base} text-white`;
   }
-  return `${base} text-black`;
+  return `${base} text-slate-900`;
 }
 
 function MenuIcon() {

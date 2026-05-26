@@ -1,11 +1,9 @@
 import { PricingAnalyticsSubscriptions } from "@/features/pricing/components/PricingAnalyticsSubscriptions";
 import { PricingMediaPackages } from "@/features/pricing/components/PricingMediaPackages";
 import { PRICING_PAGE_COPY } from "@/features/pricing/content/pricingCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
   INNER_PAGE_TITLE_CLASS,
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   INNER_PAGE_MAIN_CLASS,
   WHAT_WE_DO_PAGE_EYEBROW_CLASS,
 } from "@/shared/lib/constants";
@@ -23,10 +21,8 @@ export function PricingPage() {
   const { eyebrow, title, subtitleSegments } = PRICING_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={INNER_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+    <main className={INNER_PAGE_MAIN_CLASS}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <header>
             <p className={PRICING_EYEBROW_CLASS}>{eyebrow}</p>
             <h1 className={INNER_PAGE_TITLE_CLASS}>{title}</h1>
@@ -44,7 +40,6 @@ export function PricingPage() {
           <PricingMediaPackages />
           <PricingAnalyticsSubscriptions />
         </div>
-      </main>
-    </>
+    </main>
   );
 }

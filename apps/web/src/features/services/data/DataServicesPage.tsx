@@ -1,9 +1,7 @@
 import { DataServicesBody } from "@/features/services/data/components/DataServicesBody";
 import { DATA_SERVICES_PAGE_COPY } from "@/features/services/data/content/dataServicesCopy";
-import { Navbar } from "@/shared/components/navbar";
 import {
-  PAGE_CONTAINER_CLASS,
-  PAGE_GUTTER_CLASS,
+  SITE_PAGE_SHELL_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS,
@@ -14,10 +12,8 @@ export function DataServicesPage() {
   const { eyebrow, title, subtitle } = DATA_SERVICES_PAGE_COPY;
 
   return (
-    <>
-      <Navbar />
-      <main className={PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS}>
-        <div className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
+    <main className={PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS}>
+        <div className={SITE_PAGE_SHELL_CLASS}>
           <header>
             <p className={PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
             <h1 className={PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS}>{title}</h1>
@@ -25,7 +21,6 @@ export function DataServicesPage() {
           </header>
           <DataServicesBody />
         </div>
-      </main>
-    </>
+    </main>
   );
 }
