@@ -44,7 +44,7 @@ function HomePropertyIntelligenceBackground() {
       className="home-property-intelligence-bg-layer pointer-events-none absolute inset-0 z-0 size-full min-h-full overflow-hidden"
       aria-hidden
     >
-      <picture className="absolute inset-0 block size-full min-h-full" aria-hidden>
+      <picture className="absolute inset-0 block size-full min-h-full">
         <source
           media="(min-width: 1280px)"
           srcSet={HOME_PROPERTY_INTELLIGENCE_BG_SOURCES.desktop}

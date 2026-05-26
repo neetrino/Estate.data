@@ -59,7 +59,8 @@ export function HeroSection() {
 
 function HeroBackgroundPicture() {
   return (
-    <picture className="pointer-events-none absolute inset-0 block size-full" aria-hidden>
+    <div className="pointer-events-none absolute inset-0 size-full" aria-hidden>
+      <picture className="block size-full">
       <source media="(min-width: 1280px)" srcSet={HERO_LANDING_BG_SOURCES.desktop} type="image/webp" />
       <source media="(min-width: 768px)" srcSet={HERO_LANDING_BG_SOURCES.tablet} type="image/webp" />
       <img
@@ -71,6 +72,7 @@ function HeroBackgroundPicture() {
         fetchPriority="high"
         className="size-full object-cover object-center"
       />
-    </picture>
+      </picture>
+    </div>
   );
 }

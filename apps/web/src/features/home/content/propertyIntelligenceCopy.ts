@@ -1,4 +1,4 @@
-import { ASSET_KEYS, assetUrl } from "@estate/db";
+import { ASSET_KEYS } from "@estate/db";
 import { HOME_PROPERTY_INTELLIGENCE_VISUAL_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
 import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 import { DATA_BIM_PATH } from "@/shared/lib/routes";

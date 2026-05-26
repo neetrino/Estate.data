@@ -32,11 +32,11 @@ export function WhatWeDoServiceCardsGrid({ services }: WhatWeDoServiceCardsGridP
     getPrefersReducedMotionSnapshot,
     () => false,
   );
-  const [hasEntered, setHasEntered] = useState(false);
+  const [hasIntersected, setHasIntersected] = useState(false);
+  const hasEntered = prefersReducedMotion || hasIntersected;
 
   useEffect(() => {
     if (prefersReducedMotion) {
-      setHasEntered(true);
       return;
     }
 
@@ -51,7 +51,7 @@ export function WhatWeDoServiceCardsGrid({ services }: WhatWeDoServiceCardsGridP
         if (!entry?.isIntersecting) {
           return;
         }
-        setHasEntered(true);
+        setHasIntersected(true);
         observer.disconnect();
       },
       { threshold: WHAT_WE_DO_CARDS_INTERSECTION_THRESHOLD },

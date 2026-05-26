@@ -6,7 +6,7 @@ import "@/features/home/styles/home-listing-cta-banner.css";
 export function ListingCtaSectionBackground() {
   return (
     <div className="home-listing-cta-section__bg pointer-events-none" aria-hidden>
-      <picture className="block size-full" aria-hidden>
+      <picture className="block size-full">
         <source
           media="(min-width: 1280px)"
           srcSet={LISTING_CTA_BANNER_BG_SOURCES.desktop}

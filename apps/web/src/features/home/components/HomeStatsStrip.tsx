@@ -168,7 +168,7 @@ function HomeStatsStripBackground() {
       className="home-stats-strip-bg-layer pointer-events-none absolute inset-0 z-0 size-full min-h-full overflow-hidden"
       aria-hidden
     >
-      <picture className="absolute inset-0 block size-full min-h-full" aria-hidden>
+      <picture className="absolute inset-0 block size-full min-h-full">
         <source
           media="(min-width: 1280px)"
           srcSet={HOME_STATS_BG_SOURCES.desktop}
