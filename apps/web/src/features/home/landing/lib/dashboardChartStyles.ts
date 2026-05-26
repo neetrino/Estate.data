@@ -14,8 +14,9 @@ export const DASHBOARD_CHART_FILTER_CLASS = [
 export const DASHBOARD_CHART_LEGEND_CLASS =
   "text-[10px] font-medium text-[#2e4873]/65 sm:text-[11px]";
 
-/** Plot height on xl+ — keeps the outer dashboard panel from growing taller when the chart widens. */
-export const DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS = "xl:h-[11rem]";
+/** Plot height on lg+ — keeps the outer dashboard panel from growing when the chart widens. */
+export const DASHBOARD_CHART_PLOT_HEIGHT_XL_CLASS =
+  "min-[480px]:h-[10.5rem] xl:h-[11rem]";
 
 export const DASHBOARD_CHART_PLOT_WRAPPER_CLASS = [
   "group relative mt-4 w-full min-w-0 overflow-hidden rounded-xl",
@@ -24,7 +25,8 @@ export const DASHBOARD_CHART_PLOT_WRAPPER_CLASS = [
   "outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/35",
 ].join(" ");
 
-export const DASHBOARD_CHART_SVG_CLASS = "h-auto w-full xl:h-full xl:min-h-0";
+export const DASHBOARD_CHART_SVG_CLASS =
+  "h-auto w-full min-[480px]:h-full min-[480px]:min-h-0";
 
 export const DASHBOARD_CHART_TOOLTIP_CLASS = [
   "pointer-events-none absolute z-10 max-w-[10.5rem] rounded-lg",
