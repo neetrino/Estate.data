@@ -16,3 +16,15 @@ export const HOME_STATS_BG_SOURCES = {
   tablet: "/images/home-stats-bg-1920.webp",
   desktop: "/images/home-stats-bg-2560.webp",
 } as const;
+
+/** Pastel wave section behind Property intelligence (below KPI strip). */
+export const HOME_PROPERTY_INTELLIGENCE_BG_SOURCES = {
+  mobile: "/images/property-intelligence/home-section-bg-1024.webp",
+  tablet: "/images/property-intelligence/home-section-bg-1920.webp",
+  desktop: "/images/property-intelligence/home-section-bg-2560.webp",
+} as const;
+
+export const HOME_PROPERTY_INTELLIGENCE_VISUAL_SOURCES = {
+  default: "/images/property-intelligence/home-visual-1024.webp",
+  retina: "/images/property-intelligence/home-visual-1536.webp",
+} as const;

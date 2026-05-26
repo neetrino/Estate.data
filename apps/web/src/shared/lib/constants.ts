@@ -307,9 +307,9 @@ export const RECENT_WORK_PROJECT_ASPECT_CLASS = "aspect-[486/365]";
 /** Property intelligence — scan-to-bim hero image (1024×716 source). */
 export const PROPERTY_INTELLIGENCE_IMAGE_ASPECT_CLASS = "aspect-[1024/716]";
 
-/** Home property intelligence — visual frame; lg height aligns with eyebrow through CTA. */
+/** Home property intelligence — visual frame (4:3, matches original landing layout). */
 export const PROPERTY_INTELLIGENCE_HOME_VISUAL_FRAME_CLASS =
-  "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem] lg:aspect-auto lg:h-full lg:min-h-0";
+  "relative w-full min-h-[17rem] overflow-hidden rounded-3xl aspect-[4/3] sm:min-h-[19rem]";
 
 /** Inner page `<h1>` — brand navy (#2E4873); not used on home. */
 export const INNER_PAGE_TITLE_CLASS =
@@ -324,9 +324,13 @@ export const PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 export const PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS =
   "mt-5 max-w-3xl text-lg leading-relaxed text-property-intelligence-navy sm:text-xl";
 
-/** Estate pill — “Explore data services” on home property intelligence block. */
+/** Estate pill — data services inner pages (report CTA, etc.). */
 export const PROPERTY_INTELLIGENCE_CTA_CLASS =
   "bg-property-intelligence-accent text-white hover:opacity-90 [&>span:last-child]:bg-property-intelligence-navy";
+
+/** Home property intelligence — “Explore data services” gradient pill (see home-property-intelligence-section.css). */
+export const HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS =
+  "home-property-intelligence-explore-cta";
 
 /** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#2E4873). */
 export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
