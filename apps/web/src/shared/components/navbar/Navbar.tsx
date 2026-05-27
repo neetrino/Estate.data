@@ -29,6 +29,7 @@ import {
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
+import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -78,12 +79,21 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const previousPathnameRef = useRef<string | null>(null);
   const lastBurgerToggleAtRef = useRef(0);
+  const scrollHomeOnLogoRef = useRef(false);
 
   const isMobileMenuVisible = mobileMenuOpen;
 
   const closeMobile = useCallback(() => {
     setMobileMenuOpen(false);
   }, []);
+
+  const handleHomeLogoClick = useCallback(() => {
+    scrollHomeOnLogoRef.current = true;
+
+    if (!isMobileMenuVisible) {
+      scrollPageToTop();
+    }
+  }, [isMobileMenuVisible]);
 
   const handleBurgerActivate = useCallback(() => {
     const now = Date.now();
@@ -149,6 +159,14 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
       body.style.left = previous.left;
       body.style.right = previous.right;
       body.style.width = previous.width;
+
+      if (scrollHomeOnLogoRef.current) {
+        scrollHomeOnLogoRef.current = false;
+        window.scrollTo(0, scrollY);
+        scrollPageToTop();
+        return;
+      }
+
       window.scrollTo(0, scrollY);
     };
   }, [isMobileMenuVisible]);
@@ -177,7 +195,11 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
           aria-label="Main"
         >
           <div className="navbar-landing-pill flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6">
-            <LogoLink tone={navTone} onNavigate={closeMobile} />
+            <LogoLink
+              tone={navTone}
+              onNavigate={closeMobile}
+              onHomeClick={handleHomeLogoClick}
+            />
 
             <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
               <ul className="flex items-center justify-center gap-5 xl:gap-7">
