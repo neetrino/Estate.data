@@ -16,7 +16,8 @@
     "optimize:how-it-works-assets": "node scripts/optimize-how-it-works-assets.mjs",
     "optimize:footer-bg": "node scripts/optimize-footer-bg.mjs",
     "optimize:listing-cta-banner-bg": "node scripts/optimize-listing-cta-banner-bg.mjs",
-    "optimize:media-bg": "node scripts/optimize-media-bg.mjs"
+    "optimize:media-bg": "node scripts/optimize-media-bg.mjs",
+    "optimize:data-bim-bg": "node scripts/optimize-data-bim-bg.mjs"
   },
   "dependencies": {
     "@estate/db": "workspace:*",

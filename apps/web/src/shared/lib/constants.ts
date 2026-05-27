@@ -490,6 +490,12 @@ export const MEDIA_PAGE_MAIN_CLASS = [
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
+/** /data-bim — photo background (see DataBimPageBackground). */
+export const DATA_BIM_PAGE_MAIN_CLASS = [
+  "data-bim-page relative isolate overflow-x-hidden",
+  INNER_PAGE_MAIN_SPACING_CLASS,
+].join(" ");
+
 export const ABOUT_PAGE_MAIN_CLASS = INNER_PAGE_MAIN_CLASS;
 
 /** Solutions role cards — white shell + purple glow (matches About stack card). */
