@@ -1,8 +1,8 @@
 /** Responsive WebP backgrounds for the /media page. */
 export const MEDIA_PAGE_BG_SOURCES = {
-  mobile: "/images/media-bg-1024.webp",
-  tablet: "/images/media-bg-1920.webp",
-  desktop: "/images/media-bg-2560.webp",
+  mobile: "/images/media-bg-reference-v2.png",
+  tablet: "/images/media-bg-reference-v2.png",
+  desktop: "/images/media-bg-reference-v2.png",
 } as const;
 
-export const MEDIA_PAGE_BG_CACHE_VERSION = "20260527";
+export const MEDIA_PAGE_BG_CACHE_VERSION = "20260527-v2";

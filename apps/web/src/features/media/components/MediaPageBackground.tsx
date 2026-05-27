@@ -17,12 +17,10 @@ export function MediaPageBackground() {
           <source
             media="(min-width: 1280px)"
             srcSet={`${MEDIA_PAGE_BG_SOURCES.desktop}${cacheSuffix}`}
-            type="image/webp"
           />
           <source
             media="(min-width: 768px)"
             srcSet={`${MEDIA_PAGE_BG_SOURCES.tablet}${cacheSuffix}`}
-            type="image/webp"
           />
           <img
             src={`${MEDIA_PAGE_BG_SOURCES.mobile}${cacheSuffix}`}
