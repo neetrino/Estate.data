@@ -31,10 +31,71 @@
     #6d2cff 55%,
     #873c83 100%
   );
+  --home-listing-cta-surface-top: #fff;
+  --home-listing-cta-surface-mid: #ebe2f4;
+  --home-listing-cta-surface-accent: #e6daf2;
+  --home-listing-cta-surface-bottom: #f4f1fb;
+  --home-listing-cta-blend-height: clamp(4rem, 10vw, 7rem);
   position: relative;
   isolation: isolate;
   overflow: visible;
-  background-color: #fff;
+  background-color: var(--home-listing-cta-surface-bottom);
+  background-image:
+    radial-gradient(
+      ellipse 110% 85% at 50% 58%,
+      var(--home-listing-cta-surface-accent) 0%,
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      var(--home-listing-cta-surface-top) 0%,
+      #f5effa 18%,
+      var(--home-listing-cta-surface-mid) 42%,
+      #f0eaf6 72%,
+      var(--home-listing-cta-surface-bottom) 100%
+    );
+}
+
+/** Soft fade into footer lavender below the section. */
+.home-listing-cta-section::after {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: var(--home-listing-cta-blend-height);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(230 218 242 / 55%) 45%,
+    rgb(244 241 251 / 90%) 78%,
+    var(--home-listing-cta-surface-bottom) 100%
+  );
+  content: "";
+}
+
+/** Tighter gap after Client voices above (section py unchanged on bottom). */
+.home-listing-cta-section {
+  padding-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .home-listing-cta-section {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-listing-cta-section {
+    padding-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-listing-cta-section {
+    padding-top: 4rem;
+  }
 }
 
 .home-listing-cta-section__inner {
