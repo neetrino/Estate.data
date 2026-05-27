@@ -17,7 +17,6 @@ const LABEL_POSITION_CLASS: Record<
   string
 > = {
   "top-left": "scan-to-bim-scene__label--top-left",
-  "top-right": "scan-to-bim-scene__label--top-right",
   "mid-left": "scan-to-bim-scene__label--mid-left",
   "mid-right": "scan-to-bim-scene__label--mid-right",
   "bottom-left": "scan-to-bim-scene__label--bottom-left",

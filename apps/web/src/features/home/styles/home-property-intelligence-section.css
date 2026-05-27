@@ -168,70 +168,14 @@
 
 .home-pi-content__footer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  gap: clamp(0.75rem, 2vw, 1.5rem);
   margin-top: clamp(1.5rem, 3.5vw, 2rem);
 }
 
 .home-pi-content__footer .home-property-intelligence-explore-cta {
   flex-shrink: 0;
   width: auto;
-}
-
-/* --- Trust row (inline beside CTA) --- */
-.home-pi-trust {
-  display: flex;
-  flex: 1 1 auto;
-  flex-wrap: nowrap;
-  align-items: center;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  gap: clamp(0.5rem, 1.5vw, 1.25rem);
-}
-
-.home-pi-trust__item {
-  display: flex;
-  align-items: center;
-}
-
-.home-pi-trust__item:not(:first-child) {
-  padding-left: clamp(0.65rem, 1.5vw, 1.25rem);
-  border-left: 1px solid rgba(15, 23, 42, 0.12);
-}
-
-.home-pi-trust__content {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.home-pi-trust__content--cyan {
-  color: #06b6d4;
-}
-
-.home-pi-trust__content--blue {
-  color: #3b82f6;
-}
-
-.home-pi-trust__content--violet {
-  color: #7c3aed;
-}
-
-.home-pi-trust__icon {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex-shrink: 0;
-}
-
-.home-pi-trust__label {
-  font-size: clamp(0.6875rem, 1.6vw, 0.8125rem);
-  font-weight: 600;
-  color: #3d4f6f;
-  white-space: nowrap;
 }
 
 /** “Explore data services” — cyan → blue → violet gradient pill. */

@@ -25,14 +25,6 @@ export type HomePropertyIntelligenceFeature = {
   readonly description: string;
 };
 
-export type HomePropertyIntelligenceTrustAccent = "cyan" | "blue" | "violet";
-
-export type HomePropertyIntelligenceTrustItem = {
-  readonly id: string;
-  readonly label: string;
-  readonly accent: HomePropertyIntelligenceTrustAccent;
-};
-
 export const HOME_PROPERTY_INTELLIGENCE_COPY = {
   titleLine1: "Scan to BIM.",
   titleLine2: "Data to decisions.",
@@ -56,11 +48,6 @@ export const HOME_PROPERTY_INTELLIGENCE_COPY = {
       description: "Seamless data flow across your ecosystem.",
     },
   ] as const satisfies readonly HomePropertyIntelligenceFeature[],
-  trustItems: [
-    { id: "secure", label: "Secure", accent: "cyan" },
-    { id: "scalable", label: "Scalable", accent: "blue" },
-    { id: "trusted", label: "Trusted", accent: "violet" },
-  ] as const satisfies readonly HomePropertyIntelligenceTrustItem[],
   ctaLabel: "Explore data services",
   ctaHref: DATA_BIM_PATH,
 } as const;
