@@ -12,5 +12,5 @@ export function SiteFooterGate() {
     return null;
   }
 
-  return <SiteFooter />;
+  return <SiteFooter smoothTopEntry />;
 }

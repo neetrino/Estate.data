@@ -8,7 +8,8 @@
   --cv-card-border: rgba(255, 255, 255, 0.65);
   --cv-card-shadow: 0 24px 70px rgba(31, 41, 55, 0.1);
   --cv-card-shadow-hover: 0 28px 80px rgba(31, 41, 55, 0.14);
-  --landing-section-blend-height: clamp(4rem, 10vw, 7.5rem);
+  --landing-section-blend-height: clamp(5rem, 12vw, 9rem);
+  --cv-shell-exit-tone: #f4f1fb;
 }
 
 /** Tighter gap before the listing CTA banner below (default section py unchanged on top). */
@@ -51,8 +52,10 @@
       rgba(255, 255, 255, 0.2) 18%,
       rgba(255, 255, 255, 0.08) 45%,
       rgba(255, 255, 255, 0.12) 72%,
-      rgba(255, 255, 255, 0.65) 92%,
-      #fff 100%
+      rgba(255, 255, 255, 0.28) 82%,
+      rgba(255, 255, 255, 0.42) 90%,
+      rgba(244, 241, 251, 0.88) 96%,
+      var(--cv-shell-exit-tone) 100%
     ),
     linear-gradient(
       90deg,
@@ -60,6 +63,20 @@
       rgba(255, 255, 255, 0.05) 50%,
       rgba(255, 255, 255, 0.32) 100%
     );
+}
+
+/** Longer, softer fade at the bottom edge of the photo background. */
+.home-client-voices .home-landing-section-blend--bottom.home-landing-section-blend--tone-white {
+  height: clamp(6rem, 14vw, 10rem);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgb(255 255 255 / 12%) 28%,
+    rgb(255 255 255 / 32%) 52%,
+    rgb(245 239 250 / 55%) 72%,
+    rgb(244 241 251 / 82%) 90%,
+    var(--cv-shell-exit-tone) 100%
+  );
 }
 
 .home-client-voices__content {

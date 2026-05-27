@@ -1,6 +1,11 @@
 import type { ReactNode } from "react";
 import type { SolutionsRoleIconId } from "@/features/solutions/content/solutionsRolesCopy";
-import { SOLUTIONS_ROLE_ICON_BOX_CLASS } from "@/shared/lib/constants";
+
+const SOLUTIONS_ROLE_ICON_BOX_CLASS = [
+  "flex size-14 shrink-0 items-center justify-center rounded-2xl text-white",
+  "bg-[linear-gradient(135deg,#B855D4_0%,#7C3AED_100%)]",
+  "shadow-[0_14px_32px_rgba(124,58,237,0.35)]",
+].join(" ");
 
 const SOLUTIONS_ROLE_ICON_SVG_CLASS = "size-7";
 

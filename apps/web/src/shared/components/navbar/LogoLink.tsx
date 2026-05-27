@@ -69,7 +69,7 @@ export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
 
-    if (pathname !== "/") {
+    if (pathname !== "/" || size !== "nav") {
       return;
     }
 

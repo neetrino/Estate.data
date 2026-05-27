@@ -6,6 +6,7 @@ import {
   PRICING_SECTION_MARGIN_TOP_CLASS,
   WHAT_WE_DO_CARD_GRID_GAP_CLASS,
 } from "@/shared/lib/constants";
+import { ScrollRevealListItem } from "@/shared/components/reveal/ScrollRevealListItem";
 
 const PRICING_SECTION_TITLE_CLASS =
   "text-2xl font-bold tracking-tight text-what-we-do-title sm:text-3xl";
@@ -44,15 +45,15 @@ export function PricingPackageSection({
       <ul
         className={`mt-8 ${PRICING_PACKAGE_GRID_CLASS} ${gridAlignClass} ${WHAT_WE_DO_CARD_GRID_GAP_CLASS}`}
       >
-        {packages.map((pkg) => (
-          <li key={pkg.id} className="min-w-0">
+        {packages.map((pkg, index) => (
+          <ScrollRevealListItem key={pkg.id} index={index} className="min-w-0">
             <PricingPackageCard
               package={pkg}
               priceSuffix={priceSuffix}
               ctaButtonClassName={ctaButtonClassName}
               pinCtaToBottom={pinCtaToBottom}
             />
-          </li>
+          </ScrollRevealListItem>
         ))}
       </ul>
     </section>

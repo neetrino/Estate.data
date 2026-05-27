@@ -1,0 +1,33 @@
+/**
+ * /data-bim — pastel gradient photo background (responsive WebP).
+ */
+.data-bim-page {
+  background-color: #ffffff;
+}
+
+.data-bim-page-bg-layer {
+  background-color: #ffffff;
+}
+
+.data-bim-page-bg-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/** Light top/bottom fade only — keeps pastels vivid like the source artwork. */
+.data-bim-page-photo-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.06) 10%,
+    transparent 24%,
+    transparent 82%,
+    rgba(255, 255, 255, 0.1) 94%,
+    rgba(244, 241, 251, 0.28) 100%
+  );
+}
+
+.data-bim-page__content {
+  position: relative;
+  z-index: 10;
+}

@@ -83,9 +83,9 @@ export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
 
 /** Main content offset below fixed landing pill navbar (sync with home hero). */
 export const NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS = [
-  "pt-[calc(7.75rem-7px+env(safe-area-inset-top,0px))]",
-  "sm:pt-[calc(8rem-7px+env(safe-area-inset-top,0px))]",
-  "lg:pt-[calc(8.25rem-7px+env(safe-area-inset-top,0px))]",
+  "pt-[calc(7.75rem-7px+env(safe-area-inset-top,0px)+15px)]",
+  "sm:pt-[calc(8rem-7px+env(safe-area-inset-top,0px)+15px)]",
+  "lg:pt-[calc(8.25rem-7px+env(safe-area-inset-top,0px)+15px)]",
 ].join(" ");
 
 /**
@@ -481,6 +481,18 @@ export const INNER_PAGE_MAIN_CLASS = [
 /** Media / Data & BIM — reversed gradient (cyan left, magenta right). */
 export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
   "page-hero-background page-hero-background--cyan-left overflow-x-hidden",
+  INNER_PAGE_MAIN_SPACING_CLASS,
+].join(" ");
+
+/** /media — photo background (see MediaPageBackground). */
+export const MEDIA_PAGE_MAIN_CLASS = [
+  "media-page relative isolate overflow-x-hidden",
+  INNER_PAGE_MAIN_SPACING_CLASS,
+].join(" ");
+
+/** /data-bim — photo background (see DataBimPageBackground). */
+export const DATA_BIM_PAGE_MAIN_CLASS = [
+  "data-bim-page relative isolate overflow-x-hidden",
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 

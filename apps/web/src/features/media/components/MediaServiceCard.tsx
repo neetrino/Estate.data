@@ -1,45 +1,41 @@
+import type { CSSProperties } from "react";
+import Image from "next/image";
 import { MediaServiceIcon } from "@/features/media/components/MediaServiceIcon";
 import type { MediaService } from "@/features/media/content/mediaServicesCopy";
-import {
-  GRADIENT_CARD_PADDING_CLASS,
-  MEDIA_SERVICE_CARD_MIN_HEIGHT_PX,
-  MEDIA_SERVICE_CARD_SURFACE_STYLE,
-  WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX,
-} from "@/shared/lib/constants";
-
-const MEDIA_SERVICE_CARD_CLASS = `relative flex w-full flex-col overflow-hidden text-left ${GRADIENT_CARD_PADDING_CLASS}`;
-
-const MEDIA_SERVICE_TITLE_CLASS = "mt-5 text-xl font-bold text-white";
-
-const MEDIA_SERVICE_FEATURES_CLASS = "mt-4 flex flex-col gap-2.5";
-
-const MEDIA_SERVICE_FEATURE_CLASS =
-  "flex items-start gap-2.5 text-base leading-relaxed text-media-service-card-description";
+import { MEDIA_SERVICE_ASSETS } from "@/features/media/lib/mediaServiceAssets";
 
 type MediaServiceCardProps = {
   service: MediaService;
 };
 
 export function MediaServiceCard({ service }: MediaServiceCardProps) {
+  const assets = MEDIA_SERVICE_ASSETS[service.icon];
+
   return (
     <article
-      className={MEDIA_SERVICE_CARD_CLASS}
-      style={{
-        minHeight: MEDIA_SERVICE_CARD_MIN_HEIGHT_PX,
-        ...MEDIA_SERVICE_CARD_SURFACE_STYLE,
-      }}
+      className="media-service-card"
+      style={
+        {
+          "--media-service-image-position": assets.imagePosition,
+        } as CSSProperties
+      }
     >
-      <div
-        className="flex flex-col"
-        style={{
-          transform: `translateY(${WHAT_WE_DO_CARD_CONTENT_OFFSET_Y_PX}px)`,
-        }}
-      >
+      <div className="media-service-card__photo" aria-hidden>
+        <Image
+          src={assets.imageSrc}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="media-service-card__photo-image"
+        />
+      </div>
+      <div className="media-service-card__overlay" aria-hidden />
+      <div className="media-service-card__content">
         <MediaServiceIcon icon={service.icon} />
-        <h3 className={MEDIA_SERVICE_TITLE_CLASS}>{service.title}</h3>
-        <ul className={MEDIA_SERVICE_FEATURES_CLASS}>
+        <h3 className="media-service-card__title">{service.title}</h3>
+        <ul className="media-service-card__features">
           {service.features.map((feature) => (
-            <li key={feature} className={MEDIA_SERVICE_FEATURE_CLASS}>
+            <li key={feature} className="media-service-card__feature">
               <MediaServiceFeatureCheckIcon />
               <span>{feature}</span>
             </li>
@@ -55,7 +51,7 @@ function MediaServiceFeatureCheckIcon() {
     <svg
       viewBox="0 0 16 16"
       fill="none"
-      className="mt-0.5 size-4 shrink-0 text-client-voices-accent"
+      className="media-service-card__check"
       aria-hidden
     >
       <path

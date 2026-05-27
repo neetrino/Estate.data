@@ -22,11 +22,20 @@ import {
 
 const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-brand-navy/70 ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  /** Soft top fade — used after /media photo background. */
+  smoothTopEntry?: boolean;
+};
+
+export function SiteFooter({ smoothTopEntry = false }: SiteFooterProps) {
+  const footerShellClass = [
+    SITE_FOOTER_CLASS,
+    FOOTER_TOP_SEPARATOR_CLASS,
+    smoothTopEntry ? "site-footer--smooth-top-entry" : "",
+  ].join(" ");
+
   return (
-    <footer
-      className={`hidden lg:block ${SITE_FOOTER_CLASS} ${FOOTER_TOP_SEPARATOR_CLASS}`}
-    >
+    <footer className={`hidden lg:block ${footerShellClass}`}>
       <SiteFooterBackground />
 
       <div className={`${SITE_PAGE_SHELL_CLASS} site-footer__content`}>

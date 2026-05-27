@@ -1,7 +1,8 @@
 import type { HeroDashboardMetric } from "@/features/home/content/heroDashboardCopy";
 
 export const KPI_CARD_SURFACE_CLASS = [
-  "flex min-w-0 flex-col gap-2 rounded-[24px]",
+  "flex min-w-0 cursor-default flex-col gap-2 rounded-[24px]",
+  "hover:cursor-default",
   "border border-white/90 bg-white/85 p-5",
   "shadow-[0_10px_30px_rgba(30,41,59,0.06)] backdrop-blur-md",
   "sm:rounded-[26px]",
@@ -20,7 +21,7 @@ export const KPI_CARD_LABEL_CLASS = [
 ].join(" ");
 
 export const KPI_CARD_BADGE_BASE_CLASS = [
-  "flex w-full items-center justify-center gap-1 rounded-full px-3 py-1",
+  "flex w-full cursor-default items-center justify-center gap-1 rounded-full px-3 py-1",
   "text-[10px] font-semibold sm:text-[11px]",
 ].join(" ");
 

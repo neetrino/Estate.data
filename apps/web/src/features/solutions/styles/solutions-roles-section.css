@@ -1,0 +1,40 @@
+.solutions-role-reveal-item {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.solutions-role-reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.solutions-role-reveal-delay-1 {
+  transition-delay: 35ms;
+}
+
+.solutions-role-reveal-delay-2 {
+  transition-delay: 70ms;
+}
+
+.solutions-role-reveal-delay-3 {
+  transition-delay: 105ms;
+}
+
+.solutions-role-reveal-delay-4 {
+  transition-delay: 140ms;
+}
+
+.solutions-role-reveal-delay-5 {
+  transition-delay: 175ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutions-role-reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
