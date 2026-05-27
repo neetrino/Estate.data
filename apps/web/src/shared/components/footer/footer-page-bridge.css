@@ -1,0 +1,36 @@
+/**
+ * Shared fade from page content into the footer lavender surface (#f4f1fb).
+ */
+:root {
+  --page-footer-bridge-tone: #f4f1fb;
+}
+
+.page-footer-bridge {
+  pointer-events: none;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(5rem, 14vw, 9rem);
+}
+
+.page-footer-bridge--from-white {
+  background: linear-gradient(
+    180deg,
+    rgb(255 255 255 / 0%) 0%,
+    rgb(255 255 255 / 72%) 18%,
+    rgb(244 241 251 / 92%) 62%,
+    var(--page-footer-bridge-tone) 100%
+  );
+}
+
+.page-footer-bridge--from-surface {
+  background: linear-gradient(
+    180deg,
+    rgb(244 241 251 / 0%) 0%,
+    rgb(244 241 251 / 55%) 22%,
+    rgb(244 241 251 / 88%) 58%,
+    var(--page-footer-bridge-tone) 100%
+  );
+}

@@ -1,0 +1,40 @@
+/**
+ * /media — pastel gradient photo background (responsive WebP).
+ */
+.media-page {
+  background-color: #ffffff;
+}
+
+.media-page-bg-layer {
+  background-color: #ffffff;
+}
+
+.media-page-bg-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+/** Soft wash so header copy and cards stay readable on the bright center. */
+.media-page-photo-scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.35) 14%,
+      rgba(255, 255, 255, 0.08) 42%,
+      rgba(255, 255, 255, 0.06) 68%,
+      rgba(255, 255, 255, 0.42) 84%,
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0.35) 100%
+    );
+}
+
+.media-page__content {
+  position: relative;
+  z-index: 10;
+}

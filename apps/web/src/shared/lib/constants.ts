@@ -484,6 +484,12 @@ export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
+/** /media — photo background (see MediaPageBackground). */
+export const MEDIA_PAGE_MAIN_CLASS = [
+  "media-page relative isolate overflow-x-hidden",
+  INNER_PAGE_MAIN_SPACING_CLASS,
+].join(" ");
+
 export const ABOUT_PAGE_MAIN_CLASS = INNER_PAGE_MAIN_CLASS;
 
 /** Solutions role cards — white shell + purple glow (matches About stack card). */

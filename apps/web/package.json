@@ -15,7 +15,8 @@
     "optimize:home-client-voices-bg": "node scripts/optimize-home-client-voices-bg.mjs",
     "optimize:how-it-works-assets": "node scripts/optimize-how-it-works-assets.mjs",
     "optimize:footer-bg": "node scripts/optimize-footer-bg.mjs",
-    "optimize:listing-cta-banner-bg": "node scripts/optimize-listing-cta-banner-bg.mjs"
+    "optimize:listing-cta-banner-bg": "node scripts/optimize-listing-cta-banner-bg.mjs",
+    "optimize:media-bg": "node scripts/optimize-media-bg.mjs"
   },
   "dependencies": {
     "@estate/db": "workspace:*",

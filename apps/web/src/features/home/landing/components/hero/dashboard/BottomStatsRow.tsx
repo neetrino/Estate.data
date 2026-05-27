@@ -1,24 +1,18 @@
 import { HERO_DASHBOARD_COPY } from "@/features/home/content/heroDashboardCopy";
 import type { HeroDashboardBottomStat } from "@/features/home/content/heroDashboardCopy";
 import { dashboardChartStatEnterClass } from "@/features/home/landing/lib/dashboardChartBarStyles";
+import { bottomStatsIconBubbleClass } from "@/features/home/landing/lib/bottomStatsRowStyles";
+import "@/features/home/landing/styles/bottom-stats-row.css";
 import "@/features/home/landing/styles/dashboard-chart-enter.css";
-import {
-  BOTTOM_STATS_ITEM_CLASS,
-  BOTTOM_STATS_LABEL_CLASS,
-  BOTTOM_STATS_ROW_CARD_CLASS,
-  BOTTOM_STATS_ROW_GRID_CLASS,
-  BOTTOM_STATS_VALUE_CLASS,
-  bottomStatsIconBubbleClass,
-} from "@/features/home/landing/lib/bottomStatsRowStyles";
 
 export function BottomStatsRow() {
   return (
-    <div className={BOTTOM_STATS_ROW_CARD_CLASS}>
-      <ul className={BOTTOM_STATS_ROW_GRID_CLASS} aria-label="Summary statistics">
+    <div className="hero-bottom-stats-card">
+      <ul className="hero-bottom-stats-grid" aria-label="Summary statistics">
         {HERO_DASHBOARD_COPY.bottomStats.map((stat, index) => (
           <li
             key={stat.id}
-            className={`${BOTTOM_STATS_ITEM_CLASS} ${dashboardChartStatEnterClass(index)}`}
+            className={`hero-bottom-stats-item ${dashboardChartStatEnterClass(index)}`}
           >
             <BottomStatItem stat={stat} />
           </li>
@@ -31,12 +25,15 @@ export function BottomStatsRow() {
 function BottomStatItem({ stat }: { stat: HeroDashboardBottomStat }) {
   return (
     <>
-      <span className={bottomStatsIconBubbleClass(stat.accent)} aria-hidden>
+      <span
+        className={`hero-bottom-stats-icon ${bottomStatsIconBubbleClass(stat.accent)}`}
+        aria-hidden
+      >
         <BottomStatIcon type={stat.icon} />
       </span>
-      <div className="min-w-0">
-        <p className={BOTTOM_STATS_LABEL_CLASS}>{stat.label}</p>
-        <p className={BOTTOM_STATS_VALUE_CLASS}>{stat.value}</p>
+      <div className="hero-bottom-stats-copy">
+        <p className="hero-bottom-stats-label">{stat.label}</p>
+        <p className="hero-bottom-stats-value">{stat.value}</p>
       </div>
     </>
   );

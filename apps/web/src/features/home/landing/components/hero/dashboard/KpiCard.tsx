@@ -36,14 +36,10 @@ export function KpiCard({ metric }: KpiCardProps) {
       </div>
       <div className={KPI_CARD_FOOTER_CLASS}>
         <p className={KPI_CARD_LABEL_CLASS}>{metric.label}</p>
-        <button
-          type="button"
-          className={kpiCardBadgeClass(metric.accent)}
-          aria-label={metric.trend}
-        >
+        <span className={kpiCardBadgeClass(metric.accent)}>
           <TrendUpIcon />
           {metric.trend}
-        </button>
+        </span>
       </div>
     </article>
   );

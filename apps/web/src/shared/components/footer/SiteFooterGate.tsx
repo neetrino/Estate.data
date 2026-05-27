@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { SiteFooter } from "@/shared/components/footer/SiteFooter";
-import { isSupersudoRoute } from "@/shared/lib/routes";
+import { isSupersudoRoute, shouldFooterSmoothTopEntry } from "@/shared/lib/routes";
 
 /** Marketing footer — hidden on admin (`/supersudo`) routes. */
 export function SiteFooterGate() {
@@ -12,5 +12,5 @@ export function SiteFooterGate() {
     return null;
   }
 
-  return <SiteFooter />;
+  return <SiteFooter smoothTopEntry={shouldFooterSmoothTopEntry(pathname)} />;
 }

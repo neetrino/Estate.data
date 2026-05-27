@@ -1,4 +1,5 @@
 import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
+import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   LazyHomeClientVoices,
   LazyHomeHowItWorks,
@@ -18,7 +19,7 @@ type HomeLandingPageProps = {
 export function HomeLandingPage({ projects }: HomeLandingPageProps) {
   return (
     <div className={LANDING_PAGE_CLASS}>
-      <main>
+      <main className="relative isolate">
         <HeroSection />
         <LazyHomeWhatWeDo />
         <LazyHomeHowItWorks />
@@ -27,6 +28,7 @@ export function HomeLandingPage({ projects }: HomeLandingPageProps) {
         <LazyHomePropertyIntelligence />
         <LazyHomeClientVoices />
         <LazyHomeListingCta />
+        <FooterPageBridge from="surface" />
       </main>
     </div>
   );

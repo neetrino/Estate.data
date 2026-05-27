@@ -37,7 +37,7 @@
   --home-listing-cta-surface-bottom: #f4f1fb;
   --home-listing-cta-blend-height: clamp(4rem, 10vw, 7rem);
   position: relative;
-  isolation: isolate;
+  z-index: 11;
   overflow: visible;
   background-color: var(--home-listing-cta-surface-bottom);
   background-image:
@@ -100,11 +100,12 @@
 
 .home-listing-cta-section__inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .home-listing-cta-panel {
   position: relative;
+  z-index: 2;
   display: grid;
   align-items: center;
   gap: var(--home-listing-cta-panel-gap);
