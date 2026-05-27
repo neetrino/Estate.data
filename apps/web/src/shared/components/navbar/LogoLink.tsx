@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
+import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
 import {
   LOGO_FOOTER_HEIGHT_CLASS,
   LOGO_FOOTER_WIDTH_CLASS,
@@ -46,6 +51,8 @@ const LOGO_SIZE_SPECS: Record<LogoSize, LogoDisplaySpec> = {
 
 type LogoLinkProps = {
   onNavigate?: () => void;
+  /** When already on home — parent may defer scroll (e.g. mobile menu body lock). */
+  onHomeClick?: () => void;
   tone?: NavTone;
   size?: LogoSize;
 };
@@ -54,15 +61,33 @@ function logoLayerOpacityClass(visible: boolean): string {
   return visible ? "opacity-100" : "opacity-0";
 }
 
-export function LogoLink({ onNavigate, tone = "dark", size = "nav" }: LogoLinkProps) {
+export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" }: LogoLinkProps) {
+  const pathname = usePathname();
   const isLight = tone === "light";
   const { linkClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    onNavigate?.();
+
+    if (pathname !== "/") {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (onHomeClick) {
+      onHomeClick();
+      return;
+    }
+
+    scrollPageToTop();
+  };
 
   return (
     <Link
       href="/"
       className={`relative inline-flex shrink-0 ${linkClass}`}
-      onClick={onNavigate}
+      onClick={handleClick}
     >
       <Image
         src={`${SITE_LOGO_PATH}?v=${SITE_LOGO_CACHE_VERSION}`}

@@ -554,9 +554,8 @@ export const CLIENT_VOICES_SECTION_SURFACE_CLASS =
 export const WHAT_WE_DO_SECTION_SURFACE_CLASS =
   `bg-what-we-do-surface ${SECTION_VERTICAL_PADDING_CLASS}`;
 
-/** Home listing CTA — content block; section carries the gradient backdrop. */
-export const HOME_LISTING_CTA_PANEL_CLASS =
-  "home-listing-cta-panel px-6 py-10 sm:px-10 sm:py-12";
+/** Home listing CTA — premium rounded gradient panel (padding via CSS). */
+export const HOME_LISTING_CTA_PANEL_CLASS = "home-listing-cta-panel";
 
 /** Estate pill — white surface, #873C83 label, #C364BE icon disc (listing CTA above footer). */
 export const HOME_LISTING_CTA_PILL_BUTTON_CLASS = [

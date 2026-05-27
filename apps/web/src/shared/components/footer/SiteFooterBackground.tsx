@@ -5,7 +5,7 @@ import "@/shared/components/footer/site-footer.css";
 export function SiteFooterBackground() {
   return (
     <div className="site-footer-bg-layer pointer-events-none" aria-hidden>
-      <picture className="site-footer-bg-picture block" aria-hidden>
+      <picture className="site-footer-bg-picture block">
         <source
           media="(min-width: 1280px)"
           srcSet={FOOTER_BG_SOURCES.desktop}

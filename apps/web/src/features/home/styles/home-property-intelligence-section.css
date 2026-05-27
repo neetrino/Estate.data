@@ -168,70 +168,14 @@
 
 .home-pi-content__footer {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
   margin-top: clamp(1.5rem, 3.5vw, 2rem);
 }
 
-@media (width >= 640px) {
-  .home-pi-content__footer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem 2rem;
-  }
-}
-
-/* --- Trust row (inline, no mini card) --- */
-.home-pi-trust {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  gap: 0.75rem 1.25rem;
-}
-
-.home-pi-trust__item {
-  display: flex;
-  align-items: center;
-}
-
-.home-pi-trust__item:not(:first-child) {
-  padding-left: 1.25rem;
-  border-left: 1px solid rgba(15, 23, 42, 0.12);
-}
-
-.home-pi-trust__content {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.home-pi-trust__content--cyan {
-  color: #06b6d4;
-}
-
-.home-pi-trust__content--blue {
-  color: #3b82f6;
-}
-
-.home-pi-trust__content--violet {
-  color: #7c3aed;
-}
-
-.home-pi-trust__icon {
-  width: 1.125rem;
-  height: 1.125rem;
+.home-pi-content__footer .home-property-intelligence-explore-cta {
   flex-shrink: 0;
-}
-
-.home-pi-trust__label {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #3d4f6f;
+  width: auto;
 }
 
 /** “Explore data services” — cyan → blue → violet gradient pill. */

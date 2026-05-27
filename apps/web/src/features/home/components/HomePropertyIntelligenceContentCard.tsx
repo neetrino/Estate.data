@@ -1,30 +1,11 @@
-import type { HomePropertyIntelligenceTrustItem } from "@/features/home/content/propertyIntelligenceCopy";
 import { HOME_PROPERTY_INTELLIGENCE_COPY } from "@/features/home/content/propertyIntelligenceCopy";
-import {
-  PropertyIntelligenceCheckIcon,
-  PropertyIntelligenceScalableIcon,
-  PropertyIntelligenceSecureIcon,
-  PropertyIntelligenceTrustedIcon,
-} from "@/features/home/components/HomePropertyIntelligenceIcons";
+import { PropertyIntelligenceCheckIcon } from "@/features/home/components/HomePropertyIntelligenceIcons";
 import { HOME_MOBILE_LEFT_PILL_CLASS } from "@/features/home/landing/lib/landingStyles";
 import { HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
-function TrustIconForItem({ itemId }: { itemId: HomePropertyIntelligenceTrustItem["id"] }) {
-  switch (itemId) {
-    case "secure":
-      return <PropertyIntelligenceSecureIcon className="home-pi-trust__icon" />;
-    case "scalable":
-      return <PropertyIntelligenceScalableIcon className="home-pi-trust__icon" />;
-    case "trusted":
-      return <PropertyIntelligenceTrustedIcon className="home-pi-trust__icon" />;
-    default:
-      return null;
-  }
-}
-
 export function HomePropertyIntelligenceContentCard() {
-  const { titleLine1, titleLine2, description, features, trustItems, ctaLabel, ctaHref } =
+  const { titleLine1, titleLine2, description, features, ctaLabel, ctaHref } =
     HOME_PROPERTY_INTELLIGENCE_COPY;
 
   return (
@@ -55,29 +36,11 @@ export function HomePropertyIntelligenceContentCard() {
       <div className="home-pi-content__footer">
         <EstatePillButtonLink
           href={ctaHref}
-          fullWidth
           className={`${HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS} ${HOME_MOBILE_LEFT_PILL_CLASS}`}
         >
           {ctaLabel}
         </EstatePillButtonLink>
-
-        <ul className="home-pi-trust" aria-label="Platform qualities">
-          {trustItems.map((item) => (
-            <li key={item.id} className="home-pi-trust__item">
-              <TrustItemContent item={item} />
-            </li>
-          ))}
-        </ul>
       </div>
-    </div>
-  );
-}
-
-function TrustItemContent({ item }: { item: HomePropertyIntelligenceTrustItem }) {
-  return (
-    <div className={`home-pi-trust__content home-pi-trust__content--${item.accent}`}>
-      <TrustIconForItem itemId={item.id} />
-      <span className="home-pi-trust__label">{item.label}</span>
     </div>
   );
 }

@@ -1,78 +1,101 @@
 /**
- * Home listing CTA — gradient strip on the section; smooth edges into page + footer.
+ * Home listing CTA — premium rounded gradient banner with isometric city art.
  */
 .home-listing-cta-section {
-  --home-listing-cta-banner-fallback: #f6f4fb;
-  --home-listing-cta-edge-fade-height: clamp(4.5rem, 11vw, 7.5rem);
-  --home-listing-cta-footer-tone: #f4f1fb;
+  --home-listing-cta-banner-radius: clamp(2.25rem, 3.5vw, 2.75rem);
+  --home-listing-cta-panel-padding-x: clamp(1.25rem, 4vw, 3.5rem);
+  --home-listing-cta-panel-padding-y: clamp(1.75rem, 4.5vw, 3rem);
+  --home-listing-cta-panel-gap: clamp(1.25rem, 3vw, 2.5rem);
+  --home-listing-cta-illustration-size: clamp(7rem, 13vw, 10rem);
+  --home-listing-cta-illustration-scale: 1.72;
+  --home-listing-cta-offset-x: 30px;
+  --home-listing-cta-illustration-offset-y: 16px;
+  --home-listing-cta-copy-offset-x: 75px;
+  --home-listing-cta-headline-size: clamp(1.5rem, 2.8vw, 2.75rem);
+  --home-listing-cta-subtitle-size: clamp(0.875rem, 1.25vw, 1.125rem);
+  --home-listing-cta-gradient: linear-gradient(
+    90deg,
+    #d9b8f6 0%,
+    #b95bd6 45%,
+    #8b2fb8 100%
+  );
+  --home-listing-cta-icon-gradient-primary: linear-gradient(
+    135deg,
+    #e83e9f 0%,
+    #c364be 55%,
+    #b95bd6 100%
+  );
+  --home-listing-cta-icon-gradient-secondary: linear-gradient(
+    135deg,
+    #8b35ff 0%,
+    #6d2cff 55%,
+    #873c83 100%
+  );
+  --home-listing-cta-surface-top: #fff;
+  --home-listing-cta-surface-mid: #ebe2f4;
+  --home-listing-cta-surface-accent: #e6daf2;
+  --home-listing-cta-surface-bottom: #f4f1fb;
+  --home-listing-cta-blend-height: clamp(4rem, 10vw, 7rem);
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  background-color: var(--home-listing-cta-banner-fallback);
+  overflow: visible;
+  background-color: var(--home-listing-cta-surface-bottom);
+  background-image:
+    radial-gradient(
+      ellipse 110% 85% at 50% 58%,
+      var(--home-listing-cta-surface-accent) 0%,
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      var(--home-listing-cta-surface-top) 0%,
+      #f5effa 18%,
+      var(--home-listing-cta-surface-mid) 42%,
+      #f0eaf6 72%,
+      var(--home-listing-cta-surface-bottom) 100%
+    );
 }
 
-.home-listing-cta-section__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.home-listing-cta-section__bg-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-
-/** Dissolve banner art into footer lavender below. */
-.home-listing-cta-section__bg::before {
+/** Soft fade into footer lavender below the section. */
+.home-listing-cta-section::after {
   pointer-events: none;
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  height: var(--home-listing-cta-edge-fade-height);
+  height: var(--home-listing-cta-blend-height);
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(244, 241, 251, 0.2) 30%,
-    rgba(244, 241, 251, 0.55) 58%,
-    var(--home-listing-cta-footer-tone) 100%
+    rgb(230 218 242 / 55%) 45%,
+    rgb(244 241 251 / 90%) 78%,
+    var(--home-listing-cta-surface-bottom) 100%
   );
   content: "";
 }
 
-/** Dissolve from white section above into the banner gradient. */
-.home-listing-cta-section__bg::after {
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: var(--home-listing-cta-edge-fade-height);
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    rgba(255, 255, 255, 0.9) 22%,
-    rgba(255, 255, 255, 0.55) 48%,
-    rgba(255, 255, 255, 0.15) 72%,
-    transparent 100%
-  );
-  content: "";
+/** Tighter gap after Client voices above (section py unchanged on bottom). */
+.home-listing-cta-section {
+  padding-top: 2rem;
 }
 
-.home-listing-cta-section.home-landing-section-enter::before {
-  z-index: 2;
-  height: var(--home-listing-cta-edge-fade-height);
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    rgba(255, 255, 255, 0.82) 38%,
-    transparent 100%
-  );
+@media (min-width: 640px) {
+  .home-listing-cta-section {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-listing-cta-section {
+    padding-top: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-listing-cta-section {
+    padding-top: 4rem;
+  }
 }
 
 .home-listing-cta-section__inner {
@@ -82,4 +105,233 @@
 
 .home-listing-cta-panel {
   position: relative;
+  display: grid;
+  align-items: center;
+  gap: var(--home-listing-cta-panel-gap);
+  overflow: visible;
+  border-radius: var(--home-listing-cta-banner-radius);
+  padding: var(--home-listing-cta-panel-padding-y) var(--home-listing-cta-panel-padding-x);
+  background: var(--home-listing-cta-gradient);
+  box-shadow:
+    0 24px 48px rgb(139 47 184 / 22%),
+    0 8px 20px rgb(139 47 184 / 14%),
+    inset 0 1px 0 rgb(255 255 255 / 35%),
+    inset 0 -1px 0 rgb(109 44 255 / 18%);
+}
+
+/** Soft glass sheen across the banner surface. */
+.home-listing-cta-panel::before {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 80% 60% at 18% 50%, rgb(255 255 255 / 22%) 0%, transparent 62%),
+    radial-gradient(ellipse 55% 45% at 88% 18%, rgb(255 255 255 / 14%) 0%, transparent 58%),
+    linear-gradient(180deg, rgb(255 255 255 / 10%) 0%, transparent 42%, rgb(0 0 0 / 6%) 100%);
+  content: "";
+}
+
+/** Inner glow ring for a glassy edge. */
+.home-listing-cta-panel::after {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: inherit;
+  content: "";
+}
+
+.home-listing-cta-panel__content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  gap: var(--home-listing-cta-panel-gap);
+  min-width: 0;
+  overflow: visible;
+}
+
+.home-listing-cta-panel__illustration {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  width: var(--home-listing-cta-illustration-size);
+  height: var(--home-listing-cta-illustration-size);
+  filter: drop-shadow(0 12px 28px rgb(109 44 255 / 28%));
+  transform: translateX(var(--home-listing-cta-offset-x))
+    translateY(var(--home-listing-cta-illustration-offset-y));
+}
+
+.home-listing-cta-panel__illustration-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  transform: scale(var(--home-listing-cta-illustration-scale));
+  transform-origin: center center;
+}
+
+.home-listing-cta-panel__copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  transform: translateX(var(--home-listing-cta-copy-offset-x));
+}
+
+.home-listing-cta-panel__title {
+  margin: 0;
+  color: #fff;
+  font-size: var(--home-listing-cta-headline-size);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.home-listing-cta-panel__description {
+  margin: clamp(0.5rem, 1.2vw, 0.75rem) 0 0;
+  max-width: 32rem;
+  color: rgb(255 255 255 / 88%);
+  font-size: var(--home-listing-cta-subtitle-size);
+  line-height: 1.55;
+}
+
+.home-listing-cta-panel__actions {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+/** White pills on gradient — standard estate layout; gradient icon discs only. */
+.home-listing-cta-panel__button {
+  opacity: 1 !important;
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.home-listing-cta-panel__button:hover {
+  transform: translateY(-2px);
+  opacity: 1 !important;
+  box-shadow:
+    0 12px 28px rgb(139 47 184 / 20%),
+    0 4px 12px rgb(46 72 115 / 10%);
+}
+
+.home-listing-cta-panel__button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgb(255 255 255 / 95%),
+    0 0 0 5px rgb(139 47 184 / 45%);
+}
+
+.home-listing-cta-panel__button > span:last-child {
+  transition: transform 200ms ease;
+}
+
+.home-listing-cta-panel__button:not(.home-listing-cta-panel__button--secondary) > span:last-child {
+  background: var(--home-listing-cta-icon-gradient-primary) !important;
+}
+
+.home-listing-cta-panel__button:hover > span:last-child {
+  transform: translateX(-5px) scale(1.06) !important;
+}
+
+.home-listing-cta-panel__button--secondary > span:last-child {
+  background: var(--home-listing-cta-icon-gradient-secondary) !important;
+}
+
+/** Mobile — stacked layout, illustration above copy. */
+@media (max-width: 767px) {
+  .home-listing-cta-panel__content {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .home-listing-cta-panel__copy {
+    text-align: center;
+  }
+
+  .home-listing-cta-panel__description {
+    margin-inline: auto;
+  }
+
+  .home-listing-cta-panel__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/** Tablet — illustration + copy row, buttons below. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .home-listing-cta-panel__content {
+    grid-template-columns: var(--home-listing-cta-illustration-size) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .home-listing-cta-panel__illustration {
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  .home-listing-cta-panel__copy {
+    grid-column: 2;
+  }
+
+  .home-listing-cta-panel__actions {
+    grid-column: 2;
+  }
+}
+
+/** Desktop — illustration, copy, and buttons in one row. */
+@media (min-width: 1024px) {
+  .home-listing-cta-panel__content {
+    grid-template-columns:
+      var(--home-listing-cta-illustration-size)
+      minmax(0, 1fr)
+      auto;
+  }
+
+  .home-listing-cta-panel__illustration {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .home-listing-cta-panel__copy {
+    grid-row: 1;
+    grid-column: 2;
+    padding-inline: clamp(0.5rem, 1.5vw, 1.5rem);
+  }
+
+  .home-listing-cta-panel__actions {
+    grid-row: 1;
+    grid-column: 3;
+    max-width: min(100%, 32rem);
+  }
+}
+
+/** Wide desktop — larger scaled city art, same banner footprint. */
+@media (min-width: 1280px) {
+  .home-listing-cta-section {
+    --home-listing-cta-illustration-scale: 1.85;
+  }
+
+  .home-listing-cta-panel__actions {
+    max-width: none;
+  }
+}
+
+/** Narrow phones — tighten padding to prevent horizontal scroll. */
+@media (max-width: 430px) {
+  .home-listing-cta-section {
+    --home-listing-cta-panel-padding-x: clamp(1rem, 4vw, 1.25rem);
+    --home-listing-cta-panel-gap: 1.125rem;
+  }
 }

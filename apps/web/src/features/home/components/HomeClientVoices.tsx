@@ -1,4 +1,4 @@
-import { ClientVoiceCard } from "@/features/home/components/ClientVoiceCard";
+import { ClientVoicesCardsGrid } from "@/features/home/components/ClientVoicesCardsGrid";
 import { HOME_CLIENT_VOICES_COPY } from "@/features/home/content/clientVoicesCopy";
 import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
 import { HOME_CLIENT_VOICES_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
@@ -34,13 +34,7 @@ export function HomeClientVoices() {
         </header>
 
         <div className="home-client-voices__stage">
-          <ul className="home-client-voices__grid" role="list">
-            {testimonials.map((voice) => (
-              <li key={voice.id} className="flex min-w-0">
-                <ClientVoiceCard voice={voice} />
-              </li>
-            ))}
-          </ul>
+          <ClientVoicesCardsGrid testimonials={testimonials} />
         </div>
       </div>
     </section>
