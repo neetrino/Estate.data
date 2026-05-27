@@ -261,7 +261,7 @@ function desktopNavLinkClass(active: boolean, tone: NavTone): string {
   const base = [
     NAV_ITEM_TEXT_CLASS,
     "relative inline-flex items-center whitespace-nowrap transition-colors",
-    "hover:text-[#8B5CF6] focus-visible:text-[#8B5CF6] focus-visible:outline-none",
+    "hover:text-brand-purple-light focus-visible:text-brand-purple-light focus-visible:outline-none",
   ].join(" ");
 
   if (active) {
