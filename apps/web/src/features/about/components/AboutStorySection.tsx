@@ -7,6 +7,7 @@ import {
   type AboutStoryParagraph,
 } from "@/features/about/content/aboutStoryCopy";
 import { ABOUT_STORY_BRAND_ACCENT_CLASS } from "@/shared/lib/constants";
+import { ScrollRevealBlock } from "@/shared/components/reveal/ScrollRevealBlock";
 
 const ABOUT_STORY_SECTION_CLASS =
   "mt-14 grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-12 xl:gap-16";
@@ -47,7 +48,9 @@ export function AboutStorySection() {
             </p>
           ))}
         </div>
-        <AboutStackCard />
+        <ScrollRevealBlock index={1}>
+          <AboutStackCard />
+        </ScrollRevealBlock>
       </div>
     </section>
   );

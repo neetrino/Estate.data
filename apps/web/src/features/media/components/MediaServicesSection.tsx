@@ -1,10 +1,16 @@
 import Link from "next/link";
 import { MediaServiceCard } from "@/features/media/components/MediaServiceCard";
+import { MediaRevealListItem } from "@/features/media/components/MediaRevealListItem";
 import {
   MEDIA_PAGE_CTAS,
   MEDIA_SERVICES,
 } from "@/features/media/content/mediaServicesCopy";
 import { MEDIA_PAGE_COPY } from "@/features/media/content/mediaPageCopy";
+import {
+  PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS,
+  PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS,
+  PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS,
+} from "@/shared/lib/constants";
 import "@/features/media/styles/media-services-section.css";
 
 export function MediaServicesSection() {
@@ -14,18 +20,21 @@ export function MediaServicesSection() {
   return (
     <section className="media-services-section" aria-labelledby="media-services-heading">
       <header>
-        <p className="media-services-section__eyebrow">{eyebrow}</p>
-        <h1 id="media-services-heading" className="media-services-section__title">
+        <p className={PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
+        <h1
+          id="media-services-heading"
+          className={[PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS, "lg:whitespace-nowrap"].join(" ")}
+        >
           {title}
         </h1>
-        <p className="media-services-section__subtitle">{subtitle}</p>
+        <p className={PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
       </header>
 
       <ul className="media-services-section__grid">
-        {MEDIA_SERVICES.map((service) => (
-          <li key={service.id} className="media-services-section__grid-item">
+        {MEDIA_SERVICES.map((service, index) => (
+          <MediaRevealListItem key={service.id} index={index}>
             <MediaServiceCard service={service} />
-          </li>
+          </MediaRevealListItem>
         ))}
       </ul>
 

@@ -12,15 +12,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  height: clamp(5rem, 14vw, 9rem);
+  height: clamp(6rem, 16vw, 11rem);
 }
 
 .page-footer-bridge--from-white {
   background: linear-gradient(
     180deg,
     rgb(255 255 255 / 0%) 0%,
-    rgb(255 255 255 / 72%) 18%,
-    rgb(244 241 251 / 92%) 62%,
+    rgb(255 255 255 / 54%) 24%,
+    rgb(250 248 254 / 82%) 56%,
     var(--page-footer-bridge-tone) 100%
   );
 }
@@ -29,8 +29,8 @@
   background: linear-gradient(
     180deg,
     rgb(244 241 251 / 0%) 0%,
-    rgb(244 241 251 / 55%) 22%,
-    rgb(244 241 251 / 88%) 58%,
+    rgb(244 241 251 / 44%) 28%,
+    rgb(244 241 251 / 78%) 60%,
     var(--page-footer-bridge-tone) 100%
   );
 }

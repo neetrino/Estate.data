@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import { PortfolioFilter } from "@/features/portfolio/components/PortfolioFilter";
 import { PortfolioPagination } from "@/features/portfolio/components/PortfolioPagination";
+import { PortfolioProjectCard } from "@/features/portfolio/components/PortfolioProjectCard";
 import {
   type PortfolioFilterId,
   type PortfolioProject,
@@ -16,6 +16,7 @@ import {
 } from "@/features/portfolio/lib/portfolioPagination";
 import { usePortfolioItemsPerPage } from "@/features/portfolio/lib/usePortfolioItemsPerPage";
 import { PORTFOLIO_GRID_GAP_CLASS } from "@/shared/lib/constants";
+import { ScrollRevealListItem } from "@/shared/components/reveal/ScrollRevealListItem";
 
 const PORTFOLIO_GRID_CLASS = `mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${PORTFOLIO_GRID_GAP_CLASS}`;
 
@@ -67,10 +68,10 @@ export function PortfolioWorkSection({ projects }: PortfolioWorkSectionProps) {
     <>
       <PortfolioFilter activeId={activeFilterId} onFilterChange={handleFilterChange} />
       <ul ref={gridRef} className={PORTFOLIO_GRID_CLASS}>
-        {paginatedProjects.map((project) => (
-          <li key={project.id}>
-            <RecentWorkProjectTile project={project} />
-          </li>
+        {paginatedProjects.map((project, index) => (
+          <ScrollRevealListItem key={project.id} index={index}>
+            <PortfolioProjectCard project={project} showTopLeftBadge={activeFilterId === "all"} />
+          </ScrollRevealListItem>
         ))}
       </ul>
       {shouldShowPortfolioPagination(filteredProjects.length, itemsPerPage) ? (

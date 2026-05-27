@@ -1,11 +1,18 @@
-import Link from "next/link";
+import { SolutionsRevealListItem } from "@/features/solutions/components/SolutionsRevealListItem";
 import { SolutionsRoleCard } from "@/features/solutions/components/SolutionsRoleCard";
 import { SOLUTIONS_PAGE_COPY } from "@/features/solutions/content/solutionsPageCopy";
 import {
   SOLUTIONS_PAGE_CTA,
   SOLUTIONS_ROLES,
 } from "@/features/solutions/content/solutionsRolesCopy";
-import { WHAT_WE_DO_CARD_GRID_GAP_CLASS } from "@/shared/lib/constants";
+import {
+  ESTATE_PILL_CONTENT_WIDTH_CLASS,
+  LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
+  LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
+  WHAT_WE_DO_CARD_GRID_GAP_CLASS,
+} from "@/shared/lib/constants";
+import { EstatePillButtonLink } from "@/shared/ui/button";
+import "@/features/solutions/styles/solutions-roles-section.css";
 
 const SOLUTIONS_SECTION_CLASS = [
   "relative pb-8 sm:pb-10 lg:pb-12",
@@ -17,20 +24,19 @@ const SOLUTIONS_HEADER_EYEBROW_CLASS =
   "text-sm font-bold tracking-[0.24em] text-[#A855F7] uppercase sm:text-base";
 
 const SOLUTIONS_HEADER_TITLE_CLASS = [
-  "mt-4 max-w-[20ch] font-extrabold tracking-tight text-[#07142F]",
-  "text-[2.2rem] leading-[1.08] sm:text-[2.65rem] md:text-[3rem] lg:text-[3.3rem] xl:text-[3.8rem]",
+  "mt-4 max-w-[20ch] font-extrabold tracking-tight text-[#2E4873] lg:max-w-none lg:whitespace-nowrap",
+  "text-3xl leading-[1.08] sm:text-4xl md:text-5xl lg:text-[3rem]",
 ].join(" ");
 
 const SOLUTIONS_HEADER_SUBTITLE_CLASS =
   "mt-5 max-w-[48.75rem] text-base leading-relaxed text-[#5D5A7C] sm:text-lg lg:text-[1.35rem]";
 
 const SOLUTIONS_CTA_CLASS = [
-  "mt-10 inline-flex h-14 items-center justify-center gap-2.5 rounded-full px-9",
-  "bg-[linear-gradient(90deg,#B855D4_0%,#8B2FB8_100%)] text-base font-semibold text-white",
-  "shadow-[0_14px_38px_rgba(139,47,184,0.35)] transition-all duration-300",
-  "hover:-translate-y-0.5 hover:shadow-[0_18px_46px_rgba(139,47,184,0.45)]",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B855D4]/35",
-  "max-[430px]:w-full max-[430px]:px-6",
+  "mt-8",
+  "relative z-20",
+  ESTATE_PILL_CONTENT_WIDTH_CLASS,
+  LANDING_BOOK_SHOOT_GRADIENT_SURFACE_CLASS,
+  LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
 ].join(" ");
 
 export function SolutionsRolesSection() {
@@ -49,28 +55,15 @@ export function SolutionsRolesSection() {
           <p className={SOLUTIONS_HEADER_SUBTITLE_CLASS}>{subtitle}</p>
         </header>
         <ul className={SOLUTIONS_ROLES_GRID_CLASS}>
-          {SOLUTIONS_ROLES.map((role) => (
-            <li key={role.id} className="min-w-0">
+          {SOLUTIONS_ROLES.map((role, index) => (
+            <SolutionsRevealListItem key={role.id} index={index}>
               <SolutionsRoleCard role={role} />
-            </li>
+            </SolutionsRevealListItem>
           ))}
         </ul>
-        <Link href={href} className={SOLUTIONS_CTA_CLASS}>
-          <span>{label}</span>
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="size-4 shrink-0"
-            aria-hidden
-          >
-            <path d="M4 10h12" />
-            <path d="m11 6 4 4-4 4" />
-          </svg>
-        </Link>
+        <EstatePillButtonLink href={href} className={SOLUTIONS_CTA_CLASS}>
+          {label}
+        </EstatePillButtonLink>
       </div>
     </section>
   );

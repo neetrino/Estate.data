@@ -2,6 +2,7 @@ import { DataServicesFeatureImage } from "@/features/services/data/components/Da
 import { DataServicesIntegrationsCard } from "@/features/services/data/components/DataServicesIntegrationsCard";
 import { DataServicesOfferingsGrid } from "@/features/services/data/components/DataServicesOfferingsGrid";
 import { DataServicesReportCta } from "@/features/services/data/components/DataServicesReportCta";
+import { ScrollRevealBlock } from "@/shared/components/reveal/ScrollRevealBlock";
 import { HOME_STATS_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 const DATA_SERVICES_BODY_CLASS = `mt-10 lg:mt-12 flex flex-col ${HOME_STATS_GRID_GAP_CLASS}`;
@@ -18,8 +19,12 @@ export function DataServicesBody() {
         <DataServicesOfferingsGrid />
       </div>
       <div className={DATA_SERVICES_BOTTOM_ROW_CLASS}>
-        <DataServicesIntegrationsCard />
-        <DataServicesReportCta />
+        <ScrollRevealBlock className="min-h-0" index={0}>
+          <DataServicesIntegrationsCard />
+        </ScrollRevealBlock>
+        <ScrollRevealBlock className="min-h-0" index={1}>
+          <DataServicesReportCta />
+        </ScrollRevealBlock>
       </div>
     </div>
   );

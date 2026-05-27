@@ -83,9 +83,9 @@ export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
 
 /** Main content offset below fixed landing pill navbar (sync with home hero). */
 export const NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS = [
-  "pt-[calc(7.75rem-7px+env(safe-area-inset-top,0px))]",
-  "sm:pt-[calc(8rem-7px+env(safe-area-inset-top,0px))]",
-  "lg:pt-[calc(8.25rem-7px+env(safe-area-inset-top,0px))]",
+  "pt-[calc(7.75rem-7px+env(safe-area-inset-top,0px)+15px)]",
+  "sm:pt-[calc(8rem-7px+env(safe-area-inset-top,0px)+15px)]",
+  "lg:pt-[calc(8.25rem-7px+env(safe-area-inset-top,0px)+15px)]",
 ].join(" ");
 
 /**
