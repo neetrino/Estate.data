@@ -1,0 +1,22 @@
+/**
+ * Shared lavender surface for Client Voices + listing CTA (matches footer #f4f1fb).
+ */
+.home-client-voices-cta-shell {
+  --cv-cta-shell-tone: #f4f1fb;
+  --cv-cta-shell-mid: #f0eaf6;
+  --cv-cta-shell-soft: #f5effa;
+  position: relative;
+  background-color: var(--cv-cta-shell-tone);
+  background-image: linear-gradient(
+    180deg,
+    var(--cv-cta-shell-soft) 0%,
+    var(--cv-cta-shell-mid) 42%,
+    var(--cv-cta-shell-tone) 72%,
+    var(--cv-cta-shell-tone) 100%
+  );
+}
+
+.home-client-voices-cta-shell__listing {
+  position: relative;
+  z-index: 12;
+}

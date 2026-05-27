@@ -1,4 +1,5 @@
 import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
+import { HomeClientVoicesCtaShell } from "@/features/home/landing/components/HomeClientVoicesCtaShell";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   LazyHomeClientVoices,
@@ -26,8 +27,10 @@ export function HomeLandingPage({ projects }: HomeLandingPageProps) {
         <LazyHomeRecentWork projects={projects} />
         <LazyHomeStatsStrip />
         <LazyHomePropertyIntelligence />
-        <LazyHomeClientVoices />
-        <LazyHomeListingCta />
+        <HomeClientVoicesCtaShell
+          clientVoices={<LazyHomeClientVoices />}
+          listingCta={<LazyHomeListingCta />}
+        />
         <FooterPageBridge from="surface" />
       </main>
     </div>

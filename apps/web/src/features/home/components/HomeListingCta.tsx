@@ -5,7 +5,6 @@ import { LISTING_CTA_CITY_ILLUSTRATION_SRC } from "@/features/home/landing/lib/l
 import {
   LANDING_CONTAINER_CLASS,
   LANDING_SECTION_CLASS,
-  LANDING_SECTION_ENTER_FROM_WHITE_CLASS,
 } from "@/features/home/landing/lib/landingStyles";
 import {
   HOME_LISTING_CTA_BUTTONS_WRAP_CLASS,
@@ -28,7 +27,7 @@ export function HomeListingCta() {
 
   return (
     <section
-      className={`home-listing-cta-section ${LANDING_SECTION_CLASS} ${LANDING_SECTION_ENTER_FROM_WHITE_CLASS}`}
+      className={`home-listing-cta-section ${LANDING_SECTION_CLASS}`}
       aria-labelledby="listing-cta-heading"
     >
       <div className={`${LANDING_CONTAINER_CLASS} home-listing-cta-section__inner`}>
