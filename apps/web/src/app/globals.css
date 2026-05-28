@@ -279,6 +279,46 @@ button:disabled {
   }
 }
 
+/** iPad mini/tablet hero — smoother transition to the next section. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .home-landing-hero-background-image {
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 52%,
+      rgb(0 0 0 / 90%) 68%,
+      rgb(0 0 0 / 62%) 82%,
+      rgb(0 0 0 / 28%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 52%,
+      rgb(0 0 0 / 90%) 68%,
+      rgb(0 0 0 / 62%) 82%,
+      rgb(0 0 0 / 28%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .home-landing-hero-photo-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 34%,
+      rgba(248, 249, 252, 0.06) 58%,
+      rgba(248, 249, 252, 0.18) 74%,
+      rgba(248, 249, 252, 0.4) 88%,
+      rgba(248, 249, 252, 0.68) 100%
+    );
+  }
+}
+
 /** What we do — fallback while the photo loads. */
 .home-what-we-do-bg-layer {
   background-color: var(--landing-surface);
@@ -376,6 +416,16 @@ button:disabled {
   backdrop-filter: blur(16px) saturate(150%);
 }
 
+/**
+ * iPad mini: make home navbar pill match inner pages more closely
+ * by reducing hero-image bleed-through under the translucent surface.
+ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar-landing-pill--home {
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+
 /** Inner routes — same stack as {@link HeroSection}: white base + hero gradient at 80%. */
 .page-hero-background {
   position: relative;
@@ -442,5 +492,11 @@ button:disabled {
     mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-inner-pages-background::after {
+    content: none;
   }
 }

@@ -191,7 +191,13 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
           className={[SITE_PAGE_SHELL_CLASS, "py-3 sm:py-4"].join(" ")}
           aria-label="Main"
         >
-          <div className="navbar-landing-pill flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6">
+          <div
+            className={[
+              "navbar-landing-pill",
+              isHome ? "navbar-landing-pill--home" : "",
+              "flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6",
+            ].join(" ")}
+          >
             <LogoLink
               tone={navTone}
               onNavigate={closeMobile}
