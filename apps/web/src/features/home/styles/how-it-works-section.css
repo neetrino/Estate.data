@@ -245,6 +245,36 @@
   position: relative;
 }
 
+.how-it-works-mobile-decor-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.how-it-works-mobile-decor-lines__segment {
+  position: absolute;
+  width: 6.75rem;
+  height: 12rem;
+  transform: translateY(-50%);
+  opacity: 0.96;
+}
+
+.how-it-works-mobile-decor-lines__segment--left {
+  left: calc(50% - 9.1rem);
+}
+
+.how-it-works-mobile-decor-lines__segment--right {
+  left: calc(50% + 3.1rem);
+}
+
+.how-it-works-mobile-decor-lines__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .how-it-works-grid {
   display: grid;
   align-items: stretch;
@@ -459,6 +489,15 @@
 }
 
 @media (max-width: 639px) {
+  .how-it-works-mobile-decor-lines {
+    display: block;
+  }
+
+  .how-it-works-grid {
+    position: relative;
+    z-index: 10;
+  }
+
   .how-it-works-bg-dots--right,
   .how-it-works-heading-sparkle {
     display: none;

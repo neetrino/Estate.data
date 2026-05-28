@@ -1,5 +1,6 @@
 import { HOME_HOW_IT_WORKS_COPY } from "@/features/home/content/howItWorksCopy";
 import { HowItWorksConnector } from "@/features/home/landing/components/HowItWorksConnector";
+import { HowItWorksMobileDecorLines } from "@/features/home/landing/components/HowItWorksMobileDecorLines";
 import { LandingSectionBlend } from "@/features/home/landing/components/LandingSectionBlend";
 import { HowItWorksStepIcon } from "@/features/home/landing/components/HowItWorksStepIcon";
 import {
@@ -44,6 +45,10 @@ export function HomeHowItWorks() {
 
         <div className="how-it-works-steps">
           <div className="how-it-works-grid-wrap">
+            <HowItWorksMobileDecorLines
+              stepCount={steps.length}
+              stepAccents={steps.map((step) => step.accent)}
+            />
             <HowItWorksConnector />
             <ol className="how-it-works-grid">
               {steps.map((step, index) => (
