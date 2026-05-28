@@ -19,7 +19,7 @@ export type NavLink = {
 
 export const MAIN_NAV_LINKS: readonly NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Media", href: "/media" },
+  { label: "Services", href: "/services" },
   { label: "Data & BIM", href: DATA_BIM_PATH },
   { label: "Solutions", href: "/solutions" },
   { label: "Portfolio", href: "/portfolio" },
@@ -31,7 +31,7 @@ export const MAIN_NAV_LINKS: readonly NavLink[] = [
 /** Mobile drawer — always visible links (matches primary nav pattern). */
 export const MOBILE_NAV_PRIMARY_LINKS: readonly NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "Media", href: "/media" },
+  { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

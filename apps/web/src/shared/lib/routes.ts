@@ -28,7 +28,7 @@ export function isSupersudoRoute(pathname: string): boolean {
   return pathname === SUPERSUDO_PATH || pathname.startsWith(`${SUPERSUDO_PATH}/`);
 }
 
-/** Home + /media + /data-bim — soft footer top blend after photo / gradient sections. */
+/** Home + /services + /data-bim — soft footer top blend after photo / gradient sections. */
 export function shouldFooterSmoothTopEntry(pathname: string): boolean {
-  return pathname === "/" || pathname === "/media" || pathname === DATA_BIM_PATH;
+  return pathname === "/" || pathname === "/services" || pathname === DATA_BIM_PATH;
 }

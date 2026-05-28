@@ -5,7 +5,7 @@ import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
 /** Navbar links + CTA typography (excludes Estate Data wordmark). */
-export const NAV_ITEM_TEXT_CLASS = "text-base font-semibold leading-snug sm:text-lg";
+export const NAV_ITEM_TEXT_CLASS = "text-sm font-semibold leading-snug sm:text-base";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
 export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-what-we-do-subtitle`;
