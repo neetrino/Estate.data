@@ -27,9 +27,16 @@ export function DataServicesReportCta() {
             <span className="data-bim-report-card__button-arrow" aria-hidden>
               <svg viewBox="0 0 16 16" fill="none" className="size-4">
                 <path
-                  d="M3.5 8h8.2M8.5 4.8l3.2 3.2-3.2 3.2"
+                  d="M3 13 13 3"
                   stroke="currentColor"
-                  strokeWidth="1.65"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6 3h7v7"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
