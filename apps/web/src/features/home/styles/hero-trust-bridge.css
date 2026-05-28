@@ -55,3 +55,14 @@
   z-index: 1;
   background: linear-gradient(180deg, transparent 52%, var(--landing-blend-tone-soft) 100%);
 }
+
+@media (max-width: 767px) {
+  .home-landing-trust-bridge {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .home-landing-trust-bridge__top-fade {
+    background: linear-gradient(180deg, var(--landing-blend-tone-surface) 0%, transparent 42%);
+  }
+}

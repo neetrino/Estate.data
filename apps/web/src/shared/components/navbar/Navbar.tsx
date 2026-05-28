@@ -36,15 +36,17 @@ const NAVBAR_SURFACE_TRANSITION_CLASS =
 
 const NAVBAR_TRANSPARENT_CLASS = "bg-transparent";
 
-const NAVBAR_SOLID_CLASS = "bg-white";
-
 const NAVBAR_BURGER_BUTTON_CLASS =
   "relative z-[101] min-h-11 min-w-11 shrink-0 touch-manipulation cursor-pointer items-center justify-center rounded-md p-2 [-webkit-tap-highlight-color:transparent]";
 
 const NAVBAR_MOBILE_PANEL_TOP_CLASS = NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS;
 
 const NAVBAR_MOBILE_PANEL_CLASS = [
-  "fixed inset-x-0",
+  "fixed",
+  "left-[calc(1rem-5px)] right-[calc(1rem-5px)]",
+  "sm:left-[calc(1.5rem-5px)] sm:right-[calc(1.5rem-5px)]",
+  "lg:left-[calc(2rem-5px)] lg:right-[calc(2rem-5px)]",
+  "xl:left-[calc(2.5rem-5px)] xl:right-[calc(2.5rem-5px)]",
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
   NAVBAR_MOBILE_PANEL_Z_CLASS,
   "flex max-h-[calc(100dvh-7.75rem+7px-env(safe-area-inset-top,0px))] flex-col overflow-hidden",
@@ -59,7 +61,7 @@ const NAVBAR_MOBILE_BACKDROP_CLASS = [
   "fixed inset-0",
   NAVBAR_MOBILE_PANEL_TOP_CLASS,
   NAVBAR_MOBILE_BACKDROP_Z_CLASS,
-  "bg-black/30",
+  "bg-transparent",
   NAVBAR_MOBILE_MENU_CLASS,
 ].join(" ");
 
@@ -171,12 +173,7 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
     };
   }, [isMobileMenuVisible]);
 
-  const headerSurfaceClass =
-    isOverlay && !scrolled && !isMobileMenuVisible
-      ? NAVBAR_TRANSPARENT_CLASS
-      : isMobileMenuVisible
-        ? NAVBAR_SOLID_CLASS
-        : NAVBAR_TRANSPARENT_CLASS;
+  const headerSurfaceClass = NAVBAR_TRANSPARENT_CLASS;
 
   const navTone =
     landingPill || isMobileMenuVisible || !isOverlay || scrolled ? "dark" : "light";

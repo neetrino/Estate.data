@@ -231,13 +231,23 @@
 
 /** Mobile — stacked layout, illustration above copy. */
 @media (max-width: 767px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 0px;
+    --home-listing-cta-copy-offset-x: 0px;
+  }
+
   .home-listing-cta-panel__content {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     text-align: center;
   }
 
+  .home-listing-cta-panel__illustration {
+    justify-self: center;
+  }
+
   .home-listing-cta-panel__copy {
+    width: 100%;
     text-align: center;
   }
 

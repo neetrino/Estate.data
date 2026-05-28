@@ -62,23 +62,23 @@ export const NAVBAR_DESKTOP_ONLY_CLASS = "hidden min-[1400px]:flex";
  * Mobile menu panel — nudge up under navbar (px).
  * Keep in sync with {@link NAVBAR_MOBILE_PANEL_TOP_CLASS}.
  */
-export const NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX = 12;
+export const NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX = 32;
 
 /**
  * Mobile menu panel top — navbar row + safe area, minus {@link NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX}.
  * Keep in sync with NAVBAR_TOP_PADDING + NAVBAR_HEIGHT + safe-area.
  */
 export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
-  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-12px)]";
+  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-32px)]";
 
 /**
  * Mobile menu panel top — landing pill navbar (safe area + pill + vertical padding).
  * Keep in sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
  */
 export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
-  "top-[calc(7.75rem-7px+env(safe-area-inset-top,0px)-12px)]",
-  "sm:top-[calc(8rem-7px+env(safe-area-inset-top,0px)-12px)]",
-  "lg:top-[calc(8.25rem-7px+env(safe-area-inset-top,0px)-12px)]",
+  "top-[calc(7.75rem-7px+env(safe-area-inset-top,0px)-32px)]",
+  "sm:top-[calc(8rem-7px+env(safe-area-inset-top,0px)-32px)]",
+  "lg:top-[calc(8.25rem-7px+env(safe-area-inset-top,0px)-32px)]",
 ].join(" ");
 
 /** Main content offset below fixed landing pill navbar (sync with home hero). */

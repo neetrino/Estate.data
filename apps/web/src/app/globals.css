@@ -244,6 +244,41 @@ button:disabled {
   );
 }
 
+@media (max-width: 767px) {
+  .home-landing-hero-background-image {
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 60%,
+      rgb(0 0 0 / 72%) 80%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 60%,
+      rgb(0 0 0 / 72%) 80%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .home-landing-hero-photo-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.03) 30%,
+      rgba(248, 249, 252, 0.08) 54%,
+      rgba(248, 249, 252, 0.24) 72%,
+      rgba(248, 249, 252, 0.52) 90%,
+      rgba(248, 249, 252, 0.78) 100%
+    );
+  }
+}
+
 /** What we do — fallback while the photo loads. */
 .home-what-we-do-bg-layer {
   background-color: var(--landing-surface);

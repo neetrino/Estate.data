@@ -28,7 +28,9 @@ export function HeroSection() {
       >
         <HeroBackgroundPicture />
         <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
-        <LandingSectionBlend edge="bottom" tone="surface" />
+        <div className="hidden md:block">
+          <LandingSectionBlend edge="bottom" tone="surface" />
+        </div>
 
         <div className={`${HOME_LANDING_HERO_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
           <div className={HOME_LANDING_HERO_GRID_CLASS}>
@@ -70,7 +72,7 @@ function HeroBackgroundPicture() {
           height={1440}
           decoding="async"
           fetchPriority="high"
-          className="size-full object-cover object-center"
+          className="home-landing-hero-background-image size-full object-cover object-center"
         />
       </picture>
     </div>
