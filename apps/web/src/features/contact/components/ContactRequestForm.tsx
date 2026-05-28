@@ -209,7 +209,7 @@ export function ContactRequestForm() {
           disabled={isSubmitting || status === "success"}
           className={CONTACT_FORM_SUBMIT_BUTTON_CLASS}
         >
-          {isSubmitting ? submittingLabel : submitLabel}
+          <span>{isSubmitting ? submittingLabel : submitLabel}</span>
         </button>
       </div>
     </form>

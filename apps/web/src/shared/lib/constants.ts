@@ -339,12 +339,12 @@ export const HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS =
 
 /** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#2E4873). */
 export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
-  "text-sm font-semibold uppercase tracking-[0.2em] text-what-we-do-subtitle sm:text-base";
+  "text-sm font-bold tracking-[0.24em] uppercase text-[#A855F7] sm:text-base";
 
 export const WHAT_WE_DO_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 
 export const WHAT_WE_DO_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
+  "mt-5 max-w-3xl text-lg leading-relaxed text-[#5D5A7C] sm:text-xl";
 
 /** Solutions page — same purple typography as Portfolio. */
 export const SOLUTIONS_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
@@ -433,10 +433,14 @@ export const CONTACT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 export const CONTACT_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 export const CONTACT_FORM_SUBMIT_BUTTON_CLASS = [
-  "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap",
-  "rounded-button px-8 text-base font-semibold leading-snug shadow sm:w-auto",
-  WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS,
-  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+  "inline-flex h-[52px] w-full cursor-pointer items-center justify-center whitespace-nowrap",
+  "rounded-full px-5 text-sm font-bold leading-none text-white sm:w-[190px]",
+  "bg-[linear-gradient(135deg,#8B5CF6_0%,#A855F7_45%,#D946EF_100%)]",
+  "shadow-[0_16px_36px_rgba(124,58,237,0.28),0_0_24px_rgba(217,70,239,0.18)]",
+  "transition-all duration-[250ms] ease-[ease]",
+  "hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_22px_48px_rgba(168,85,247,0.38)]",
+  "active:translate-y-0",
+  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[rgba(168,85,247,0.22)]",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
 
@@ -445,13 +449,13 @@ export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-what-we-do-s
 export const CONTACT_STUDIO_LINK_CLASS =
   "text-base leading-relaxed text-black transition-colors hover:text-what-we-do-title sm:text-lg";
 
-/** About page — eyebrow matches Portfolio / Pricing; title uses brand navy (#2E4873). */
+/** About page — same heading treatment as Portfolio / Solutions. */
 export const ABOUT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 
-export const ABOUT_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
+export const ABOUT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
+  WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 /** About story — accent spans in body copy (#C364BE). */
 export const ABOUT_STORY_BRAND_ACCENT_CLASS = "font-semibold text-what-we-do-subtitle";

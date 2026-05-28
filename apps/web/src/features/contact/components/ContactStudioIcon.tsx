@@ -5,12 +5,12 @@ import {
 import Image from "next/image";
 
 /** Matches squircle asset export (location, phone, mail). */
-const CONTACT_STUDIO_ICON_DIMENSION_PX = 48;
+const CONTACT_STUDIO_ICON_DIMENSION_PX = 108;
 
 const CONTACT_STUDIO_ICON_CLASS = "size-full object-cover";
 
 const CONTACT_STUDIO_ICON_FRAME_CLASS =
-  "size-11 shrink-0 overflow-hidden rounded-2xl sm:size-12";
+  "relative -translate-y-3.5 size-[5rem] shrink-0 overflow-hidden rounded-2xl sm:size-[5.75rem]";
 
 type ContactStudioIconProps = {
   kind: ContactStudioIconKind;

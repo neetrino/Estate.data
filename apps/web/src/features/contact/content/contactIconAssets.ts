@@ -1,5 +1,5 @@
 /** Bump when replacing files under `public/images/contact/`. */
-const CONTACT_STUDIO_ICON_VERSION = "20260521";
+const CONTACT_STUDIO_ICON_VERSION = "20260528";
 
 function contactStudioIconPath(filename: string): string {
   return `/images/contact/${filename}?v=${CONTACT_STUDIO_ICON_VERSION}`;

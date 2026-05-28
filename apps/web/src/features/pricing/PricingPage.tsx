@@ -5,9 +5,9 @@ import { fetchPricingPage } from "@/features/pricing/services/fetchPricingPage";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   INNER_PAGE_MAIN_SPACING_CLASS,
-  INNER_PAGE_TITLE_CLASS,
   SITE_PAGE_SHELL_CLASS,
   WHAT_WE_DO_PAGE_EYEBROW_CLASS,
+  WHAT_WE_DO_PAGE_TITLE_CLASS,
 } from "@/shared/lib/constants";
 
 const PRICING_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
@@ -15,8 +15,8 @@ const PRICING_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 const PRICING_SUBTITLE_CLASS = "mt-5 max-w-3xl text-lg leading-relaxed sm:text-xl";
 
 const PRICING_SUBTITLE_SEGMENT_CLASS = {
-  subtitle: "text-what-we-do-subtitle",
-  title: "font-semibold text-what-we-do-title",
+  subtitle: "text-[#5D5A7C]",
+  title: "font-semibold text-[#5D5A7C]",
 } as const;
 
 export async function PricingPage() {
@@ -38,7 +38,7 @@ export async function PricingPage() {
         <div className={`${SITE_PAGE_SHELL_CLASS} relative z-20`}>
           <header>
             <p className={PRICING_EYEBROW_CLASS}>{eyebrow}</p>
-            <h1 className={INNER_PAGE_TITLE_CLASS}>{title}</h1>
+            <h1 className={WHAT_WE_DO_PAGE_TITLE_CLASS}>{title}</h1>
             <p className={PRICING_SUBTITLE_CLASS}>
               {subtitleSegments.map((segment) => (
                 <span
