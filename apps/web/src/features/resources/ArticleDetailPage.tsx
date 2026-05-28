@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { ArticleDetail } from "@/features/resources/content/resourcesContentCopy";
+import "@/features/resources/styles/resources-page.css";
+import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import { Navbar } from "@/shared/components/navbar";
 import {
   ABOUT_PAGE_MAIN_CLASS,
@@ -14,7 +16,7 @@ const ARTICLE_BODY_CLASS =
 const ARTICLE_META_CLASS = "mt-3 text-sm text-muted-foreground sm:text-base";
 
 const ARTICLE_BACK_LINK_CLASS =
-  "text-sm font-medium text-what-we-do-subtitle hover:underline";
+  "text-base font-medium text-what-we-do-subtitle transition-opacity hover:opacity-85";
 
 type ArticleDetailPageProps = {
   article: ArticleDetail;
@@ -24,7 +26,7 @@ export function ArticleDetailPage({ article }: ArticleDetailPageProps) {
   return (
     <>
       <Navbar />
-      <main className={ABOUT_PAGE_MAIN_CLASS}>
+      <main className={`${ABOUT_PAGE_MAIN_CLASS} relative isolate resources-page-background`}>
         <article className={`${PAGE_CONTAINER_CLASS} ${PAGE_GUTTER_CLASS}`}>
           <Link href="/resources" className={ARTICLE_BACK_LINK_CLASS}>
             ← Back to resources
@@ -39,6 +41,7 @@ export function ArticleDetailPage({ article }: ArticleDetailPageProps) {
             ))}
           </div>
         </article>
+        <FooterPageBridge from="surface" />
       </main>
     </>
   );
