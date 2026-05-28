@@ -37,7 +37,7 @@ export function ResourcesFaqPanel({ faqItems }: ResourcesFaqPanelProps) {
         {RESOURCES_FAQ_SECTION_TITLE}
       </h2>
       <article
-        className={`${RESOURCES_SECTION_CONTENT_OFFSET_CLASS} ${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_FAQ_CARD_CLASS}`}
+        className={`resources-surface-card ${RESOURCES_SECTION_CONTENT_OFFSET_CLASS} ${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_FAQ_CARD_CLASS}`}
       >
         <dl className={RESOURCES_FAQ_LIST_CLASS}>
           {faqItems.map((item) => (

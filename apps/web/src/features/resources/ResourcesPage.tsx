@@ -20,8 +20,8 @@ export async function ResourcesPage() {
   ]);
 
   return (
-    <main className={`${ABOUT_PAGE_MAIN_CLASS} resources-page-background`}>
-      <div className={SITE_PAGE_SHELL_CLASS}>
+    <main className={`${ABOUT_PAGE_MAIN_CLASS} relative isolate resources-page-background`}>
+      <div className={`${SITE_PAGE_SHELL_CLASS} relative z-20`}>
         <header>
           <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
           <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>

@@ -15,7 +15,7 @@ export function SolutionsPage() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-28 bg-gradient-to-b from-transparent via-[#f4f1fb]/65 to-[#f4f1fb]"
         aria-hidden
       />
-      <div className={SITE_PAGE_SHELL_CLASS}>
+      <div className={`${SITE_PAGE_SHELL_CLASS} relative z-20`}>
         <SolutionsRolesSection />
       </div>
       <FooterPageBridge from="surface" />

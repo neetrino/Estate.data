@@ -8,7 +8,11 @@ import {
   RESOURCES_SECTION_TITLE_CLASS,
 } from "@/features/resources/content/resourcesLayout";
 
-const RESOURCES_ARTICLES_LIST_CLASS = `flex flex-col gap-4 sm:gap-5 ${RESOURCES_SECTION_CONTENT_OFFSET_CLASS}`;
+const RESOURCES_ARTICLES_LIST_CLASS = [
+  `relative z-20 flex flex-col gap-4 sm:gap-5 ${RESOURCES_SECTION_CONTENT_OFFSET_CLASS}`,
+  "[&>li]:relative [&>li]:z-0 [&>li:last-child]:z-30",
+  "[&>li:last-child>a]:relative [&>li:last-child>a]:z-30",
+].join(" ");
 
 type ResourcesArticlesSectionProps = {
   articles: readonly ResourceArticle[];

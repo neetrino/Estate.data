@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ResourceArticle } from "@/features/resources/content/resourcesContentCopy";
 import { SOLUTIONS_ROLE_CARD_SHELL_CLASS } from "@/shared/lib/constants";
@@ -25,12 +26,24 @@ type ResourcesArticleCardProps = {
 };
 
 export function ResourcesArticleCard({ article }: ResourcesArticleCardProps) {
+  const iconPath = RESOURCES_ARTICLE_ICON_BY_ID[article.id];
+
   return (
     <li>
       <Link
         href={article.href}
-        className={`${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_ARTICLE_CARD_CLASS}`}
+        className={`resources-surface-card ${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_ARTICLE_CARD_CLASS}`}
       >
+        <span className="flex size-[4.25rem] shrink-0 items-center justify-center sm:size-[4.75rem]">
+          <Image
+            src={iconPath}
+            alt=""
+            width={76}
+            height={76}
+            className="size-full object-contain"
+            aria-hidden
+          />
+        </span>
         <div className="min-w-0 flex-1">
           <p className={RESOURCES_ARTICLE_TITLE_CLASS}>{article.title}</p>
           <p className={RESOURCES_ARTICLE_READ_TIME_CLASS}>{article.readTimeLabel}</p>
@@ -42,6 +55,13 @@ export function ResourcesArticleCard({ article }: ResourcesArticleCardProps) {
     </li>
   );
 }
+
+const RESOURCES_ARTICLE_ICON_BY_ID: Record<ResourceArticle["id"], string> = {
+  "westside-eastside-spring-2026": "/images/resources/icons/articles.png",
+  "twilight-drone-outperforms": "/images/resources/icons/drone.png",
+  "scan-to-bim-playbook": "/images/resources/icons/scan-to-bim.png",
+  "analytics-dashboards-listings": "/images/resources/icons/analytics.png",
+};
 
 function ResourcesArticleArrowIcon() {
   return (

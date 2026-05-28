@@ -1,3 +1,8 @@
+.resources-page-background {
+  position: relative;
+  isolation: isolate;
+}
+
 .resources-page-background::after {
   content: "";
   position: absolute;
@@ -11,7 +16,13 @@
   opacity: 0.9;
 }
 
-.resources-page-background > * {
+.resources-page-background > :not(.page-footer-bridge) {
   position: relative;
-  z-index: 1;
+  z-index: 20;
+}
+
+.resources-page-background .resources-surface-card {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
 }
