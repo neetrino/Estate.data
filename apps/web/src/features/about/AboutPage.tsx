@@ -6,6 +6,7 @@ import {
   ABOUT_PAGE_SUBTITLE_CLASS,
   ABOUT_PAGE_TITLE_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
@@ -16,6 +17,7 @@ export function AboutPage() {
     <main
       className={[
         INNER_PAGE_MAIN_SPACING_CLASS,
+        MOBILE_INNER_PAGES_BACKGROUND_CLASS,
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
         "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}

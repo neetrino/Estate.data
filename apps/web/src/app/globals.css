@@ -400,3 +400,47 @@ button:disabled {
 .page-hero-background--cyan-left::before {
   background: var(--property-intelligence-page-gradient);
 }
+
+@media (max-width: 767px) {
+  .mobile-inner-pages-background {
+    background-color: #f8f7ff;
+    position: relative;
+  }
+
+  .mobile-inner-pages-background::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    bottom: auto;
+    height: min(185vw, 1180px);
+    z-index: 0;
+    pointer-events: none;
+    background-image: url("/images/mobile-inner-pages-bg-20260528.png");
+    background-size: 100% 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+}

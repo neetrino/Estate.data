@@ -476,27 +476,36 @@ export const INNER_PAGE_MAIN_SPACING_CLASS = [
   "pb-12 sm:pb-14 md:pb-16 lg:pb-20",
 ].join(" ");
 
+/** Shared mobile background image for non-home pages. */
+export const MOBILE_INNER_PAGES_BACKGROUND_CLASS = [
+  "mobile-inner-pages-background",
+].join(" ");
+
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [
   "page-hero-background overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** Media / Data & BIM — reversed gradient (cyan left, magenta right). */
 export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
   "page-hero-background page-hero-background--cyan-left overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** /media — photo background (see MediaPageBackground). */
 export const MEDIA_PAGE_MAIN_CLASS = [
   "media-page relative isolate overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** /data-bim — photo background (see DataBimPageBackground). */
 export const DATA_BIM_PAGE_MAIN_CLASS = [
   "data-bim-page relative isolate overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 

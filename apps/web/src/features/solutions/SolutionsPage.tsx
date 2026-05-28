@@ -1,12 +1,17 @@
 import { SolutionsRolesSection } from "@/features/solutions/components/SolutionsRolesSection";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
-import { SITE_PAGE_SHELL_CLASS, INNER_PAGE_MAIN_SPACING_CLASS } from "@/shared/lib/constants";
+import {
+  SITE_PAGE_SHELL_CLASS,
+  INNER_PAGE_MAIN_SPACING_CLASS,
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
+} from "@/shared/lib/constants";
 
 export function SolutionsPage() {
   return (
     <main
       className={[
         INNER_PAGE_MAIN_SPACING_CLASS,
+        MOBILE_INNER_PAGES_BACKGROUND_CLASS,
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
         "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}

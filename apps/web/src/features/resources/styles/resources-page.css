@@ -97,3 +97,40 @@
 .resources-page-background .resources-ask-question-button:hover > span:last-child {
   transform: translateX(2px);
 }
+
+@media (max-width: 767px) {
+  .resources-page-background::after {
+    background-image: url("/images/mobile-inner-pages-bg-20260528.png");
+    background-color: rgb(248 245 255 / 22%);
+    background-position: center top;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    inset-inline: 0;
+    top: 0;
+    bottom: auto;
+    height: min(185vw, 1180px);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    opacity: 0.9;
+  }
+}
