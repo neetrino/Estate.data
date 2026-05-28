@@ -31,9 +31,9 @@ export function DataServicesIntegrationsCard() {
         <Image
           src="/images/data-bim-services/icons/integrations-puzzle.png"
           alt=""
-          width={148}
-          height={148}
-          className="size-[5.5rem] object-contain sm:size-[6.5rem]"
+          width={220}
+          height={220}
+          className="data-bim-integrations-card__icon"
         />
       </div>
       <div className="data-bim-integrations-card__content">

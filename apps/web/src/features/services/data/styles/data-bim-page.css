@@ -322,6 +322,16 @@
   background: rgba(255, 255, 255, 0.82);
 }
 
+.data-bim-integrations-card__icon-wrap {
+  min-width: clamp(7.5rem, 9.2vw, 9rem);
+}
+
+.data-bim-integrations-card__icon {
+  width: clamp(7rem, 8.8vw, 8.5rem);
+  height: clamp(7rem, 8.8vw, 8.5rem);
+  object-fit: contain;
+}
+
 .data-bim-integrations-card__content {
   min-width: 0;
 }
