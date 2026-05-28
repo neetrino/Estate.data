@@ -18,7 +18,7 @@ export function ContactStudioDetails() {
 
   return (
     <ul
-      className="flex shrink-0 flex-col gap-6 sm:gap-8"
+      className="flex shrink-0 flex-col gap-4 sm:gap-2"
       aria-label="Studio contact"
     >
       <li className={CONTACT_STUDIO_ROW_CLASS}>
