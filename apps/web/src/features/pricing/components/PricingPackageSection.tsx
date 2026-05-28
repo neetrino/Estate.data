@@ -9,7 +9,7 @@ import {
 import { ScrollRevealListItem } from "@/shared/components/reveal/ScrollRevealListItem";
 
 const PRICING_SECTION_TITLE_CLASS =
-  "text-2xl font-bold tracking-tight text-what-we-do-title sm:text-3xl";
+  "text-2xl font-bold tracking-tight text-[#A855F7] sm:text-3xl";
 
 type PricingPackageSectionProps = {
   sectionId: string;

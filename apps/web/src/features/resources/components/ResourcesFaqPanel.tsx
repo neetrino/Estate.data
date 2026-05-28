@@ -14,17 +14,20 @@ import {
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
 const RESOURCES_FAQ_CARD_CLASS =
-  "flex w-full flex-col items-start px-6 py-6 sm:px-7 sm:py-7";
+  "resources-faq-card flex w-full flex-col items-start px-6 py-6 sm:px-7 sm:py-7";
 
 const RESOURCES_FAQ_LIST_CLASS = "flex w-full flex-col gap-6 sm:gap-7";
 
 const RESOURCES_FAQ_QUESTION_CLASS =
-  "text-base font-bold text-what-we-do-title sm:text-lg";
+  "resources-faq-question text-base font-bold text-[#07142F] sm:text-lg";
 
 const RESOURCES_FAQ_ANSWER_CLASS =
-  "mt-2 text-base leading-relaxed text-muted-foreground sm:text-lg";
+  "mt-2 text-base leading-relaxed text-[#334B73] sm:text-lg";
 
-const RESOURCES_ASK_QUESTION_BUTTON_CLASS = `mt-8 ${ESTATE_PILL_CONTENT_WIDTH_CLASS}`;
+const RESOURCES_ASK_QUESTION_BUTTON_CLASS = [
+  "resources-ask-question-button mt-8",
+  ESTATE_PILL_CONTENT_WIDTH_CLASS,
+].join(" ");
 
 type ResourcesFaqPanelProps = {
   faqItems: readonly ResourceFaqItem[];
@@ -41,7 +44,7 @@ export function ResourcesFaqPanel({ faqItems }: ResourcesFaqPanelProps) {
       >
         <dl className={RESOURCES_FAQ_LIST_CLASS}>
           {faqItems.map((item) => (
-            <div key={item.id}>
+            <div key={item.id} className="resources-faq-item">
               <dt className={RESOURCES_FAQ_QUESTION_CLASS}>{item.question}</dt>
               <dd className={RESOURCES_FAQ_ANSWER_CLASS}>{item.answer}</dd>
             </div>
