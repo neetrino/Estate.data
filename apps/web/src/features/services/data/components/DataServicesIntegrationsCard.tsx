@@ -1,32 +1,12 @@
+import Image from "next/image";
 import { DATA_SERVICES_INTEGRATIONS_COPY } from "@/features/services/data/content/dataServicesCopy";
-import {
-  DATA_SERVICES_BOTTOM_CARD_PADDING_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
-} from "@/features/services/data/content/dataServicesLayout";
-
-const DATA_SERVICES_INTEGRATIONS_CARD_CLASS = [
-  DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_PADDING_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
-  "flex flex-col justify-start border border-foreground/10 bg-white shadow-[var(--client-voices-card-shadow)]",
-].join(" ");
-
-const DATA_SERVICES_INTEGRATIONS_TITLE_CLASS =
-  "text-xl font-bold text-property-intelligence-navy";
-
-const DATA_SERVICES_INTEGRATIONS_LIST_CLASS =
-  "mt-4 grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2";
-
-const DATA_SERVICES_INTEGRATIONS_ITEM_CLASS =
-  "flex items-center gap-2.5 text-base text-property-intelligence-navy";
 
 function IntegrationCheckIcon() {
   return (
     <svg
       viewBox="0 0 16 16"
       fill="none"
-      className="size-4 shrink-0 text-client-voices-accent"
+      className="size-4 shrink-0 text-[#8B5CF6]"
       aria-hidden
     >
       <path
@@ -42,20 +22,43 @@ function IntegrationCheckIcon() {
 
 export function DataServicesIntegrationsCard() {
   const { title, items } = DATA_SERVICES_INTEGRATIONS_COPY;
+  const leftColumn = items.filter((_, index) => index % 2 === 0);
+  const rightColumn = items.filter((_, index) => index % 2 !== 0);
 
   return (
-    <section className={DATA_SERVICES_INTEGRATIONS_CARD_CLASS} aria-labelledby="data-integrations-heading">
-      <h2 id="data-integrations-heading" className={DATA_SERVICES_INTEGRATIONS_TITLE_CLASS}>
-        {title}
-      </h2>
-      <ul className={DATA_SERVICES_INTEGRATIONS_LIST_CLASS}>
-        {items.map((item) => (
-          <li key={item} className={DATA_SERVICES_INTEGRATIONS_ITEM_CLASS}>
-            <IntegrationCheckIcon />
-            {item}
-          </li>
-        ))}
-      </ul>
+    <section className="data-bim-integrations-card" aria-labelledby="data-integrations-heading">
+      <div className="data-bim-integrations-card__icon-wrap" aria-hidden>
+        <Image
+          src="/images/data-bim-services/icons/integrations-puzzle.png"
+          alt=""
+          width={148}
+          height={148}
+          className="size-[5.5rem] object-contain sm:size-[6.5rem]"
+        />
+      </div>
+      <div className="data-bim-integrations-card__content">
+        <h2 id="data-integrations-heading" className="data-bim-integrations-card__title">
+          {title}
+        </h2>
+        <div className="data-bim-integrations-card__columns">
+          <ul className="data-bim-integrations-card__list">
+            {leftColumn.map((item) => (
+              <li key={item} className="data-bim-integrations-card__item">
+                <IntegrationCheckIcon />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <ul className="data-bim-integrations-card__list">
+            {rightColumn.map((item) => (
+              <li key={item} className="data-bim-integrations-card__item">
+                <IntegrationCheckIcon />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   );
 }

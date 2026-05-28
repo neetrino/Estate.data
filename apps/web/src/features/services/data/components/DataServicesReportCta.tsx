@@ -1,44 +1,42 @@
+import Image from "next/image";
+import Link from "next/link";
 import { DATA_SERVICES_REPORT_CTA_COPY } from "@/features/services/data/content/dataServicesCopy";
-import {
-  DATA_SERVICES_BOTTOM_CARD_PADDING_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
-} from "@/features/services/data/content/dataServicesLayout";
-import { PROPERTY_INTELLIGENCE_CTA_CLASS } from "@/shared/lib/constants";
-import { EstatePillButtonLink } from "@/shared/ui/button";
-
-const DATA_SERVICES_REPORT_CTA_SHELL_CLASS = [
-  "data-services-report-cta-panel",
-  DATA_SERVICES_BOTTOM_CARD_SHELL_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_PADDING_CLASS,
-  DATA_SERVICES_BOTTOM_CARD_RADIUS_CLASS,
-  "flex flex-col justify-start shadow-[var(--client-voices-card-shadow)]",
-].join(" ");
-
-const DATA_SERVICES_REPORT_CTA_TITLE_CLASS =
-  "text-2xl font-bold tracking-tight text-property-intelligence-navy sm:text-3xl";
-
-const DATA_SERVICES_REPORT_CTA_DESCRIPTION_CLASS =
-  "mt-3 max-w-md text-base leading-relaxed text-property-intelligence-navy";
-
-const DATA_SERVICES_REPORT_CTA_BUTTON_CLASS = `max-w-full ${PROPERTY_INTELLIGENCE_CTA_CLASS}`;
 
 export function DataServicesReportCta() {
   const { title, description, buttonLabel, buttonHref } = DATA_SERVICES_REPORT_CTA_COPY;
 
   return (
-    <section
-      className={DATA_SERVICES_REPORT_CTA_SHELL_CLASS}
-      aria-labelledby="data-report-cta-heading"
-    >
-      <h2 id="data-report-cta-heading" className={DATA_SERVICES_REPORT_CTA_TITLE_CLASS}>
-        {title}
-      </h2>
-      <p className={DATA_SERVICES_REPORT_CTA_DESCRIPTION_CLASS}>{description}</p>
-      <div className="mt-4 flex justify-start">
-        <EstatePillButtonLink href={buttonHref} className={DATA_SERVICES_REPORT_CTA_BUTTON_CLASS}>
-          {buttonLabel}
-        </EstatePillButtonLink>
+    <section className="data-bim-report-card" aria-labelledby="data-report-cta-heading">
+      <div className="data-bim-report-card__icon-wrap" aria-hidden>
+        <Image
+          src="/images/data-bim-services/icons/market-report.png"
+          alt=""
+          width={124}
+          height={124}
+          className="size-20 object-contain sm:size-24"
+        />
+      </div>
+      <div className="data-bim-report-card__content">
+        <h2 id="data-report-cta-heading" className="data-bim-report-card__title">
+          {title}
+        </h2>
+        <p className="data-bim-report-card__description">{description}</p>
+        <div className="mt-5 flex justify-start">
+          <Link href={buttonHref} className="data-bim-report-card__button">
+            <span>{buttonLabel}</span>
+            <span className="data-bim-report-card__button-arrow" aria-hidden>
+              <svg viewBox="0 0 16 16" fill="none" className="size-4">
+                <path
+                  d="M3.5 8h8.2M8.5 4.8l3.2 3.2-3.2 3.2"
+                  stroke="currentColor"
+                  strokeWidth="1.65"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );
