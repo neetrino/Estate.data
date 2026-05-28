@@ -34,12 +34,12 @@ export function ResourcesArticleCard({ article }: ResourcesArticleCardProps) {
         href={article.href}
         className={`resources-surface-card ${SOLUTIONS_ROLE_CARD_SHELL_CLASS} ${RESOURCES_ARTICLE_CARD_CLASS}`}
       >
-        <span className="flex size-[4.25rem] shrink-0 items-center justify-center sm:size-[4.75rem]">
+        <span className="flex size-[7rem] shrink-0 items-center justify-center">
           <Image
             src={iconPath}
             alt=""
-            width={76}
-            height={76}
+            width={80}
+            height={80}
             className="size-full object-contain"
             aria-hidden
           />
