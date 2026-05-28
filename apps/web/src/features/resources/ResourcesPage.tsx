@@ -2,6 +2,8 @@ import { ResourcesBodySection } from "@/features/resources/components/ResourcesB
 import { RESOURCES_PAGE_COPY } from "@/features/resources/content/resourcesPageCopy";
 import { fetchResourcesArticles } from "@/features/resources/services/fetchResourcesArticles";
 import { fetchResourcesFaqItems } from "@/features/resources/services/fetchResourcesFaqItems";
+import "@/features/resources/styles/resources-page.css";
+import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   ABOUT_PAGE_EYEBROW_CLASS,
   ABOUT_PAGE_MAIN_CLASS,
@@ -18,15 +20,16 @@ export async function ResourcesPage() {
   ]);
 
   return (
-    <main className={ABOUT_PAGE_MAIN_CLASS}>
-        <div className={SITE_PAGE_SHELL_CLASS}>
-          <header>
-            <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
-            <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>
-            <p className={ABOUT_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
-          </header>
-          <ResourcesBodySection articles={articles} faqItems={faqItems} />
-        </div>
+    <main className={`${ABOUT_PAGE_MAIN_CLASS} resources-page-background`}>
+      <div className={SITE_PAGE_SHELL_CLASS}>
+        <header>
+          <p className={ABOUT_PAGE_EYEBROW_CLASS}>{eyebrow}</p>
+          <h1 className={ABOUT_PAGE_TITLE_CLASS}>{title}</h1>
+          <p className={ABOUT_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
+        </header>
+        <ResourcesBodySection articles={articles} faqItems={faqItems} />
+      </div>
+      <FooterPageBridge from="surface" />
     </main>
   );
 }
