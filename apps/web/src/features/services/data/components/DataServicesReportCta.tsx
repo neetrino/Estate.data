@@ -11,9 +11,9 @@ export function DataServicesReportCta() {
         <Image
           src="/images/data-bim-services/icons/market-report.png"
           alt=""
-          width={124}
-          height={124}
-          className="size-20 object-contain sm:size-24"
+          width={220}
+          height={220}
+          className="data-bim-report-card__icon"
         />
       </div>
       <div className="data-bim-report-card__content">
