@@ -22,7 +22,7 @@ const RECENT_WORK_TITLE_CLASS =
   "hero-headline-gradient mt-3 text-3xl font-bold tracking-tight sm:text-4xl md:text-[2.5rem] md:leading-tight";
 
 const RECENT_WORK_GRID_CLASS = [
-  "mt-10 grid grid-cols-1",
+  "home-recent-work-grid--ipad-two mt-10 grid grid-cols-1",
   HOME_STATS_GRID_GAP_CLASS,
   "sm:grid-cols-2 lg:grid-cols-3",
 ].join(" ");

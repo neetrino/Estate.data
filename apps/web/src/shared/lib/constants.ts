@@ -5,7 +5,7 @@ import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
 export const SITE_FONT_SANS_CLASS = "font-sans";
 
 /** Navbar links + CTA typography (excludes Estate Data wordmark). */
-export const NAV_ITEM_TEXT_CLASS = "text-base font-semibold leading-snug sm:text-lg";
+export const NAV_ITEM_TEXT_CLASS = "text-sm font-semibold leading-snug sm:text-base";
 
 /** Trusted partners strip — same sans stack as navbar/hero. */
 export const TRUSTED_STRIP_TEXT_CLASS = `${SITE_FONT_SANS_CLASS} text-sm font-semibold uppercase tracking-widest text-what-we-do-subtitle`;
@@ -62,23 +62,23 @@ export const NAVBAR_DESKTOP_ONLY_CLASS = "hidden min-[1400px]:flex";
  * Mobile menu panel — nudge up under navbar (px).
  * Keep in sync with {@link NAVBAR_MOBILE_PANEL_TOP_CLASS}.
  */
-export const NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX = 12;
+export const NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX = 32;
 
 /**
  * Mobile menu panel top — navbar row + safe area, minus {@link NAVBAR_MOBILE_PANEL_TOP_OFFSET_PX}.
  * Keep in sync with NAVBAR_TOP_PADDING + NAVBAR_HEIGHT + safe-area.
  */
 export const NAVBAR_MOBILE_PANEL_TOP_CLASS =
-  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-12px)]";
+  "top-[calc(4.5rem+1px+env(safe-area-inset-top,0px)-32px)]";
 
 /**
  * Mobile menu panel top — landing pill navbar (safe area + pill + vertical padding).
  * Keep in sync with {@link NAVBAR_LANDING_PILL_MAIN_OFFSET_CLASS}.
  */
 export const NAVBAR_MOBILE_PANEL_TOP_LANDING_PILL_CLASS = [
-  "top-[calc(7.75rem-7px+env(safe-area-inset-top,0px)-12px)]",
-  "sm:top-[calc(8rem-7px+env(safe-area-inset-top,0px)-12px)]",
-  "lg:top-[calc(8.25rem-7px+env(safe-area-inset-top,0px)-12px)]",
+  "top-[calc(7.75rem-7px+env(safe-area-inset-top,0px)-32px)]",
+  "sm:top-[calc(8rem-7px+env(safe-area-inset-top,0px)-32px)]",
+  "lg:top-[calc(8.25rem-7px+env(safe-area-inset-top,0px)-32px)]",
 ].join(" ");
 
 /** Main content offset below fixed landing pill navbar (sync with home hero). */
@@ -212,8 +212,8 @@ export const PRICING_ANALYTICS_CTA_MARGIN_TOP_PX = 16;
 /** Pricing section — below page header (Media packages). */
 export const PRICING_SECTION_AFTER_HEADER_CLASS = "mt-8 sm:mt-10 lg:mt-12";
 
-/** Pricing section — below another pricing section (Analytics). */
-export const PRICING_SECTION_MARGIN_TOP_CLASS = "mt-14 sm:mt-16 lg:mt-20";
+/** Pricing section — below another pricing section (Analytics), tightened to ~30px. */
+export const PRICING_SECTION_MARGIN_TOP_CLASS = "mt-[30px]";
 
 /** Pricing — phone + tablet/iPad (≤1399px). Tune mobile here; leave desktop block below. */
 export const PRICING_GRID_MOBILE_TABLET_CLASS =
@@ -339,12 +339,12 @@ export const HOME_PROPERTY_INTELLIGENCE_EXPLORE_CTA_CLASS =
 
 /** Portfolio / Solutions page header — eyebrow + subtitle (#C364BE), title (#2E4873). */
 export const WHAT_WE_DO_PAGE_EYEBROW_CLASS =
-  "text-sm font-semibold uppercase tracking-[0.2em] text-what-we-do-subtitle sm:text-base";
+  "text-sm font-bold tracking-[0.24em] uppercase text-[#A855F7] sm:text-base";
 
 export const WHAT_WE_DO_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
 
 export const WHAT_WE_DO_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
+  "mt-5 max-w-3xl text-lg leading-relaxed text-[#5D5A7C] sm:text-xl";
 
 /** Solutions page — same purple typography as Portfolio. */
 export const SOLUTIONS_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
@@ -433,10 +433,14 @@ export const CONTACT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 export const CONTACT_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 export const CONTACT_FORM_SUBMIT_BUTTON_CLASS = [
-  "inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap",
-  "rounded-button px-8 text-base font-semibold leading-snug shadow sm:w-auto",
-  WHAT_WE_DO_SUBTITLE_BUTTON_SURFACE_CLASS,
-  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+  "inline-flex h-[52px] w-full cursor-pointer items-center justify-center whitespace-nowrap",
+  "rounded-full px-5 text-sm font-bold leading-none text-white sm:w-[190px]",
+  "bg-[linear-gradient(135deg,#8B5CF6_0%,#A855F7_45%,#D946EF_100%)]",
+  "shadow-[0_16px_36px_rgba(124,58,237,0.28),0_0_24px_rgba(217,70,239,0.18)]",
+  "transition-all duration-[250ms] ease-[ease]",
+  "hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_22px_48px_rgba(168,85,247,0.38)]",
+  "active:translate-y-0",
+  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[rgba(168,85,247,0.22)]",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
 
@@ -445,13 +449,13 @@ export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-what-we-do-s
 export const CONTACT_STUDIO_LINK_CLASS =
   "text-base leading-relaxed text-black transition-colors hover:text-what-we-do-title sm:text-lg";
 
-/** About page — eyebrow matches Portfolio / Pricing; title uses brand navy (#2E4873). */
+/** About page — same heading treatment as Portfolio / Solutions. */
 export const ABOUT_PAGE_EYEBROW_CLASS = WHAT_WE_DO_PAGE_EYEBROW_CLASS;
 
-export const ABOUT_PAGE_TITLE_CLASS = INNER_PAGE_TITLE_CLASS;
+export const ABOUT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 
 export const ABOUT_PAGE_SUBTITLE_CLASS =
-  "mt-5 max-w-3xl text-lg leading-relaxed text-what-we-do-subtitle sm:text-xl";
+  WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 /** About story — accent spans in body copy (#C364BE). */
 export const ABOUT_STORY_BRAND_ACCENT_CLASS = "font-semibold text-what-we-do-subtitle";
@@ -472,27 +476,36 @@ export const INNER_PAGE_MAIN_SPACING_CLASS = [
   "pb-12 sm:pb-14 md:pb-16 lg:pb-20",
 ].join(" ");
 
+/** Shared mobile background image for non-home pages. */
+export const MOBILE_INNER_PAGES_BACKGROUND_CLASS = [
+  "mobile-inner-pages-background",
+].join(" ");
+
 /** Inner pages (not home) — default hero gradient (magenta left, cyan right). */
 export const INNER_PAGE_MAIN_CLASS = [
   "page-hero-background overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** Media / Data & BIM — reversed gradient (cyan left, magenta right). */
 export const PROPERTY_INTELLIGENCE_PAGE_MAIN_CLASS = [
   "page-hero-background page-hero-background--cyan-left overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** /media — photo background (see MediaPageBackground). */
 export const MEDIA_PAGE_MAIN_CLASS = [
   "media-page relative isolate overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 
 /** /data-bim — photo background (see DataBimPageBackground). */
 export const DATA_BIM_PAGE_MAIN_CLASS = [
   "data-bim-page relative isolate overflow-x-hidden",
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
 ].join(" ");
 

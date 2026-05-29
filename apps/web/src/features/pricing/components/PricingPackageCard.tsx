@@ -1,18 +1,18 @@
+import { WhatWeDoNeonCardDecor } from "@/features/home/components/WhatWeDoNeonCardDecor";
 import type { PricingPackage } from "@/features/pricing/content/pricingPackageTypes";
 import {
   PRICING_ANALYTICS_CTA_WRAP_CLASS,
   PRICING_CARD_PADDING_CLASS,
-  PRICING_MEDIA_CARD_SURFACE_BY_ACCENT,
   PRICING_MEDIA_CTA_BUTTON_CLASS,
   PRICING_MEDIA_CTA_WRAP_CLASS,
   PRICING_PACKAGE_CARD_MIN_HEIGHT_PX,
   PRICING_ANALYTICS_CTA_BUTTON_CLASS,
   type PricingMediaCardAccent,
-  WHAT_WE_DO_CARD_SURFACE_STYLE,
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
+import "@/features/home/styles/what-we-do-neon-card.css";
 
-const PRICING_PACKAGE_CARD_BASE_CLASS = `relative flex w-full flex-col overflow-hidden text-left ${PRICING_CARD_PADDING_CLASS}`;
+const PRICING_PACKAGE_CARD_BASE_CLASS = "relative flex w-full overflow-hidden text-left";
 
 const PRICING_PACKAGE_FEATURES_GROW_CLASS = "mt-5 flex flex-1 flex-col gap-2";
 
@@ -37,6 +37,12 @@ const PRICING_PACKAGE_CHECK_ICON_BY_ACCENT: Record<PricingMediaCardAccent, strin
   blue: "text-property-intelligence-accent",
   purple: "text-what-we-do-subtitle",
   orange: "text-brand-orange",
+};
+
+const PRICING_PACKAGE_NEON_CARD_CLASS_BY_ACCENT: Record<PricingMediaCardAccent, string> = {
+  blue: "what-we-do-neon-card what-we-do-neon-card--cyan",
+  purple: "what-we-do-neon-card what-we-do-neon-card--purple",
+  orange: "what-we-do-neon-card what-we-do-neon-card--sunset",
 };
 
 type PricingPackageCardProps = {
@@ -70,46 +76,49 @@ export function PricingPackageCard({
   const resolvedCtaClassName = [ctaButtonClassName ?? defaultCtaClassName, pkg.bookCtaExtraClassName]
     .filter(Boolean)
     .join(" ");
-  const cardSurfaceStyle = pkg.cardAccent
-    ? PRICING_MEDIA_CARD_SURFACE_BY_ACCENT[pkg.cardAccent]
-    : WHAT_WE_DO_CARD_SURFACE_STYLE;
+  const cardAccent = pkg.cardAccent ?? "purple";
+  const neonCardClassName = PRICING_PACKAGE_NEON_CARD_CLASS_BY_ACCENT[cardAccent];
   const checkIconClassName = pkg.cardAccent
     ? PRICING_PACKAGE_CHECK_ICON_BY_ACCENT[pkg.cardAccent]
     : PRICING_PACKAGE_CHECK_ICON_BY_ACCENT.purple;
 
   return (
     <article
-      className={`${cardClassName}${highlighted ? ` ${PRICING_PACKAGE_HIGHLIGHTED_CLASS}` : ""}`}
+      className={`${neonCardClassName} ${cardClassName}${highlighted ? ` ${PRICING_PACKAGE_HIGHLIGHTED_CLASS}` : ""}`}
       style={{
         ...(pinCtaToBottom ? { minHeight: PRICING_PACKAGE_CARD_MIN_HEIGHT_PX } : {}),
-        ...cardSurfaceStyle,
       }}
     >
-      {pkg.badgeLabel ? <span className={PRICING_PACKAGE_BADGE_CLASS}>{pkg.badgeLabel}</span> : null}
-      <h3 className={PRICING_PACKAGE_NAME_CLASS}>{pkg.name}</h3>
-      <p className="mt-4">
-        <span className={PRICING_PACKAGE_PRICE_CLASS}>{pkg.price}</span>
-        {resolvedPriceSuffix ? (
-          <span className={PRICING_PACKAGE_PRICE_SUFFIX_CLASS}> {resolvedPriceSuffix}</span>
-        ) : null}
-      </p>
-      <ul className={featuresClassName}>
-        {pkg.features.map((feature) => (
-          <li key={feature} className={PRICING_PACKAGE_FEATURE_CLASS}>
-            <PricingFeatureCheckIcon className={checkIconClassName} />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
-      <div className={ctaWrapClassName}>
-        <EstatePillButtonLink
-          href={pkg.bookHref}
-          fullWidth
-          className={resolvedCtaClassName}
-          accent={pkg.cardAccent ?? "purple"}
-        >
-          {pkg.bookLabel}
-        </EstatePillButtonLink>
+      <div className="what-we-do-neon-card__surface flex flex-1">
+        <WhatWeDoNeonCardDecor showPlanet={false} />
+        <div className={`relative z-[1] flex min-h-full flex-1 flex-col ${PRICING_CARD_PADDING_CLASS}`}>
+          {pkg.badgeLabel ? <span className={PRICING_PACKAGE_BADGE_CLASS}>{pkg.badgeLabel}</span> : null}
+          <h3 className={PRICING_PACKAGE_NAME_CLASS}>{pkg.name}</h3>
+          <p className="mt-4">
+            <span className={PRICING_PACKAGE_PRICE_CLASS}>{pkg.price}</span>
+            {resolvedPriceSuffix ? (
+              <span className={PRICING_PACKAGE_PRICE_SUFFIX_CLASS}> {resolvedPriceSuffix}</span>
+            ) : null}
+          </p>
+          <ul className={featuresClassName}>
+            {pkg.features.map((feature) => (
+              <li key={feature} className={PRICING_PACKAGE_FEATURE_CLASS}>
+                <PricingFeatureCheckIcon className={checkIconClassName} />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <div className={ctaWrapClassName}>
+            <EstatePillButtonLink
+              href={pkg.bookHref}
+              fullWidth
+              className={resolvedCtaClassName}
+              accent={pkg.cardAccent ?? "purple"}
+            >
+              {pkg.bookLabel}
+            </EstatePillButtonLink>
+          </div>
+        </div>
       </div>
     </article>
   );

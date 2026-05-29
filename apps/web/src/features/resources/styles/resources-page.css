@@ -1,0 +1,136 @@
+.resources-page-background {
+  position: relative;
+  isolation: isolate;
+}
+
+.resources-page-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/images/resources/resources-bg.png");
+  background-color: rgb(248 245 255 / 45%);
+  background-blend-mode: soft-light;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  opacity: 0.9;
+}
+
+.resources-page-background > :not(.page-footer-bridge) {
+  position: relative;
+  z-index: 20;
+}
+
+.resources-page-background .resources-surface-card {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+}
+
+.resources-page-background .resources-article-card {
+  border: 1px solid rgb(168 85 247 / 10%);
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 18px 55px rgb(31 41 55 / 8%);
+}
+
+.resources-page-background .resources-article-card:hover {
+  border-color: rgb(168 85 247 / 22%);
+  box-shadow: 0 24px 65px rgb(168 85 247 / 12%);
+}
+
+.resources-page-background .resources-article-arrow {
+  background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
+  box-shadow: 0 12px 28px rgb(168 85 247 / 24%);
+}
+
+.resources-page-background .resources-article-card:hover .resources-article-arrow {
+  background: linear-gradient(135deg, #b96bfb 0%, #e35cf6 100%);
+}
+
+.resources-page-background .resources-faq-card {
+  border: 1px solid rgb(168 85 247 / 10%);
+  background: rgb(255 255 255 / 82%);
+  box-shadow: 0 22px 65px rgb(31 41 55 / 8%);
+}
+
+.resources-page-background .resources-faq-question {
+  position: relative;
+}
+
+.resources-page-background .resources-faq-question::before {
+  content: "?";
+  display: inline-flex;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-right: 0.55rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgb(168 85 247 / 10%);
+  color: #8b5cf6;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: text-top;
+}
+
+.resources-page-background .resources-ask-question-button {
+  color: #fff;
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 45%, #d946ef 100%);
+  box-shadow: 0 18px 42px rgb(168 85 247 / 30%);
+  transition: transform 200ms ease, box-shadow 220ms ease;
+}
+
+.resources-page-background .resources-ask-question-button > span:last-child {
+  background: #050816;
+  color: #fff;
+  transition: transform 200ms ease;
+}
+
+.resources-page-background .resources-ask-question-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 52px rgb(168 85 247 / 38%);
+}
+
+.resources-page-background .resources-ask-question-button:hover > span:last-child {
+  transform: translateX(2px);
+}
+
+@media (max-width: 767px) {
+  .resources-page-background::after {
+    background-image: url("/images/mobile-inner-pages-bg-20260528.png");
+    background-color: rgb(248 245 255 / 22%);
+    background-position: center top;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    inset-inline: 0;
+    top: 0;
+    bottom: auto;
+    height: min(185vw, 1180px);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 100%) 50%,
+      rgb(0 0 0 / 88%) 68%,
+      rgb(0 0 0 / 60%) 82%,
+      rgb(0 0 0 / 24%) 92%,
+      rgb(0 0 0 / 0%) 100%
+    );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    opacity: 0.9;
+  }
+}

@@ -26,7 +26,7 @@ export const HOME_FEATURE_HIGHLIGHTS_COPY = {
     },
     {
       id: "faster-decisions",
-      title: "Faster Decisions.",
+      title: "Faster Decisions",
       subtitle: "Stronger Results",
       icon: "rocket",
       accent: "pink",

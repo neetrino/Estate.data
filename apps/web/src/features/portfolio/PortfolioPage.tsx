@@ -8,6 +8,7 @@ import {
   WHAT_WE_DO_PAGE_SUBTITLE_CLASS,
   WHAT_WE_DO_PAGE_TITLE_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
+  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
 } from "@/shared/lib/constants";
 
 export async function PortfolioPage() {
@@ -18,6 +19,7 @@ export async function PortfolioPage() {
     <main
       className={[
         INNER_PAGE_MAIN_SPACING_CLASS,
+        MOBILE_INNER_PAGES_BACKGROUND_CLASS,
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
         "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}

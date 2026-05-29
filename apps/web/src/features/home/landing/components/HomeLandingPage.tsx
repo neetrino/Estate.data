@@ -20,7 +20,7 @@ type HomeLandingPageProps = {
 export function HomeLandingPage({ projects }: HomeLandingPageProps) {
   return (
     <div className={LANDING_PAGE_CLASS}>
-      <main className="relative isolate">
+      <main className="relative isolate overflow-x-clip">
         <HeroSection />
         <LazyHomeWhatWeDo />
         <LazyHomeHowItWorks />

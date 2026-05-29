@@ -231,13 +231,23 @@
 
 /** Mobile — stacked layout, illustration above copy. */
 @media (max-width: 767px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 0px;
+    --home-listing-cta-copy-offset-x: 0px;
+  }
+
   .home-listing-cta-panel__content {
     grid-template-columns: minmax(0, 1fr);
     justify-items: center;
     text-align: center;
   }
 
+  .home-listing-cta-panel__illustration {
+    justify-self: center;
+  }
+
   .home-listing-cta-panel__copy {
+    width: 100%;
     text-align: center;
   }
 
@@ -253,6 +263,13 @@
 
 /** Tablet — illustration + copy row, buttons below. */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 60px;
+    --home-listing-cta-copy-offset-x: 150px;
+    --home-listing-cta-illustration-size: clamp(7.75rem, 15vw, 10.75rem);
+    --home-listing-cta-illustration-scale: 1.82;
+  }
+
   .home-listing-cta-panel__content {
     grid-template-columns: var(--home-listing-cta-illustration-size) minmax(0, 1fr);
     grid-template-rows: auto auto;
@@ -269,6 +286,39 @@
 
   .home-listing-cta-panel__actions {
     grid-column: 2;
+  }
+}
+
+/** iPad landscape widths can still hit right overflow with large X offsets. */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 16px;
+    --home-listing-cta-copy-offset-x: 34px;
+    --home-listing-cta-illustration-size: clamp(7.75rem, 13.5vw, 10.5rem);
+    --home-listing-cta-illustration-scale: 1.8;
+  }
+}
+
+/** iPad Air: shift banner buttons to the left. */
+@media (min-width: 820px) and (max-width: 1180px) {
+  .home-listing-cta-panel__actions {
+    justify-content: flex-start;
+    transform: translateX(140px);
+  }
+}
+
+/** iPad Pro: stack banner buttons one under another. */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 44px;
+    --home-listing-cta-copy-offset-x: 94px;
+  }
+
+  .home-listing-cta-panel__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transform: none;
   }
 }
 

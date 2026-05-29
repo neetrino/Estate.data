@@ -10,25 +10,16 @@ import {
   CONTACT_PAGE_EYEBROW_CLASS,
   CONTACT_PAGE_SUBTITLE_CLASS,
   CONTACT_PAGE_TITLE_CLASS,
+  ABOUT_PAGE_MAIN_CLASS,
   SITE_PAGE_SHELL_CLASS,
-  INNER_PAGE_MAIN_SPACING_CLASS,
 } from "@/shared/lib/constants";
+import "@/features/resources/styles/resources-page.css";
 
 export function ContactPage() {
   const { eyebrow, title, subtitle } = CONTACT_PAGE_COPY;
 
   return (
-    <main
-      className={[
-        INNER_PAGE_MAIN_SPACING_CLASS,
-        "relative isolate overflow-x-hidden bg-[#f8f7ff]",
-        "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
-      ].join(" ")}
-    >
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-28 bg-gradient-to-b from-transparent via-[#f4f1fb]/65 to-[#f4f1fb]"
-          aria-hidden
-        />
+    <main className={`${ABOUT_PAGE_MAIN_CLASS} relative isolate resources-page-background`}>
         <div className={`${SITE_PAGE_SHELL_CLASS} relative z-20`}>
           <div className="flex flex-col gap-10 lg:gap-12">
             <header>

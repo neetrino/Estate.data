@@ -1,5 +1,5 @@
 export const HERO_LANDING_BG_SOURCES = {
-  mobile: "/images/hero-landing-bg-1024.webp",
+  mobile: "/images/hero-landing-bg-mobile-20260528-v2.png",
   tablet: "/images/hero-landing-bg-1920.webp",
   desktop: "/images/hero-landing-bg-2560.webp",
 } as const;

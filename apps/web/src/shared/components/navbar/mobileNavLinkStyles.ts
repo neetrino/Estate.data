@@ -18,7 +18,7 @@ const MOBILE_NAV_LINK_AFTER_BASE_CLASS = [
 ].join(" ");
 
 const MOBILE_NAV_LINK_BASE_CLASS =
-  "relative block py-3.5 text-xl font-semibold transition-opacity";
+  "relative block py-3.5 text-lg font-semibold transition-opacity";
 
 const MOBILE_NAV_LINK_IDLE_TEXT_CLASS =
   "text-foreground hover:opacity-70 active:opacity-50";
@@ -43,7 +43,7 @@ export function mobileNavLinkClassName(active: boolean): string {
 }
 
 const MOBILE_NAV_MORE_TOGGLE_BASE_CLASS =
-  "flex w-full items-center justify-between gap-2 py-3.5 text-left text-xl font-semibold transition-opacity hover:opacity-80";
+  "flex w-full items-center justify-between gap-2 py-3.5 text-left text-lg font-semibold transition-opacity hover:opacity-80";
 
 /** Mobile drawer “More” toggle — accent when a nested route is active. */
 export function mobileNavMoreToggleClassName(sectionActive: boolean): string {

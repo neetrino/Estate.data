@@ -9,7 +9,7 @@ export const NOT_FOUND_PAGE_COPY = {
   secondaryCta: { label: "Contact us", href: CONTACT_PATH },
   quickLinksHeading: "Popular destinations",
   quickLinks: [
-    { label: "Media", href: "/media" },
+    { label: "Services", href: "/services" },
     { label: "Data & BIM", href: DATA_BIM_PATH },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Pricing", href: PRICING_PATH },

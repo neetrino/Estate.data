@@ -11,8 +11,8 @@ export const FOOTER_BRAND_TAGLINE =
   "High-impact visual marketing and actionable property intelligence — built for Los Angeles.";
 
 export const FOOTER_SERVICES_LINKS = [
-  { id: "photography-video", label: "Photography & Video", href: "/media" },
-  { id: "drone-tours", label: "Drone & 3D Tours", href: "/media" },
+  { id: "photography-video", label: "Photography & Video", href: "/services" },
+  { id: "drone-tours", label: "Drone & 3D Tours", href: "/services" },
   { id: "scan-to-bim", label: "Scan to BIM", href: DATA_BIM_PATH },
   { id: "market-reports", label: "Market Reports", href: "/solutions" },
 ] as const satisfies readonly FooterNavLink[];
