@@ -16,6 +16,7 @@ export function AboutPage() {
   return (
     <main
       className={[
+        "flex-1",
         INNER_PAGE_MAIN_SPACING_CLASS,
         MOBILE_INNER_PAGES_BACKGROUND_CLASS,
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
