@@ -264,8 +264,10 @@
 /** Tablet — illustration + copy row, buttons below. */
 @media (min-width: 768px) and (max-width: 1023px) {
   .home-listing-cta-section {
-    --home-listing-cta-offset-x: 0px;
-    --home-listing-cta-copy-offset-x: 0px;
+    --home-listing-cta-offset-x: 60px;
+    --home-listing-cta-copy-offset-x: 150px;
+    --home-listing-cta-illustration-size: clamp(7.75rem, 15vw, 10.75rem);
+    --home-listing-cta-illustration-scale: 1.82;
   }
 
   .home-listing-cta-panel__content {
@@ -290,8 +292,18 @@
 /** iPad landscape widths can still hit right overflow with large X offsets. */
 @media (min-width: 1024px) and (max-width: 1180px) {
   .home-listing-cta-section {
-    --home-listing-cta-offset-x: 8px;
-    --home-listing-cta-copy-offset-x: 18px;
+    --home-listing-cta-offset-x: 16px;
+    --home-listing-cta-copy-offset-x: 34px;
+    --home-listing-cta-illustration-size: clamp(7.75rem, 13.5vw, 10.5rem);
+    --home-listing-cta-illustration-scale: 1.8;
+  }
+}
+
+/** iPad Air: shift banner buttons to the left. */
+@media (min-width: 820px) and (max-width: 1180px) {
+  .home-listing-cta-panel__actions {
+    justify-content: flex-start;
+    transform: translateX(140px);
   }
 }
 

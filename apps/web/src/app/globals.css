@@ -416,6 +416,17 @@ button:disabled {
   }
 }
 
+/** Home recent work: iPad mini/air keep a 2x1 card layout. */
+@media (min-width: 768px) and (max-width: 1180px) {
+  .home-recent-work-grid--ipad-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-recent-work-grid--ipad-two > li:nth-child(n + 3) {
+    display: none;
+  }
+}
+
 .navbar-landing-pill {
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 9999px;

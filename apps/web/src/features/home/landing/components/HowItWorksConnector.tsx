@@ -3,7 +3,13 @@ export function HowItWorksConnector() {
   return (
     <div className="how-it-works-connector" aria-hidden>
       <div className="how-it-works-connector-grid">
-        <div className="how-it-works-connector-svg-wrap">
+        <div className="how-it-works-connector-svg-wrap how-it-works-connector-svg-wrap--desktop">
+          <ConnectorSvg />
+        </div>
+        <div className="how-it-works-connector-svg-wrap how-it-works-connector-svg-wrap--ipad-top">
+          <ConnectorSvg />
+        </div>
+        <div className="how-it-works-connector-svg-wrap how-it-works-connector-svg-wrap--ipad-bottom">
           <ConnectorSvg />
         </div>
       </div>
