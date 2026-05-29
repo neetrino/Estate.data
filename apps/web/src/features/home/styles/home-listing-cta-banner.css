@@ -263,6 +263,11 @@
 
 /** Tablet — illustration + copy row, buttons below. */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 0px;
+    --home-listing-cta-copy-offset-x: 0px;
+  }
+
   .home-listing-cta-panel__content {
     grid-template-columns: var(--home-listing-cta-illustration-size) minmax(0, 1fr);
     grid-template-rows: auto auto;
@@ -279,6 +284,14 @@
 
   .home-listing-cta-panel__actions {
     grid-column: 2;
+  }
+}
+
+/** iPad landscape widths can still hit right overflow with large X offsets. */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 8px;
+    --home-listing-cta-copy-offset-x: 18px;
   }
 }
 

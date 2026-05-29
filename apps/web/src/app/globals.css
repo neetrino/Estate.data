@@ -363,6 +363,16 @@ button:disabled {
   color: transparent;
 }
 
+/** iPad mini/air: center feature chips row inside hero copy area. */
+@media (min-width: 768px) and (max-width: 1180px) {
+  .home-hero-features--ipad-center {
+    grid-template-columns: repeat(3, minmax(0, auto));
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+
 /** Filled marketing-gradient CTA — white label; hover brightens slightly. */
 .landing-brand-gradient-outline-button {
   display: inline-flex;
