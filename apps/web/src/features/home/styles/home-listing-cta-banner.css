@@ -307,6 +307,21 @@
   }
 }
 
+/** iPad Pro: stack banner buttons one under another. */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .home-listing-cta-section {
+    --home-listing-cta-offset-x: 44px;
+    --home-listing-cta-copy-offset-x: 94px;
+  }
+
+  .home-listing-cta-panel__actions {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transform: none;
+  }
+}
+
 /** Desktop — illustration, copy, and buttons in one row. */
 @media (min-width: 1024px) {
   .home-listing-cta-panel__content {

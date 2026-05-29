@@ -342,6 +342,39 @@ button:disabled {
   linear-gradient(180deg, transparent 0%, transparent 70%, rgba(247, 248, 253, 0.45) 100%);
 }
 
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .home-what-we-do-bg-layer .home-landing-section-blend--top {
+    display: block;
+    height: clamp(7.5rem, 16vw, 12rem);
+    opacity: 1;
+  }
+
+  .home-what-we-do-bg-layer .home-landing-section-blend--top.home-landing-section-blend--tone-soft {
+    background: linear-gradient(
+      180deg,
+      rgb(247 248 253 / 58%) 0%,
+      rgb(247 248 253 / 30%) 38%,
+      rgb(247 248 253 / 10%) 68%,
+      rgb(247 248 253 / 0%) 100%
+    );
+  }
+
+  .home-what-we-do-photo-scrim {
+    background: linear-gradient(
+      180deg,
+      rgb(247 248 253 / 22%) 0%,
+      rgb(247 248 253 / 10%) 24%,
+      rgb(247 248 253 / 0%) 58%
+    ),
+    linear-gradient(
+      105deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.018) 46%,
+      rgba(255, 255, 255, 0) 78%
+    );
+  }
+}
+
 /** How it works — fallback while the background photo loads. */
 .home-how-it-works-bg-layer {
   background: linear-gradient(180deg, #fff 0%, #f8f9fc 55%, #f3f0fa 100%);
@@ -519,5 +552,18 @@ button:disabled {
 @media (min-width: 768px) {
   .mobile-inner-pages-background::after {
     content: none;
+  }
+}
+
+/** iPad Pro home: align hero top offset with iPad Air. */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .home-landing-hero-shell {
+    padding-top: calc(8rem - 7px + env(safe-area-inset-top, 0px) + 15px) !important;
+  }
+
+  .home-landing-hero-shell .home-landing-hero-inner {
+    justify-content: flex-start;
+    padding-top: 0.75rem;
+    padding-bottom: 1.25rem;
   }
 }

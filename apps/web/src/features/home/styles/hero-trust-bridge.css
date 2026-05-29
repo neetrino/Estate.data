@@ -66,3 +66,44 @@
     background: linear-gradient(180deg, var(--landing-blend-tone-surface) 0%, transparent 42%);
   }
 }
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .home-landing-trust-bridge {
+    transform: none;
+    margin-top: -404px;
+    margin-bottom: 0;
+  }
+
+  .home-landing-trust-bridge__mesh {
+    background: linear-gradient(
+      180deg,
+      rgb(248 246 252 / 84%) 0%,
+      rgb(248 246 252 / 68%) 28%,
+      rgb(247 248 253 / 54%) 66%,
+      var(--landing-blend-tone-soft) 100%
+    );
+  }
+
+  .home-landing-trust-bridge::after {
+    content: none;
+  }
+
+  .home-landing-trust-bridge__what-we-do-photo {
+    opacity: 0.28;
+  }
+
+  .home-landing-trust-bridge__bottom-fade {
+    display: block;
+    background: linear-gradient(180deg, rgb(247 248 253 / 0%) 34%, rgb(247 248 253 / 26%) 100%);
+  }
+
+  .home-landing-hero-inner {
+    justify-content: flex-start !important;
+    padding-bottom: 0 !important;
+  }
+
+  .home-landing-trust-below-hero-shell {
+    margin-top: 0;
+    padding-top: 0 !important;
+  }
+}

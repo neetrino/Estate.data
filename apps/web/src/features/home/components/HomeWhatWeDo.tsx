@@ -20,7 +20,7 @@ const WHAT_WE_DO_BG_SOURCES = {
   desktop: "/images/what-we-do-bg-2560.webp",
 } as const;
 
-const WHAT_WE_DO_SECTION_CLASS = `relative isolate ${LANDING_SECTION_CLASS}`;
+const WHAT_WE_DO_SECTION_CLASS = `relative isolate z-30 ${LANDING_SECTION_CLASS}`;
 
 const WHAT_WE_DO_STICKY_HEADER_CLASS = "relative z-20 self-start lg:sticky lg:top-28";
 

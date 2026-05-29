@@ -3,7 +3,7 @@ import { DataServicesBody } from "@/features/services/data/components/DataServic
 import { DATA_SERVICES_PAGE_COPY } from "@/features/services/data/content/dataServicesCopy";
 import "@/features/services/data/styles/data-bim-page.css";
 import {
-  DATA_BIM_PAGE_MAIN_CLASS,
+  INNER_PAGE_MAIN_SPACING_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_EYEBROW_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_SUBTITLE_CLASS,
   PROPERTY_INTELLIGENCE_PAGE_TITLE_CLASS,
@@ -14,7 +14,13 @@ export function DataServicesPage() {
   const { eyebrow, title, subtitle } = DATA_SERVICES_PAGE_COPY;
 
   return (
-    <main className={DATA_BIM_PAGE_MAIN_CLASS}>
+    <main
+      className={[
+        INNER_PAGE_MAIN_SPACING_CLASS,
+        "data-bim-page relative isolate overflow-x-hidden",
+        "max-[743px]:mobile-inner-pages-background",
+      ].join(" ")}
+    >
       <DataBimPageBackground />
 
       <div className={`${SITE_PAGE_SHELL_CLASS} data-bim-page__content`}>

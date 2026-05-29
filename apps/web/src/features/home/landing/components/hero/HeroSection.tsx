@@ -24,7 +24,7 @@ export function HeroSection() {
   return (
     <>
       <section
-        className={`relative flex flex-col overflow-x-clip bg-landing-surface ${HOME_LANDING_HERO_VIEWPORT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
+        className={`home-landing-hero-shell relative flex flex-col overflow-x-clip bg-landing-surface ${HOME_LANDING_HERO_VIEWPORT_CLASS} ${HOME_LANDING_HERO_TOP_PADDING_CLASS}`}
       >
         <HeroBackgroundPicture />
         <div className="home-landing-hero-photo-scrim pointer-events-none absolute inset-0" aria-hidden />
@@ -32,7 +32,7 @@ export function HeroSection() {
           <LandingSectionBlend edge="bottom" tone="surface" />
         </div>
 
-        <div className={`${HOME_LANDING_HERO_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
+        <div className={`home-landing-hero-inner ${HOME_LANDING_HERO_CONTAINER_CLASS} ${HOME_LANDING_HERO_INNER_CLASS}`}>
           <div className={HOME_LANDING_HERO_GRID_CLASS}>
             <div className={HOME_LANDING_HERO_COPY_COLUMN_CLASS}>
               <div className={HOME_LANDING_HERO_COPY_TOP_CLASS}>
@@ -51,7 +51,7 @@ export function HeroSection() {
 
       <div className={HOME_LANDING_TRUST_BRIDGE_CLASS}>
         <HeroTrustBridgeBackground />
-        <div className={`${LANDING_CONTAINER_CLASS} ${HOME_LANDING_TRUST_BELOW_HERO_CLASS}`}>
+        <div className={`home-landing-trust-below-hero-shell ${LANDING_CONTAINER_CLASS} ${HOME_LANDING_TRUST_BELOW_HERO_CLASS}`}>
           <TrustedLogos />
         </div>
       </div>

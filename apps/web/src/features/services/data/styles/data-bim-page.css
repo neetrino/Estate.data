@@ -307,6 +307,7 @@
 
 .data-bim-integrations-card,
 .data-bim-report-card {
+  height: 100%;
   min-height: clamp(13.5rem, 17.8vw, 15rem);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.75);
@@ -484,23 +485,28 @@
   .data-bim-layout__top > :last-child {
     grid-column: span 2 / span 2;
   }
-}
 
-@media (min-width: 744px) and (max-width: 1023px) and (hover: none) and (pointer: coarse) {
   .data-bim-report-card {
     align-items: center;
   }
 
+  .data-bim-report-card__icon-wrap,
+  .data-bim-report-card__content {
+    align-self: center;
+  }
+}
+
+@media (min-width: 744px) and (max-width: 1023px) and (hover: none) and (pointer: coarse) {
   .data-bim-report-card__icon-wrap {
     align-items: center;
     justify-content: flex-end;
-    min-width: 11.25rem;
-    padding-right: 0.35rem;
+    min-width: 9.5rem;
+    padding-right: 0.25rem;
   }
 
   .data-bim-report-card__icon {
-    width: clamp(10rem, 18vw, 11.5rem);
-    height: clamp(10rem, 18vw, 11.5rem);
+    width: clamp(8.2rem, 14.5vw, 9.2rem);
+    height: clamp(8.2rem, 14.5vw, 9.2rem);
   }
 
   .data-bim-report-card__content {
@@ -537,6 +543,7 @@
   }
 
   .data-bim-layout__top > :last-child {
+    grid-column: auto;
     min-width: 0;
   }
 }

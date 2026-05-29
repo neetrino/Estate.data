@@ -5,7 +5,6 @@ import { fetchPricingPage } from "@/features/pricing/services/fetchPricingPage";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   INNER_PAGE_MAIN_SPACING_CLASS,
-  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
   SITE_PAGE_SHELL_CLASS,
   WHAT_WE_DO_PAGE_EYEBROW_CLASS,
   WHAT_WE_DO_PAGE_TITLE_CLASS,
@@ -28,7 +27,7 @@ export async function PricingPage() {
     <main
       className={[
         INNER_PAGE_MAIN_SPACING_CLASS,
-        MOBILE_INNER_PAGES_BACKGROUND_CLASS,
+        "max-[743px]:mobile-inner-pages-background",
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
         "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}

@@ -3,7 +3,6 @@ import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import {
   SITE_PAGE_SHELL_CLASS,
   INNER_PAGE_MAIN_SPACING_CLASS,
-  MOBILE_INNER_PAGES_BACKGROUND_CLASS,
 } from "@/shared/lib/constants";
 
 export function SolutionsPage() {
@@ -11,7 +10,7 @@ export function SolutionsPage() {
     <main
       className={[
         INNER_PAGE_MAIN_SPACING_CLASS,
-        MOBILE_INNER_PAGES_BACKGROUND_CLASS,
+        "max-[743px]:mobile-inner-pages-background",
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
         "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}
