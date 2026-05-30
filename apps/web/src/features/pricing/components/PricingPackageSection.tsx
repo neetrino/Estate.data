@@ -49,7 +49,7 @@ export function PricingPackageSection({
         {packages.map((pkg, index) => {
           const isLastOddCard = hasOddCardCount && index === packages.length - 1;
           const itemClassName = isLastOddCard
-            ? "min-w-0 max-[1399px]:col-span-2 max-[1399px]:mx-auto max-[1399px]:w-full max-[1399px]:max-w-[32rem]"
+            ? "min-w-0 md:max-[1399px]:col-span-2 md:max-[1399px]:mx-auto md:max-[1399px]:w-full md:max-[1399px]:max-w-[32rem]"
             : "min-w-0";
 
           return (

@@ -217,7 +217,7 @@ export const PRICING_SECTION_MARGIN_TOP_CLASS = "mt-[30px]";
 
 /** Pricing — phone + tablet/iPad (≤1399px). Tune mobile here; leave desktop block below. */
 export const PRICING_GRID_MOBILE_TABLET_CLASS =
-  "grid grid-cols-1 md:grid-cols-2 md:max-[1399px]:!grid-cols-2";
+  "grid grid-cols-1 md:grid-cols-2";
 
 /** Media packages — phone only: CTA +5px (md+ uses tablet/desktop rules below). */
 export const PRICING_MEDIA_CTA_MOBILE_ONLY_CLASS = "max-md:-translate-y-[5px]";
