@@ -15,6 +15,7 @@ import {
   slicePortfolioPage,
 } from "@/features/portfolio/lib/portfolioPagination";
 import { usePortfolioItemsPerPage } from "@/features/portfolio/lib/usePortfolioItemsPerPage";
+import { ScrollRevealListItem } from "@/shared/components/reveal/ScrollRevealListItem";
 import { PORTFOLIO_GRID_GAP_CLASS } from "@/shared/lib/constants";
 
 const PORTFOLIO_IMAGE_PRIORITY_COUNT = 6;
@@ -70,13 +71,13 @@ export function PortfolioWorkSection({ projects }: PortfolioWorkSectionProps) {
       <PortfolioFilter activeId={activeFilterId} onFilterChange={handleFilterChange} />
       <ul ref={gridRef} className={PORTFOLIO_GRID_CLASS}>
         {paginatedProjects.map((project, index) => (
-          <li key={project.id}>
+          <ScrollRevealListItem key={project.id} index={index} className="min-w-0">
             <PortfolioProjectCard
               project={project}
               showTopLeftBadge={activeFilterId === "all"}
               priority={index < PORTFOLIO_IMAGE_PRIORITY_COUNT}
             />
-          </li>
+          </ScrollRevealListItem>
         ))}
       </ul>
       {shouldShowPortfolioPagination(filteredProjects.length, itemsPerPage) ? (
