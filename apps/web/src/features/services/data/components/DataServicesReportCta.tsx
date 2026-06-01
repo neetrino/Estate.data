@@ -9,7 +9,7 @@ export function DataServicesReportCta() {
     <section className="data-bim-report-card" aria-labelledby="data-report-cta-heading">
       <div className="data-bim-report-card__icon-wrap" aria-hidden>
         <Image
-          src="/images/data-bim-services/icons/market-report.png"
+          src="/icons/data-bim-services/market-report.png"
           alt=""
           width={220}
           height={220}

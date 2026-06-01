@@ -5,7 +5,10 @@ import { RECENT_WORK_PROJECT_ASPECT_CLASS } from "@/shared/lib/constants";
 type PortfolioProjectCardProps = {
   project: PortfolioProject;
   showTopLeftBadge: boolean;
+  priority?: boolean;
 };
+
+const PORTFOLIO_CARD_IMAGE_PLACEHOLDER_CLASS = "bg-[#e8e4f3]";
 
 const PORTFOLIO_CARD_META: Record<
   PortfolioProject["category"],
@@ -33,7 +36,11 @@ const PORTFOLIO_CARD_META: Record<
   },
 };
 
-export function PortfolioProjectCard({ project, showTopLeftBadge }: PortfolioProjectCardProps) {
+export function PortfolioProjectCard({
+  project,
+  showTopLeftBadge,
+  priority = false,
+}: PortfolioProjectCardProps) {
   const metadata = PORTFOLIO_CARD_META[project.category];
 
   return (
@@ -43,13 +50,15 @@ export function PortfolioProjectCard({ project, showTopLeftBadge }: PortfolioPro
         "transition-all duration-300 hover:-translate-y-1.5 hover:border-cyan-300/40",
         "hover:shadow-[0_0_0_1px_rgba(124,58,237,0.18),0_28px_76px_rgba(31,41,55,0.22),0_0_36px_rgba(124,58,237,0.2)]",
         RECENT_WORK_PROJECT_ASPECT_CLASS,
+        PORTFOLIO_CARD_IMAGE_PLACEHOLDER_CLASS,
       ].join(" ")}
     >
       <Image
         src={project.imageSrc}
         alt={project.imageAlt}
         fill
-        loading="lazy"
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
         className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />

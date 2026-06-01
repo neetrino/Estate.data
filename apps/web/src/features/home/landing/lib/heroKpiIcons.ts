@@ -1,9 +1,9 @@
 import type { HeroDashboardMetricIcon } from "@/features/home/content/heroDashboardCopy";
 
 export const HERO_KPI_ICON_PATHS: Record<HeroDashboardMetricIcon, string> = {
-  home: "/images/hero/kpi-icons/home.png",
-  clock: "/images/hero/kpi-icons/clock.png",
-  star: "/images/hero/kpi-icons/star.png",
+  home: "/icons/hero/kpi/home.svg",
+  clock: "/icons/hero/kpi/clock.svg",
+  star: "/icons/hero/kpi/star.svg",
 };
 
 /** Rendered inside glow frame (frame stays size-10 / sm:size-11). */

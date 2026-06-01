@@ -57,10 +57,10 @@ export function ResourcesArticleCard({ article }: ResourcesArticleCardProps) {
 }
 
 const RESOURCES_ARTICLE_ICON_BY_ID: Record<ResourceArticle["id"], string> = {
-  "westside-eastside-spring-2026": "/images/resources/icons/articles.png",
-  "twilight-drone-outperforms": "/images/resources/icons/drone.png",
-  "scan-to-bim-playbook": "/images/resources/icons/scan-to-bim.png",
-  "analytics-dashboards-listings": "/images/resources/icons/analytics.png",
+  "westside-eastside-spring-2026": "/icons/resources/articles.png",
+  "twilight-drone-outperforms": "/icons/resources/drone.png",
+  "scan-to-bim-playbook": "/icons/resources/scan-to-bim.png",
+  "analytics-dashboards-listings": "/icons/resources/analytics.png",
 };
 
 function ResourcesArticleArrowIcon() {

@@ -16,8 +16,8 @@ export function DataServicesOfferingIcon({ icon }: DataServicesOfferingIconProps
 }
 
 const OFFERING_ICON_ASSET_PATH: Record<DataServicesOfferingIconId, string> = {
-  "lidar-scanning": "/images/data-bim-services/icons/lidar-scanning.png",
-  "bim-modeling": "/images/data-bim-services/icons/bim-modeling.png",
-  "listings-valuations": "/images/data-bim-services/icons/listings-valuations.png",
-  "analytics-dashboards": "/images/data-bim-services/icons/analytics-dashboards.png",
+  "lidar-scanning": "/icons/data-bim-services/lidar-scanning.png",
+  "bim-modeling": "/icons/data-bim-services/bim-modeling.png",
+  "listings-valuations": "/icons/data-bim-services/listings-valuations.png",
+  "analytics-dashboards": "/icons/data-bim-services/analytics-dashboards.png",
 };

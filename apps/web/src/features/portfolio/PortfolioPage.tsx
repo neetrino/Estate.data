@@ -1,4 +1,4 @@
-import { LazyPortfolioWorkSection } from "@/features/portfolio/lib/lazyPortfolioComponents";
+import { PortfolioWorkSection } from "@/features/portfolio/components/PortfolioWorkSection";
 import { PORTFOLIO_PAGE_COPY } from "@/features/portfolio/content/portfolioCopy";
 import { fetchPortfolioProjects } from "@/features/portfolio/services/fetchPortfolioProjects";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
@@ -34,7 +34,7 @@ export async function PortfolioPage() {
           <h1 className={WHAT_WE_DO_PAGE_TITLE_CLASS}>{title}</h1>
           <p className={WHAT_WE_DO_PAGE_SUBTITLE_CLASS}>{subtitle}</p>
         </header>
-        <LazyPortfolioWorkSection projects={projects} />
+        <PortfolioWorkSection projects={projects} />
       </div>
       <FooterPageBridge from="surface" />
     </main>

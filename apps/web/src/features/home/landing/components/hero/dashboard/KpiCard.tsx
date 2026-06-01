@@ -1,9 +1,5 @@
-import Image from "next/image";
 import type { HeroDashboardMetric } from "@/features/home/content/heroDashboardCopy";
-import {
-  HERO_KPI_ICON_PATHS,
-  HERO_KPI_ICON_SIZE_PX,
-} from "@/features/home/landing/lib/heroKpiIcons";
+import { HeroDashboardKpiIcon } from "@/features/home/landing/components/hero/dashboard/HeroDashboardKpiIcon";
 import {
   KPI_CARD_FOOTER_CLASS,
   KPI_CARD_LABEL_CLASS,
@@ -24,11 +20,9 @@ export function KpiCard({ metric }: KpiCardProps) {
     <article className={KPI_CARD_SURFACE_CLASS}>
       <div className={KPI_CARD_TOP_ROW_CLASS}>
         <span className={kpiCardIconGlowClass(metric.accent)} aria-hidden>
-          <Image
-            src={HERO_KPI_ICON_PATHS[metric.icon]}
-            alt=""
-            width={HERO_KPI_ICON_SIZE_PX}
-            height={HERO_KPI_ICON_SIZE_PX}
+          <HeroDashboardKpiIcon
+            icon={metric.icon}
+            accent={metric.accent}
             className={kpiCardIconImageClass(metric.accent)}
           />
         </span>

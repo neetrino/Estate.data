@@ -25,24 +25,24 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.whatWeDoPhotographyIcon]: {
-    publicPath: "icons/what-we-do/photography.png",
-    mimeType: "image/png",
+    publicPath: "icons/what-we-do/photography.svg",
+    mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.whatWeDoCinematicVideoIcon]: {
-    publicPath: "icons/what-we-do/cinematic-video.png",
-    mimeType: "image/png",
+    publicPath: "icons/what-we-do/cinematic-video.svg",
+    mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.whatWeDoDroneAerialIcon]: {
-    publicPath: "icons/what-we-do/drone-aerial.png",
-    mimeType: "image/png",
+    publicPath: "icons/what-we-do/drone-aerial.svg",
+    mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.whatWeDoToursFloorplansIcon]: {
-    publicPath: "icons/what-we-do/tours-floorplans.png",
-    mimeType: "image/png",
+    publicPath: "icons/what-we-do/tours-floorplans.svg",
+    mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.whatWeDoMarketIntelligenceIcon]: {
-    publicPath: "icons/what-we-do/market-intelligence.png",
-    mimeType: "image/png",
+    publicPath: "icons/what-we-do/market-intelligence.svg",
+    mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.propertyIntelligenceHero]: {
     publicPath: "images/property-intelligence/scan-to-bim.jpg",
@@ -61,15 +61,15 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     mimeType: "image/png",
   },
   [ASSET_KEYS.contactLocationIcon]: {
-    publicPath: "images/contact/location.png",
+    publicPath: "icons/contact/location.png",
     mimeType: "image/png",
   },
   [ASSET_KEYS.contactPhoneIcon]: {
-    publicPath: "images/contact/phone.png",
+    publicPath: "icons/contact/phone.png",
     mimeType: "image/png",
   },
   [ASSET_KEYS.contactEmailIcon]: {
-    publicPath: "images/contact/mail.png",
+    publicPath: "icons/contact/mail.png",
     mimeType: "image/png",
   },
   [ASSET_KEYS.siteFavicon]: {
