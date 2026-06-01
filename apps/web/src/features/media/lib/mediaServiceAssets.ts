@@ -8,7 +8,7 @@ type MediaServiceAssetEntry = {
   readonly imagePosition: MediaServiceImagePosition;
 };
 
-const MEDIA_SERVICE_ICONS_BASE = "/images/media-services/icons";
+const MEDIA_SERVICE_ICONS_BASE = "/icons/media-services";
 const MEDIA_SERVICE_CARDS_BASE = "/images/media-services/cards";
 
 /** Static icon + card background paths for /media service tiles. */

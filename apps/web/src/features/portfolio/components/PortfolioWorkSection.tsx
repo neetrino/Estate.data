@@ -16,7 +16,8 @@ import {
 } from "@/features/portfolio/lib/portfolioPagination";
 import { usePortfolioItemsPerPage } from "@/features/portfolio/lib/usePortfolioItemsPerPage";
 import { PORTFOLIO_GRID_GAP_CLASS } from "@/shared/lib/constants";
-import { ScrollRevealListItem } from "@/shared/components/reveal/ScrollRevealListItem";
+
+const PORTFOLIO_IMAGE_PRIORITY_COUNT = 6;
 
 const PORTFOLIO_GRID_CLASS = `mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${PORTFOLIO_GRID_GAP_CLASS}`;
 
@@ -69,9 +70,13 @@ export function PortfolioWorkSection({ projects }: PortfolioWorkSectionProps) {
       <PortfolioFilter activeId={activeFilterId} onFilterChange={handleFilterChange} />
       <ul ref={gridRef} className={PORTFOLIO_GRID_CLASS}>
         {paginatedProjects.map((project, index) => (
-          <ScrollRevealListItem key={project.id} index={index}>
-            <PortfolioProjectCard project={project} showTopLeftBadge={activeFilterId === "all"} />
-          </ScrollRevealListItem>
+          <li key={project.id}>
+            <PortfolioProjectCard
+              project={project}
+              showTopLeftBadge={activeFilterId === "all"}
+              priority={index < PORTFOLIO_IMAGE_PRIORITY_COUNT}
+            />
+          </li>
         ))}
       </ul>
       {shouldShowPortfolioPagination(filteredProjects.length, itemsPerPage) ? (

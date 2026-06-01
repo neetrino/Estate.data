@@ -29,7 +29,7 @@ export function DataServicesIntegrationsCard() {
     <section className="data-bim-integrations-card" aria-labelledby="data-integrations-heading">
       <div className="data-bim-integrations-card__icon-wrap" aria-hidden>
         <Image
-          src="/images/data-bim-services/icons/integrations-puzzle.png"
+          src="/icons/data-bim-services/integrations-puzzle.png"
           alt=""
           width={220}
           height={220}

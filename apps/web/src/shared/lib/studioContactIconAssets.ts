@@ -1,8 +1,8 @@
 /** Shared studio contact icons (footer). Bump when replacing assets. */
-const STUDIO_CONTACT_ICON_VERSION = "20260527";
+const STUDIO_CONTACT_ICON_VERSION = "20260601";
 
 function studioContactIconPath(filename: string): string {
-  return `/images/footer/${filename}?v=${STUDIO_CONTACT_ICON_VERSION}`;
+  return `/icons/footer/${filename}?v=${STUDIO_CONTACT_ICON_VERSION}`;
 }
 
 export const STUDIO_CONTACT_ICON_SOURCES = {

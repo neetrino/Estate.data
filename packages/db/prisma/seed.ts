@@ -43,28 +43,28 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.whatWeDoPhotographyIcon,
-    relativePath: "icons/what-we-do/photography.png",
-    mimeType: "image/png",
+    relativePath: "icons/what-we-do/photography.svg",
+    mimeType: "image/svg+xml",
   },
   {
     key: ASSET_KEYS.whatWeDoCinematicVideoIcon,
-    relativePath: "icons/what-we-do/cinematic-video.png",
-    mimeType: "image/png",
+    relativePath: "icons/what-we-do/cinematic-video.svg",
+    mimeType: "image/svg+xml",
   },
   {
     key: ASSET_KEYS.whatWeDoDroneAerialIcon,
-    relativePath: "icons/what-we-do/drone-aerial.png",
-    mimeType: "image/png",
+    relativePath: "icons/what-we-do/drone-aerial.svg",
+    mimeType: "image/svg+xml",
   },
   {
     key: ASSET_KEYS.whatWeDoToursFloorplansIcon,
-    relativePath: "icons/what-we-do/tours-floorplans.png",
-    mimeType: "image/png",
+    relativePath: "icons/what-we-do/tours-floorplans.svg",
+    mimeType: "image/svg+xml",
   },
   {
     key: ASSET_KEYS.whatWeDoMarketIntelligenceIcon,
-    relativePath: "icons/what-we-do/market-intelligence.png",
-    mimeType: "image/png",
+    relativePath: "icons/what-we-do/market-intelligence.svg",
+    mimeType: "image/svg+xml",
   },
   {
     key: ASSET_KEYS.propertyIntelligenceHero,
@@ -88,17 +88,17 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.contactLocationIcon,
-    relativePath: "images/contact/location.png",
+    relativePath: "icons/contact/location.png",
     mimeType: "image/png",
   },
   {
     key: ASSET_KEYS.contactPhoneIcon,
-    relativePath: "images/contact/phone.png",
+    relativePath: "icons/contact/phone.png",
     mimeType: "image/png",
   },
   {
     key: ASSET_KEYS.contactEmailIcon,
-    relativePath: "images/contact/mail.png",
+    relativePath: "icons/contact/mail.png",
     mimeType: "image/png",
   },
   {

@@ -1,11 +1,11 @@
-/** Bump when replacing files under `public/images/contact/`. */
-const CONTACT_STUDIO_ICON_VERSION = "20260528";
+/** Bump when replacing files under `public/icons/contact/`. */
+const CONTACT_STUDIO_ICON_VERSION = "20260601";
 
 function contactStudioIconPath(filename: string): string {
-  return `/images/contact/${filename}?v=${CONTACT_STUDIO_ICON_VERSION}`;
+  return `/icons/contact/${filename}?v=${CONTACT_STUDIO_ICON_VERSION}`;
 }
 
-/** Studio contact row icons — static files in `public/images/contact/`. */
+/** Studio contact row icons — static files in `public/icons/contact/`. */
 export const CONTACT_STUDIO_ICON_PATHS = {
   location: contactStudioIconPath("location.png"),
   phone: contactStudioIconPath("phone.png"),

@@ -1,6 +1,3 @@
-import { ASSET_KEYS } from "@estate/db";
-import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
-
 export type WhatWeDoServiceIconId =
   | "photography"
   | "cinematic-video"
@@ -14,7 +11,6 @@ export type WhatWeDoService = {
   readonly title: string;
   readonly description: string;
   readonly icon: WhatWeDoServiceIconId;
-  readonly iconSrc?: string;
   /** SVG icon at full size, no colored wrapper (e.g. scan-to-bim). */
   readonly iconPlain?: boolean;
 };
@@ -32,28 +28,24 @@ export const HOME_WHAT_WE_DO_COPY = {
       title: "Photography",
       description: "Interior, exterior, twilight & virtual twilight.",
       icon: "photography",
-      iconSrc: resolveAssetUrl(ASSET_KEYS.whatWeDoPhotographyIcon),
     },
     {
       id: "cinematic-video",
       title: "Cinematic Video",
       description: "Walkthroughs and bespoke property films.",
       icon: "cinematic-video",
-      iconSrc: resolveAssetUrl(ASSET_KEYS.whatWeDoCinematicVideoIcon),
     },
     {
       id: "drone-aerial",
       title: "Drone & Aerial",
       description: "FAA Part 107 licensed pilots.",
       icon: "drone-aerial",
-      iconSrc: resolveAssetUrl(ASSET_KEYS.whatWeDoDroneAerialIcon),
     },
     {
       id: "tours-floorplans",
       title: "3D Tours & Floorplans",
       description: "Matterport, dollhouse, schematic plans.",
       icon: "tours-floorplans",
-      iconSrc: resolveAssetUrl(ASSET_KEYS.whatWeDoToursFloorplansIcon),
     },
     {
       id: "scan-to-bim",
@@ -67,7 +59,6 @@ export const HOME_WHAT_WE_DO_COPY = {
       title: "Market Intelligence",
       description: "Listings data, valuations, CRM integrations.",
       icon: "market-intelligence",
-      iconSrc: resolveAssetUrl(ASSET_KEYS.whatWeDoMarketIntelligenceIcon),
     },
   ] as const satisfies readonly WhatWeDoService[],
 } as const;
