@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const PORTFOLIO_PATH = "/api/v1/portfolio";
 
 function resolveUrl(baseUrl, path) {
@@ -10,7 +10,7 @@ function resolveUrl(baseUrl, path) {
   return `${base}${path}`;
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const hasRedis =
   Boolean(process.env.UPSTASH_REDIS_REST_URL?.trim()) &&
   Boolean(process.env.UPSTASH_REDIS_REST_TOKEN?.trim());
@@ -28,7 +28,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Cache check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Cache check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

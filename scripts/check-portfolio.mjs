@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const PORTFOLIO_PATH = "/api/v1/portfolio";
 const ADMIN_PORTFOLIO_PATH = "/api/v1/admin/portfolio";
 const PLACEHOLDER_IMAGE = "/api/v1/assets/recent-work-placeholder";
@@ -34,7 +34,7 @@ async function issueAdminToken() {
     .sign(new TextEncoder().encode(secret));
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const portfolioUrl = resolveUrl(apiUrl, PORTFOLIO_PATH);
 const adminPortfolioUrl = resolveUrl(apiUrl, ADMIN_PORTFOLIO_PATH);
 
@@ -46,7 +46,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Portfolio check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Portfolio check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

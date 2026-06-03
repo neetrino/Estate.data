@@ -1,8 +1,11 @@
 "use client";
 
+import { ADMIN_AUTH_CHANGED_EVENT } from "@/features/admin/lib/admin-auth-events";
 import {
   clearAdminAuthToken,
+  readAdminAuthEmail,
   readAdminAuthToken,
+  writeAdminAuthEmail,
   writeAdminAuthToken,
 } from "@/features/admin/lib/admin-auth-storage";
 import { submitAdminLogin } from "@/features/admin/services/submitAdminLogin";
@@ -15,10 +18,9 @@ import {
   type ReactNode,
 } from "react";
 
-const ADMIN_AUTH_CHANGED_EVENT = "estate-admin-auth-changed";
-
 type AdminAuthContextValue = {
   readonly token: string | null;
+  readonly email: string | null;
   readonly isAuthenticated: boolean;
   readonly isLoading: boolean;
   readonly login: (email: string, password: string) => Promise<void>;
@@ -47,10 +49,6 @@ function getAdminAuthServerSnapshot(): null {
   return null;
 }
 
-function notifyAdminAuthChanged(): void {
-  window.dispatchEvent(new Event(ADMIN_AUTH_CHANGED_EVENT));
-}
-
 type AdminAuthProviderProps = {
   readonly children: ReactNode;
 };
@@ -62,26 +60,35 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
     getAdminAuthServerSnapshot,
   );
 
-  const login = useCallback(async (email: string, password: string) => {
-    const result = await submitAdminLogin({ email, password });
+  const email = useSyncExternalStore(
+    subscribeAdminAuth,
+    () => readAdminAuthEmail(),
+    () => null,
+  );
+
+  const login = useCallback(async (loginEmail: string, password: string) => {
+    const normalizedEmail = loginEmail.toLowerCase();
+    const result = await submitAdminLogin({ email: normalizedEmail, password });
     writeAdminAuthToken(result.token);
-    notifyAdminAuthChanged();
+    writeAdminAuthEmail(normalizedEmail);
+    window.dispatchEvent(new Event(ADMIN_AUTH_CHANGED_EVENT));
   }, []);
 
   const logout = useCallback(() => {
     clearAdminAuthToken();
-    notifyAdminAuthChanged();
+    window.dispatchEvent(new Event(ADMIN_AUTH_CHANGED_EVENT));
   }, []);
 
   const value = useMemo<AdminAuthContextValue>(
     () => ({
       token,
+      email,
       isAuthenticated: token !== null,
       isLoading: false,
       login,
       logout,
     }),
-    [token, login, logout],
+    [token, email, login, logout],
   );
 
   return (

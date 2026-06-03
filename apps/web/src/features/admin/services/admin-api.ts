@@ -1,0 +1,228 @@
+import { adminAuthenticatedRequest } from "@/features/admin/services/adminAuthenticatedRequest";
+import type {
+  AdminArticle,
+  AdminAsset,
+  AdminContactInquiry,
+  AdminFaqItem,
+  AdminMediaListResponse,
+  AdminOrder,
+  AdminPortfolioProject,
+  AdminPricingPackage,
+  AdminPricingResponse,
+  DashboardSummary,
+} from "@/features/admin/types/admin-data";
+import { API_ROUTES } from "@/shared/api/routes";
+
+export function fetchAdminDashboard(): Promise<DashboardSummary> {
+  return adminAuthenticatedRequest<DashboardSummary>(API_ROUTES.adminDashboard);
+}
+
+export function fetchAdminContactInquiries(params?: {
+  limit?: number;
+  page?: number;
+  search?: string;
+  service?: string;
+}): Promise<AdminContactInquiry[]> {
+  const searchParams = new URLSearchParams();
+  if (params?.limit !== undefined) {
+    searchParams.set("limit", String(params.limit));
+  }
+  if (params?.page !== undefined) {
+    searchParams.set("page", String(params.page));
+  }
+  if (params?.search) {
+    searchParams.set("search", params.search);
+  }
+  if (params?.service) {
+    searchParams.set("service", params.service);
+  }
+
+  const query = searchParams.toString();
+  const path = query
+    ? `${API_ROUTES.adminContactInquiries}?${query}`
+    : API_ROUTES.adminContactInquiries;
+
+  return adminAuthenticatedRequest<AdminContactInquiry[]>(path);
+}
+
+export function deleteAdminContactInquiry(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(
+    API_ROUTES.adminContactInquiryById(id),
+    { method: "DELETE" },
+  );
+}
+
+export function fetchAdminPortfolio(): Promise<AdminPortfolioProject[]> {
+  return adminAuthenticatedRequest<AdminPortfolioProject[]>(API_ROUTES.adminPortfolio);
+}
+
+export function createAdminPortfolioProject(
+  body: Record<string, unknown>,
+): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminPortfolio, {
+    method: "POST",
+    body,
+  });
+}
+
+export function updateAdminPortfolioProject(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminPortfolioById(id), {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function deleteAdminPortfolioProject(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(
+    API_ROUTES.adminPortfolioById(id),
+    { method: "DELETE" },
+  );
+}
+
+export function fetchAdminPricing(): Promise<AdminPricingResponse> {
+  return adminAuthenticatedRequest<AdminPricingResponse>(API_ROUTES.adminPricing);
+}
+
+export function createAdminPricingPackage(
+  body: Record<string, unknown>,
+): Promise<AdminPricingPackage> {
+  return adminAuthenticatedRequest<AdminPricingPackage>(API_ROUTES.adminPricingPackages, {
+    method: "POST",
+    body,
+  });
+}
+
+export function updateAdminPricingPackage(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<AdminPricingPackage> {
+  return adminAuthenticatedRequest<AdminPricingPackage>(
+    API_ROUTES.adminPricingPackageById(id),
+    { method: "PATCH", body },
+  );
+}
+
+export function deleteAdminPricingPackage(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(
+    API_ROUTES.adminPricingPackageById(id),
+    { method: "DELETE" },
+  );
+}
+
+export function fetchAdminArticles(): Promise<AdminArticle[]> {
+  return adminAuthenticatedRequest<AdminArticle[]>(API_ROUTES.adminArticles);
+}
+
+export function createAdminArticle(body: Record<string, unknown>): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminArticles, {
+    method: "POST",
+    body,
+  });
+}
+
+export function updateAdminArticle(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminArticleById(id), {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function deleteAdminArticle(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(API_ROUTES.adminArticleById(id), {
+    method: "DELETE",
+  });
+}
+
+export function fetchAdminFaq(): Promise<AdminFaqItem[]> {
+  return adminAuthenticatedRequest<AdminFaqItem[]>(API_ROUTES.adminFaq);
+}
+
+export function createAdminFaqItem(body: Record<string, unknown>): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminFaq, { method: "POST", body });
+}
+
+export function updateAdminFaqItem(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<unknown> {
+  return adminAuthenticatedRequest(API_ROUTES.adminFaqById(id), {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function deleteAdminFaqItem(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(API_ROUTES.adminFaqById(id), {
+    method: "DELETE",
+  });
+}
+
+export function fetchAdminAssets(): Promise<AdminAsset[]> {
+  return adminAuthenticatedRequest<AdminAsset[]>(API_ROUTES.adminAssets);
+}
+
+export async function uploadAdminAsset(key: string, file: File): Promise<unknown> {
+  const formData = new FormData();
+  formData.append("key", key);
+  formData.append("file", file);
+
+  const token = (await import("@/features/admin/lib/admin-auth-storage")).readAdminAuthToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(API_ROUTES.adminAssets, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const { ApiError } = await import("@/shared/api/errors");
+    throw new ApiError("Upload failed", response.status);
+  }
+
+  const json = (await response.json()) as { data: unknown };
+  return json.data;
+}
+
+export function fetchAdminMedia(): Promise<AdminMediaListResponse> {
+  return adminAuthenticatedRequest<AdminMediaListResponse>(API_ROUTES.adminMedia);
+}
+
+export async function uploadAdminMedia(file: File): Promise<unknown> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const { readAdminAuthToken } = await import("@/features/admin/lib/admin-auth-storage");
+  const token = readAdminAuthToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(API_ROUTES.adminMedia, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const { ApiError } = await import("@/shared/api/errors");
+    throw new ApiError("Upload failed", response.status);
+  }
+
+  const json = (await response.json()) as { data: unknown };
+  return json.data;
+}
+
+export function fetchAdminPaymentsOrders(): Promise<AdminOrder[]> {
+  return adminAuthenticatedRequest<AdminOrder[]>(API_ROUTES.adminPaymentsOrders);
+}

@@ -17,7 +17,7 @@ function buildApiAssetRemotePattern(): {
   const fallback = {
     protocol: "http" as const,
     hostname: "localhost",
-    port: "3001",
+    port: "3000",
     pathname: "/api/v1/assets/**",
   };
 

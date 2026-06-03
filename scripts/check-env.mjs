@@ -64,23 +64,14 @@ if (rootMissing.length > 0) {
 
 const webEnvPath = resolve(ROOT, "apps/web/.env.local");
 const webEnv = parseEnvFile(webEnvPath);
+const webRequired = ["DATABASE_URL", "JWT_SECRET"];
 const webMissing = webEnv
-  ? missingKeys(webEnv, ["DATABASE_URL", "NEXT_PUBLIC_API_URL"])
+  ? missingKeys(webEnv, webRequired)
   : ["apps/web/.env.local (file missing)"];
 
-const apiEnvPath = resolve(ROOT, "apps/api/.env.local");
-const apiEnv = parseEnvFile(apiEnvPath);
-const apiMissing = apiEnv
-  ? missingKeys(apiEnv, ["DATABASE_URL", "DIRECT_URL"])
-  : ["apps/api/.env.local (file missing)"];
-
-if (apiMissing.length > 0) {
-  console.error(`API env missing or placeholder: ${apiMissing.join(", ")}`);
+if (webMissing.length > 0) {
+  console.error(`Web env missing or placeholder: ${webMissing.join(", ")}`);
   process.exit(1);
 }
 
-if (webMissing.length > 0) {
-  console.warn(`Web env warning: ${webMissing.join(", ")}`);
-}
-
-console.log("Env check OK — DATABASE_URL set for root, web, and API.");
+console.log("Env check OK — DATABASE_URL and JWT_SECRET set for root and merged web app.");

@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const LOCALES_PATH = "/api/v1/i18n/locales";
 const ARTICLES_PATH = "/api/v1/articles";
 const FAQ_PATH = "/api/v1/faq";
@@ -37,7 +37,7 @@ async function issueAdminToken() {
     .sign(new TextEncoder().encode(secret));
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 
 const localesResponse = await fetch(resolveUrl(apiUrl, LOCALES_PATH), {
   headers: { Accept: "application/json" },

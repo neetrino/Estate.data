@@ -1,4 +1,4 @@
-import { clientEnv } from "@/config/env";
+import { resolveApiBaseUrl } from "@/config/env";
 import { DEFAULT_REQUEST_TIMEOUT_MS } from "@/shared/lib/constants";
 import { ApiError } from "@/shared/api/errors";
 import type { ApiEnvelope, ApiErrorBody } from "@/shared/api/types";
@@ -14,9 +14,16 @@ export type ApiRequestOptions = {
 };
 
 function buildUrl(path: string): string {
-  const base = clientEnv.NEXT_PUBLIC_API_URL.replace(/\/$/, "");
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${base}${normalizedPath}`;
+  const explicitBase = resolveApiBaseUrl();
+  if (explicitBase) {
+    return `${explicitBase}${normalizedPath}`;
+  }
+  if (typeof window === "undefined") {
+    const appUrl = (process.env.APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+    return `${appUrl}${normalizedPath}`;
+  }
+  return normalizedPath;
 }
 
 async function parseErrorResponse(response: Response): Promise<ApiError> {
@@ -37,8 +44,9 @@ async function parseErrorResponse(response: Response): Promise<ApiError> {
 }
 
 /**
- * Typed HTTP client for the separate Next.js API app.
+ * Typed HTTP client for the merged Next.js app.
  * When NEXT_PUBLIC_USE_MOCK_API=true, prefer feature-level mocks instead of calling this.
+ * When NEXT_PUBLIC_API_URL is unset, requests use same-origin relative `/api/v1/...` paths.
  */
 export async function apiRequest<T>(
   path: string,

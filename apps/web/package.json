@@ -20,10 +20,16 @@
     "optimize:data-bim-bg": "node scripts/optimize-data-bim-bg.mjs"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1053.0",
     "@estate/db": "workspace:*",
+    "@node-rs/argon2": "^2.0.2",
+    "@upstash/ratelimit": "^2.0.6",
+    "@upstash/redis": "^1.35.3",
+    "jose": "^6.2.3",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "resend": "^6.12.3",
     "zod": "^3.25.76"
   },
   "devDependencies": {

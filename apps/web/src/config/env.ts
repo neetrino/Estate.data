@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const clientEnvSchema = z.object({
-  NEXT_PUBLIC_API_URL: z.string().url(),
+  NEXT_PUBLIC_API_URL: z.string().url().optional(),
   NEXT_PUBLIC_USE_MOCK_API: z
     .enum(["true", "false"])
     .default("true")
@@ -11,9 +11,9 @@ const clientEnvSchema = z.object({
 export type ClientEnv = z.infer<typeof clientEnvSchema>;
 
 function parseClientEnv(): ClientEnv {
+  const rawApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
   const result = clientEnvSchema.safeParse({
-    NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001",
+    NEXT_PUBLIC_API_URL: rawApiUrl || undefined,
     NEXT_PUBLIC_USE_MOCK_API:
       process.env.NEXT_PUBLIC_USE_MOCK_API ?? "true",
   });
@@ -30,3 +30,10 @@ function parseClientEnv(): ClientEnv {
 
 /** Validated public env — safe for client bundles. */
 export const clientEnv = parseClientEnv();
+
+/**
+ * API base for absolute URLs. Empty when unset — use same-origin relative paths.
+ */
+export function resolveApiBaseUrl(): string {
+  return clientEnv.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "";
+}

@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const ORDERS_PATH = "/api/v1/payments/orders";
 const IDRAM_INIT_PATH = "/api/v1/payments/idram/init";
 const IDRAM_CALLBACK_PATH = "/api/v1/payments/idram/callback";
@@ -12,7 +12,7 @@ function resolveUrl(baseUrl, path, query = "") {
   return `${base}${path}${query}`;
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 
 let orderResponse;
 try {
@@ -26,7 +26,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Payments check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Payments check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

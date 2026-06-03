@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const LOGIN_PATH = "/api/v1/admin/auth/login";
 const REFRESH_PATH = "/api/v1/admin/auth/refresh";
 
@@ -11,7 +11,7 @@ function resolveUrl(baseUrl, path) {
   return `${base}${path}`;
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const email = process.env.ADMIN_EMAIL ?? "admin@estate.data";
 const password = process.env.ADMIN_PASSWORD ?? "admin-change-me";
 
@@ -27,7 +27,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Auth check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Auth check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

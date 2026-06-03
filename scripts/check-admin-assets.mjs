@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const ADMIN_ASSETS_PATH = "/api/v1/admin/assets";
 const TEST_KEY = "site-logo";
 
@@ -39,7 +39,7 @@ async function issueAdminToken() {
     .sign(new TextEncoder().encode(secret));
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const adminUrl = resolveUrl(apiUrl, ADMIN_ASSETS_PATH);
 const assetUrl = resolveUrl(apiUrl, `/api/v1/assets/${encodeURIComponent(TEST_KEY)}`);
 
@@ -55,7 +55,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Admin asset check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Admin asset check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

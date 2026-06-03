@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const RECENT_PATH = "/api/v1/projects/recent";
 
 /**
@@ -26,7 +26,7 @@ function parseProjects(body) {
   return Array.isArray(data) ? data : null;
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 
 let defaultResponse;
 try {
@@ -36,7 +36,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Recent work check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Recent work check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

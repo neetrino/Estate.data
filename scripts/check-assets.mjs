@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 
 /** Sample keys from seed — must return image/* with non-empty body. */
 const SAMPLE_KEYS = ["site-logo", "home-hero"];
@@ -19,7 +19,7 @@ function isImageContentType(contentType) {
   return typeof contentType === "string" && contentType.startsWith("image/");
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 
 for (const key of SAMPLE_KEYS) {
   const url = resolveAssetUrl(apiUrl, key);
@@ -29,7 +29,7 @@ for (const key of SAMPLE_KEYS) {
     response = await fetch(url, { cache: "no-store" });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Network error";
-    console.error(`Asset check failed for ${key} — is \`pnpm dev:api\` running? ${message}`);
+    console.error(`Asset check failed for ${key} — is \`pnpm dev\` running? ${message}`);
     process.exit(1);
   }
 

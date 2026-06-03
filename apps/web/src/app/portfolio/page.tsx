@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Selected real estate media work across Los Angeles — photography, video, drone, and 3D tours.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function PortfolioRoutePage() {
   return <PortfolioPage />;
 }

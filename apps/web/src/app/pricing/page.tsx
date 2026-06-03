@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Clear packages with no surprises. Media tiers ship in 48 hours — add analytics anytime.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function PricingRoutePage() {
   return <PricingPage />;
 }
