@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const PRICING_PATH = "/api/v1/pricing";
 const ADMIN_PRICING_PACKAGE_PATH = "/api/v1/admin/pricing/packages";
 
@@ -33,7 +33,7 @@ async function issueAdminToken() {
     .sign(new TextEncoder().encode(secret));
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const pricingUrl = resolveUrl(apiUrl, PRICING_PATH);
 
 let pricingResponse;
@@ -44,7 +44,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Pricing check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Pricing check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

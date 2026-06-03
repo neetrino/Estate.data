@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const CONTACT_PATH = "/api/v1/contact";
 
 const VALID_BODY = {
@@ -18,7 +18,7 @@ function resolveContactUrl(baseUrl) {
   return `${base}${CONTACT_PATH}`;
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const contactUrl = resolveContactUrl(apiUrl);
 
 let invalidResponse;
@@ -33,7 +33,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Contact check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Contact check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

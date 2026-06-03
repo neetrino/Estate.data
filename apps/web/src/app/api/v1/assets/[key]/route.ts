@@ -1,43 +1,17 @@
-import path from "node:path";
-import { ASSET_CACHE_CONTROL, isAssetKey } from "@estate/db";
-import { loadAsset } from "@estate/db/server";
-import { NextResponse } from "next/server";
+import { serveAssetByKey } from "@/server/lib/assets";
+import { emptyOptionsResponse } from "@/server/lib/http";
+import { handleApiRoute } from "@/server/lib/route-handler";
 
-const WEB_PUBLIC_DIR = path.join(process.cwd(), "public");
-
-type RouteContext = {
-  params: Promise<{ key: string }>;
-};
-
-function assetNotFoundResponse(): NextResponse {
-  return NextResponse.json(
-    { error: { message: "Asset not found", code: "NOT_FOUND" } },
-    { status: 404, headers: { "Cache-Control": "no-store" } },
-  );
+async function getAsset(
+  _request: Request,
+  context: { params: Promise<Record<string, string>> },
+): Promise<Response> {
+  const { key } = await context.params;
+  return serveAssetByKey(key);
 }
 
-/** Mock-mode fallback when `NEXT_PUBLIC_USE_MOCK_API=true` (same-origin assets). */
-export async function GET(
-  _request: Request,
-  context: RouteContext,
-): Promise<NextResponse> {
-  const { key: rawKey } = await context.params;
-  const key = decodeURIComponent(rawKey);
+export const GET = handleApiRoute(getAsset);
 
-  if (!isAssetKey(key)) {
-    return assetNotFoundResponse();
-  }
-
-  const asset = await loadAsset(key, { publicDir: WEB_PUBLIC_DIR });
-
-  if (!asset) {
-    return assetNotFoundResponse();
-  }
-
-  return new NextResponse(new Uint8Array(asset.data), {
-    headers: {
-      "Content-Type": asset.mimeType,
-      "Cache-Control": ASSET_CACHE_CONTROL,
-    },
-  });
+export async function OPTIONS(): Promise<Response> {
+  return emptyOptionsResponse();
 }

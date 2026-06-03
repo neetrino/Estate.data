@@ -1,4 +1,4 @@
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const HEALTH_PATH = "/api/v1/health";
 
 /**
@@ -21,7 +21,7 @@ function isHealthOk(body) {
   return data?.status === "ok" && data?.db === "ok";
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 const healthUrl = resolveHealthUrl(apiUrl);
 
 let response;
@@ -32,7 +32,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Health check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Health check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 

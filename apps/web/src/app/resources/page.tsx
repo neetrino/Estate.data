@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Insights from the LA market — reports, articles, and answers to the questions we hear most.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function ResourcesRoutePage() {
   return <ResourcesPage />;
 }

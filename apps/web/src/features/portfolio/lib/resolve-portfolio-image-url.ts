@@ -1,8 +1,8 @@
-import { clientEnv } from "@/config/env";
+import { clientEnv, resolveApiBaseUrl } from "@/config/env";
 
 /**
  * Resolve portfolio image path from API for `<Image src>`.
- * Absolute URLs pass through; `/api/v1/assets/...` gets API base in live mode.
+ * Absolute URLs pass through; `/api/v1/assets/...` stays same-origin when API URL unset.
  */
 export function resolvePortfolioImageUrl(imageUrl: string): string {
   if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
@@ -13,6 +13,10 @@ export function resolvePortfolioImageUrl(imageUrl: string): string {
     return imageUrl;
   }
 
-  const base = clientEnv.NEXT_PUBLIC_API_URL.replace(/\/$/, "");
+  const base = resolveApiBaseUrl();
+  if (!base) {
+    return imageUrl;
+  }
+
   return imageUrl.startsWith("/") ? `${base}${imageUrl}` : `${base}/${imageUrl}`;
 }

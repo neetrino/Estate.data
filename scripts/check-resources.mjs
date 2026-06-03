@@ -2,7 +2,7 @@ import { loadRootEnv } from "./lib/load-root-env.mjs";
 
 loadRootEnv();
 
-const DEFAULT_API_URL = "http://localhost:3001";
+const DEFAULT_API_URL = "http://localhost:3000";
 const ARTICLES_PATH = "/api/v1/articles";
 const FAQ_PATH = "/api/v1/faq";
 const ADMIN_ARTICLES_PATH = "/api/v1/admin/articles";
@@ -36,7 +36,7 @@ async function issueAdminToken() {
     .sign(new TextEncoder().encode(secret));
 }
 
-const apiUrl = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL;
+const apiUrl = (process.env.API_URL ?? DEFAULT_API_URL).trim();
 
 const articlesUrl = resolveUrl(apiUrl, ARTICLES_PATH);
 const faqUrl = resolveUrl(apiUrl, FAQ_PATH);
@@ -49,7 +49,7 @@ try {
   });
 } catch (error) {
   const message = error instanceof Error ? error.message : "Network error";
-  console.error(`Resources check failed — is \`pnpm dev:api\` running? ${message}`);
+  console.error(`Resources check failed — is \`pnpm dev\` running? ${message}`);
   process.exit(1);
 }
 
