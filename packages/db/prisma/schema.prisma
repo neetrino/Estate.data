@@ -235,3 +235,23 @@ model Payment {
   @@index([orderId])
   @@map("payments")
 }
+
+/// Singleton homepage hero copy — key `home`.
+model HomeHero {
+  id                   String   @id @default(cuid())
+  key                  String   @unique
+  title                String   @db.Text
+  description          String   @db.Text
+  primaryButtonLabel   String   @map("primary_button_label")
+  primaryButtonHref    String   @map("primary_button_href")
+  secondaryButtonLabel String   @map("secondary_button_label")
+  secondaryButtonHref  String   @map("secondary_button_href")
+  desktopImageUrl      String?  @map("desktop_image_url")
+  desktopImageKey      String?  @map("desktop_image_key")
+  mobileImageUrl       String?  @map("mobile_image_url")
+  mobileImageKey       String?  @map("mobile_image_key")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  @@map("home_heroes")
+}

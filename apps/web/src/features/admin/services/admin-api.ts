@@ -4,6 +4,8 @@ import type {
   AdminAsset,
   AdminContactInquiry,
   AdminFaqItem,
+  AdminHomeHero,
+  AdminHomeHeroUploadResult,
   AdminMediaListResponse,
   AdminOrder,
   AdminPortfolioProject,
@@ -225,4 +227,51 @@ export async function uploadAdminMedia(file: File): Promise<unknown> {
 
 export function fetchAdminPaymentsOrders(): Promise<AdminOrder[]> {
   return adminAuthenticatedRequest<AdminOrder[]>(API_ROUTES.adminPaymentsOrders);
+}
+
+export function fetchAdminHomeHero(): Promise<AdminHomeHero> {
+  return adminAuthenticatedRequest<AdminHomeHero>(API_ROUTES.adminHomeHero);
+}
+
+export function updateAdminHomeHero(input: AdminHomeHero): Promise<AdminHomeHero> {
+  return adminAuthenticatedRequest<AdminHomeHero>(API_ROUTES.adminHomeHero, {
+    method: "PATCH",
+    body: input,
+  });
+}
+
+export async function uploadAdminHomeHeroImage(
+  file: File,
+): Promise<AdminHomeHeroUploadResult> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("context", "homeHero");
+
+  const { readAdminAuthToken } = await import("@/features/admin/lib/admin-auth-storage");
+  const token = readAdminAuthToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const response = await fetch(API_ROUTES.adminUpload, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const { ApiError } = await import("@/shared/api/errors");
+    let message = "Upload failed";
+    try {
+      const json = (await response.json()) as { error?: { message?: string } };
+      message = json.error?.message ?? message;
+    } catch {
+      // keep default message
+    }
+    throw new ApiError(message, response.status);
+  }
+
+  const json = (await response.json()) as { data: AdminHomeHeroUploadResult };
+  return json.data;
 }
