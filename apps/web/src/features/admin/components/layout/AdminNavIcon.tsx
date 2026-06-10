@@ -88,6 +88,7 @@ export function AdminNavIcon({ id, className = ICON_CLASS_DEFAULT }: AdminNavIco
         </NavIconSvg>
       );
     case "site-content":
+    case "home-hero":
       return (
         <NavIconSvg className={className}>
           <path d="M4 6h16M4 12h16M4 18h10" />

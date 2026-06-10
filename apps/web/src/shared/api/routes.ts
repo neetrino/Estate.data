@@ -36,6 +36,8 @@ export const API_ROUTES = {
   adminAssets: `${API_VERSION_PREFIX}/admin/assets`,
   adminMedia: `${API_VERSION_PREFIX}/admin/media`,
   adminPaymentsOrders: `${API_VERSION_PREFIX}/admin/payments/orders`,
+  adminHomeHero: `${API_VERSION_PREFIX}/admin/home-hero`,
+  adminUpload: `${API_VERSION_PREFIX}/admin/upload`,
 } as const;
 
 export type ApiRouteKey = keyof typeof API_ROUTES;

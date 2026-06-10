@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
 import {
   HERO_ACTIONS_ROOT_CLASS,
   HERO_ACTIONS_SECONDARY_CLASS,
@@ -16,13 +15,23 @@ import {
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
-export function HeroActions() {
-  const { primaryCta, secondaryCta } = HOME_HERO_COPY;
+type HeroActionsProps = {
+  readonly primaryButtonLabel: string;
+  readonly primaryButtonHref: string;
+  readonly secondaryButtonLabel: string;
+  readonly secondaryButtonHref: string;
+};
 
+export function HeroActions({
+  primaryButtonLabel,
+  primaryButtonHref,
+  secondaryButtonLabel,
+  secondaryButtonHref,
+}: HeroActionsProps) {
   return (
     <div className={`${HERO_ACTIONS_ROOT_CLASS} ${HOME_MOBILE_CTA_STACK_CLASS}`}>
       <EstatePillButtonLink
-        href={primaryCta.href}
+        href={primaryButtonHref}
         fullWidth
         className={[
           HOME_MOBILE_BOOK_SHOOT_PILL_CLASS,
@@ -30,14 +39,14 @@ export function HeroActions() {
           LANDING_BOOK_SHOOT_GRADIENT_HOVER_CLASS,
         ].join(" ")}
       >
-        {primaryCta.label}
+        {primaryButtonLabel}
       </EstatePillButtonLink>
 
       <Link
-        href={secondaryCta.href}
+        href={secondaryButtonHref}
         className={`${HERO_ACTIONS_SECONDARY_CLASS} ${HOME_MOBILE_LEFT_PILL_CLASS}`}
       >
-        <span>{secondaryCta.label}</span>
+        <span>{secondaryButtonLabel}</span>
         <span className={HERO_ACTIONS_SECONDARY_ICON_DISC_CLASS} aria-hidden>
           <BarChartIcon />
         </span>

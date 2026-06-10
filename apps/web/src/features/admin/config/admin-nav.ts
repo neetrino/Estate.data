@@ -9,11 +9,13 @@ export type AdminNavIconId =
   | "contact-inquiries"
   | "payments"
   | "site-content"
+  | "home-hero"
   | "logout";
 import {
   SUPERSUDO_PANEL_ARTICLES_PATH,
   SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
   SUPERSUDO_PANEL_FAQ_PATH,
+  SUPERSUDO_PANEL_HOME_HERO_PATH,
   SUPERSUDO_PANEL_PATH,
   SUPERSUDO_PANEL_PAYMENTS_PATH,
   SUPERSUDO_PANEL_PORTFOLIO_PATH,
@@ -39,6 +41,12 @@ const CONTENT_NAV_ITEMS: AdminNavItem[] = [
   { id: "pricing", label: "Pricing", href: SUPERSUDO_PANEL_PRICING_PATH, icon: "pricing" },
   { id: "articles", label: "Articles", href: SUPERSUDO_PANEL_ARTICLES_PATH, icon: "articles" },
   { id: "faq", label: "FAQ", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
+  {
+    id: "home-hero",
+    label: "Home Hero",
+    href: SUPERSUDO_PANEL_HOME_HERO_PATH,
+    icon: "home-hero",
+  },
 ];
 
 const SITE_CONTENT_NAV_ITEM: AdminNavItem = {

@@ -469,7 +469,56 @@ async function main(): Promise<void> {
 
   await seedTranslations();
   await seedPricing();
+  await seedHomeHero();
   await seedAdminUser();
+}
+
+const HOME_HERO_SEED = {
+  key: "home",
+  title: "Stunning visuals.\nActionable insights.\nFaster sales in LA.",
+  description:
+    "Estate Data pairs stunning real estate media with property intelligence — so brokers, developers, and investors close deals with confidence.",
+  primaryButtonLabel: "Book a Shoot",
+  primaryButtonHref: "/contact",
+  secondaryButtonLabel: "Request a Market Report",
+  secondaryButtonHref: "/data-bim",
+  desktopImageUrl: "/images/hero-landing-bg-2560.webp",
+  desktopImageKey: null,
+  mobileImageUrl: "/images/hero-landing-bg-mobile-20260528-v2.png",
+  mobileImageKey: null,
+} as const;
+
+async function seedHomeHero(): Promise<void> {
+  await prisma.homeHero.upsert({
+    where: { key: HOME_HERO_SEED.key },
+    create: {
+      key: HOME_HERO_SEED.key,
+      title: HOME_HERO_SEED.title,
+      description: HOME_HERO_SEED.description,
+      primaryButtonLabel: HOME_HERO_SEED.primaryButtonLabel,
+      primaryButtonHref: HOME_HERO_SEED.primaryButtonHref,
+      secondaryButtonLabel: HOME_HERO_SEED.secondaryButtonLabel,
+      secondaryButtonHref: HOME_HERO_SEED.secondaryButtonHref,
+      desktopImageUrl: HOME_HERO_SEED.desktopImageUrl,
+      desktopImageKey: HOME_HERO_SEED.desktopImageKey,
+      mobileImageUrl: HOME_HERO_SEED.mobileImageUrl,
+      mobileImageKey: HOME_HERO_SEED.mobileImageKey,
+    },
+    update: {
+      title: HOME_HERO_SEED.title,
+      description: HOME_HERO_SEED.description,
+      primaryButtonLabel: HOME_HERO_SEED.primaryButtonLabel,
+      primaryButtonHref: HOME_HERO_SEED.primaryButtonHref,
+      secondaryButtonLabel: HOME_HERO_SEED.secondaryButtonLabel,
+      secondaryButtonHref: HOME_HERO_SEED.secondaryButtonHref,
+      desktopImageUrl: HOME_HERO_SEED.desktopImageUrl,
+      desktopImageKey: HOME_HERO_SEED.desktopImageKey,
+      mobileImageUrl: HOME_HERO_SEED.mobileImageUrl,
+      mobileImageKey: HOME_HERO_SEED.mobileImageKey,
+    },
+  });
+
+  console.info("Seeded home hero");
 }
 
 type SeedPricingCategory = {

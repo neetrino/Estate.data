@@ -1,6 +1,7 @@
 import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
 import { HomeClientVoicesCtaShell } from "@/features/home/landing/components/HomeClientVoicesCtaShell";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
+import type { HomeHeroContentFields } from "@/features/home/content/heroCopy";
 import {
   LazyHomeClientVoices,
   LazyHomeHowItWorks,
@@ -15,13 +16,14 @@ import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 
 type HomeLandingPageProps = {
   projects: readonly RecentWorkProject[];
+  hero: HomeHeroContentFields;
 };
 
-export function HomeLandingPage({ projects }: HomeLandingPageProps) {
+export function HomeLandingPage({ projects, hero }: HomeLandingPageProps) {
   return (
     <div className={LANDING_PAGE_CLASS}>
       <main className="relative isolate overflow-x-clip">
-        <HeroSection />
+        <HeroSection hero={hero} />
         <LazyHomeWhatWeDo />
         <LazyHomeHowItWorks />
         <LazyHomeRecentWork projects={projects} />

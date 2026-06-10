@@ -131,3 +131,23 @@ export type AdminOrder = {
   updatedAt: string;
   payments: AdminPayment[];
 };
+
+export type AdminHomeHero = {
+  title: string;
+  description: string;
+  primaryButtonLabel: string;
+  primaryButtonHref: string;
+  secondaryButtonLabel: string;
+  secondaryButtonHref: string;
+  desktopImageUrl: string | null;
+  desktopImageKey: string | null;
+  mobileImageUrl: string | null;
+  mobileImageKey: string | null;
+};
+
+export type AdminHomeHeroUploadResult = {
+  objectKey: string;
+  publicUrl: string;
+  byteSize: number;
+  mimeType: string;
+};

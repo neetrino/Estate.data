@@ -14,6 +14,7 @@ export const SUPERSUDO_PANEL_ASSETS_PATH = "/supersudo/panel/assets";
 export const SUPERSUDO_PANEL_MEDIA_PATH = "/supersudo/panel/media";
 export const SUPERSUDO_PANEL_PAYMENTS_PATH = "/supersudo/panel/payments";
 export const SUPERSUDO_PANEL_SITE_CONTENT_PATH = "/supersudo/panel/site-content";
+export const SUPERSUDO_PANEL_HOME_HERO_PATH = "/supersudo/panel/site-content/home-hero";
 
 /** Whether the pathname belongs to the admin area. */
 export function isSupersudoRoute(pathname: string): boolean {
@@ -34,6 +35,7 @@ const PAGE_TITLES: Readonly<Record<string, string>> = {
   [SUPERSUDO_PANEL_MEDIA_PATH]: "Media",
   [SUPERSUDO_PANEL_PAYMENTS_PATH]: "Payments",
   [SUPERSUDO_PANEL_SITE_CONTENT_PATH]: "Site content",
+  [SUPERSUDO_PANEL_HOME_HERO_PATH]: "Home Hero",
 };
 
 /** Human-readable title for the current admin panel route. */

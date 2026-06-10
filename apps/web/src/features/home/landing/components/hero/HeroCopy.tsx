@@ -1,4 +1,4 @@
-import { HOME_HERO_COPY } from "@/features/home/content/heroCopy";
+import { HOME_HERO_COPY, splitHomeHeroTitleLines } from "@/features/home/content/heroCopy";
 import {
   HERO_COPY_BADGE_CLASS,
   HERO_COPY_HEADLINE_CLASS,
@@ -6,9 +6,14 @@ import {
   HERO_COPY_SUBTITLE_CLASS,
 } from "@/features/home/landing/lib/heroCopyStyles";
 
-export function HeroCopy() {
-  const { locationBadge, headlineLines, descriptionLines } = HOME_HERO_COPY;
-  const subtitle = descriptionLines.join(" ");
+type HeroCopyProps = {
+  readonly title: string;
+  readonly description: string;
+};
+
+export function HeroCopy({ title, description }: HeroCopyProps) {
+  const { locationBadge } = HOME_HERO_COPY;
+  const titleLines = splitHomeHeroTitleLines(title);
 
   return (
     <div className={HERO_COPY_ROOT_CLASS}>
@@ -18,27 +23,20 @@ export function HeroCopy() {
       </p>
 
       <h1 className={HERO_COPY_HEADLINE_CLASS}>
-        {headlineLines.map((line) => {
-          const isAccentLine = line.segments.some((segment) => segment.accent);
+        {titleLines.map((line, index) => {
+          const isAccentLine = titleLines.length >= 2 && index === 1;
           return (
             <span
-              key={line.segments.map((segment) => segment.text).join("")}
+              key={`${index}-${line}`}
               className={isAccentLine ? "block whitespace-nowrap" : "block [overflow-wrap:anywhere]"}
             >
-              {line.segments.map((segment) => (
-                <span
-                  key={segment.text}
-                  className={segment.accent ? "hero-headline-gradient" : undefined}
-                >
-                  {segment.text}
-                </span>
-              ))}
+              <span className={isAccentLine ? "hero-headline-gradient" : undefined}>{line}</span>
             </span>
           );
         })}
       </h1>
 
-      <p className={HERO_COPY_SUBTITLE_CLASS}>{subtitle}</p>
+      <p className={HERO_COPY_SUBTITLE_CLASS}>{description}</p>
     </div>
   );
 }
