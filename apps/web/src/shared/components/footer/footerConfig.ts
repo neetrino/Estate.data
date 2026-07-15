@@ -1,21 +1,22 @@
-import { DATA_BIM_PATH } from "@/shared/lib/routes";
 import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
+import { SERVICE_CATALOG } from "@/shared/lib/serviceCatalog";
 
 export type FooterNavLink = {
   readonly id: string;
   readonly label: string;
   readonly href: string;
+  readonly disabled?: boolean;
 };
 
 export const FOOTER_BRAND_TAGLINE =
-  "High-impact visual marketing and actionable property intelligence — built for Los Angeles.";
+  "High-impact visual marketing for real estate teams across Los Angeles.";
 
-export const FOOTER_SERVICES_LINKS = [
-  { id: "photography-video", label: "Photography & Video", href: "/services" },
-  { id: "drone-tours", label: "Drone & 3D Tours", href: "/services" },
-  { id: "scan-to-bim", label: "Scan to BIM", href: DATA_BIM_PATH },
-  { id: "market-reports", label: "Market Reports", href: "/solutions" },
-] as const satisfies readonly FooterNavLink[];
+export const FOOTER_SERVICES_LINKS = SERVICE_CATALOG.map((service) => ({
+  id: service.id,
+  label: service.enabled ? service.label : `${service.label} (Coming Soon)`,
+  href: service.href,
+  disabled: !service.enabled,
+})) as readonly FooterNavLink[];
 
 export const FOOTER_COMPANY_LINKS = [
   { id: "about", label: "About", href: "/about" },

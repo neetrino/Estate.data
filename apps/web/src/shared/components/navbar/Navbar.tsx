@@ -24,12 +24,14 @@ import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import {
   MAIN_NAV_LINKS,
   NAV_CTA_LINKS,
+  SERVICE_NAV_LINKS,
   type NavLink,
 } from "@/shared/components/navbar/navConfig";
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
+import type { ServiceCatalogItem } from "@/shared/lib/serviceCatalog";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -212,6 +214,7 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
                     link={link}
                     active={isNavbarActivePath(pathname, link.href)}
                     tone={navTone}
+                    serviceLinks={link.href === "/services" ? SERVICE_NAV_LINKS : undefined}
                   />
                 ))}
               </ul>
@@ -268,16 +271,54 @@ function NavItem({
   link,
   active,
   tone,
+  serviceLinks,
 }: {
   link: NavLink;
   active: boolean;
   tone: NavTone;
+  serviceLinks?: readonly ServiceCatalogItem[];
 }) {
+  const hasServiceDropdown = (serviceLinks?.length ?? 0) > 0;
+
   return (
-    <li>
-      <Link href={link.href} className={desktopNavLinkClass(active, tone)} aria-current={active ? "page" : undefined}>
+    <li className={hasServiceDropdown ? "group relative" : undefined}>
+      <Link
+        href={link.href}
+        className={desktopNavLinkClass(active, tone)}
+        aria-current={active ? "page" : undefined}
+      >
         {link.label}
       </Link>
+      {hasServiceDropdown ? (
+        <div className="pointer-events-none invisible absolute left-1/2 top-full z-[130] mt-3 w-72 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
+          <ul className="space-y-1" aria-label="Services">
+            {serviceLinks?.map((service) => (
+              <li key={service.id}>
+                {service.enabled ? (
+                  <Link
+                    href={service.href}
+                    className="flex items-center rounded-xl px-3 py-2 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                  >
+                    {service.label}
+                  </Link>
+                ) : (
+                  <span
+                    className="flex cursor-not-allowed items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-slate-400"
+                    aria-disabled
+                  >
+                    <span>{service.label}</span>
+                    {service.comingSoon ? (
+                      <span className="rounded-full border border-slate-300 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
+                        Coming Soon
+                      </span>
+                    ) : null}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </li>
   );
 }

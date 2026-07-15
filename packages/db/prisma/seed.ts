@@ -475,13 +475,14 @@ async function main(): Promise<void> {
 
 const HOME_HERO_SEED = {
   key: "home",
-  title: "Stunning visuals.\nActionable insights.\nFaster sales in LA.",
+  title:
+    "From first impression to final decision, we help every property present its best self.",
   description:
-    "Estate Data pairs stunning real estate media with property intelligence — so brokers, developers, and investors close deals with confidence.",
-  primaryButtonLabel: "Book a Shoot",
+    "Estatedata.cloud delivers premium real estate media that helps brokers, developers, and investors present every property at its best.",
+  primaryButtonLabel: "Book Now",
   primaryButtonHref: "/contact",
-  secondaryButtonLabel: "Request a Market Report",
-  secondaryButtonHref: "/data-bim",
+  secondaryButtonLabel: "Book Consultation",
+  secondaryButtonHref: "/contact",
   desktopImageUrl: "/images/hero-landing-bg-2560.webp",
   desktopImageKey: null,
   mobileImageUrl: "/images/hero-landing-bg-mobile-20260528-v2.png",

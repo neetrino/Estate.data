@@ -1,4 +1,5 @@
 import { HeroSection } from "@/features/home/landing/components/hero/HeroSection";
+import { HomeMediaShowcase } from "@/features/home/components/HomeMediaShowcase";
 import { HomeClientVoicesCtaShell } from "@/features/home/landing/components/HomeClientVoicesCtaShell";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import type { HomeHeroContentFields } from "@/features/home/content/heroCopy";
@@ -6,7 +7,6 @@ import {
   LazyHomeClientVoices,
   LazyHomeHowItWorks,
   LazyHomeListingCta,
-  LazyHomePropertyIntelligence,
   LazyHomeRecentWork,
   LazyHomeStatsStrip,
   LazyHomeWhatWeDo,
@@ -27,8 +27,8 @@ export function HomeLandingPage({ projects, hero }: HomeLandingPageProps) {
         <LazyHomeWhatWeDo />
         <LazyHomeHowItWorks />
         <LazyHomeRecentWork projects={projects} />
+        <HomeMediaShowcase />
         <LazyHomeStatsStrip />
-        <LazyHomePropertyIntelligence />
         <HomeClientVoicesCtaShell
           clientVoices={<LazyHomeClientVoices />}
           listingCta={<LazyHomeListingCta />}

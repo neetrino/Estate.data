@@ -43,7 +43,7 @@ function TrustLogoCard({ partner }: { partner: TrustedPartner }) {
         alt={partner.name}
         width={TRUSTED_PARTNER_IMAGE_WIDTH_PX}
         height={TRUSTED_PARTNER_IMAGE_HEIGHT_PX}
-        className="max-h-10 w-full object-contain object-center grayscale sm:max-h-11"
+        className="max-h-12 w-full object-contain object-center grayscale sm:max-h-14"
         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
       />
     </div>

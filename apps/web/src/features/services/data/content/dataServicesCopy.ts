@@ -66,9 +66,9 @@ export const DATA_SERVICES_INTEGRATIONS_COPY = {
 } as const;
 
 export const DATA_SERVICES_REPORT_CTA_COPY = {
-  title: "Request a free LA market report",
+  title: "Book a consultation",
   description:
-    "Get a tailored snapshot of your micro-market — comparable sales, days on market, and buyer demand signals.",
-  buttonLabel: "Request report",
+    "Talk with our team about the right media and delivery approach for your next property.",
+  buttonLabel: "Book Consultation",
   buttonHref: "/contact",
 } as const;

@@ -12,7 +12,7 @@ export const HOME_CLIENT_VOICES_COPY = {
   eyebrow: "VOICES",
   title: "What clients say",
   subtitle:
-    "Trusted by brokers, developers, and investors to power smarter decisions in real estate.",
+    "Trusted by brokers, developers, and investors for premium real estate media delivery.",
   testimonials: [
     {
       id: "maya-chen",
@@ -25,7 +25,7 @@ export const HOME_CLIENT_VOICES_COPY = {
     {
       id: "david-ortiz",
       quote:
-        "BIM-ready scans in 48 hours saved our team weeks. The dashboards are now central to investor reporting.",
+        "The video and aerial package helped us launch faster and present the project with confidence.",
       name: "David Ortiz",
       role: "Developer, DTLA",
       icon: "building",
@@ -33,7 +33,7 @@ export const HOME_CLIENT_VOICES_COPY = {
     {
       id: "priya-shah",
       quote:
-        "I trust Estate Data's market intel. The data layer is what makes them different.",
+        "Their quality and consistency make every listing presentation look world-class.",
       name: "Priya Shah",
       role: "Investor",
       icon: "chart",

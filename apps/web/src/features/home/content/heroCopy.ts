@@ -1,5 +1,4 @@
 import { HERO_LANDING_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
-import { DATA_BIM_PATH } from "@/shared/lib/routes";
 
 type HeroTextSegment = {
   text: string;
@@ -31,20 +30,19 @@ export const HOME_HERO_COPY = {
   locationBadge: "Serving Greater Los Angeles",
   headlineLines: [
     {
-      segments: [{ text: "Stunning visuals.", accent: false }],
-    },
-    {
-      segments: [{ text: "Actionable insights.", accent: true }],
-    },
-    {
-      segments: [{ text: "Faster sales in LA.", accent: false }],
+      segments: [
+        {
+          text: "From first impression to final decision, we help every property present its best self.",
+          accent: false,
+        },
+      ],
     },
   ] as const satisfies readonly HeroHeadlineLine[],
   descriptionLines: [
-    "Estate Data pairs stunning real estate media with property intelligence — so brokers, developers, and investors close deals with confidence.",
+    "EstateData.cloud delivers premium real estate media that helps brokers, developers, and investors present every property at its best.",
   ] as const,
-  primaryCta: { label: "Book a Shoot", href: "/contact" },
-  secondaryCta: { label: "Request a Market Report", href: DATA_BIM_PATH },
+  primaryCta: { label: "Book Now", href: "/contact" },
+  secondaryCta: { label: "Book Consultation", href: "/contact" },
 } as const;
 
 /** Static fallback when the DB row is missing. */

@@ -21,7 +21,7 @@ export type MediaService = {
 export const MEDIA_PAGE_CTAS = {
   pricingLabel: "See pricing tiers",
   pricingHref: PRICING_PATH,
-  bookLabel: "Book a shoot",
+  bookLabel: "Book Now",
   bookHref: "/contact",
 } as const;
 
