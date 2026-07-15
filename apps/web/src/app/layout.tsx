@@ -1,4 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoscript,
+} from "@/shared/analytics/GoogleTagManager";
 import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
 import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
 import { SiteChrome } from "@/shared/components/navbar";
@@ -30,6 +34,8 @@ export default function RootLayout({
       className={`${siteFont.variable} h-full antialiased [color-scheme:light]`}
     >
       <body className="flex min-h-full flex-col bg-white font-sans text-foreground">
+        <GoogleTagManagerNoscript />
+        <GoogleTagManager />
         <SiteChrome>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         </SiteChrome>
