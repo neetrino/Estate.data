@@ -4,5 +4,16 @@ export async function register(): Promise<void> {
   }
 
   const { ensureDatabaseReady } = await import("@/server/lib/env");
-  await ensureDatabaseReady();
+  try {
+    await ensureDatabaseReady();
+  } catch (error) {
+    if (process.env.NODE_ENV !== "development") {
+      throw error;
+    }
+
+    const { logger } = await import("@/server/lib/logger");
+    logger.warn("startup.db.unavailable", {
+      reason: error instanceof Error ? error.message : "Unknown database startup failure",
+    });
+  }
 }

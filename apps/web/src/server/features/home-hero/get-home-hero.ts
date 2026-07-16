@@ -8,6 +8,7 @@ import {
   type HomeHeroContentFields,
 } from "@/features/home/content/heroCopy";
 import { getPrisma } from "@/server/lib/db";
+import { logger } from "@/server/lib/logger";
 
 type HomeHeroRow = {
   title: string;
@@ -52,16 +53,23 @@ function mapRowToContent(row: HomeHeroRow): HomeHeroContent {
 
 /** Read singleton home hero — falls back to static defaults when missing. */
 export async function getHomeHero(): Promise<HomeHeroContent> {
-  const row = await getPrisma().homeHero.findUnique({
-    where: { key: HOME_HERO_KEY },
-    select: HOME_HERO_SELECT,
-  });
+  try {
+    const row = await getPrisma().homeHero.findUnique({
+      where: { key: HOME_HERO_KEY },
+      select: HOME_HERO_SELECT,
+    });
 
-  if (!row) {
+    if (!row) {
+      return getDefaultHomeHeroContent();
+    }
+
+    return mapRowToContent(row);
+  } catch (error) {
+    logger.warn("home_hero.read.fallback_default", {
+      reason: error instanceof Error ? error.message : "Unknown home hero read failure",
+    });
     return getDefaultHomeHeroContent();
   }
-
-  return mapRowToContent(row);
 }
 
 /** Home hero with resolved image URLs for the storefront. */

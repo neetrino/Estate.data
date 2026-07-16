@@ -55,13 +55,24 @@ type LogoLinkProps = {
   onHomeClick?: () => void;
   tone?: NavTone;
   size?: LogoSize;
+  customLabel?: string;
+  customIconPath?: string;
+  useFigmaHomeDesktopStyle?: boolean;
 };
 
 function logoLayerOpacityClass(visible: boolean): string {
   return visible ? "opacity-100" : "opacity-0";
 }
 
-export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" }: LogoLinkProps) {
+export function LogoLink({
+  onNavigate,
+  onHomeClick,
+  tone = "dark",
+  size = "nav",
+  customLabel,
+  customIconPath,
+  useFigmaHomeDesktopStyle = false,
+}: LogoLinkProps) {
   const pathname = usePathname();
   const isLight = tone === "light";
   const { imageWrapClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
@@ -84,6 +95,30 @@ export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" 
 
     scrollPageToTop();
   };
+
+  if (useFigmaHomeDesktopStyle && size === "nav" && customLabel && customIconPath) {
+    return (
+      <Link
+        href="/"
+        className="relative inline-flex shrink-0 items-center gap-2 text-[#0f172a]"
+        onClick={handleClick}
+      >
+        <span className="relative size-8 shrink-0">
+          <Image
+            src={customIconPath}
+            alt=""
+            aria-hidden
+            fill
+            unoptimized
+            className="object-contain"
+          />
+        </span>
+        <span className="text-[24px] font-semibold leading-[32px] tracking-[-0.6px] [font-family:Inter,var(--font-site),sans-serif]">
+          {customLabel}
+        </span>
+      </Link>
+    );
+  }
 
   return (
     <Link
