@@ -18,9 +18,9 @@ export type WhatWeDoService = {
 export const HOME_WHAT_WE_DO_COPY = {
   title: "What we do",
   subtitleLines: [
-    "Media + Data, under one roof",
-    "From the first drone pass to the final dashboard,",
-    "we ship the assets and intelligence you need to move properties faster.",
+    "End-to-end real estate media services",
+    "From first capture to final delivery,",
+    "we create premium visuals that help properties stand out and sell faster.",
   ] as const,
   services: [
     {
@@ -56,8 +56,8 @@ export const HOME_WHAT_WE_DO_COPY = {
     },
     {
       id: "market-intelligence",
-      title: "Market Intelligence",
-      description: "Listings data, valuations, CRM integrations.",
+      title: "AI Media",
+      description: "Fast enhancement workflows with polished, listing-ready output.",
       icon: "market-intelligence",
     },
   ] as const satisfies readonly WhatWeDoService[],

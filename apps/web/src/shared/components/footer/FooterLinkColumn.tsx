@@ -17,9 +17,18 @@ export function FooterLinkColumn({ title, links, className }: FooterLinkColumnPr
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
           <li key={link.id}>
-            <Link href={link.href} className={FOOTER_LINK_CLASS}>
-              {link.label}
-            </Link>
+            {link.disabled ? (
+              <span
+                className={`${FOOTER_LINK_CLASS} cursor-not-allowed opacity-60`}
+                aria-disabled
+              >
+                {link.label}
+              </span>
+            ) : (
+              <Link href={link.href} className={FOOTER_LINK_CLASS}>
+                {link.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>

@@ -28,12 +28,6 @@ export const LazyHomeStatsStrip = lazyNamed(
   { loading: sectionLoading },
 );
 
-export const LazyHomePropertyIntelligence = lazyNamed(
-  () => import("@/features/home/components/HomePropertyIntelligence"),
-  "HomePropertyIntelligence",
-  { loading: mutedSectionLoading },
-);
-
 export const LazyHomeClientVoices = lazyNamed(
   () => import("@/features/home/components/HomeClientVoices"),
   "HomeClientVoices",

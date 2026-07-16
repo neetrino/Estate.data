@@ -24,12 +24,14 @@ import { LogoLink } from "@/shared/components/navbar/LogoLink";
 import {
   MAIN_NAV_LINKS,
   NAV_CTA_LINKS,
+  SERVICE_NAV_LINKS,
   type NavLink,
 } from "@/shared/components/navbar/navConfig";
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
+import type { ServiceCatalogItem } from "@/shared/lib/serviceCatalog";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -72,6 +74,18 @@ type NavbarProps = {
   landingPill?: boolean;
 };
 
+const FIGMA_HOME_NAV_LINKS: readonly NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Media", href: "/services" },
+  { label: "Data & Intelligence", href: "/data-bim" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "About", href: "/about" },
+] as const;
+
+const FIGMA_HOME_LOGO_ICON_PATH = "/images/hero/la-figma/logo-star.svg";
+const FIGMA_HOME_LOGO_LABEL = "LumenLA";
+
 export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -79,9 +93,12 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isOverHomeHero, setIsOverHomeHero] = useState(true);
+  const [isInitialHeaderAnimating, setIsInitialHeaderAnimating] = useState(true);
   const previousPathnameRef = useRef<string | null>(null);
   const lastBurgerToggleAtRef = useRef(0);
   const scrollHomeOnLogoRef = useRef(false);
+  const initialHeaderAnimationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isMobileMenuVisible = mobileMenuOpen;
 
@@ -114,6 +131,18 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   };
 
   useEffect(() => {
+    initialHeaderAnimationTimeoutRef.current = setTimeout(() => {
+      setIsInitialHeaderAnimating(false);
+    }, 420);
+
+    return () => {
+      if (initialHeaderAnimationTimeoutRef.current) {
+        clearTimeout(initialHeaderAnimationTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     if (previousPathnameRef.current === null) {
       previousPathnameRef.current = pathname;
       return;
@@ -133,6 +162,33 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
     window.addEventListener("scroll", updateScrolled, { passive: true });
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
+
+  useEffect(() => {
+    if (!isHome) {
+      return;
+    }
+
+    const updateHeroOverlayState = () => {
+      const heroElement = document.querySelector<HTMLElement>(".la-hero");
+      if (!heroElement) {
+        setIsOverHomeHero(window.scrollY <= NAVBAR_SCROLL_OFFSET_PX);
+        return;
+      }
+
+      const heroBottom = heroElement.offsetTop + heroElement.offsetHeight;
+      const navbarEstimatedHeightPx = 112;
+      setIsOverHomeHero(window.scrollY + navbarEstimatedHeightPx < heroBottom);
+    };
+
+    updateHeroOverlayState();
+    window.addEventListener("scroll", updateHeroOverlayState, { passive: true });
+    window.addEventListener("resize", updateHeroOverlayState);
+
+    return () => {
+      window.removeEventListener("scroll", updateHeroOverlayState);
+      window.removeEventListener("resize", updateHeroOverlayState);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     if (!isMobileMenuVisible) {
@@ -177,6 +233,8 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
 
   const navTone =
     landingPill || isMobileMenuVisible || !isOverlay || scrolled ? "dark" : "light";
+  const useFigmaHomeDesktopHeader = isHome;
+  const useTransparentHomeHeader = useFigmaHomeDesktopHeader && isOverHomeHero && !isMobileMenuVisible;
 
   const positionClass = NAVBAR_OVERLAY_POSITION_CLASS;
 
@@ -185,42 +243,100 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   return (
     <>
       <header
-        className={`${positionClass} ${headerZClass} ${NAVBAR_SURFACE_TRANSITION_CLASS} ${NAVBAR_TOP_PADDING_CLASS} ${headerSurfaceClass}`}
+        className={[
+          positionClass,
+          headerZClass,
+          NAVBAR_SURFACE_TRANSITION_CLASS,
+          NAVBAR_TOP_PADDING_CLASS,
+          headerSurfaceClass,
+          "transform-gpu transition-[transform,opacity,filter] duration-360 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          isInitialHeaderAnimating ? "translate-y-[-8px] opacity-0 blur-[2px]" : "translate-y-0 opacity-100 blur-0",
+          "motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:blur-0",
+        ].join(" ")}
       >
         <nav
-          className={[SITE_PAGE_SHELL_CLASS, "py-3 sm:py-4"].join(" ")}
+          className={[
+            useFigmaHomeDesktopHeader
+              ? "w-full px-0 py-0"
+              : `${SITE_PAGE_SHELL_CLASS} py-3 sm:py-4`,
+          ].join(" ")}
           aria-label="Main"
         >
           <div
             className={[
-              "navbar-landing-pill",
-              isHome ? "navbar-landing-pill--home" : "",
-              "flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6",
+              useFigmaHomeDesktopHeader
+                ? [
+                    "la-home-navbar-shell border-b transition-[background-color,border-color,backdrop-filter,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    useTransparentHomeHeader
+                      ? "la-home-navbar-shell--transparent border-white/0 bg-white/0 backdrop-blur-[0px] shadow-none"
+                      : "la-home-navbar-shell--solid border-white/60 bg-[rgba(255,255,255,0.5)] backdrop-blur-sm shadow-[0_10px_30px_rgba(15,23,42,0.08)]",
+                  ].join(" ")
+                : "navbar-landing-pill",
+              isHome && !useFigmaHomeDesktopHeader ? "navbar-landing-pill--home" : "",
+              useFigmaHomeDesktopHeader
+                ? "flex items-center justify-between gap-8 px-8 py-6"
+                : "flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6",
             ].join(" ")}
           >
-            <LogoLink
-              tone={navTone}
-              onNavigate={closeMobile}
-              onHomeClick={handleHomeLogoClick}
-            />
+            <div
+              className={[
+                "transform-gpu transition-[transform,opacity,filter] duration-360 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                "motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:blur-0",
+                isInitialHeaderAnimating
+                  ? "translate-y-[5px] opacity-0 blur-[1px]"
+                  : "translate-y-0 opacity-100 blur-0",
+              ].join(" ")}
+            >
+              <LogoLink
+                tone={navTone}
+                onNavigate={closeMobile}
+                onHomeClick={handleHomeLogoClick}
+                customIconPath={useFigmaHomeDesktopHeader ? FIGMA_HOME_LOGO_ICON_PATH : undefined}
+                customLabel={useFigmaHomeDesktopHeader ? FIGMA_HOME_LOGO_LABEL : undefined}
+                useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}
+              />
+            </div>
 
-            <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4`}>
-              <ul className="flex items-center justify-center gap-5 xl:gap-7">
-                {MAIN_NAV_LINKS.map((link) => (
+            <div
+              className={`${NAVBAR_DESKTOP_ONLY_CLASS} min-w-0 flex-1 justify-center px-4 transform-gpu transition-[transform,opacity,filter] duration-360 delay-40 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:blur-0 ${
+                isInitialHeaderAnimating
+                  ? "translate-y-[6px] opacity-0 blur-[1px]"
+                  : "translate-y-0 opacity-100 blur-0"
+              }`}
+            >
+              <ul className="flex items-center justify-center gap-8">
+                {(useFigmaHomeDesktopHeader ? FIGMA_HOME_NAV_LINKS : MAIN_NAV_LINKS).map((link) => (
                   <NavItem
                     key={link.href}
                     link={link}
                     active={isNavbarActivePath(pathname, link.href)}
-                    tone={navTone}
+                    tone={useFigmaHomeDesktopHeader ? "dark" : navTone}
+                    serviceLinks={link.href === "/services" ? SERVICE_NAV_LINKS : undefined}
+                    useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}
                   />
                 ))}
               </ul>
             </div>
 
-            <div className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center`}>
+            <div
+              className={`${NAVBAR_DESKTOP_ONLY_CLASS} shrink-0 items-center gap-3 transform-gpu transition-[transform,opacity,filter] duration-360 delay-80 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 motion-reduce:blur-0 ${
+                isInitialHeaderAnimating
+                  ? "translate-y-[7px] opacity-0 blur-[1px]"
+                  : "translate-y-0 opacity-100 blur-0"
+              }`}
+            >
+              {useFigmaHomeDesktopHeader ? (
+                <Link
+                  href="/contact"
+                  className="inline-flex h-8 items-center justify-center rounded-full border border-white/80 bg-transparent px-6 text-center text-[12px] font-semibold leading-[16px] uppercase tracking-[1.2px] text-[#1e293b] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/50"
+                >
+                  Contact
+                </Link>
+              ) : null}
               <NavBookShootCta
                 href={NAV_CTA_LINKS.bookShoot.href}
-                label={NAV_CTA_LINKS.bookShoot.label}
+                label={useFigmaHomeDesktopHeader ? "BOOK A SHOOT" : NAV_CTA_LINKS.bookShoot.label}
+                useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}
               />
             </div>
 
@@ -268,21 +384,79 @@ function NavItem({
   link,
   active,
   tone,
+  serviceLinks,
+  useFigmaHomeDesktopStyle = false,
 }: {
   link: NavLink;
   active: boolean;
   tone: NavTone;
+  serviceLinks?: readonly ServiceCatalogItem[];
+  useFigmaHomeDesktopStyle?: boolean;
 }) {
+  const hasServiceDropdown = (serviceLinks?.length ?? 0) > 0;
+
   return (
-    <li>
-      <Link href={link.href} className={desktopNavLinkClass(active, tone)} aria-current={active ? "page" : undefined}>
+    <li className={hasServiceDropdown ? "group relative" : undefined}>
+      <Link
+        href={link.href}
+        className={desktopNavLinkClass(active, tone, useFigmaHomeDesktopStyle)}
+        aria-current={active ? "page" : undefined}
+      >
         {link.label}
       </Link>
+      {hasServiceDropdown ? (
+        <div className="pointer-events-none invisible absolute left-1/2 top-full z-[130] mt-3 w-72 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
+          <ul className="space-y-1" aria-label="Services">
+            {serviceLinks?.map((service) => (
+              <li key={service.id}>
+                {service.enabled ? (
+                  <Link
+                    href={service.href}
+                    className="flex items-center rounded-xl px-3 py-2 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                  >
+                    {service.label}
+                  </Link>
+                ) : (
+                  <span
+                    className="flex cursor-not-allowed items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-slate-400"
+                    aria-disabled
+                  >
+                    <span>{service.label}</span>
+                    {service.comingSoon ? (
+                      <span className="rounded-full border border-slate-300 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
+                        Coming Soon
+                      </span>
+                    ) : null}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </li>
   );
 }
 
-function desktopNavLinkClass(active: boolean, tone: NavTone): string {
+function desktopNavLinkClass(
+  active: boolean,
+  tone: NavTone,
+  useFigmaHomeDesktopStyle: boolean,
+): string {
+  if (useFigmaHomeDesktopStyle) {
+    const base = [
+      "relative inline-flex items-center whitespace-nowrap pb-[6px]",
+      "border-b-2 border-transparent text-[14px] leading-[20px] font-medium uppercase tracking-[1.4px]",
+      "transition-colors focus-visible:outline-none focus-visible:text-[#8e54e9]",
+    ].join(" ");
+
+    if (active) {
+      return `${base} border-[#8e54e9] text-[#8e54e9]`;
+    }
+
+    return `${base} text-[#475569] hover:text-slate-700`;
+  }
+
   const base = [
     NAV_ITEM_TEXT_CLASS,
     "relative inline-flex items-center whitespace-nowrap transition-colors",

@@ -1,7 +1,6 @@
 import { ASSET_KEYS } from "@estate/db";
 import { HOME_PROPERTY_INTELLIGENCE_VISUAL_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
 import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
-import { DATA_BIM_PATH } from "@/shared/lib/routes";
 
 export const PROPERTY_INTELLIGENCE_IMAGE_PATH = resolveAssetUrl(
   ASSET_KEYS.propertyIntelligenceHero,
@@ -26,28 +25,28 @@ export type HomePropertyIntelligenceFeature = {
 };
 
 export const HOME_PROPERTY_INTELLIGENCE_COPY = {
-  titleLine1: "Scan to BIM.",
-  titleLine2: "Data to decisions.",
+  titleLine1: "Media execution.",
+  titleLine2: "Consultation to delivery.",
   description:
-    "Pair your media package with LiDAR scanning, Revit-ready BIM, and live market dashboards. We integrate with HubSpot, Follow Up Boss, and your IDX feed—so your data works harder for you.",
+    "Work with our team to build the right media plan for your listing goals, timeline, and target audience.",
   features: [
     {
-      title: "Sub-centimeter LiDAR capture",
-      description: "High-density point clouds with unmatched accuracy.",
+      title: "Tailored production planning",
+      description: "Service mix aligned to property type, audience, and market.",
     },
     {
-      title: "Revit / IFC BIM deliverables",
-      description: "Coordination-ready models for design, ops & facilities.",
+      title: "Premium visual quality",
+      description: "Consistent standards across photo, video, drone, and edits.",
     },
     {
-      title: "Custom analytics dashboards",
-      description: "Visualize performance, utilization & opportunities.",
+      title: "Fast turnarounds",
+      description: "Reliable delivery timelines to support launch schedules.",
     },
     {
-      title: "MLS / IDX & CRM integrations",
-      description: "Seamless data flow across your ecosystem.",
+      title: "Expert collaboration",
+      description: "A guided process from briefing through final handoff.",
     },
   ] as const satisfies readonly HomePropertyIntelligenceFeature[],
-  ctaLabel: "Explore data services",
-  ctaHref: DATA_BIM_PATH,
+  ctaLabel: "Book Consultation",
+  ctaHref: "/contact",
 } as const;

@@ -31,19 +31,19 @@ type NavTone = "light" | "dark";
 type LogoSize = "nav" | "footer";
 
 type LogoDisplaySpec = {
-  readonly linkClass: string;
+  readonly imageWrapClass: string;
   readonly layerLightClass: string;
   readonly layerDarkClass: string;
 };
 
 const LOGO_SIZE_SPECS: Record<LogoSize, LogoDisplaySpec> = {
   nav: {
-    linkClass: `${LOGO_NAV_HEIGHT_CLASS} ${LOGO_NAV_WIDTH_CLASS}`,
+    imageWrapClass: `${LOGO_NAV_HEIGHT_CLASS} ${LOGO_NAV_WIDTH_CLASS}`,
     layerLightClass: `absolute inset-0 ${LOGO_NAV_HEIGHT_CLASS} w-full object-contain object-left`,
     layerDarkClass: `absolute -left-[4px] -top-[3px] ${LOGO_NAV_HEIGHT_CLASS} w-full object-contain object-left`,
   },
   footer: {
-    linkClass: `${LOGO_FOOTER_HEIGHT_CLASS} ${LOGO_FOOTER_WIDTH_CLASS}`,
+    imageWrapClass: `${LOGO_FOOTER_HEIGHT_CLASS} ${LOGO_FOOTER_WIDTH_CLASS}`,
     layerLightClass: `absolute inset-0 ${LOGO_FOOTER_HEIGHT_CLASS} w-full object-contain object-left`,
     layerDarkClass: `absolute -left-[6px] -top-[4px] ${LOGO_FOOTER_HEIGHT_CLASS} w-full object-contain object-left`,
   },
@@ -55,16 +55,29 @@ type LogoLinkProps = {
   onHomeClick?: () => void;
   tone?: NavTone;
   size?: LogoSize;
+  customLabel?: string;
+  customIconPath?: string;
+  useFigmaHomeDesktopStyle?: boolean;
 };
 
 function logoLayerOpacityClass(visible: boolean): string {
   return visible ? "opacity-100" : "opacity-0";
 }
 
-export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" }: LogoLinkProps) {
+export function LogoLink({
+  onNavigate,
+  onHomeClick,
+  tone = "dark",
+  size = "nav",
+  customLabel,
+  customIconPath,
+  useFigmaHomeDesktopStyle = false,
+}: LogoLinkProps) {
   const pathname = usePathname();
   const isLight = tone === "light";
-  const { linkClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
+  const { imageWrapClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
+  const toneClassName = isLight ? "text-white" : "text-slate-900";
+  const rootClassName = "inline-flex";
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
@@ -83,31 +96,57 @@ export function LogoLink({ onNavigate, onHomeClick, tone = "dark", size = "nav" 
     scrollPageToTop();
   };
 
+  if (useFigmaHomeDesktopStyle && size === "nav" && customLabel && customIconPath) {
+    return (
+      <Link
+        href="/"
+        className="relative inline-flex shrink-0 items-center gap-2 text-[#0f172a]"
+        onClick={handleClick}
+      >
+        <span className="relative size-8 shrink-0">
+          <Image
+            src={customIconPath}
+            alt=""
+            aria-hidden
+            fill
+            unoptimized
+            className="object-contain"
+          />
+        </span>
+        <span className="text-[24px] font-semibold leading-[32px] tracking-[-0.6px] [font-family:Inter,var(--font-site),sans-serif]">
+          {customLabel}
+        </span>
+      </Link>
+    );
+  }
+
   return (
     <Link
       href="/"
-      className={`relative inline-flex shrink-0 ${linkClass}`}
+      className={`${rootClassName} ${toneClassName} relative shrink-0`}
       onClick={handleClick}
     >
-      <Image
-        src={`${SITE_LOGO_PATH}?v=${SITE_LOGO_CACHE_VERSION}`}
-        alt={SITE_LOGO_ALT}
-        width={LOGO_SOURCE_WIDTH_PX}
-        height={LOGO_SOURCE_HEIGHT_PX}
-        priority
-        unoptimized
-        className={`${layerLightClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(isLight)}`}
-      />
-      <Image
-        src={`${SITE_LOGO_DARK_PATH}?v=${SITE_LOGO_DARK_CACHE_VERSION}`}
-        alt=""
-        aria-hidden
-        width={LOGO_SOURCE_WIDTH_PX}
-        height={LOGO_SOURCE_HEIGHT_PX}
-        priority
-        unoptimized
-        className={`${layerDarkClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(!isLight)}`}
-      />
+      <span className={`relative ${imageWrapClass}`}>
+        <Image
+          src={`${SITE_LOGO_PATH}?v=${SITE_LOGO_CACHE_VERSION}`}
+          alt={SITE_LOGO_ALT}
+          width={LOGO_SOURCE_WIDTH_PX}
+          height={LOGO_SOURCE_HEIGHT_PX}
+          priority
+          unoptimized
+          className={`${layerLightClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(isLight)}`}
+        />
+        <Image
+          src={`${SITE_LOGO_DARK_PATH}?v=${SITE_LOGO_DARK_CACHE_VERSION}`}
+          alt=""
+          aria-hidden
+          width={LOGO_SOURCE_WIDTH_PX}
+          height={LOGO_SOURCE_HEIGHT_PX}
+          priority
+          unoptimized
+          className={`${layerDarkClass} ${LOGO_LAYER_TRANSITION_CLASS} ${logoLayerOpacityClass(!isLight)}`}
+        />
+      </span>
     </Link>
   );
 }
