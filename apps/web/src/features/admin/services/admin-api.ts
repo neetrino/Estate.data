@@ -2,8 +2,10 @@ import { adminAuthenticatedRequest } from "@/features/admin/services/adminAuthen
 import type {
   AdminArticle,
   AdminAsset,
+  AdminContactField,
   AdminContactInquiry,
   AdminFaqItem,
+  AdminHeroSlide,
   AdminHomeHero,
   AdminHomeHeroUploadResult,
   AdminMediaListResponse,
@@ -11,6 +13,8 @@ import type {
   AdminPortfolioProject,
   AdminPricingPackage,
   AdminPricingResponse,
+  AdminSiteCopyItem,
+  AdminStudioService,
   DashboardSummary,
 } from "@/features/admin/types/admin-data";
 import { API_ROUTES } from "@/shared/api/routes";
@@ -274,4 +278,82 @@ export async function uploadAdminHomeHeroImage(
 
   const json = (await response.json()) as { data: AdminHomeHeroUploadResult };
   return json.data;
+}
+
+export function fetchAdminHeroSlides(): Promise<AdminHeroSlide[]> {
+  return adminAuthenticatedRequest<AdminHeroSlide[]>(API_ROUTES.adminHomeHeroSlides);
+}
+
+export function createAdminHeroSlide(body: Record<string, unknown>): Promise<AdminHeroSlide> {
+  return adminAuthenticatedRequest<AdminHeroSlide>(API_ROUTES.adminHomeHeroSlides, {
+    method: "POST",
+    body,
+  });
+}
+
+export function updateAdminHeroSlide(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<AdminHeroSlide> {
+  return adminAuthenticatedRequest<AdminHeroSlide>(API_ROUTES.adminHomeHeroSlideById(id), {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function deleteAdminHeroSlide(id: string): Promise<{ deleted: boolean }> {
+  return adminAuthenticatedRequest<{ deleted: boolean }>(
+    API_ROUTES.adminHomeHeroSlideById(id),
+    { method: "DELETE" },
+  );
+}
+
+export function fetchAdminStudioServices(): Promise<AdminStudioService[]> {
+  return adminAuthenticatedRequest<AdminStudioService[]>(API_ROUTES.adminStudioServices);
+}
+
+export function updateAdminStudioService(
+  id: string,
+  body: Record<string, unknown>,
+): Promise<AdminStudioService> {
+  return adminAuthenticatedRequest<AdminStudioService>(API_ROUTES.adminStudioServiceById(id), {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function fetchAdminContactFields(): Promise<AdminContactField[]> {
+  return adminAuthenticatedRequest<AdminContactField[]>(API_ROUTES.adminContactFields);
+}
+
+export function saveAdminContactFields(
+  fields: AdminContactField[],
+): Promise<AdminContactField[]> {
+  return adminAuthenticatedRequest<AdminContactField[]>(API_ROUTES.adminContactFields, {
+    method: "PUT",
+    body: {
+      fields: fields.map((field) => ({
+        fieldKey: field.fieldKey,
+        label: field.label,
+        placeholder: field.placeholder,
+        mode: field.mode,
+        sortOrder: field.sortOrder,
+      })),
+    },
+  });
+}
+
+export function fetchAdminSiteCopy(): Promise<AdminSiteCopyItem[]> {
+  return adminAuthenticatedRequest<AdminSiteCopyItem[]>(API_ROUTES.adminSiteCopy);
+}
+
+export function saveAdminSiteCopy(items: AdminSiteCopyItem[]): Promise<AdminSiteCopyItem[]> {
+  return adminAuthenticatedRequest<AdminSiteCopyItem[]>(API_ROUTES.adminSiteCopy, {
+    method: "PUT",
+    body: { items },
+  });
+}
+
+export function fetchAdminAnalytics(): Promise<{ url: string | null }> {
+  return adminAuthenticatedRequest<{ url: string | null }>(API_ROUTES.adminAnalytics);
 }

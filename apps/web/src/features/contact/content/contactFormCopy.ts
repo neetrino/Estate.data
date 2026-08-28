@@ -1,33 +1,24 @@
-export const CONTACT_FORM_SERVICE_OPTIONS = [
-  { value: "photography", label: "Photography" },
-  { value: "cinematic-video", label: "Cinematic Video" },
-  { value: "drone-aerial", label: "Drone & Aerial" },
-  { value: "tours-floorplans", label: "3D Tours & Floorplans" },
-  { value: "scan-to-bim", label: "Scan to BIM" },
-  { value: "market-intelligence", label: "Market Intelligence" },
-] as const;
-
 export const CONTACT_FORM_COPY = {
   fields: {
-    name: { label: "Your name", placeholder: "Jane Smith" },
+    name: { label: "Name", placeholder: "Jane Smith" },
     email: { label: "Email", placeholder: "you@example.com" },
     propertyAddress: {
-      label: "Property address",
+      label: "Property Address",
       placeholder: "1234 Sunset Blvd, Los Angeles, CA",
     },
     service: {
-      label: "Service needed",
+      label: "Services Required",
       placeholder: "Select a service",
     },
-    preferredDate: { label: "Preferred date", placeholder: "Select a date" },
+    preferredDate: { label: "Desired Shoot Date", placeholder: "Select a date" },
     projectDetails: {
-      label: "Project details",
-      placeholder: "Square footage, timeline, deliverables, or anything else we should know.",
+      label: "Additional Notes",
+      placeholder: "Anything else we should know about the property or shoot.",
     },
   },
-  submitLabel: "Send request",
+  submitLabel: "Get My Quote",
   submittingLabel: "Sending…",
   successMessage:
-    "Thanks — we received your request and will follow up shortly.",
+    "Thanks — we received your request and will return a scoped quote the same business day.",
   errorMessage: "Something went wrong. Please try again in a moment.",
 } as const;

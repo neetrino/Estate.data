@@ -17,11 +17,11 @@ export const SERVICE_DETAIL_COPY_SPATIAL = {
         alt: "3D tours and floor plan visualization concept card",
       },
       {
-        src: "/images/property-intelligence/home-visual-1024.webp",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Spatial visualization panel for digital property tour",
       },
       {
-        src: "/images/property-intelligence/home-section-bg-2560.webp",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Immersive floor mapping background for virtual walkthroughs",
       },
     ],
@@ -95,11 +95,11 @@ export const SERVICE_DETAIL_COPY_SPATIAL = {
     },
     gallery: [
       {
-        src: "/images/property-intelligence/home-visual.webp",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Spatial intelligence visual used for floor plan storytelling",
       },
       {
-        src: "/images/hero-landing-bg-1920.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Architectural perspective suited for floor plan marketing",
       },
       {
@@ -172,12 +172,12 @@ export const SERVICE_DETAIL_COPY_SPATIAL = {
     heroLabel: "Reality Capture",
     serviceSummary: "Construction-grade point-cloud capture converted into structured BIM deliverables.",
     heroImage: {
-      src: "/images/data-bim-services/bim-illustration-v2.png",
+      src: "/assets/scan-bim-gjdfWRdw.webp",
       alt: "Laser scanning and scan-to-BIM technical illustration",
     },
     gallery: [
       {
-        src: "/images/data-bim-bg-2560.webp",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Reality capture environment for BIM workflows",
       },
       {
@@ -185,7 +185,7 @@ export const SERVICE_DETAIL_COPY_SPATIAL = {
         alt: "Scan-to-BIM services visual card",
       },
       {
-        src: "/images/data-bim-services/bim-illustration.png",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Point cloud to BIM conversion process graphic",
       },
     ],

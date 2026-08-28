@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import type { FooterNavLink } from "@/shared/components/footer/footerConfig";
 import { FOOTER_COLUMN_TITLE_CLASS, FOOTER_LINK_CLASS } from "@/shared/lib/constants";
 
@@ -25,9 +27,9 @@ export function FooterLinkColumn({ title, links, className }: FooterLinkColumnPr
                 {link.label}
               </span>
             ) : (
-              <Link href={link.href} className={FOOTER_LINK_CLASS}>
+              <HomeSectionLink href={link.href} className={FOOTER_LINK_CLASS}>
                 {link.label}
-              </Link>
+              </HomeSectionLink>
             )}
           </li>
         ))}

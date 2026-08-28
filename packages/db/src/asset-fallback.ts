@@ -17,7 +17,7 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     mimeType: "image/png",
   },
   [ASSET_KEYS.homeHero]: {
-    publicPath: "images/hero-home.jpg",
+    publicPath: "assets/hero-villa-BcD5T4f7.webp",
     mimeType: "image/jpeg",
   },
   [ASSET_KEYS.navPhoneIcon]: {
@@ -45,11 +45,11 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     mimeType: "image/svg+xml",
   },
   [ASSET_KEYS.propertyIntelligenceHero]: {
-    publicPath: "images/property-intelligence/scan-to-bim.jpg",
+    publicPath: "assets/scan-bim-gjdfWRdw.webp",
     mimeType: "image/jpeg",
   },
   [ASSET_KEYS.recentWorkPlaceholder]: {
-    publicPath: "images/recent-work/placeholder.jpg",
+    publicPath: "assets/portfolio-1-DsFekI_2.webp",
     mimeType: "image/jpeg",
   },
   [ASSET_KEYS.clientVoicesQuoteMarks]: {
@@ -57,8 +57,8 @@ export const ASSET_FALLBACK_BY_KEY: Record<AssetKey, AssetFallback> = {
     mimeType: "image/png",
   },
   [ASSET_KEYS.aboutTeamCollaboration]: {
-    publicPath: "images/about/team-collaboration.png",
-    mimeType: "image/png",
+    publicPath: "assets/team-zk6Ayjl0.webp",
+    mimeType: "image/jpeg",
   },
   [ASSET_KEYS.contactLocationIcon]: {
     publicPath: "icons/contact/location.png",

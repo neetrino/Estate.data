@@ -17,7 +17,7 @@ export const SERVICE_DETAIL_COPY_CREATIVE = {
         alt: "Curated photography mood board for luxury listing",
       },
       {
-        src: "/images/hero-landing-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "High-end listing hero visual for photography campaign",
       },
       {
@@ -99,11 +99,11 @@ export const SERVICE_DETAIL_COPY_CREATIVE = {
         alt: "Storyboard style preview for real estate video production",
       },
       {
-        src: "/images/media-bg-1024.webp",
+        src: "/assets/photography-BEgVm_0g.webp",
         alt: "Motion-ready residential exterior scene",
       },
       {
-        src: "/images/hero-landing-bg-mobile-20260528-v2.png",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Vertical social video composition for a listing campaign",
       },
     ],
@@ -185,7 +185,7 @@ export const SERVICE_DETAIL_COPY_CREATIVE = {
         alt: "Drone filter showcase frame from portfolio",
       },
       {
-        src: "/images/listing-cta/banner-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Wide neighborhood context aerial backdrop",
       },
     ],

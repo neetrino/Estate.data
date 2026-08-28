@@ -2,10 +2,19 @@
 export type ContactInquiryPayload = {
   name: string;
   email: string;
-  propertyAddress: string;
+  phone?: string;
+  company?: string;
+  propertyAddress?: string;
   service: string;
   preferredDate?: string;
   projectDetails?: string;
+  extraFields?: {
+    propertyType?: string;
+    squareFootage?: string;
+    rooms?: string;
+    floor?: string;
+    price?: string;
+  };
 };
 
 export type ContactInquiryResult = {

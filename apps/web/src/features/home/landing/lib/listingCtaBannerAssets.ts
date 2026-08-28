@@ -1,9 +1,9 @@
-/** Responsive WebP paths for the legacy full-width listing CTA backdrop. */
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+
 export const LISTING_CTA_BANNER_BG_SOURCES = {
-  mobile: "/images/listing-cta/banner-bg-1024.webp",
-  tablet: "/images/listing-cta/banner-bg-1920.webp",
-  desktop: "/images/listing-cta/banner-bg-2560.webp",
+  mobile: STUDIO_MEDIA.heroVilla,
+  tablet: STUDIO_MEDIA.heroVilla,
+  desktop: STUDIO_MEDIA.heroVilla,
 } as const;
 
-/** Isometric city illustration for the premium listing CTA panel. */
-export const LISTING_CTA_CITY_ILLUSTRATION_SRC = "/images/listing-cta/city-isometric.png";
+export const LISTING_CTA_CITY_ILLUSTRATION_SRC = STUDIO_MEDIA.landingPage;

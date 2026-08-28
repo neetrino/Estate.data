@@ -15,15 +15,17 @@ export type ApiRequestOptions = {
 
 function buildUrl(path: string): string {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  // Browser: always same-origin. A stale NEXT_PUBLIC_API_URL (e.g. :3001)
+  // would otherwise POST to a server that is no longer running.
+  if (typeof window !== "undefined") {
+    return normalizedPath;
+  }
   const explicitBase = resolveApiBaseUrl();
   if (explicitBase) {
     return `${explicitBase}${normalizedPath}`;
   }
-  if (typeof window === "undefined") {
-    const appUrl = (process.env.APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
-    return `${appUrl}${normalizedPath}`;
-  }
-  return normalizedPath;
+  const appUrl = (process.env.APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  return `${appUrl}${normalizedPath}`;
 }
 
 async function parseErrorResponse(response: Response): Promise<ApiError> {

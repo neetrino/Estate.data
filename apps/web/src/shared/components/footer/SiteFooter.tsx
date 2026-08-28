@@ -4,9 +4,9 @@ import { FooterStudioColumn } from "@/shared/components/footer/FooterStudioColum
 import {
   FOOTER_BRAND_TAGLINE,
   FOOTER_COMPANY_LINKS,
+  FOOTER_LEGAL_LINKS,
   FOOTER_SERVICES_LINKS,
 } from "@/shared/components/footer/footerConfig";
-import { SiteFooterBackground } from "@/shared/components/footer/SiteFooterBackground";
 import { LogoLink } from "@/shared/components/navbar";
 import {
   FOOTER_BRAND_COLUMN_CLASS,
@@ -20,7 +20,7 @@ import {
   SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 
-const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-brand-navy/70 ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
+const FOOTER_BRAND_TEXT_CLASS = `max-w-xs text-sm leading-relaxed text-studio-muted ${FOOTER_BRAND_TAGLINE_OFFSET_CLASS}`;
 
 type SiteFooterProps = {
   /** Soft top fade — used after /media photo background. */
@@ -35,14 +35,12 @@ export function SiteFooter({ smoothTopEntry = false }: SiteFooterProps) {
   ].join(" ");
 
   return (
-    <footer className={`hidden lg:block ${footerShellClass}`}>
-      <SiteFooterBackground />
-
+    <footer className={footerShellClass}>
       <div className={`${SITE_PAGE_SHELL_CLASS} site-footer__content`}>
         <div className={FOOTER_MAIN_ROW_CLASS}>
           <div className={FOOTER_BRAND_COLUMN_CLASS}>
             <div className={LOGO_FOOTER_OFFSET_CLASS}>
-              <LogoLink tone="dark" size="footer" />
+              <LogoLink tone="light" size="footer" />
             </div>
             <p className={FOOTER_BRAND_TEXT_CLASS}>{FOOTER_BRAND_TAGLINE}</p>
           </div>
@@ -54,6 +52,11 @@ export function SiteFooter({ smoothTopEntry = false }: SiteFooterProps) {
           <FooterLinkColumn
             title="Company"
             links={FOOTER_COMPANY_LINKS}
+            className={FOOTER_LINK_COLUMNS_OFFSET_CLASS}
+          />
+          <FooterLinkColumn
+            title="Legal"
+            links={FOOTER_LEGAL_LINKS}
             className={FOOTER_LINK_COLUMNS_OFFSET_CLASS}
           />
           <FooterStudioColumn />

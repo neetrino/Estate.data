@@ -1,5 +1,4 @@
-import { ASSET_KEYS } from "@estate/db";
-import { resolveAssetUrl } from "@/shared/assets/resolve-asset-url";
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 
 export type RecentWorkProject = {
   readonly id: string;
@@ -7,33 +6,26 @@ export type RecentWorkProject = {
   readonly imageAlt: string;
 };
 
-/** Placeholder image until admin panel supplies project assets. */
-const RECENT_WORK_PLACEHOLDER_IMAGE = resolveAssetUrl(ASSET_KEYS.recentWorkPlaceholder);
-
-const RECENT_WORK_PLACEHOLDER_ALT =
-  "Luxury hillside home overlooking the ocean at sunset";
-
 export const HOME_RECENT_WORK_COPY = {
   eyebrow: "Recent work",
   title: "Selected LA projects",
   viewAllLabel: "View all",
   viewAllHref: "/portfolio",
-  /** Static mock tiles when `NEXT_PUBLIC_USE_MOCK_API=true`. */
   projects: [
     {
       id: "project-1",
-      imageSrc: RECENT_WORK_PLACEHOLDER_IMAGE,
-      imageAlt: RECENT_WORK_PLACEHOLDER_ALT,
+      imageSrc: STUDIO_MEDIA.portfolio1,
+      imageAlt: "Modern Beverly Hills Residence in Beverly Hills, CA — Photography, Cinematic Video, Drone, Matterport",
     },
     {
       id: "project-2",
-      imageSrc: RECENT_WORK_PLACEHOLDER_IMAGE,
-      imageAlt: RECENT_WORK_PLACEHOLDER_ALT,
+      imageSrc: STUDIO_MEDIA.portfolio2,
+      imageAlt: "Wilshire Corporate Lobby in Downtown Los Angeles, CA — Architectural Photography, 3D Laser Scanning, Scan-to-BIM",
     },
     {
       id: "project-3",
-      imageSrc: RECENT_WORK_PLACEHOLDER_IMAGE,
-      imageAlt: RECENT_WORK_PLACEHOLDER_ALT,
+      imageSrc: STUDIO_MEDIA.portfolio3,
+      imageAlt: "Venice Architectural Loft in Venice, CA — Photography, Cinematic Video, Virtual Staging",
     },
   ] as const satisfies readonly RecentWorkProject[],
 } as const;

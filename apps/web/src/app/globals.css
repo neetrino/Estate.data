@@ -144,6 +144,27 @@
   --home-listing-cta-button: #ffffff;
   --home-listing-cta-button-foreground: #873c83;
   --home-listing-cta-button-icon: #c364be;
+
+  /* Lovable studio tokens — https://la-capture-studio.lovable.app/ */
+  --studio-bg: oklch(14.5% 0.012 305);
+  --studio-fg: oklch(96.5% 0.004 320);
+  --studio-card: oklch(18.5% 0.016 305);
+  --studio-muted: oklch(70% 0.02 315);
+  --studio-accent: oklch(62% 0.18 325);
+  --studio-accent-fg: oklch(98% 0.005 320);
+  --studio-border: oklch(100% 0 0 / 0.13);
+  --studio-veil: linear-gradient(
+    to top,
+    oklch(14.5% 0.012 305) 0%,
+    oklch(14.5% 0.012 305 / 0.72) 35%,
+    oklch(14.5% 0.012 305 / 0.25) 70%,
+    transparent 100%
+  );
+  --studio-brand-gradient: linear-gradient(
+    135deg,
+    oklch(50% 0.16 330),
+    oklch(68% 0.17 325)
+  );
 }
 
 @theme inline {
@@ -186,14 +207,22 @@
   --color-landing-surface: var(--landing-surface);
   --color-landing-surface-muted: var(--landing-surface-muted);
   --color-landing-trust-surface: var(--landing-trust-surface);
-  --radius-button: 9999px;
-  --font-sans: var(--font-site), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --radius-button: 0px;
+  --font-sans: var(--font-site), "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Archivo", "Manrope", ui-sans-serif, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --color-studio-bg: var(--studio-bg);
+  --color-studio-fg: var(--studio-fg);
+  --color-studio-muted: var(--studio-muted);
+  --color-studio-card: var(--studio-card);
+  --color-studio-accent: var(--studio-accent);
+  --color-studio-accent-fg: var(--studio-accent-fg);
+  --color-studio-border: var(--studio-border);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--studio-bg);
+  color: var(--studio-fg);
   font-family: var(--font-sans);
 }
 
@@ -643,5 +672,67 @@ button:disabled {
     justify-content: flex-start;
     padding-top: 0.75rem;
     padding-bottom: 1.25rem;
+  }
+}
+
+.studio-site h1,
+.studio-site h2,
+.studio-site h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+
+.studio-display-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 8.5vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.studio-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.2vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.studio-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.studio-veil {
+  background: var(--studio-veil);
+}
+
+@keyframes studio-kenburns {
+  0% {
+    transform: scale(1.06) translate(0);
+  }
+  100% {
+    transform: scale(1.18) translate(-1.5%, -1.5%);
+  }
+}
+
+.studio-kenburns {
+  animation: 26s ease-in-out infinite alternate studio-kenburns;
+}
+
+.studio-service-map iframe {
+  filter: grayscale(1) invert(0.9) contrast(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-kenburns {
+    animation: none;
   }
 }

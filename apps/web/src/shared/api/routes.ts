@@ -37,6 +37,15 @@ export const API_ROUTES = {
   adminMedia: `${API_VERSION_PREFIX}/admin/media`,
   adminPaymentsOrders: `${API_VERSION_PREFIX}/admin/payments/orders`,
   adminHomeHero: `${API_VERSION_PREFIX}/admin/home-hero`,
+  adminHomeHeroSlides: `${API_VERSION_PREFIX}/admin/home-hero-slides`,
+  adminHomeHeroSlideById: (id: string) =>
+    `${API_VERSION_PREFIX}/admin/home-hero-slides/${encodeURIComponent(id)}`,
+  adminStudioServices: `${API_VERSION_PREFIX}/admin/studio-services`,
+  adminStudioServiceById: (id: string) =>
+    `${API_VERSION_PREFIX}/admin/studio-services/${encodeURIComponent(id)}`,
+  adminContactFields: `${API_VERSION_PREFIX}/admin/contact-fields`,
+  adminSiteCopy: `${API_VERSION_PREFIX}/admin/site-copy`,
+  adminAnalytics: `${API_VERSION_PREFIX}/admin/analytics`,
   adminUpload: `${API_VERSION_PREFIX}/admin/upload`,
 } as const;
 

@@ -1,5 +1,5 @@
 /** Default tile count on the home «Recent work» section. */
-export const DEFAULT_RECENT_WORK_LIMIT = 4;
+export const DEFAULT_RECENT_WORK_LIMIT = 6;
 
 export const MIN_RECENT_WORK_LIMIT = 1;
 

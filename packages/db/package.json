@@ -14,6 +14,7 @@
     "migrate:deploy": "dotenv -e ../../.env -- prisma migrate deploy",
     "migrate:resolve-contact": "dotenv -e ../../.env -- prisma migrate resolve --applied 20260525130000_add_contact_inquiries",
     "seed": "dotenv -e ../../.env -- tsx prisma/seed.ts",
+    "seed:admin": "dotenv -e ../../.env -- tsx prisma/seed.ts --admin-only",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

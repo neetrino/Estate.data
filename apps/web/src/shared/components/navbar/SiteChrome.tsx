@@ -1,8 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { Navbar } from "@/shared/components/navbar/Navbar";
+import { ScrollToHomeSection } from "@/shared/components/navbar/ScrollToHomeSection";
 import { isSupersudoRoute } from "@/shared/lib/routes";
 
 type SiteChromeProps = {
@@ -19,7 +20,10 @@ export function SiteChrome({ children }: SiteChromeProps) {
 
   return (
     <>
-      <Navbar overlay={pathname === "/"} landingPill />
+      <Navbar overlay={pathname === "/"} />
+      <Suspense fallback={null}>
+        <ScrollToHomeSection />
+      </Suspense>
       {children}
     </>
   );

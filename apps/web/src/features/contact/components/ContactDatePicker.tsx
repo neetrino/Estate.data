@@ -15,35 +15,35 @@ import { CONTACT_FORM_CONTROL_FOCUS_CLASS } from "@/shared/lib/constants";
 import { useEffect, useId, useRef, useState } from "react";
 
 const CONTACT_DATE_TRIGGER_CLASS = [
-  "relative flex w-full cursor-pointer items-center rounded-xl border border-foreground/15 bg-white py-3 pl-4 pr-11 text-left text-base transition-colors",
+  "relative flex w-full cursor-pointer items-center border border-studio-border bg-studio-bg py-3 pl-4 pr-11 text-left text-base text-studio-fg transition-colors",
   "focus-visible:outline-none focus-visible:ring-2",
   CONTACT_FORM_CONTROL_FOCUS_CLASS,
 ].join(" ");
 
-const CONTACT_DATE_PLACEHOLDER_CLASS = "text-muted-foreground";
+const CONTACT_DATE_PLACEHOLDER_CLASS = "text-studio-muted";
 
 const CONTACT_DATE_ICON_CLASS =
-  "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-black";
+  "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-studio-fg";
 
 const CONTACT_DATE_POPOVER_CLASS =
-  "absolute inset-x-0 z-20 mt-1 box-border w-full max-w-full min-w-0 rounded-xl border border-foreground/15 bg-white p-2.5 shadow-[var(--client-voices-card-shadow)] sm:p-3";
+  "absolute inset-x-0 z-20 mt-1 box-border w-full max-w-full min-w-0 border border-studio-border bg-studio-card p-2.5 sm:p-3";
 
 const CONTACT_DATE_NAV_BUTTON_CLASS =
-  "flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-lg text-black transition-colors hover:bg-what-we-do-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-what-we-do-subtitle/40 sm:size-8";
+  "flex size-7 shrink-0 cursor-pointer items-center justify-center text-studio-fg transition-colors hover:bg-studio-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40 sm:size-8";
 
 const CONTACT_DATE_WEEKDAY_CLASS =
-  "flex aspect-square w-full items-center justify-center text-[0.625rem] font-semibold uppercase tracking-wide text-muted-foreground sm:text-xs";
+  "flex aspect-square w-full items-center justify-center text-[0.625rem] font-semibold uppercase tracking-wide text-studio-muted sm:text-xs";
 
 const CONTACT_DATE_DAY_BASE_CLASS =
   "flex aspect-square w-full min-w-0 items-center justify-center rounded-md text-xs font-medium sm:rounded-lg sm:text-sm";
 
 const CONTACT_DATE_DAY_INTERACTIVE_CLASS =
-  "cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-what-we-do-subtitle/40";
+  "cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40";
 
 const CONTACT_DATE_DAY_SELECTED_CLASS =
-  "bg-brand-purple-light text-white ring-0 hover:bg-brand-purple-light hover:opacity-90 focus-visible:ring-0";
+  "bg-studio-accent text-studio-accent-fg ring-0 hover:bg-studio-accent/90 focus-visible:ring-0";
 
-const CONTACT_DATE_DAY_DISABLED_CLASS = "cursor-default text-muted-foreground";
+const CONTACT_DATE_DAY_DISABLED_CLASS = "cursor-default text-studio-muted";
 
 type ContactDatePickerProps = {
   id: string;
@@ -150,7 +150,7 @@ export function ContactDatePicker({
             >
               <ChevronLeftIcon />
             </button>
-            <p className="truncate px-1 text-center text-xs font-semibold text-black sm:text-sm">
+            <p className="truncate px-1 text-center text-xs font-semibold text-studio-fg sm:text-sm">
               {formatContactMonthYear(viewMonth)}
             </p>
             <button
@@ -193,7 +193,7 @@ export function ContactDatePicker({
               } else if (!inCurrentMonth) {
                 dayClass += " text-muted-foreground/60 hover:bg-what-we-do-surface";
               } else {
-                dayClass += " text-black hover:bg-what-we-do-surface";
+                dayClass += " text-studio-fg hover:bg-studio-accent/15";
               }
 
               if (isToday && !selected) {

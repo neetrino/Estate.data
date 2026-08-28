@@ -27,10 +27,13 @@ model ContactInquiry {
   id              String    @id @default(cuid())
   name            String
   email           String
-  propertyAddress String    @map("property_address")
+  phone           String?
+  company         String?
+  propertyAddress String?   @map("property_address")
   service         String
   preferredDate   DateTime? @map("preferred_date") @db.Date
   projectDetails  String?   @map("project_details")
+  extraFields     Json?     @map("extra_fields")
   createdAt       DateTime  @default(now()) @map("created_at")
 
   @@index([email])
@@ -254,4 +257,67 @@ model HomeHero {
   updatedAt            DateTime @updatedAt @map("updated_at")
 
   @@map("home_heroes")
+}
+
+/// Admin-managed homepage hero slider images.
+model HomeHeroSlide {
+  id        String   @id @default(cuid())
+  imageUrl  String   @map("image_url")
+  imageKey  String?  @map("image_key")
+  thumbUrl  String   @map("thumb_url")
+  alt       String
+  sortOrder Int      @default(0) @map("sort_order")
+  published Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([published, sortOrder])
+  @@map("home_hero_slides")
+}
+
+/// Visual service blocks on the one-page studio site.
+model StudioServiceSection {
+  id               String   @id @default(cuid())
+  sectionKey       String   @unique @map("section_key")
+  eyebrow          String
+  title            String
+  description      String   @db.Text
+  imageUrl         String   @map("image_url")
+  galleryUrls      Json     @map("gallery_urls")
+  included         Json
+  pricing          Json
+  primaryCtaLabel  String   @map("primary_cta_label")
+  primaryCtaHref   String   @map("primary_cta_href")
+  secondaryCtaLabel String  @map("secondary_cta_label")
+  secondaryCtaHref  String  @map("secondary_cta_href")
+  sortOrder        Int      @default(0) @map("sort_order")
+  published        Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@index([published, sortOrder])
+  @@map("studio_service_sections")
+}
+
+/// Key-value marketing copy (titles, JSON blobs for lists).
+model SiteCopy {
+  key       String   @id
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("site_copies")
+}
+
+/// Public contact form field visibility and required/optional mode.
+model ContactFieldSetting {
+  id          String   @id @default(cuid())
+  fieldKey    String   @unique @map("field_key")
+  label       String
+  placeholder String   @default("")
+  mode        String
+  sortOrder   Int      @default(0) @map("sort_order")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([sortOrder])
+  @@map("contact_field_settings")
 }

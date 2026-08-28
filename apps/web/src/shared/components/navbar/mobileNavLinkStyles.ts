@@ -21,9 +21,9 @@ const MOBILE_NAV_LINK_BASE_CLASS =
   "relative block py-3.5 text-lg font-semibold transition-opacity";
 
 const MOBILE_NAV_LINK_IDLE_TEXT_CLASS =
-  "text-foreground hover:opacity-70 active:opacity-50";
+  "text-studio-fg hover:text-studio-accent active:opacity-80";
 
-const MOBILE_NAV_LINK_ACTIVE_TEXT_CLASS = "text-accent hover:opacity-100 active:opacity-100";
+const MOBILE_NAV_LINK_ACTIVE_TEXT_CLASS = "text-studio-accent hover:opacity-100 active:opacity-100";
 
 const MOBILE_NAV_LINK_AFTER_SHADOW_IDLE_CLASS =
   "after:shadow-[0_0_6px_rgba(195,100,190,0.2),0_0_14px_rgba(195,100,190,0.28)]";
@@ -49,6 +49,6 @@ const MOBILE_NAV_MORE_TOGGLE_BASE_CLASS =
 export function mobileNavMoreToggleClassName(sectionActive: boolean): string {
   return [
     MOBILE_NAV_MORE_TOGGLE_BASE_CLASS,
-    sectionActive ? "text-accent" : "text-foreground",
+    sectionActive ? "text-studio-accent" : "text-studio-fg",
   ].join(" ");
 }

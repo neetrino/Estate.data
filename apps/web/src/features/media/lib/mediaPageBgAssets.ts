@@ -1,8 +1,9 @@
-/** Responsive WebP backgrounds for the /media page. */
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+
 export const MEDIA_PAGE_BG_SOURCES = {
-  mobile: "/images/media-bg-reference-v2.png",
-  tablet: "/images/media-bg-reference-v2.png",
-  desktop: "/images/media-bg-reference-v2.png",
+  mobile: STUDIO_MEDIA.photography,
+  tablet: STUDIO_MEDIA.photography,
+  desktop: STUDIO_MEDIA.photography,
 } as const;
 
-export const MEDIA_PAGE_BG_CACHE_VERSION = "20260527-v2";
+export const MEDIA_PAGE_BG_CACHE_VERSION = "20260828-lovable";
