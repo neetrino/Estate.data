@@ -1,4 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoscript,
+} from "@/shared/analytics/GoogleTagManager";
 import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
 import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
 import { SiteChrome } from "@/shared/components/navbar";
