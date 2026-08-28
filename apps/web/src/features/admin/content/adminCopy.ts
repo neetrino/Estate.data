@@ -5,7 +5,7 @@ export const ADMIN_LOGIN_COPY = {
   subtitle:
     "Use your admin email and password to access the control panel.",
   emailLabel: "Email",
-  emailPlaceholder: "admin@estate.data",
+  emailPlaceholder: "admin@ed.com",
   passwordLabel: "Password",
   passwordPlaceholder: "Enter your password",
   submitLabel: "Sign in",

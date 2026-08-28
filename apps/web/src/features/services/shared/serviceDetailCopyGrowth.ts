@@ -21,7 +21,7 @@ export const SERVICE_DETAIL_COPY_GROWTH = {
         alt: "Virtual staging preview used in AI media workflows",
       },
       {
-        src: "/images/media-bg-reference-v2.png",
+        src: "/assets/photography-BEgVm_0g.webp",
         alt: "Editorial media baseline for AI polish workflows",
       },
     ],
@@ -95,15 +95,15 @@ export const SERVICE_DETAIL_COPY_GROWTH = {
     },
     gallery: [
       {
-        src: "/images/listing-cta/banner-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Lead-focused property campaign banner visual",
       },
       {
-        src: "/images/listing-cta/city-isometric.png",
+        src: "/assets/landing-page-DGifBn8w.webp",
         alt: "Property landing page map and neighborhood illustration",
       },
       {
-        src: "/images/hero-landing-bg-1920.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Luxury property hero section for landing page conversion",
       },
     ],
@@ -177,11 +177,11 @@ export const SERVICE_DETAIL_COPY_GROWTH = {
     },
     gallery: [
       {
-        src: "/images/home-stats-bg-1024.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "MLS analytics style dashboard backdrop",
       },
       {
-        src: "/images/listing-cta/banner-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Listing campaign performance landscape visual",
       },
       {

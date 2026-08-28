@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 
 export function DataServicesFeatureImage() {
   return (
     <article className="data-bim-feature-card" aria-label="BIM data flow illustration">
       <Image
-        src="/images/data-bim-services/bim-illustration-v2.png"
+        src={STUDIO_MEDIA.scanBim}
         alt="Scan to BIM building visualization with LiDAR and data labels"
         fill
         sizes="(max-width: 1023px) 100vw, 50vw"

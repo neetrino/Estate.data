@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import "@/features/home/styles/home-figma-hero.css";
 import type { HomeHeroContentFields } from "@/features/home/content/heroCopy";
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 import {
   HOME_LANDING_HERO_TOP_PADDING_CLASS,
   LANDING_CONTAINER_CLASS,
@@ -326,28 +327,28 @@ const LA_TRUSTED_BRANDS = [
 
 const LA_CAROUSEL_IMAGES = [
   {
-    heroSrc: "/images/hero-home.jpg",
-    thumbSrc: "/images/hero-home.jpg",
-    alt: "Aerial luxury hillside property view",
+    heroSrc: STUDIO_MEDIA.heroVilla,
+    thumbSrc: STUDIO_MEDIA.heroVilla,
+    alt: "Luxury Los Angeles hillside residence photographed at dusk",
   },
   {
-    heroSrc: "/images/hero/la-figma/hero-bg.jpg",
-    thumbSrc: "/images/hero/la-figma/hero-bg.jpg",
-    alt: "Modern Los Angeles estate facade at sunset",
+    heroSrc: STUDIO_MEDIA.photography,
+    thumbSrc: STUDIO_MEDIA.photography,
+    alt: "Bright modern Los Angeles living room captured for MLS photography",
   },
   {
-    heroSrc: "/images/hero/la-figma/carousel-luxury-01-hero.webp",
-    thumbSrc: "/images/hero/la-figma/carousel-luxury-01-thumb.webp",
-    alt: "Luxury infinity pool and palms at sunset",
+    heroSrc: STUDIO_MEDIA.drone,
+    thumbSrc: STUDIO_MEDIA.drone,
+    alt: "Aerial drone photograph of a Malibu cliffside estate at golden hour",
   },
   {
-    heroSrc: "/images/hero/la-figma/carousel-luxury-02-hero.webp",
-    thumbSrc: "/images/hero/la-figma/carousel-luxury-02-thumb.webp",
-    alt: "Modern luxury home with stone accents at dusk",
+    heroSrc: STUDIO_MEDIA.portfolio1,
+    thumbSrc: STUDIO_MEDIA.portfolio1,
+    alt: "Modern Beverly Hills Residence",
   },
   {
-    heroSrc: "/images/hero/la-figma/carousel-luxury-03-hero.webp",
-    thumbSrc: "/images/hero/la-figma/carousel-luxury-03-thumb.webp",
-    alt: "Contemporary white mansion with palm trees",
+    heroSrc: STUDIO_MEDIA.matterport,
+    thumbSrc: STUDIO_MEDIA.matterport,
+    alt: "Dollhouse view of a scanned property rendered as a 3D digital twin",
   },
 ] as const;

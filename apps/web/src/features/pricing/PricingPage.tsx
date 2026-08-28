@@ -29,7 +29,7 @@ export async function PricingPage() {
         INNER_PAGE_MAIN_SPACING_CLASS,
         "max-[743px]:mobile-inner-pages-background",
         "relative isolate overflow-x-hidden bg-[#f8f7ff]",
-        "bg-[url('/images/solutions/solutions-page-bg-reference-v2.png')] bg-cover bg-center bg-no-repeat",
+        "bg-[url('/assets/hero-villa-BcD5T4f7.webp')] bg-cover bg-center bg-no-repeat",
       ].join(" ")}
     >
         <div

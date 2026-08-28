@@ -14,10 +14,12 @@ import {
 } from "@/shared/lib/constants";
 import { EstatePillButtonLink } from "@/shared/ui/button";
 
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+
 const WHAT_WE_DO_BG_SOURCES = {
-  mobile: "/images/what-we-do-bg-1024.webp",
-  tablet: "/images/what-we-do-bg-1920.webp",
-  desktop: "/images/what-we-do-bg-2560.webp",
+  mobile: STUDIO_MEDIA.heroVilla,
+  tablet: STUDIO_MEDIA.heroVilla,
+  desktop: STUDIO_MEDIA.heroVilla,
 } as const;
 
 const WHAT_WE_DO_SECTION_CLASS = `relative isolate z-30 ${LANDING_SECTION_CLASS}`;
@@ -94,8 +96,8 @@ function WhatWeDoBackgroundLayer() {
 function WhatWeDoBackgroundPicture() {
   return (
     <picture className="absolute inset-0 block size-full min-h-full">
-      <source media="(min-width: 1280px)" srcSet={WHAT_WE_DO_BG_SOURCES.desktop} type="image/webp" />
-      <source media="(min-width: 768px)" srcSet={WHAT_WE_DO_BG_SOURCES.tablet} type="image/webp" />
+      <source media="(min-width: 1280px)" srcSet={WHAT_WE_DO_BG_SOURCES.desktop} type="image/jpeg" />
+      <source media="(min-width: 768px)" srcSet={WHAT_WE_DO_BG_SOURCES.tablet} type="image/jpeg" />
       <img
         src={WHAT_WE_DO_BG_SOURCES.mobile}
         alt=""

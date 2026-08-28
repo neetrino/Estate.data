@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -14,7 +13,6 @@ import {
   NAVBAR_OVERLAY_POSITION_CLASS,
   NAVBAR_SCROLL_OFFSET_PX,
   NAVBAR_TOP_PADDING_CLASS,
-  NAV_ITEM_TEXT_CLASS,
   NAVBAR_DESKTOP_ONLY_CLASS,
   NAVBAR_HEADER_MENU_OPEN_Z_CLASS,
   NAVBAR_MOBILE_BURGER_CLASS,
@@ -25,13 +23,13 @@ import {
   MAIN_NAV_LINKS,
   NAV_CTA_LINKS,
   SERVICE_NAV_LINKS,
-  type NavLink,
 } from "@/shared/components/navbar/navConfig";
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
+import { NavDesktopItem } from "@/shared/components/navbar/NavDesktopItem";
+import { useLocationHash } from "@/shared/components/navbar/useLocationHash";
 import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
-import type { ServiceCatalogItem } from "@/shared/lib/serviceCatalog";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
   "transition-[background-color,backdrop-filter,box-shadow] duration-300 ease-out";
@@ -70,29 +68,15 @@ const NAVBAR_MOBILE_BACKDROP_CLASS = [
 type NavbarProps = {
   /** Fixed over hero (home). Defaults to home route. */
   overlay?: boolean;
-  /** Glass pill shell — links stay dark for contrast on the pill surface. */
-  landingPill?: boolean;
 };
 
-const FIGMA_HOME_NAV_LINKS: readonly NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "Media", href: "/services" },
-  { label: "Data & Intelligence", href: "/data-bim" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
-] as const;
-
-const FIGMA_HOME_LOGO_ICON_PATH = "/images/hero/la-figma/logo-star.svg";
-const FIGMA_HOME_LOGO_LABEL = "LumenLA";
-
-export function Navbar({ overlay, landingPill = true }: NavbarProps) {
+export function Navbar({ overlay }: NavbarProps) {
   const pathname = usePathname();
+  const hash = useLocationHash();
   const isHome = pathname === "/";
   const isOverlay = overlay ?? isHome;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [isOverHomeHero, setIsOverHomeHero] = useState(true);
   const [isInitialHeaderAnimating, setIsInitialHeaderAnimating] = useState(true);
   const previousPathnameRef = useRef<string | null>(null);
@@ -154,17 +138,7 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
   }, [pathname]);
 
   useEffect(() => {
-    const updateScrolled = () => {
-      setScrolled(window.scrollY > NAVBAR_SCROLL_OFFSET_PX);
-    };
-
-    updateScrolled();
-    window.addEventListener("scroll", updateScrolled, { passive: true });
-    return () => window.removeEventListener("scroll", updateScrolled);
-  }, []);
-
-  useEffect(() => {
-    if (!isHome) {
+    if (!isOverlay) {
       return;
     }
 
@@ -188,7 +162,7 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
       window.removeEventListener("scroll", updateHeroOverlayState);
       window.removeEventListener("resize", updateHeroOverlayState);
     };
-  }, [isHome]);
+  }, [isOverlay]);
 
   useEffect(() => {
     if (!isMobileMenuVisible) {
@@ -231,10 +205,10 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
 
   const headerSurfaceClass = NAVBAR_TRANSPARENT_CLASS;
 
-  const navTone =
-    landingPill || isMobileMenuVisible || !isOverlay || scrolled ? "dark" : "light";
-  const useFigmaHomeDesktopHeader = isHome;
-  const useTransparentHomeHeader = useFigmaHomeDesktopHeader && isOverHomeHero && !isMobileMenuVisible;
+  const navTone = "light";
+  const useFigmaHomeDesktopHeader = true;
+  const useTransparentHomeHeader =
+    isOverlay && useFigmaHomeDesktopHeader && isOverHomeHero && !isMobileMenuVisible;
 
   const positionClass = NAVBAR_OVERLAY_POSITION_CLASS;
 
@@ -268,11 +242,11 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
                 ? [
                     "la-home-navbar-shell border-b transition-[background-color,border-color,backdrop-filter,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                     useTransparentHomeHeader
-                      ? "la-home-navbar-shell--transparent border-white/0 bg-white/0 backdrop-blur-[0px] shadow-none"
-                      : "la-home-navbar-shell--solid border-white/60 bg-[rgba(255,255,255,0.5)] backdrop-blur-sm shadow-[0_10px_30px_rgba(15,23,42,0.08)]",
+                      ? "border-white/0 bg-transparent backdrop-blur-[0px] shadow-none"
+                      : "border-studio-border bg-studio-bg/85 backdrop-blur-xl shadow-[0_24px_60px_rgba(0,0,0,0.35)]",
                   ].join(" ")
                 : "navbar-landing-pill",
-              isHome && !useFigmaHomeDesktopHeader ? "navbar-landing-pill--home" : "",
+              isOverlay && !useFigmaHomeDesktopHeader ? "navbar-landing-pill--home" : "",
               useFigmaHomeDesktopHeader
                 ? "flex items-center justify-between gap-8 px-8 py-6"
                 : "flex min-h-[3.75rem] items-center justify-between gap-3 px-4 sm:min-h-[4rem] sm:px-5 lg:px-6",
@@ -291,8 +265,6 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
                 tone={navTone}
                 onNavigate={closeMobile}
                 onHomeClick={handleHomeLogoClick}
-                customIconPath={useFigmaHomeDesktopHeader ? FIGMA_HOME_LOGO_ICON_PATH : undefined}
-                customLabel={useFigmaHomeDesktopHeader ? FIGMA_HOME_LOGO_LABEL : undefined}
                 useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}
               />
             </div>
@@ -305,14 +277,14 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
               }`}
             >
               <ul className="flex items-center justify-center gap-8">
-                {(useFigmaHomeDesktopHeader ? FIGMA_HOME_NAV_LINKS : MAIN_NAV_LINKS).map((link) => (
-                  <NavItem
-                    key={link.href}
+                {MAIN_NAV_LINKS.map((link) => (
+                  <NavDesktopItem
+                    key={link.label}
                     link={link}
-                    active={isNavbarActivePath(pathname, link.href)}
+                    active={isNavbarActivePath(pathname, link.href, hash)}
                     tone={useFigmaHomeDesktopHeader ? "dark" : navTone}
-                    serviceLinks={link.href === "/services" ? SERVICE_NAV_LINKS : undefined}
-                    useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}
+                    serviceLinks={link.hasServicesDropdown ? SERVICE_NAV_LINKS : undefined}
+                    useOverlayStyle={useFigmaHomeDesktopHeader}
                   />
                 ))}
               </ul>
@@ -325,14 +297,6 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
                   : "translate-y-0 opacity-100 blur-0"
               }`}
             >
-              {useFigmaHomeDesktopHeader ? (
-                <Link
-                  href="/contact"
-                  className="inline-flex h-8 items-center justify-center rounded-full border border-white/80 bg-transparent px-6 text-center text-[12px] font-semibold leading-[16px] uppercase tracking-[1.2px] text-[#1e293b] transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8B5CF6]/50"
-                >
-                  Contact
-                </Link>
-              ) : null}
               <NavBookShootCta
                 href={NAV_CTA_LINKS.bookShoot.href}
                 label={useFigmaHomeDesktopHeader ? "BOOK A SHOOT" : NAV_CTA_LINKS.bookShoot.label}
@@ -370,106 +334,12 @@ export function Navbar({ overlay, landingPill = true }: NavbarProps) {
             onClick={closeMobile}
           />
           <div id="mobile-nav" className={NAVBAR_MOBILE_PANEL_CLASS}>
-            <MobileNavMenu pathname={pathname} onNavigate={closeMobile} />
+            <MobileNavMenu pathname={pathname} hash={hash} onNavigate={closeMobile} />
           </div>
         </>
       ) : null}
     </>
   );
-}
-
-type NavTone = "light" | "dark";
-
-function NavItem({
-  link,
-  active,
-  tone,
-  serviceLinks,
-  useFigmaHomeDesktopStyle = false,
-}: {
-  link: NavLink;
-  active: boolean;
-  tone: NavTone;
-  serviceLinks?: readonly ServiceCatalogItem[];
-  useFigmaHomeDesktopStyle?: boolean;
-}) {
-  const hasServiceDropdown = (serviceLinks?.length ?? 0) > 0;
-
-  return (
-    <li className={hasServiceDropdown ? "group relative" : undefined}>
-      <Link
-        href={link.href}
-        className={desktopNavLinkClass(active, tone, useFigmaHomeDesktopStyle)}
-        aria-current={active ? "page" : undefined}
-      >
-        {link.label}
-      </Link>
-      {hasServiceDropdown ? (
-        <div className="pointer-events-none invisible absolute left-1/2 top-full z-[130] mt-3 w-72 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all duration-150 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
-          <ul className="space-y-1" aria-label="Services">
-            {serviceLinks?.map((service) => (
-              <li key={service.id}>
-                {service.enabled ? (
-                  <Link
-                    href={service.href}
-                    className="flex items-center rounded-xl px-3 py-2 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-slate-900"
-                  >
-                    {service.label}
-                  </Link>
-                ) : (
-                  <span
-                    className="flex cursor-not-allowed items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-slate-400"
-                    aria-disabled
-                  >
-                    <span>{service.label}</span>
-                    {service.comingSoon ? (
-                      <span className="rounded-full border border-slate-300 px-2 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
-                        Coming Soon
-                      </span>
-                    ) : null}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-    </li>
-  );
-}
-
-function desktopNavLinkClass(
-  active: boolean,
-  tone: NavTone,
-  useFigmaHomeDesktopStyle: boolean,
-): string {
-  if (useFigmaHomeDesktopStyle) {
-    const base = [
-      "relative inline-flex items-center whitespace-nowrap pb-[6px]",
-      "border-b-2 border-transparent text-[14px] leading-[20px] font-medium uppercase tracking-[1.4px]",
-      "transition-colors focus-visible:outline-none focus-visible:text-[#8e54e9]",
-    ].join(" ");
-
-    if (active) {
-      return `${base} border-[#8e54e9] text-[#8e54e9]`;
-    }
-
-    return `${base} text-[#475569] hover:text-slate-700`;
-  }
-
-  const base = [
-    NAV_ITEM_TEXT_CLASS,
-    "relative inline-flex items-center whitespace-nowrap transition-colors",
-    "hover:text-brand-purple-light focus-visible:text-brand-purple-light focus-visible:outline-none",
-  ].join(" ");
-
-  if (active) {
-    return `${base} text-accent`;
-  }
-  if (tone === "light") {
-    return `${base} text-white`;
-  }
-  return `${base} text-slate-900`;
 }
 
 function MenuIcon() {

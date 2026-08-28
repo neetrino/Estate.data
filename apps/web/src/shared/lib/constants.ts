@@ -106,13 +106,13 @@ export const NAVBAR_GLASS_SURFACE_CLASS =
 
 /** Mobile burger drawer — solid white panel. */
 export const NAVBAR_MOBILE_PANEL_SURFACE_CLASS =
-  "border-t border-zinc-200/80 bg-white shadow-lg";
+  "border-t border-studio-border bg-studio-bg shadow-lg";
 
 /** Mobile burger menu panel — corner radius (px). */
 export const NAVBAR_MOBILE_MENU_RADIUS_PX = 15;
 
 /** Mobile burger menu panel — corner radius (Tailwind). */
-export const NAVBAR_MOBILE_MENU_RADIUS_CLASS = "rounded-[15px]";
+export const NAVBAR_MOBILE_MENU_RADIUS_CLASS = "rounded-none";
 
 /** Mobile drawer — scrollable link list area. */
 export const NAVBAR_MOBILE_PANEL_SCROLL_CLASS =
@@ -120,7 +120,7 @@ export const NAVBAR_MOBILE_PANEL_SCROLL_CLASS =
 
 /** Mobile drawer — stacked links with dividers. */
 export const NAVBAR_MOBILE_NAV_LIST_CLASS =
-  "flex w-full flex-col divide-y divide-zinc-200/80";
+  "flex w-full flex-col divide-y divide-studio-border";
 
 /** Shared centered content width (navbar + pages + footer). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl 2xl:max-w-[90rem]";
@@ -278,18 +278,17 @@ export const WHAT_WE_DO_CARD_GRID_GAP_CLASS =
 export const FOOTER_LINK_COLUMNS_OFFSET_CLASS = "lg:-translate-x-[20px]";
 
 /** Site footer — column headings (Services, Company, Studio) — #873C83. */
-export const FOOTER_COLUMN_TITLE_CLASS = "text-base font-bold text-brand-purple";
+export const FOOTER_COLUMN_TITLE_CLASS =
+  "studio-label text-studio-accent";
 
-/** Site footer — nav + studio links; hover #C364BE. */
 export const FOOTER_LINK_CLASS =
-  "text-sm text-brand-navy/70 transition-colors hover:text-brand-purple-light";
+  "text-sm text-studio-muted transition-colors hover:text-studio-fg";
 
-/** Site footer — root shell with lavender artwork background. */
 export const SITE_FOOTER_CLASS =
-  "site-footer relative overflow-hidden text-brand-navy [color-scheme:light]";
+  "studio-site relative overflow-hidden bg-studio-bg text-studio-fg [color-scheme:dark]";
 
 /** Site footer — top edge line separating footer from page content. */
-export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-foreground/10";
+export const FOOTER_TOP_SEPARATOR_CLASS = "border-t border-studio-border";
 
 /** Site footer — main row; stacked mobile, 2-col tablet, spread desktop. */
 export const FOOTER_MAIN_ROW_CLASS =
@@ -434,17 +433,13 @@ export const CONTACT_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 export const CONTACT_FORM_SUBMIT_BUTTON_CLASS = [
   "inline-flex h-[52px] w-full cursor-pointer items-center justify-center whitespace-nowrap",
-  "rounded-full px-5 text-sm font-bold leading-none text-white sm:w-[190px]",
-  "bg-[linear-gradient(135deg,#8B5CF6_0%,#A855F7_45%,#D946EF_100%)]",
-  "shadow-[0_16px_36px_rgba(124,58,237,0.28),0_0_24px_rgba(217,70,239,0.18)]",
-  "transition-all duration-[250ms] ease-[ease]",
-  "hover:-translate-y-0.5 hover:brightness-105 hover:shadow-[0_22px_48px_rgba(168,85,247,0.38)]",
-  "active:translate-y-0",
-  "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[rgba(168,85,247,0.22)]",
+  "px-7 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-studio-accent-fg sm:w-auto",
+  "bg-studio-accent transition-colors hover:bg-studio-accent/85",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
 
-export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-what-we-do-subtitle/40";
+export const CONTACT_FORM_CONTROL_FOCUS_CLASS = "focus-visible:ring-studio-accent/40";
 
 export const CONTACT_STUDIO_LINK_CLASS =
   "text-base leading-relaxed text-black transition-colors hover:text-what-we-do-title sm:text-lg";

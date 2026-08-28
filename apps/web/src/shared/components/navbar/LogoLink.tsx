@@ -17,7 +17,9 @@ import {
   SITE_LOGO_DARK_CACHE_VERSION,
   SITE_LOGO_DARK_PATH,
   SITE_LOGO_PATH,
+  SITE_NAME,
 } from "@/shared/components/navbar/navConfig";
+import { STUDIO_MARK_SRC, STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 
 /** Intrinsic dimensions for Next Image (source ~637×392). */
 const LOGO_SOURCE_WIDTH_PX = 637;
@@ -96,16 +98,16 @@ export function LogoLink({
     scrollPageToTop();
   };
 
-  if (useFigmaHomeDesktopStyle && size === "nav" && customLabel && customIconPath) {
+  if (useFigmaHomeDesktopStyle && size === "nav") {
     return (
       <Link
         href="/"
-        className="relative inline-flex shrink-0 items-center gap-2 text-[#0f172a]"
+        className="relative inline-flex shrink-0 items-center gap-3 text-studio-fg"
         onClick={handleClick}
       >
         <span className="relative size-8 shrink-0">
           <Image
-            src={customIconPath}
+            src={customIconPath ?? STUDIO_MARK_SRC}
             alt=""
             aria-hidden
             fill
@@ -113,8 +115,13 @@ export function LogoLink({
             className="object-contain"
           />
         </span>
-        <span className="text-[24px] font-semibold leading-[32px] tracking-[-0.6px] [font-family:Inter,var(--font-site),sans-serif]">
-          {customLabel}
+        <span className="flex flex-col leading-none">
+          <span className="font-display text-[15px] font-bold tracking-[0.16em]">
+            {customLabel ?? SITE_NAME}
+          </span>
+          <span className="mt-1 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-studio-muted">
+            {STUDIO_PAGE_COPY.brand.kicker}
+          </span>
         </span>
       </Link>
     );

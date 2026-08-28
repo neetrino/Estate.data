@@ -4,4 +4,4 @@ export const API_VERSION_PREFIX = "/api/v1";
 export const ASSET_CACHE_CONTROL = "public, max-age=31536000, immutable";
 
 /** Default count for GET /api/v1/projects/recent. */
-export const DEFAULT_RECENT_WORK_LIMIT = 4;
+export const DEFAULT_RECENT_WORK_LIMIT = 6;

@@ -1,8 +1,7 @@
-import {
-  type ContactInquiryAccepted,
-  contactInquirySchema,
-} from "@/server/features/contact/contact-inquiry.schema";
+import { buildContactInquirySchema } from "@/server/features/contact/contact-inquiry.schema";
+import type { ContactInquiryAccepted } from "@/server/features/contact/contact-inquiry.schema";
 import { createContactInquiry } from "@/server/features/contact/create-contact-inquiry";
+import { getContactFieldSettings } from "@/server/features/contact/get-contact-field-settings";
 import { sendContactNotification } from "@/server/features/contact/send-contact-notification";
 import { ApiError } from "@/server/lib/api-error";
 import { emptyOptionsResponse, jsonSuccess } from "@/server/lib/http";
@@ -11,17 +10,15 @@ import { enforceContactRateLimit } from "@/server/lib/rate-limit/enforce-rate-li
 import { handleApiRoute } from "@/server/lib/route-handler";
 import { parseJsonBody } from "@/server/lib/validate";
 
-async function postContact(
-  request: Request
-): Promise<Response> {
+async function postContact(request: Request): Promise<Response> {
   const rateLimit = await enforceContactRateLimit(request);
   if (!rateLimit.success) {
     throw ApiError.rateLimited(rateLimit.retryAfterSeconds);
   }
 
-  const body = await parseJsonBody(request, contactInquirySchema);
+  const settings = await getContactFieldSettings();
+  const body = await parseJsonBody(request, buildContactInquirySchema(settings));
   const inquiry = await createContactInquiry(body);
-
   await sendContactNotification(body, inquiry.id);
 
   logger.info("contact.inquiry.created", {

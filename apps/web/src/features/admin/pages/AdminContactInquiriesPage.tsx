@@ -117,8 +117,18 @@ export function AdminContactInquiriesPage() {
                   <tr>
                     <td colSpan={4} className="bg-neutral-50 px-4 py-3 text-sm">
                       <p>
-                        <strong>Property:</strong> {item.propertyAddress}
+                        <strong>Property:</strong> {item.propertyAddress ?? "—"}
                       </p>
+                      {item.phone ? (
+                        <p className="mt-1">
+                          <strong>Phone:</strong> {item.phone}
+                        </p>
+                      ) : null}
+                      {item.company ? (
+                        <p className="mt-1">
+                          <strong>Company:</strong> {item.company}
+                        </p>
+                      ) : null}
                       {item.preferredDate ? (
                         <p className="mt-1">
                           <strong>Preferred date:</strong> {item.preferredDate}

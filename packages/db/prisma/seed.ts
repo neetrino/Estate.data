@@ -3,8 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PrismaClient } from "@prisma/client";
 import { ASSET_KEYS } from "../src/asset-keys";
-import { assetUrl } from "../src/asset-url";
 import type { PortfolioMediaCategory } from "../src/portfolio-category";
+import { seedStudioCms } from "./seed-studio";
 
 const prisma = new PrismaClient();
 
@@ -33,7 +33,7 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.homeHero,
-    relativePath: "images/hero-home.jpg",
+    relativePath: "assets/hero-villa-BcD5T4f7.webp",
     mimeType: "image/jpeg",
   },
   {
@@ -68,12 +68,12 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.propertyIntelligenceHero,
-    relativePath: "images/property-intelligence/scan-to-bim.jpg",
+    relativePath: "assets/scan-bim-gjdfWRdw.webp",
     mimeType: "image/jpeg",
   },
   {
     key: ASSET_KEYS.recentWorkPlaceholder,
-    relativePath: "images/recent-work/placeholder.jpg",
+    relativePath: "assets/portfolio-1-DsFekI_2.webp",
     mimeType: "image/jpeg",
   },
   {
@@ -83,8 +83,8 @@ const SEED_ASSETS: readonly SeedAsset[] = [
   },
   {
     key: ASSET_KEYS.aboutTeamCollaboration,
-    relativePath: "images/about/team-collaboration.png",
-    mimeType: "image/png",
+    relativePath: "assets/team-zk6Ayjl0.webp",
+    mimeType: "image/jpeg",
   },
   {
     key: ASSET_KEYS.contactLocationIcon,
@@ -178,24 +178,64 @@ async function seedAsset(entry: SeedAsset): Promise<void> {
   console.info(`Seeded asset: ${entry.key} (${data.byteLength} bytes)`);
 }
 
-const PORTFOLIO_PLACEHOLDER_IMAGE = assetUrl(ASSET_KEYS.recentWorkPlaceholder);
-const PORTFOLIO_PLACEHOLDER_ALT =
-  "Luxury Los Angeles property — portfolio placeholder";
-
 type SeedPortfolioProject = {
   id: string;
   category: PortfolioMediaCategory;
   sortOrder: number;
   featuredOnHome?: boolean;
+  imageUrl: string;
+  imageAlt: string;
 };
 
 const SEED_PORTFOLIO_PROJECTS: readonly SeedPortfolioProject[] = [
-  { id: "portfolio-1", category: "photo", sortOrder: 1, featuredOnHome: true },
-  { id: "portfolio-2", category: "photo", sortOrder: 2, featuredOnHome: true },
-  { id: "portfolio-3", category: "video", sortOrder: 3, featuredOnHome: true },
-  { id: "portfolio-4", category: "video", sortOrder: 4, featuredOnHome: true },
-  { id: "portfolio-5", category: "drone", sortOrder: 5 },
-  { id: "portfolio-6", category: "3d-tour", sortOrder: 6 },
+  {
+    id: "portfolio-1",
+    category: "photo",
+    sortOrder: 1,
+    featuredOnHome: true,
+    imageUrl: "/assets/portfolio-1-DsFekI_2.webp",
+    imageAlt: "Modern Beverly Hills Residence in Beverly Hills, CA — Photography, Cinematic Video, Drone, Matterport",
+  },
+  {
+    id: "portfolio-2",
+    category: "photo",
+    sortOrder: 2,
+    featuredOnHome: true,
+    imageUrl: "/assets/portfolio-2-uY8hxEf-.webp",
+    imageAlt: "Wilshire Corporate Lobby in Downtown Los Angeles, CA — Architectural Photography, 3D Laser Scanning, Scan-to-BIM",
+  },
+  {
+    id: "portfolio-3",
+    category: "video",
+    sortOrder: 3,
+    featuredOnHome: true,
+    imageUrl: "/assets/portfolio-3-fLsZycgA.webp",
+    imageAlt: "Venice Architectural Loft in Venice, CA — Photography, Cinematic Video, Virtual Staging",
+  },
+  {
+    id: "portfolio-4",
+    category: "drone",
+    sortOrder: 4,
+    featuredOnHome: true,
+    imageUrl: "/assets/drone-DM_DRS7C.webp",
+    imageAlt: "Point Dume Cliffside Estate in Malibu, CA — Drone Photo + Video, Photography, Matterport",
+  },
+  {
+    id: "portfolio-5",
+    category: "video",
+    sortOrder: 5,
+    featuredOnHome: true,
+    imageUrl: "/assets/hero-villa-BcD5T4f7.webp",
+    imageAlt: "Sunset Plaza Glass House in West Hollywood, CA — Cinematic Film, Twilight Photography, Drone",
+  },
+  {
+    id: "portfolio-6",
+    category: "3d-tour",
+    sortOrder: 6,
+    featuredOnHome: true,
+    imageUrl: "/assets/scan-bim-gjdfWRdw.webp",
+    imageAlt: "Vernon Industrial As-Built in Vernon, CA — 3D Laser Scanning, Point Cloud, Revit LOD 300",
+  },
 ];
 
 async function seedPortfolioProject(entry: SeedPortfolioProject): Promise<void> {
@@ -203,16 +243,16 @@ async function seedPortfolioProject(entry: SeedPortfolioProject): Promise<void> 
     where: { id: entry.id },
     create: {
       id: entry.id,
-      imageUrl: PORTFOLIO_PLACEHOLDER_IMAGE,
-      imageAlt: PORTFOLIO_PLACEHOLDER_ALT,
+      imageUrl: entry.imageUrl,
+      imageAlt: entry.imageAlt,
       category: entry.category,
       sortOrder: entry.sortOrder,
       featuredOnHome: entry.featuredOnHome ?? false,
       published: true,
     },
     update: {
-      imageUrl: PORTFOLIO_PLACEHOLDER_IMAGE,
-      imageAlt: PORTFOLIO_PLACEHOLDER_ALT,
+      imageUrl: entry.imageUrl,
+      imageAlt: entry.imageAlt,
       category: entry.category,
       sortOrder: entry.sortOrder,
       featuredOnHome: entry.featuredOnHome ?? false,
@@ -280,22 +320,99 @@ type SeedFaqItem = {
 
 const SEED_FAQ_ITEMS: readonly SeedFaqItem[] = [
   {
-    id: "turnaround",
-    question: "What's your turnaround?",
-    answer: "Standard 48 hours; rush 24 hours available.",
+    id: "photo-turnaround",
+    question: "How quickly can I receive my photos?",
+    answer: "Average photo delivery is 24 hours. Rush options are available for many shoots.",
     sortOrder: 1,
   },
   {
-    id: "la-coverage",
-    question: "Do you cover all of LA?",
-    answer: "Yes — from Malibu to DTLA, Pasadena to South Bay.",
+    id: "same-day",
+    question: "Do you provide same-day delivery?",
+    answer: "Same-day is available on request when scheduling and post-production capacity allow.",
     sortOrder: 2,
   },
   {
-    id: "raw-files",
-    question: "Can I license raw files?",
-    answer: "Yes, raw + edited delivery available on Cinematic+.",
+    id: "drone-photo",
+    question: "Do you provide drone photography?",
+    answer:
+      "Yes. Licensed aerial photography and video from $199, subject to FAA rules, airspace and weather.",
     sortOrder: 3,
+  },
+  {
+    id: "faa",
+    question: "Are your drone operators FAA compliant?",
+    answer: "Yes. Drone operations are conducted under FAA Part 107.",
+    sortOrder: 4,
+  },
+  {
+    id: "matterport-how",
+    question: "How does Matterport work?",
+    answer:
+      "We capture the property with professional 3D scanning and deliver an interactive digital twin — dollhouse, measurements and a shareable MLS-ready link.",
+    sortOrder: 5,
+  },
+  {
+    id: "embed-tour",
+    question: "Can I embed my Matterport tour on my website?",
+    answer: "Yes. Tours are website-embeddable and mobile/desktop optimized.",
+    sortOrder: 6,
+  },
+  {
+    id: "floor-plans",
+    question: "Can you create floor plans?",
+    answer: "Yes. Floor plans are included with Matterport 3D tours and available as add-ons.",
+    sortOrder: 7,
+  },
+  {
+    id: "virtual-staging",
+    question: "Do you offer virtual staging?",
+    answer: "Yes. Virtual staging starts from $35 per image.",
+    sortOrder: 8,
+  },
+  {
+    id: "ai-media",
+    question: "Do you offer AI-generated property media?",
+    answer:
+      "Yes. AI social video, reels and creative packages — clearly identified for marketing and visualization.",
+    sortOrder: 9,
+  },
+  {
+    id: "commercial",
+    question: "Do you provide commercial real estate photography?",
+    answer: "Yes. We shoot commercial, office, retail, industrial, hospitality and multifamily.",
+    sortOrder: 10,
+  },
+  {
+    id: "aec",
+    question: "Do you work with architects and developers?",
+    answer: "Yes. Scan-to-BIM, point clouds and Revit delivery are built for AEC teams.",
+    sortOrder: 11,
+  },
+  {
+    id: "scan-to-bim",
+    question: "What is Scan-to-BIM?",
+    answer:
+      "We laser-scan the real space, register a point cloud, then model it in Revit for as-built documentation.",
+    sortOrder: 12,
+  },
+  {
+    id: "revit",
+    question: "Can you deliver Revit files?",
+    answer: "Yes. Deliverables include RVT models, plus E57 / RCP / RCS point clouds as specified.",
+    sortOrder: 13,
+  },
+  {
+    id: "quote-info",
+    question: "What information do you need for a quote?",
+    answer:
+      "Property address or area, type, approximate square footage, desired date and the services you need.",
+    sortOrder: 14,
+  },
+  {
+    id: "book-shoot",
+    question: "How do I book a shoot?",
+    answer: "Use the contact form on this page. We return a scoped quote the same business day.",
+    sortOrder: 15,
   },
 ];
 
@@ -372,19 +489,19 @@ async function seedTranslations(): Promise<void> {
   await prisma.faqItemTranslation.upsert({
     where: {
       faqItemId_locale: {
-        faqItemId: "turnaround",
+        faqItemId: "photo-turnaround",
         locale: "es",
       },
     },
     create: {
-      faqItemId: "turnaround",
+      faqItemId: "photo-turnaround",
       locale: "es",
-      question: "¿Cuál es su tiempo de entrega?",
-      answer: "Estándar 48 horas; urgente 24 horas disponible.",
+      question: "¿Qué tan rápido recibo las fotos?",
+      answer: "La entrega promedio es 24 horas. Opciones urgentes disponibles.",
     },
     update: {
-      question: "¿Cuál es su tiempo de entrega?",
-      answer: "Estándar 48 horas; urgente 24 horas disponible.",
+      question: "¿Qué tan rápido recibo las fotos?",
+      answer: "La entrega promedio es 24 horas. Opciones urgentes disponibles.",
     },
   });
 
@@ -428,11 +545,17 @@ async function seedTranslations(): Promise<void> {
   });
 }
 
+const ARGON2_OPTIONS = {
+  memoryCost: 19456,
+  timeCost: 2,
+  parallelism: 1,
+} as const;
+
 async function seedAdminUser(): Promise<void> {
   const { hash } = await import("@node-rs/argon2");
   const email = (process.env.ADMIN_EMAIL ?? "admin@estate.data").toLowerCase();
   const password = process.env.ADMIN_PASSWORD ?? "admin-change-me";
-  const passwordHash = await hash(password);
+  const passwordHash = await hash(password, ARGON2_OPTIONS);
 
   await prisma.user.upsert({
     where: { email },
@@ -451,6 +574,11 @@ async function seedAdminUser(): Promise<void> {
 }
 
 async function main(): Promise<void> {
+  if (process.argv.includes("--admin-only")) {
+    await seedAdminUser();
+    return;
+  }
+
   for (const entry of SEED_ASSETS) {
     await seedAsset(entry);
   }
@@ -463,6 +591,11 @@ async function main(): Promise<void> {
     await seedArticle(entry);
   }
 
+  const faqIds = SEED_FAQ_ITEMS.map((entry) => entry.id);
+  await prisma.faqItem.deleteMany({
+    where: { id: { notIn: [...faqIds] } },
+  });
+
   for (const entry of SEED_FAQ_ITEMS) {
     await seedFaqItem(entry);
   }
@@ -470,22 +603,22 @@ async function main(): Promise<void> {
   await seedTranslations();
   await seedPricing();
   await seedHomeHero();
+  await seedStudioCms(prisma);
   await seedAdminUser();
 }
 
 const HOME_HERO_SEED = {
   key: "home",
-  title:
-    "From first impression to final decision, we help every property present its best self.",
+  title: "Make your property impossible to ignore.",
   description:
-    "Estatedata.cloud delivers premium real estate media that helps brokers, developers, and investors present every property at its best.",
-  primaryButtonLabel: "Book Now",
-  primaryButtonHref: "/contact",
-  secondaryButtonLabel: "Book Consultation",
-  secondaryButtonHref: "/contact",
-  desktopImageUrl: "/images/hero-landing-bg-2560.webp",
+    "Premium real estate photography, cinematic video, drone, AI-powered media, Matterport 3D tours and professional reality capture — all under one roof.",
+  primaryButtonLabel: "Book a Shoot",
+  primaryButtonHref: "/#contact",
+  secondaryButtonLabel: "Explore Services",
+  secondaryButtonHref: "/#photography",
+  desktopImageUrl: "/assets/hero-villa-BcD5T4f7.webp",
   desktopImageKey: null,
-  mobileImageUrl: "/images/hero-landing-bg-mobile-20260528-v2.png",
+  mobileImageUrl: "/assets/hero-villa-BcD5T4f7.webp",
   mobileImageKey: null,
 } as const;
 
@@ -546,8 +679,8 @@ type SeedPricingPackage = {
 const SEED_PRICING_CATEGORIES: readonly SeedPricingCategory[] = [
   {
     key: "media",
-    sectionTitle: "Media packages",
-    priceSuffix: "/listing",
+    sectionTitle: "Choose how far you want to go.",
+    priceSuffix: "",
   },
   {
     key: "analytics",
@@ -561,53 +694,97 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
     id: "essential",
     categoryKey: "media",
     name: "Essential",
-    price: "$549",
+    price: "$349",
+    priceSuffixOverride: "",
     features: [
-      "25 HDR photos",
-      "Basic floorplan",
-      "48-hour delivery",
-      "Listing website",
+      "Professional photography",
+      "Interior & exterior",
+      "Professional editing",
+      "20+ final images",
     ],
     bookLabel: "Book Essential",
-    bookHref: "/contact",
+    bookHref: "/#contact",
     cardAccent: "blue",
     sortOrder: 1,
   },
   {
-    id: "signature",
+    id: "digital",
     categoryKey: "media",
-    name: "Signature",
-    price: "$1,249",
+    name: "Digital",
+    price: "$499",
+    priceSuffixOverride: "",
     features: [
-      "40 HDR photos + twilight",
-      "Drone aerials",
-      "Cinematic 60s reel",
+      "Professional photography",
       "3D Matterport tour",
-      "Listing website",
+      "Professional editing",
+      "Digital floor plan",
     ],
-    bookLabel: "Book Signature",
-    bookHref: "/contact",
+    bookLabel: "Book Digital",
+    bookHref: "/#contact",
     cardAccent: "purple",
-    highlighted: true,
-    badgeLabel: "Most popular",
     sortOrder: 2,
   },
   {
-    id: "cinematic-plus",
+    id: "cinematic",
     categoryKey: "media",
-    name: "Cinematic+",
-    price: "$2,499",
+    name: "Cinematic",
+    price: "$799",
+    priceSuffixOverride: "",
     features: [
-      "Full photo set",
-      "2-min cinematic film",
-      "Drone + neighborhood B-roll",
-      "3D tour + floorplan",
-      "Comps & market brief",
+      "Professional photography",
+      "Cinematic property video",
+      "Drone photography",
+      "Professional editing",
+      "Social media version",
     ],
-    bookLabel: "Book Cinematic+",
-    bookHref: "/contact",
+    bookLabel: "Book Cinematic",
+    bookHref: "/#contact",
     cardAccent: "orange",
     sortOrder: 3,
+  },
+  {
+    id: "complete",
+    categoryKey: "media",
+    name: "Complete",
+    price: "$999",
+    priceSuffixOverride: "",
+    features: [
+      "Professional photography",
+      "Cinematic 4K video",
+      "Drone photography",
+      "Drone video",
+      "Matterport 3D tour",
+      "Floor plan",
+      "Social media vertical video",
+      "Professional editing",
+    ],
+    bookLabel: "Book Complete",
+    bookHref: "/#contact",
+    cardAccent: "purple",
+    highlighted: true,
+    badgeLabel: "Most complete",
+    sortOrder: 4,
+  },
+  {
+    id: "luxury-development",
+    categoryKey: "media",
+    name: "Luxury / Development",
+    price: "Custom",
+    priceSuffixOverride: "",
+    features: [
+      "Custom production planning",
+      "Dedicated creative direction",
+      "Multi-day capture",
+      "Luxury estates",
+      "Commercial properties",
+      "New developments",
+      "Hotels & multifamily",
+      "Architectural projects",
+    ],
+    bookLabel: "Request Custom Proposal",
+    bookHref: "/#contact",
+    cardAccent: "orange",
+    sortOrder: 5,
   },
   {
     id: "insights",
@@ -616,7 +793,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
     price: "$199",
     features: ["Neighborhood reports", "Listing analytics", "Email digest"],
     bookLabel: "Talk to sales",
-    bookHref: "/contact",
+    bookHref: "/#contact",
     cardAccent: "blue",
     sortOrder: 1,
   },
@@ -627,7 +804,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
     price: "$499",
     features: ["MLS/IDX integration", "Custom dashboard", "CRM sync"],
     bookLabel: "Talk to sales",
-    bookHref: "/contact",
+    bookHref: "/#contact",
     cardAccent: "purple",
     sortOrder: 2,
   },
@@ -639,7 +816,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
     priceSuffixOverride: "",
     features: ["BIM workflows", "API access", "Dedicated success mgr"],
     bookLabel: "Talk to sales",
-    bookHref: "/contact",
+    bookHref: "/#contact",
     cardAccent: "orange",
     sortOrder: 3,
   },
@@ -700,6 +877,10 @@ async function seedPricingPackage(entry: SeedPricingPackage): Promise<void> {
 }
 
 async function seedPricing(): Promise<void> {
+  await prisma.pricingPackage.deleteMany({
+    where: { id: { in: ["signature", "cinematic-plus"] } },
+  });
+
   for (const entry of SEED_PRICING_CATEGORIES) {
     await seedPricingCategory(entry);
   }

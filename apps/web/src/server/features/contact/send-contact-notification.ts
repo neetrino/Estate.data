@@ -6,21 +6,34 @@ import { logger } from "@/server/lib/logger";
 function formatContactEmailHtml(input: ContactInquiryInput, inquiryId: string): string {
   const lines = [
     `<p><strong>New contact inquiry</strong> (${inquiryId})</p>`,
-    `<p><strong>Name:</strong> ${escapeHtml(input.name)}</p>`,
-    `<p><strong>Email:</strong> ${escapeHtml(input.email)}</p>`,
-    `<p><strong>Property:</strong> ${escapeHtml(input.propertyAddress)}</p>`,
-    `<p><strong>Service:</strong> ${escapeHtml(input.service)}</p>`,
+    `<p><strong>Name:</strong> ${escapeHtml(input.name ?? "")}</p>`,
+    `<p><strong>Email:</strong> ${escapeHtml(input.email ?? "")}</p>`,
   ];
 
-  if (input.preferredDate) {
-    lines.push(`<p><strong>Preferred date:</strong> ${escapeHtml(input.preferredDate)}</p>`);
+  appendOptionalLine(lines, "Phone", input.phone);
+  appendOptionalLine(lines, "Company", input.company);
+  appendOptionalLine(lines, "Property", input.propertyAddress);
+  lines.push(`<p><strong>Service:</strong> ${escapeHtml(input.service || "other")}</p>`);
+  appendOptionalLine(lines, "Preferred date", input.preferredDate);
+
+  if (input.extraFields) {
+    for (const [key, value] of Object.entries(input.extraFields)) {
+      appendOptionalLine(lines, key, value);
+    }
   }
 
   if (input.projectDetails) {
-    lines.push(`<p><strong>Details:</strong></p><p>${escapeHtml(input.projectDetails)}</p>`);
+    lines.push(`<p><strong>Message:</strong></p><p>${escapeHtml(input.projectDetails)}</p>`);
   }
 
   return lines.join("\n");
+}
+
+function appendOptionalLine(lines: string[], label: string, value: string | undefined): void {
+  if (!value) {
+    return;
+  }
+  lines.push(`<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`);
 }
 
 function escapeHtml(value: string): string {
@@ -43,7 +56,6 @@ export async function sendContactNotification(
   }
 
   const resend = new Resend(config.RESEND_API_KEY);
-
   const { error } = await resend.emails.send({
     from: config.RESEND_FROM_EMAIL,
     to: config.CONTACT_NOTIFY_EMAIL,
@@ -53,10 +65,7 @@ export async function sendContactNotification(
   });
 
   if (error) {
-    logger.error("contact.email.failed", {
-      inquiryId,
-      message: error.message,
-    });
+    logger.error("contact.email.failed", { inquiryId, message: error.message });
     return false;
   }
 

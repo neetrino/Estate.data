@@ -3,6 +3,7 @@ import {
   LazyContactRequestForm,
   LazyContactStudioMap,
 } from "@/features/contact/lib/lazyContactComponents";
+import { DEFAULT_CONTACT_FIELD_SETTINGS } from "@/features/contact/content/contactFieldConfig";
 import { CONTACT_PAGE_COPY } from "@/features/contact/content/contactCopy";
 import { FooterPageBridge } from "@/shared/components/footer/FooterPageBridge";
 import { ScrollRevealBlock } from "@/shared/components/reveal/ScrollRevealBlock";
@@ -35,7 +36,7 @@ export function ContactPage() {
                 </div>
               </ScrollRevealBlock>
               <ScrollRevealBlock className="min-h-0" index={1}>
-                <LazyContactRequestForm />
+                <LazyContactRequestForm fields={DEFAULT_CONTACT_FIELD_SETTINGS} />
               </ScrollRevealBlock>
             </div>
           </div>

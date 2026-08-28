@@ -1,6 +1,9 @@
 /** Admin sign-in and panel — no marketing navbar/footer. */
 export const SUPERSUDO_PATH = "/supersudo";
 
+/** Separate Web Pages marketing route (property websites). */
+export const WEB_PAGES_PATH = "/web-pages";
+
 /** Contact page — forms, studio details, “Book a Shoot” CTAs. */
 export const CONTACT_PATH = "/contact";
 
@@ -28,7 +31,7 @@ export function isSupersudoRoute(pathname: string): boolean {
   return pathname === SUPERSUDO_PATH || pathname.startsWith(`${SUPERSUDO_PATH}/`);
 }
 
-/** Home + /services + /data-bim — soft footer top blend after photo / gradient sections. */
+/** Home + /web-pages — soft footer top blend after photo / gradient sections. */
 export function shouldFooterSmoothTopEntry(pathname: string): boolean {
-  return pathname === "/" || pathname === "/services" || pathname === DATA_BIM_PATH;
+  return pathname === "/" || pathname === WEB_PAGES_PATH;
 }

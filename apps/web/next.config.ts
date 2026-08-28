@@ -46,12 +46,53 @@ export const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: "/images/**" },
       { pathname: "/icons/**" },
+      { pathname: "/assets/**" },
+      { pathname: "/__l5e/**" },
       { pathname: "/api/v1/assets/**" },
     ],
     remotePatterns: [buildApiAssetRemotePattern()],
   },
   experimental: {
     optimizePackageImports: ["zod"],
+  },
+  async redirects() {
+    return [
+      { source: "/services/photography", destination: "/?section=photography", permanent: true },
+      { source: "/services/video-production", destination: "/?section=video", permanent: true },
+      { source: "/services/drone-services", destination: "/?section=drone", permanent: true },
+      {
+        source: "/services/3d-tours-visualization",
+        destination: "/?section=tours",
+        permanent: true,
+      },
+      {
+        source: "/services/floor-plans-2d-3d",
+        destination: "/?section=floor-plans",
+        permanent: true,
+      },
+      { source: "/services/ai-media", destination: "/?section=ai-media", permanent: true },
+      {
+        source: "/services/laser-scanning-scan-to-bim",
+        destination: "/?section=scan-to-bim",
+        permanent: true,
+      },
+      {
+        source: "/services/property-landing-pages",
+        destination: "/web-pages",
+        permanent: true,
+      },
+      { source: "/services/mls-solutions", destination: "/", permanent: true },
+      { source: "/services", destination: "/?section=photography", permanent: true },
+      { source: "/contact", destination: "/?section=contact", permanent: true },
+      { source: "/pricing", destination: "/?section=packages", permanent: true },
+      { source: "/portfolio", destination: "/?section=portfolio", permanent: true },
+      { source: "/about", destination: "/?section=studio", permanent: true },
+      { source: "/solutions", destination: "/", permanent: true },
+      { source: "/data-bim", destination: "/?section=scan-to-bim", permanent: true },
+      { source: "/services/data", destination: "/?section=scan-to-bim", permanent: true },
+      { source: "/resources", destination: "/?section=faq", permanent: true },
+      { source: "/resources/:slug", destination: "/?section=faq", permanent: true },
+    ];
   },
 };
 

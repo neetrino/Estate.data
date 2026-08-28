@@ -17,10 +17,13 @@ export type AdminContactInquiry = {
   id: string;
   name: string;
   email: string;
-  propertyAddress: string;
+  phone: string | null;
+  company: string | null;
+  propertyAddress: string | null;
   service: string;
   preferredDate: string | null;
   projectDetails: string | null;
+  extraFields: Record<string, string> | null;
   createdAt: string;
 };
 
@@ -150,4 +153,46 @@ export type AdminHomeHeroUploadResult = {
   publicUrl: string;
   byteSize: number;
   mimeType: string;
+};
+
+export type AdminHeroSlide = {
+  id: string;
+  imageUrl: string;
+  imageKey: string | null;
+  thumbUrl: string;
+  alt: string;
+  sortOrder: number;
+  published: boolean;
+};
+
+export type AdminStudioService = {
+  id: string;
+  sectionKey: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  galleryUrls: unknown;
+  included: unknown;
+  pricing: unknown;
+  primaryCtaLabel: string;
+  primaryCtaHref: string;
+  secondaryCtaLabel: string;
+  secondaryCtaHref: string;
+  sortOrder: number;
+  published: boolean;
+};
+
+export type AdminContactField = {
+  id: string;
+  fieldKey: string;
+  label: string;
+  placeholder: string;
+  mode: string;
+  sortOrder: number;
+};
+
+export type AdminSiteCopyItem = {
+  key: string;
+  value: string;
 };

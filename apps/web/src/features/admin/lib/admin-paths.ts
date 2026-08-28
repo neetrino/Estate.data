@@ -15,6 +15,14 @@ export const SUPERSUDO_PANEL_MEDIA_PATH = "/supersudo/panel/media";
 export const SUPERSUDO_PANEL_PAYMENTS_PATH = "/supersudo/panel/payments";
 export const SUPERSUDO_PANEL_SITE_CONTENT_PATH = "/supersudo/panel/site-content";
 export const SUPERSUDO_PANEL_HOME_HERO_PATH = "/supersudo/panel/site-content/home-hero";
+export const SUPERSUDO_PANEL_HERO_SLIDES_PATH =
+  "/supersudo/panel/site-content/hero-slides";
+export const SUPERSUDO_PANEL_STUDIO_SERVICES_PATH =
+  "/supersudo/panel/site-content/studio-services";
+export const SUPERSUDO_PANEL_CONTACT_FIELDS_PATH =
+  "/supersudo/panel/site-content/contact-fields";
+export const SUPERSUDO_PANEL_SITE_COPY_PATH = "/supersudo/panel/site-content/copy";
+export const SUPERSUDO_PANEL_ANALYTICS_PATH = "/supersudo/panel/analytics";
 
 /** Whether the pathname belongs to the admin area. */
 export function isSupersudoRoute(pathname: string): boolean {
@@ -36,6 +44,11 @@ const PAGE_TITLES: Readonly<Record<string, string>> = {
   [SUPERSUDO_PANEL_PAYMENTS_PATH]: "Payments",
   [SUPERSUDO_PANEL_SITE_CONTENT_PATH]: "Site content",
   [SUPERSUDO_PANEL_HOME_HERO_PATH]: "Home Hero",
+  [SUPERSUDO_PANEL_HERO_SLIDES_PATH]: "Hero slides",
+  [SUPERSUDO_PANEL_STUDIO_SERVICES_PATH]: "Studio services",
+  [SUPERSUDO_PANEL_CONTACT_FIELDS_PATH]: "Contact fields",
+  [SUPERSUDO_PANEL_SITE_COPY_PATH]: "Site copy",
+  [SUPERSUDO_PANEL_ANALYTICS_PATH]: "Analytics",
 };
 
 /** Human-readable title for the current admin panel route. */

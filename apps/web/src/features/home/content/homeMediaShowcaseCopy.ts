@@ -17,12 +17,12 @@ export const HOME_MEDIA_SHOWCASE_COPY = {
     [
       {
         id: "interior-1",
-        src: "/images/hero-landing-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Premium interior living space with natural light",
       },
       {
         id: "aerial-1",
-        src: "/images/what-we-do-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Aerial neighborhood context over luxury homes",
       },
       {
@@ -32,24 +32,24 @@ export const HOME_MEDIA_SHOWCASE_COPY = {
       },
       {
         id: "architecture-1",
-        src: "/images/client-voices/home-section-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Architectural facade details and modern lines",
       },
     ],
     [
       {
         id: "twilight-1",
-        src: "/images/hero-landing-bg-mobile-20260528-v2.png",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Twilight property photography with warm ambiance",
       },
       {
         id: "commercial-1",
-        src: "/images/property-intelligence/home-visual.webp",
+        src: "/assets/scan-bim-gjdfWRdw.webp",
         alt: "Commercial real estate space with clean composition",
       },
       {
         id: "exterior-1",
-        src: "/images/hero-landing-bg-2560.webp",
+        src: "/assets/hero-villa-BcD5T4f7.webp",
         alt: "Wide exterior shot of an upscale listing",
       },
       {

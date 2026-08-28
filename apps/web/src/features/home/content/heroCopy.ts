@@ -27,22 +27,22 @@ export type HomeHeroContentFields = {
 export const HOME_HERO_KEY = "home" as const;
 
 export const HOME_HERO_COPY = {
-  locationBadge: "Serving Greater Los Angeles",
+  locationBadge: "Los Angeles · Real Estate Media + Digital Reality Capture",
   headlineLines: [
     {
       segments: [
         {
-          text: "From first impression to final decision, we help every property present its best self.",
+          text: "Make your property impossible to ignore.",
           accent: false,
         },
       ],
     },
   ] as const satisfies readonly HeroHeadlineLine[],
   descriptionLines: [
-    "EstateData.cloud delivers premium real estate media that helps brokers, developers, and investors present every property at its best.",
+    "Premium real estate photography, cinematic video, drone, AI-powered media, Matterport 3D tours and professional reality capture — all under one roof.",
   ] as const,
-  primaryCta: { label: "Book Now", href: "/contact" },
-  secondaryCta: { label: "Book Consultation", href: "/contact" },
+  primaryCta: { label: "Book a Shoot", href: "/#contact" },
+  secondaryCta: { label: "Explore Services", href: "/#photography" },
 } as const;
 
 /** Static fallback when the DB row is missing. */

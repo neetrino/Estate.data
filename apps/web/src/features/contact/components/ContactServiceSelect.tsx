@@ -2,23 +2,23 @@
 
 import {
   CONTACT_FORM_SERVICE_OPTIONS,
-} from "@/features/contact/content/contactFormCopy";
+} from "@/features/contact/content/contactFieldConfig";
 import { CONTACT_FORM_LIGHT_PURPLE_HOVER_CLASS } from "@/features/contact/lib/contactFormStyles";
 import { useEffect, useId, useRef, useState } from "react";
 
 const CONTACT_SERVICE_TRIGGER_CLASS =
-  "relative flex w-full cursor-pointer items-center rounded-xl border border-foreground/15 bg-white py-3 pl-4 pr-11 text-left text-base transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-client-voices-accent/40";
+  "relative flex w-full cursor-pointer items-center border border-studio-border bg-studio-bg py-3 pl-4 pr-11 text-left text-base text-studio-fg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40";
 
-const CONTACT_SERVICE_PLACEHOLDER_CLASS = "text-muted-foreground";
+const CONTACT_SERVICE_PLACEHOLDER_CLASS = "text-studio-muted";
 
 const CONTACT_SERVICE_CHEVRON_CLASS =
-  "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-black transition-transform duration-200";
+  "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-studio-fg transition-transform duration-200";
 
 const CONTACT_SERVICE_LIST_CLASS =
-  "w-full rounded-xl border border-foreground/15 bg-white py-1 shadow-[var(--client-voices-card-shadow)]";
+  "w-full border border-studio-border bg-studio-card py-1";
 
 const CONTACT_SERVICE_OPTION_CLASS = [
-  "block w-full cursor-pointer px-4 py-2.5 text-left text-base text-black transition-colors",
+  "block w-full cursor-pointer px-4 py-2.5 text-left text-base text-studio-fg transition-colors",
   CONTACT_FORM_LIGHT_PURPLE_HOVER_CLASS,
 ].join(" ");
 
@@ -28,12 +28,14 @@ type ContactServiceSelectProps = {
   id: string;
   placeholder: string;
   disabled?: boolean;
+  required?: boolean;
 };
 
 export function ContactServiceSelect({
   id,
   placeholder,
   disabled = false,
+  required = false,
 }: ContactServiceSelectProps) {
   const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -74,7 +76,7 @@ export function ContactServiceSelect({
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <input type="hidden" name="service" value={value} required disabled={disabled} />
+      <input type="hidden" name="service" value={value} required={required} disabled={disabled} />
 
       <button
         type="button"
