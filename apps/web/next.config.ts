@@ -54,6 +54,7 @@ export const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: "/images/**" },
       { pathname: "/icons/**" },
+      { pathname: "/assets/*" },
       { pathname: "/assets/**" },
       { pathname: "/__l5e/**" },
       { pathname: "/api/v1/assets/**" },
@@ -103,7 +104,11 @@ export const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
-    return [{ source: "/favicon.ico", destination: "/favicon.png" }];
+    return [
+      { source: "/favicon.ico", destination: "/favicon.png" },
+      { source: "/assets/:file.jpg", destination: "/assets/:file.webp" },
+      { source: "/assets/:file.jpeg", destination: "/assets/:file.webp" },
+    ];
   },
 };
 

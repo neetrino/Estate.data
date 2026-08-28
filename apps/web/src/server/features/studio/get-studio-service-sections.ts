@@ -2,6 +2,7 @@ import {
   DEFAULT_STUDIO_SERVICES,
   type StudioServiceContent,
 } from "@/features/home/content/studioServicesCopy";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 import { getPrisma } from "@/server/lib/db";
 import { logger } from "@/server/lib/logger";
 
@@ -10,6 +11,10 @@ function asStringArray(value: unknown): string[] {
     return [];
   }
   return value.filter((item): item is string => typeof item === "string");
+}
+
+function asAssetUrlArray(value: unknown): string[] {
+  return asStringArray(value).map(normalizePublicAssetUrl);
 }
 
 function asPricing(value: unknown): StudioServiceContent["pricing"] {
@@ -43,8 +48,8 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
       eyebrow: row.eyebrow,
       title: row.title,
       description: row.description,
-      imageUrl: row.imageUrl,
-      galleryUrls: asStringArray(row.galleryUrls),
+      imageUrl: normalizePublicAssetUrl(row.imageUrl),
+      galleryUrls: asAssetUrlArray(row.galleryUrls),
       included: asStringArray(row.included),
       pricing: asPricing(row.pricing),
       primaryCtaLabel: row.primaryCtaLabel,

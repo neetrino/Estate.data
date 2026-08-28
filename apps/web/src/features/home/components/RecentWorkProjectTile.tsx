@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 
 type RecentWorkProjectTileProps = {
@@ -8,7 +8,7 @@ type RecentWorkProjectTileProps = {
 export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
   return (
     <article className="relative aspect-[4/5] w-full overflow-hidden bg-studio-card">
-      <Image
+      <PublicAssetImage
         src={project.imageSrc}
         alt={project.imageAlt}
         fill
