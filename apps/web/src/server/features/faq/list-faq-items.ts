@@ -1,5 +1,6 @@
 import type { FaqItemDto } from "@/server/features/faq/faq.schema";
 import { getPrisma } from "@/server/lib/db";
+import { logger } from "@/server/lib/logger";
 import { DEFAULT_LOCALE, type SupportedLocale } from "@estate/db";
 
 async function loadFaqTranslationMap(
@@ -29,31 +30,38 @@ async function loadFaqTranslationMap(
 export async function listFaqItems(
   locale: SupportedLocale = DEFAULT_LOCALE,
 ): Promise<FaqItemDto[]> {
-  const items = await getPrisma().faqItem.findMany({
-    where: { published: true },
-    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
-    select: {
-      id: true,
-      question: true,
-      answer: true,
-    },
-  });
+  try {
+    const items = await getPrisma().faqItem.findMany({
+      where: { published: true },
+      orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+      select: {
+        id: true,
+        question: true,
+        answer: true,
+      },
+    });
 
-  const translations = await loadFaqTranslationMap(
-    items.map((item) => item.id),
-    locale,
-  );
+    const translations = await loadFaqTranslationMap(
+      items.map((item) => item.id),
+      locale,
+    );
 
-  return items.map((item) => {
-    const translation = translations.get(item.id);
-    if (!translation) {
-      return item;
-    }
+    return items.map((item) => {
+      const translation = translations.get(item.id);
+      if (!translation) {
+        return item;
+      }
 
-    return {
-      id: item.id,
-      question: translation.question,
-      answer: translation.answer,
-    };
-  });
+      return {
+        id: item.id,
+        question: translation.question,
+        answer: translation.answer,
+      };
+    });
+  } catch (error) {
+    logger.warn("faq.read.fallback_empty", {
+      reason: error instanceof Error ? error.message : "unknown",
+    });
+    return [];
+  }
 }

@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     "Premium Los Angeles real estate media: photography, cinematic video, drone, AI media, Matterport 3D tours and Scan-to-BIM. Book a shoot from $249.",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -35,6 +39,8 @@ export default function RootLayout({
       className={`${siteFont.variable} ${displayFont.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto [color-scheme:dark]`}
     >
       <body className="flex min-h-full flex-col bg-studio-bg font-sans text-studio-fg">
+        <GoogleTagManagerNoscript />
+        <GoogleTagManager />
         <SiteChrome>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         </SiteChrome>
