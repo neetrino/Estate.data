@@ -6,6 +6,18 @@ import type {
 import { isPricingCardAccent, type PricingCategoryKey, DEFAULT_LOCALE, type SupportedLocale } from "@estate/db";
 import { cacheGet, cacheSet } from "@/server/lib/cache/redis-cache";
 import { getPrisma } from "@/server/lib/db";
+import { logger } from "@/server/lib/logger";
+
+const EMPTY_PRICING_CATEGORY: PricingCategoryDto = {
+  sectionTitle: "",
+  priceSuffix: "",
+  packages: [],
+};
+
+const EMPTY_PRICING_PAGE: PricingPageDto = {
+  media: EMPTY_PRICING_CATEGORY,
+  analytics: EMPTY_PRICING_CATEGORY,
+};
 
 function cacheKey(locale: SupportedLocale): string {
   return `pricing:page:${locale}`;
@@ -110,7 +122,7 @@ async function loadCategory(
   });
 
   if (!category) {
-    return { sectionTitle: "", priceSuffix: "", packages: [] };
+    return EMPTY_PRICING_CATEGORY;
   }
 
   const translation = await loadCategoryTranslation(categoryKey, locale);
@@ -126,20 +138,27 @@ async function loadCategory(
 export async function getPricingPage(
   locale: SupportedLocale = DEFAULT_LOCALE,
 ): Promise<PricingPageDto> {
-  const key = cacheKey(locale);
-  const cached = await cacheGet<PricingPageDto>(key);
-  if (cached) {
-    return cached;
+  try {
+    const key = cacheKey(locale);
+    const cached = await cacheGet<PricingPageDto>(key);
+    if (cached) {
+      return cached;
+    }
+
+    const [media, analytics] = await Promise.all([
+      loadCategory("media", locale),
+      loadCategory("analytics", locale),
+    ]);
+
+    const result = { media, analytics };
+    await cacheSet(key, result);
+    return result;
+  } catch (error) {
+    logger.warn("pricing.read.fallback_empty", {
+      reason: error instanceof Error ? error.message : "unknown",
+    });
+    return EMPTY_PRICING_PAGE;
   }
-
-  const [media, analytics] = await Promise.all([
-    loadCategory("media", locale),
-    loadCategory("analytics", locale),
-  ]);
-
-  const result = { media, analytics };
-  await cacheSet(key, result);
-  return result;
 }
 
 export async function invalidatePricingCache(): Promise<void> {

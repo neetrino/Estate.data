@@ -8,35 +8,43 @@ const devAllowedOrigins = [
   ...(process.env.DEV_ALLOWED_ORIGINS?.split(",").map((origin) => origin.trim()) ?? []),
 ];
 
-function buildApiAssetRemotePattern(): {
+type ImageRemotePattern = {
   protocol: "http" | "https";
   hostname: string;
   port?: string;
   pathname: string;
-} {
-  const fallback = {
-    protocol: "http" as const,
-    hostname: "localhost",
-    port: "3000",
-    pathname: "/api/v1/assets/**",
-  };
+};
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (!apiUrl) {
-    return fallback;
-  }
-
+function urlToRemotePattern(rawUrl: string, pathname: string): ImageRemotePattern | null {
   try {
-    const parsed = new URL(apiUrl);
+    const parsed = new URL(rawUrl);
     return {
       protocol: parsed.protocol === "https:" ? "https" : "http",
       hostname: parsed.hostname,
       ...(parsed.port ? { port: parsed.port } : {}),
-      pathname: "/api/v1/assets/**",
+      pathname,
     };
   } catch {
-    return fallback;
+    return null;
   }
+}
+
+function buildImageRemotePatterns(): ImageRemotePattern[] {
+  const apiPattern =
+    urlToRemotePattern(process.env.NEXT_PUBLIC_API_URL ?? "", "/api/v1/assets/**") ?? {
+      protocol: "http",
+      hostname: "localhost",
+      port: "3000",
+      pathname: "/api/v1/assets/**",
+    };
+
+  const r2Pattern = urlToRemotePattern(process.env.R2_PUBLIC_URL ?? "", "/**");
+
+  return [
+    apiPattern,
+    ...(r2Pattern ? [r2Pattern] : []),
+    { protocol: "https", hostname: "*.r2.dev", pathname: "/**" },
+  ];
 }
 
 export const nextConfig: NextConfig = {
@@ -50,7 +58,7 @@ export const nextConfig: NextConfig = {
       { pathname: "/__l5e/**" },
       { pathname: "/api/v1/assets/**" },
     ],
-    remotePatterns: [buildApiAssetRemotePattern()],
+    remotePatterns: buildImageRemotePatterns(),
   },
   experimental: {
     optimizePackageImports: ["zod"],
@@ -93,6 +101,9 @@ export const nextConfig: NextConfig = {
       { source: "/resources", destination: "/?section=faq", permanent: true },
       { source: "/resources/:slug", destination: "/?section=faq", permanent: true },
     ];
+  },
+  async rewrites() {
+    return [{ source: "/favicon.ico", destination: "/favicon.png" }];
   },
 };
 
