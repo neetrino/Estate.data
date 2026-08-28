@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import { useEffect } from "react";
 
 type MediaLightboxProps = {
@@ -56,7 +56,7 @@ export function MediaLightbox({
       />
       <div className="relative z-10 flex w-full max-w-5xl flex-col gap-4">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-black">
-          <Image src={image} alt={alt} fill className="object-contain" sizes="100vw" />
+          <PublicAssetImage src={image} alt={alt} fill className="object-contain" sizes="100vw" />
         </div>
         <div className="flex items-center justify-between gap-3">
           <button

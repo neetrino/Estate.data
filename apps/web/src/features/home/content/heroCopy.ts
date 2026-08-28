@@ -1,4 +1,5 @@
 import { HERO_LANDING_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 
 type HeroTextSegment = {
   text: string;
@@ -76,8 +77,10 @@ export function resolveHomeHeroImageUrls(input: {
   desktopImageUrl: string | null | undefined;
   mobileImageUrl: string | null | undefined;
 }): Pick<HomeHeroContentFields, "desktopImageUrl" | "mobileImageUrl"> {
-  const desktopImageUrl = input.desktopImageUrl ?? DEFAULT_HOME_HERO_DESKTOP_IMAGE_URL;
-  const mobileImageUrl = input.mobileImageUrl ?? desktopImageUrl;
+  const desktopImageUrl = normalizePublicAssetUrl(
+    input.desktopImageUrl ?? DEFAULT_HOME_HERO_DESKTOP_IMAGE_URL,
+  );
+  const mobileImageUrl = normalizePublicAssetUrl(input.mobileImageUrl ?? desktopImageUrl);
 
   return {
     desktopImageUrl,

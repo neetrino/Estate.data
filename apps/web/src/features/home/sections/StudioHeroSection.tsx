@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { HomeHeroContentFields } from "@/features/home/content/heroCopy";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import {
@@ -39,7 +39,7 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
       id={HOME_SECTION_IDS.hero}
       className={`la-hero relative isolate min-h-svh overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
-      <Image
+      <PublicAssetImage
         src={activeSlide.imageUrl}
         alt={activeSlide.alt}
         fill

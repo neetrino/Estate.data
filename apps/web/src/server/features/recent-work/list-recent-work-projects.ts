@@ -6,6 +6,7 @@ import {
 import type { RecentWorkProjectDto } from "@/server/features/recent-work/recent-work.schema";
 import { ApiError } from "@/server/lib/api-error";
 import { getPrisma } from "@/server/lib/db";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 
 /** Parse `?limit=` for GET /api/v1/projects/recent. */
 export function parseRecentWorkLimit(raw: string | null): number {
@@ -38,7 +39,7 @@ function toRecentWorkProjectDto(project: {
 }): RecentWorkProjectDto {
   return {
     id: project.id,
-    imageSrc: project.imageUrl,
+    imageSrc: normalizePublicAssetUrl(project.imageUrl),
     imageAlt: project.imageAlt,
   };
 }

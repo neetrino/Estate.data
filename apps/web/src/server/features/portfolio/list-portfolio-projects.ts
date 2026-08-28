@@ -1,6 +1,7 @@
 import type { PortfolioProjectDto } from "@/server/features/portfolio/portfolio.schema";
 import { cacheGet, cacheSet } from "@/server/lib/cache/redis-cache";
 import { getPrisma } from "@/server/lib/db";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 import { DEFAULT_LOCALE, type SupportedLocale } from "@estate/db";
 
 function cacheKey(locale: SupportedLocale): string {
@@ -15,7 +16,7 @@ function toPortfolioProjectDto(project: {
 }): PortfolioProjectDto {
   return {
     id: project.id,
-    imageSrc: project.imageUrl,
+    imageSrc: normalizePublicAssetUrl(project.imageUrl),
     imageAlt: project.imageAlt,
     category: project.category as PortfolioProjectDto["category"],
   };

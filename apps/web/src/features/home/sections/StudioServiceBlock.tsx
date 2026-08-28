@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import { useState } from "react";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
 import {
@@ -36,7 +36,7 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
       >
         <div className={imageOnRight ? "lg:order-1" : "lg:order-2"}>
           <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
+            <PublicAssetImage
               src={service.imageUrl}
               alt={service.title}
               fill

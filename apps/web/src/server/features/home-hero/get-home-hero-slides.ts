@@ -1,5 +1,6 @@
 import type { StudioHeroSlide } from "@/features/home/sections/StudioHeroSection";
 import { DEFAULT_HERO_SLIDES } from "@/features/home/content/studioPageCopy";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 import { getPrisma } from "@/server/lib/db";
 import { logger } from "@/server/lib/logger";
 
@@ -19,7 +20,11 @@ export async function getHomeHeroSlides(): Promise<StudioHeroSlide[]> {
     if (rows.length === 0) {
       return [...DEFAULT_HERO_SLIDES];
     }
-    return rows;
+    return rows.map((row) => ({
+      ...row,
+      imageUrl: normalizePublicAssetUrl(row.imageUrl),
+      thumbUrl: normalizePublicAssetUrl(row.thumbUrl),
+    }));
   } catch (error) {
     logger.warn("home_hero_slides.read.fallback_default", {
       reason: error instanceof Error ? error.message : "unknown",
