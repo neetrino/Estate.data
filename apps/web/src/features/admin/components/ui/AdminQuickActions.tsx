@@ -1,10 +1,32 @@
+"use client";
+
 import Link from "next/link";
-import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
+import { ChevronRight } from "lucide-react";
+import { motion } from "motion/react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { AdminNavIconId } from "@/features/admin/config/admin-nav";
+import { AdminLucideIcon } from "@/features/admin/lib/admin-lucide-icons";
+import { adminFadeUpItem, adminStaggerContainer } from "@/features/admin/lib/admin-motion";
+import {
+  ADMIN_DASHBOARD_PANEL_BODY_CLASS,
+  ADMIN_DASHBOARD_PANEL_CLASS,
+  ADMIN_DASHBOARD_PANEL_HEADER_CLASS,
+  ADMIN_DASHBOARD_PANEL_TITLE_CLASS,
+  ADMIN_QUICK_ACTION_CHEVRON_CLASS,
+  ADMIN_QUICK_ACTION_COPY_CLASS,
+  ADMIN_QUICK_ACTION_HINT_CLASS,
+  ADMIN_QUICK_ACTION_ICON_CLASS,
+  ADMIN_QUICK_ACTION_LABEL_CLASS,
+  ADMIN_QUICK_ACTION_LINK_CLASS,
+  ADMIN_QUICK_ACTION_LIST_CLASS,
+} from "@/features/admin/styles/admin-dashboard-classes";
 
 export type AdminQuickAction = {
   id: string;
   label: string;
   href: string;
+  description: string;
+  icon: AdminNavIconId;
 };
 
 type AdminQuickActionsProps = {
@@ -13,20 +35,35 @@ type AdminQuickActionsProps = {
 
 export function AdminQuickActions({ actions }: AdminQuickActionsProps) {
   return (
-    <div className={ADMIN_CARD_CLASS}>
-      <h2 className="text-base font-semibold text-brand-navy">Quick actions</h2>
-      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-        {actions.map((action) => (
-          <li key={action.id}>
-            <Link
-              href={action.href}
-              className="flex rounded-lg border border-foreground/10 px-3 py-2.5 text-sm font-medium text-brand-navy transition-colors hover:border-brand-purple/30 hover:bg-brand-purple/5"
-            >
-              {action.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <motion.div variants={adminFadeUpItem}>
+      <Card className={ADMIN_DASHBOARD_PANEL_CLASS}>
+        <CardHeader className={ADMIN_DASHBOARD_PANEL_HEADER_CLASS}>
+          <CardTitle className={ADMIN_DASHBOARD_PANEL_TITLE_CLASS}>Quick actions</CardTitle>
+        </CardHeader>
+        <CardContent className={ADMIN_DASHBOARD_PANEL_BODY_CLASS}>
+          <motion.ul
+            className={ADMIN_QUICK_ACTION_LIST_CLASS}
+            variants={adminStaggerContainer}
+            initial="hidden"
+            animate="show"
+          >
+            {actions.map((action) => (
+              <motion.li key={action.id} variants={adminFadeUpItem}>
+                <Link href={action.href} className={ADMIN_QUICK_ACTION_LINK_CLASS}>
+                  <span className={ADMIN_QUICK_ACTION_ICON_CLASS}>
+                    <AdminLucideIcon id={action.icon} className="size-[18px]" />
+                  </span>
+                  <span className={ADMIN_QUICK_ACTION_COPY_CLASS}>
+                    <span className={ADMIN_QUICK_ACTION_LABEL_CLASS}>{action.label}</span>
+                    <span className={ADMIN_QUICK_ACTION_HINT_CLASS}>{action.description}</span>
+                  </span>
+                  <ChevronRight className={ADMIN_QUICK_ACTION_CHEVRON_CLASS} aria-hidden />
+                </Link>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 }
