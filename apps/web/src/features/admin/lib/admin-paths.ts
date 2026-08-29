@@ -31,27 +31,3 @@ export function isSupersudoRoute(pathname: string): boolean {
     pathname.startsWith(`${SUPERSUDO_PATH}/`)
   );
 }
-
-const PAGE_TITLES: Readonly<Record<string, string>> = {
-  [SUPERSUDO_PANEL_PATH]: "Dashboard",
-  [SUPERSUDO_PANEL_PORTFOLIO_PATH]: "Portfolio",
-  [SUPERSUDO_PANEL_PRICING_PATH]: "Pricing",
-  [SUPERSUDO_PANEL_ARTICLES_PATH]: "Articles",
-  [SUPERSUDO_PANEL_FAQ_PATH]: "FAQ",
-  [SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH]: "Contact inquiries",
-  [SUPERSUDO_PANEL_ASSETS_PATH]: "Assets",
-  [SUPERSUDO_PANEL_MEDIA_PATH]: "Media",
-  [SUPERSUDO_PANEL_PAYMENTS_PATH]: "Payments",
-  [SUPERSUDO_PANEL_SITE_CONTENT_PATH]: "Site content",
-  [SUPERSUDO_PANEL_HOME_HERO_PATH]: "Home Hero",
-  [SUPERSUDO_PANEL_HERO_SLIDES_PATH]: "Hero slides",
-  [SUPERSUDO_PANEL_STUDIO_SERVICES_PATH]: "Studio services",
-  [SUPERSUDO_PANEL_CONTACT_FIELDS_PATH]: "Contact fields",
-  [SUPERSUDO_PANEL_SITE_COPY_PATH]: "Site copy",
-  [SUPERSUDO_PANEL_ANALYTICS_PATH]: "Analytics",
-};
-
-/** Human-readable title for the current admin panel route. */
-export function getAdminPanelPageTitle(pathname: string): string {
-  return PAGE_TITLES[pathname] ?? "Admin";
-}

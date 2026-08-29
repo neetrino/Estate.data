@@ -4,6 +4,7 @@ export { SiteChrome } from "@/shared/components/navbar/SiteChrome";
 export {
   MAIN_NAV_LINKS,
   NAV_CTA_LINKS,
+  SITE_BRAND_WORDMARK,
   SITE_LOGO_ALT,
   SITE_LOGO_PATH,
   SITE_NAME,
