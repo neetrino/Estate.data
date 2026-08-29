@@ -20,7 +20,7 @@ export const DEFAULT_HERO_SLIDES = [
 
 export const STUDIO_PAGE_COPY = {
   brand: {
-    name: "ESTATEDATA.CLOUD",
+    name: "ESTATEDATA",
     kicker: "Media · Reality Capture",
   },
   hero: {

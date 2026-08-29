@@ -12,12 +12,12 @@ import {
   LOGO_NAV_WIDTH_CLASS,
 } from "@/shared/lib/constants";
 import {
+  SITE_BRAND_WORDMARK,
   SITE_LOGO_ALT,
   SITE_LOGO_CACHE_VERSION,
   SITE_LOGO_DARK_CACHE_VERSION,
   SITE_LOGO_DARK_PATH,
   SITE_LOGO_PATH,
-  SITE_NAME,
 } from "@/shared/components/navbar/navConfig";
 import { STUDIO_MARK_SRC, STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 
@@ -80,6 +80,7 @@ export function LogoLink({
   const { imageWrapClass, layerLightClass, layerDarkClass } = LOGO_SIZE_SPECS[size];
   const toneClassName = isLight ? "text-white" : "text-slate-900";
   const rootClassName = "inline-flex";
+  const brandLabel = customLabel ?? SITE_BRAND_WORDMARK;
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
@@ -117,7 +118,7 @@ export function LogoLink({
         </span>
         <span className="flex flex-col leading-none">
           <span className="font-display text-[15px] font-bold tracking-[0.16em]">
-            {customLabel ?? SITE_NAME}
+            {brandLabel}
           </span>
           <span className="mt-1 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-studio-muted">
             {STUDIO_PAGE_COPY.brand.kicker}

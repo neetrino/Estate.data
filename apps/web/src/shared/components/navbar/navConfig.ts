@@ -9,12 +9,15 @@ import { SERVICE_CATALOG } from "@/shared/lib/serviceCatalog";
 
 export const SITE_NAME = "ESTATEDATA.CLOUD";
 
+/** Short wordmark for logo UI (without domain suffix). */
+export const SITE_BRAND_WORDMARK = "ESTATEDATA";
+
 export const SITE_DISPLAY_NAME = "ESTATEDATA.CLOUD";
 export const SITE_LOGO_PATH = resolveAssetUrl(ASSET_KEYS.siteLogo);
 export const SITE_LOGO_DARK_PATH = resolveAssetUrl(ASSET_KEYS.siteLogoDark);
 export const SITE_LOGO_CACHE_VERSION = "20260519-removebg";
 export const SITE_LOGO_DARK_CACHE_VERSION = "20260519-dark";
-export const SITE_LOGO_ALT = "ESTATEDATA.CLOUD";
+export const SITE_LOGO_ALT = "ESTATEDATA";
 
 export type NavLink = {
   label: string;

@@ -34,7 +34,7 @@ export function AdminModal({ open, title, onClose, children, footer }: AdminModa
             ✕
           </button>
         </div>
-        <div className="overflow-y-auto px-5 py-4">{children}</div>
+        <div className="admin-scrollbar overflow-y-auto px-5 py-4">{children}</div>
         {footer ? (
           <div className="flex justify-end gap-2 border-t border-foreground/10 px-5 py-4">
             {footer}

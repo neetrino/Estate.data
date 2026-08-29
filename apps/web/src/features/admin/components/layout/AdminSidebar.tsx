@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { AdminNavIcon } from "@/features/admin/components/layout/AdminNavIcon";
@@ -10,7 +11,25 @@ import {
 } from "@/features/admin/config/admin-nav";
 import { SUPERSUDO_PATH } from "@/features/admin/lib/admin-paths";
 import { useAdminAuth } from "@/features/admin/providers/AdminAuthProvider";
-import { ADMIN_SIDEBAR_CLASS } from "@/features/admin/styles/admin-panel-classes";
+import {
+  ADMIN_SIDEBAR_BRAND_CLASS,
+  ADMIN_SIDEBAR_BRAND_LOGO_IMG_CLASS,
+  ADMIN_SIDEBAR_BRAND_LOGO_WRAP_CLASS,
+  ADMIN_SIDEBAR_CLASS,
+  ADMIN_SIDEBAR_FOOTER_CLASS,
+  ADMIN_SIDEBAR_GROUP_CLASS,
+  ADMIN_SIDEBAR_GROUP_LABEL_CLASS,
+  ADMIN_SIDEBAR_NAV_CLASS,
+  ADMIN_SIDEBAR_NAV_ITEM_ACTIVE_CLASS,
+  ADMIN_SIDEBAR_NAV_ITEM_CLASS,
+  ADMIN_SIDEBAR_NAV_ITEM_IDLE_CLASS,
+  ADMIN_SIDEBAR_NAV_LIST_CLASS,
+} from "@/features/admin/styles/admin-panel-classes";
+import {
+  SITE_LOGO_ALT,
+  SITE_LOGO_DARK_CACHE_VERSION,
+  SITE_LOGO_DARK_PATH,
+} from "@/shared/components/navbar/navConfig";
 
 function isNavItemActive(pathname: string, href: string): boolean {
   if (href === "/supersudo/panel") {
@@ -22,10 +41,8 @@ function isNavItemActive(pathname: string, href: string): boolean {
 
 function navItemClass(active: boolean): string {
   return [
-    "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-    active
-      ? "bg-brand-purple/10 text-brand-purple"
-      : "text-brand-navy hover:bg-neutral-50",
+    ADMIN_SIDEBAR_NAV_ITEM_CLASS,
+    active ? ADMIN_SIDEBAR_NAV_ITEM_ACTIVE_CLASS : ADMIN_SIDEBAR_NAV_ITEM_IDLE_CLASS,
   ].join(" ");
 }
 
@@ -50,20 +67,32 @@ export function AdminSidebar() {
 
   return (
     <aside className={ADMIN_SIDEBAR_CLASS}>
-      <div className="border-b border-foreground/10 px-5 py-5">
-        <p className="text-xs font-semibold tracking-[0.2em] text-brand-purple uppercase">
-          Estate Data
-        </p>
-        <p className="mt-1 text-lg font-bold text-brand-navy">Admin</p>
-      </div>
+      <Link
+        href="/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={ADMIN_SIDEBAR_BRAND_CLASS}
+        title="View live site"
+        aria-label="View live site"
+      >
+        <span className={ADMIN_SIDEBAR_BRAND_LOGO_WRAP_CLASS}>
+          <Image
+            src={`${SITE_LOGO_DARK_PATH}?v=${SITE_LOGO_DARK_CACHE_VERSION}`}
+            alt={SITE_LOGO_ALT}
+            fill
+            sizes="248px"
+            unoptimized
+            priority
+            className={ADMIN_SIDEBAR_BRAND_LOGO_IMG_CLASS}
+          />
+        </span>
+      </Link>
 
-      <nav className="flex-1 overflow-y-auto px-3 py-4">
+      <nav className={ADMIN_SIDEBAR_NAV_CLASS}>
         {ADMIN_NAV_GROUPS.map((group) => (
-          <div key={group.id} className="mb-5">
-            <p className="px-2 text-[10px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-              {group.label}
-            </p>
-            <ul className="mt-2 space-y-0.5">
+          <div key={group.id} className={ADMIN_SIDEBAR_GROUP_CLASS}>
+            <p className={ADMIN_SIDEBAR_GROUP_LABEL_CLASS}>{group.label}</p>
+            <ul className={ADMIN_SIDEBAR_NAV_LIST_CLASS}>
               {group.items.map((item) => (
                 <li key={item.id}>
                   <NavLink item={item} active={isNavItemActive(pathname, item.href)} />
@@ -74,7 +103,7 @@ export function AdminSidebar() {
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-foreground/10 p-3">
+      <div className={ADMIN_SIDEBAR_FOOTER_CLASS}>
         <button
           type="button"
           onClick={handleLogout}
