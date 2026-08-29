@@ -30,6 +30,7 @@
 | 2.3 | Forms | React Hook Form + Zod | ✅ |
 | 2.4 | Data fetching | Server Components + client fetch | ✅ |
 | 2.5 | i18n | CMS API `?locale=` (web routing TBD) | 🟡 |
+| 2.6 | Admin UI kit | shadcn/ui (Radix) + lucide-react + motion | ✅ |
 
 ---
 
