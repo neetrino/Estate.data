@@ -3,6 +3,7 @@
 import { PORTFOLIO_MEDIA_CATEGORIES } from "@estate/db";
 import { useState } from "react";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
+import { HomeHeroImageUploader } from "@/features/admin/components/HomeHeroImageUploader";
 import { AdminBadge } from "@/features/admin/components/ui/AdminBadge";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminCheckboxField } from "@/features/admin/components/ui/AdminCheckboxField";
@@ -19,8 +20,14 @@ import {
   deleteAdminPortfolioProject,
   fetchAdminPortfolio,
   updateAdminPortfolioProject,
+  uploadAdminImage,
 } from "@/features/admin/services/admin-api";
+import {
+  ADMIN_TABLE_THUMB_IMG_CLASS,
+  ADMIN_TABLE_THUMB_WRAP_CLASS,
+} from "@/features/admin/styles/admin-panel-classes";
 import type { AdminPortfolioProject } from "@/features/admin/types/admin-data";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 
 type PortfolioFormState = {
   imageUrl: string;
@@ -40,6 +47,9 @@ const EMPTY_FORM: PortfolioFormState = {
   published: true,
 };
 
+const IMAGE_REQUIRED_MESSAGE = "Upload an image before saving";
+const IMAGE_UPLOAD_FAILED_MESSAGE = "Upload failed";
+
 export function AdminPortfolioPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminPortfolio, []);
   const items = data ?? [];
@@ -47,12 +57,14 @@ export function AdminPortfolioPage() {
   const [editing, setEditing] = useState<AdminPortfolioProject | null>(null);
   const [form, setForm] = useState<PortfolioFormState>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
 
   function openCreate() {
     setEditing(null);
     setForm(EMPTY_FORM);
+    setActionError(null);
     setModalOpen(true);
   }
 
@@ -66,10 +78,31 @@ export function AdminPortfolioPage() {
       featuredOnHome: item.featuredOnHome,
       published: item.published,
     });
+    setActionError(null);
     setModalOpen(true);
   }
 
+  async function handleImageUpload(file: File) {
+    setUploading(true);
+    setActionError(null);
+    try {
+      const uploaded = await uploadAdminImage(file);
+      setForm((prev) => ({ ...prev, imageUrl: uploaded.publicUrl }));
+    } catch (uploadError) {
+      setActionError(
+        uploadError instanceof Error ? uploadError.message : IMAGE_UPLOAD_FAILED_MESSAGE,
+      );
+    } finally {
+      setUploading(false);
+    }
+  }
+
   async function handleSave() {
+    if (!form.imageUrl.trim()) {
+      setActionError(IMAGE_REQUIRED_MESSAGE);
+      return;
+    }
+
     setSaving(true);
     try {
       const body = {
@@ -121,7 +154,7 @@ export function AdminPortfolioPage() {
 
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
-      {actionError ? <AdminErrorState message={actionError} /> : null}
+      {actionError && !modalOpen ? <AdminErrorState message={actionError} /> : null}
 
       {!loading && !error && items.length === 0 ? (
         <AdminEmptyState title="No projects" message="Create your first portfolio project." />
@@ -142,10 +175,17 @@ export function AdminPortfolioPage() {
             {items.map((item) => (
               <tr key={item.id} className="border-b border-foreground/5">
                 <td className="px-4 py-3">
-                  <p className="font-medium text-brand-navy">{item.imageAlt}</p>
-                  <p className="text-xs text-muted-foreground truncate max-w-[200px]">
-                    {item.imageUrl}
-                  </p>
+                  <div className={ADMIN_TABLE_THUMB_WRAP_CLASS}>
+                    {item.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- admin thumbnail for stored URLs
+                      <img
+                        src={normalizePublicAssetUrl(item.imageUrl)}
+                        alt={item.imageAlt}
+                        className={ADMIN_TABLE_THUMB_IMG_CLASS}
+                      />
+                    ) : null}
+                    <p className="font-medium text-brand-navy">{item.imageAlt}</p>
+                  </div>
                 </td>
                 <td className="px-4 py-3">{item.category}</td>
                 <td className="px-4 py-3">
@@ -184,19 +224,23 @@ export function AdminPortfolioPage() {
             <AdminButton variant="secondary" onClick={() => setModalOpen(false)}>
               Cancel
             </AdminButton>
-            <AdminButton onClick={() => void handleSave()} disabled={saving}>
+            <AdminButton
+              onClick={() => void handleSave()}
+              disabled={saving || uploading || !form.imageUrl}
+            >
               {saving ? "Saving…" : "Save"}
             </AdminButton>
           </>
         }
       >
         <div className="space-y-4">
-          <AdminFormField
-            label="Image URL"
-            name="imageUrl"
-            value={form.imageUrl}
-            onChange={(value) => setForm((prev) => ({ ...prev, imageUrl: value }))}
-            required
+          {actionError ? <AdminErrorState message={actionError} /> : null}
+          <HomeHeroImageUploader
+            label="Image"
+            previewUrl={form.imageUrl ? normalizePublicAssetUrl(form.imageUrl) : null}
+            uploading={uploading}
+            placeholderText="Upload a project image"
+            onUpload={handleImageUpload}
           />
           <AdminFormField
             label="Image alt"

@@ -244,12 +244,17 @@ export function updateAdminHomeHero(input: AdminHomeHero): Promise<AdminHomeHero
   });
 }
 
-export async function uploadAdminHomeHeroImage(
+const HOME_HERO_UPLOAD_CONTEXT = "homeHero";
+
+async function postAdminUpload(
   file: File,
+  context?: string,
 ): Promise<AdminHomeHeroUploadResult> {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("context", "homeHero");
+  if (context) {
+    formData.append("context", context);
+  }
 
   const { readAdminAuthToken } = await import("@/features/admin/lib/admin-auth-storage");
   const token = readAdminAuthToken();
@@ -278,6 +283,16 @@ export async function uploadAdminHomeHeroImage(
 
   const json = (await response.json()) as { data: AdminHomeHeroUploadResult };
   return json.data;
+}
+
+export async function uploadAdminHomeHeroImage(
+  file: File,
+): Promise<AdminHomeHeroUploadResult> {
+  return postAdminUpload(file, HOME_HERO_UPLOAD_CONTEXT);
+}
+
+export async function uploadAdminImage(file: File): Promise<AdminHomeHeroUploadResult> {
+  return postAdminUpload(file);
 }
 
 export function fetchAdminHeroSlides(): Promise<AdminHeroSlide[]> {
