@@ -118,9 +118,8 @@ export const NAVBAR_MOBILE_MENU_RADIUS_CLASS = "rounded-none";
 export const NAVBAR_MOBILE_PANEL_SCROLL_CLASS =
   "min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pt-5 pb-5";
 
-/** Mobile drawer — stacked links with dividers. */
-export const NAVBAR_MOBILE_NAV_LIST_CLASS =
-  "flex w-full flex-col divide-y divide-studio-border";
+/** Mobile drawer — stacked links without dividers. */
+export const NAVBAR_MOBILE_NAV_LIST_CLASS = "flex w-full flex-col";
 
 /** Shared centered content width (navbar + pages + footer). */
 export const PAGE_CONTAINER_CLASS = "mx-auto w-full max-w-7xl 2xl:max-w-[90rem]";
