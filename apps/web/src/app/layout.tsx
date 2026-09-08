@@ -3,7 +3,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoscript,
 } from "@/shared/analytics/GoogleTagManager";
-import { SITE_DISPLAY_NAME } from "@/shared/components/navbar/navConfig";
+import { SITE_BRAND_WORDMARK } from "@/shared/components/navbar/navConfig";
 import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
 import { SiteChrome } from "@/shared/components/navbar";
 import { displayFont, siteFont } from "./site-font";
@@ -17,8 +17,8 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: SITE_DISPLAY_NAME,
-    template: `%s | ${SITE_DISPLAY_NAME}`,
+    default: SITE_BRAND_WORDMARK,
+    template: `%s | ${SITE_BRAND_WORDMARK}`,
   },
   description:
     "Premium Los Angeles real estate media: photography, cinematic video, drone, AI media, Matterport 3D tours and Scan-to-BIM. Book a shoot from $249.",

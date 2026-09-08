@@ -42,8 +42,9 @@ export const FOOTER_STUDIO = STUDIO_CONTACT;
 
 export const FOOTER_COPYRIGHT = {
   year: 2026,
-  companyName: "ESTATEDATA.CLOUD",
-  companyHref: "/",
-  suffix: "All rights reserved.",
-  droneNote: "Drone operations conducted under FAA Part 107.",
+  rightsText: "Բոլոր իրավունքները պաշտպանված են",
+  createdPrefix: "Ստեղծվել է",
+  createdSuffix: "կողմից",
+  creatorName: "Neetrino IT Company",
+  creatorHref: "https://www.neetrino.com/",
 } as const;
