@@ -7,12 +7,7 @@ import {
   STUDIO_SEED_SERVICES,
 } from "./seed-studio-data";
 
-const SITE_COPY = [
-  { key: "analytics.url", value: "" },
-  { key: "contact.heading", value: "Let's create something great." },
-] as const;
-
-/** Seed hero slides, service blocks, contact field modes, and site copy. */
+/** Seed hero slides, service blocks, and contact field modes. */
 export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
   for (const slide of HERO_SLIDES) {
     await prisma.homeHeroSlide.upsert({
@@ -52,13 +47,5 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
     });
   }
 
-  for (const copy of SITE_COPY) {
-    await prisma.siteCopy.upsert({
-      where: { key: copy.key },
-      create: copy,
-      update: { value: copy.value },
-    });
-  }
-
-  console.info("Seeded studio CMS (slides, services, contact fields, site copy)");
+  console.info("Seeded studio CMS (slides, services, contact fields)");
 }
