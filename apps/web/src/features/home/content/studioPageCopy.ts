@@ -23,6 +23,52 @@ export const STUDIO_SERVICE_BLOCK_COPY = {
   pricingLabel: "Pricing",
 } as const;
 
+export const STUDIO_MATTERPORT_DEMO = {
+  label: "Interactive demo",
+  title: "Interactive Matterport 3D tour demo",
+  embedUrl: "https://my.matterport.com/show/?m=SxQL3iGyoDo&play=1&brand=0",
+  imageAlt: "Dollhouse view of a scanned property rendered as a 3D digital twin",
+} as const;
+
+export const STUDIO_SCAN_TO_BIM = {
+  imageAlt: "Registered laser scan point cloud overlaid with a Revit BIM wireframe model",
+  workflowLabel: "Workflow",
+  deliverablesLabel: "Deliverables",
+  pricingLabel: "Pricing",
+  pricingFactorsLabel: "Final pricing depends on",
+  chain: ["Real Property", "3D Scan", "Point Cloud", "BIM Model", "Revit"],
+  workflow: [
+    { step: "01", label: "On-site 3D laser scanning" },
+    { step: "02", label: "Point cloud generation" },
+    { step: "03", label: "Registration and processing" },
+    { step: "04", label: "Quality control" },
+    { step: "05", label: "BIM modeling" },
+    { step: "06", label: "Revit delivery" },
+    { step: "07", label: "Documentation" },
+  ],
+  deliverables: [
+    "Point Cloud",
+    "E57",
+    "RCP / RCS",
+    "LAS / LAZ where applicable",
+    "Revit (RVT)",
+    "BIM models",
+    "Floor plans",
+    "Elevations",
+    "Sections",
+    "As-built documentation",
+  ],
+  pricingFactors: [
+    "Building size",
+    "Complexity",
+    "Level of Detail (LOD)",
+    "Required accuracy",
+    "Deliverables",
+    "Number of floors",
+    "Project location",
+  ],
+} as const;
+
 export const STUDIO_PAGE_COPY = {
   brand: {
     name: "ESTATEDATA",

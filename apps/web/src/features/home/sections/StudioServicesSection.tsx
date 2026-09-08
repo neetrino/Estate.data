@@ -11,6 +11,13 @@ import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 
 const BLOCK_STACK_CLASS = "mt-20 space-y-24 lg:space-y-32";
 
+/** Services rendered inside the shared intro section; the rest get bespoke layouts. */
+export const STUDIO_CORE_SERVICE_KEYS: readonly string[] = [
+  HOME_SECTION_IDS.photography,
+  HOME_SECTION_IDS.editing,
+  HOME_SECTION_IDS.video,
+];
+
 type StudioServicesSectionProps = {
   readonly services: readonly StudioServiceContent[];
 };
