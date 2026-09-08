@@ -3,14 +3,9 @@ export type DashboardSummary = {
   publishedPortfolioCount: number;
   featuredPortfolioCount: number;
   pricingPackageCount: number;
-  articleCount: number;
-  publishedArticleCount: number;
   faqCount: number;
   publishedFaqCount: number;
   contactInquiryCount: number;
-  assetCount: number;
-  orderCount: number;
-  pendingOrderCount: number;
 };
 
 export type AdminContactInquiry = {
@@ -68,18 +63,6 @@ export type AdminPricingResponse = {
   categories: AdminPricingCategory[];
 };
 
-export type AdminArticle = {
-  id: string;
-  slug: string;
-  title: string;
-  readTimeLabel: string;
-  body: string;
-  sortOrder: number;
-  published: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type AdminFaqItem = {
   id: string;
   question: string;
@@ -88,51 +71,6 @@ export type AdminFaqItem = {
   published: boolean;
   createdAt: string;
   updatedAt: string;
-};
-
-export type AdminAsset = {
-  id: string;
-  key: string;
-  mimeType: string;
-  fileName: string;
-  byteSize: number;
-  createdAt: string;
-  updatedAt: string;
-  publicUrl: string;
-};
-
-export type AdminMediaItem = {
-  key: string;
-  url: string;
-  size: number;
-  lastModified: string;
-  contentType: string | null;
-};
-
-export type AdminMediaListResponse = {
-  configured: boolean;
-  items: AdminMediaItem[];
-};
-
-export type AdminPayment = {
-  id: string;
-  provider: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type AdminOrder = {
-  id: string;
-  amount: string;
-  currency: string;
-  status: string;
-  provider: string | null;
-  providerRef: string | null;
-  description: string | null;
-  createdAt: string;
-  updatedAt: string;
-  payments: AdminPayment[];
 };
 
 export type AdminHomeHero = {
@@ -190,9 +128,4 @@ export type AdminContactField = {
   placeholder: string;
   mode: string;
   sortOrder: number;
-};
-
-export type AdminSiteCopyItem = {
-  key: string;
-  value: string;
 };

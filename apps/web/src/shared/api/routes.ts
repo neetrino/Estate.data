@@ -8,12 +8,6 @@ export const API_ROUTES = {
   health: `${API_VERSION_PREFIX}/health`,
   assets: `${API_VERSION_PREFIX}/assets`,
   contact: `${API_VERSION_PREFIX}/contact`,
-  portfolio: `${API_VERSION_PREFIX}/portfolio`,
-  projectsRecent: `${API_VERSION_PREFIX}/projects/recent`,
-  articles: `${API_VERSION_PREFIX}/articles`,
-  faq: `${API_VERSION_PREFIX}/faq`,
-  i18nLocales: `${API_VERSION_PREFIX}/i18n/locales`,
-  pricing: `${API_VERSION_PREFIX}/pricing`,
   adminAuthLogin: `${API_VERSION_PREFIX}/admin/auth/login`,
   adminAuthRefresh: `${API_VERSION_PREFIX}/admin/auth/refresh`,
   adminDashboard: `${API_VERSION_PREFIX}/admin/dashboard`,
@@ -27,15 +21,9 @@ export const API_ROUTES = {
   adminPricingPackages: `${API_VERSION_PREFIX}/admin/pricing/packages`,
   adminPricingPackageById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/pricing/packages/${encodeURIComponent(id)}`,
-  adminArticles: `${API_VERSION_PREFIX}/admin/articles`,
-  adminArticleById: (id: string) =>
-    `${API_VERSION_PREFIX}/admin/articles/${encodeURIComponent(id)}`,
   adminFaq: `${API_VERSION_PREFIX}/admin/faq`,
   adminFaqById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/faq/${encodeURIComponent(id)}`,
-  adminAssets: `${API_VERSION_PREFIX}/admin/assets`,
-  adminMedia: `${API_VERSION_PREFIX}/admin/media`,
-  adminPaymentsOrders: `${API_VERSION_PREFIX}/admin/payments/orders`,
   adminHomeHero: `${API_VERSION_PREFIX}/admin/home-hero`,
   adminHomeHeroSlides: `${API_VERSION_PREFIX}/admin/home-hero-slides`,
   adminHomeHeroSlideById: (id: string) =>
@@ -44,8 +32,6 @@ export const API_ROUTES = {
   adminStudioServiceById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/studio-services/${encodeURIComponent(id)}`,
   adminContactFields: `${API_VERSION_PREFIX}/admin/contact-fields`,
-  adminSiteCopy: `${API_VERSION_PREFIX}/admin/site-copy`,
-  adminAnalytics: `${API_VERSION_PREFIX}/admin/analytics`,
   adminUpload: `${API_VERSION_PREFIX}/admin/upload`,
 } as const;
 

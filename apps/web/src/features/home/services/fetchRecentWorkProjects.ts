@@ -3,7 +3,7 @@ import {
   HOME_RECENT_WORK_COPY,
   type RecentWorkProject,
 } from "@/features/home/content/recentWorkCopy";
-import { resolvePortfolioImageUrl } from "@/features/portfolio/lib/resolve-portfolio-image-url";
+import { resolvePortfolioImageUrl } from "@/shared/assets/resolve-portfolio-image-url";
 import { listRecentWorkProjects } from "@/server/features/recent-work/list-recent-work-projects";
 import { logger } from "@/server/lib/logger";
 import { DEFAULT_RECENT_WORK_LIMIT } from "@estate/db";

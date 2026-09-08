@@ -4,7 +4,6 @@ import {
   SUPERSUDO_PANEL_CONTACT_FIELDS_PATH,
   SUPERSUDO_PANEL_HERO_SLIDES_PATH,
   SUPERSUDO_PANEL_HOME_HERO_PATH,
-  SUPERSUDO_PANEL_SITE_COPY_PATH,
   SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
 } from "@/features/admin/lib/admin-paths";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
@@ -29,11 +28,6 @@ const CONTENT_LINKS = [
     href: SUPERSUDO_PANEL_CONTACT_FIELDS_PATH,
     title: "Contact fields",
     description: "Mark each form field required, optional, or hidden.",
-  },
-  {
-    href: SUPERSUDO_PANEL_SITE_COPY_PATH,
-    title: "Site copy",
-    description: "Edit remaining marketing strings and the Analytics URL.",
   },
 ] as const;
 
