@@ -13,7 +13,7 @@ export function FooterStudioColumn() {
   return (
     <div className="shrink-0">
       <h3 className={FOOTER_COLUMN_TITLE_CLASS}>Studio</h3>
-      <ul className="footer-studio-contact-list mt-4 space-y-2.5">
+      <ul className="footer-studio-contact-list mt-4">
         <li className={FOOTER_STUDIO_ROW_CLASS}>
           <FooterContactIcon id="location" />
           <Link

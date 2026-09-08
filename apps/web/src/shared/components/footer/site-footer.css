@@ -54,6 +54,9 @@
 }
 
 .footer-studio-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   margin-inline-start: -15px;
 }
 
@@ -75,7 +78,7 @@
   justify-content: center;
   align-items: center;
   width: 2.75rem;
-  height: 2.75rem;
+  height: 2.25rem;
   transform: translateY(-5px);
 }
 
