@@ -1,21 +1,26 @@
 "use client";
 
-import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import { useState } from "react";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import {
-  HOME_SECTION_SCROLL_MARGIN_CLASS,
-} from "@/shared/lib/homeSectionIds";
-import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import { MediaLightbox } from "@/shared/components/media/MediaLightbox";
-import {
-  STUDIO_BODY_CLASS,
-  STUDIO_CONTAINER_CLASS,
-  STUDIO_EYEBROW_CLASS,
-  STUDIO_PRIMARY_BUTTON_CLASS,
-  STUDIO_SECONDARY_BUTTON_CLASS,
-  STUDIO_TITLE_CLASS,
-} from "@/features/home/sections/studioSectionStyles";
+import { StudioCta } from "@/features/home/sections/StudioCta";
+import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
+import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
+import { StudioReveal } from "@/features/home/sections/StudioReveal";
+import { StudioViewExampleButton } from "@/features/home/sections/StudioViewExampleButton";
+import { splitStudioServiceEyebrow } from "@/features/home/sections/studioServiceEyebrow";
+import { STUDIO_SERVICE_BLOCK_COPY } from "@/features/home/content/studioPageCopy";
+import { HOME_SECTION_SCROLL_MARGIN_CLASS } from "@/shared/lib/homeSectionIds";
+
+const MEDIA_CLASS = "relative aspect-[4/3] overflow-hidden bg-studio-bg";
+
+const IMAGE_CLASS = "object-cover transition-transform duration-[1200ms] hover:scale-105";
+
+const BADGE_CLASS = [
+  "absolute left-0 top-0 z-10 bg-studio-bg/80 px-4 py-2",
+  "font-display text-xs tracking-[0.3em] backdrop-blur-sm",
+].join(" ");
 
 type StudioServiceBlockProps = {
   readonly service: StudioServiceContent;
@@ -25,73 +30,66 @@ type StudioServiceBlockProps = {
 export function StudioServiceBlock({ service, imageOnRight = false }: StudioServiceBlockProps) {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const { badge, name } = splitStudioServiceEyebrow(service.eyebrow);
 
   return (
-    <section
-      id={service.sectionKey}
-      className={`relative isolate border-t border-studio-border bg-studio-bg py-20 md:py-32 ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
+    <StudioReveal
+      as="article"
+      className={`grid gap-10 lg:grid-cols-12 lg:gap-16 ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
+      <div className={imageOnRight ? "lg:order-2 lg:col-span-6" : "lg:col-span-6"}>
+        <div className={MEDIA_CLASS}>
+          <PublicAssetImage
+            src={service.imageUrl}
+            alt={service.title}
+            fill
+            className={IMAGE_CLASS}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          {badge ? <span className={BADGE_CLASS}>{badge}</span> : null}
+        </div>
+      </div>
+
       <div
-        className={`${STUDIO_CONTAINER_CLASS} grid items-center gap-10 lg:grid-cols-2 lg:gap-16`}
+        id={service.sectionKey}
+        className={`${imageOnRight ? "lg:order-1 lg:col-span-6" : "lg:col-span-6"} ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
       >
-        <div className={imageOnRight ? "lg:order-1" : "lg:order-2"}>
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <PublicAssetImage
-              src={service.imageUrl}
-              alt={service.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
+        <p className="studio-label text-studio-accent">{name}</p>
+        <h3 className="studio-display-md mt-5 max-w-[18ch] text-studio-fg">{service.title}</h3>
+        <p className="studio-body-lg mt-5 max-w-[52ch]">{service.description}</p>
+
+        <div className="mt-8">
+          <p className="studio-label mb-4 text-studio-muted">
+            {STUDIO_SERVICE_BLOCK_COPY.includedLabel}
+          </p>
+          <StudioFeatureList items={service.included} />
         </div>
 
-        <div className={imageOnRight ? "lg:order-2" : "lg:order-1"}>
-          <p className={STUDIO_EYEBROW_CLASS}>{service.eyebrow}</p>
-          <h2 className={STUDIO_TITLE_CLASS}>{service.title}</h2>
-          <p className={STUDIO_BODY_CLASS}>{service.description}</p>
-          <ul className="mt-6 grid gap-2 sm:grid-cols-2">
-            {service.included.map((item) => (
-              <li key={item} className="text-sm text-studio-muted">
-                {item}
-              </li>
-            ))}
-          </ul>
-          <dl className="mt-6 space-y-2">
-            {service.pricing.map((row) => (
-              <div key={row.label} className="flex justify-between gap-4 text-sm">
-                <dt className="text-studio-muted">{row.label}</dt>
-                <dd className="font-semibold text-studio-fg">{row.price}</dd>
-              </div>
-            ))}
-          </dl>
+        <div className="mt-10">
+          <p className="studio-label mb-4 text-studio-muted">
+            {STUDIO_SERVICE_BLOCK_COPY.pricingLabel}
+          </p>
+          <StudioPricingRows rows={service.pricing} />
+        </div>
+
+        {service.footnote ? (
+          <p className="mt-8 max-w-[52ch] border-l border-studio-accent/50 pl-4 text-xs leading-relaxed text-studio-muted">
+            {service.footnote}
+          </p>
+        ) : null}
+
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
+          <StudioViewExampleButton
+            label={service.secondaryCtaLabel}
+            onOpen={() => {
+              setGalleryIndex(0);
+              setGalleryOpen(true);
+            }}
+          />
           {service.startingAt ? (
-            <p className="studio-label mt-6 text-studio-accent">{service.startingAt}</p>
+            <p className="text-sm text-studio-muted">{service.startingAt}</p>
           ) : null}
-          {service.footnote ? (
-            <p className="mt-4 max-w-[50ch] text-xs leading-relaxed text-studio-muted">
-              {service.footnote}
-            </p>
-          ) : null}
-          <div className="mt-8 flex flex-wrap gap-3">
-            <HomeSectionLink
-              href={service.primaryCtaHref}
-              className={STUDIO_PRIMARY_BUTTON_CLASS}
-            >
-              {service.primaryCtaLabel}
-              <span aria-hidden>→</span>
-            </HomeSectionLink>
-            <button
-              type="button"
-              className={STUDIO_SECONDARY_BUTTON_CLASS}
-              onClick={() => {
-                setGalleryIndex(0);
-                setGalleryOpen(true);
-              }}
-            >
-              {service.secondaryCtaLabel}↗
-            </button>
-          </div>
         </div>
       </div>
 
@@ -104,6 +102,6 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
           onClose={() => setGalleryOpen(false)}
         />
       ) : null}
-    </section>
+    </StudioReveal>
   );
 }

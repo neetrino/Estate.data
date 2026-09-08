@@ -749,7 +749,7 @@ button:disabled {
 .studio-display-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 8.5vw, 8rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 0.9;
   text-transform: uppercase;
@@ -762,6 +762,20 @@ button:disabled {
   letter-spacing: -0.03em;
   line-height: 0.95;
   text-transform: uppercase;
+}
+
+.studio-display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+
+.studio-body-lg {
+  color: var(--studio-muted);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.7;
 }
 
 .studio-label {
@@ -786,6 +800,22 @@ button:disabled {
 
 .studio-kenburns {
   animation: 26s ease-in-out infinite alternate studio-kenburns;
+}
+
+@keyframes studio-scrollcue {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(8px);
+  }
+}
+
+.studio-scrollcue {
+  animation: 2.2s ease-in-out infinite studio-scrollcue;
 }
 
 .studio-service-map iframe {

@@ -10,8 +10,8 @@ import {
 import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import {
   STUDIO_CONTAINER_CLASS,
-  STUDIO_PRIMARY_BUTTON_CLASS,
-  STUDIO_SECONDARY_BUTTON_CLASS,
+  STUDIO_HERO_PRIMARY_BUTTON_CLASS,
+  STUDIO_HERO_SECONDARY_BUTTON_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
 
 export type StudioHeroSlide = {
@@ -37,40 +37,48 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
   return (
     <section
       id={HOME_SECTION_IDS.hero}
-      className={`la-hero relative isolate min-h-svh overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
+      className={`la-hero relative flex min-h-svh items-end overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
-      <PublicAssetImage
-        src={activeSlide.imageUrl}
-        alt={activeSlide.alt}
-        fill
-        priority
-        className="studio-kenburns object-cover"
-        sizes="100vw"
-      />
-      <div className="studio-veil absolute inset-0" />
+      <div className="absolute inset-0">
+        <PublicAssetImage
+          src={activeSlide.imageUrl}
+          alt={activeSlide.alt}
+          fill
+          priority
+          className="studio-kenburns object-cover"
+          sizes="100vw"
+        />
+        <div className="studio-veil absolute inset-0" />
+        <div className="absolute inset-0 bg-studio-bg/25" />
+      </div>
 
-      <div
-        className={`${STUDIO_CONTAINER_CLASS} relative z-10 flex min-h-svh flex-col justify-end pb-16 pt-32`}
-      >
-        <p className="studio-label text-studio-fg/80">{copy.eyebrow}</p>
-        <h1 className="studio-display-hero mt-6 max-w-[16ch] text-studio-fg">
+      <div className={`${STUDIO_CONTAINER_CLASS} relative z-10 pt-32 pb-24 md:pb-28`}>
+        <p className="studio-label mb-8 text-studio-accent">{copy.eyebrow}</p>
+        <h1 className="studio-display-hero max-w-[16ch] text-studio-fg">
           {copy.titleLines[0]}
           <br />
-          {copy.titleLines[1]}
+          <span className="text-studio-accent">{copy.titleAccentWord}</span>{" "}
+          {copy.titleTrailing}
         </h1>
-        <p className="mt-6 max-w-[46ch] text-base leading-relaxed text-studio-fg/80 md:text-lg">
-          {hero.description}
-        </p>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <HomeSectionLink href={hero.primaryButtonHref} className={STUDIO_PRIMARY_BUTTON_CLASS}>
+        <p className="studio-body-lg mt-8 max-w-[60ch] text-studio-fg/75">{hero.description}</p>
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <HomeSectionLink
+            href={hero.primaryButtonHref}
+            className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}
+          >
             {hero.primaryButtonLabel}
-            <span aria-hidden>→</span>
           </HomeSectionLink>
-          <HomeSectionLink href={hero.secondaryButtonHref} className={STUDIO_SECONDARY_BUTTON_CLASS}>
+          <HomeSectionLink
+            href={hero.secondaryButtonHref}
+            className={`${STUDIO_HERO_SECONDARY_BUTTON_CLASS} backdrop-blur-sm`}
+          >
             {hero.secondaryButtonLabel}
           </HomeSectionLink>
         </div>
-        <p className="studio-label mt-14 text-studio-fg/50">{copy.scrollLabel}</p>
+        <div className="mt-16 flex items-center gap-4 text-studio-muted">
+          <span aria-hidden className="studio-scrollcue block h-8 w-px bg-studio-accent" />
+          <span className="studio-label">{copy.scrollLabel}</span>
+        </div>
       </div>
     </section>
   );

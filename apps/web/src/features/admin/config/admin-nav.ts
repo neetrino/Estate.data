@@ -69,7 +69,7 @@ export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
     items: [
       {
         id: "contact-inquiries",
-        label: "Contact inquiries",
+        label: "Inquiries",
         href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
         icon: "contact-inquiries",
       },

@@ -3,7 +3,7 @@
 import { PORTFOLIO_MEDIA_CATEGORIES } from "@estate/db";
 import { useState } from "react";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
-import { HomeHeroImageUploader } from "@/features/admin/components/HomeHeroImageUploader";
+import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminBadge } from "@/features/admin/components/ui/AdminBadge";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminCheckboxField } from "@/features/admin/components/ui/AdminCheckboxField";
@@ -235,7 +235,7 @@ export function AdminPortfolioPage() {
       >
         <div className="space-y-4">
           {actionError ? <AdminErrorState message={actionError} /> : null}
-          <HomeHeroImageUploader
+          <AdminImageUploader
             label="Image"
             previewUrl={form.imageUrl ? normalizePublicAssetUrl(form.imageUrl) : null}
             uploading={uploading}

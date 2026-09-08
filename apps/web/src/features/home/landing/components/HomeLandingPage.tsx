@@ -5,14 +5,14 @@ import type { StudioServiceContent } from "@/features/home/content/studioService
 import type { PricingCategoryDto } from "@/server/features/pricing/pricing.schema";
 import type { FaqItemDto } from "@/server/features/faq/faq.schema";
 import { StudioHeroSection, type StudioHeroSlide } from "@/features/home/sections/StudioHeroSection";
-import { StudioServiceBlock } from "@/features/home/sections/StudioServiceBlock";
+import { StudioServicesSection } from "@/features/home/sections/StudioServicesSection";
 import { StudioWhatWeDo } from "@/features/home/sections/StudioWhatWeDo";
 import {
-  StudioStats,
   StudioWebPagesTeaser,
   StudioOfferings,
 } from "@/features/home/sections/StudioIntroSections";
 import { StudioPackages } from "@/features/home/sections/StudioPackages";
+import { StudioPackageCompare } from "@/features/home/sections/StudioPackageCompare";
 import { StudioPortfolio } from "@/features/home/sections/StudioPortfolio";
 import { StudioBeforeAfter } from "@/features/home/sections/StudioBeforeAfter";
 import {
@@ -49,17 +49,11 @@ export function HomeLandingPage({
       <main className="relative isolate overflow-x-clip">
         <StudioHeroSection hero={hero} slides={slides} />
         <StudioWhatWeDo />
-        <StudioStats />
         <StudioOfferings />
-        {services.map((service, index) => (
-          <StudioServiceBlock
-            key={service.sectionKey}
-            service={service}
-            imageOnRight={index % 2 === 1}
-          />
-        ))}
+        <StudioServicesSection services={services} />
         <StudioWebPagesTeaser />
         <StudioPackages category={packages} />
+        <StudioPackageCompare />
         <StudioPortfolio projects={projects} />
         <StudioBeforeAfter />
         <StudioProcess />

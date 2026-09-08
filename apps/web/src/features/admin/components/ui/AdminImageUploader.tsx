@@ -14,7 +14,7 @@ import {
   HOME_HERO_UPLOAD_SPINNER_CLASS,
 } from "@/features/admin/styles/admin-home-hero-classes";
 
-type HomeHeroImageUploaderProps = {
+type AdminImageUploaderProps = {
   readonly label: string;
   readonly previewUrl: string | null;
   readonly uploading: boolean;
@@ -25,7 +25,8 @@ type HomeHeroImageUploaderProps = {
   readonly onClear?: () => void;
 };
 
-export function HomeHeroImageUploader({
+/** Shared admin image field — preview plus file picker, no manual URL entry. */
+export function AdminImageUploader({
   label,
   previewUrl,
   uploading,
@@ -34,7 +35,7 @@ export function HomeHeroImageUploader({
   showClear = false,
   onUpload,
   onClear,
-}: HomeHeroImageUploaderProps) {
+}: AdminImageUploaderProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {

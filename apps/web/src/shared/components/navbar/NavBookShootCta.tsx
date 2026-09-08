@@ -1,7 +1,7 @@
 "use client";
 
 import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
-import { STUDIO_PRIMARY_BUTTON_CLASS } from "@/features/home/sections/studioSectionStyles";
+import { STUDIO_NAV_BUTTON_CLASS } from "@/features/home/sections/studioSectionStyles";
 
 type NavBookShootCtaProps = {
   href: string;
@@ -14,9 +14,8 @@ export function NavBookShootCta({
   label,
 }: NavBookShootCtaProps) {
   return (
-    <HomeSectionLink href={href} className={`${STUDIO_PRIMARY_BUTTON_CLASS} h-10 px-6 py-0`}>
+    <HomeSectionLink href={href} className={STUDIO_NAV_BUTTON_CLASS}>
       {label}
-      <span aria-hidden>→</span>
     </HomeSectionLink>
   );
 }

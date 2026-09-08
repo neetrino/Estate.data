@@ -5,6 +5,7 @@ import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
+import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import {
@@ -16,6 +17,9 @@ import {
 } from "@/features/admin/services/admin-api";
 import type { AdminHeroSlide } from "@/features/admin/types/admin-data";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
+import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+
+const UPLOAD_FAILED_MESSAGE = "Upload failed";
 
 export function AdminHeroSlidesPage() {
   const { data, loading, error, reload } = useAdminQuery(() => fetchAdminHeroSlides(), []);
@@ -37,7 +41,7 @@ export function AdminHeroSlidesPage() {
       });
       reload();
     } catch (uploadError) {
-      setFormError(uploadError instanceof Error ? uploadError.message : "Upload failed");
+      setFormError(uploadError instanceof Error ? uploadError.message : UPLOAD_FAILED_MESSAGE);
     } finally {
       setBusy(false);
     }
@@ -52,21 +56,15 @@ export function AdminHeroSlidesPage() {
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {formError ? <AdminErrorState message={formError} /> : null}
-      <label className={`${ADMIN_CARD_CLASS} mb-4 block cursor-pointer`}>
-        <span className="text-sm font-medium">Upload image</span>
-        <input
-          type="file"
-          accept="image/*"
-          className="mt-2 block w-full text-sm"
-          disabled={busy}
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            if (file) {
-              void handleUpload(file);
-            }
-          }}
+      <div className={`${ADMIN_CARD_CLASS} mb-4`}>
+        <AdminImageUploader
+          label="New slide"
+          previewUrl={null}
+          uploading={busy}
+          placeholderText="Upload an image to add a slide"
+          onUpload={handleUpload}
         />
-      </label>
+      </div>
       <ul className="grid gap-4">
         {slides.map((slide) => (
           <HeroSlideCard key={slide.id} slide={slide} onChanged={reload} />
@@ -85,10 +83,36 @@ function HeroSlideCard({
 }) {
   const [alt, setAlt] = useState(slide.alt);
   const [sortOrder, setSortOrder] = useState(String(slide.sortOrder));
+  const [replacing, setReplacing] = useState(false);
+  const [replaceError, setReplaceError] = useState<string | null>(null);
+
+  async function handleReplace(file: File) {
+    setReplacing(true);
+    setReplaceError(null);
+
+    try {
+      const uploaded = await uploadAdminHomeHeroImage(file);
+      await updateAdminHeroSlide(slide.id, {
+        imageUrl: uploaded.publicUrl,
+        thumbUrl: uploaded.publicUrl,
+      });
+      onChanged();
+    } catch (uploadError) {
+      setReplaceError(uploadError instanceof Error ? uploadError.message : UPLOAD_FAILED_MESSAGE);
+    } finally {
+      setReplacing(false);
+    }
+  }
 
   return (
     <li className={ADMIN_CARD_CLASS}>
-      <p className="text-xs text-muted-foreground">{slide.imageUrl}</p>
+      {replaceError ? <AdminErrorState message={replaceError} /> : null}
+      <AdminImageUploader
+        label="Slide image"
+        previewUrl={normalizePublicAssetUrl(slide.imageUrl)}
+        uploading={replacing}
+        onUpload={handleReplace}
+      />
       <AdminFormField label="Alt text" name={`alt-${slide.id}`} value={alt} onChange={setAlt} />
       <AdminFormField
         label="Sort order"
@@ -96,29 +120,59 @@ function HeroSlideCard({
         value={sortOrder}
         onChange={setSortOrder}
       />
-      <div className="mt-3 flex flex-wrap gap-2">
-        <AdminButton
-          onClick={() =>
-            void updateAdminHeroSlide(slide.id, {
-              alt,
-              sortOrder: Number(sortOrder) || 0,
-            }).then(onChanged)
-          }
-        >
-          Save
-        </AdminButton>
-        <AdminButton
-          variant="secondary"
-          onClick={() =>
-            void updateAdminHeroSlide(slide.id, { published: !slide.published }).then(onChanged)
-          }
-        >
-          {slide.published ? "Unpublish" : "Publish"}
-        </AdminButton>
-        <AdminButton variant="danger" onClick={() => void deleteAdminHeroSlide(slide.id).then(onChanged)}>
-          Delete
-        </AdminButton>
-      </div>
+      <HeroSlideActions
+        slide={slide}
+        alt={alt}
+        sortOrder={sortOrder}
+        disabled={replacing}
+        onChanged={onChanged}
+      />
     </li>
+  );
+}
+
+function HeroSlideActions({
+  slide,
+  alt,
+  sortOrder,
+  disabled,
+  onChanged,
+}: {
+  slide: AdminHeroSlide;
+  alt: string;
+  sortOrder: string;
+  disabled: boolean;
+  onChanged: () => void;
+}) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      <AdminButton
+        disabled={disabled}
+        onClick={() =>
+          void updateAdminHeroSlide(slide.id, {
+            alt,
+            sortOrder: Number(sortOrder) || 0,
+          }).then(onChanged)
+        }
+      >
+        Save
+      </AdminButton>
+      <AdminButton
+        variant="secondary"
+        disabled={disabled}
+        onClick={() =>
+          void updateAdminHeroSlide(slide.id, { published: !slide.published }).then(onChanged)
+        }
+      >
+        {slide.published ? "Unpublish" : "Publish"}
+      </AdminButton>
+      <AdminButton
+        variant="danger"
+        disabled={disabled}
+        onClick={() => void deleteAdminHeroSlide(slide.id).then(onChanged)}
+      >
+        Delete
+      </AdminButton>
+    </div>
   );
 }
