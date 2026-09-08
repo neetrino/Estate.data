@@ -42,9 +42,8 @@ export const FOOTER_STUDIO = STUDIO_CONTACT;
 
 export const FOOTER_COPYRIGHT = {
   year: 2026,
-  rightsText: "Բոլոր իրավունքները պաշտպանված են",
-  createdPrefix: "Ստեղծվել է",
-  createdSuffix: "կողմից",
+  rightsText: "All rights reserved",
+  createdPrefix: "Created by",
   creatorName: "Neetrino IT Company",
   creatorHref: "https://www.neetrino.com/",
 } as const;

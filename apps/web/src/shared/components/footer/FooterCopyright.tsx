@@ -7,8 +7,7 @@ const FOOTER_COPYRIGHT_CREATOR_CLASS =
   "font-bold text-studio-fg transition-colors hover:text-studio-accent";
 
 export function FooterCopyright() {
-  const { year, rightsText, createdPrefix, createdSuffix, creatorName, creatorHref } =
-    FOOTER_COPYRIGHT;
+  const { year, rightsText, createdPrefix, creatorName, creatorHref } = FOOTER_COPYRIGHT;
 
   return (
     <p className={FOOTER_COPYRIGHT_CLASS}>
@@ -20,8 +19,7 @@ export function FooterCopyright() {
         rel="noopener noreferrer"
       >
         {creatorName}
-      </Link>{" "}
-      {createdSuffix}
+      </Link>
     </p>
   );
 }
