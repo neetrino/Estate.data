@@ -263,54 +263,6 @@ async function seedPortfolioProject(entry: SeedPortfolioProject): Promise<void> 
   console.info(`Seeded portfolio project: ${entry.id} (${entry.category})`);
 }
 
-type SeedArticle = {
-  id: string;
-  slug: string;
-  title: string;
-  readTimeLabel: string;
-  body: string;
-  sortOrder: number;
-};
-
-const SEED_ARTICLES: readonly SeedArticle[] = [
-  {
-    id: "westside-eastside-spring-2026",
-    slug: "westside-vs-eastside-spring-2026-absorption",
-    title: "Westside vs. Eastside: Spring 2026 absorption",
-    readTimeLabel: "6 min read",
-    body:
-      "Spring 2026 absorption rates diverged sharply between the Westside and Eastside corridors.\n\nWestside luxury inventory moved faster where twilight and drone packages were bundled with pricing intelligence. Eastside listings benefited from stronger investor demand in Silver Lake and Eagle Rock.\n\nWe track weekly DOM shifts across LA micro-markets so brokers can adjust media spend before a listing stalls.",
-    sortOrder: 1,
-  },
-  {
-    id: "twilight-drone-outperforms",
-    slug: "why-twilight-drone-outperforms",
-    title: "Why twilight + drone outperforms by 41%",
-    readTimeLabel: "4 min read",
-    body:
-      "Listings with coordinated twilight photography and aerial coverage saw 41% more qualified inquiries in our 2025 sample.\n\nTwilight exteriors signal lifestyle; drone context anchors neighborhood value. Together they reduce buyer uncertainty on first click.\n\nThe uplift held across condos and single-family homes above $1.5M.",
-    sortOrder: 2,
-  },
-  {
-    id: "scan-to-bim-playbook",
-    slug: "scan-to-bim-developer-playbook",
-    title: "Scan to BIM: a developer's 90-day playbook",
-    readTimeLabel: "9 min read",
-    body:
-      "Developers use scan-to-BIM to de-risk entitlements and coordinate trades before drywall goes up.\n\nDay 0–30: site capture and model alignment. Day 31–60: clash review with architects and GCs. Day 61–90: investor-ready visualization and as-built documentation.\n\nThis playbook reflects projects we supported across DTLA and the Westside in 2025.",
-    sortOrder: 3,
-  },
-  {
-    id: "analytics-dashboards-listings",
-    slug: "analytics-dashboards-close-listings",
-    title: "How analytics dashboards close listings faster",
-    readTimeLabel: "5 min read",
-    body:
-      "Pricing dashboards give listing agents a defensible story in seller conversations.\n\nWhen DOM rises in a submarket, we surface comp velocity, showing absorption and price-per-square-foot trends alongside your media performance.\n\nBrokers using shared dashboards reported shorter negotiation cycles in Q4 2025.",
-    sortOrder: 4,
-  },
-];
-
 type SeedFaqItem = {
   id: string;
   question: string;
@@ -416,31 +368,6 @@ const SEED_FAQ_ITEMS: readonly SeedFaqItem[] = [
   },
 ];
 
-async function seedArticle(entry: SeedArticle): Promise<void> {
-  await prisma.article.upsert({
-    where: { id: entry.id },
-    create: {
-      id: entry.id,
-      slug: entry.slug,
-      title: entry.title,
-      readTimeLabel: entry.readTimeLabel,
-      body: entry.body,
-      sortOrder: entry.sortOrder,
-      published: true,
-    },
-    update: {
-      slug: entry.slug,
-      title: entry.title,
-      readTimeLabel: entry.readTimeLabel,
-      body: entry.body,
-      sortOrder: entry.sortOrder,
-      published: true,
-    },
-  });
-
-  console.info(`Seeded article: ${entry.slug}`);
-}
-
 async function seedFaqItem(entry: SeedFaqItem): Promise<void> {
   await prisma.faqItem.upsert({
     where: { id: entry.id },
@@ -463,29 +390,6 @@ async function seedFaqItem(entry: SeedFaqItem): Promise<void> {
 }
 
 async function seedTranslations(): Promise<void> {
-  await prisma.articleTranslation.upsert({
-    where: {
-      articleId_locale: {
-        articleId: "westside-eastside-spring-2026",
-        locale: "es",
-      },
-    },
-    create: {
-      articleId: "westside-eastside-spring-2026",
-      locale: "es",
-      title: "Westside vs. Eastside: absorción primavera 2026",
-      readTimeLabel: "6 min de lectura",
-      body:
-        "Las tasas de absorción de primavera 2026 divergieron entre el Westside y el Eastside.\n\nEl inventario de lujo en el Westside se movió más rápido cuando los paquetes twilight y drone se combinaron con inteligencia de precios.",
-    },
-    update: {
-      title: "Westside vs. Eastside: absorción primavera 2026",
-      readTimeLabel: "6 min de lectura",
-      body:
-        "Las tasas de absorción de primavera 2026 divergieron entre el Westside y el Eastside.\n\nEl inventario de lujo en el Westside se movió más rápido cuando los paquetes twilight y drone se combinaron con inteligencia de precios.",
-    },
-  });
-
   await prisma.faqItemTranslation.upsert({
     where: {
       faqItemId_locale: {
@@ -505,7 +409,7 @@ async function seedTranslations(): Promise<void> {
     },
   });
 
-  console.info("Seeded CMS translations: es (article + FAQ)");
+  console.info("Seeded CMS translations: es (FAQ)");
 
   await prisma.pricingCategoryTranslation.upsert({
     where: {
@@ -585,10 +489,6 @@ async function main(): Promise<void> {
 
   for (const entry of SEED_PORTFOLIO_PROJECTS) {
     await seedPortfolioProject(entry);
-  }
-
-  for (const entry of SEED_ARTICLES) {
-    await seedArticle(entry);
   }
 
   const faqIds = SEED_FAQ_ITEMS.map((entry) => entry.id);
@@ -772,13 +672,12 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
     price: "Custom",
     priceSuffixOverride: "",
     features: [
-      "Custom production planning",
-      "Dedicated creative direction",
-      "Multi-day capture",
       "Luxury estates",
       "Commercial properties",
       "New developments",
-      "Hotels & multifamily",
+      "Hotels",
+      "Multifamily",
+      "Large properties",
       "Architectural projects",
     ],
     bookLabel: "Request Custom Proposal",

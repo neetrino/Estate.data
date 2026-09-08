@@ -10,10 +10,8 @@ import { AdminStatCard } from "@/features/admin/components/ui/AdminStatCard";
 import type { AdminNavIconId } from "@/features/admin/config/admin-nav";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import {
-  SUPERSUDO_PANEL_ARTICLES_PATH,
   SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
   SUPERSUDO_PANEL_FAQ_PATH,
-  SUPERSUDO_PANEL_PAYMENTS_PATH,
   SUPERSUDO_PANEL_PORTFOLIO_PATH,
   SUPERSUDO_PANEL_PRICING_PATH,
 } from "@/features/admin/lib/admin-paths";
@@ -48,16 +46,9 @@ const QUICK_ACTIONS = [
     icon: "pricing",
   },
   {
-    id: "articles",
-    label: "Manage articles",
-    description: "Resources posts and translations",
-    href: SUPERSUDO_PANEL_ARTICLES_PATH,
-    icon: "articles",
-  },
-  {
     id: "faq",
     label: "Manage FAQ",
-    description: "Questions shown on the resources page",
+    description: "Questions shown on the home page",
     href: SUPERSUDO_PANEL_FAQ_PATH,
     icon: "faq",
   },
@@ -67,13 +58,6 @@ const QUICK_ACTIONS = [
     description: "Review new contact form submissions",
     href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
     icon: "contact-inquiries",
-  },
-  {
-    id: "payments",
-    label: "Review payments",
-    description: "Orders and pending transactions",
-    href: SUPERSUDO_PANEL_PAYMENTS_PATH,
-    icon: "payments",
   },
 ] as const;
 
@@ -104,14 +88,6 @@ function getDashboardStats(summary: DashboardSummary): DashboardStat[] {
       tone: "navy",
     },
     {
-      label: "Articles",
-      value: summary.articleCount,
-      sublabel: `${summary.publishedArticleCount} published`,
-      href: SUPERSUDO_PANEL_ARTICLES_PATH,
-      icon: "articles",
-      tone: "cyan",
-    },
-    {
       label: "FAQ items",
       value: summary.faqCount,
       sublabel: `${summary.publishedFaqCount} published`,
@@ -125,14 +101,6 @@ function getDashboardStats(summary: DashboardSummary): DashboardStat[] {
       href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
       icon: "contact-inquiries",
       tone: "orange",
-    },
-    {
-      label: "Orders",
-      value: summary.orderCount,
-      sublabel: `${summary.pendingOrderCount} pending`,
-      href: SUPERSUDO_PANEL_PAYMENTS_PATH,
-      icon: "payments",
-      tone: "purple",
     },
   ];
 }

@@ -2,6 +2,7 @@
 export const HOME_SECTION_IDS = {
   hero: "hero",
   whatWeDo: "what-we-do",
+  services: "services",
   photography: "photography",
   editing: "editing",
   video: "video",
@@ -38,4 +39,4 @@ export function homeSectionQuery(sectionId: HomeSectionId): string {
   return `/?section=${sectionId}`;
 }
 
-export const HOME_SECTION_SCROLL_MARGIN_CLASS = "scroll-mt-28 sm:scroll-mt-32";
+export const HOME_SECTION_SCROLL_MARGIN_CLASS = "scroll-mt-20";

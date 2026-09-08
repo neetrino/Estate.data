@@ -1,19 +1,14 @@
 import { adminAuthenticatedRequest } from "@/features/admin/services/adminAuthenticatedRequest";
 import type {
-  AdminArticle,
-  AdminAsset,
   AdminContactField,
   AdminContactInquiry,
   AdminFaqItem,
   AdminHeroSlide,
   AdminHomeHero,
   AdminHomeHeroUploadResult,
-  AdminMediaListResponse,
-  AdminOrder,
   AdminPortfolioProject,
   AdminPricingPackage,
   AdminPricingResponse,
-  AdminSiteCopyItem,
   AdminStudioService,
   DashboardSummary,
 } from "@/features/admin/types/admin-data";
@@ -118,33 +113,6 @@ export function deleteAdminPricingPackage(id: string): Promise<{ deleted: boolea
   );
 }
 
-export function fetchAdminArticles(): Promise<AdminArticle[]> {
-  return adminAuthenticatedRequest<AdminArticle[]>(API_ROUTES.adminArticles);
-}
-
-export function createAdminArticle(body: Record<string, unknown>): Promise<unknown> {
-  return adminAuthenticatedRequest(API_ROUTES.adminArticles, {
-    method: "POST",
-    body,
-  });
-}
-
-export function updateAdminArticle(
-  id: string,
-  body: Record<string, unknown>,
-): Promise<unknown> {
-  return adminAuthenticatedRequest(API_ROUTES.adminArticleById(id), {
-    method: "PATCH",
-    body,
-  });
-}
-
-export function deleteAdminArticle(id: string): Promise<{ deleted: boolean }> {
-  return adminAuthenticatedRequest<{ deleted: boolean }>(API_ROUTES.adminArticleById(id), {
-    method: "DELETE",
-  });
-}
-
 export function fetchAdminFaq(): Promise<AdminFaqItem[]> {
   return adminAuthenticatedRequest<AdminFaqItem[]>(API_ROUTES.adminFaq);
 }
@@ -167,70 +135,6 @@ export function deleteAdminFaqItem(id: string): Promise<{ deleted: boolean }> {
   return adminAuthenticatedRequest<{ deleted: boolean }>(API_ROUTES.adminFaqById(id), {
     method: "DELETE",
   });
-}
-
-export function fetchAdminAssets(): Promise<AdminAsset[]> {
-  return adminAuthenticatedRequest<AdminAsset[]>(API_ROUTES.adminAssets);
-}
-
-export async function uploadAdminAsset(key: string, file: File): Promise<unknown> {
-  const formData = new FormData();
-  formData.append("key", key);
-  formData.append("file", file);
-
-  const token = (await import("@/features/admin/lib/admin-auth-storage")).readAdminAuthToken();
-  const headers: Record<string, string> = {};
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-
-  const response = await fetch(API_ROUTES.adminAssets, {
-    method: "POST",
-    headers,
-    body: formData,
-  });
-
-  if (!response.ok) {
-    const { ApiError } = await import("@/shared/api/errors");
-    throw new ApiError("Upload failed", response.status);
-  }
-
-  const json = (await response.json()) as { data: unknown };
-  return json.data;
-}
-
-export function fetchAdminMedia(): Promise<AdminMediaListResponse> {
-  return adminAuthenticatedRequest<AdminMediaListResponse>(API_ROUTES.adminMedia);
-}
-
-export async function uploadAdminMedia(file: File): Promise<unknown> {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const { readAdminAuthToken } = await import("@/features/admin/lib/admin-auth-storage");
-  const token = readAdminAuthToken();
-  const headers: Record<string, string> = {};
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
-
-  const response = await fetch(API_ROUTES.adminMedia, {
-    method: "POST",
-    headers,
-    body: formData,
-  });
-
-  if (!response.ok) {
-    const { ApiError } = await import("@/shared/api/errors");
-    throw new ApiError("Upload failed", response.status);
-  }
-
-  const json = (await response.json()) as { data: unknown };
-  return json.data;
-}
-
-export function fetchAdminPaymentsOrders(): Promise<AdminOrder[]> {
-  return adminAuthenticatedRequest<AdminOrder[]>(API_ROUTES.adminPaymentsOrders);
 }
 
 export function fetchAdminHomeHero(): Promise<AdminHomeHero> {
@@ -356,19 +260,4 @@ export function saveAdminContactFields(
       })),
     },
   });
-}
-
-export function fetchAdminSiteCopy(): Promise<AdminSiteCopyItem[]> {
-  return adminAuthenticatedRequest<AdminSiteCopyItem[]>(API_ROUTES.adminSiteCopy);
-}
-
-export function saveAdminSiteCopy(items: AdminSiteCopyItem[]): Promise<AdminSiteCopyItem[]> {
-  return adminAuthenticatedRequest<AdminSiteCopyItem[]>(API_ROUTES.adminSiteCopy, {
-    method: "PUT",
-    body: { items },
-  });
-}
-
-export function fetchAdminAnalytics(): Promise<{ url: string | null }> {
-  return adminAuthenticatedRequest<{ url: string | null }>(API_ROUTES.adminAnalytics);
 }

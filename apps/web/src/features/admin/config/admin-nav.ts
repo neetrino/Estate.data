@@ -1,11 +1,8 @@
 import {
-  SUPERSUDO_PANEL_ANALYTICS_PATH,
-  SUPERSUDO_PANEL_ARTICLES_PATH,
   SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
   SUPERSUDO_PANEL_FAQ_PATH,
   SUPERSUDO_PANEL_HOME_HERO_PATH,
   SUPERSUDO_PANEL_PATH,
-  SUPERSUDO_PANEL_PAYMENTS_PATH,
   SUPERSUDO_PANEL_PORTFOLIO_PATH,
   SUPERSUDO_PANEL_PRICING_PATH,
   SUPERSUDO_PANEL_SITE_CONTENT_PATH,
@@ -15,13 +12,10 @@ export type AdminNavIconId =
   | "dashboard"
   | "portfolio"
   | "pricing"
-  | "articles"
   | "faq"
   | "contact-inquiries"
-  | "payments"
   | "site-content"
   | "home-hero"
-  | "analytics"
   | "logout";
 
 export type AdminNavItem = {
@@ -40,7 +34,6 @@ export type AdminNavGroup = {
 const CONTENT_NAV_ITEMS: AdminNavItem[] = [
   { id: "portfolio", label: "Portfolio", href: SUPERSUDO_PANEL_PORTFOLIO_PATH, icon: "portfolio" },
   { id: "pricing", label: "Pricing", href: SUPERSUDO_PANEL_PRICING_PATH, icon: "pricing" },
-  { id: "articles", label: "Articles", href: SUPERSUDO_PANEL_ARTICLES_PATH, icon: "articles" },
   { id: "faq", label: "FAQ", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
   {
     id: "home-hero",
@@ -76,27 +69,9 @@ export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
     items: [
       {
         id: "contact-inquiries",
-        label: "Contact inquiries",
+        label: "Inquiries",
         href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
         icon: "contact-inquiries",
-      },
-    ],
-  },
-  {
-    id: "system",
-    label: "System",
-    items: [
-      {
-        id: "payments",
-        label: "Payments",
-        href: SUPERSUDO_PANEL_PAYMENTS_PATH,
-        icon: "payments",
-      },
-      {
-        id: "analytics",
-        label: "Analytics",
-        href: SUPERSUDO_PANEL_ANALYTICS_PATH,
-        icon: "analytics",
       },
     ],
   },

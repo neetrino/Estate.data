@@ -18,6 +18,57 @@ export const DEFAULT_HERO_SLIDES = [
   },
 ] as const;
 
+export const STUDIO_SERVICE_BLOCK_COPY = {
+  includedLabel: "What's included",
+  pricingLabel: "Pricing",
+} as const;
+
+export const STUDIO_MATTERPORT_DEMO = {
+  label: "Interactive demo",
+  title: "Interactive Matterport 3D tour demo",
+  embedUrl: "https://my.matterport.com/show/?m=SxQL3iGyoDo&play=1&brand=0",
+  imageAlt: "Dollhouse view of a scanned property rendered as a 3D digital twin",
+} as const;
+
+export const STUDIO_SCAN_TO_BIM = {
+  imageAlt: "Registered laser scan point cloud overlaid with a Revit BIM wireframe model",
+  workflowLabel: "Workflow",
+  deliverablesLabel: "Deliverables",
+  pricingLabel: "Pricing",
+  pricingFactorsLabel: "Final pricing depends on",
+  chain: ["Real Property", "3D Scan", "Point Cloud", "BIM Model", "Revit"],
+  workflow: [
+    { step: "01", label: "On-site 3D laser scanning" },
+    { step: "02", label: "Point cloud generation" },
+    { step: "03", label: "Registration and processing" },
+    { step: "04", label: "Quality control" },
+    { step: "05", label: "BIM modeling" },
+    { step: "06", label: "Revit delivery" },
+    { step: "07", label: "Documentation" },
+  ],
+  deliverables: [
+    "Point Cloud",
+    "E57",
+    "RCP / RCS",
+    "LAS / LAZ where applicable",
+    "Revit (RVT)",
+    "BIM models",
+    "Floor plans",
+    "Elevations",
+    "Sections",
+    "As-built documentation",
+  ],
+  pricingFactors: [
+    "Building size",
+    "Complexity",
+    "Level of Detail (LOD)",
+    "Required accuracy",
+    "Deliverables",
+    "Number of floors",
+    "Project location",
+  ],
+} as const;
+
 export const STUDIO_PAGE_COPY = {
   brand: {
     name: "ESTATEDATA",
@@ -26,6 +77,8 @@ export const STUDIO_PAGE_COPY = {
   hero: {
     eyebrow: "Los Angeles · Real Estate Media + Digital Reality Capture",
     titleLines: ["Make your property", "impossible to ignore."] as const,
+    titleAccentWord: "impossible",
+    titleTrailing: "to ignore.",
     description:
       "Premium real estate photography, cinematic video, drone, AI-powered media, Matterport 3D tours and professional reality capture — all under one roof.",
     primaryCta: "Book a Shoot",
@@ -34,7 +87,7 @@ export const STUDIO_PAGE_COPY = {
   },
   whatWeDo: {
     eyebrow: "What we do",
-    title: "One shoot. Every channel. One studio.",
+    titleLines: ["One shoot.", "Every channel.", "One studio."] as const,
     body: "ESTATEDATA.CLOUD combines creative media production with advanced reality capture technology — photography, cinematic video, drone, AI media, Matterport 3D tours and Scan-to-BIM — so your property communicates its full value before anyone steps inside.",
     primaryCta: "Start a Project",
     secondaryCta: "See Services",
@@ -83,7 +136,8 @@ export const STUDIO_PAGE_COPY = {
     body: "A dedicated, high-converting property website that brings every asset we produce — photos, video, drone, 3D tour and floor plans — into one branded experience you can share with a single link.",
     ctaLabel: "Build My Property Page",
     href: WEB_PAGES_PATH,
-    startingAt: "Starting at $399",
+    startingPrice: "$399",
+    includedLabel: "What's included",
     included: [
       "Custom single-property website",
       "Mobile-first responsive design",
@@ -222,28 +276,39 @@ export const STUDIO_PAGE_COPY = {
     eyebrow: "Packages",
     title: "Choose how far you want to go.",
     startingAt: "Starting at",
+    builtForLabel: "Built for",
+    customDescription:
+      "Includes custom production planning, dedicated creative direction and multi-day capture.",
   },
   portfolio: {
     eyebrow: "Selected work",
     title: "Properties we made unforgettable.",
     cta: "Start your project",
+    tileCta: "View Project →",
   },
   beforeAfter: {
     eyebrow: "Post-production",
     title: "See the difference.",
     body: "Raw photo → edited photo. Daylight → virtual twilight. Empty room → virtual staging. Raw scan → point cloud → Revit BIM.",
+    sliderLabel: "Before and after comparison position",
+    beforeLabel: "Before",
+    afterLabel: "After",
     items: [
       {
         id: "staging",
         label: "Empty Room → Virtual Staging",
         beforeSrc: STUDIO_MEDIA.beforeEmpty,
         afterSrc: STUDIO_MEDIA.afterStaged,
+        beforeAlt: "Unfurnished living room before virtual staging",
+        afterAlt: "Same living room after virtual staging with modern furniture",
       },
       {
         id: "bim",
         label: "Raw Scan → Point Cloud → Revit BIM",
-        beforeSrc: STUDIO_MEDIA.scanBim,
+        beforeSrc: STUDIO_MEDIA.matterport,
         afterSrc: STUDIO_MEDIA.scanBim,
+        beforeAlt: "Raw 3D scan of a property",
+        afterAlt: "Processed point cloud overlaid with Revit BIM model",
       },
     ],
   },

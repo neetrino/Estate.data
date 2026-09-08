@@ -56,14 +56,6 @@ export function AdminNavIcon({ id, className = ICON_CLASS_DEFAULT }: AdminNavIco
           <path d="M7 8h8.5a2.5 2.5 0 0 1 0 5H9a2.5 2.5 0 0 0 0 5h6.5" />
         </NavIconSvg>
       );
-    case "articles":
-      return (
-        <NavIconSvg className={className}>
-          <path d="M6 4h9l3 3v13H6z" />
-          <path d="M15 4v4h4" />
-          <path d="M9 12h6M9 16h6" />
-        </NavIconSvg>
-      );
     case "faq":
       return (
         <NavIconSvg className={className}>
@@ -79,29 +71,11 @@ export function AdminNavIcon({ id, className = ICON_CLASS_DEFAULT }: AdminNavIco
           <path d="m4 7 8 6 8-6" />
         </NavIconSvg>
       );
-    case "payments":
-      return (
-        <NavIconSvg className={className}>
-          <rect x="3" y="6" width="18" height="12" rx="2" />
-          <path d="M3 10h18" />
-          <path d="M7 15h4" />
-        </NavIconSvg>
-      );
     case "site-content":
     case "home-hero":
       return (
         <NavIconSvg className={className}>
           <path d="M4 6h16M4 12h16M4 18h10" />
-        </NavIconSvg>
-      );
-    case "analytics":
-      return (
-        <NavIconSvg className={className}>
-          <path d="M4 19V5" />
-          <path d="M4 19h16" />
-          <path d="M8 15v-4" />
-          <path d="M12 15V8" />
-          <path d="M16 15v-6" />
         </NavIconSvg>
       );
     case "logout":

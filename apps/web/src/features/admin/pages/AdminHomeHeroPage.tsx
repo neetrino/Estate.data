@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { HomeHeroImageUploader } from "@/features/admin/components/HomeHeroImageUploader";
+import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
@@ -214,13 +214,13 @@ export function AdminHomeHeroPage() {
             {successMessage ? <p className={HOME_HERO_SUCCESS_ALERT_CLASS}>{successMessage}</p> : null}
 
             <HomeHeroSection title="Images">
-              <HomeHeroImageUploader
+              <AdminImageUploader
                 label="Desktop image"
                 previewUrl={previewImages.desktopImageUrl}
                 uploading={uploadingDesktop}
                 onUpload={handleDesktopUpload}
               />
-              <HomeHeroImageUploader
+              <AdminImageUploader
                 label="Mobile image"
                 previewUrl={form.mobileImageUrl ? previewImages.mobileImageUrl : null}
                 uploading={uploadingMobile}
