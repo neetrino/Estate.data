@@ -37,7 +37,7 @@ export function StudioPortfolio({ projects }: StudioPortfolioProps) {
             <StudioSectionLabel>{copy.eyebrow}</StudioSectionLabel>
             <h2 className="studio-display-lg mt-6 max-w-[16ch] text-studio-fg">{copy.title}</h2>
           </div>
-          <StudioCta href={`/#${HOME_SECTION_IDS.contact}`} variant="outline">
+          <StudioCta href={`/#${HOME_SECTION_IDS.quote}`} variant="outline">
             {copy.cta}
           </StudioCta>
         </StudioReveal>

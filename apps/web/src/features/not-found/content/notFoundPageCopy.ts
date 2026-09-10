@@ -9,7 +9,7 @@ export const NOT_FOUND_PAGE_COPY = {
   primaryCta: { label: "Back to home", href: "/" },
   secondaryCta: {
     label: "Contact us",
-    href: homeSectionHref(HOME_SECTION_IDS.contact),
+    href: homeSectionHref(HOME_SECTION_IDS.quote),
   },
   quickLinksHeading: "Popular destinations",
   quickLinks: [

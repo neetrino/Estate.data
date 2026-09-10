@@ -42,7 +42,7 @@ export function StudioWhatWeDo() {
             <p className="studio-body-lg mt-6 max-w-[48ch]">{copy.body}</p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <HomeSectionLink
-                href={`/#${HOME_SECTION_IDS.contact}`}
+                href={`/#${HOME_SECTION_IDS.quote}`}
                 className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}
               >
                 {copy.primaryCta}

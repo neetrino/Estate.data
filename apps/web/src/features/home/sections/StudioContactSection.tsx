@@ -20,7 +20,7 @@ export function StudioContactSection({ fields }: StudioContactSectionProps) {
   const copy = STUDIO_PAGE_COPY.contact;
 
   return (
-    <section id={HOME_SECTION_IDS.contact} className={STUDIO_MUTED_SECTION_CLASS}>
+    <section id={HOME_SECTION_IDS.quote} className={STUDIO_MUTED_SECTION_CLASS}>
       <div className={`${STUDIO_CONTAINER_CLASS} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
         <StudioReveal className="lg:col-span-4">
           <StudioSectionLabel>{copy.eyebrow}</StudioSectionLabel>

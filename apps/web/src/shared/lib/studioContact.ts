@@ -25,6 +25,12 @@ export const STUDIO_CONTACT = {
     href: "mailto:studio@estatedata.cloud",
   },
   hours: "Mon – Sat · 7:00 AM – 8:00 PM PT",
+  social: [
+    { label: "Instagram", href: "https://instagram.com/" },
+    { label: "LinkedIn", href: "https://linkedin.com/" },
+    { label: "YouTube", href: "https://youtube.com/" },
+    { label: "Vimeo", href: "https://vimeo.com/" },
+  ],
 } as const;
 
 /** Google Maps embed iframe URL for the contact page. */

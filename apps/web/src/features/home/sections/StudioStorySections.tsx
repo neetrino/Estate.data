@@ -65,17 +65,28 @@ export function StudioProcess() {
   );
 }
 
+const WHY_US_TITLE_CLASS = [
+  "mt-6 max-w-[11ch] text-studio-fg",
+  "font-display text-[clamp(1.75rem,3.6vw,3.15rem)] font-bold uppercase",
+  "leading-[0.95] tracking-[-0.03em]",
+].join(" ");
+
+const WHY_US_POINT_CLASS = [
+  "min-w-0 font-display text-lg uppercase tracking-tight",
+  "sm:text-xl md:text-2xl lg:text-[1.65rem]",
+].join(" ");
+
 export function StudioWhyUs() {
   const copy = STUDIO_PAGE_COPY.whyUs;
 
   return (
     <section id={HOME_SECTION_IDS.whyUs} className={STUDIO_MUTED_SECTION_CLASS}>
-      <div className={`${STUDIO_CONTAINER_CLASS} ${SPLIT_GRID_CLASS}`}>
-        <StudioReveal className="lg:col-span-5">
+      <div className={`${STUDIO_CONTAINER_CLASS} grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14`}>
+        <StudioReveal className="min-w-0 lg:col-span-5">
           <StudioSectionLabel>{copy.eyebrow}</StudioSectionLabel>
-          <h2 className="studio-display-lg mt-6 text-studio-fg">{copy.title}</h2>
-          <p className="studio-body-lg mt-6 max-w-[44ch]">{copy.body}</p>
-          <ul className="mt-10 flex flex-wrap gap-2">
+          <h2 className={WHY_US_TITLE_CLASS}>{copy.title}</h2>
+          <p className="studio-body-lg mt-6 max-w-[40ch] text-[0.95rem]">{copy.body}</p>
+          <ul className="mt-8 flex flex-wrap gap-2">
             {copy.tags.map((tag) => (
               <li key={tag} className={TAG_CLASS}>
                 {tag}
@@ -83,15 +94,17 @@ export function StudioWhyUs() {
             ))}
           </ul>
         </StudioReveal>
-        <div className="lg:col-span-7">
+        <div className="min-w-0 lg:col-span-7">
           {copy.points.map((point, index) => (
             <StudioReveal
               key={point}
               delay={index * STATEMENT_DELAY_STEP_MS}
-              className="flex items-baseline gap-6 border-t border-studio-border py-6 first:border-t-0"
+              className="flex items-baseline gap-4 border-t border-studio-border py-5 first:border-t-0 sm:gap-5"
             >
-              <span className="studio-label text-studio-accent">{stepNumber(index)}</span>
-              <p className="font-display text-2xl uppercase tracking-tight md:text-4xl">{point}</p>
+              <span className="studio-label shrink-0 text-studio-accent">
+                {stepNumber(index)}
+              </span>
+              <p className={WHY_US_POINT_CLASS}>{point}</p>
             </StudioReveal>
           ))}
         </div>
@@ -178,7 +191,7 @@ export function StudioServiceArea() {
           </ul>
           <p className="mt-8 text-sm text-studio-muted">{copy.note}</p>
           <div className="mt-8">
-            <StudioCta href={`/#${HOME_SECTION_IDS.contact}`} variant="outline">
+            <StudioCta href={`/#${HOME_SECTION_IDS.quote}`} variant="outline">
               {copy.cta}
             </StudioCta>
           </div>

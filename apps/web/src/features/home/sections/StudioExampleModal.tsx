@@ -70,7 +70,7 @@ const CTA_CLASS = [
 
 const BODY_LOCK_CLASS = "overflow-hidden";
 
-const DEFAULT_CTA_HREF = homeSectionHref(HOME_SECTION_IDS.contact);
+const DEFAULT_CTA_HREF = homeSectionHref(HOME_SECTION_IDS.quote);
 
 function isEditingLoftExample(sectionKey: string, imageUrl: string): boolean {
   return sectionKey === HOME_SECTION_IDS.editing || imageUrl.includes("portfolio-3");

@@ -29,7 +29,7 @@ export type StudioServiceContent = {
   readonly footnote?: string;
 };
 
-const CONTACT_HREF = homeSectionHref(HOME_SECTION_IDS.contact);
+const CONTACT_HREF = homeSectionHref(HOME_SECTION_IDS.quote);
 
 const GALLERY = STUDIO_MEDIA_GALLERY;
 
