@@ -7,7 +7,7 @@ export type AdminContactInquiryRow = {
   phone: string | null;
   company: string | null;
   propertyAddress: string | null;
-  service: string;
+  services: readonly string[];
   preferredDate: string | null;
   projectDetails: string | null;
   extraFields: Record<string, string> | null;
@@ -28,7 +28,7 @@ function toRow(inquiry: {
   phone: string | null;
   company: string | null;
   propertyAddress: string | null;
-  service: string;
+  services: string[];
   preferredDate: Date | null;
   projectDetails: string | null;
   extraFields: unknown;
@@ -41,7 +41,7 @@ function toRow(inquiry: {
     phone: inquiry.phone,
     company: inquiry.company,
     propertyAddress: inquiry.propertyAddress,
-    service: inquiry.service,
+    services: inquiry.services,
     preferredDate: inquiry.preferredDate
       ? inquiry.preferredDate.toISOString().slice(0, 10)
       : null,
@@ -74,7 +74,7 @@ export async function listAdminContactInquiries(
   const service = input.service?.trim();
 
   const where = {
-    ...(service ? { service } : {}),
+    ...(service ? { services: { has: service } } : {}),
     ...(search
       ? {
           OR: [
@@ -98,7 +98,7 @@ export async function listAdminContactInquiries(
       phone: true,
       company: true,
       propertyAddress: true,
-      service: true,
+      services: true,
       preferredDate: true,
       projectDetails: true,
       extraFields: true,

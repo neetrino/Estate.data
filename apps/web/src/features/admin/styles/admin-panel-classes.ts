@@ -33,10 +33,10 @@ export const ADMIN_TABLE_THUMB_WRAP_CLASS =
 export const ADMIN_TABLE_THUMB_IMG_CLASS =
   "h-14 w-20 shrink-0 rounded-md object-cover bg-neutral-100";
 export const ADMIN_INPUT_CLASS =
-  "w-full rounded-lg border border-foreground/15 bg-white px-3 py-2 text-sm text-brand-navy outline-none focus-visible:ring-1 focus-visible:ring-brand-purple";
+  "w-full rounded-xl border border-foreground/12 bg-white px-3.5 py-2.5 text-sm text-brand-navy shadow-sm outline-none transition-[box-shadow,border-color] focus-visible:border-brand-purple/40 focus-visible:ring-2 focus-visible:ring-brand-purple/20";
 export const ADMIN_BTN_PRIMARY_CLASS =
-  "inline-flex h-9 cursor-pointer items-center justify-center rounded-lg bg-brand-purple px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
+  "inline-flex h-10 cursor-pointer items-center justify-center rounded-xl bg-brand-purple px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/35";
 export const ADMIN_BTN_SECONDARY_CLASS =
-  "inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border border-foreground/15 bg-white px-4 text-sm font-semibold text-brand-navy transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
+  "inline-flex h-10 cursor-pointer items-center justify-center rounded-xl border border-foreground/12 bg-white px-5 text-sm font-semibold text-brand-navy shadow-sm transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/25";
 export const ADMIN_BTN_DANGER_CLASS =
   "inline-flex h-9 cursor-pointer items-center justify-center rounded-lg border border-red-200 bg-red-50 px-4 text-sm font-semibold text-red-700 transition-colors hover:bg-red-100";

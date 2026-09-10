@@ -12,29 +12,52 @@ export type ContactFieldSetting = {
 
 export const CONTACT_SERVICE_VALUES = [
   "photography",
+  "photo-editing",
   "video-production",
-  "drone-services",
+  "drone-photography",
+  "drone-video",
   "3d-tours-visualization",
   "floor-plans-2d-3d",
   "ai-media",
   "laser-scanning-scan-to-bim",
-  "web-pages",
   "other",
 ] as const;
 
 export type ContactServiceValue = (typeof CONTACT_SERVICE_VALUES)[number];
 
+/** Minimum checkboxes a visitor must tick when the services field is required. */
+export const MIN_SELECTED_SERVICES = 1;
+
 export const CONTACT_FORM_SERVICE_OPTIONS = [
   { value: "photography", label: "Photography" },
+  { value: "photo-editing", label: "Photo Editing" },
   { value: "video-production", label: "Video" },
-  { value: "drone-services", label: "Drone Photography / Video" },
+  { value: "drone-photography", label: "Drone Photography" },
+  { value: "drone-video", label: "Drone Video" },
   { value: "3d-tours-visualization", label: "Matterport 3D Tour" },
   { value: "floor-plans-2d-3d", label: "Floor Plan" },
   { value: "ai-media", label: "AI Media" },
   { value: "laser-scanning-scan-to-bim", label: "Scan-to-BIM" },
-  { value: "web-pages", label: "Landing Pages" },
   { value: "other", label: "Other" },
 ] as const;
+
+export const CONTACT_PROPERTY_TYPE_OPTIONS = [
+  "Single Family Residential",
+  "Luxury Estate",
+  "Condo / Townhome",
+  "Multifamily",
+  "Commercial / Office",
+  "Retail",
+  "Industrial",
+  "Hospitality",
+  "New Development",
+  "Other",
+] as const;
+
+/** Human label for a stored service value (falls back to the raw value). */
+export function contactServiceLabel(value: string): string {
+  return CONTACT_FORM_SERVICE_OPTIONS.find((option) => option.value === value)?.label ?? value;
+}
 
 export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
   { fieldKey: "name", label: "Name", placeholder: "Jane Smith", mode: "required", sortOrder: 10 },
@@ -69,7 +92,13 @@ export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
     mode: "optional",
     sortOrder: 80,
   },
-  { fieldKey: "service", label: "Services Required", placeholder: "Select a service", mode: "required", sortOrder: 90 },
+  {
+    fieldKey: "service",
+    label: "Services Required",
+    placeholder: "Select one or more services",
+    mode: "required",
+    sortOrder: 90,
+  },
   {
     fieldKey: "projectDetails",
     label: "Additional Notes",

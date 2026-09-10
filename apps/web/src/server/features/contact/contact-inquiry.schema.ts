@@ -2,6 +2,7 @@ import { z } from "zod";
 import {
   CONTACT_SERVICE_VALUES,
   DEFAULT_CONTACT_FIELD_SETTINGS,
+  MIN_SELECTED_SERVICES,
   isContactFieldMode,
   type ContactFieldMode,
   type ContactFieldSetting,
@@ -43,10 +44,13 @@ export function buildContactInquirySchema(
   settings: readonly ContactFieldSetting[] = DEFAULT_CONTACT_FIELD_SETTINGS,
 ) {
   const serviceMode = settingMode(settings, "service");
-  const serviceSchema =
-    serviceMode === "required"
-      ? z.enum(CONTACT_SERVICE_VALUES, { message: "Select a valid service" })
-      : z.enum(CONTACT_SERVICE_VALUES).optional().or(z.literal(""));
+  const servicesSchema = z
+    .array(z.enum(CONTACT_SERVICE_VALUES, { message: "Select a valid service" }))
+    .max(CONTACT_SERVICE_VALUES.length)
+    .refine(
+      (values) => serviceMode !== "required" || values.length >= MIN_SELECTED_SERVICES,
+      { message: "Select at least one service" },
+    );
 
   return z.object({
     name: fieldSchema(settingMode(settings, "name"), 200, "Name is required"),
@@ -61,7 +65,7 @@ export function buildContactInquirySchema(
       500,
       "Property address is required",
     ),
-    service: serviceSchema,
+    services: servicesSchema,
     preferredDate: fieldSchema(
       settingMode(settings, "preferredDate"),
       10,

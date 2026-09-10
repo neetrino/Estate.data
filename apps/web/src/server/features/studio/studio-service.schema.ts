@@ -34,6 +34,9 @@ export const updateStudioServiceSchema = z.object({
   primaryCtaHref: hrefSchema.optional(),
   secondaryCtaLabel: z.string().trim().min(1).max(80).optional(),
   secondaryCtaHref: hrefSchema.optional(),
+  startingPrice: z.string().trim().max(40).nullable().optional(),
+  pricingUnit: z.string().trim().max(40).nullable().optional(),
+  footnote: z.string().trim().max(2000).nullable().optional(),
   sortOrder: z.number().int().min(0).max(999).optional(),
   published: z.boolean().optional(),
 });

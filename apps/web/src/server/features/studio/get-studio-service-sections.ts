@@ -33,6 +33,11 @@ function asPricing(value: unknown): StudioServiceContent["pricing"] {
   });
 }
 
+function asOptionalText(value: string | null | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
 /** Published studio service blocks with static fallback. */
 export async function getStudioServiceSections(): Promise<StudioServiceContent[]> {
   try {
@@ -43,20 +48,32 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
     if (rows.length === 0) {
       return [...DEFAULT_STUDIO_SERVICES];
     }
-    return rows.map((row) => ({
-      sectionKey: row.sectionKey,
-      eyebrow: row.eyebrow,
-      title: row.title,
-      description: row.description,
-      imageUrl: normalizePublicAssetUrl(row.imageUrl),
-      galleryUrls: asAssetUrlArray(row.galleryUrls),
-      included: asStringArray(row.included),
-      pricing: asPricing(row.pricing),
-      primaryCtaLabel: row.primaryCtaLabel,
-      primaryCtaHref: row.primaryCtaHref,
-      secondaryCtaLabel: row.secondaryCtaLabel,
-      secondaryCtaHref: row.secondaryCtaHref,
-    }));
+
+    const defaultsByKey = new Map(
+      DEFAULT_STUDIO_SERVICES.map((service) => [service.sectionKey, service]),
+    );
+
+    return rows.map((row) => {
+      const defaults = defaultsByKey.get(row.sectionKey);
+      return {
+        sectionKey: row.sectionKey,
+        eyebrow: row.eyebrow,
+        title: row.title,
+        description: row.description,
+        imageUrl: normalizePublicAssetUrl(row.imageUrl),
+        galleryUrls: asAssetUrlArray(row.galleryUrls),
+        included: asStringArray(row.included),
+        pricing: asPricing(row.pricing),
+        primaryCtaLabel: row.primaryCtaLabel,
+        primaryCtaHref: row.primaryCtaHref,
+        secondaryCtaLabel: row.secondaryCtaLabel,
+        secondaryCtaHref: row.secondaryCtaHref,
+        startingPrice:
+          asOptionalText(row.startingPrice) ?? defaults?.startingPrice,
+        pricingUnit: asOptionalText(row.pricingUnit) ?? defaults?.pricingUnit,
+        footnote: asOptionalText(row.footnote) ?? defaults?.footnote,
+      };
+    });
   } catch (error) {
     logger.warn("studio_services.read.fallback_default", {
       reason: error instanceof Error ? error.message : "unknown",

@@ -13,7 +13,9 @@ function formatContactEmailHtml(input: ContactInquiryInput, inquiryId: string): 
   appendOptionalLine(lines, "Phone", input.phone);
   appendOptionalLine(lines, "Company", input.company);
   appendOptionalLine(lines, "Property", input.propertyAddress);
-  lines.push(`<p><strong>Service:</strong> ${escapeHtml(input.service || "other")}</p>`);
+  lines.push(
+    `<p><strong>Services:</strong> ${escapeHtml(input.services.join(", ") || "—")}</p>`,
+  );
   appendOptionalLine(lines, "Preferred date", input.preferredDate);
 
   if (input.extraFields) {

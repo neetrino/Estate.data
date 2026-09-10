@@ -1,15 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
+import Link from "next/link";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
-import {
-  fetchAdminHomeHero,
-  updateAdminHomeHero,
-  uploadAdminHomeHeroImage,
-} from "@/features/admin/services/admin-api";
+import { SUPERSUDO_PANEL_HERO_SLIDES_PATH } from "@/features/admin/lib/admin-paths";
+import { fetchAdminHomeHero, updateAdminHomeHero } from "@/features/admin/services/admin-api";
 import {
   HOME_HERO_EDITOR_BODY_CLASS,
   HOME_HERO_EDITOR_CARD_CLASS,
@@ -28,7 +25,6 @@ import {
   HOME_HERO_SUCCESS_ALERT_CLASS,
 } from "@/features/admin/styles/admin-home-hero-classes";
 import type { AdminHomeHero } from "@/features/admin/types/admin-data";
-import { resolveHomeHeroImageUrls } from "@/features/home/content/heroCopy";
 
 const EMPTY_FORM: AdminHomeHero = {
   title: "",
@@ -116,67 +112,14 @@ export function AdminHomeHeroPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminHomeHero, []);
   const [draft, setDraft] = useState<AdminHomeHero | null>(null);
   const [saving, setSaving] = useState(false);
-  const [uploadingDesktop, setUploadingDesktop] = useState(false);
-  const [uploadingMobile, setUploadingMobile] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const form = draft ?? data ?? EMPTY_FORM;
-  const previewImages = resolveHomeHeroImageUrls({
-    desktopImageUrl: form.desktopImageUrl,
-    mobileImageUrl: form.mobileImageUrl,
-  });
-  const isBusy = saving || uploadingDesktop || uploadingMobile;
 
   function updateForm<K extends keyof AdminHomeHero>(field: K, value: AdminHomeHero[K]) {
     setDraft((previous) => ({
       ...(previous ?? data ?? EMPTY_FORM),
       [field]: value,
-    }));
-  }
-
-  async function handleDesktopUpload(file: File) {
-    setUploadingDesktop(true);
-    setActionError(null);
-    setSuccessMessage(null);
-
-    try {
-      const uploaded = await uploadAdminHomeHeroImage(file);
-      setDraft((previous) => ({
-        ...(previous ?? data ?? EMPTY_FORM),
-        desktopImageUrl: uploaded.publicUrl,
-        desktopImageKey: uploaded.objectKey,
-      }));
-    } catch (uploadError) {
-      setActionError(uploadError instanceof Error ? uploadError.message : "Desktop upload failed");
-    } finally {
-      setUploadingDesktop(false);
-    }
-  }
-
-  async function handleMobileUpload(file: File) {
-    setUploadingMobile(true);
-    setActionError(null);
-    setSuccessMessage(null);
-
-    try {
-      const uploaded = await uploadAdminHomeHeroImage(file);
-      setDraft((previous) => ({
-        ...(previous ?? data ?? EMPTY_FORM),
-        mobileImageUrl: uploaded.publicUrl,
-        mobileImageKey: uploaded.objectKey,
-      }));
-    } catch (uploadError) {
-      setActionError(uploadError instanceof Error ? uploadError.message : "Mobile upload failed");
-    } finally {
-      setUploadingMobile(false);
-    }
-  }
-
-  function handleClearMobileImage() {
-    setDraft((previous) => ({
-      ...(previous ?? data ?? EMPTY_FORM),
-      mobileImageUrl: null,
-      mobileImageKey: null,
     }));
   }
 
@@ -213,22 +156,17 @@ export function AdminHomeHeroPage() {
             {actionError ? <p className={HOME_HERO_ERROR_ALERT_CLASS}>{actionError}</p> : null}
             {successMessage ? <p className={HOME_HERO_SUCCESS_ALERT_CLASS}>{successMessage}</p> : null}
 
-            <HomeHeroSection title="Images">
-              <AdminImageUploader
-                label="Desktop image"
-                previewUrl={previewImages.desktopImageUrl}
-                uploading={uploadingDesktop}
-                onUpload={handleDesktopUpload}
-              />
-              <AdminImageUploader
-                label="Mobile image"
-                previewUrl={form.mobileImageUrl ? previewImages.mobileImageUrl : null}
-                uploading={uploadingMobile}
-                hint="Optional. If empty, desktop image will be used on mobile."
-                showClear
-                onUpload={handleMobileUpload}
-                onClear={handleClearMobileImage}
-              />
+            <HomeHeroSection title="Background image">
+              <p className="text-sm leading-relaxed text-[#414141]/70">
+                The studio homepage hero background comes from{" "}
+                <Link
+                  href={SUPERSUDO_PANEL_HERO_SLIDES_PATH}
+                  className="font-medium text-[#414141] underline underline-offset-2"
+                >
+                  Hero slides
+                </Link>
+                . Manage published slides there (first published slide is shown).
+              </p>
             </HomeHeroSection>
 
             <HomeHeroSection title="Hero copy">
@@ -240,7 +178,7 @@ export function AdminHomeHeroPage() {
                 multiline
                 rows={5}
                 required
-                hint="Use line breaks to keep the current multi-line hero style. The second line will keep the accent style."
+                hint="Use line breaks for the multi-line hero. The first word of the second line uses the accent color."
               />
               <HomeHeroField
                 id="home-hero-description"
@@ -288,8 +226,8 @@ export function AdminHomeHeroPage() {
           </div>
 
           <footer className={HOME_HERO_FOOTER_CLASS}>
-            <button type="submit" disabled={isBusy} className={HOME_HERO_SAVE_BUTTON_CLASS}>
-              {saving ? "Saving…" : "Save"}
+            <button type="submit" disabled={saving} className={HOME_HERO_SAVE_BUTTON_CLASS}>
+              {saving ? "Saving…" : "Save hero"}
             </button>
           </footer>
         </form>

@@ -22,6 +22,13 @@ function readTrimmed(data: FormData, key: string): string {
   return String(data.get(key) ?? "").trim();
 }
 
+function readServices(data: FormData): string[] {
+  return data
+    .getAll("services")
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+}
+
 /** Map native form fields to API JSON body. */
 export function contactFormToPayload(form: HTMLFormElement): ContactInquiryPayload {
   const data = new FormData(form);
@@ -42,7 +49,7 @@ export function contactFormToPayload(form: HTMLFormElement): ContactInquiryPaylo
     ...(readTrimmed(data, "propertyAddress")
       ? { propertyAddress: readTrimmed(data, "propertyAddress") }
       : {}),
-    service: readTrimmed(data, "service"),
+    services: readServices(data),
     ...(readTrimmed(data, "preferredDate")
       ? { preferredDate: readTrimmed(data, "preferredDate") }
       : {}),

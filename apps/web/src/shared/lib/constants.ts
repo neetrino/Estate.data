@@ -431,8 +431,8 @@ export const CONTACT_PAGE_TITLE_CLASS = WHAT_WE_DO_PAGE_TITLE_CLASS;
 export const CONTACT_PAGE_SUBTITLE_CLASS = WHAT_WE_DO_PAGE_SUBTITLE_CLASS;
 
 export const CONTACT_FORM_SUBMIT_BUTTON_CLASS = [
-  "inline-flex h-[52px] w-full cursor-pointer items-center justify-center whitespace-nowrap",
-  "px-7 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-studio-accent-fg sm:w-auto",
+  "inline-flex w-full cursor-pointer items-center justify-center whitespace-nowrap",
+  "px-8 py-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-studio-accent-fg sm:w-auto",
   "bg-studio-accent transition-colors hover:bg-studio-accent/85",
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",

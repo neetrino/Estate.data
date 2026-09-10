@@ -15,7 +15,7 @@ export type AdminContactInquiry = {
   phone: string | null;
   company: string | null;
   propertyAddress: string | null;
-  service: string;
+  services: readonly string[];
   preferredDate: string | null;
   projectDetails: string | null;
   extraFields: Record<string, string> | null;
@@ -117,6 +117,9 @@ export type AdminStudioService = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
+  startingPrice: string | null;
+  pricingUnit: string | null;
+  footnote: string | null;
   sortOrder: number;
   published: boolean;
 };

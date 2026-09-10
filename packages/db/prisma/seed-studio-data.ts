@@ -37,7 +37,7 @@ export const CONTACT_FIELDS = [
   { fieldKey: "propertyType", label: "Property Type", placeholder: "Single Family, Luxury Estate, Condo…", mode: "optional", sortOrder: 60 },
   { fieldKey: "squareFootage", label: "Approximate Square Footage", placeholder: "2,400 sq ft", mode: "optional", sortOrder: 70 },
   { fieldKey: "preferredDate", label: "Desired Shoot Date", placeholder: "Select a date", mode: "optional", sortOrder: 80 },
-  { fieldKey: "service", label: "Services Required", placeholder: "Select a service", mode: "required", sortOrder: 90 },
+  { fieldKey: "service", label: "Services Required", placeholder: "Select one or more services", mode: "required", sortOrder: 90 },
   { fieldKey: "projectDetails", label: "Additional Notes", placeholder: "Anything else we should know.", mode: "optional", sortOrder: 100 },
   { fieldKey: "rooms", label: "Number of rooms", placeholder: "4", mode: "hidden", sortOrder: 110 },
   { fieldKey: "floor", label: "Floor", placeholder: "3", mode: "hidden", sortOrder: 120 },
@@ -55,6 +55,9 @@ type StudioSeedService = {
   readonly pricing: readonly { label: string; price: string }[];
   readonly primaryCtaLabel: string;
   readonly secondaryCtaLabel: string;
+  readonly startingPrice?: string;
+  readonly pricingUnit?: string;
+  readonly footnote?: string;
 };
 
 export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
@@ -89,6 +92,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Photography",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$249",
   },
   {
     sectionKey: "editing",
@@ -118,6 +122,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Request Editing",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$20",
+    pricingUnit: "/ image",
   },
   {
     sectionKey: "video",
@@ -125,7 +131,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     title: "Turn a Property Into a Story.",
     description:
       "Cinematic interior and exterior video production designed to create emotional impact and showcase the lifestyle behind the property.",
-    imageUrl: "/assets/photography-BEgVm_0g.webp",
+    imageUrl: "/assets/portfolio-1-DsFekI_2.webp",
     sortOrder: 30,
     included: [
       "4K video",
@@ -148,6 +154,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Video",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$499",
   },
   {
     sectionKey: "ai-media",
@@ -177,6 +184,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Explore AI Media",
     secondaryCtaLabel: "View Example",
+    footnote:
+      "AI-generated content is clearly identified where appropriate and is designed for marketing and visualization purposes.",
   },
   {
     sectionKey: "drone",
@@ -201,6 +210,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Drone Coverage",
     secondaryCtaLabel: "View Example",
+    footnote:
+      "Drone operations are subject to applicable FAA regulations, airspace restrictions and weather conditions.",
   },
   {
     sectionKey: "tours",

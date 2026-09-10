@@ -23,7 +23,7 @@ async function postContact(request: Request): Promise<Response> {
 
   logger.info("contact.inquiry.created", {
     id: inquiry.id,
-    service: body.service,
+    services: body.services,
   });
 
   const data: ContactInquiryAccepted = {
