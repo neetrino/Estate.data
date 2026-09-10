@@ -1,18 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type PointerEvent } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 
-const FRAME_CLASS = "relative aspect-[3/2] w-full touch-pan-y select-none overflow-hidden";
+const FRAME_CLASS = [
+  "relative aspect-[3/2] w-full cursor-ew-resize touch-none select-none overflow-hidden",
+  "outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/50",
+].join(" ");
 
-const IMAGE_CLASS = "object-cover";
+const IMAGE_CLASS = "pointer-events-none object-cover";
 
-const BADGE_CLASS = "studio-label absolute top-4 bg-studio-bg/75 px-2 py-1";
+const BADGE_CLASS = "studio-label pointer-events-none absolute top-4 bg-studio-bg/75 px-2 py-1";
 
 const HANDLE_CLASS = [
-  "absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2",
-  "items-center justify-center border border-studio-accent bg-studio-bg",
-  "text-xs text-studio-accent",
+  "pointer-events-none absolute left-1/2 top-1/2 flex h-10 w-10",
+  "-translate-x-1/2 -translate-y-1/2 items-center justify-center",
+  "border border-studio-accent bg-studio-bg text-xs text-studio-accent",
 ].join(" ");
 
 const INITIAL_POSITION = 50;
@@ -21,7 +30,7 @@ const MIN_POSITION = 0;
 
 const MAX_POSITION = 100;
 
-const PRIMARY_BUTTON_MASK = 1;
+const KEYBOARD_STEP = 2;
 
 type StudioCompareSliderProps = {
   readonly id: string;
@@ -46,41 +55,107 @@ export function StudioCompareSlider({
   afterLabel,
 }: StudioCompareSliderProps) {
   const frameRef = useRef<HTMLDivElement>(null);
+  const draggingRef = useRef(false);
   const [position, setPosition] = useState(INITIAL_POSITION);
 
-  const moveTo = (clientX: number): void => {
-    const frame = frameRef.current;
-    if (!frame) {
+  const clampPosition = useCallback((value: number): number => {
+    return Math.min(MAX_POSITION, Math.max(MIN_POSITION, value));
+  }, []);
+
+  const moveTo = useCallback(
+    (clientX: number): void => {
+      const frame = frameRef.current;
+      if (!frame) {
+        return;
+      }
+
+      const bounds = frame.getBoundingClientRect();
+      if (bounds.width <= 0) {
+        return;
+      }
+
+      const ratio = ((clientX - bounds.left) / bounds.width) * MAX_POSITION;
+      setPosition(clampPosition(ratio));
+    },
+    [clampPosition],
+  );
+
+  const stopDrag = useCallback((event: PointerEvent<HTMLDivElement>): void => {
+    if (!draggingRef.current) {
       return;
     }
 
-    const bounds = frame.getBoundingClientRect();
-    const ratio = ((clientX - bounds.left) / bounds.width) * MAX_POSITION;
-    setPosition(Math.min(MAX_POSITION, Math.max(MIN_POSITION, ratio)));
+    draggingRef.current = false;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }, []);
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>): void => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    event.preventDefault();
+    draggingRef.current = true;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    moveTo(event.clientX);
   };
 
   const handlePointerMove = (event: PointerEvent<HTMLDivElement>): void => {
-    if (event.buttons === PRIMARY_BUTTON_MASK) {
-      moveTo(event.clientX);
+    if (!draggingRef.current) {
+      return;
+    }
+
+    moveTo(event.clientX);
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>): void => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      setPosition((current) => clampPosition(current - KEYBOARD_STEP));
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      setPosition((current) => clampPosition(current + KEYBOARD_STEP));
     }
   };
 
   return (
     <div
       ref={frameRef}
+      role="slider"
+      aria-label={sliderLabel}
+      aria-valuemin={MIN_POSITION}
+      aria-valuemax={MAX_POSITION}
+      aria-valuenow={Math.round(position)}
+      tabIndex={0}
       className={FRAME_CLASS}
+      onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
-      onPointerDown={(event) => moveTo(event.clientX)}
+      onPointerUp={stopDrag}
+      onPointerCancel={stopDrag}
+      onKeyDown={handleKeyDown}
     >
-      <Image src={afterSrc} alt={afterAlt} fill className={IMAGE_CLASS} sizes="(max-width: 1024px) 100vw, 50vw" />
+      <Image
+        src={afterSrc}
+        alt={afterAlt}
+        fill
+        draggable={false}
+        className={IMAGE_CLASS}
+        sizes="(max-width: 1024px) 100vw, 50vw"
+      />
       <div
-        className="absolute inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{ clipPath: `inset(0 ${MAX_POSITION - position}% 0 0)` }}
       >
         <Image
           src={beforeSrc}
           alt={beforeAlt}
           fill
+          draggable={false}
           className={IMAGE_CLASS}
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
@@ -94,18 +169,9 @@ export function StudioCompareSlider({
       >
         <span className={HANDLE_CLASS}>↔</span>
       </div>
-      <label className="sr-only" htmlFor={`studio-compare-${id}`}>
+      <span id={`studio-compare-${id}`} className="sr-only">
         {sliderLabel}
-      </label>
-      <input
-        id={`studio-compare-${id}`}
-        type="range"
-        min={MIN_POSITION}
-        max={MAX_POSITION}
-        value={Math.round(position)}
-        onChange={(event) => setPosition(Number(event.target.value))}
-        className="absolute inset-x-0 bottom-0 w-full opacity-0"
-      />
+      </span>
     </div>
   );
 }

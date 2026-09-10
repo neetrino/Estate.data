@@ -14,7 +14,7 @@ const WEB_PAGES_EXAMPLE_SERVICE = {
   description: STUDIO_PAGE_COPY.webPages.body,
   imageUrl: STUDIO_MEDIA.landingPage,
   included: STUDIO_PAGE_COPY.webPages.included,
-  primaryCtaHref: homeSectionHref(HOME_SECTION_IDS.contact),
+  primaryCtaHref: homeSectionHref(HOME_SECTION_IDS.quote),
 } as const;
 
 /** View Example control for the landing-pages teaser — opens the shared example dialog. */

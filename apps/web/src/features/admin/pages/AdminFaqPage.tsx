@@ -104,18 +104,26 @@ export function AdminFaqPage() {
 
   return (
     <>
-      <AdminPageHeader title="FAQ" description="Questions on the resources page." actions={<AdminButton onClick={openCreate}>Add FAQ</AdminButton>} />
+      <AdminPageHeader
+        title="FAQ"
+        description="Questions and answers shown in the home page FAQ accordion."
+        actions={<AdminButton onClick={openCreate}>Add FAQ</AdminButton>}
+      />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {actionError ? <AdminErrorState message={actionError} /> : null}
       {!loading && !error && items.length === 0 ? (
-        <AdminEmptyState title="No FAQ items" message="Add questions for the resources page." />
+        <AdminEmptyState
+          title="No FAQ items"
+          message="Add a question and answer — published items appear on the home page."
+        />
       ) : null}
       {!loading && !error && items.length > 0 ? (
         <AdminTable>
           <thead>
             <tr className="border-b border-foreground/10 text-xs tracking-wide text-muted-foreground uppercase">
               <th className="px-4 py-3">Question</th>
+              <th className="px-4 py-3">Answer</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3 text-right">Actions</th>
             </tr>
@@ -123,14 +131,25 @@ export function AdminFaqPage() {
           <tbody>
             {items.map((item) => (
               <tr key={item.id} className="border-b border-foreground/5">
-                <td className="px-4 py-3 font-medium text-brand-navy">{item.question}</td>
+                <td className="max-w-[18rem] px-4 py-3 font-medium text-brand-navy">{item.question}</td>
+                <td className="max-w-[24rem] truncate px-4 py-3 text-sm text-muted-foreground">
+                  {item.answer}
+                </td>
                 <td className="px-4 py-3">
-                  {item.published ? <AdminBadge label="Published" tone="success" /> : <AdminBadge label="Draft" tone="muted" />}
+                  {item.published ? (
+                    <AdminBadge label="Published" tone="success" />
+                  ) : (
+                    <AdminBadge label="Draft" tone="muted" />
+                  )}
                 </td>
                 <td className="px-4 py-3 text-right">
                   <div className="flex justify-end gap-2">
-                    <AdminButton variant="secondary" onClick={() => openEdit(item)}>Edit</AdminButton>
-                    <AdminButton variant="danger" onClick={() => setDeleteId(item.id)}>Delete</AdminButton>
+                    <AdminButton variant="secondary" onClick={() => openEdit(item)}>
+                      Edit
+                    </AdminButton>
+                    <AdminButton variant="danger" onClick={() => setDeleteId(item.id)}>
+                      Delete
+                    </AdminButton>
                   </div>
                 </td>
               </tr>

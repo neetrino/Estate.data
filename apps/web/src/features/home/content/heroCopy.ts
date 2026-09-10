@@ -42,7 +42,7 @@ export const HOME_HERO_COPY = {
   descriptionLines: [
     "Premium real estate photography, cinematic video, drone, AI-powered media, Matterport 3D tours and professional reality capture — all under one roof.",
   ] as const,
-  primaryCta: { label: "Book a Shoot", href: "/#contact" },
+  primaryCta: { label: "Book a Shoot", href: "/#quote" },
   secondaryCta: { label: "Explore Services", href: "/#photography" },
 } as const;
 

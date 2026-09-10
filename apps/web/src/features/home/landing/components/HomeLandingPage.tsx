@@ -31,6 +31,7 @@ import {
 } from "@/features/home/sections/StudioStorySections";
 import { StudioFaq } from "@/features/home/sections/StudioFaq";
 import { StudioContactSection } from "@/features/home/sections/StudioContactSection";
+import { StudioTalkSection } from "@/features/home/sections/StudioTalkSection";
 import { STUDIO_PAGE_CLASS } from "@/features/home/sections/studioSectionStyles";
 
 type HomeLandingPageProps = {
@@ -85,6 +86,7 @@ export function HomeLandingPage({
         <StudioServiceArea />
         <StudioFaq items={faq} />
         <StudioContactSection fields={contactFields} />
+        <StudioTalkSection />
       </main>
     </div>
   );

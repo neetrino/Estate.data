@@ -20,6 +20,7 @@ export const HOME_SECTION_IDS = {
   studio: "studio",
   serviceArea: "service-area",
   faq: "faq",
+  quote: "quote",
   contact: "contact",
 } as const;
 
