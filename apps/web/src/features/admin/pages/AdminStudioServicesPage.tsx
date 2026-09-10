@@ -23,9 +23,14 @@ import {
 import type { AdminStudioService } from "@/features/admin/types/admin-data";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
 const PRICING_HINT = "One row per line: Label | Price";
+
+function serviceShowsPublicImage(sectionKey: string): boolean {
+  return sectionKey !== HOME_SECTION_IDS.aiMedia;
+}
 
 type ServiceDraft = {
   eyebrow: string;
@@ -163,13 +168,15 @@ function ServiceEditor({
         onChange={(value) => setField("description", value)}
         multiline
       />
-      <AdminImageUploader
-        label="Image"
-        previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
-        uploading={uploading}
-        placeholderText="Upload a service image"
-        onUpload={handleUpload}
-      />
+      {serviceShowsPublicImage(service.sectionKey) ? (
+        <AdminImageUploader
+          label="Image"
+          previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
+          uploading={uploading}
+          placeholderText="Upload a service image"
+          onUpload={handleUpload}
+        />
+      ) : null}
       <AdminFormField
         label="What's included"
         name={`included-${service.id}`}

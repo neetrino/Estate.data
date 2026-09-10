@@ -106,10 +106,27 @@ export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
     mode: "optional",
     sortOrder: 100,
   },
-  { fieldKey: "rooms", label: "Number of rooms", placeholder: "4", mode: "hidden", sortOrder: 110 },
-  { fieldKey: "floor", label: "Floor", placeholder: "3", mode: "hidden", sortOrder: 120 },
-  { fieldKey: "price", label: "Price", placeholder: "Optional list price", mode: "hidden", sortOrder: 130 },
 ];
+
+/** Keys rendered by the public quote form — leftover CMS rows are ignored. */
+export const QUOTE_CONTACT_FIELD_KEYS = [
+  "name",
+  "company",
+  "email",
+  "phone",
+  "propertyAddress",
+  "propertyType",
+  "squareFootage",
+  "preferredDate",
+  "service",
+  "projectDetails",
+] as const;
+
+export type QuoteContactFieldKey = (typeof QUOTE_CONTACT_FIELD_KEYS)[number];
+
+export function isQuoteContactFieldKey(value: string): value is QuoteContactFieldKey {
+  return (QUOTE_CONTACT_FIELD_KEYS as readonly string[]).includes(value);
+}
 
 export function isContactFieldMode(value: string): value is ContactFieldMode {
   return CONTACT_FIELD_MODES.includes(value as ContactFieldMode);

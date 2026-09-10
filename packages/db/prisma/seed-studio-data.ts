@@ -39,9 +39,6 @@ export const CONTACT_FIELDS = [
   { fieldKey: "preferredDate", label: "Desired Shoot Date", placeholder: "Select a date", mode: "optional", sortOrder: 80 },
   { fieldKey: "service", label: "Services Required", placeholder: "Select one or more services", mode: "required", sortOrder: 90 },
   { fieldKey: "projectDetails", label: "Additional Notes", placeholder: "Anything else we should know.", mode: "optional", sortOrder: 100 },
-  { fieldKey: "rooms", label: "Number of rooms", placeholder: "4", mode: "hidden", sortOrder: 110 },
-  { fieldKey: "floor", label: "Floor", placeholder: "3", mode: "hidden", sortOrder: 120 },
-  { fieldKey: "price", label: "Price", placeholder: "Optional list price", mode: "hidden", sortOrder: 130 },
 ] as const;
 
 type StudioSeedService = {

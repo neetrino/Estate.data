@@ -19,7 +19,16 @@ import {
   deleteAdminContactInquiry,
   fetchAdminContactInquiries,
 } from "@/features/admin/services/admin-api";
-import { contactServiceLabel } from "@/features/contact/content/contactFieldConfig";
+import {
+  contactServiceLabel,
+  DEFAULT_CONTACT_FIELD_SETTINGS,
+} from "@/features/contact/content/contactFieldConfig";
+
+function extraFieldLabel(key: string): string {
+  return (
+    DEFAULT_CONTACT_FIELD_SETTINGS.find((field) => field.fieldKey === key)?.label ?? key
+  );
+}
 
 export function AdminContactInquiriesPage() {
   const [search, setSearch] = useState("");
@@ -148,6 +157,13 @@ export function AdminContactInquiriesPage() {
                           <strong>Details:</strong> {item.projectDetails}
                         </p>
                       ) : null}
+                      {item.extraFields
+                        ? Object.entries(item.extraFields).map(([key, value]) => (
+                            <p key={key} className="mt-1">
+                              <strong>{extraFieldLabel(key)}:</strong> {value}
+                            </p>
+                          ))
+                        : null}
                     </td>
                   </tr>
                 ) : null}

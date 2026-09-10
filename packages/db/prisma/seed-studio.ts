@@ -48,5 +48,11 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
     });
   }
 
+  await prisma.contactFieldSetting.deleteMany({
+    where: {
+      fieldKey: { notIn: CONTACT_FIELDS.map((field) => field.fieldKey) },
+    },
+  });
+
   console.info("Seeded studio CMS (slides, services, contact fields)");
 }
