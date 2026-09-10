@@ -55,7 +55,7 @@ export const createPricingPackageSchema = z.object({
     .min(1)
     .max(80)
     .regex(PRICING_PACKAGE_ID_PATTERN, "Id must be lowercase letters, numbers, and hyphens"),
-  categoryKey: z.enum(["media", "analytics"]),
+  categoryKey: z.literal("media"),
   name: z.string().min(1).max(120),
   price: z.string().min(1).max(40),
   priceSuffixOverride: z.string().max(40).nullable().optional(),

@@ -14,6 +14,10 @@ import { AdminModal } from "@/features/admin/components/ui/AdminModal";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import { AdminTable } from "@/features/admin/components/ui/AdminTable";
 import {
+  ADMIN_TABLE_CELL_CLASS,
+  ADMIN_TABLE_HEAD_ROW_CLASS,
+} from "@/features/admin/styles/admin-panel-classes";
+import {
   createAdminFaqItem,
   deleteAdminFaqItem,
   fetchAdminFaq,
@@ -121,28 +125,30 @@ export function AdminFaqPage() {
       {!loading && !error && items.length > 0 ? (
         <AdminTable>
           <thead>
-            <tr className="border-b border-foreground/10 text-xs tracking-wide text-muted-foreground uppercase">
-              <th className="px-4 py-3">Question</th>
-              <th className="px-4 py-3">Answer</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+            <tr className={ADMIN_TABLE_HEAD_ROW_CLASS}>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Question</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Answer</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Status</th>
+              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
               <tr key={item.id} className="border-b border-foreground/5">
-                <td className="max-w-[18rem] px-4 py-3 font-medium text-brand-navy">{item.question}</td>
-                <td className="max-w-[24rem] truncate px-4 py-3 text-sm text-muted-foreground">
+                <td className={`max-w-[18rem] ${ADMIN_TABLE_CELL_CLASS} font-medium`}>
+                  {item.question}
+                </td>
+                <td className={`max-w-[24rem] truncate ${ADMIN_TABLE_CELL_CLASS}`}>
                   {item.answer}
                 </td>
-                <td className="px-4 py-3">
+                <td className={ADMIN_TABLE_CELL_CLASS}>
                   {item.published ? (
                     <AdminBadge label="Published" tone="success" />
                   ) : (
                     <AdminBadge label="Draft" tone="muted" />
                   )}
                 </td>
-                <td className="px-4 py-3 text-right">
+                <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
                   <div className="flex justify-end gap-2">
                     <AdminButton variant="secondary" onClick={() => openEdit(item)}>
                       Edit

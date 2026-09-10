@@ -6,12 +6,14 @@ import {
   SUPERSUDO_PANEL_PORTFOLIO_PATH,
   SUPERSUDO_PANEL_PRICING_PATH,
   SUPERSUDO_PANEL_SITE_CONTENT_PATH,
+  SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
 } from "@/features/admin/lib/admin-paths";
 
 export type AdminNavIconId =
   | "dashboard"
   | "portfolio"
   | "pricing"
+  | "services"
   | "faq"
   | "contact-inquiries"
   | "site-content"
@@ -33,6 +35,12 @@ export type AdminNavGroup = {
 
 const CONTENT_NAV_ITEMS: AdminNavItem[] = [
   { id: "portfolio", label: "Portfolio", href: SUPERSUDO_PANEL_PORTFOLIO_PATH, icon: "portfolio" },
+  {
+    id: "services",
+    label: "Services",
+    href: SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
+    icon: "services",
+  },
   { id: "pricing", label: "Pricing", href: SUPERSUDO_PANEL_PRICING_PATH, icon: "pricing" },
   { id: "faq", label: "FAQ", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
   {

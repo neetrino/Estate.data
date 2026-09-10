@@ -1,7 +1,8 @@
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
-import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
-import { parseRecentWorkAlt } from "@/features/home/content/parseRecentWorkAlt";
+import type { StudioPortfolioCard } from "@/features/home/content/studioPortfolioCatalog";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
+import { HOME_SECTION_IDS, homeSectionHref } from "@/shared/lib/homeSectionIds";
 
 const FRAME_CLASS = "relative aspect-[4/5] w-full overflow-hidden bg-studio-card";
 
@@ -11,17 +12,36 @@ const IMAGE_CLASS =
 const OVERLAY_CLASS =
   "absolute inset-0 bg-gradient-to-t from-studio-bg via-studio-bg/10 to-transparent opacity-90";
 
+const BADGE_CLASS = "studio-label bg-studio-bg/70 px-2 py-1 text-studio-accent";
+
+const CTA_CLASS =
+  "mt-5 inline-block text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-studio-accent";
+
 const SERVICE_SEPARATOR = " · ";
 
 type RecentWorkProjectTileProps = {
-  readonly project: RecentWorkProject;
+  readonly project: StudioPortfolioCard;
 };
 
-export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
-  const { title, location, services } = parseRecentWorkAlt(project.imageAlt);
+function PortfolioTileBadges({ project }: { readonly project: StudioPortfolioCard }) {
+  const copy = STUDIO_PAGE_COPY.portfolio;
+  if (!project.hasVideo && !project.has3D) {
+    return null;
+  }
 
   return (
-    <article className={FRAME_CLASS}>
+    <div className="mb-3 flex gap-2">
+      {project.hasVideo ? <span className={BADGE_CLASS}>{copy.videoBadge}</span> : null}
+      {project.has3D ? <span className={BADGE_CLASS}>{copy.tourBadge}</span> : null}
+    </div>
+  );
+}
+
+export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
+  const copy = STUDIO_PAGE_COPY.portfolio;
+
+  return (
+    <div className={FRAME_CLASS}>
       <PublicAssetImage
         src={project.imageSrc}
         alt={project.imageAlt}
@@ -32,17 +52,20 @@ export function RecentWorkProjectTile({ project }: RecentWorkProjectTileProps) {
       />
       <div className={OVERLAY_CLASS} />
       <div className="absolute inset-x-0 bottom-0 p-6">
-        <h3 className="font-display text-xl text-studio-fg">{title}</h3>
-        {location ? (
-          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-studio-muted">{location}</p>
+        <PortfolioTileBadges project={project} />
+        <h3 className="font-display text-xl text-studio-fg">{project.title}</h3>
+        {project.location ? (
+          <p className="mt-1 text-xs uppercase tracking-[0.18em] text-studio-muted">
+            {project.location}
+          </p>
         ) : null}
-        {services.length > 0 ? (
-          <p className="mt-3 text-sm text-studio-muted">{services.join(SERVICE_SEPARATOR)}</p>
+        {project.services.length > 0 ? (
+          <p className="mt-3 text-sm text-studio-muted">{project.services.join(SERVICE_SEPARATOR)}</p>
         ) : null}
-        <span className="mt-5 inline-block text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-studio-accent">
-          {STUDIO_PAGE_COPY.portfolio.tileCta}
-        </span>
+        <HomeSectionLink href={homeSectionHref(HOME_SECTION_IDS.quote)} className={CTA_CLASS}>
+          {copy.tileCta}
+        </HomeSectionLink>
       </div>
-    </article>
+    </div>
   );
 }

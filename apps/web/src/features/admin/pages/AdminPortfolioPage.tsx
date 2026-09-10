@@ -24,6 +24,8 @@ import {
 } from "@/features/admin/services/admin-api";
 import {
   ADMIN_INPUT_CLASS,
+  ADMIN_TABLE_CELL_CLASS,
+  ADMIN_TABLE_HEAD_ROW_CLASS,
   ADMIN_TABLE_THUMB_IMG_CLASS,
   ADMIN_TABLE_THUMB_WRAP_CLASS,
 } from "@/features/admin/styles/admin-panel-classes";
@@ -164,18 +166,18 @@ export function AdminPortfolioPage() {
       {!loading && !error && items.length > 0 ? (
         <AdminTable>
           <thead>
-            <tr className="border-b border-foreground/10 text-xs tracking-wide text-muted-foreground uppercase">
-              <th className="px-4 py-3">Image</th>
-              <th className="px-4 py-3">Category</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Order</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+            <tr className={ADMIN_TABLE_HEAD_ROW_CLASS}>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Image</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Category</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Status</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Order</th>
+              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
               <tr key={item.id} className="border-b border-foreground/5">
-                <td className="px-4 py-3">
+                <td className={ADMIN_TABLE_CELL_CLASS}>
                   <div className={ADMIN_TABLE_THUMB_WRAP_CLASS}>
                     {item.imageUrl ? (
                       // eslint-disable-next-line @next/next/no-img-element -- admin thumbnail for stored URLs
@@ -188,8 +190,8 @@ export function AdminPortfolioPage() {
                     <p className="font-medium text-brand-navy">{item.imageAlt}</p>
                   </div>
                 </td>
-                <td className="px-4 py-3">{item.category}</td>
-                <td className="px-4 py-3">
+                <td className={ADMIN_TABLE_CELL_CLASS}>{item.category}</td>
+                <td className={ADMIN_TABLE_CELL_CLASS}>
                   <div className="flex flex-wrap gap-1">
                     {item.published ? (
                       <AdminBadge label="Published" tone="success" />
@@ -199,8 +201,8 @@ export function AdminPortfolioPage() {
                     {item.featuredOnHome ? <AdminBadge label="Featured" /> : null}
                   </div>
                 </td>
-                <td className="px-4 py-3">{item.sortOrder}</td>
-                <td className="px-4 py-3 text-right">
+                <td className={ADMIN_TABLE_CELL_CLASS}>{item.sortOrder}</td>
+                <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
                   <div className="flex justify-end gap-2">
                     <AdminButton variant="secondary" onClick={() => openEdit(item)}>
                       Edit

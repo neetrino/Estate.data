@@ -4,9 +4,16 @@ import { useState } from "react";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import {
+  filterPortfolioCards,
+  PORTFOLIO_FILTER_ALL,
+  PORTFOLIO_FILTERS,
+  type PortfolioFilter,
+} from "@/features/home/content/studioPortfolioFilters";
+import { mergeStudioPortfolioProjects } from "@/features/home/lib/mergeStudioPortfolioProjects";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import { MediaLightbox } from "@/shared/components/media/MediaLightbox";
 import { StudioCta } from "@/features/home/sections/StudioCta";
+import { StudioPortfolioFilters } from "@/features/home/sections/StudioPortfolioFilters";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
 import {
@@ -21,9 +28,9 @@ type StudioPortfolioProps = {
 };
 
 export function StudioPortfolio({ projects }: StudioPortfolioProps) {
-  const [open, setOpen] = useState(false);
-  const [index, setIndex] = useState(0);
-  const images = projects.map((project) => project.imageSrc);
+  const [filter, setFilter] = useState<PortfolioFilter>(PORTFOLIO_FILTER_ALL);
+  const cards = mergeStudioPortfolioProjects(projects);
+  const visible = filterPortfolioCards(cards, filter);
   const copy = STUDIO_PAGE_COPY.portfolio;
 
   return (
@@ -41,37 +48,25 @@ export function StudioPortfolio({ projects }: StudioPortfolioProps) {
             {copy.cta}
           </StudioCta>
         </StudioReveal>
-        <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, projectIndex) => (
+        <StudioPortfolioFilters
+          filters={PORTFOLIO_FILTERS}
+          active={filter}
+          ariaLabel={copy.filtersAriaLabel}
+          onChange={setFilter}
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {visible.map((project, projectIndex) => (
             <StudioReveal
               key={project.id}
-              as="li"
+              as="article"
               delay={projectIndex * TILE_DELAY_STEP_MS}
               className="group"
             >
-              <button
-                type="button"
-                className="w-full cursor-pointer text-left"
-                onClick={() => {
-                  setIndex(projectIndex);
-                  setOpen(true);
-                }}
-              >
-                <RecentWorkProjectTile project={project} />
-              </button>
+              <RecentWorkProjectTile project={project} />
             </StudioReveal>
           ))}
-        </ul>
+        </div>
       </div>
-      {open && images.length > 0 ? (
-        <MediaLightbox
-          images={images}
-          alt="Selected work"
-          activeIndex={index}
-          onIndexChange={setIndex}
-          onClose={() => setOpen(false)}
-        />
-      ) : null}
     </section>
   );
 }

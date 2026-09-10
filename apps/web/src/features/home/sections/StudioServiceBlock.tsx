@@ -1,15 +1,10 @@
-"use client";
-
-import { useState } from "react";
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { StudioExampleModal } from "@/features/home/sections/StudioExampleModal";
 import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioStartingAt } from "@/features/home/sections/StudioStartingAt";
-import { StudioViewExampleButton } from "@/features/home/sections/StudioViewExampleButton";
 import { splitStudioServiceEyebrow } from "@/features/home/sections/studioServiceEyebrow";
 import { STUDIO_SERVICE_BLOCK_COPY } from "@/features/home/content/studioPageCopy";
 import { HOME_SECTION_SCROLL_MARGIN_CLASS } from "@/shared/lib/homeSectionIds";
@@ -29,7 +24,6 @@ type StudioServiceBlockProps = {
 };
 
 export function StudioServiceBlock({ service, imageOnRight = false }: StudioServiceBlockProps) {
-  const [galleryOpen, setGalleryOpen] = useState(false);
   const { badge, name } = splitStudioServiceEyebrow(service.eyebrow);
 
   return (
@@ -80,19 +74,11 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
 
         <div className="mt-8 flex flex-wrap items-center gap-6">
           <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
-          <StudioViewExampleButton
-            label={service.secondaryCtaLabel}
-            onOpen={() => setGalleryOpen(true)}
-          />
           {service.startingPrice ? (
             <StudioStartingAt price={service.startingPrice} unit={service.pricingUnit} />
           ) : null}
         </div>
       </div>
-
-      {galleryOpen ? (
-        <StudioExampleModal service={service} onClose={() => setGalleryOpen(false)} />
-      ) : null}
     </StudioReveal>
   );
 }

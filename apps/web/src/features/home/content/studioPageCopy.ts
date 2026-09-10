@@ -309,6 +309,9 @@ export const STUDIO_PAGE_COPY = {
     title: "Properties we made unforgettable.",
     cta: "Start your project",
     tileCta: "View Project →",
+    filtersAriaLabel: "Portfolio categories",
+    videoBadge: "Video",
+    tourBadge: "3D Tour",
   },
   beforeAfter: {
     eyebrow: "Post-production",

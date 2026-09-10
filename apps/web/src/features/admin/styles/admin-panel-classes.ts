@@ -1,4 +1,5 @@
-export const ADMIN_PANEL_ROOT_CLASS = "min-h-screen bg-neutral-100";
+export const ADMIN_PANEL_ROOT_CLASS =
+  "min-h-screen bg-neutral-100 text-brand-navy [color-scheme:light]";
 export const ADMIN_LAYOUT_CLASS = "flex min-h-screen gap-3 p-3";
 export const ADMIN_SIDEBAR_CLASS =
   "sticky top-3 flex max-h-[calc(100vh-1.5rem)] w-[280px] shrink-0 flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-white shadow-[0_8px_30px_rgba(46,72,115,0.08)]";
@@ -27,7 +28,12 @@ export const ADMIN_MAIN_CLASS =
 export const ADMIN_CONTENT_CLASS = "admin-scrollbar flex-1 overflow-y-auto p-6";
 export const ADMIN_CARD_CLASS =
   "rounded-xl border border-foreground/10 bg-white p-5 shadow-sm";
-export const ADMIN_TABLE_CLASS = "w-full text-left text-sm";
+export const ADMIN_TABLE_CLASS =
+  "w-full text-left text-sm text-brand-navy [&_th]:text-brand-navy [&_td]:text-brand-navy";
+export const ADMIN_TABLE_HEAD_ROW_CLASS =
+  "border-b border-foreground/10 text-xs font-semibold tracking-wide text-brand-navy uppercase";
+export const ADMIN_TABLE_CELL_CLASS = "px-4 py-3 text-brand-navy";
+export const ADMIN_TABLE_CELL_SECONDARY_CLASS = "px-4 py-3 text-sm text-brand-navy/80";
 export const ADMIN_TABLE_THUMB_WRAP_CLASS =
   "flex items-center gap-3";
 export const ADMIN_TABLE_THUMB_IMG_CLASS =

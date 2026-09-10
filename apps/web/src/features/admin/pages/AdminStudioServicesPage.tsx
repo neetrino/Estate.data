@@ -36,8 +36,6 @@ type ServiceDraft = {
   pricingText: string;
   primaryCtaLabel: string;
   primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
   startingPrice: string;
   pricingUnit: string;
   footnote: string;
@@ -54,8 +52,6 @@ function toDraft(service: AdminStudioService): ServiceDraft {
     pricingText: formatPricingLines(asPricingRows(service.pricing)),
     primaryCtaLabel: service.primaryCtaLabel,
     primaryCtaHref: service.primaryCtaHref,
-    secondaryCtaLabel: service.secondaryCtaLabel,
-    secondaryCtaHref: service.secondaryCtaHref,
     startingPrice: service.startingPrice ?? "",
     pricingUnit: service.pricingUnit ?? "",
     footnote: service.footnote ?? "",
@@ -131,8 +127,6 @@ function ServiceEditor({
         pricing: parsePricingLines(draft.pricingText),
         primaryCtaLabel: draft.primaryCtaLabel,
         primaryCtaHref: draft.primaryCtaHref,
-        secondaryCtaLabel: draft.secondaryCtaLabel,
-        secondaryCtaHref: draft.secondaryCtaHref,
         startingPrice: draft.startingPrice.trim() || null,
         pricingUnit: draft.pricingUnit.trim() || null,
         footnote: draft.footnote.trim() || null,
@@ -230,18 +224,6 @@ function ServiceEditor({
           name={`href-${service.id}`}
           value={draft.primaryCtaHref}
           onChange={(value) => setField("primaryCtaHref", value)}
-        />
-        <AdminFormField
-          label="Secondary button"
-          name={`secondary-cta-${service.id}`}
-          value={draft.secondaryCtaLabel}
-          onChange={(value) => setField("secondaryCtaLabel", value)}
-        />
-        <AdminFormField
-          label="Secondary button href"
-          name={`secondary-href-${service.id}`}
-          value={draft.secondaryCtaHref}
-          onChange={(value) => setField("secondaryCtaHref", value)}
         />
       </div>
       <AdminFormField

@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
+  Briefcase,
   CircleHelp,
   FolderKanban,
   Home,
@@ -17,6 +18,7 @@ const ADMIN_LUCIDE_ICON_MAP: Record<AdminNavIconId, LucideIcon> = {
   dashboard: LayoutDashboard,
   portfolio: FolderKanban,
   pricing: Tags,
+  services: Briefcase,
   faq: CircleHelp,
   "contact-inquiries": Mail,
   "site-content": Palette,

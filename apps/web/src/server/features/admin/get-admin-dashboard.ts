@@ -26,7 +26,7 @@ export async function getAdminDashboard(): Promise<AdminDashboardSummary> {
     prisma.portfolioProject.count(),
     prisma.portfolioProject.count({ where: { published: true } }),
     prisma.portfolioProject.count({ where: { featuredOnHome: true } }),
-    prisma.pricingPackage.count(),
+    prisma.pricingPackage.count({ where: { categoryKey: "media" } }),
     prisma.faqItem.count(),
     prisma.faqItem.count({ where: { published: true } }),
     prisma.contactInquiry.count(),

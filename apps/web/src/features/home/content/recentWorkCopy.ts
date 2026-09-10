@@ -1,4 +1,7 @@
-import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+import {
+  STUDIO_PORTFOLIO_CATALOG,
+  type StudioPortfolioCard,
+} from "@/features/home/content/studioPortfolioCatalog";
 
 export type RecentWorkProject = {
   readonly id: string;
@@ -6,26 +9,18 @@ export type RecentWorkProject = {
   readonly imageAlt: string;
 };
 
+function toRecentWorkProject(card: StudioPortfolioCard): RecentWorkProject {
+  return {
+    id: card.id,
+    imageSrc: card.imageSrc,
+    imageAlt: card.imageAlt,
+  };
+}
+
 export const HOME_RECENT_WORK_COPY = {
   eyebrow: "Recent work",
   title: "Selected LA projects",
   viewAllLabel: "View all",
   viewAllHref: "/portfolio",
-  projects: [
-    {
-      id: "project-1",
-      imageSrc: STUDIO_MEDIA.portfolio1,
-      imageAlt: "Modern Beverly Hills Residence in Beverly Hills, CA — Photography, Cinematic Video, Drone, Matterport",
-    },
-    {
-      id: "project-2",
-      imageSrc: STUDIO_MEDIA.portfolio2,
-      imageAlt: "Wilshire Corporate Lobby in Downtown Los Angeles, CA — Architectural Photography, 3D Laser Scanning, Scan-to-BIM",
-    },
-    {
-      id: "project-3",
-      imageSrc: STUDIO_MEDIA.portfolio3,
-      imageAlt: "Venice Architectural Loft in Venice, CA — Photography, Cinematic Video, Virtual Staging",
-    },
-  ] as const satisfies readonly RecentWorkProject[],
+  projects: STUDIO_PORTFOLIO_CATALOG.map(toRecentWorkProject),
 } as const;

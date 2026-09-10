@@ -34,9 +34,10 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
     });
   }
 
-  await prisma.studioServiceSection.updateMany({
-    where: { sectionKey: "floor-plans" },
-    data: { published: false },
+  await prisma.studioServiceSection.deleteMany({
+    where: {
+      sectionKey: { notIn: STUDIO_SEED_SERVICES.map((service) => service.sectionKey) },
+    },
   });
 
   for (const field of CONTACT_FIELDS) {
