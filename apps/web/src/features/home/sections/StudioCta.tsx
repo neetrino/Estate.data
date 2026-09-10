@@ -23,6 +23,7 @@ type StudioCtaProps = {
   readonly children: ReactNode;
   readonly variant?: StudioCtaVariant;
   readonly className?: string;
+  readonly onNavigate?: () => void;
 };
 
 /** Section call to action — arrow slides right on hover. */
@@ -31,10 +32,12 @@ export function StudioCta({
   children,
   variant = "solid",
   className = "",
+  onNavigate,
 }: StudioCtaProps) {
   return (
     <HomeSectionLink
       href={href}
+      onNavigate={onNavigate}
       className={`${CTA_BASE_CLASS} ${CTA_VARIANT_CLASS[variant]} ${className}`.trim()}
     >
       {children}

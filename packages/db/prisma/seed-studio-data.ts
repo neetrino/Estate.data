@@ -37,7 +37,7 @@ export const CONTACT_FIELDS = [
   { fieldKey: "propertyType", label: "Property Type", placeholder: "Single Family, Luxury Estate, Condo…", mode: "optional", sortOrder: 60 },
   { fieldKey: "squareFootage", label: "Approximate Square Footage", placeholder: "2,400 sq ft", mode: "optional", sortOrder: 70 },
   { fieldKey: "preferredDate", label: "Desired Shoot Date", placeholder: "Select a date", mode: "optional", sortOrder: 80 },
-  { fieldKey: "service", label: "Services Required", placeholder: "Select a service", mode: "required", sortOrder: 90 },
+  { fieldKey: "service", label: "Services Required", placeholder: "Select one or more services", mode: "required", sortOrder: 90 },
   { fieldKey: "projectDetails", label: "Additional Notes", placeholder: "Anything else we should know.", mode: "optional", sortOrder: 100 },
   { fieldKey: "rooms", label: "Number of rooms", placeholder: "4", mode: "hidden", sortOrder: 110 },
   { fieldKey: "floor", label: "Floor", placeholder: "3", mode: "hidden", sortOrder: 120 },
@@ -125,7 +125,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     title: "Turn a Property Into a Story.",
     description:
       "Cinematic interior and exterior video production designed to create emotional impact and showcase the lifestyle behind the property.",
-    imageUrl: "/assets/photography-BEgVm_0g.webp",
+    imageUrl: "/assets/portfolio-1-DsFekI_2.webp",
     sortOrder: 30,
     included: [
       "4K video",

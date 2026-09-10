@@ -22,7 +22,10 @@ export type StudioServiceContent = {
   readonly primaryCtaHref: string;
   readonly secondaryCtaLabel: string;
   readonly secondaryCtaHref: string;
-  readonly startingAt?: string;
+  /** Master CTA row price, e.g. "$249". */
+  readonly startingPrice?: string;
+  /** Optional unit after price, e.g. "/ image". */
+  readonly pricingUnit?: string;
   readonly footnote?: string;
 };
 
@@ -64,7 +67,7 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     primaryCtaHref: CONTACT_HREF,
     secondaryCtaLabel: "View Example",
     secondaryCtaHref: "#gallery",
-    startingAt: "Starting at $249",
+    startingPrice: "$249",
   },
   {
     sectionKey: HOME_SECTION_IDS.editing,
@@ -96,7 +99,8 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     primaryCtaHref: CONTACT_HREF,
     secondaryCtaLabel: "View Example",
     secondaryCtaHref: "#gallery",
-    startingAt: "Starting at $20 / image",
+    startingPrice: "$20",
+    pricingUnit: "/ image",
   },
   {
     sectionKey: HOME_SECTION_IDS.video,
@@ -104,7 +108,7 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     title: "Turn a Property Into a Story.",
     description:
       "Cinematic interior and exterior video production designed to create emotional impact and showcase the lifestyle behind the property.",
-    imageUrl: STUDIO_MEDIA.photography,
+    imageUrl: STUDIO_MEDIA.portfolio1,
     galleryUrls: GALLERY,
     included: [
       "4K video",
@@ -129,7 +133,7 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     primaryCtaHref: CONTACT_HREF,
     secondaryCtaLabel: "View Example",
     secondaryCtaHref: "#gallery",
-    startingAt: "Starting at $499",
+    startingPrice: "$499",
   },
   {
     sectionKey: HOME_SECTION_IDS.aiMedia,

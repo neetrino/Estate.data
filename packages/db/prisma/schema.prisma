@@ -30,7 +30,7 @@ model ContactInquiry {
   phone           String?
   company         String?
   propertyAddress String?   @map("property_address")
-  service         String
+  services        String[]
   preferredDate   DateTime? @map("preferred_date") @db.Date
   projectDetails  String?   @map("project_details")
   extraFields     Json?     @map("extra_fields")

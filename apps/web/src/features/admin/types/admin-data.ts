@@ -15,7 +15,7 @@ export type AdminContactInquiry = {
   phone: string | null;
   company: string | null;
   propertyAddress: string | null;
-  service: string;
+  services: readonly string[];
   preferredDate: string | null;
   projectDetails: string | null;
   extraFields: Record<string, string> | null;

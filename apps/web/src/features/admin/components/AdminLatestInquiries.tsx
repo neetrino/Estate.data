@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH } from "@/features/admin/lib/admin-paths";
 import { adminFadeUpItem } from "@/features/admin/lib/admin-motion";
 import type { AdminContactInquiry } from "@/features/admin/types/admin-data";
+import { contactServiceLabel } from "@/features/contact/content/contactFieldConfig";
 import {
   ADMIN_DASHBOARD_PANEL_BODY_CLASS,
   ADMIN_DASHBOARD_PANEL_CLASS,
@@ -81,7 +82,11 @@ function InquiryRow({ inquiry }: { readonly inquiry: AdminContactInquiry }) {
       <div className={ADMIN_INQUIRY_COPY_CLASS}>
         <div className={ADMIN_INQUIRY_NAME_ROW_CLASS}>
           <p className={ADMIN_INQUIRY_NAME_CLASS}>{inquiry.name}</p>
-          <Badge variant="secondary">{inquiry.service}</Badge>
+          {inquiry.services.map((service) => (
+            <Badge key={service} variant="secondary">
+              {contactServiceLabel(service)}
+            </Badge>
+          ))}
         </div>
         <p className={ADMIN_INQUIRY_META_CLASS}>{inquiry.email}</p>
       </div>

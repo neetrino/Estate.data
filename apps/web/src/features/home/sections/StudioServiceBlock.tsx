@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { MediaLightbox } from "@/shared/components/media/MediaLightbox";
+import { StudioExampleModal } from "@/features/home/sections/StudioExampleModal";
 import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
+import { StudioStartingAt } from "@/features/home/sections/StudioStartingAt";
 import { StudioViewExampleButton } from "@/features/home/sections/StudioViewExampleButton";
 import { splitStudioServiceEyebrow } from "@/features/home/sections/studioServiceEyebrow";
 import { STUDIO_SERVICE_BLOCK_COPY } from "@/features/home/content/studioPageCopy";
@@ -29,7 +30,6 @@ type StudioServiceBlockProps = {
 
 export function StudioServiceBlock({ service, imageOnRight = false }: StudioServiceBlockProps) {
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const [galleryIndex, setGalleryIndex] = useState(0);
   const { badge, name } = splitStudioServiceEyebrow(service.eyebrow);
 
   return (
@@ -82,25 +82,16 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
           <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
           <StudioViewExampleButton
             label={service.secondaryCtaLabel}
-            onOpen={() => {
-              setGalleryIndex(0);
-              setGalleryOpen(true);
-            }}
+            onOpen={() => setGalleryOpen(true)}
           />
-          {service.startingAt ? (
-            <p className="text-sm text-studio-muted">{service.startingAt}</p>
+          {service.startingPrice ? (
+            <StudioStartingAt price={service.startingPrice} unit={service.pricingUnit} />
           ) : null}
         </div>
       </div>
 
       {galleryOpen ? (
-        <MediaLightbox
-          images={service.galleryUrls}
-          alt={service.title}
-          activeIndex={galleryIndex}
-          onIndexChange={setGalleryIndex}
-          onClose={() => setGalleryOpen(false)}
-        />
+        <StudioExampleModal service={service} onClose={() => setGalleryOpen(false)} />
       ) : null}
     </StudioReveal>
   );

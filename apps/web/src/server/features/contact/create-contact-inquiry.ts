@@ -30,7 +30,7 @@ export async function createContactInquiry(input: ContactInquiryInput) {
       phone: optionalText(input.phone),
       company: optionalText(input.company),
       propertyAddress: optionalText(input.propertyAddress),
-      service: input.service || "other",
+      services: input.services,
       preferredDate: parsePreferredDate(input.preferredDate),
       projectDetails: optionalText(input.projectDetails),
       extraFields: Object.keys(extraFields).length > 0 ? extraFields : undefined,

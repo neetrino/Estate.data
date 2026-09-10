@@ -8,7 +8,7 @@ export const CONTACT_FORM_COPY = {
     },
     service: {
       label: "Services Required",
-      placeholder: "Select a service",
+      placeholder: "Select one or more services",
     },
     preferredDate: { label: "Desired Shoot Date", placeholder: "Select a date" },
     projectDetails: {
@@ -18,7 +18,8 @@ export const CONTACT_FORM_COPY = {
   },
   submitLabel: "Get My Quote",
   submittingLabel: "Sending…",
-  successMessage:
-    "Thanks — we received your request and will return a scoped quote the same business day.",
+  successEyebrow: "Request received",
+  successMessage: "Thank you. Our team will review your project and contact you shortly.",
   errorMessage: "Something went wrong. Please try again in a moment.",
+  servicesRequiredMessage: "Select at least one service.",
 } as const;

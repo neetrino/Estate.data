@@ -5,7 +5,7 @@ export type ContactInquiryPayload = {
   phone?: string;
   company?: string;
   propertyAddress?: string;
-  service: string;
+  services: string[];
   preferredDate?: string;
   projectDetails?: string;
   extraFields?: {

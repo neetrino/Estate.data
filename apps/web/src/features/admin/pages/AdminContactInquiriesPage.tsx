@@ -14,6 +14,7 @@ import {
   deleteAdminContactInquiry,
   fetchAdminContactInquiries,
 } from "@/features/admin/services/admin-api";
+import { contactServiceLabel } from "@/features/contact/content/contactFieldConfig";
 export function AdminContactInquiriesPage() {
   const [search, setSearch] = useState("");
   const { data, loading, error, reload, setLoading } = useAdminQuery(
@@ -103,7 +104,9 @@ export function AdminContactInquiriesPage() {
                       <p className="text-xs text-muted-foreground">{item.email}</p>
                     </button>
                   </td>
-                  <td className="px-4 py-3">{item.service}</td>
+                  <td className="px-4 py-3">
+                    {item.services.map(contactServiceLabel).join(", ") || "—"}
+                  </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
                     {new Date(item.createdAt).toLocaleString()}
                   </td>

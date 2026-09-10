@@ -23,6 +23,11 @@ export const STUDIO_SERVICE_BLOCK_COPY = {
   pricingLabel: "Pricing",
 } as const;
 
+export const STUDIO_EXAMPLE_MODAL_COPY = {
+  ctaLabel: "Get this for my listing",
+  closeLabel: "Close example",
+} as const;
+
 export const STUDIO_MATTERPORT_DEMO = {
   label: "Interactive demo",
   title: "Interactive Matterport 3D tour demo",
