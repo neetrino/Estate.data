@@ -34,9 +34,10 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
     });
   }
 
-  await prisma.studioServiceSection.updateMany({
-    where: { sectionKey: "floor-plans" },
-    data: { published: false },
+  await prisma.studioServiceSection.deleteMany({
+    where: {
+      sectionKey: { notIn: STUDIO_SEED_SERVICES.map((service) => service.sectionKey) },
+    },
   });
 
   for (const field of CONTACT_FIELDS) {
@@ -46,6 +47,12 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
       update: field,
     });
   }
+
+  await prisma.contactFieldSetting.deleteMany({
+    where: {
+      fieldKey: { notIn: CONTACT_FIELDS.map((field) => field.fieldKey) },
+    },
+  });
 
   console.info("Seeded studio CMS (slides, services, contact fields)");
 }

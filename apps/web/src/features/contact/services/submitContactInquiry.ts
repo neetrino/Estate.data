@@ -35,9 +35,6 @@ export function contactFormToPayload(form: HTMLFormElement): ContactInquiryPaylo
   const extraFields = {
     propertyType: readTrimmed(data, "propertyType"),
     squareFootage: readTrimmed(data, "squareFootage"),
-    rooms: readTrimmed(data, "rooms"),
-    floor: readTrimmed(data, "floor"),
-    price: readTrimmed(data, "price"),
   };
   const hasExtra = Object.values(extraFields).some(Boolean);
 

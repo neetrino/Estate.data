@@ -1,15 +1,25 @@
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
+import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
-import { StudioServiceActions } from "@/features/home/sections/StudioServiceActions";
+import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import {
   STUDIO_CONTAINER_CLASS,
   STUDIO_LIGHT_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
-import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
+import { HOME_SECTION_IDS, homeSectionHref } from "@/shared/lib/homeSectionIds";
 
 const GRID_DELAY_MS = 120;
+
+const EXAMPLE_LINK_CLASS = [
+  "group inline-flex items-center gap-3 border-b border-studio-accent/50 pb-1",
+  "text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-studio-accent",
+  "transition-colors hover:border-studio-accent hover:text-studio-fg",
+].join(" ");
+
+const EXAMPLE_ARROW_CLASS =
+  "inline-block transition-transform duration-500 group-hover:translate-x-1";
 
 type StudioAiMediaSectionProps = {
   readonly service: StudioServiceContent;
@@ -19,7 +29,20 @@ function featureNumber(index: number): string {
   return String(index + 1).padStart(2, "0");
 }
 
-/** Generative production — capabilities shown as a numbered hairline grid. */
+function AiFeatureGrid({ items }: { readonly items: readonly string[] }) {
+  return (
+    <div className="grid gap-px bg-studio-border sm:grid-cols-2">
+      {items.map((feature, index) => (
+        <div key={feature} className="bg-studio-bg p-6">
+          <span className="studio-label text-studio-accent">{featureNumber(index)}</span>
+          <p className="mt-4 text-sm text-studio-fg">{feature}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Generative production — copy and numbered capability grid, no photo. */
 export function StudioAiMediaSection({ service }: StudioAiMediaSectionProps) {
   return (
     <section
@@ -34,7 +57,18 @@ export function StudioAiMediaSection({ service }: StudioAiMediaSectionProps) {
           <div className="mt-10">
             <StudioPricingRows rows={service.pricing} />
           </div>
-          <StudioServiceActions service={service} className="mt-8" />
+          <div className="mt-8 flex flex-wrap items-center gap-6">
+            <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
+            <HomeSectionLink
+              href={homeSectionHref(HOME_SECTION_IDS.portfolio)}
+              className={EXAMPLE_LINK_CLASS}
+            >
+              {service.secondaryCtaLabel}
+              <span aria-hidden className={EXAMPLE_ARROW_CLASS}>
+                ↗
+              </span>
+            </HomeSectionLink>
+          </div>
           {service.footnote ? (
             <p className="mt-8 max-w-[52ch] border-l border-studio-accent/50 pl-4 text-xs leading-relaxed text-studio-muted">
               {service.footnote}
@@ -43,14 +77,7 @@ export function StudioAiMediaSection({ service }: StudioAiMediaSectionProps) {
         </StudioReveal>
 
         <StudioReveal className="lg:col-span-7" delay={GRID_DELAY_MS}>
-          <div className="grid gap-px bg-studio-border sm:grid-cols-2">
-            {service.included.map((feature, index) => (
-              <div key={feature} className="bg-studio-bg p-6">
-                <span className="studio-label text-studio-accent">{featureNumber(index)}</span>
-                <p className="mt-4 text-sm text-studio-fg">{feature}</p>
-              </div>
-            ))}
-          </div>
+          <AiFeatureGrid items={service.included} />
         </StudioReveal>
       </div>
     </section>

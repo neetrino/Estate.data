@@ -21,14 +21,12 @@ export const SITE_LOGO_ALT = "ESTATEDATA";
 export type NavLink = {
   label: string;
   href: string;
-  hasServicesDropdown?: boolean;
 };
 
 export const MAIN_NAV_LINKS: readonly NavLink[] = [
   {
     label: "Services",
     href: homeSectionHref(HOME_SECTION_IDS.photography),
-    hasServicesDropdown: true,
   },
   { label: "3D Tours", href: homeSectionHref(HOME_SECTION_IDS.tours) },
   { label: "Scan-to-BIM", href: homeSectionHref(HOME_SECTION_IDS.scanToBim) },

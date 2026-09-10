@@ -556,14 +556,14 @@ async function seedHomeHero(): Promise<void> {
 }
 
 type SeedPricingCategory = {
-  key: "media" | "analytics";
+  key: "media";
   sectionTitle: string;
   priceSuffix: string;
 };
 
 type SeedPricingPackage = {
   id: string;
-  categoryKey: "media" | "analytics";
+  categoryKey: "media";
   name: string;
   price: string;
   priceSuffixOverride?: string | null;
@@ -582,11 +582,6 @@ const SEED_PRICING_CATEGORIES: readonly SeedPricingCategory[] = [
     sectionTitle: "Choose how far you want to go.",
     priceSuffix: "",
   },
-  {
-    key: "analytics",
-    sectionTitle: "Analytics subscriptions",
-    priceSuffix: "/mo",
-  },
 ];
 
 const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
@@ -603,7 +598,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
       "20+ final images",
     ],
     bookLabel: "Book Essential",
-    bookHref: "/#contact",
+    bookHref: "/#quote",
     cardAccent: "blue",
     sortOrder: 1,
   },
@@ -620,7 +615,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
       "Digital floor plan",
     ],
     bookLabel: "Book Digital",
-    bookHref: "/#contact",
+    bookHref: "/#quote",
     cardAccent: "purple",
     sortOrder: 2,
   },
@@ -638,7 +633,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
       "Social media version",
     ],
     bookLabel: "Book Cinematic",
-    bookHref: "/#contact",
+    bookHref: "/#quote",
     cardAccent: "orange",
     sortOrder: 3,
   },
@@ -659,7 +654,7 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
       "Professional editing",
     ],
     bookLabel: "Book Complete",
-    bookHref: "/#contact",
+    bookHref: "/#quote",
     cardAccent: "purple",
     highlighted: true,
     badgeLabel: "Most complete",
@@ -681,43 +676,9 @@ const SEED_PRICING_PACKAGES: readonly SeedPricingPackage[] = [
       "Architectural projects",
     ],
     bookLabel: "Request Custom Proposal",
-    bookHref: "/#contact",
+    bookHref: "/#quote",
     cardAccent: "orange",
     sortOrder: 5,
-  },
-  {
-    id: "insights",
-    categoryKey: "analytics",
-    name: "Insights",
-    price: "$199",
-    features: ["Neighborhood reports", "Listing analytics", "Email digest"],
-    bookLabel: "Talk to sales",
-    bookHref: "/#contact",
-    cardAccent: "blue",
-    sortOrder: 1,
-  },
-  {
-    id: "pro-data",
-    categoryKey: "analytics",
-    name: "Pro Data",
-    price: "$499",
-    features: ["MLS/IDX integration", "Custom dashboard", "CRM sync"],
-    bookLabel: "Talk to sales",
-    bookHref: "/#contact",
-    cardAccent: "purple",
-    sortOrder: 2,
-  },
-  {
-    id: "enterprise",
-    categoryKey: "analytics",
-    name: "Enterprise",
-    price: "Custom",
-    priceSuffixOverride: "",
-    features: ["BIM workflows", "API access", "Dedicated success mgr"],
-    bookLabel: "Talk to sales",
-    bookHref: "/#contact",
-    cardAccent: "orange",
-    sortOrder: 3,
   },
 ];
 
@@ -777,7 +738,12 @@ async function seedPricingPackage(entry: SeedPricingPackage): Promise<void> {
 
 async function seedPricing(): Promise<void> {
   await prisma.pricingPackage.deleteMany({
-    where: { id: { in: ["signature", "cinematic-plus"] } },
+    where: {
+      OR: [{ categoryKey: "analytics" }, { id: { in: ["signature", "cinematic-plus"] } }],
+    },
+  });
+  await prisma.pricingCategory.deleteMany({
+    where: { key: "analytics" },
   });
 
   for (const entry of SEED_PRICING_CATEGORIES) {

@@ -6,7 +6,6 @@ import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
-import { StudioWebPagesExampleButton } from "@/features/home/sections/StudioWebPagesExampleButton";
 import { StudioStartingAt } from "@/features/home/sections/StudioStartingAt";
 import {
   STUDIO_CONTAINER_CLASS,
@@ -81,7 +80,6 @@ export function StudioWebPagesTeaser() {
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <StudioCta href={copy.href}>{copy.ctaLabel}</StudioCta>
-            <StudioWebPagesExampleButton />
             <StudioStartingAt price={copy.startingPrice} />
           </div>
         </StudioReveal>

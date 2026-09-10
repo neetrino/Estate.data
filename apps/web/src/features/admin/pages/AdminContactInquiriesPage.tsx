@@ -11,10 +11,25 @@ import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingSt
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import { AdminTable } from "@/features/admin/components/ui/AdminTable";
 import {
+  ADMIN_TABLE_CELL_CLASS,
+  ADMIN_TABLE_CELL_SECONDARY_CLASS,
+  ADMIN_TABLE_HEAD_ROW_CLASS,
+} from "@/features/admin/styles/admin-panel-classes";
+import {
   deleteAdminContactInquiry,
   fetchAdminContactInquiries,
 } from "@/features/admin/services/admin-api";
-import { contactServiceLabel } from "@/features/contact/content/contactFieldConfig";
+import {
+  contactServiceLabel,
+  DEFAULT_CONTACT_FIELD_SETTINGS,
+} from "@/features/contact/content/contactFieldConfig";
+
+function extraFieldLabel(key: string): string {
+  return (
+    DEFAULT_CONTACT_FIELD_SETTINGS.find((field) => field.fieldKey === key)?.label ?? key
+  );
+}
+
 export function AdminContactInquiriesPage() {
   const [search, setSearch] = useState("");
   const { data, loading, error, reload, setLoading } = useAdminQuery(
@@ -81,18 +96,18 @@ export function AdminContactInquiriesPage() {
       {!loading && !error && items.length > 0 ? (
         <AdminTable>
           <thead>
-            <tr className="border-b border-foreground/10 text-xs tracking-wide text-muted-foreground uppercase">
-              <th className="px-4 py-3">Contact</th>
-              <th className="px-4 py-3">Service</th>
-              <th className="px-4 py-3">Date</th>
-              <th className="px-4 py-3 text-right">Actions</th>
+            <tr className={ADMIN_TABLE_HEAD_ROW_CLASS}>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Contact</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Service</th>
+              <th className={ADMIN_TABLE_CELL_CLASS}>Date</th>
+              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
               <Fragment key={item.id}>
                 <tr className="border-b border-foreground/5">
-                  <td className="px-4 py-3">
+                  <td className={ADMIN_TABLE_CELL_CLASS}>
                     <button
                       type="button"
                       className="cursor-pointer text-left"
@@ -101,16 +116,16 @@ export function AdminContactInquiriesPage() {
                       }
                     >
                       <p className="font-medium text-brand-navy">{item.name}</p>
-                      <p className="text-xs text-muted-foreground">{item.email}</p>
+                      <p className="text-xs text-brand-navy/75">{item.email}</p>
                     </button>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className={ADMIN_TABLE_CELL_CLASS}>
                     {item.services.map(contactServiceLabel).join(", ") || "—"}
                   </td>
-                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                  <td className={ADMIN_TABLE_CELL_SECONDARY_CLASS}>
                     {new Date(item.createdAt).toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
                     <AdminButton variant="danger" onClick={() => setDeleteId(item.id)}>
                       Delete
                     </AdminButton>
@@ -142,6 +157,13 @@ export function AdminContactInquiriesPage() {
                           <strong>Details:</strong> {item.projectDetails}
                         </p>
                       ) : null}
+                      {item.extraFields
+                        ? Object.entries(item.extraFields).map(([key, value]) => (
+                            <p key={key} className="mt-1">
+                              <strong>{extraFieldLabel(key)}:</strong> {value}
+                            </p>
+                          ))
+                        : null}
                     </td>
                   </tr>
                 ) : null}

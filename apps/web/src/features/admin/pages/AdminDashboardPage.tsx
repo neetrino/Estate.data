@@ -41,7 +41,7 @@ const QUICK_ACTIONS = [
   {
     id: "pricing",
     label: "Manage pricing",
-    description: "Packages and subscription tiers",
+    description: "Shoot packages on the public site",
     href: SUPERSUDO_PANEL_PRICING_PATH,
     icon: "pricing",
   },

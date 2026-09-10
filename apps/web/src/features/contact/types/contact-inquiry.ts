@@ -11,9 +11,6 @@ export type ContactInquiryPayload = {
   extraFields?: {
     propertyType?: string;
     squareFootage?: string;
-    rooms?: string;
-    floor?: string;
-    price?: string;
   };
 };
 

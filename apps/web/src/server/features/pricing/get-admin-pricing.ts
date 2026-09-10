@@ -80,7 +80,7 @@ function toPackageRow(row: {
 /** Full pricing tree for admin (all packages, including unpublished). */
 export async function getAdminPricing(): Promise<AdminPricingPayload> {
   const categories = await getPrisma().pricingCategory.findMany({
-    orderBy: { key: "asc" },
+    where: { key: "media" },
     select: {
       key: true,
       sectionTitle: true,

@@ -23,9 +23,14 @@ import {
 import type { AdminStudioService } from "@/features/admin/types/admin-data";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
 const PRICING_HINT = "One row per line: Label | Price";
+
+function serviceShowsPublicImage(sectionKey: string): boolean {
+  return sectionKey !== HOME_SECTION_IDS.aiMedia;
+}
 
 type ServiceDraft = {
   eyebrow: string;
@@ -36,8 +41,6 @@ type ServiceDraft = {
   pricingText: string;
   primaryCtaLabel: string;
   primaryCtaHref: string;
-  secondaryCtaLabel: string;
-  secondaryCtaHref: string;
   startingPrice: string;
   pricingUnit: string;
   footnote: string;
@@ -54,8 +57,6 @@ function toDraft(service: AdminStudioService): ServiceDraft {
     pricingText: formatPricingLines(asPricingRows(service.pricing)),
     primaryCtaLabel: service.primaryCtaLabel,
     primaryCtaHref: service.primaryCtaHref,
-    secondaryCtaLabel: service.secondaryCtaLabel,
-    secondaryCtaHref: service.secondaryCtaHref,
     startingPrice: service.startingPrice ?? "",
     pricingUnit: service.pricingUnit ?? "",
     footnote: service.footnote ?? "",
@@ -131,8 +132,6 @@ function ServiceEditor({
         pricing: parsePricingLines(draft.pricingText),
         primaryCtaLabel: draft.primaryCtaLabel,
         primaryCtaHref: draft.primaryCtaHref,
-        secondaryCtaLabel: draft.secondaryCtaLabel,
-        secondaryCtaHref: draft.secondaryCtaHref,
         startingPrice: draft.startingPrice.trim() || null,
         pricingUnit: draft.pricingUnit.trim() || null,
         footnote: draft.footnote.trim() || null,
@@ -169,13 +168,15 @@ function ServiceEditor({
         onChange={(value) => setField("description", value)}
         multiline
       />
-      <AdminImageUploader
-        label="Image"
-        previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
-        uploading={uploading}
-        placeholderText="Upload a service image"
-        onUpload={handleUpload}
-      />
+      {serviceShowsPublicImage(service.sectionKey) ? (
+        <AdminImageUploader
+          label="Image"
+          previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
+          uploading={uploading}
+          placeholderText="Upload a service image"
+          onUpload={handleUpload}
+        />
+      ) : null}
       <AdminFormField
         label="What's included"
         name={`included-${service.id}`}
@@ -230,18 +231,6 @@ function ServiceEditor({
           name={`href-${service.id}`}
           value={draft.primaryCtaHref}
           onChange={(value) => setField("primaryCtaHref", value)}
-        />
-        <AdminFormField
-          label="Secondary button"
-          name={`secondary-cta-${service.id}`}
-          value={draft.secondaryCtaLabel}
-          onChange={(value) => setField("secondaryCtaLabel", value)}
-        />
-        <AdminFormField
-          label="Secondary button href"
-          name={`secondary-href-${service.id}`}
-          value={draft.secondaryCtaHref}
-          onChange={(value) => setField("secondaryCtaHref", value)}
         />
       </div>
       <AdminFormField

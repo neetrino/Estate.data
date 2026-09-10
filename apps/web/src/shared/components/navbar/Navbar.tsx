@@ -19,11 +19,7 @@ import {
   SITE_PAGE_SHELL_CLASS,
 } from "@/shared/lib/constants";
 import { LogoLink } from "@/shared/components/navbar/LogoLink";
-import {
-  MAIN_NAV_LINKS,
-  NAV_CTA_LINKS,
-  SERVICE_NAV_LINKS,
-} from "@/shared/components/navbar/navConfig";
+import { MAIN_NAV_LINKS, NAV_CTA_LINKS } from "@/shared/components/navbar/navConfig";
 import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
@@ -283,7 +279,6 @@ export function Navbar({ overlay }: NavbarProps) {
                     link={link}
                     active={isNavbarActivePath(pathname, link.href, hash)}
                     tone={useFigmaHomeDesktopHeader ? "dark" : navTone}
-                    serviceLinks={link.hasServicesDropdown ? SERVICE_NAV_LINKS : undefined}
                     useOverlayStyle={useFigmaHomeDesktopHeader}
                   />
                 ))}

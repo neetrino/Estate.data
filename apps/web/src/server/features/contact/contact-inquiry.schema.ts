@@ -4,17 +4,10 @@ import {
   DEFAULT_CONTACT_FIELD_SETTINGS,
   MIN_SELECTED_SERVICES,
   isContactFieldMode,
+  isQuoteContactFieldKey,
   type ContactFieldMode,
   type ContactFieldSetting,
 } from "@/features/contact/content/contactFieldConfig";
-
-const EXTRA_FIELD_KEYS = [
-  "propertyType",
-  "squareFootage",
-  "rooms",
-  "floor",
-  "price",
-] as const;
 
 function optionalTrimmed(max: number) {
   return z.string().trim().max(max).optional().or(z.literal(""));
@@ -82,9 +75,6 @@ export function buildContactInquirySchema(
       .object({
         propertyType: optionalTrimmed(120),
         squareFootage: optionalTrimmed(80),
-        rooms: optionalTrimmed(40),
-        floor: optionalTrimmed(40),
-        price: optionalTrimmed(80),
       })
       .optional(),
   });
@@ -99,8 +89,6 @@ export type ContactInquiryAccepted = {
   received: true;
 };
 
-export { EXTRA_FIELD_KEYS };
-
 export function parseContactFieldSettings(
   rows: readonly {
     fieldKey: string;
@@ -111,8 +99,9 @@ export function parseContactFieldSettings(
   }[],
 ): ContactFieldSetting[] {
   return rows
-    .filter((row): row is typeof row & { mode: ContactFieldMode } =>
-      isContactFieldMode(row.mode),
+    .filter(
+      (row): row is typeof row & { mode: ContactFieldMode } =>
+        isContactFieldMode(row.mode) && isQuoteContactFieldKey(row.fieldKey),
     )
     .map((row) => ({
       fieldKey: row.fieldKey,

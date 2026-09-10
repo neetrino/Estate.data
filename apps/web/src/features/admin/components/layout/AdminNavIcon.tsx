@@ -56,6 +56,13 @@ export function AdminNavIcon({ id, className = ICON_CLASS_DEFAULT }: AdminNavIco
           <path d="M7 8h8.5a2.5 2.5 0 0 1 0 5H9a2.5 2.5 0 0 0 0 5h6.5" />
         </NavIconSvg>
       );
+    case "services":
+      return (
+        <NavIconSvg className={className}>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M8 7V6a4 4 0 0 1 8 0v1" />
+        </NavIconSvg>
+      );
     case "faq":
       return (
         <NavIconSvg className={className}>
