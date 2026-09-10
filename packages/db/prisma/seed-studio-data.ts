@@ -55,6 +55,9 @@ type StudioSeedService = {
   readonly pricing: readonly { label: string; price: string }[];
   readonly primaryCtaLabel: string;
   readonly secondaryCtaLabel: string;
+  readonly startingPrice?: string;
+  readonly pricingUnit?: string;
+  readonly footnote?: string;
 };
 
 export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
@@ -89,6 +92,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Photography",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$249",
   },
   {
     sectionKey: "editing",
@@ -118,6 +122,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Request Editing",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$20",
+    pricingUnit: "/ image",
   },
   {
     sectionKey: "video",
@@ -148,6 +154,7 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Video",
     secondaryCtaLabel: "View Example",
+    startingPrice: "$499",
   },
   {
     sectionKey: "ai-media",
@@ -177,6 +184,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Explore AI Media",
     secondaryCtaLabel: "View Example",
+    footnote:
+      "AI-generated content is clearly identified where appropriate and is designed for marketing and visualization purposes.",
   },
   {
     sectionKey: "drone",
@@ -201,6 +210,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Book Drone Coverage",
     secondaryCtaLabel: "View Example",
+    footnote:
+      "Drone operations are subject to applicable FAA regulations, airspace restrictions and weather conditions.",
   },
   {
     sectionKey: "tours",

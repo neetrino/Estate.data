@@ -57,9 +57,7 @@ export function getDefaultHomeHeroContent(): Omit<
   mobileImageKey: string | null;
 } {
   return {
-    title: HOME_HERO_COPY.headlineLines
-      .map((line) => line.segments.map((segment) => segment.text).join(""))
-      .join("\n"),
+    title: "Make your property\nimpossible to ignore.",
     description: HOME_HERO_COPY.descriptionLines.join(" "),
     primaryButtonLabel: HOME_HERO_COPY.primaryCta.label,
     primaryButtonHref: HOME_HERO_COPY.primaryCta.href,
@@ -94,4 +92,29 @@ export function splitHomeHeroTitleLines(title: string): string[] {
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
+}
+
+export type StudioHeroTitleParts = {
+  readonly firstLine: string;
+  readonly accentWord: string;
+  readonly trailing: string;
+};
+
+/**
+ * Map admin multi-line title to studio hero markup.
+ * Line 1 is plain; line 2’s first word is accented (master style).
+ */
+export function parseStudioHeroTitle(title: string): StudioHeroTitleParts {
+  const lines = splitHomeHeroTitleLines(title);
+  const firstLine = lines[0] ?? "";
+  const secondLine = lines[1] ?? "";
+  if (!secondLine) {
+    return { firstLine, accentWord: "", trailing: "" };
+  }
+  const [accentWord = "", ...rest] = secondLine.split(/\s+/);
+  return {
+    firstLine,
+    accentWord,
+    trailing: rest.join(" "),
+  };
 }

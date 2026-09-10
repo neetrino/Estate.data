@@ -6,7 +6,7 @@ type AdminCheckboxFieldProps = {
 
 export function AdminCheckboxField({ label, checked, onChange }: AdminCheckboxFieldProps) {
   return (
-    <label className="flex cursor-pointer items-center gap-2 text-sm text-brand-navy">
+    <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-transparent px-1 py-1.5 text-sm font-medium text-brand-navy transition-colors hover:border-foreground/8 hover:bg-white">
       <input
         type="checkbox"
         checked={checked}

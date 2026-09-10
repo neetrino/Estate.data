@@ -43,23 +43,23 @@ export const HOME_HERO_SUCCESS_ALERT_CLASS =
   "rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800";
 
 export const HOME_HERO_IMAGE_PREVIEW_CLASS =
-  "min-h-40 w-full max-w-xl overflow-hidden rounded-xl border border-[#dcc090]/25 bg-[#dcc090]/5";
+  "min-h-52 w-full overflow-hidden rounded-2xl border border-[#dcc090]/25 bg-gradient-to-b from-[#dcc090]/8 to-[#dcc090]/3 shadow-inner";
 
 export const HOME_HERO_IMAGE_PREVIEW_IMG_CLASS =
-  "max-h-56 w-full object-contain object-center";
+  "max-h-72 w-full object-cover object-center";
 
 export const HOME_HERO_IMAGE_PLACEHOLDER_CLASS =
-  "flex min-h-40 items-center justify-center px-4 text-center text-sm text-[#414141]/40";
+  "flex min-h-52 items-center justify-center px-4 text-center text-sm text-[#414141]/40";
 
 export const HOME_HERO_UPLOAD_BUTTON_CLASS =
-  "inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-lg border border-[#dcc090]/35 bg-[#dcc090]/10 px-4 py-2 text-xs font-bold text-[#122a26] transition-all hover:border-[#dcc090] hover:bg-[#dcc090]/25 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex shrink-0 cursor-pointer items-center gap-2 self-start rounded-xl border border-[#dcc090]/35 bg-[#dcc090]/12 px-4 py-2.5 text-xs font-bold tracking-wide text-[#122a26] shadow-sm transition-all hover:border-[#dcc090] hover:bg-[#dcc090]/28 disabled:cursor-not-allowed disabled:opacity-50";
 
 export const HOME_HERO_CLEAR_BUTTON_CLASS =
-  "rounded-lg border border-[#dcc090]/35 px-4 py-2 text-xs font-bold text-[#414141]/70 transition-all hover:border-[#dcc090] hover:bg-[#dcc090]/10 disabled:cursor-not-allowed disabled:opacity-50";
+  "rounded-xl border border-[#dcc090]/35 px-4 py-2.5 text-xs font-bold text-[#414141]/70 transition-all hover:border-[#dcc090] hover:bg-[#dcc090]/10 disabled:cursor-not-allowed disabled:opacity-50";
 
-export const HOME_HERO_IMAGE_ROW_CLASS = "flex flex-col gap-3 sm:flex-row sm:items-start";
+export const HOME_HERO_IMAGE_ROW_CLASS = "flex flex-col gap-4";
 
-export const HOME_HERO_IMAGE_ACTIONS_CLASS = "flex shrink-0 flex-col gap-2 self-start";
+export const HOME_HERO_IMAGE_ACTIONS_CLASS = "flex shrink-0 flex-row flex-wrap gap-2";
 
 export const HOME_HERO_UPLOAD_SPINNER_CLASS =
   "h-3 w-3 animate-spin rounded-full border-b-2 border-[#122a26]";

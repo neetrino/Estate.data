@@ -117,6 +117,9 @@ export type AdminStudioService = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
+  startingPrice: string | null;
+  pricingUnit: string | null;
+  footnote: string | null;
   sortOrder: number;
   published: boolean;
 };

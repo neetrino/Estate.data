@@ -1,7 +1,10 @@
 "use client";
 
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
-import type { HomeHeroContentFields } from "@/features/home/content/heroCopy";
+import {
+  parseStudioHeroTitle,
+  type HomeHeroContentFields,
+} from "@/features/home/content/heroCopy";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import {
   HOME_SECTION_IDS,
@@ -28,7 +31,8 @@ type StudioHeroSectionProps = {
 
 export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
   const activeSlide = slides[0];
-  const copy = STUDIO_PAGE_COPY.hero;
+  const chrome = STUDIO_PAGE_COPY.hero;
+  const title = parseStudioHeroTitle(hero.title);
 
   if (!activeSlide) {
     return null;
@@ -53,12 +57,16 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
       </div>
 
       <div className={`${STUDIO_CONTAINER_CLASS} relative z-10 pt-32 pb-24 md:pb-28`}>
-        <p className="studio-label mb-8 text-studio-accent">{copy.eyebrow}</p>
+        <p className="studio-label mb-8 text-studio-accent">{chrome.eyebrow}</p>
         <h1 className="studio-display-hero max-w-[16ch] text-studio-fg">
-          {copy.titleLines[0]}
-          <br />
-          <span className="text-studio-accent">{copy.titleAccentWord}</span>{" "}
-          {copy.titleTrailing}
+          {title.firstLine}
+          {title.accentWord ? (
+            <>
+              <br />
+              <span className="text-studio-accent">{title.accentWord}</span>
+              {title.trailing ? ` ${title.trailing}` : null}
+            </>
+          ) : null}
         </h1>
         <p className="studio-body-lg mt-8 max-w-[60ch] text-studio-fg/75">{hero.description}</p>
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -77,7 +85,7 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
         </div>
         <div className="mt-16 flex items-center gap-4 text-studio-muted">
           <span aria-hidden className="studio-scrollcue block h-8 w-px bg-studio-accent" />
-          <span className="studio-label">{copy.scrollLabel}</span>
+          <span className="studio-label">{chrome.scrollLabel}</span>
         </div>
       </div>
     </section>

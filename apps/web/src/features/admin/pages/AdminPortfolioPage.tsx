@@ -23,6 +23,7 @@ import {
   uploadAdminImage,
 } from "@/features/admin/services/admin-api";
 import {
+  ADMIN_INPUT_CLASS,
   ADMIN_TABLE_THUMB_IMG_CLASS,
   ADMIN_TABLE_THUMB_WRAP_CLASS,
 } from "@/features/admin/styles/admin-panel-classes";
@@ -233,55 +234,65 @@ export function AdminPortfolioPage() {
           </>
         }
       >
-        <div className="space-y-4">
+        <div className="space-y-6">
           {actionError ? <AdminErrorState message={actionError} /> : null}
-          <AdminImageUploader
-            label="Image"
-            previewUrl={form.imageUrl ? normalizePublicAssetUrl(form.imageUrl) : null}
-            uploading={uploading}
-            placeholderText="Upload a project image"
-            onUpload={handleImageUpload}
-          />
-          <AdminFormField
-            label="Image alt"
-            name="imageAlt"
-            value={form.imageAlt}
-            onChange={(value) => setForm((prev) => ({ ...prev, imageAlt: value }))}
-            required
-          />
-          <label className="block space-y-1.5">
-            <span className="text-sm font-medium text-brand-navy">Category</span>
-            <select
-              value={form.category}
-              onChange={(event) =>
-                setForm((prev) => ({ ...prev, category: event.target.value }))
-              }
-              className="w-full rounded-lg border border-foreground/15 bg-white px-3 py-2 text-sm"
-            >
-              {PORTFOLIO_MEDIA_CATEGORIES.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </label>
-          <AdminFormField
-            label="Sort order"
-            name="sortOrder"
-            type="number"
-            value={form.sortOrder}
-            onChange={(value) => setForm((prev) => ({ ...prev, sortOrder: value }))}
-          />
-          <AdminCheckboxField
-            label="Featured on home"
-            checked={form.featuredOnHome}
-            onChange={(checked) => setForm((prev) => ({ ...prev, featuredOnHome: checked }))}
-          />
-          <AdminCheckboxField
-            label="Published"
-            checked={form.published}
-            onChange={(checked) => setForm((prev) => ({ ...prev, published: checked }))}
-          />
+
+          <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
+            <AdminImageUploader
+              label="Image"
+              previewUrl={form.imageUrl ? normalizePublicAssetUrl(form.imageUrl) : null}
+              uploading={uploading}
+              placeholderText="Upload a project image"
+              onUpload={handleImageUpload}
+            />
+            <AdminFormField
+              label="Image alt"
+              name="imageAlt"
+              value={form.imageAlt}
+              onChange={(value) => setForm((prev) => ({ ...prev, imageAlt: value }))}
+              required
+            />
+          </section>
+
+          <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="block space-y-1.5">
+                <span className="text-sm font-medium text-brand-navy">Category</span>
+                <select
+                  value={form.category}
+                  onChange={(event) =>
+                    setForm((prev) => ({ ...prev, category: event.target.value }))
+                  }
+                  className={`${ADMIN_INPUT_CLASS} h-10`}
+                >
+                  {PORTFOLIO_MEDIA_CATEGORIES.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <AdminFormField
+                label="Sort order"
+                name="sortOrder"
+                type="number"
+                value={form.sortOrder}
+                onChange={(value) => setForm((prev) => ({ ...prev, sortOrder: value }))}
+              />
+            </div>
+            <div className="grid gap-3 rounded-xl bg-neutral-50/90 p-4 sm:grid-cols-2">
+              <AdminCheckboxField
+                label="Featured on home"
+                checked={form.featuredOnHome}
+                onChange={(checked) => setForm((prev) => ({ ...prev, featuredOnHome: checked }))}
+              />
+              <AdminCheckboxField
+                label="Published"
+                checked={form.published}
+                onChange={(checked) => setForm((prev) => ({ ...prev, published: checked }))}
+              />
+            </div>
+          </section>
         </div>
       </AdminModal>
 

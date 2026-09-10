@@ -33,6 +33,11 @@ function asPricing(value: unknown): StudioServiceContent["pricing"] {
   });
 }
 
+function asOptionalText(value: string | null | undefined): string | undefined {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
 /** Published studio service blocks with static fallback. */
 export async function getStudioServiceSections(): Promise<StudioServiceContent[]> {
   try {
@@ -63,9 +68,10 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
         primaryCtaHref: row.primaryCtaHref,
         secondaryCtaLabel: row.secondaryCtaLabel,
         secondaryCtaHref: row.secondaryCtaHref,
-        startingPrice: defaults?.startingPrice,
-        pricingUnit: defaults?.pricingUnit,
-        footnote: defaults?.footnote,
+        startingPrice:
+          asOptionalText(row.startingPrice) ?? defaults?.startingPrice,
+        pricingUnit: asOptionalText(row.pricingUnit) ?? defaults?.pricingUnit,
+        footnote: asOptionalText(row.footnote) ?? defaults?.footnote,
       };
     });
   } catch (error) {
