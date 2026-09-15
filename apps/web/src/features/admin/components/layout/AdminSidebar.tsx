@@ -47,8 +47,24 @@ function navItemClass(active: boolean): string {
 }
 
 function NavLink({ item, active }: { readonly item: AdminNavItem; readonly active: boolean }) {
+  const className = navItemClass(active);
+
+  if (item.external) {
+    return (
+      <a
+        href={item.href}
+        className={className}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <AdminNavIcon id={item.icon} />
+        <span>{item.label}</span>
+      </a>
+    );
+  }
+
   return (
-    <Link href={item.href} className={navItemClass(active)}>
+    <Link href={item.href} className={className}>
       <AdminNavIcon id={item.icon} />
       <span>{item.label}</span>
     </Link>
@@ -95,7 +111,10 @@ export function AdminSidebar() {
             <ul className={ADMIN_SIDEBAR_NAV_LIST_CLASS}>
               {group.items.map((item) => (
                 <li key={item.id}>
-                  <NavLink item={item} active={isNavItemActive(pathname, item.href)} />
+                  <NavLink
+                    item={item}
+                    active={item.external ? false : isNavItemActive(pathname, item.href)}
+                  />
                 </li>
               ))}
             </ul>

@@ -1,3 +1,7 @@
+import {
+  getInquiryAnalytics,
+  type ServiceRequestCount,
+} from "@/server/features/admin/get-inquiry-analytics";
 import { getPrisma } from "@/server/lib/db";
 
 export type AdminDashboardSummary = {
@@ -8,9 +12,12 @@ export type AdminDashboardSummary = {
   faqCount: number;
   publishedFaqCount: number;
   contactInquiryCount: number;
+  requestsLast7Days: number;
+  requestsLast30Days: number;
+  requestsByService: readonly ServiceRequestCount[];
 };
 
-/** Aggregate counts for the admin dashboard. */
+/** Aggregate counts for the admin dashboard and analytics page. */
 export async function getAdminDashboard(): Promise<AdminDashboardSummary> {
   const prisma = getPrisma();
 
@@ -21,7 +28,7 @@ export async function getAdminDashboard(): Promise<AdminDashboardSummary> {
     pricingPackageCount,
     faqCount,
     publishedFaqCount,
-    contactInquiryCount,
+    inquiryAnalytics,
   ] = await Promise.all([
     prisma.portfolioProject.count(),
     prisma.portfolioProject.count({ where: { published: true } }),
@@ -29,7 +36,7 @@ export async function getAdminDashboard(): Promise<AdminDashboardSummary> {
     prisma.pricingPackage.count({ where: { categoryKey: "media" } }),
     prisma.faqItem.count(),
     prisma.faqItem.count({ where: { published: true } }),
-    prisma.contactInquiry.count(),
+    getInquiryAnalytics(),
   ]);
 
   return {
@@ -39,6 +46,9 @@ export async function getAdminDashboard(): Promise<AdminDashboardSummary> {
     pricingPackageCount,
     faqCount,
     publishedFaqCount,
-    contactInquiryCount,
+    contactInquiryCount: inquiryAnalytics.total,
+    requestsLast7Days: inquiryAnalytics.last7Days,
+    requestsLast30Days: inquiryAnalytics.last30Days,
+    requestsByService: inquiryAnalytics.byService,
   };
 }

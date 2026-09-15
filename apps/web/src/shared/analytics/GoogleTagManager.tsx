@@ -1,14 +1,5 @@
 import Script from "next/script";
-
-const GTM_ID_PATTERN = /^GTM-[A-Z0-9]+$/;
-
-function resolveGtmId(): string | null {
-  const raw = process.env.NEXT_PUBLIC_GTM_ID?.trim();
-  if (!raw || !GTM_ID_PATTERN.test(raw)) {
-    return null;
-  }
-  return raw;
-}
+import { resolveGtmId } from "@/shared/analytics/gtmConfig";
 
 /** Loads Google Tag Manager when `NEXT_PUBLIC_GTM_ID` is set. */
 export function GoogleTagManager() {

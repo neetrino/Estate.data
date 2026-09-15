@@ -32,6 +32,7 @@ export const API_ROUTES = {
   adminStudioServiceById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/studio-services/${encodeURIComponent(id)}`,
   adminContactFields: `${API_VERSION_PREFIX}/admin/contact-fields`,
+  adminSiteCopy: `${API_VERSION_PREFIX}/admin/site-copy`,
   adminUpload: `${API_VERSION_PREFIX}/admin/upload`,
 } as const;
 

@@ -6,6 +6,13 @@ export type DashboardSummary = {
   faqCount: number;
   publishedFaqCount: number;
   contactInquiryCount: number;
+  requestsLast7Days: number;
+  requestsLast30Days: number;
+  requestsByService: readonly {
+    service: string;
+    label: string;
+    count: number;
+  }[];
 };
 
 export type AdminContactInquiry = {
@@ -132,3 +139,10 @@ export type AdminContactField = {
   mode: string;
   sortOrder: number;
 };
+
+export type {
+  ContactMarketingCopy,
+  MarketingCopyBundle,
+  WebPagesCopy,
+  WhatWeDoCopy,
+} from "@/server/features/site-copy/site-copy.schema";

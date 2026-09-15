@@ -6,6 +6,7 @@ import {
   STUDIO_SEED_GALLERY,
   STUDIO_SEED_SERVICES,
 } from "./seed-studio-data";
+import { SITE_COPY_SEED } from "./seed-site-copy-data";
 
 /** Seed hero slides, service blocks, and contact field modes. */
 export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
@@ -54,5 +55,14 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
     },
   });
 
-  console.info("Seeded studio CMS (slides, services, contact fields)");
+  for (const entry of SITE_COPY_SEED) {
+    const value = JSON.stringify(entry.value);
+    await prisma.siteCopy.upsert({
+      where: { key: entry.key },
+      create: { key: entry.key, value },
+      update: { value },
+    });
+  }
+
+  console.info("Seeded studio CMS (slides, services, contact fields, site copy)");
 }

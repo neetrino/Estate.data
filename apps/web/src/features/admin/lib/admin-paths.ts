@@ -17,6 +17,21 @@ export const SUPERSUDO_PANEL_STUDIO_SERVICES_PATH =
   "/supersudo/panel/site-content/studio-services";
 export const SUPERSUDO_PANEL_CONTACT_FIELDS_PATH =
   "/supersudo/panel/site-content/contact-fields";
+export const SUPERSUDO_PANEL_MARKETING_COPY_PATH =
+  "/supersudo/panel/site-content/marketing-copy";
+export const SUPERSUDO_PANEL_ANALYTICS_PATH = "/supersudo/panel/analytics";
+
+const DEFAULT_GOOGLE_ANALYTICS_HREF = "https://analytics.google.com/";
+
+/** Admin shortcut into Google Analytics — no in-app duplicate stats. */
+export function googleAnalyticsHref(): string {
+  const raw = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_URL?.trim();
+  if (!raw || (!raw.startsWith("https://") && !raw.startsWith("http://"))) {
+    return DEFAULT_GOOGLE_ANALYTICS_HREF;
+  }
+  return raw;
+}
+
 /** Whether the pathname belongs to the admin area. */
 export function isSupersudoRoute(pathname: string): boolean {
   return (

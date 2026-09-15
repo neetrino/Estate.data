@@ -17,6 +17,6 @@ export const NOT_FOUND_PAGE_COPY = {
     { label: "Scan-to-BIM", href: homeSectionHref(HOME_SECTION_IDS.scanToBim) },
     { label: "Portfolio", href: homeSectionHref(HOME_SECTION_IDS.portfolio) },
     { label: "Packages", href: homeSectionHref(HOME_SECTION_IDS.packages) },
-    { label: "Landing Pages", href: WEB_PAGES_PATH },
+    { label: "Web Pages", href: WEB_PAGES_PATH },
   ],
 } as const;

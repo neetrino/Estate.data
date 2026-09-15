@@ -24,7 +24,11 @@ export function StudioMatterportSection({ service }: StudioMatterportSectionProp
   const { lead, rest } = splitLeadParagraph(service.description);
 
   return (
-    <section id={HOME_SECTION_IDS.tours} className={STUDIO_MUTED_SECTION_CLASS}>
+    <section
+      id={HOME_SECTION_IDS.tours}
+      data-service-key={HOME_SECTION_IDS.tours}
+      className={STUDIO_MUTED_SECTION_CLASS}
+    >
       <div className={STUDIO_CONTAINER_CLASS}>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <StudioReveal className="lg:col-span-6">

@@ -1,10 +1,9 @@
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
-import { StudioStartingAt } from "@/features/home/sections/StudioStartingAt";
+import { StudioServiceActions } from "@/features/home/sections/StudioServiceActions";
 import { splitStudioServiceEyebrow } from "@/features/home/sections/studioServiceEyebrow";
 import { STUDIO_SERVICE_BLOCK_COPY } from "@/features/home/content/studioPageCopy";
 import { HOME_SECTION_SCROLL_MARGIN_CLASS } from "@/shared/lib/homeSectionIds";
@@ -46,6 +45,7 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
 
       <div
         id={service.sectionKey}
+        data-service-key={service.sectionKey}
         className={`${imageOnRight ? "lg:order-1 lg:col-span-6" : "lg:col-span-6"} ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
       >
         <p className="studio-label text-studio-accent">{name}</p>
@@ -72,12 +72,7 @@ export function StudioServiceBlock({ service, imageOnRight = false }: StudioServ
           </p>
         ) : null}
 
-        <div className="mt-8 flex flex-wrap items-center gap-6">
-          <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
-          {service.startingPrice ? (
-            <StudioStartingAt price={service.startingPrice} unit={service.pricingUnit} />
-          ) : null}
-        </div>
+        <StudioServiceActions service={service} className="mt-8" />
       </div>
     </StudioReveal>
   );

@@ -1,25 +1,15 @@
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
-import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
+import { StudioServiceActions } from "@/features/home/sections/StudioServiceActions";
 import {
   STUDIO_CONTAINER_CLASS,
   STUDIO_LIGHT_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
-import { HOME_SECTION_IDS, homeSectionHref } from "@/shared/lib/homeSectionIds";
+import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 
 const GRID_DELAY_MS = 120;
-
-const EXAMPLE_LINK_CLASS = [
-  "group inline-flex items-center gap-3 border-b border-studio-accent/50 pb-1",
-  "text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-studio-accent",
-  "transition-colors hover:border-studio-accent hover:text-studio-fg",
-].join(" ");
-
-const EXAMPLE_ARROW_CLASS =
-  "inline-block transition-transform duration-500 group-hover:translate-x-1";
 
 type StudioAiMediaSectionProps = {
   readonly service: StudioServiceContent;
@@ -47,6 +37,7 @@ export function StudioAiMediaSection({ service }: StudioAiMediaSectionProps) {
   return (
     <section
       id={HOME_SECTION_IDS.aiMedia}
+      data-service-key={HOME_SECTION_IDS.aiMedia}
       className={`${STUDIO_LIGHT_SECTION_CLASS} overflow-hidden border-t border-studio-border`}
     >
       <div className={`${STUDIO_CONTAINER_CLASS} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
@@ -57,18 +48,7 @@ export function StudioAiMediaSection({ service }: StudioAiMediaSectionProps) {
           <div className="mt-10">
             <StudioPricingRows rows={service.pricing} />
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-6">
-            <StudioCta href={service.primaryCtaHref}>{service.primaryCtaLabel}</StudioCta>
-            <HomeSectionLink
-              href={homeSectionHref(HOME_SECTION_IDS.portfolio)}
-              className={EXAMPLE_LINK_CLASS}
-            >
-              {service.secondaryCtaLabel}
-              <span aria-hidden className={EXAMPLE_ARROW_CLASS}>
-                ↗
-              </span>
-            </HomeSectionLink>
-          </div>
+          <StudioServiceActions service={service} className="mt-8" />
           {service.footnote ? (
             <p className="mt-8 max-w-[52ch] border-l border-studio-accent/50 pl-4 text-xs leading-relaxed text-studio-muted">
               {service.footnote}

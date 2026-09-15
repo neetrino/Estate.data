@@ -1,4 +1,5 @@
 import {
+  SUPERSUDO_PANEL_ANALYTICS_PATH,
   SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
   SUPERSUDO_PANEL_FAQ_PATH,
   SUPERSUDO_PANEL_HOME_HERO_PATH,
@@ -18,6 +19,7 @@ export type AdminNavIconId =
   | "contact-inquiries"
   | "site-content"
   | "home-hero"
+  | "analytics"
   | "logout";
 
 export type AdminNavItem = {
@@ -25,6 +27,7 @@ export type AdminNavItem = {
   label: string;
   href: string;
   icon: AdminNavIconId;
+  external?: boolean;
 };
 
 export type AdminNavGroup = {
@@ -80,6 +83,18 @@ export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
         label: "Inquiries",
         href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
         icon: "contact-inquiries",
+      },
+    ],
+  },
+  {
+    id: "insights",
+    label: "Insights",
+    items: [
+      {
+        id: "analytics",
+        label: "Analytics",
+        href: SUPERSUDO_PANEL_ANALYTICS_PATH,
+        icon: "analytics",
       },
     ],
   },

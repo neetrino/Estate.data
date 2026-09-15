@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
+import { AdminServiceGalleryField } from "@/features/admin/components/AdminServiceGalleryField";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
@@ -37,6 +38,7 @@ type ServiceDraft = {
   title: string;
   description: string;
   imageUrl: string;
+  galleryText: string;
   includedText: string;
   pricingText: string;
   primaryCtaLabel: string;
@@ -53,6 +55,7 @@ function toDraft(service: AdminStudioService): ServiceDraft {
     title: service.title,
     description: service.description,
     imageUrl: service.imageUrl,
+    galleryText: asStringList(service.galleryUrls).join("\n"),
     includedText: asStringList(service.included).join("\n"),
     pricingText: formatPricingLines(asPricingRows(service.pricing)),
     primaryCtaLabel: service.primaryCtaLabel,
@@ -114,6 +117,22 @@ function ServiceEditor({
     }
   }
 
+  async function handleGalleryUpload(file: File) {
+    setUploading(true);
+    setUploadError(null);
+    try {
+      const uploaded = await uploadAdminImage(file);
+      setDraft((previous) => {
+        const lines = parseIncludedLines(previous.galleryText);
+        return { ...previous, galleryText: [...lines, uploaded.publicUrl].join("\n") };
+      });
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : UPLOAD_FAILED_MESSAGE);
+    } finally {
+      setUploading(false);
+    }
+  }
+
   async function handleSave() {
     setSaveError(null);
     const sortOrder = Number.parseInt(draft.sortOrder, 10);
@@ -128,6 +147,7 @@ function ServiceEditor({
         title: draft.title,
         description: draft.description,
         imageUrl: draft.imageUrl,
+        galleryUrls: parseIncludedLines(draft.galleryText),
         included: parseIncludedLines(draft.includedText),
         pricing: parsePricingLines(draft.pricingText),
         primaryCtaLabel: draft.primaryCtaLabel,
@@ -177,6 +197,13 @@ function ServiceEditor({
           onUpload={handleUpload}
         />
       ) : null}
+      <AdminServiceGalleryField
+        serviceId={service.id}
+        galleryText={draft.galleryText}
+        uploading={uploading}
+        onGalleryTextChange={(value) => setField("galleryText", value)}
+        onUpload={handleGalleryUpload}
+      />
       <AdminFormField
         label="What's included"
         name={`included-${service.id}`}

@@ -46,3 +46,13 @@ export function parsePricingLines(text: string): PricingDraftRow[] {
 export function formatPricingLines(rows: readonly PricingDraftRow[]): string {
   return rows.map((row) => `${row.label} | ${row.price}`).join("\n");
 }
+
+export type LinkDraftRow = { label: string; href: string };
+
+export function parseLinkLines(text: string): LinkDraftRow[] {
+  return parsePricingLines(text).map((row) => ({ label: row.label, href: row.price }));
+}
+
+export function formatLinkLines(rows: readonly LinkDraftRow[]): string {
+  return rows.map((row) => `${row.label} | ${row.href}`).join("\n");
+}

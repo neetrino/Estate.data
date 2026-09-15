@@ -7,17 +7,20 @@ import { getStudioServiceSections } from "@/server/features/studio/get-studio-se
 import { getContactFieldSettings } from "@/server/features/contact/get-contact-field-settings";
 import { listFaqItems } from "@/server/features/faq/list-faq-items";
 import { getPricingPage } from "@/server/features/pricing/get-pricing-page";
+import { getMarketingCopy } from "@/server/features/site-copy/get-site-copy";
 
 export async function HomePage() {
-  const [projects, hero, slides, services, pricing, faq, contactFields] = await Promise.all([
-    fetchRecentWorkProjects(DEFAULT_RECENT_WORK_LIMIT),
-    getHomeHeroForPage(),
-    getHomeHeroSlides(),
-    getStudioServiceSections(),
-    getPricingPage(),
-    listFaqItems(),
-    getContactFieldSettings(),
-  ]);
+  const [projects, hero, slides, services, pricing, faq, contactFields, marketingCopy] =
+    await Promise.all([
+      fetchRecentWorkProjects(DEFAULT_RECENT_WORK_LIMIT),
+      getHomeHeroForPage(),
+      getHomeHeroSlides(),
+      getStudioServiceSections(),
+      getPricingPage(),
+      listFaqItems(),
+      getContactFieldSettings(),
+      getMarketingCopy(),
+    ]);
 
   return (
     <HomeLandingPage
@@ -28,6 +31,7 @@ export async function HomePage() {
       packages={pricing.media}
       faq={faq}
       contactFields={contactFields}
+      marketingCopy={marketingCopy}
     />
   );
 }
