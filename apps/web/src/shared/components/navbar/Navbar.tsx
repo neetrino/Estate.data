@@ -24,6 +24,7 @@ import { MobileNavMenu } from "@/shared/components/navbar/MobileNavMenu";
 import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
 import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 import { NavDesktopItem } from "@/shared/components/navbar/NavDesktopItem";
+import { NavDesktopServicesItem } from "@/shared/components/navbar/NavDesktopServicesItem";
 import { useLocationHash } from "@/shared/components/navbar/useLocationHash";
 import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
 
@@ -273,15 +274,24 @@ export function Navbar({ overlay }: NavbarProps) {
               }`}
             >
               <ul className="flex items-center justify-center gap-8">
-                {MAIN_NAV_LINKS.map((link) => (
-                  <NavDesktopItem
-                    key={link.label}
-                    link={link}
-                    active={isNavbarActivePath(pathname, link.href, hash)}
-                    tone={useFigmaHomeDesktopHeader ? "dark" : navTone}
-                    useOverlayStyle={useFigmaHomeDesktopHeader}
-                  />
-                ))}
+                {MAIN_NAV_LINKS.map((link) =>
+                  link.label === "Services" ? (
+                    <NavDesktopServicesItem
+                      key={link.label}
+                      pathname={pathname}
+                      hash={hash}
+                      useOverlayStyle={useFigmaHomeDesktopHeader}
+                    />
+                  ) : (
+                    <NavDesktopItem
+                      key={link.label}
+                      link={link}
+                      active={isNavbarActivePath(pathname, link.href, hash)}
+                      tone={useFigmaHomeDesktopHeader ? "dark" : navTone}
+                      useOverlayStyle={useFigmaHomeDesktopHeader}
+                    />
+                  ),
+                )}
               </ul>
             </div>
 

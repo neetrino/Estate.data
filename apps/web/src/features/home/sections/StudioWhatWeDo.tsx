@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import type { WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioReelDialog } from "@/features/home/sections/StudioReelDialog";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -18,8 +18,11 @@ import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 
 const REEL_DELAY_MS = 120;
 
-export function StudioWhatWeDo() {
-  const copy = STUDIO_PAGE_COPY.whatWeDo;
+type StudioWhatWeDoProps = {
+  readonly copy: WhatWeDoCopy;
+};
+
+export function StudioWhatWeDo({ copy }: StudioWhatWeDoProps) {
   const [reelOpen, setReelOpen] = useState(false);
 
   return (
@@ -41,14 +44,11 @@ export function StudioWhatWeDo() {
             </h2>
             <p className="studio-body-lg mt-6 max-w-[48ch]">{copy.body}</p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <HomeSectionLink
-                href={`/#${HOME_SECTION_IDS.quote}`}
-                className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}
-              >
+              <HomeSectionLink href={copy.primaryCtaHref} className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}>
                 {copy.primaryCta}
               </HomeSectionLink>
               <HomeSectionLink
-                href={`/#${HOME_SECTION_IDS.photography}`}
+                href={copy.secondaryCtaHref}
                 className={STUDIO_HERO_SECONDARY_BUTTON_CLASS}
               >
                 {copy.secondaryCta}

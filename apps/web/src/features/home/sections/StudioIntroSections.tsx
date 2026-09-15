@@ -2,8 +2,6 @@ import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import { StudioCta } from "@/features/home/sections/StudioCta";
-import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
-import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
 import { StudioStartingAt } from "@/features/home/sections/StudioStartingAt";
@@ -12,6 +10,7 @@ import {
   STUDIO_LIGHT_SECTION_CLASS,
   STUDIO_MUTED_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
+import type { WebPagesCopy } from "@/server/features/site-copy/site-copy.schema";
 import Image from "next/image";
 
 const CARD_DELAY_STEP_MS = 80;
@@ -47,9 +46,12 @@ export function StudioOfferings() {
   );
 }
 
-export function StudioWebPagesTeaser() {
-  const copy = STUDIO_PAGE_COPY.webPages;
+type StudioWebPagesTeaserProps = {
+  readonly copy: WebPagesCopy;
+};
 
+/** Compact home teaser — full included list and pricing live on `/web-pages`. */
+export function StudioWebPagesTeaser({ copy }: StudioWebPagesTeaserProps) {
   return (
     <section
       id={HOME_SECTION_IDS.webPagesTeaser}
@@ -60,27 +62,20 @@ export function StudioWebPagesTeaser() {
           <StudioSectionLabel>{copy.eyebrow}</StudioSectionLabel>
           <h2 className="studio-display-lg mt-6 max-w-[18ch] text-studio-fg">{copy.title}</h2>
           <p className="studio-body-lg mt-6 max-w-[50ch]">{copy.body}</p>
-          <div className="mt-10">
-            <p className="studio-label mb-4 text-studio-muted">{copy.includedLabel}</p>
-            <StudioFeatureList items={copy.included} />
+          <div className="mt-8 flex flex-wrap items-center gap-6">
+            <StudioCta href={copy.href}>{copy.ctaLabel}</StudioCta>
+            <StudioStartingAt price={copy.startingPrice} />
           </div>
         </StudioReveal>
         <StudioReveal className="lg:col-span-6" delay={MEDIA_DELAY_MS}>
           <div className="relative aspect-[4/3] overflow-hidden bg-studio-bg">
             <Image
               src={STUDIO_MEDIA.landingPage}
-              alt="Single-property real estate landing page shown on a laptop and phone"
+              alt="Single-property real estate web page shown on a laptop and phone"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-          </div>
-          <div className="mt-10">
-            <StudioPricingRows rows={copy.pricing} />
-          </div>
-          <div className="mt-8 flex flex-wrap items-center gap-6">
-            <StudioCta href={copy.href}>{copy.ctaLabel}</StudioCta>
-            <StudioStartingAt price={copy.startingPrice} />
           </div>
         </StudioReveal>
       </div>

@@ -4,6 +4,7 @@ import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
 import type { PricingCategoryDto } from "@/server/features/pricing/pricing.schema";
 import type { FaqItemDto } from "@/server/features/faq/faq.schema";
+import type { MarketingCopyBundle } from "@/server/features/site-copy/site-copy.schema";
 import { StudioHeroSection, type StudioHeroSlide } from "@/features/home/sections/StudioHeroSection";
 import {
   StudioServicesSection,
@@ -12,6 +13,7 @@ import {
 import { StudioAiMediaSection } from "@/features/home/sections/StudioAiMediaSection";
 import { StudioDroneSection } from "@/features/home/sections/StudioDroneSection";
 import { StudioMatterportSection } from "@/features/home/sections/StudioMatterportSection";
+import { StudioFloorPlansSection } from "@/features/home/sections/StudioFloorPlansSection";
 import { StudioScanToBimSection } from "@/features/home/sections/StudioScanToBimSection";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import { StudioWhatWeDo } from "@/features/home/sections/StudioWhatWeDo";
@@ -31,7 +33,7 @@ import {
 } from "@/features/home/sections/StudioStorySections";
 import { StudioFaq } from "@/features/home/sections/StudioFaq";
 import { StudioContactSection } from "@/features/home/sections/StudioContactSection";
-import { StudioTalkSection } from "@/features/home/sections/StudioTalkSection";
+import { StudioSectionViewTracker } from "@/features/home/sections/StudioSectionViewTracker";
 import { STUDIO_PAGE_CLASS } from "@/features/home/sections/studioSectionStyles";
 
 type HomeLandingPageProps = {
@@ -42,6 +44,7 @@ type HomeLandingPageProps = {
   readonly packages: PricingCategoryDto;
   readonly faq: readonly FaqItemDto[];
   readonly contactFields: readonly ContactFieldSetting[];
+  readonly marketingCopy: MarketingCopyBundle;
 };
 
 export function HomeLandingPage({
@@ -52,6 +55,7 @@ export function HomeLandingPage({
   packages,
   faq,
   contactFields,
+  marketingCopy,
 }: HomeLandingPageProps) {
   const coreServices = services.filter((service) =>
     STUDIO_CORE_SERVICE_KEYS.includes(service.sectionKey),
@@ -68,14 +72,15 @@ export function HomeLandingPage({
     <div className={STUDIO_PAGE_CLASS}>
       <main className="relative isolate overflow-x-clip">
         <StudioHeroSection hero={hero} slides={slides} />
-        <StudioWhatWeDo />
+        <StudioWhatWeDo copy={marketingCopy.whatWeDo} />
         <StudioOfferings />
         <StudioServicesSection services={coreServices} />
         {aiMedia ? <StudioAiMediaSection service={aiMedia} /> : null}
         {drone ? <StudioDroneSection service={drone} /> : null}
         {matterport ? <StudioMatterportSection service={matterport} /> : null}
+        {matterport ? <StudioFloorPlansSection service={matterport} /> : null}
         {scanToBim ? <StudioScanToBimSection service={scanToBim} /> : null}
-        <StudioWebPagesTeaser />
+        <StudioWebPagesTeaser copy={marketingCopy.webPages} />
         <StudioPackages category={packages} />
         <StudioPackageCompare />
         <StudioPortfolio projects={projects} />
@@ -85,8 +90,8 @@ export function HomeLandingPage({
         <StudioTeam />
         <StudioServiceArea />
         <StudioFaq items={faq} />
-        <StudioContactSection fields={contactFields} />
-        <StudioTalkSection />
+        <StudioContactSection fields={contactFields} copy={marketingCopy.contact} />
+        <StudioSectionViewTracker />
       </main>
     </div>
   );

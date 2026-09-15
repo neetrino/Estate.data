@@ -68,7 +68,7 @@ export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
     fieldKey: "propertyAddress",
     label: "Property Address",
     placeholder: "1234 Sunset Blvd, Los Angeles, CA",
-    mode: "required",
+    mode: "optional",
     sortOrder: 50,
   },
   {
@@ -101,9 +101,9 @@ export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
   },
   {
     fieldKey: "projectDetails",
-    label: "Additional Notes",
+    label: "Message / Notes",
     placeholder: "Anything else we should know about the property or shoot.",
-    mode: "optional",
+    mode: "required",
     sortOrder: 100,
   },
 ];

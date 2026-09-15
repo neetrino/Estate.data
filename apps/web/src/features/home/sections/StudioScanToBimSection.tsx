@@ -53,6 +53,7 @@ export function StudioScanToBimSection({ service }: StudioScanToBimSectionProps)
   return (
     <section
       id={HOME_SECTION_IDS.scanToBim}
+      data-service-key={HOME_SECTION_IDS.scanToBim}
       className={`${STUDIO_LIGHT_SECTION_CLASS} border-t border-studio-border`}
     >
       <div className={STUDIO_CONTAINER_CLASS}>

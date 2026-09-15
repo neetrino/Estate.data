@@ -12,7 +12,7 @@ export const CONTACT_FORM_COPY = {
     },
     preferredDate: { label: "Desired Shoot Date", placeholder: "Select a date" },
     projectDetails: {
-      label: "Additional Notes",
+      label: "Message / Notes",
       placeholder: "Anything else we should know about the property or shoot.",
     },
   },

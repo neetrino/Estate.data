@@ -12,6 +12,7 @@ export type ServiceCatalogItem = {
   readonly comingSoon?: boolean;
 };
 
+/** Services dropdown — in-page section jumps, matching the product brief. */
 export const SERVICE_CATALOG = [
   {
     id: "photography",
@@ -21,27 +22,21 @@ export const SERVICE_CATALOG = [
   },
   {
     id: "video-production",
-    label: "Video",
+    label: "Video Production",
     href: homeSectionHref(HOME_SECTION_IDS.video),
     enabled: true,
   },
   {
     id: "drone-services",
-    label: "Drone",
+    label: "Drone Services",
     href: homeSectionHref(HOME_SECTION_IDS.drone),
-    enabled: true,
-  },
-  {
-    id: "3d-tours-visualization",
-    label: "Matterport 3D",
-    href: homeSectionHref(HOME_SECTION_IDS.tours),
     enabled: true,
   },
   {
     id: "floor-plans-2d-3d",
     label: "Floor Plans / 2D–3D",
-    href: homeSectionHref(HOME_SECTION_IDS.tours),
-    enabled: false,
+    href: homeSectionHref(HOME_SECTION_IDS.floorPlans),
+    enabled: true,
   },
   {
     id: "ai-media",

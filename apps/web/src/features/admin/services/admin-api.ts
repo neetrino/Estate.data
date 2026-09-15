@@ -11,6 +11,7 @@ import type {
   AdminPricingResponse,
   AdminStudioService,
   DashboardSummary,
+  MarketingCopyBundle,
 } from "@/features/admin/types/admin-data";
 import { API_ROUTES } from "@/shared/api/routes";
 
@@ -259,5 +260,18 @@ export function saveAdminContactFields(
         sortOrder: field.sortOrder,
       })),
     },
+  });
+}
+
+export function fetchAdminSiteCopy(): Promise<MarketingCopyBundle> {
+  return adminAuthenticatedRequest<MarketingCopyBundle>(API_ROUTES.adminSiteCopy);
+}
+
+export function updateAdminSiteCopy(
+  body: Record<string, unknown>,
+): Promise<MarketingCopyBundle> {
+  return adminAuthenticatedRequest<MarketingCopyBundle>(API_ROUTES.adminSiteCopy, {
+    method: "PATCH",
+    body,
   });
 }

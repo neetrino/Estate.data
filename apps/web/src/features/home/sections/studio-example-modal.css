@@ -1,0 +1,33 @@
+/**
+ * Studio example dialog media — editing loft portrait must fit fully
+ * inside the fixed 16/10 slot without changing the modal box size.
+ */
+.studio-example-modal__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: var(--studio-card);
+}
+
+.studio-example-modal__img--cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.studio-example-modal__img--contain {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* Slightly wider than pure contain; box size unchanged (sides crop less empty). */
+  transform: translate(-50%, -50%) scale(2);
+}

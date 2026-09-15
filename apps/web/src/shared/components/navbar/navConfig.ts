@@ -30,23 +30,23 @@ export const MAIN_NAV_LINKS: readonly NavLink[] = [
   },
   { label: "3D Tours", href: homeSectionHref(HOME_SECTION_IDS.tours) },
   { label: "Scan-to-BIM", href: homeSectionHref(HOME_SECTION_IDS.scanToBim) },
-  { label: "Landing Pages", href: WEB_PAGES_PATH },
+  { label: "Web Pages", href: WEB_PAGES_PATH },
   { label: "Packages", href: homeSectionHref(HOME_SECTION_IDS.packages) },
   { label: "Portfolio", href: homeSectionHref(HOME_SECTION_IDS.portfolio) },
   { label: "Studio", href: homeSectionHref(HOME_SECTION_IDS.studio) },
   { label: "FAQ", href: homeSectionHref(HOME_SECTION_IDS.faq) },
-  { label: "Contact", href: homeSectionHref(HOME_SECTION_IDS.contact) },
+  { label: "Contact", href: homeSectionHref(HOME_SECTION_IDS.quote) },
 ] as const;
 
 export const MOBILE_NAV_PRIMARY_LINKS: readonly NavLink[] = [
   { label: "3D Tours", href: homeSectionHref(HOME_SECTION_IDS.tours) },
   { label: "Scan-to-BIM", href: homeSectionHref(HOME_SECTION_IDS.scanToBim) },
-  { label: "Landing Pages", href: WEB_PAGES_PATH },
+  { label: "Web Pages", href: WEB_PAGES_PATH },
   { label: "Packages", href: homeSectionHref(HOME_SECTION_IDS.packages) },
   { label: "Portfolio", href: homeSectionHref(HOME_SECTION_IDS.portfolio) },
   { label: "Studio", href: homeSectionHref(HOME_SECTION_IDS.studio) },
   { label: "FAQ", href: homeSectionHref(HOME_SECTION_IDS.faq) },
-  { label: "Contact", href: homeSectionHref(HOME_SECTION_IDS.contact) },
+  { label: "Contact", href: homeSectionHref(HOME_SECTION_IDS.quote) },
 ] as const;
 
 export const MOBILE_NAV_MORE_LINKS: readonly NavLink[] = [] as const;

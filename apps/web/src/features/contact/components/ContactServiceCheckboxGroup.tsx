@@ -1,7 +1,8 @@
 "use client";
 
 import { CONTACT_FORM_SERVICE_OPTIONS } from "@/features/contact/content/contactFieldConfig";
-import { useState } from "react";
+import { subscribeContactService } from "@/features/contact/lib/contactServicePrefill";
+import { useEffect, useState } from "react";
 
 const CONTACT_SERVICE_LEGEND_CLASS = "studio-label mb-2 block text-studio-muted";
 
@@ -28,6 +29,16 @@ export function ContactServiceCheckboxGroup({
   disabled = false,
 }: ContactServiceCheckboxGroupProps) {
   const [selected, setSelected] = useState<readonly string[]>([]);
+
+  useEffect(
+    () =>
+      subscribeContactService((service) => {
+        setSelected((current) =>
+          current.includes(service) ? current : [...current, service],
+        );
+      }),
+    [],
+  );
 
   function toggle(value: string, checked: boolean) {
     setSelected((current) =>

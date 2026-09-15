@@ -21,6 +21,7 @@ export function StudioDroneSection({ service }: StudioDroneSectionProps) {
   return (
     <section
       id={HOME_SECTION_IDS.drone}
+      data-service-key={HOME_SECTION_IDS.drone}
       className={`relative overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
       <div className="absolute inset-0">

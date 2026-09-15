@@ -33,12 +33,12 @@ export const CONTACT_FIELDS = [
   { fieldKey: "company", label: "Company", placeholder: "Brokerage or studio", mode: "optional", sortOrder: 20 },
   { fieldKey: "email", label: "Email", placeholder: "you@example.com", mode: "required", sortOrder: 30 },
   { fieldKey: "phone", label: "Phone", placeholder: "(310) 555-0142", mode: "optional", sortOrder: 40 },
-  { fieldKey: "propertyAddress", label: "Property Address", placeholder: "1234 Sunset Blvd, Los Angeles, CA", mode: "required", sortOrder: 50 },
+  { fieldKey: "propertyAddress", label: "Property Address", placeholder: "1234 Sunset Blvd, Los Angeles, CA", mode: "optional", sortOrder: 50 },
   { fieldKey: "propertyType", label: "Property Type", placeholder: "Single Family, Luxury Estate, Condo…", mode: "optional", sortOrder: 60 },
   { fieldKey: "squareFootage", label: "Approximate Square Footage", placeholder: "2,400 sq ft", mode: "optional", sortOrder: 70 },
   { fieldKey: "preferredDate", label: "Desired Shoot Date", placeholder: "Select a date", mode: "optional", sortOrder: 80 },
   { fieldKey: "service", label: "Services Required", placeholder: "Select one or more services", mode: "required", sortOrder: 90 },
-  { fieldKey: "projectDetails", label: "Additional Notes", placeholder: "Anything else we should know.", mode: "optional", sortOrder: 100 },
+  { fieldKey: "projectDetails", label: "Message / Notes", placeholder: "Anything else we should know.", mode: "required", sortOrder: 100 },
 ] as const;
 
 type StudioSeedService = {
