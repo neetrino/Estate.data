@@ -6,9 +6,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { AdminNavIcon } from "@/features/admin/components/layout/AdminNavIcon";
 import {
   ADMIN_NAV_GROUPS,
+  ADMIN_NAV_PAGE_HREFS,
   ADMIN_SIDEBAR_LOGOUT_ITEM,
   type AdminNavItem,
 } from "@/features/admin/config/admin-nav";
+import { isAdminNavItemActive } from "@/features/admin/lib/is-admin-nav-item-active";
 import { SUPERSUDO_PATH } from "@/features/admin/lib/admin-paths";
 import { useAdminAuth } from "@/features/admin/providers/AdminAuthProvider";
 import {
@@ -30,14 +32,6 @@ import {
   SITE_LOGO_DARK_CACHE_VERSION,
   SITE_LOGO_DARK_PATH,
 } from "@/shared/components/navbar/navConfig";
-
-function isNavItemActive(pathname: string, href: string): boolean {
-  if (href === "/supersudo/panel") {
-    return pathname === href;
-  }
-
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 function navItemClass(active: boolean): string {
   return [
@@ -64,7 +58,7 @@ function NavLink({ item, active }: { readonly item: AdminNavItem; readonly activ
   }
 
   return (
-    <Link href={item.href} className={className}>
+    <Link href={item.href} className={className} aria-current={active ? "page" : undefined}>
       <AdminNavIcon id={item.icon} />
       <span>{item.label}</span>
     </Link>
@@ -113,7 +107,11 @@ export function AdminSidebar() {
                 <li key={item.id}>
                   <NavLink
                     item={item}
-                    active={item.external ? false : isNavItemActive(pathname, item.href)}
+                    active={
+                      item.external
+                        ? false
+                        : isAdminNavItemActive(pathname, item.href, ADMIN_NAV_PAGE_HREFS)
+                    }
                   />
                 </li>
               ))}

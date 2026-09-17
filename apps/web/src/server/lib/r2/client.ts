@@ -22,6 +22,9 @@ export function getR2Client(): S3Client {
         accessKeyId: config.R2_ACCESS_KEY_ID,
         secretAccessKey: config.R2_SECRET_ACCESS_KEY,
       },
+      // AWS SDK v3 default checksums are rejected by R2.
+      requestChecksumCalculation: "WHEN_REQUIRED",
+      responseChecksumValidation: "WHEN_REQUIRED",
     });
   }
 

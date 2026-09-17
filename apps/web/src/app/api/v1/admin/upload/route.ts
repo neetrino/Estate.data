@@ -1,19 +1,21 @@
-import { uploadHomeHeroImageToR2, uploadMediaToR2 } from "@/server/features/r2/upload-media";
+import { uploadHomeHeroImageToR2, uploadMediaToR2, isMediaStorageConfigured } from "@/server/features/r2/upload-media";
 import { ApiError } from "@/server/lib/api-error";
 import { requireAdminAuth } from "@/server/lib/auth/require-admin";
-import { isR2Configured } from "@/server/lib/r2/client";
 import { enforceAdminRateLimit } from "@/server/lib/rate-limit/enforce-rate-limit";
 import { emptyOptionsResponse, jsonSuccess } from "@/server/lib/http";
 import { logger } from "@/server/lib/logger";
 import { handleApiRoute } from "@/server/lib/route-handler";
-
-const MAX_FORM_BYTES = 10 * 1024 * 1024;
+import {
+  ADMIN_IMAGE_STORAGE_UNAVAILABLE,
+  MAX_ADMIN_IMAGE_UPLOAD_BYTES,
+  resolveAdminImageMime,
+} from "@/shared/lib/adminImageUpload";
 
 const HOME_HERO_UPLOAD_CONTEXT = "homeHero";
 
 async function postAdminUpload(request: Request): Promise<Response> {
-  if (!isR2Configured()) {
-    throw ApiError.internal("R2 storage is not configured");
+  if (!isMediaStorageConfigured()) {
+    throw ApiError.serviceUnavailable(ADMIN_IMAGE_STORAGE_UNAVAILABLE);
   }
 
   const rateLimit = await enforceAdminRateLimit(request);
@@ -24,7 +26,7 @@ async function postAdminUpload(request: Request): Promise<Response> {
   await requireAdminAuth(request);
 
   const contentLength = request.headers.get("content-length");
-  if (contentLength && Number(contentLength) > MAX_FORM_BYTES) {
+  if (contentLength && Number(contentLength) > MAX_ADMIN_IMAGE_UPLOAD_BYTES) {
     throw ApiError.payloadTooLarge();
   }
 
@@ -39,7 +41,7 @@ async function postAdminUpload(request: Request): Promise<Response> {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const mimeType = file.type || "application/octet-stream";
+  const mimeType = resolveAdminImageMime(file.name, file.type || "application/octet-stream");
 
   try {
     const uploaded =
@@ -55,7 +57,10 @@ async function postAdminUpload(request: Request): Promise<Response> {
     return jsonSuccess(uploaded, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed";
-    if (message.includes("maximum") || message.includes("Unsupported")) {
+    if (message.includes("storage")) {
+      throw ApiError.serviceUnavailable(message);
+    }
+    if (message.includes("10 MB") || message.includes("JPEG")) {
       throw ApiError.badRequest(message, "VALIDATION_ERROR");
     }
 

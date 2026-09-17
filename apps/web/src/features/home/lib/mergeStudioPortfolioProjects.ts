@@ -1,13 +1,14 @@
-import { parseRecentWorkAlt } from "@/features/home/content/parseRecentWorkAlt";
+import {
+  parseRecentWorkAlt,
+  portfolioHas3D,
+  portfolioHasVideo,
+} from "@/features/home/content/parseRecentWorkAlt";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import {
   formatPortfolioAlt,
   STUDIO_PORTFOLIO_CATALOG,
   type StudioPortfolioCard,
 } from "@/features/home/content/studioPortfolioCatalog";
-
-const VIDEO_PATTERN = /video|film|cinematic/iu;
-const TOUR_PATTERN = /matterport|3d tour/iu;
 
 const CATEGORY_KEYWORDS: readonly { filter: string; pattern: RegExp }[] = [
   { filter: "Luxury Homes", pattern: /luxury|estate|beverly|malibu|glass house/iu },
@@ -29,8 +30,8 @@ function inferCategories(haystack: string): string[] {
 function derivePortfolioCard(project: RecentWorkProject): StudioPortfolioCard {
   const parsed = parseRecentWorkAlt(project.imageAlt);
   const haystack = project.imageAlt;
-  const hasVideo = VIDEO_PATTERN.test(haystack);
-  const has3D = TOUR_PATTERN.test(haystack);
+  const hasVideo = portfolioHasVideo(haystack);
+  const has3D = portfolioHas3D(haystack);
 
   return {
     id: project.id,
@@ -55,10 +56,21 @@ function overlayCatalogCard(
     return entry;
   }
 
+  const parsed = parseRecentWorkAlt(cms.imageAlt);
+  const haystack = `${cms.imageAlt} ${parsed.title}`;
+  const inferred = inferCategories(haystack);
+  const structured = Boolean(parsed.location) || parsed.services.length > 0;
+
   return {
     ...entry,
+    title: parsed.title || entry.title,
+    location: parsed.location ?? entry.location,
+    services: parsed.services.length > 0 ? parsed.services : entry.services,
+    categories: inferred.length > 0 ? inferred : entry.categories,
     imageSrc: cms.imageSrc,
     imageAlt: cms.imageAlt || formatPortfolioAlt(entry),
+    hasVideo: portfolioHasVideo(haystack) || (!structured && entry.hasVideo),
+    has3D: portfolioHas3D(haystack) || (!structured && entry.has3D),
   };
 }
 

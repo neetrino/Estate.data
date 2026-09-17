@@ -26,6 +26,7 @@ export function AdminHeroSlidesPage() {
   const slides = data ?? [];
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const publishedCount = slides.filter((slide) => slide.published).length;
 
   async function handleUpload(file: File) {
     setBusy(true);
@@ -35,13 +36,14 @@ export function AdminHeroSlidesPage() {
       await createAdminHeroSlide({
         imageUrl: uploaded.publicUrl,
         thumbUrl: uploaded.publicUrl,
+        imageKey: uploaded.objectKey,
         alt: file.name,
-        sortOrder: slides.length,
         published: true,
       });
       reload();
     } catch (uploadError) {
       setFormError(uploadError instanceof Error ? uploadError.message : UPLOAD_FAILED_MESSAGE);
+      throw uploadError;
     } finally {
       setBusy(false);
     }
@@ -51,17 +53,26 @@ export function AdminHeroSlidesPage() {
     <>
       <AdminPageHeader
         title="Hero slides"
-        description="Upload, reorder, replace, or remove homepage slider images."
+        description="Add as many images as you want. The homepage plays them in order and restarts from the first after the last."
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {formError ? <AdminErrorState message={formError} /> : null}
+      <p className="mb-3 text-sm text-muted-foreground">
+        {publishedCount} published slide{publishedCount === 1 ? "" : "s"} in the loop.
+        {publishedCount < 2 ? " Add at least two published images to see the slider rotate." : ""}
+      </p>
       <div className={`${ADMIN_CARD_CLASS} mb-4`}>
         <AdminImageUploader
-          label="New slide"
+          label="Add slides"
           previewUrl={null}
           uploading={busy}
-          placeholderText="Upload an image to add a slide"
+          multiple
+          resetPreviewOnSuccess
+          reverseFiles
+          buttonLabel="Add images"
+          hint="Select one or several files. Each file becomes a new slide"
+          placeholderText="Upload one or more images to add slides"
           onUpload={handleUpload}
         />
       </div>
@@ -95,6 +106,7 @@ function HeroSlideCard({
       await updateAdminHeroSlide(slide.id, {
         imageUrl: uploaded.publicUrl,
         thumbUrl: uploaded.publicUrl,
+        imageKey: uploaded.objectKey,
       });
       onChanged();
     } catch (uploadError) {

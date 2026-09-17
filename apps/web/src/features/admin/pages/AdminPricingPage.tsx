@@ -11,6 +11,11 @@ import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
 import { AdminModal } from "@/features/admin/components/ui/AdminModal";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
+import {
+  pricingPackageFieldFromApiMessage,
+  validatePricingPackageForm,
+  type PricingPackageFieldErrors,
+} from "@/features/admin/lib/pricing-package-form";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 import {
   createAdminPricingPackage,
@@ -64,7 +69,9 @@ export function AdminPricingPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminPricing, []);
   const category = data?.categories.find((item) => item.key === MEDIA_CATEGORY_KEY);
   const packages = category?.packages ?? [];
-  const [actionError, setActionError] = useState<string | null>(null);
+  const [pageError, setPageError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<PricingPackageFieldErrors>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<AdminPricingPackage | null>(null);
   const [form, setForm] = useState<PackageFormState>(EMPTY_FORM);
@@ -74,6 +81,8 @@ export function AdminPricingPage() {
   function openCreate() {
     setEditing(null);
     setForm(EMPTY_FORM);
+    setFormError(null);
+    setFieldErrors({});
     setModalOpen(true);
   }
 
@@ -91,15 +100,32 @@ export function AdminPricingPage() {
       sortOrder: String(pkg.sortOrder),
       published: pkg.published,
     });
+    setFormError(null);
+    setFieldErrors({});
     setModalOpen(true);
   }
 
   async function handleSave() {
+    const nextFieldErrors = validatePricingPackageForm({
+      isCreate: editing === null,
+      id: form.id,
+      name: form.name,
+      price: form.price,
+      features: form.features,
+    });
+    if (Object.keys(nextFieldErrors).length > 0) {
+      setFieldErrors(nextFieldErrors);
+      setFormError("Fix the highlighted fields to save this package.");
+      return;
+    }
+
     setSaving(true);
+    setFormError(null);
+    setFieldErrors({});
     try {
       const shared = {
-        name: form.name,
-        price: form.price,
+        name: form.name.trim(),
+        price: form.price.trim(),
         features: textToFeatures(form.features),
         bookLabel: form.bookLabel,
         bookHref: form.bookHref,
@@ -108,21 +134,24 @@ export function AdminPricingPage() {
         sortOrder: Number(form.sortOrder),
         published: form.published,
       };
-
       if (editing) {
         await updateAdminPricingPackage(editing.id, shared);
       } else {
         await createAdminPricingPackage({
-          id: form.id,
+          id: form.id.trim(),
           categoryKey: MEDIA_CATEGORY_KEY,
           ...shared,
         });
       }
-
       setModalOpen(false);
       reload();
     } catch (saveError) {
-      setActionError(saveError instanceof Error ? saveError.message : "Save failed");
+      const message = saveError instanceof Error ? saveError.message : "Save failed";
+      const field = pricingPackageFieldFromApiMessage(message);
+      if (field) {
+        setFieldErrors({ [field]: message });
+      }
+      setFormError(message);
     } finally {
       setSaving(false);
     }
@@ -132,14 +161,13 @@ export function AdminPricingPage() {
     if (!deleteId) {
       return;
     }
-
     setSaving(true);
     try {
       await deleteAdminPricingPackage(deleteId);
       setDeleteId(null);
       reload();
     } catch (deleteError) {
-      setActionError(deleteError instanceof Error ? deleteError.message : "Delete failed");
+      setPageError(deleteError instanceof Error ? deleteError.message : "Delete failed");
     } finally {
       setSaving(false);
     }
@@ -154,8 +182,7 @@ export function AdminPricingPage() {
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
-      {actionError ? <AdminErrorState message={actionError} /> : null}
-
+      {pageError ? <AdminErrorState message={pageError} /> : null}
       {!loading && !error ? (
         <section className={`${ADMIN_CARD_CLASS} mb-6`}>
           <h2 className="text-lg font-semibold text-brand-navy">
@@ -173,7 +200,6 @@ export function AdminPricingPage() {
           </ul>
         </section>
       ) : null}
-
       <AdminModal
         open={modalOpen}
         title={editing ? "Edit package" : "New package"}
@@ -190,6 +216,7 @@ export function AdminPricingPage() {
         }
       >
         <div className="space-y-4">
+          {formError ? <AdminErrorState message={formError} /> : null}
           {!editing ? (
             <AdminFormField
               label="Package id"
@@ -197,6 +224,7 @@ export function AdminPricingPage() {
               value={form.id}
               onChange={(value) => setForm((prev) => ({ ...prev, id: value }))}
               hint="Lowercase slug, e.g. essential"
+              error={fieldErrors.id}
               required
             />
           ) : null}
@@ -205,6 +233,7 @@ export function AdminPricingPage() {
             name="name"
             value={form.name}
             onChange={(value) => setForm((prev) => ({ ...prev, name: value }))}
+            error={fieldErrors.name}
             required
           />
           <AdminFormField
@@ -212,6 +241,7 @@ export function AdminPricingPage() {
             name="price"
             value={form.price}
             onChange={(value) => setForm((prev) => ({ ...prev, price: value }))}
+            error={fieldErrors.price}
             required
           />
           <AdminFormField
@@ -221,6 +251,7 @@ export function AdminPricingPage() {
             onChange={(value) => setForm((prev) => ({ ...prev, features: value }))}
             multiline
             rows={6}
+            error={fieldErrors.features}
             required
           />
           <AdminFormField
@@ -261,7 +292,6 @@ export function AdminPricingPage() {
           />
         </div>
       </AdminModal>
-
       <AdminConfirmDialog
         open={deleteId !== null}
         title="Delete package?"

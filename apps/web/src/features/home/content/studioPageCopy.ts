@@ -26,6 +26,8 @@ export const STUDIO_SERVICE_BLOCK_COPY = {
 export const STUDIO_EXAMPLE_MODAL_COPY = {
   ctaLabel: "Get this for my listing",
   closeLabel: "Close example",
+  previousServiceLabel: "Previous service example",
+  nextServiceLabel: "Next service example",
 } as const;
 
 export const STUDIO_MATTERPORT_DEMO = {

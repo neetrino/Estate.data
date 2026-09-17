@@ -106,3 +106,8 @@ export const ADMIN_SIDEBAR_LOGOUT_ITEM: AdminNavItem = {
   href: "#logout",
   icon: "logout",
 };
+
+/** Internal page hrefs used to pick a single active sidebar item. */
+export const ADMIN_NAV_PAGE_HREFS: readonly string[] = ADMIN_NAV_GROUPS.flatMap((group) =>
+  group.items.filter((item) => !item.external).map((item) => item.href),
+);

@@ -1,6 +1,5 @@
 "use client";
 
-import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import {
   parseStudioHeroTitle,
   type HomeHeroContentFields,
@@ -16,13 +15,12 @@ import {
   STUDIO_HERO_PRIMARY_BUTTON_CLASS,
   STUDIO_HERO_SECONDARY_BUTTON_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
+import {
+  StudioHeroSlideshow,
+  type StudioHeroSlide,
+} from "@/features/home/sections/StudioHeroSlideshow";
 
-export type StudioHeroSlide = {
-  readonly id: string;
-  readonly imageUrl: string;
-  readonly thumbUrl: string;
-  readonly alt: string;
-};
+export type { StudioHeroSlide };
 
 type StudioHeroSectionProps = {
   readonly hero: HomeHeroContentFields;
@@ -30,11 +28,10 @@ type StudioHeroSectionProps = {
 };
 
 export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
-  const activeSlide = slides[0];
   const chrome = STUDIO_PAGE_COPY.hero;
   const title = parseStudioHeroTitle(hero.title);
 
-  if (!activeSlide) {
+  if (slides.length === 0) {
     return null;
   }
 
@@ -43,18 +40,7 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
       id={HOME_SECTION_IDS.hero}
       className={`la-hero relative flex min-h-svh items-end overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
-      <div className="absolute inset-0">
-        <PublicAssetImage
-          src={activeSlide.imageUrl}
-          alt={activeSlide.alt}
-          fill
-          priority
-          className="studio-kenburns object-cover"
-          sizes="100vw"
-        />
-        <div className="studio-veil absolute inset-0" />
-        <div className="absolute inset-0 bg-studio-bg/25" />
-      </div>
+      <StudioHeroSlideshow slides={slides} />
 
       <div className={`${STUDIO_CONTAINER_CLASS} relative z-10 pt-32 pb-24 md:pb-28`}>
         <p className="studio-label mb-8 text-studio-accent">{chrome.eyebrow}</p>

@@ -2,7 +2,7 @@
 
 import { SERVICE_NAV_LINKS } from "@/shared/components/navbar/navConfig";
 import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
-import { isNavbarActivePath } from "@/shared/components/navbar/navActivePath";
+import { isNavbarActivePath, isServicesMenuActive } from "@/shared/components/navbar/navActivePath";
 
 type NavDesktopServicesItemProps = {
   readonly pathname: string;
@@ -41,9 +41,7 @@ export function NavDesktopServicesItem({
   hash,
   useOverlayStyle = false,
 }: NavDesktopServicesItemProps) {
-  const anyActive = SERVICE_NAV_LINKS.some((service) =>
-    isNavbarActivePath(pathname, service.href, hash),
-  );
+  const anyActive = isServicesMenuActive(pathname, hash);
 
   return (
     <li className="group relative">
@@ -52,6 +50,7 @@ export function NavDesktopServicesItem({
         className={triggerClass(anyActive, useOverlayStyle)}
         aria-haspopup="menu"
         aria-expanded={false}
+        aria-current={anyActive ? "true" : undefined}
       >
         Services
       </button>
