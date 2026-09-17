@@ -1,9 +1,7 @@
 "use client";
 
-import {
-  parseStudioHeroTitle,
-  type HomeHeroContentFields,
-} from "@/features/home/content/heroCopy";
+import { useCallback, useState } from "react";
+import { parseStudioHeroTitle, type HomeHeroContentFields } from "@/features/home/content/heroCopy";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import {
   HOME_SECTION_IDS,
@@ -27,9 +25,30 @@ type StudioHeroSectionProps = {
   readonly slides: readonly StudioHeroSlide[];
 };
 
+function HeroCopyBlock({ slide }: { readonly slide: StudioHeroSlide }) {
+  const title = parseStudioHeroTitle(slide.title);
+  return (
+    <>
+      <h1 className="studio-display-hero max-w-[16ch] text-studio-fg">
+        {title.firstLine}
+        {title.accentWord ? (
+          <>
+            <br />
+            <span className="text-studio-accent">{title.accentWord}</span>
+            {title.trailing ? ` ${title.trailing}` : null}
+          </>
+        ) : null}
+      </h1>
+      <p className="studio-body-lg mt-8 max-w-[60ch] text-studio-fg/75">{slide.description}</p>
+    </>
+  );
+}
+
 export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
   const chrome = STUDIO_PAGE_COPY.hero;
-  const title = parseStudioHeroTitle(hero.title);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const onActiveIndexChange = useCallback((index: number) => setActiveIndex(index), []);
+  const safeIndex = slides.length === 0 ? 0 : activeIndex % slides.length;
 
   if (slides.length === 0) {
     return null;
@@ -40,26 +59,25 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
       id={HOME_SECTION_IDS.hero}
       className={`la-hero relative flex min-h-svh items-end overflow-hidden ${HOME_SECTION_SCROLL_MARGIN_CLASS}`}
     >
-      <StudioHeroSlideshow slides={slides} />
-
+      <StudioHeroSlideshow slides={slides} onActiveIndexChange={onActiveIndexChange} />
       <div className={`${STUDIO_CONTAINER_CLASS} relative z-10 pt-32 pb-24 md:pb-28`}>
         <p className="studio-label mb-8 text-studio-accent">{chrome.eyebrow}</p>
-        <h1 className="studio-display-hero max-w-[16ch] text-studio-fg">
-          {title.firstLine}
-          {title.accentWord ? (
-            <>
-              <br />
-              <span className="text-studio-accent">{title.accentWord}</span>
-              {title.trailing ? ` ${title.trailing}` : null}
-            </>
-          ) : null}
-        </h1>
-        <p className="studio-body-lg mt-8 max-w-[60ch] text-studio-fg/75">{hero.description}</p>
+        <div className="relative">
+          {slides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={
+                index === safeIndex
+                  ? "relative opacity-100 transition-opacity duration-700"
+                  : "pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700"
+              }
+            >
+              <HeroCopyBlock slide={slide} />
+            </div>
+          ))}
+        </div>
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <HomeSectionLink
-            href={hero.primaryButtonHref}
-            className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}
-          >
+          <HomeSectionLink href={hero.primaryButtonHref} className={STUDIO_HERO_PRIMARY_BUTTON_CLASS}>
             {hero.primaryButtonLabel}
           </HomeSectionLink>
           <HomeSectionLink

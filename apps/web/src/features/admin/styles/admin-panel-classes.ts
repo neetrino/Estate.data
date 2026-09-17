@@ -28,6 +28,13 @@ export const ADMIN_MAIN_CLASS =
 export const ADMIN_CONTENT_CLASS = "admin-scrollbar flex-1 overflow-y-auto p-6";
 export const ADMIN_CARD_CLASS =
   "rounded-xl border border-foreground/10 bg-white p-5 shadow-sm";
+export const ADMIN_TABS_LIST_CLASS =
+  "mb-6 flex flex-wrap gap-1 border-b border-foreground/10";
+export const ADMIN_TAB_CLASS =
+  "relative -mb-px border-b-2 px-4 py-2.5 text-sm font-semibold transition-colors";
+export const ADMIN_TAB_ACTIVE_CLASS = "border-brand-purple text-brand-purple";
+export const ADMIN_TAB_IDLE_CLASS =
+  "border-transparent text-brand-navy/60 hover:text-brand-navy";
 export const ADMIN_TABLE_CLASS =
   "w-full text-left text-sm text-brand-navy [&_th]:text-brand-navy [&_td]:text-brand-navy";
 export const ADMIN_TABLE_HEAD_ROW_CLASS =
@@ -40,6 +47,13 @@ export const ADMIN_TABLE_THUMB_IMG_CLASS =
   "h-14 w-20 shrink-0 rounded-md object-cover bg-neutral-100";
 export const ADMIN_INPUT_CLASS =
   "w-full rounded-xl border border-foreground/12 bg-white px-3.5 py-2.5 text-sm text-brand-navy shadow-sm outline-none transition-[box-shadow,border-color] focus-visible:border-brand-purple/40 focus-visible:ring-2 focus-visible:ring-brand-purple/20";
+export const ADMIN_COPY_SECTION_CLASS =
+  "space-y-4 rounded-xl bg-neutral-50 p-4 sm:p-5";
+export const ADMIN_COPY_SECTION_TITLE_CLASS = "text-sm font-semibold text-brand-navy";
+export const ADMIN_COPY_SECTION_HINT_CLASS = "mt-1 text-sm text-muted-foreground";
+export const ADMIN_PAIR_ROW_CLASS = "grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end";
+export const ADMIN_TEXT_BUTTON_CLASS =
+  "inline-flex h-10 cursor-pointer items-center justify-center px-2 text-sm font-medium text-brand-navy/55 transition-colors hover:text-brand-navy";
 export const ADMIN_BTN_PRIMARY_CLASS =
   "inline-flex h-10 cursor-pointer items-center justify-center rounded-xl bg-brand-purple px-5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-purple/35";
 export const ADMIN_BTN_SECONDARY_CLASS =

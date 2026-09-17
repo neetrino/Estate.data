@@ -20,11 +20,17 @@ import {
   validateAdminImageFile,
 } from "@/shared/lib/adminImageUpload";
 
+type AdminMediaPreviewKind = "image" | "video";
+
 type AdminImageUploaderProps = {
   readonly label: string;
   readonly previewUrl: string | null;
   readonly uploading: boolean;
   readonly hint?: string;
+  readonly fileHint?: string;
+  readonly accept?: string;
+  readonly previewKind?: AdminMediaPreviewKind;
+  readonly validateFile?: (file: File) => string | null;
   readonly error?: string | null;
   readonly required?: boolean;
   readonly placeholderText?: string;
@@ -33,8 +39,10 @@ type AdminImageUploaderProps = {
   readonly resetPreviewOnSuccess?: boolean;
   readonly reverseFiles?: boolean;
   readonly buttonLabel?: string;
+  readonly posterUrl?: string | null;
   readonly onUpload: (file: File) => Promise<void>;
   readonly onClear?: () => void;
+  readonly clearLabel?: string;
 };
 
 function revokeIfBlob(url: string | null): void {
@@ -43,12 +51,16 @@ function revokeIfBlob(url: string | null): void {
   }
 }
 
-/** Shared admin image field — preview plus file picker, no manual URL entry. */
+/** Shared admin media field — preview plus file picker, no manual URL entry. */
 export function AdminImageUploader({
   label,
   previewUrl,
   uploading,
   hint,
+  fileHint = ADMIN_IMAGE_UPLOAD_HINT,
+  accept = ADMIN_IMAGE_ACCEPT,
+  previewKind = "image",
+  validateFile = validateAdminImageFile,
   error,
   required = false,
   placeholderText = "No image uploaded",
@@ -57,8 +69,10 @@ export function AdminImageUploader({
   resetPreviewOnSuccess = false,
   reverseFiles = false,
   buttonLabel = "Upload image",
+  posterUrl = null,
   onUpload,
   onClear,
+  clearLabel = "Clear",
 }: AdminImageUploaderProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -79,7 +93,7 @@ export function AdminImageUploader({
     }
 
     const firstInvalid = files
-      .map((file) => validateAdminImageFile(file))
+      .map((file) => validateFile(file))
       .find((message) => message !== null);
     if (firstInvalid) {
       setLocalError(firstInvalid);
@@ -122,21 +136,14 @@ export function AdminImageUploader({
           {label}
           {required ? " (required)" : ""}
         </label>
-        <p className={HOME_HERO_HINT_CLASS}>
-          {hint ? `${hint} · ${ADMIN_IMAGE_UPLOAD_HINT}` : ADMIN_IMAGE_UPLOAD_HINT}
-        </p>
+        <p className={HOME_HERO_HINT_CLASS}>{hint ? `${hint} · ${fileHint}` : fileHint}</p>
         <div className={HOME_HERO_IMAGE_PREVIEW_CLASS}>
-          {displayUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element -- admin preview for blob + R2 URLs
-            <img
-              src={displayUrl}
-              alt=""
-              referrerPolicy="no-referrer"
-              className={HOME_HERO_IMAGE_PREVIEW_IMG_CLASS}
-            />
-          ) : (
-            <div className={HOME_HERO_IMAGE_PLACEHOLDER_CLASS}>{placeholderText}</div>
-          )}
+          <AdminMediaPreview
+            url={displayUrl}
+            kind={previewKind}
+            posterUrl={posterUrl}
+            placeholderText={placeholderText}
+          />
         </div>
         {displayError ? <p className={HOME_HERO_FIELD_ERROR_CLASS}>{displayError}</p> : null}
       </div>
@@ -145,7 +152,7 @@ export function AdminImageUploader({
         <input
           ref={inputRef}
           type="file"
-          accept={ADMIN_IMAGE_ACCEPT}
+          accept={accept}
           multiple={multiple}
           className="hidden"
           onChange={(event) => void handleFileChange(event)}
@@ -178,10 +185,50 @@ export function AdminImageUploader({
               onClear();
             }}
           >
-            Clear
+            {clearLabel}
           </button>
         ) : null}
       </div>
     </div>
   );
 }
+
+type AdminMediaPreviewProps = {
+  readonly url: string | null;
+  readonly kind: AdminMediaPreviewKind;
+  readonly posterUrl?: string | null;
+  readonly placeholderText: string;
+};
+
+function AdminMediaPreview({ url, kind, posterUrl, placeholderText }: AdminMediaPreviewProps) {
+  if (!url) {
+    return <div className={HOME_HERO_IMAGE_PLACEHOLDER_CLASS}>{placeholderText}</div>;
+  }
+
+  if (kind === "video") {
+    return (
+      <video
+        src={url}
+        poster={posterUrl || undefined}
+        className={`${HOME_HERO_IMAGE_PREVIEW_IMG_CLASS} min-h-52`}
+        muted
+        playsInline
+        autoPlay
+        loop
+        controls
+        preload="auto"
+      />
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- admin preview for blob + R2 URLs
+    <img
+      src={url}
+      alt=""
+      referrerPolicy="no-referrer"
+      className={HOME_HERO_IMAGE_PREVIEW_IMG_CLASS}
+    />
+  );
+}
+

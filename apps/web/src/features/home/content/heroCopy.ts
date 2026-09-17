@@ -1,5 +1,6 @@
 import { HERO_LANDING_BG_SOURCES } from "@/features/home/landing/lib/heroLandingAssets";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import type { HomeHeroCopyMode } from "@/shared/lib/homeHeroCopyMode";
 
 type HeroTextSegment = {
   text: string;
@@ -21,6 +22,7 @@ export type HomeHeroContentFields = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  copyMode: HomeHeroCopyMode;
   desktopImageUrl: string;
   mobileImageUrl: string;
 };
@@ -63,6 +65,7 @@ export function getDefaultHomeHeroContent(): Omit<
     primaryButtonHref: HOME_HERO_COPY.primaryCta.href,
     secondaryButtonLabel: HOME_HERO_COPY.secondaryCta.label,
     secondaryButtonHref: HOME_HERO_COPY.secondaryCta.href,
+    copyMode: "shared",
     desktopImageUrl: DEFAULT_HOME_HERO_DESKTOP_IMAGE_URL,
     desktopImageKey: null,
     mobileImageUrl: null,

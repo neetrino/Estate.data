@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import Link from "next/link";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
+import { AdminHomeHeroCopyModeField } from "@/features/admin/components/AdminHomeHeroCopyModeField";
+import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
-import { SUPERSUDO_PANEL_HERO_SLIDES_PATH } from "@/features/admin/lib/admin-paths";
+import { AdminHeroSlidesPanel } from "@/features/admin/pages/AdminHeroSlidesPage";
 import { fetchAdminHomeHero, updateAdminHomeHero } from "@/features/admin/services/admin-api";
 import {
   HOME_HERO_EDITOR_BODY_CLASS,
@@ -33,21 +34,11 @@ const EMPTY_FORM: AdminHomeHero = {
   primaryButtonHref: "",
   secondaryButtonLabel: "",
   secondaryButtonHref: "",
+  copyMode: "shared",
   desktopImageUrl: null,
   desktopImageKey: null,
   mobileImageUrl: null,
   mobileImageKey: null,
-};
-
-type HomeHeroFieldProps = {
-  readonly id: string;
-  readonly label: string;
-  readonly value: string;
-  readonly onChange: (value: string) => void;
-  readonly multiline?: boolean;
-  readonly rows?: number;
-  readonly required?: boolean;
-  readonly hint?: string;
 };
 
 function HomeHeroField({
@@ -59,7 +50,16 @@ function HomeHeroField({
   rows = 3,
   required,
   hint,
-}: HomeHeroFieldProps) {
+}: {
+  readonly id: string;
+  readonly label: string;
+  readonly value: string;
+  readonly onChange: (value: string) => void;
+  readonly multiline?: boolean;
+  readonly rows?: number;
+  readonly required?: boolean;
+  readonly hint?: string;
+}) {
   return (
     <div>
       <label htmlFor={id} className={HOME_HERO_LABEL_CLASS}>
@@ -91,13 +91,7 @@ function HomeHeroField({
   );
 }
 
-function HomeHeroSection({
-  title,
-  children,
-}: {
-  readonly title: string;
-  readonly children: ReactNode;
-}) {
+function HomeHeroSection({ title, children }: { readonly title: string; readonly children: ReactNode }) {
   return (
     <section className={HOME_HERO_SECTION_CARD_CLASS}>
       <div className={HOME_HERO_SECTION_HEADER_CLASS}>
@@ -128,7 +122,6 @@ export function AdminHomeHeroPage() {
     setSaving(true);
     setActionError(null);
     setSuccessMessage(null);
-
     try {
       await updateAdminHomeHero(form);
       setDraft(null);
@@ -145,92 +138,91 @@ export function AdminHomeHeroPage() {
     <div className={HOME_HERO_EDITOR_SHELL_CLASS}>
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
-
       {!loading && !error ? (
-        <form onSubmit={(event) => void handleSave(event)} className={HOME_HERO_EDITOR_CARD_CLASS}>
-          <header className={HOME_HERO_EDITOR_HEADER_CLASS}>
-            <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Home Hero</h1>
-          </header>
-
-          <div className={HOME_HERO_EDITOR_BODY_CLASS}>
-            {actionError ? <p className={HOME_HERO_ERROR_ALERT_CLASS}>{actionError}</p> : null}
-            {successMessage ? <p className={HOME_HERO_SUCCESS_ALERT_CLASS}>{successMessage}</p> : null}
-
-            <HomeHeroSection title="Background image">
-              <p className="text-sm leading-relaxed text-[#414141]/70">
-                The studio homepage hero background comes from{" "}
-                <Link
-                  href={SUPERSUDO_PANEL_HERO_SLIDES_PATH}
-                  className="font-medium text-[#414141] underline underline-offset-2"
-                >
-                  Hero slides
-                </Link>
-                . Manage published slides there (first published slide is shown).
-              </p>
-            </HomeHeroSection>
-
-            <HomeHeroSection title="Hero copy">
-              <HomeHeroField
-                id="home-hero-title"
-                label="Hero title"
-                value={form.title}
-                onChange={(value) => updateForm("title", value)}
-                multiline
-                rows={5}
-                required
-                hint="Use line breaks for the multi-line hero. The first word of the second line uses the accent color."
+        <div className="space-y-6">
+          <form onSubmit={(event) => void handleSave(event)} className={HOME_HERO_EDITOR_CARD_CLASS}>
+            <header className={HOME_HERO_EDITOR_HEADER_CLASS}>
+              <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Home Hero</h1>
+            </header>
+            <div className={HOME_HERO_EDITOR_BODY_CLASS}>
+              {actionError ? <p className={HOME_HERO_ERROR_ALERT_CLASS}>{actionError}</p> : null}
+              {successMessage ? (
+                <p className={HOME_HERO_SUCCESS_ALERT_CLASS}>{successMessage}</p>
+              ) : null}
+              <AdminHomeHeroCopyModeField
+                value={form.copyMode}
+                onChange={(copyMode) => updateForm("copyMode", copyMode)}
               />
-              <HomeHeroField
-                id="home-hero-description"
-                label="Hero description"
-                value={form.description}
-                onChange={(value) => updateForm("description", value)}
-                multiline
-                rows={4}
-                required
-              />
-            </HomeHeroSection>
-
-            <HomeHeroSection title="Buttons">
-              <div className="grid gap-4 sm:grid-cols-2">
+              <HomeHeroSection
+                title={form.copyMode === "perSlide" ? "Default text" : "Hero text"}
+              >
                 <HomeHeroField
-                  id="home-hero-primary-label"
-                  label="Primary button label"
-                  value={form.primaryButtonLabel}
-                  onChange={(value) => updateForm("primaryButtonLabel", value)}
+                  id="home-hero-title"
+                  label="Title"
+                  value={form.title}
+                  onChange={(value) => updateForm("title", value)}
+                  multiline
+                  rows={4}
                   required
+                  hint={
+                    form.copyMode === "perSlide"
+                      ? "Used when a slide has no title of its own. Line 2’s first word is accent-colored."
+                      : "Use line breaks for the multi-line hero. The first word of the second line uses the accent color."
+                  }
                 />
                 <HomeHeroField
-                  id="home-hero-primary-href"
-                  label="Primary button link"
-                  value={form.primaryButtonHref}
-                  onChange={(value) => updateForm("primaryButtonHref", value)}
+                  id="home-hero-description"
+                  label="Description"
+                  value={form.description}
+                  onChange={(value) => updateForm("description", value)}
+                  multiline
+                  rows={3}
                   required
                 />
-                <HomeHeroField
-                  id="home-hero-secondary-label"
-                  label="Secondary button label"
-                  value={form.secondaryButtonLabel}
-                  onChange={(value) => updateForm("secondaryButtonLabel", value)}
-                  required
-                />
-                <HomeHeroField
-                  id="home-hero-secondary-href"
-                  label="Secondary button link"
-                  value={form.secondaryButtonHref}
-                  onChange={(value) => updateForm("secondaryButtonHref", value)}
-                  required
-                />
-              </div>
-            </HomeHeroSection>
-          </div>
-
-          <footer className={HOME_HERO_FOOTER_CLASS}>
-            <button type="submit" disabled={saving} className={HOME_HERO_SAVE_BUTTON_CLASS}>
-              {saving ? "Saving…" : "Save hero"}
-            </button>
-          </footer>
-        </form>
+              </HomeHeroSection>
+              <HomeHeroSection title="Buttons">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <HomeHeroField
+                    id="home-hero-primary-label"
+                    label="Main button"
+                    value={form.primaryButtonLabel}
+                    onChange={(value) => updateForm("primaryButtonLabel", value)}
+                    required
+                  />
+                  <AdminJumpTargetField
+                    label="Main button goes to"
+                    name="home-hero-primary-href"
+                    value={form.primaryButtonHref}
+                    onChange={(value) => updateForm("primaryButtonHref", value)}
+                  />
+                  <HomeHeroField
+                    id="home-hero-secondary-label"
+                    label="Second button"
+                    value={form.secondaryButtonLabel}
+                    onChange={(value) => updateForm("secondaryButtonLabel", value)}
+                    required
+                  />
+                  <AdminJumpTargetField
+                    label="Second button goes to"
+                    name="home-hero-secondary-href"
+                    value={form.secondaryButtonHref}
+                    onChange={(value) => updateForm("secondaryButtonHref", value)}
+                  />
+                </div>
+              </HomeHeroSection>
+            </div>
+            <footer className={HOME_HERO_FOOTER_CLASS}>
+              <button type="submit" disabled={saving} className={HOME_HERO_SAVE_BUTTON_CLASS}>
+                {saving ? "Saving…" : "Save hero text"}
+              </button>
+            </footer>
+          </form>
+          <AdminHeroSlidesPanel
+            copyMode={form.copyMode}
+            sharedTitle={form.title}
+            sharedDescription={form.description}
+          />
+        </div>
       ) : null}
     </div>
   );

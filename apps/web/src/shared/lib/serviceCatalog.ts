@@ -12,7 +12,7 @@ export type ServiceCatalogItem = {
   readonly comingSoon?: boolean;
 };
 
-/** Services dropdown — in-page section jumps, matching the product brief. */
+/** Public service sections — footer links and in-page jumps. */
 export const SERVICE_CATALOG = [
   {
     id: "photography",

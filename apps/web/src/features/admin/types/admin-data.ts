@@ -1,3 +1,5 @@
+import type { HomeHeroCopyMode } from "@/shared/lib/homeHeroCopyMode";
+
 export type DashboardSummary = {
   portfolioCount: number;
   publishedPortfolioCount: number;
@@ -87,6 +89,7 @@ export type AdminHomeHero = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  copyMode: HomeHeroCopyMode;
   desktopImageUrl: string | null;
   desktopImageKey: string | null;
   mobileImageUrl: string | null;
@@ -105,7 +108,11 @@ export type AdminHeroSlide = {
   imageUrl: string;
   imageKey: string | null;
   thumbUrl: string;
+  mobileImageUrl: string | null;
+  mobileImageKey: string | null;
   alt: string;
+  title: string | null;
+  description: string | null;
   sortOrder: number;
   published: boolean;
 };

@@ -41,14 +41,3 @@ export function mobileNavLinkClassName(active: boolean): string {
     active ? MOBILE_NAV_LINK_AFTER_SHADOW_ACTIVE_CLASS : MOBILE_NAV_LINK_AFTER_SHADOW_IDLE_CLASS,
   ].join(" ");
 }
-
-const MOBILE_NAV_MORE_TOGGLE_BASE_CLASS =
-  "flex w-full items-center justify-between gap-2 py-3.5 text-left text-lg font-semibold transition-opacity hover:opacity-80";
-
-/** Mobile drawer “More” toggle — accent when a nested route is active. */
-export function mobileNavMoreToggleClassName(sectionActive: boolean): string {
-  return [
-    MOBILE_NAV_MORE_TOGGLE_BASE_CLASS,
-    sectionActive ? "text-studio-accent" : "text-studio-fg",
-  ].join(" ");
-}

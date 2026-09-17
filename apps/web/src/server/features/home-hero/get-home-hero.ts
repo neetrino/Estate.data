@@ -1,5 +1,6 @@
 import {
   HOME_HERO_KEY,
+  parseHomeHeroCopyMode,
   type HomeHeroContent,
 } from "@/server/features/home-hero/home-hero.schema";
 import {
@@ -17,6 +18,7 @@ type HomeHeroRow = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  copyMode: string;
   desktopImageUrl: string | null;
   desktopImageKey: string | null;
   mobileImageUrl: string | null;
@@ -30,6 +32,7 @@ const HOME_HERO_SELECT = {
   primaryButtonHref: true,
   secondaryButtonLabel: true,
   secondaryButtonHref: true,
+  copyMode: true,
   desktopImageUrl: true,
   desktopImageKey: true,
   mobileImageUrl: true,
@@ -44,6 +47,7 @@ function mapRowToContent(row: HomeHeroRow): HomeHeroContent {
     primaryButtonHref: row.primaryButtonHref,
     secondaryButtonLabel: row.secondaryButtonLabel,
     secondaryButtonHref: row.secondaryButtonHref,
+    copyMode: parseHomeHeroCopyMode(row.copyMode),
     desktopImageUrl: row.desktopImageUrl,
     desktopImageKey: row.desktopImageKey,
     mobileImageUrl: row.mobileImageUrl,
@@ -87,6 +91,7 @@ export async function getHomeHeroForPage(): Promise<HomeHeroContentFields> {
     primaryButtonHref: hero.primaryButtonHref,
     secondaryButtonLabel: hero.secondaryButtonLabel,
     secondaryButtonHref: hero.secondaryButtonHref,
+    copyMode: hero.copyMode,
     desktopImageUrl: images.desktopImageUrl,
     mobileImageUrl: images.mobileImageUrl,
   };

@@ -1,15 +1,12 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
+import { AdminCopySection } from "@/features/admin/components/ui/AdminCopySection";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
-import {
-  formatPricingLines,
-  parseIncludedLines,
-  parsePricingLines,
-} from "@/features/admin/lib/admin-studio-service-draft";
-import { updateAdminSiteCopy } from "@/features/admin/services/admin-api";
-import { HOME_HERO_SAVE_BUTTON_CLASS } from "@/features/admin/styles/admin-home-hero-classes";
-import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
+import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
+import { AdminPairListField } from "@/features/admin/components/ui/AdminPairListField";
+import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
+import { parseIncludedLines } from "@/features/admin/lib/admin-studio-service-draft";
 import { SITE_COPY_KEYS, type WebPagesCopy } from "@/server/features/site-copy/site-copy.schema";
 
 type AdminWebPagesCopyFormProps = {
@@ -17,98 +14,137 @@ type AdminWebPagesCopyFormProps = {
   readonly onSaved: () => void;
 };
 
-/** Admin editor for Web Pages marketing copy (home teaser + `/web-pages`). */
-export function AdminWebPagesCopyForm({ initial, onSaved }: AdminWebPagesCopyFormProps) {
-  const [draft, setDraft] = useState(initial);
-  const [includedText, setIncludedText] = useState(initial.included.join("\n"));
-  const [pricingText, setPricingText] = useState(formatPricingLines(initial.pricing));
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+type WebPagesFieldsProps = {
+  readonly draft: WebPagesCopy;
+  readonly onChange: (next: WebPagesCopy) => void;
+};
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSaving(true);
-    setError(null);
-    try {
-      await updateAdminSiteCopy({
-        key: SITE_COPY_KEYS.webPages,
-        value: {
-          ...draft,
-          included: parseIncludedLines(includedText),
-          pricing: parsePricingLines(pricingText),
-        },
-      });
-      onSaved();
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Save failed");
-    } finally {
-      setSaving(false);
-    }
-  }
+function filterPricing(draft: WebPagesCopy): WebPagesCopy {
+  return {
+    ...draft,
+    pricing: draft.pricing.filter((row) => row.label.trim().length > 0 && row.price.trim().length > 0),
+  };
+}
 
+function WebPagesTextFields({ draft, onChange }: WebPagesFieldsProps) {
   return (
-    <form onSubmit={onSubmit} className={`${ADMIN_CARD_CLASS} space-y-4`}>
-      <h2 className="text-base font-semibold text-brand-navy">Web Pages</h2>
+    <>
       <AdminFormField
-        label="Eyebrow"
+        label="Small label"
         name="web-pages-eyebrow"
         value={draft.eyebrow}
-        onChange={(eyebrow) => setDraft((current) => ({ ...current, eyebrow }))}
+        onChange={(eyebrow) => onChange({ ...draft, eyebrow })}
+        hint="Tiny line above the headline"
       />
       <AdminFormField
-        label="Title"
+        label="Headline"
         name="web-pages-title"
         value={draft.title}
-        onChange={(title) => setDraft((current) => ({ ...current, title }))}
+        onChange={(title) => onChange({ ...draft, title })}
       />
       <AdminFormField
-        label="Body"
+        label="Description"
         name="web-pages-body"
         value={draft.body}
-        onChange={(body) => setDraft((current) => ({ ...current, body }))}
+        onChange={(body) => onChange({ ...draft, body })}
         multiline
         rows={5}
       />
-      <AdminFormField
-        label="CTA label"
-        name="web-pages-cta"
-        value={draft.ctaLabel}
-        onChange={(ctaLabel) => setDraft((current) => ({ ...current, ctaLabel }))}
-      />
-      <AdminFormField
-        label="CTA href"
-        name="web-pages-href"
-        value={draft.href}
-        onChange={(href) => setDraft((current) => ({ ...current, href }))}
-      />
+    </>
+  );
+}
+
+function WebPagesPricingFields({
+  draft,
+  includedText,
+  onChange,
+  onIncludedTextChange,
+}: WebPagesFieldsProps & {
+  readonly includedText: string;
+  readonly onIncludedTextChange: (value: string) => void;
+}) {
+  return (
+    <>
       <AdminFormField
         label="Starting price"
         name="web-pages-price"
         value={draft.startingPrice}
-        onChange={(startingPrice) => setDraft((current) => ({ ...current, startingPrice }))}
+        onChange={(startingPrice) => onChange({ ...draft, startingPrice })}
+        hint="Shown as the from-price on the site"
       />
       <AdminFormField
-        label="Included list"
+        label="What's included"
         name="web-pages-included"
         value={includedText}
-        onChange={setIncludedText}
+        onChange={onIncludedTextChange}
         multiline
         rows={8}
-        hint="One item per line"
+        hint="One bullet per line"
       />
-      <AdminFormField
-        label="Pricing rows"
-        name="web-pages-pricing"
-        value={pricingText}
-        onChange={setPricingText}
-        multiline
-        rows={6}
-        hint="label|price per line"
+      <AdminPairListField
+        label="Price list"
+        hint="Package name on the left, price on the right"
+        leftPlaceholder="Package name"
+        rightPlaceholder="Price"
+        addLabel="Add a package"
+        rows={draft.pricing.map((row) => ({ left: row.label, right: row.price }))}
+        onChange={(rows) =>
+          onChange({
+            ...draft,
+            pricing: rows.map((row) => ({ label: row.left, price: row.right })),
+          })
+        }
       />
-      {error ? <p className="text-sm text-red-700">{error}</p> : null}
-      <button type="submit" disabled={saving} className={HOME_HERO_SAVE_BUTTON_CLASS}>
-        {saving ? "Saving…" : "Save Web Pages"}
-      </button>
-    </form>
+    </>
+  );
+}
+
+/** Admin editor for Web Pages marketing copy (home teaser + `/web-pages`). */
+export function AdminWebPagesCopyForm({ initial, onSaved }: AdminWebPagesCopyFormProps) {
+  const [includedText, setIncludedText] = useState(initial.included.join("\n"));
+
+  return (
+    <AdminSiteCopyForm
+      description="Property website offer: homepage teaser and the Web Pages page."
+      copyKey={SITE_COPY_KEYS.webPages}
+      initial={initial}
+      saveLabel="Save this section"
+      onSaved={onSaved}
+      beforeSave={(draft) =>
+        filterPricing({ ...draft, included: parseIncludedLines(includedText) })
+      }
+    >
+      {(draft, setDraft) => (
+        <>
+          <AdminCopySection title="Text" description="Headline and description visitors read.">
+            <WebPagesTextFields draft={draft} onChange={setDraft} />
+          </AdminCopySection>
+          <AdminCopySection title="Button" description="The call-to-action on this section.">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AdminFormField
+                label="Button text"
+                name="web-pages-cta"
+                value={draft.ctaLabel}
+                onChange={(ctaLabel) => setDraft({ ...draft, ctaLabel })}
+              />
+              <AdminJumpTargetField
+                label="Button goes to"
+                name="web-pages-href"
+                value={draft.href}
+                onChange={(href) => setDraft({ ...draft, href })}
+              />
+            </div>
+          </AdminCopySection>
+          <AdminCopySection title="Pricing" description="Price and what's included.">
+            <WebPagesPricingFields
+              draft={draft}
+              includedText={includedText}
+              onChange={setDraft}
+              onIncludedTextChange={setIncludedText}
+            />
+          </AdminCopySection>
+        </>
+      )}
+    </AdminSiteCopyForm>
   );
 }

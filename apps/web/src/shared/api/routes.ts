@@ -15,6 +15,7 @@ export const API_ROUTES = {
   adminContactInquiryById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/contact-inquiries/${encodeURIComponent(id)}`,
   adminPortfolio: `${API_VERSION_PREFIX}/admin/portfolio`,
+  adminPortfolioReorder: `${API_VERSION_PREFIX}/admin/portfolio/reorder`,
   adminPortfolioById: (id: string) =>
     `${API_VERSION_PREFIX}/admin/portfolio/${encodeURIComponent(id)}`,
   adminPricing: `${API_VERSION_PREFIX}/admin/pricing`,

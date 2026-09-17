@@ -10,6 +10,8 @@ export const SITE_COPY_SEED = [
       secondaryCta: "See Services",
       secondaryCtaHref: "/#photography",
       reelLabel: "Watch the reel",
+      reelUrl: "/__l5e/assets-v1/77e53f23-6cc4-45aa-99c1-a08109bbb34c/promo.mp4",
+      reelPosterUrl: "/assets/hero-villa-BcD5T4f7.webp",
     },
   },
   {

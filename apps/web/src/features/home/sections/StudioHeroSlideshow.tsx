@@ -6,8 +6,11 @@ import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 export type StudioHeroSlide = {
   readonly id: string;
   readonly imageUrl: string;
+  readonly mobileImageUrl: string;
   readonly thumbUrl: string;
   readonly alt: string;
+  readonly title: string;
+  readonly description: string;
 };
 
 /** Keep in sync with `.studio-hero-progress` duration in `globals.css`. */
@@ -15,7 +18,10 @@ export const HERO_SLIDE_INTERVAL_MS = 6000;
 
 type StudioHeroSlideshowProps = {
   readonly slides: readonly StudioHeroSlide[];
+  readonly onActiveIndexChange?: (index: number) => void;
 };
+
+const HERO_SLIDE_IMAGE_CLASS = "studio-kenburns object-cover";
 
 function nextSlideIndex(current: number, length: number): number {
   if (length <= 0) {
@@ -24,8 +30,45 @@ function nextSlideIndex(current: number, length: number): number {
   return (current + 1) % length;
 }
 
+function HeroSlideMedia({
+  slide,
+  priority,
+}: {
+  readonly slide: StudioHeroSlide;
+  readonly priority: boolean;
+}) {
+  const shared = {
+    alt: slide.alt,
+    fill: true as const,
+    priority,
+    sizes: "100vw",
+  };
+
+  if (slide.mobileImageUrl === slide.imageUrl) {
+    return <PublicAssetImage src={slide.imageUrl} className={HERO_SLIDE_IMAGE_CLASS} {...shared} />;
+  }
+
+  return (
+    <>
+      <PublicAssetImage
+        src={slide.imageUrl}
+        className={`${HERO_SLIDE_IMAGE_CLASS} hidden md:block`}
+        {...shared}
+      />
+      <PublicAssetImage
+        src={slide.mobileImageUrl}
+        className={`${HERO_SLIDE_IMAGE_CLASS} md:hidden`}
+        {...shared}
+      />
+    </>
+  );
+}
+
 /** Crossfading hero images. After the last slide, playback continues from the first. */
-export function StudioHeroSlideshow({ slides }: StudioHeroSlideshowProps) {
+export function StudioHeroSlideshow({
+  slides,
+  onActiveIndexChange,
+}: StudioHeroSlideshowProps) {
   const [index, setIndex] = useState(0);
   const reduceMotion = usePrefersReducedMotion();
   const length = slides.length;
@@ -38,11 +81,15 @@ export function StudioHeroSlideshow({ slides }: StudioHeroSlideshowProps) {
     }
 
     const timerId = window.setInterval(() => {
-      setIndex((current) => nextSlideIndex(current, length));
+      setIndex((current) => {
+        const next = nextSlideIndex(current, length);
+        onActiveIndexChange?.(next);
+        return next;
+      });
     }, HERO_SLIDE_INTERVAL_MS);
 
     return () => window.clearInterval(timerId);
-  }, [length, reduceMotion]);
+  }, [length, reduceMotion, onActiveIndexChange]);
 
   if (!active) {
     return null;
@@ -63,14 +110,7 @@ export function StudioHeroSlideshow({ slides }: StudioHeroSlideshowProps) {
           }`}
           aria-hidden={slideIndex !== activeIndex}
         >
-          <PublicAssetImage
-            src={slide.imageUrl}
-            alt={slide.alt}
-            fill
-            priority={slideIndex === 0}
-            className="studio-kenburns object-cover"
-            sizes="100vw"
-          />
+          <HeroSlideMedia slide={slide} priority={slideIndex === 0} />
         </div>
       ))}
       <div className="studio-veil absolute inset-0" />

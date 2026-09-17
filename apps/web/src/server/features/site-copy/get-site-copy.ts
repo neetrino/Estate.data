@@ -1,6 +1,6 @@
 import { getPrisma } from "@/server/lib/db";
 import { logger } from "@/server/lib/logger";
-import { defaultMarketingCopy } from "@/server/features/site-copy/site-copy-defaults";
+import { defaultMarketingCopy, withResolvedWhatWeDoMedia } from "@/server/features/site-copy/site-copy-defaults";
 import {
   SITE_COPY_KEYS,
   beforeAfterCopySchema,
@@ -63,7 +63,9 @@ export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
     faqIntro,
     floorPlans,
   ] = await Promise.all([
-    readCopy(SITE_COPY_KEYS.whatWeDo, whatWeDoCopySchema, defaults.whatWeDo),
+    readCopy(SITE_COPY_KEYS.whatWeDo, whatWeDoCopySchema, defaults.whatWeDo).then(
+      withResolvedWhatWeDoMedia,
+    ),
     readCopy(SITE_COPY_KEYS.webPages, webPagesCopySchema, defaults.webPages),
     readCopy(SITE_COPY_KEYS.contact, contactMarketingCopySchema, defaults.contact),
     readCopy(SITE_COPY_KEYS.stats, statsCopySchema, defaults.stats),

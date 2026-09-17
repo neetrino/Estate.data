@@ -13,11 +13,18 @@ const imageUrl = z
     { message: "Must be an internal path or http(s) URL" },
   );
 
+const optionalStoredImage = imageUrl.nullable().optional();
+const optionalImageKey = z.string().trim().min(1).max(500).nullable().optional();
+
 export const createHomeHeroSlideSchema = z.object({
   imageUrl,
   thumbUrl: imageUrl,
-  imageKey: z.string().trim().min(1).max(500).optional(),
+  imageKey: optionalImageKey,
+  mobileImageUrl: optionalStoredImage,
+  mobileImageKey: optionalImageKey,
   alt: z.string().trim().min(1).max(200),
+  title: z.string().trim().max(500).nullable().optional(),
+  description: z.string().trim().max(2000).nullable().optional(),
   sortOrder: z.number().int().min(0).max(999).optional(),
   published: z.boolean().optional(),
 });

@@ -28,3 +28,11 @@ export const updatePortfolioProjectSchema = createPortfolioProjectSchema.partial
 export type UpdatePortfolioProjectInput = z.infer<
   typeof updatePortfolioProjectSchema
 >;
+
+const PORTFOLIO_REORDER_MAX_IDS = 200;
+
+export const reorderPortfolioProjectsSchema = z.object({
+  ids: z.array(z.string().trim().min(1).max(80)).min(1).max(PORTFOLIO_REORDER_MAX_IDS),
+});
+
+export type ReorderPortfolioProjectsInput = z.infer<typeof reorderPortfolioProjectsSchema>;
