@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import type { WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
+import type { StatsCopy, WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioReelDialog } from "@/features/home/sections/StudioReelDialog";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -20,9 +20,10 @@ const REEL_DELAY_MS = 120;
 
 type StudioWhatWeDoProps = {
   readonly copy: WhatWeDoCopy;
+  readonly stats: StatsCopy;
 };
 
-export function StudioWhatWeDo({ copy }: StudioWhatWeDoProps) {
+export function StudioWhatWeDo({ copy, stats }: StudioWhatWeDoProps) {
   const [reelOpen, setReelOpen] = useState(false);
 
   return (
@@ -56,12 +57,23 @@ export function StudioWhatWeDo({ copy }: StudioWhatWeDoProps) {
             </div>
           </StudioReveal>
           <StudioReveal className="lg:col-span-7" delay={REEL_DELAY_MS}>
-            <StudioWhatWeDoReel label={copy.reelLabel} onOpen={() => setReelOpen(true)} />
+            <StudioWhatWeDoReel
+              label={copy.reelLabel}
+              src={copy.reelUrl}
+              poster={copy.reelPosterUrl}
+              onOpen={() => setReelOpen(true)}
+            />
           </StudioReveal>
         </div>
-        <StudioStats />
+        <StudioStats items={stats.items} />
       </div>
-      {reelOpen ? <StudioReelDialog onClose={() => setReelOpen(false)} /> : null}
+      {reelOpen ? (
+        <StudioReelDialog
+          label={copy.reelLabel}
+          src={copy.reelUrl}
+          onClose={() => setReelOpen(false)}
+        />
+      ) : null}
     </section>
   );
 }

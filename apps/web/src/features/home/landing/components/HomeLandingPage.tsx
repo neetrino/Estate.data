@@ -72,24 +72,26 @@ export function HomeLandingPage({
     <div className={STUDIO_PAGE_CLASS}>
       <main className="relative isolate overflow-x-clip">
         <StudioHeroSection hero={hero} slides={slides} />
-        <StudioWhatWeDo copy={marketingCopy.whatWeDo} />
-        <StudioOfferings />
+        <StudioWhatWeDo copy={marketingCopy.whatWeDo} stats={marketingCopy.stats} />
+        <StudioOfferings copy={marketingCopy.offerings} />
         <StudioServicesSection services={coreServices} />
         {aiMedia ? <StudioAiMediaSection service={aiMedia} /> : null}
         {drone ? <StudioDroneSection service={drone} /> : null}
         {matterport ? <StudioMatterportSection service={matterport} /> : null}
-        {matterport ? <StudioFloorPlansSection service={matterport} /> : null}
+        {matterport ? (
+          <StudioFloorPlansSection service={matterport} copy={marketingCopy.floorPlans} />
+        ) : null}
         {scanToBim ? <StudioScanToBimSection service={scanToBim} /> : null}
         <StudioWebPagesTeaser copy={marketingCopy.webPages} />
-        <StudioPackages category={packages} />
+        <StudioPackages category={packages} copy={marketingCopy.packagesIntro} />
         <StudioPackageCompare />
-        <StudioPortfolio projects={projects} />
-        <StudioBeforeAfter />
-        <StudioProcess />
-        <StudioWhyUs />
-        <StudioTeam />
-        <StudioServiceArea />
-        <StudioFaq items={faq} />
+        <StudioPortfolio projects={projects} copy={marketingCopy.portfolioIntro} />
+        <StudioBeforeAfter copy={marketingCopy.beforeAfter} />
+        <StudioProcess copy={marketingCopy.process} />
+        <StudioWhyUs copy={marketingCopy.whyUs} />
+        <StudioTeam copy={marketingCopy.studio} />
+        <StudioServiceArea copy={marketingCopy.serviceArea} />
+        <StudioFaq items={faq} copy={marketingCopy.faqIntro} />
         <StudioContactSection fields={contactFields} copy={marketingCopy.contact} />
         <StudioSectionViewTracker />
       </main>

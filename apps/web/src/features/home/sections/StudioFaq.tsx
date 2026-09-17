@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { FaqItemDto } from "@/server/features/faq/faq.schema";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import type { FaqIntroCopy } from "@/server/features/site-copy/site-copy.schema";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -31,10 +31,11 @@ const LIST_DELAY_MS = 80;
 
 type StudioFaqProps = {
   readonly items: readonly FaqItemDto[];
+  readonly copy: FaqIntroCopy;
 };
 
 /** Home FAQ accordion — published items from Admin → FAQ. */
-export function StudioFaq({ items }: StudioFaqProps) {
+export function StudioFaq({ items, copy }: StudioFaqProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   if (items.length === 0) {
@@ -48,9 +49,9 @@ export function StudioFaq({ items }: StudioFaqProps) {
     >
       <div className={`${STUDIO_CONTAINER_CLASS} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
         <StudioReveal className="lg:col-span-4">
-          <StudioSectionLabel>{STUDIO_PAGE_COPY.faq.eyebrow}</StudioSectionLabel>
+          <StudioSectionLabel>{copy.eyebrow}</StudioSectionLabel>
           <h2 className="studio-display-lg mt-6 max-w-[12ch] text-studio-fg">
-            {STUDIO_PAGE_COPY.faq.title}
+            {copy.title}
           </h2>
         </StudioReveal>
         <StudioReveal className="lg:col-span-8" delay={LIST_DELAY_MS}>

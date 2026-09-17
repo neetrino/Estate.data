@@ -1,4 +1,4 @@
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import type { BeforeAfterCopy } from "@/server/features/site-copy/site-copy.schema";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import { StudioCompareSlider } from "@/features/home/sections/StudioCompareSlider";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
@@ -10,8 +10,11 @@ import {
 
 const ITEM_DELAY_STEP_MS = 100;
 
-export function StudioBeforeAfter() {
-  const copy = STUDIO_PAGE_COPY.beforeAfter;
+type StudioBeforeAfterProps = {
+  readonly copy: BeforeAfterCopy;
+};
+
+export function StudioBeforeAfter({ copy }: StudioBeforeAfterProps) {
 
   return (
     <section id={HOME_SECTION_IDS.beforeAfter} className={STUDIO_MUTED_SECTION_CLASS}>

@@ -19,6 +19,8 @@ export const SUPERSUDO_PANEL_CONTACT_FIELDS_PATH =
   "/supersudo/panel/site-content/contact-fields";
 export const SUPERSUDO_PANEL_MARKETING_COPY_PATH =
   "/supersudo/panel/site-content/marketing-copy";
+export const SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH =
+  "/supersudo/panel/site-content/homepage-sections";
 export const SUPERSUDO_PANEL_ANALYTICS_PATH = "/supersudo/panel/analytics";
 
 const DEFAULT_GOOGLE_ANALYTICS_HREF = "https://analytics.google.com/";

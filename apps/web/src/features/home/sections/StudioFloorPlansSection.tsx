@@ -1,5 +1,6 @@
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { STUDIO_MATTERPORT_DEMO, STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import { STUDIO_MATTERPORT_DEMO } from "@/features/home/content/studioPageCopy";
+import type { FloorPlansCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -15,11 +16,11 @@ const MEDIA_DELAY_MS = 120;
 
 type StudioFloorPlansSectionProps = {
   readonly service: StudioServiceContent;
+  readonly copy: FloorPlansCopy;
 };
 
 /** Dedicated Floor Plans / 2D–3D block — same capture as the Matterport tour. */
-export function StudioFloorPlansSection({ service }: StudioFloorPlansSectionProps) {
-  const copy = STUDIO_PAGE_COPY.floorPlans;
+export function StudioFloorPlansSection({ service, copy }: StudioFloorPlansSectionProps) {
   const actionsService: StudioServiceContent = {
     ...service,
     sectionKey: HOME_SECTION_IDS.floorPlans,

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { RecentWorkProjectTile } from "@/features/home/components/RecentWorkProjectTile";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import type { PortfolioIntroCopy } from "@/server/features/site-copy/site-copy.schema";
 import {
   filterPortfolioCards,
   PORTFOLIO_FILTER_ALL,
@@ -25,13 +25,13 @@ const TILE_DELAY_STEP_MS = 60;
 
 type StudioPortfolioProps = {
   readonly projects: readonly RecentWorkProject[];
+  readonly copy: PortfolioIntroCopy;
 };
 
-export function StudioPortfolio({ projects }: StudioPortfolioProps) {
+export function StudioPortfolio({ projects, copy }: StudioPortfolioProps) {
   const [filter, setFilter] = useState<PortfolioFilter>(PORTFOLIO_FILTER_ALL);
   const cards = mergeStudioPortfolioProjects(projects);
   const visible = filterPortfolioCards(cards, filter);
-  const copy = STUDIO_PAGE_COPY.portfolio;
 
   return (
     <section

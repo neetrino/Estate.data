@@ -1,8 +1,11 @@
-import Image from "next/image";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
-import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import { SITE_NAME } from "@/shared/components/navbar/navConfig";
+import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
+import type {
+  ProcessCopy,
+  ServiceAreaCopy,
+  StudioCopy,
+  WhyUsCopy,
+} from "@/server/features/site-copy/site-copy.schema";
 import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -29,8 +32,7 @@ function stepNumber(index: number): string {
   return String(index + 1).padStart(2, "0");
 }
 
-export function StudioProcess() {
-  const copy = STUDIO_PAGE_COPY.process;
+export function StudioProcess({ copy }: { readonly copy: ProcessCopy }) {
 
   return (
     <section
@@ -76,8 +78,7 @@ const WHY_US_POINT_CLASS = [
   "sm:text-xl md:text-2xl lg:text-[1.65rem]",
 ].join(" ");
 
-export function StudioWhyUs() {
-  const copy = STUDIO_PAGE_COPY.whyUs;
+export function StudioWhyUs({ copy }: { readonly copy: WhyUsCopy }) {
 
   return (
     <section id={HOME_SECTION_IDS.whyUs} className={STUDIO_MUTED_SECTION_CLASS}>
@@ -113,8 +114,7 @@ export function StudioWhyUs() {
   );
 }
 
-export function StudioTeam() {
-  const copy = STUDIO_PAGE_COPY.studio;
+export function StudioTeam({ copy }: { readonly copy: StudioCopy }) {
 
   return (
     <section
@@ -130,9 +130,9 @@ export function StudioTeam() {
           </StudioReveal>
           <StudioReveal className="lg:col-span-7" delay={MEDIA_DELAY_MS}>
             <div className="relative aspect-[16/10] overflow-hidden">
-              <Image
-                src={STUDIO_MEDIA.team}
-                alt={`${SITE_NAME} production crew on location at a Los Angeles property shoot`}
+              <PublicAssetImage
+                src={copy.imageUrl}
+                alt={copy.imageAlt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 60vw"
@@ -141,7 +141,7 @@ export function StudioTeam() {
           </StudioReveal>
         </div>
         <ul className="mt-16 grid gap-px bg-studio-border sm:grid-cols-2 lg:grid-cols-4">
-          {STUDIO_PAGE_COPY.team.map((member, index) => (
+          {copy.members.map((member, index) => (
             <StudioReveal
               key={member.name}
               as="li"
@@ -164,8 +164,7 @@ export function StudioTeam() {
   );
 }
 
-export function StudioServiceArea() {
-  const copy = STUDIO_PAGE_COPY.serviceArea;
+export function StudioServiceArea({ copy }: { readonly copy: ServiceAreaCopy }) {
   const surroundingLabel = copy.cities[copy.cities.length - 1];
 
   return (
@@ -191,7 +190,7 @@ export function StudioServiceArea() {
           </ul>
           <p className="mt-8 text-sm text-studio-muted">{copy.note}</p>
           <div className="mt-8">
-            <StudioCta href={`/#${HOME_SECTION_IDS.quote}`} variant="outline">
+            <StudioCta href={copy.ctaHref} variant="outline">
               {copy.cta}
             </StudioCta>
           </div>
