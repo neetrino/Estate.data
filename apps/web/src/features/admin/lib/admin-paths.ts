@@ -15,6 +15,10 @@ export const SUPERSUDO_PANEL_HERO_SLIDES_PATH =
   "/supersudo/panel/site-content/hero-slides";
 export const SUPERSUDO_PANEL_STUDIO_SERVICES_PATH =
   "/supersudo/panel/site-content/studio-services";
+
+export function supersudoStudioServicePath(sectionKey: string): string {
+  return `${SUPERSUDO_PANEL_STUDIO_SERVICES_PATH}/${encodeURIComponent(sectionKey)}`;
+}
 export const SUPERSUDO_PANEL_CONTACT_FIELDS_PATH =
   "/supersudo/panel/site-content/contact-fields";
 export const SUPERSUDO_PANEL_MARKETING_COPY_PATH =

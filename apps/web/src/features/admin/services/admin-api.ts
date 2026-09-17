@@ -77,6 +77,15 @@ export function updateAdminPortfolioProject(
   });
 }
 
+export function reorderAdminPortfolioProjects(
+  ids: readonly string[],
+): Promise<{ updated: number }> {
+  return adminAuthenticatedRequest<{ updated: number }>(API_ROUTES.adminPortfolioReorder, {
+    method: "PATCH",
+    body: { ids },
+  });
+}
+
 export function deleteAdminPortfolioProject(id: string): Promise<{ deleted: boolean }> {
   return adminAuthenticatedRequest<{ deleted: boolean }>(
     API_ROUTES.adminPortfolioById(id),

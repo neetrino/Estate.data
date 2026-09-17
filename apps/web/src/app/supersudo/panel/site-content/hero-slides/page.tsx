@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
-import { AdminHeroSlidesPage } from "@/features/admin/pages/AdminHeroSlidesPage";
-
-export const metadata: Metadata = {
-  title: "Hero slides — Admin",
-  robots: { index: false, follow: false },
-};
+import { redirect } from "next/navigation";
+import { SUPERSUDO_PANEL_HOME_HERO_PATH } from "@/features/admin/lib/admin-paths";
 
 export default function SupersudoHeroSlidesPage() {
-  return <AdminHeroSlidesPage />;
+  redirect(SUPERSUDO_PANEL_HOME_HERO_PATH);
 }

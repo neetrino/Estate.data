@@ -3,7 +3,15 @@ import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
 import { HOME_SECTION_IDS, homeSectionHref } from "@/shared/lib/homeSectionIds";
-import type { MarketingCopyBundle } from "@/server/features/site-copy/site-copy.schema";
+import type { MarketingCopyBundle, WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
+
+/** Maps the old Web Pages mockup poster to the villa still used on the public reel. */
+export function withResolvedWhatWeDoMedia(copy: WhatWeDoCopy): WhatWeDoCopy {
+  if (copy.reelPosterUrl !== STUDIO_MEDIA.landingPage) {
+    return copy;
+  }
+  return { ...copy, reelPosterUrl: STUDIO_MEDIA.heroVilla };
+}
 
 /** Static fallbacks used when a SiteCopy key is missing or invalid. */
 export function defaultMarketingCopy(): MarketingCopyBundle {
@@ -23,7 +31,7 @@ export function defaultMarketingCopy(): MarketingCopyBundle {
       secondaryCtaHref: homeSectionHref(HOME_SECTION_IDS.photography),
       reelLabel: whatWeDo.reelLabel,
       reelUrl: STUDIO_MEDIA.promo,
-      reelPosterUrl: STUDIO_MEDIA.landingPage,
+      reelPosterUrl: STUDIO_MEDIA.heroVilla,
     },
     webPages: {
       eyebrow: webPages.eyebrow,

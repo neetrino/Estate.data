@@ -13,6 +13,7 @@ export const DEFAULT_HERO_SLIDES = [
   {
     id: "slide-1",
     imageUrl: STUDIO_HERO_VILLA_SRC,
+    mobileImageUrl: STUDIO_HERO_VILLA_SRC,
     thumbUrl: STUDIO_HERO_VILLA_SRC,
     alt: "Luxury Los Angeles hillside residence photographed at dusk with city lights below",
   },

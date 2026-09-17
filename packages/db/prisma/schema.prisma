@@ -253,6 +253,7 @@ model HomeHero {
   desktopImageKey      String?  @map("desktop_image_key")
   mobileImageUrl       String?  @map("mobile_image_url")
   mobileImageKey       String?  @map("mobile_image_key")
+  copyMode             String   @default("shared") @map("copy_mode")
   createdAt            DateTime @default(now()) @map("created_at")
   updatedAt            DateTime @updatedAt @map("updated_at")
 
@@ -261,15 +262,19 @@ model HomeHero {
 
 /// Admin-managed homepage hero slider images.
 model HomeHeroSlide {
-  id        String   @id @default(cuid())
-  imageUrl  String   @map("image_url")
-  imageKey  String?  @map("image_key")
-  thumbUrl  String   @map("thumb_url")
-  alt       String
-  sortOrder Int      @default(0) @map("sort_order")
-  published Boolean  @default(true)
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id             String   @id @default(cuid())
+  imageUrl       String   @map("image_url")
+  imageKey       String?  @map("image_key")
+  thumbUrl       String   @map("thumb_url")
+  mobileImageUrl String?  @map("mobile_image_url")
+  mobileImageKey String?  @map("mobile_image_key")
+  alt            String
+  title          String?  @db.Text
+  description    String?  @db.Text
+  sortOrder      Int      @default(0) @map("sort_order")
+  published      Boolean  @default(true)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
 
   @@index([published, sortOrder])
   @@map("home_hero_slides")

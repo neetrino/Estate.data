@@ -20,16 +20,24 @@ function toPortfolioProjectDto(project: {
   };
 }
 
+async function nextPortfolioSortOrder(): Promise<number> {
+  const aggregated = await getPrisma().portfolioProject.aggregate({
+    _max: { sortOrder: true },
+  });
+  return (aggregated._max.sortOrder ?? -1) + 1;
+}
+
 /** Create a portfolio project (admin). */
 export async function createPortfolioProject(
   input: CreatePortfolioProjectInput,
 ): Promise<PortfolioProjectDto> {
+  const sortOrder = input.sortOrder ?? (await nextPortfolioSortOrder());
   const project = await getPrisma().portfolioProject.create({
     data: {
       imageUrl: input.imageUrl,
       imageAlt: input.imageAlt,
       category: input.category,
-      sortOrder: input.sortOrder ?? 0,
+      sortOrder,
       featuredOnHome: input.featuredOnHome ?? false,
       published: input.published ?? true,
     },

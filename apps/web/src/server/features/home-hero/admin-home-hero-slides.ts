@@ -17,7 +17,11 @@ export async function createHomeHeroSlide(input: CreateHomeHeroSlideInput) {
     imageUrl: input.imageUrl,
     thumbUrl: input.thumbUrl,
     imageKey: input.imageKey ?? null,
+    mobileImageUrl: input.mobileImageUrl ?? null,
+    mobileImageKey: input.mobileImageKey ?? null,
     alt: input.alt,
+    title: input.title?.trim() ? input.title : null,
+    description: input.description?.trim() ? input.description : null,
     published: input.published ?? true,
   };
 

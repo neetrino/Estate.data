@@ -25,7 +25,6 @@ export type PortfolioFormState = {
   hasVideo: boolean;
   has3D: boolean;
   category: string;
-  sortOrder: string;
   featuredOnHome: boolean;
   published: boolean;
 };
@@ -128,7 +127,7 @@ export function AdminPortfolioProjectModal({
           </div>
         </section>
         <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4">
             <label className="block space-y-1.5">
               <span className="text-sm font-medium text-brand-navy">Media type</span>
               <select
@@ -143,13 +142,6 @@ export function AdminPortfolioProjectModal({
                 ))}
               </select>
             </label>
-            <AdminFormField
-              label="Sort order"
-              name="sortOrder"
-              type="number"
-              value={form.sortOrder}
-              onChange={(value) => onFormChange({ sortOrder: value })}
-            />
           </div>
           <div className="grid gap-3 rounded-xl bg-neutral-50/90 p-4 sm:grid-cols-2">
             <AdminCheckboxField

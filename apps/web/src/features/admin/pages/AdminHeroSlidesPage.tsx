@@ -2,44 +2,55 @@
 
 import { useState } from "react";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
-import { AdminButton } from "@/features/admin/components/ui/AdminButton";
+import { AdminHeroSlideCard } from "@/features/admin/components/AdminHeroSlideCard";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
-import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
-import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import {
   createAdminHeroSlide,
-  deleteAdminHeroSlide,
   fetchAdminHeroSlides,
-  updateAdminHeroSlide,
   uploadAdminHomeHeroImage,
 } from "@/features/admin/services/admin-api";
-import type { AdminHeroSlide } from "@/features/admin/types/admin-data";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
-import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import type { AdminHeroSlide } from "@/features/admin/types/admin-data";
+import type { HomeHeroCopyMode } from "@/shared/lib/homeHeroCopyMode";
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
 
-export function AdminHeroSlidesPage() {
+type AdminHeroSlidesPanelProps = {
+  readonly copyMode: HomeHeroCopyMode;
+  readonly sharedTitle: string;
+  readonly sharedDescription: string;
+};
+
+async function createSlideFromFile(file: File): Promise<void> {
+  const uploaded = await uploadAdminHomeHeroImage(file);
+  await createAdminHeroSlide({
+    imageUrl: uploaded.publicUrl,
+    thumbUrl: uploaded.publicUrl,
+    imageKey: uploaded.objectKey,
+    alt: file.name,
+    published: true,
+  });
+}
+
+/** Hero slide images: desktop plus optional mobile, with optional per-slide text. */
+export function AdminHeroSlidesPanel({
+  copyMode,
+  sharedTitle,
+  sharedDescription,
+}: AdminHeroSlidesPanelProps) {
   const { data, loading, error, reload } = useAdminQuery(() => fetchAdminHeroSlides(), []);
   const slides = data ?? [];
   const [busy, setBusy] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const publishedCount = slides.filter((slide) => slide.published).length;
+  const perSlide = copyMode === "perSlide";
 
   async function handleUpload(file: File) {
     setBusy(true);
     setFormError(null);
     try {
-      const uploaded = await uploadAdminHomeHeroImage(file);
-      await createAdminHeroSlide({
-        imageUrl: uploaded.publicUrl,
-        thumbUrl: uploaded.publicUrl,
-        imageKey: uploaded.objectKey,
-        alt: file.name,
-        published: true,
-      });
+      await createSlideFromFile(file);
       reload();
     } catch (uploadError) {
       setFormError(uploadError instanceof Error ? uploadError.message : UPLOAD_FAILED_MESSAGE);
@@ -50,19 +61,62 @@ export function AdminHeroSlidesPage() {
   }
 
   return (
-    <>
-      <AdminPageHeader
-        title="Hero slides"
-        description="Add as many images as you want. The homepage plays them in order and restarts from the first after the last."
-      />
+    <AdminHeroSlidesPanelView
+      loading={loading}
+      error={error}
+      formError={formError}
+      busy={busy}
+      perSlide={perSlide}
+      slides={slides}
+      sharedTitle={sharedTitle}
+      sharedDescription={sharedDescription}
+      onRetry={reload}
+      onUpload={handleUpload}
+      onChanged={reload}
+    />
+  );
+}
+
+function AdminHeroSlidesPanelView({
+  loading,
+  error,
+  formError,
+  busy,
+  perSlide,
+  slides,
+  sharedTitle,
+  sharedDescription,
+  onRetry,
+  onUpload,
+  onChanged,
+}: {
+  readonly loading: boolean;
+  readonly error: string | null;
+  readonly formError: string | null;
+  readonly busy: boolean;
+  readonly perSlide: boolean;
+  readonly slides: readonly AdminHeroSlide[];
+  readonly sharedTitle: string;
+  readonly sharedDescription: string;
+  readonly onRetry: () => void;
+  readonly onUpload: (file: File) => Promise<void>;
+  readonly onChanged: () => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-sm font-semibold uppercase tracking-[0.08em] text-[#414141]/70">
+        Slides
+      </h2>
       {loading ? <AdminLoadingState /> : null}
-      {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
+      {error ? <AdminErrorState message={error} onRetry={onRetry} /> : null}
       {formError ? <AdminErrorState message={formError} /> : null}
-      <p className="mb-3 text-sm text-muted-foreground">
-        {publishedCount} published slide{publishedCount === 1 ? "" : "s"} in the loop.
-        {publishedCount < 2 ? " Add at least two published images to see the slider rotate." : ""}
+      <p className="text-sm text-muted-foreground">
+        {perSlide
+          ? "Each slide can have its own text. Leave a field empty to use the default text above."
+          : "These images rotate behind the default text above."}{" "}
+        Add a mobile image on a slide when it should look different on small screens.
       </p>
-      <div className={`${ADMIN_CARD_CLASS} mb-4`}>
+      <div className={ADMIN_CARD_CLASS}>
         <AdminImageUploader
           label="Add slides"
           previewUrl={null}
@@ -71,120 +125,28 @@ export function AdminHeroSlidesPage() {
           resetPreviewOnSuccess
           reverseFiles
           buttonLabel="Add images"
-          hint="Select one or several files. Each file becomes a new slide"
+          hint="Select one or several files. Each file becomes a new desktop slide"
           placeholderText="Upload one or more images to add slides"
-          onUpload={handleUpload}
+          onUpload={onUpload}
         />
       </div>
       <ul className="grid gap-4">
         {slides.map((slide) => (
-          <HeroSlideCard key={slide.id} slide={slide} onChanged={reload} />
+          <AdminHeroSlideCard
+            key={slide.id}
+            slide={slide}
+            perSlide={perSlide}
+            sharedTitle={sharedTitle}
+            sharedDescription={sharedDescription}
+            onChanged={onChanged}
+          />
         ))}
       </ul>
-    </>
-  );
-}
-
-function HeroSlideCard({
-  slide,
-  onChanged,
-}: {
-  slide: AdminHeroSlide;
-  onChanged: () => void;
-}) {
-  const [alt, setAlt] = useState(slide.alt);
-  const [sortOrder, setSortOrder] = useState(String(slide.sortOrder));
-  const [replacing, setReplacing] = useState(false);
-  const [replaceError, setReplaceError] = useState<string | null>(null);
-
-  async function handleReplace(file: File) {
-    setReplacing(true);
-    setReplaceError(null);
-
-    try {
-      const uploaded = await uploadAdminHomeHeroImage(file);
-      await updateAdminHeroSlide(slide.id, {
-        imageUrl: uploaded.publicUrl,
-        thumbUrl: uploaded.publicUrl,
-        imageKey: uploaded.objectKey,
-      });
-      onChanged();
-    } catch (uploadError) {
-      setReplaceError(uploadError instanceof Error ? uploadError.message : UPLOAD_FAILED_MESSAGE);
-    } finally {
-      setReplacing(false);
-    }
-  }
-
-  return (
-    <li className={ADMIN_CARD_CLASS}>
-      {replaceError ? <AdminErrorState message={replaceError} /> : null}
-      <AdminImageUploader
-        label="Slide image"
-        previewUrl={normalizePublicAssetUrl(slide.imageUrl)}
-        uploading={replacing}
-        onUpload={handleReplace}
-      />
-      <AdminFormField label="Alt text" name={`alt-${slide.id}`} value={alt} onChange={setAlt} />
-      <AdminFormField
-        label="Sort order"
-        name={`order-${slide.id}`}
-        value={sortOrder}
-        onChange={setSortOrder}
-      />
-      <HeroSlideActions
-        slide={slide}
-        alt={alt}
-        sortOrder={sortOrder}
-        disabled={replacing}
-        onChanged={onChanged}
-      />
-    </li>
-  );
-}
-
-function HeroSlideActions({
-  slide,
-  alt,
-  sortOrder,
-  disabled,
-  onChanged,
-}: {
-  slide: AdminHeroSlide;
-  alt: string;
-  sortOrder: string;
-  disabled: boolean;
-  onChanged: () => void;
-}) {
-  return (
-    <div className="mt-3 flex flex-wrap gap-2">
-      <AdminButton
-        disabled={disabled}
-        onClick={() =>
-          void updateAdminHeroSlide(slide.id, {
-            alt,
-            sortOrder: Number(sortOrder) || 0,
-          }).then(onChanged)
-        }
-      >
-        Save
-      </AdminButton>
-      <AdminButton
-        variant="secondary"
-        disabled={disabled}
-        onClick={() =>
-          void updateAdminHeroSlide(slide.id, { published: !slide.published }).then(onChanged)
-        }
-      >
-        {slide.published ? "Unpublish" : "Publish"}
-      </AdminButton>
-      <AdminButton
-        variant="danger"
-        disabled={disabled}
-        onClick={() => void deleteAdminHeroSlide(slide.id).then(onChanged)}
-      >
-        Delete
-      </AdminButton>
     </div>
   );
+}
+
+/** @deprecated Combined into Home Hero — kept for the redirected route. */
+export function AdminHeroSlidesPage() {
+  return <AdminHeroSlidesPanel copyMode="shared" sharedTitle="" sharedDescription="" />;
 }

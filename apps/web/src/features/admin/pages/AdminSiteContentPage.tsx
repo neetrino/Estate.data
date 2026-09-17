@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import {
-  SUPERSUDO_PANEL_CONTACT_FIELDS_PATH,
-  SUPERSUDO_PANEL_HERO_SLIDES_PATH,
   SUPERSUDO_PANEL_HOME_HERO_PATH,
   SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH,
   SUPERSUDO_PANEL_MARKETING_COPY_PATH,
@@ -14,12 +12,7 @@ const CONTENT_LINKS = [
   {
     href: SUPERSUDO_PANEL_HOME_HERO_PATH,
     title: "Home Hero",
-    description: "Edit hero title, description, and CTA buttons.",
-  },
-  {
-    href: SUPERSUDO_PANEL_HERO_SLIDES_PATH,
-    title: "Hero slides",
-    description: "Upload, replace, delete, and reorder slider images.",
+    description: "Hero text, buttons, and slider images — same copy on every slide, or unique copy per image.",
   },
   {
     href: SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
@@ -27,14 +20,9 @@ const CONTENT_LINKS = [
     description: "Edit service section copy, images, and buttons.",
   },
   {
-    href: SUPERSUDO_PANEL_CONTACT_FIELDS_PATH,
-    title: "Contact fields",
-    description: "Mark each form field required, optional, or hidden.",
-  },
-  {
     href: SUPERSUDO_PANEL_MARKETING_COPY_PATH,
     title: "Marketing copy",
-    description: "What We Do, Web Pages, and Contact headings and body text.",
+    description: "Homepage intro, Web Pages, and Contact — words, buttons, and the reel.",
   },
   {
     href: SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH,

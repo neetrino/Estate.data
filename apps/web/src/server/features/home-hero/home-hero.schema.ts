@@ -1,4 +1,11 @@
 import { z } from "zod";
+import {
+  HOME_HERO_COPY_MODES,
+  parseHomeHeroCopyMode,
+} from "@/shared/lib/homeHeroCopyMode";
+
+export { HOME_HERO_COPY_MODES, parseHomeHeroCopyMode };
+export type { HomeHeroCopyMode } from "@/shared/lib/homeHeroCopyMode";
 
 export const HOME_HERO_KEY = "home" as const;
 
@@ -34,6 +41,8 @@ const optionalImageKeySchema = z
   .nullable()
   .optional();
 
+export const homeHeroCopyModeSchema = z.enum(HOME_HERO_COPY_MODES);
+
 export const homeHeroContentSchema = z.object({
   title: trimmedString(1, 500),
   description: trimmedString(1, 2000),
@@ -41,6 +50,7 @@ export const homeHeroContentSchema = z.object({
   primaryButtonHref: buttonHrefSchema,
   secondaryButtonLabel: trimmedString(1, 120),
   secondaryButtonHref: buttonHrefSchema,
+  copyMode: homeHeroCopyModeSchema,
   desktopImageUrl: optionalImageUrlSchema,
   desktopImageKey: optionalImageKeySchema,
   mobileImageUrl: optionalImageUrlSchema,

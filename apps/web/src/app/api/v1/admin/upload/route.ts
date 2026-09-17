@@ -8,8 +8,8 @@ import { handleApiRoute } from "@/server/lib/route-handler";
 import {
   ADMIN_IMAGE_STORAGE_UNAVAILABLE,
   MAX_ADMIN_IMAGE_UPLOAD_BYTES,
-  resolveAdminImageMime,
 } from "@/shared/lib/adminImageUpload";
+import { resolveAdminUploadMime } from "@/shared/lib/adminVideoUpload";
 
 const HOME_HERO_UPLOAD_CONTEXT = "homeHero";
 
@@ -41,7 +41,7 @@ async function postAdminUpload(request: Request): Promise<Response> {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const mimeType = resolveAdminImageMime(file.name, file.type || "application/octet-stream");
+  const mimeType = resolveAdminUploadMime(file.name, file.type || "application/octet-stream");
 
   try {
     const uploaded =
@@ -60,7 +60,7 @@ async function postAdminUpload(request: Request): Promise<Response> {
     if (message.includes("storage")) {
       throw ApiError.serviceUnavailable(message);
     }
-    if (message.includes("10 MB") || message.includes("JPEG")) {
+    if (message.includes("10 MB") || message.includes("JPEG") || message.includes("MP4")) {
       throw ApiError.badRequest(message, "VALIDATION_ERROR");
     }
 

@@ -1,5 +1,6 @@
 import {
   HOME_HERO_KEY,
+  parseHomeHeroCopyMode,
   type HomeHeroContent,
   type UpdateHomeHeroInput,
 } from "@/server/features/home-hero/home-hero.schema";
@@ -7,6 +8,7 @@ import { getPrisma } from "@/server/lib/db";
 
 /** Upsert singleton home hero (admin). */
 export async function updateHomeHero(input: UpdateHomeHeroInput): Promise<HomeHeroContent> {
+  const copyMode = input.copyMode ?? "shared";
   const row = await getPrisma().homeHero.upsert({
     where: { key: HOME_HERO_KEY },
     create: {
@@ -17,6 +19,7 @@ export async function updateHomeHero(input: UpdateHomeHeroInput): Promise<HomeHe
       primaryButtonHref: input.primaryButtonHref,
       secondaryButtonLabel: input.secondaryButtonLabel,
       secondaryButtonHref: input.secondaryButtonHref,
+      copyMode,
       desktopImageUrl: input.desktopImageUrl ?? null,
       desktopImageKey: input.desktopImageKey ?? null,
       mobileImageUrl: input.mobileImageUrl ?? null,
@@ -29,6 +32,7 @@ export async function updateHomeHero(input: UpdateHomeHeroInput): Promise<HomeHe
       primaryButtonHref: input.primaryButtonHref,
       secondaryButtonLabel: input.secondaryButtonLabel,
       secondaryButtonHref: input.secondaryButtonHref,
+      copyMode,
       desktopImageUrl: input.desktopImageUrl ?? null,
       desktopImageKey: input.desktopImageKey ?? null,
       mobileImageUrl: input.mobileImageUrl ?? null,
@@ -41,6 +45,7 @@ export async function updateHomeHero(input: UpdateHomeHeroInput): Promise<HomeHe
       primaryButtonHref: true,
       secondaryButtonLabel: true,
       secondaryButtonHref: true,
+      copyMode: true,
       desktopImageUrl: true,
       desktopImageKey: true,
       mobileImageUrl: true,
@@ -55,6 +60,7 @@ export async function updateHomeHero(input: UpdateHomeHeroInput): Promise<HomeHe
     primaryButtonHref: row.primaryButtonHref,
     secondaryButtonLabel: row.secondaryButtonLabel,
     secondaryButtonHref: row.secondaryButtonHref,
+    copyMode: parseHomeHeroCopyMode(row.copyMode),
     desktopImageUrl: row.desktopImageUrl,
     desktopImageKey: row.desktopImageKey,
     mobileImageUrl: row.mobileImageUrl,
