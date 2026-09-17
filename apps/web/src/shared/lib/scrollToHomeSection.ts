@@ -5,6 +5,23 @@ const SECTION_QUERY = "section";
 const SECTION_SCROLL_RETRY_MS = 50;
 const SECTION_SCROLL_MAX_ATTEMPTS = 24;
 const SECTION_SCROLL_AFTER_MENU_MS = 120;
+const SECTION_HASH_LOCK_MS = 900;
+
+export const LOCATION_HASH_SYNC_EVENT = "estate:location-hash-sync";
+
+let hashSyncLockedUntil = 0;
+
+export function lockHomeSectionHashSync(durationMs = SECTION_HASH_LOCK_MS): void {
+  hashSyncLockedUntil = Date.now() + durationMs;
+}
+
+export function isHomeSectionHashSyncLocked(): boolean {
+  return Date.now() < hashSyncLockedUntil;
+}
+
+export function notifyLocationHashChanged(): void {
+  window.dispatchEvent(new Event(LOCATION_HASH_SYNC_EVENT));
+}
 
 function sectionIdFromHref(href: string): string | null {
   if (href.startsWith("#") && href.length > 1) {
@@ -42,20 +59,20 @@ export function homeSectionSearchHref(sectionId: string): string {
   return `/?section=${sectionId}`;
 }
 
-function syncSectionHash(sectionId: string): void {
+/** Update the hash without scrolling. `replaceState` does not fire `hashchange`. */
+export function syncSectionHash(sectionId: string): void {
   const nextHash = `#${sectionId}`;
   if (window.location.hash === nextHash) {
     return;
   }
 
-  // Keep the current path+search. Next.js App Router throws if replaceState
-  // is called with `null` state or a mismatched `/#id` URL.
   const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
   try {
     window.history.replaceState(window.history.state ?? {}, "", nextUrl);
   } catch {
     window.location.hash = sectionId;
   }
+  notifyLocationHashChanged();
 }
 
 function attemptScrollToSection(sectionId: string, attempt: number): void {
@@ -69,6 +86,7 @@ function attemptScrollToSection(sectionId: string, attempt: number): void {
     return;
   }
 
+  lockHomeSectionHashSync();
   element.scrollIntoView({ behavior: "smooth", block: "start" });
   syncSectionHash(sectionId);
 }

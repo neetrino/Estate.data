@@ -23,6 +23,10 @@ tmp/
 temp/
 .cache/
 
+# Local media uploads (R2 fallback in development)
+apps/web/public/uploads/**
+!apps/web/public/uploads/.gitkeep
+
 # IDE (optional, uncomment if needed)
 # .idea/
 # .vscode/

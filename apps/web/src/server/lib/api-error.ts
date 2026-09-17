@@ -68,4 +68,8 @@ export class ApiError extends Error {
       retryAfterSeconds,
     );
   }
+
+  static serviceUnavailable(message = "Service unavailable"): ApiError {
+    return new ApiError(message, 503, "SERVICE_UNAVAILABLE");
+  }
 }

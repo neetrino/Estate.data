@@ -16,6 +16,7 @@ const imageUrl = z
 export const createHomeHeroSlideSchema = z.object({
   imageUrl,
   thumbUrl: imageUrl,
+  imageKey: z.string().trim().min(1).max(500).optional(),
   alt: z.string().trim().min(1).max(200),
   sortOrder: z.number().int().min(0).max(999).optional(),
   published: z.boolean().optional(),

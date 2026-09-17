@@ -43,7 +43,7 @@ function buildImageRemotePatterns(): ImageRemotePattern[] {
   return [
     apiPattern,
     ...(r2Pattern ? [r2Pattern] : []),
-    { protocol: "https", hostname: "*.r2.dev", pathname: "/**" },
+    { protocol: "https", hostname: "**.r2.dev", pathname: "/**" },
   ];
 }
 

@@ -12,14 +12,24 @@ export async function listAdminHomeHeroSlides() {
 }
 
 export async function createHomeHeroSlide(input: CreateHomeHeroSlideInput) {
-  return getPrisma().homeHeroSlide.create({
-    data: {
-      imageUrl: input.imageUrl,
-      thumbUrl: input.thumbUrl,
-      alt: input.alt,
-      sortOrder: input.sortOrder ?? 0,
-      published: input.published ?? true,
-    },
+  const prisma = getPrisma();
+  const slideData = {
+    imageUrl: input.imageUrl,
+    thumbUrl: input.thumbUrl,
+    imageKey: input.imageKey ?? null,
+    alt: input.alt,
+    published: input.published ?? true,
+  };
+
+  if (input.sortOrder !== undefined) {
+    return prisma.homeHeroSlide.create({
+      data: { ...slideData, sortOrder: input.sortOrder },
+    });
+  }
+
+  return prisma.$transaction(async (tx) => {
+    await tx.homeHeroSlide.updateMany({ data: { sortOrder: { increment: 1 } } });
+    return tx.homeHeroSlide.create({ data: { ...slideData, sortOrder: 0 } });
   });
 }
 

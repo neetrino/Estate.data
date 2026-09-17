@@ -26,6 +26,7 @@ import { NavBookShootCta } from "@/shared/components/navbar/NavBookShootCta";
 import { NavDesktopItem } from "@/shared/components/navbar/NavDesktopItem";
 import { NavDesktopServicesItem } from "@/shared/components/navbar/NavDesktopServicesItem";
 import { useLocationHash } from "@/shared/components/navbar/useLocationHash";
+import { useHomeSectionHashSync } from "@/shared/components/navbar/useHomeSectionHashSync";
 import { scrollPageToTop } from "@/shared/lib/scrollPageToTop";
 
 const NAVBAR_SURFACE_TRANSITION_CLASS =
@@ -71,6 +72,7 @@ export function Navbar({ overlay }: NavbarProps) {
   const pathname = usePathname();
   const hash = useLocationHash();
   const isHome = pathname === "/";
+  useHomeSectionHashSync(isHome);
   const isOverlay = overlay ?? isHome;
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

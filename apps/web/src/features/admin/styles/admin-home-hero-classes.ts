@@ -27,6 +27,8 @@ export const HOME_HERO_LABEL_CLASS =
 
 export const HOME_HERO_HINT_CLASS = "mb-2 text-xs text-[#414141]/55";
 
+export const HOME_HERO_FIELD_ERROR_CLASS = "mt-1 text-xs text-red-700";
+
 export const HOME_HERO_INPUT_CLASS =
   "w-full rounded-lg border border-[#dcc090]/35 bg-white px-3 py-2 text-sm text-[#122a26] placeholder-[#414141]/30 outline-none transition-all focus:border-[#dcc090] focus:ring-2 focus:ring-[#dcc090]/30";
 

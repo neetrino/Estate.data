@@ -14,6 +14,14 @@ const r2Schema = z.object({
   R2_PUBLIC_URL: z.string().url(),
 });
 
+function readTrimmedEnv(keys: readonly string[]): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const key of keys) {
+    result[key] = process.env[key]?.trim() ?? "";
+  }
+  return result;
+}
+
 export type ResendConfig = z.infer<typeof resendSchema>;
 export type R2Config = z.infer<typeof r2Schema>;
 
@@ -25,7 +33,15 @@ export function getResendConfig(): ResendConfig | null {
 
 /** R2 S3-compatible config when all vars are set. */
 export function getR2Config(): R2Config | null {
-  const result = r2Schema.safeParse(process.env);
+  const result = r2Schema.safeParse(
+    readTrimmedEnv([
+      "R2_ACCOUNT_ID",
+      "R2_ACCESS_KEY_ID",
+      "R2_SECRET_ACCESS_KEY",
+      "R2_BUCKET_NAME",
+      "R2_PUBLIC_URL",
+    ]),
+  );
   return result.success ? result.data : null;
 }
 

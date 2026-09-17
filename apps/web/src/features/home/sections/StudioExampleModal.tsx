@@ -1,14 +1,18 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { requestContactService } from "@/features/contact/lib/contactServicePrefill";
 import { STUDIO_EXAMPLE_MODAL_COPY } from "@/features/home/content/studioPageCopy";
-import { studioServiceExample } from "@/features/home/content/studioServiceExamples";
+import {
+  studioServiceExample,
+  type StudioServiceExample,
+} from "@/features/home/content/studioServiceExamples";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
+import { studioServiceBrowseWrap } from "@/features/home/lib/studioServiceBrowseOrder";
 import { studioServiceContactValue } from "@/features/home/lib/studioServiceContactValue";
-import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import { StudioExampleModalMedia } from "@/features/home/sections/StudioExampleModalMedia";
 import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import { homeSectionHref, HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import "./studio-example-modal.css";
@@ -23,22 +27,11 @@ function useIsClient(): boolean {
 
 const OVERLAY_CLASS = "fixed inset-0 z-[200] bg-black/80";
 
-/**
- * Dialog box size is fixed (max-w-3xl + 16/10 media slot).
- * Only the editing loft portrait is fitted with contain so the full photo shows.
- */
 const PANEL_CLASS = [
   "fixed left-1/2 top-1/2 z-[201] flex w-[min(100%-1.5rem,48rem)] max-h-[90vh]",
   "-translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden",
   "border border-studio-border bg-studio-bg p-0 shadow-lg sm:rounded-lg",
 ].join(" ");
-
-const MEDIA_CLASS = "studio-example-modal__media";
-
-const MEDIA_IMAGE_COVER_CLASS = "studio-example-modal__img--cover";
-
-/** Editing loft only: full portrait inside the fixed media slot. */
-const MEDIA_IMAGE_CONTAIN_CLASS = "studio-example-modal__img--contain";
 
 const CLOSE_BUTTON_CLASS = [
   "absolute right-3 top-3 z-20 flex size-7 items-center justify-center sm:right-4 sm:top-4",
@@ -72,30 +65,65 @@ const BODY_LOCK_CLASS = "overflow-hidden";
 
 const DEFAULT_CTA_HREF = homeSectionHref(HOME_SECTION_IDS.quote);
 
-function isEditingLoftExample(sectionKey: string, imageUrl: string): boolean {
-  return sectionKey === HOME_SECTION_IDS.editing || imageUrl.includes("portfolio-3");
-}
+type ExampleFallback = Pick<
+  StudioServiceContent,
+  "sectionKey" | "eyebrow" | "title" | "description" | "imageUrl" | "included" | "primaryCtaHref"
+>;
 
 type StudioExampleModalProps = {
-  readonly service: Pick<
-    StudioServiceContent,
-    "sectionKey" | "eyebrow" | "title" | "description" | "imageUrl" | "included" | "primaryCtaHref"
-  >;
+  readonly service: ExampleFallback;
   readonly onClose: () => void;
 };
 
-/** Service example popup — editing loft shows the full portrait inside the fixed box. */
+/** View Example popup — arrows page through the next and previous service examples. */
 export function StudioExampleModal({ service, onClose }: StudioExampleModalProps) {
-  const example = studioServiceExample(service.sectionKey, service);
+  const [sectionKey, setSectionKey] = useState(service.sectionKey);
+  const example = studioServiceExample(sectionKey, service);
   const isClient = useIsClient();
-  const ctaHref = service.primaryCtaHref || DEFAULT_CTA_HREF;
-  const imageSrc = normalizePublicAssetUrl(example.imageUrl);
-  const showFullImage = isEditingLoftExample(service.sectionKey, example.imageUrl);
 
+  useExampleModalKeys(onClose, setSectionKey);
+
+  function handleCtaNavigate() {
+    requestContactService(studioServiceContactValue(sectionKey));
+    onClose();
+  }
+
+  if (!isClient) {
+    return null;
+  }
+
+  return createPortal(
+    <StudioExampleDialog
+      ctaHref={service.primaryCtaHref || DEFAULT_CTA_HREF}
+      example={example}
+      sectionKey={sectionKey}
+      onClose={onClose}
+      onCtaNavigate={handleCtaNavigate}
+      onPrev={() => setSectionKey((current) => studioServiceBrowseWrap(current, -1))}
+      onNext={() => setSectionKey((current) => studioServiceBrowseWrap(current, 1))}
+    />,
+    document.body,
+  );
+}
+
+function useExampleModalKeys(
+  onClose: () => void,
+  setSectionKey: (update: (current: string) => string) => void,
+): void {
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setSectionKey((current) => studioServiceBrowseWrap(current, 1));
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setSectionKey((current) => studioServiceBrowseWrap(current, -1));
       }
     }
 
@@ -105,18 +133,27 @@ export function StudioExampleModal({ service, onClose }: StudioExampleModalProps
       document.body.classList.remove(BODY_LOCK_CLASS);
       window.removeEventListener("keydown", onKey);
     };
-  }, [onClose]);
+  }, [onClose, setSectionKey]);
+}
 
-  function handleCtaNavigate() {
-    requestContactService(studioServiceContactValue(service.sectionKey));
-    onClose();
-  }
-
-  if (!isClient) {
-    return null;
-  }
-
-  return createPortal(
+function StudioExampleDialog({
+  ctaHref,
+  example,
+  sectionKey,
+  onClose,
+  onCtaNavigate,
+  onPrev,
+  onNext,
+}: {
+  readonly ctaHref: string;
+  readonly example: StudioServiceExample;
+  readonly sectionKey: string;
+  readonly onClose: () => void;
+  readonly onCtaNavigate: () => void;
+  readonly onPrev: () => void;
+  readonly onNext: () => void;
+}) {
+  return (
     <>
       <button
         type="button"
@@ -135,49 +172,46 @@ export function StudioExampleModal({ service, onClose }: StudioExampleModalProps
           <X className="h-4 w-4" strokeWidth={2} aria-hidden />
         </button>
 
-        <div className={MEDIA_CLASS}>
-          {example.embedUrl ? (
-            <iframe
-              title={example.title}
-              src={example.embedUrl}
-              loading="lazy"
-              allow="xr-spatial-tracking; fullscreen"
-              allowFullScreen
-              className="absolute inset-0 size-full border-0"
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element -- portal dialog matches master <img>
-            <img
-              src={imageSrc}
-              alt={example.title}
-              width={showFullImage ? 1200 : 1400}
-              height={showFullImage ? 1500 : 875}
-              loading="lazy"
-              className={showFullImage ? MEDIA_IMAGE_CONTAIN_CLASS : MEDIA_IMAGE_COVER_CLASS}
-            />
-          )}
-        </div>
+        <StudioExampleModalMedia
+          example={example}
+          sectionKey={sectionKey}
+          onPrev={onPrev}
+          onNext={onNext}
+        />
 
-        <div className={BODY_CLASS}>
-          <h3 className={TITLE_CLASS}>{example.title}</h3>
-          <p className={SUMMARY_CLASS}>{example.summary}</p>
-
-          <ul className={HIGHLIGHT_LIST_CLASS}>
-            {example.highlights.map((highlight) => (
-              <li key={highlight} className={HIGHLIGHT_ITEM_CLASS}>
-                <span aria-hidden className={HIGHLIGHT_DASH_CLASS} />
-                {highlight}
-              </li>
-            ))}
-          </ul>
-
-          <HomeSectionLink href={ctaHref} className={CTA_CLASS} onNavigate={handleCtaNavigate}>
-            {STUDIO_EXAMPLE_MODAL_COPY.ctaLabel}
-            <span aria-hidden>→</span>
-          </HomeSectionLink>
-        </div>
+        <StudioExampleModalBody example={example} ctaHref={ctaHref} onCtaNavigate={onCtaNavigate} />
       </div>
-    </>,
-    document.body,
+    </>
+  );
+}
+
+function StudioExampleModalBody({
+  example,
+  ctaHref,
+  onCtaNavigate,
+}: {
+  readonly example: StudioServiceExample;
+  readonly ctaHref: string;
+  readonly onCtaNavigate: () => void;
+}) {
+  return (
+    <div className={BODY_CLASS}>
+      <h3 className={TITLE_CLASS}>{example.title}</h3>
+      <p className={SUMMARY_CLASS}>{example.summary}</p>
+
+      <ul className={HIGHLIGHT_LIST_CLASS}>
+        {example.highlights.map((highlight) => (
+          <li key={highlight} className={HIGHLIGHT_ITEM_CLASS}>
+            <span aria-hidden className={HIGHLIGHT_DASH_CLASS} />
+            {highlight}
+          </li>
+        ))}
+      </ul>
+
+      <HomeSectionLink href={ctaHref} className={CTA_CLASS} onNavigate={onCtaNavigate}>
+        {STUDIO_EXAMPLE_MODAL_COPY.ctaLabel}
+        <span aria-hidden>→</span>
+      </HomeSectionLink>
+    </div>
   );
 }

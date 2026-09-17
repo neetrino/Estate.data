@@ -802,6 +802,21 @@ button:disabled {
   animation: 26s ease-in-out infinite alternate studio-kenburns;
 }
 
+@keyframes studio-hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Duration must match HERO_SLIDE_INTERVAL_MS in StudioHeroSlideshow.tsx */
+.studio-hero-progress {
+  transform-origin: left center;
+  animation: 6s linear forwards studio-hero-progress;
+}
+
 @keyframes studio-scrollcue {
   0%,
   100% {
@@ -824,6 +839,10 @@ button:disabled {
 
 @media (prefers-reduced-motion: reduce) {
   .studio-kenburns {
+    animation: none;
+  }
+
+  .studio-hero-progress {
     animation: none;
   }
 }

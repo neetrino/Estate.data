@@ -1,14 +1,15 @@
 import { randomUUID } from "node:crypto";
-import { uploadR2Object } from "@/server/lib/r2/client";
+import { isR2Configured, uploadR2Object } from "@/server/lib/r2/client";
+import {
+  ADMIN_IMAGE_MIME_TYPES,
+  ADMIN_IMAGE_SIZE_ERROR,
+  ADMIN_IMAGE_TYPE_ERROR,
+  MAX_ADMIN_IMAGE_UPLOAD_BYTES,
+} from "@/shared/lib/adminImageUpload";
 
-export const MAX_R2_UPLOAD_BYTES = 10 * 1024 * 1024;
+export const MAX_R2_UPLOAD_BYTES = MAX_ADMIN_IMAGE_UPLOAD_BYTES;
 
-export const ALLOWED_IMAGE_MIME_TYPES = new Set([
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-]);
+export const ALLOWED_IMAGE_MIME_TYPES = new Set<string>(ADMIN_IMAGE_MIME_TYPES);
 
 export const ALLOWED_MEDIA_MIME_TYPES = new Set([
   ...ALLOWED_IMAGE_MIME_TYPES,
@@ -21,6 +22,10 @@ export type R2UploadResult = {
   byteSize: number;
   mimeType: string;
 };
+
+export function isMediaStorageConfigured(): boolean {
+  return isR2Configured();
+}
 
 export function extensionForMime(mimeType: string): string {
   const map: Record<string, string> = {
@@ -36,7 +41,7 @@ export function extensionForMime(mimeType: string): string {
 
 function assertUploadSize(data: Buffer): void {
   if (data.length > MAX_R2_UPLOAD_BYTES) {
-    throw new Error("File exceeds maximum upload size");
+    throw new Error(ADMIN_IMAGE_SIZE_ERROR);
   }
 }
 
@@ -58,7 +63,7 @@ export async function uploadHomeHeroImageToR2(
   assertUploadSize(data);
 
   if (!ALLOWED_IMAGE_MIME_TYPES.has(mimeType)) {
-    throw new Error("Unsupported media type");
+    throw new Error(ADMIN_IMAGE_TYPE_ERROR);
   }
 
   const objectKey = buildHomeHeroObjectKey(mimeType);
@@ -80,7 +85,7 @@ export async function uploadMediaToR2(
   assertUploadSize(data);
 
   if (!ALLOWED_MEDIA_MIME_TYPES.has(mimeType)) {
-    throw new Error("Unsupported media type");
+    throw new Error(ADMIN_IMAGE_TYPE_ERROR);
   }
 
   const objectKey = `media/${randomUUID()}.${extensionForMime(mimeType)}`;

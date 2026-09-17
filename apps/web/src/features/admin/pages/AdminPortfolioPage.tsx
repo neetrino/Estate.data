@@ -3,16 +3,16 @@
 import { PORTFOLIO_MEDIA_CATEGORIES } from "@estate/db";
 import { useState } from "react";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
-import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
+import {
+  AdminPortfolioProjectModal,
+  type PortfolioFormState,
+} from "@/features/admin/components/AdminPortfolioProjectModal";
 import { AdminBadge } from "@/features/admin/components/ui/AdminBadge";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
-import { AdminCheckboxField } from "@/features/admin/components/ui/AdminCheckboxField";
 import { AdminConfirmDialog } from "@/features/admin/components/ui/AdminConfirmDialog";
 import { AdminEmptyState } from "@/features/admin/components/ui/AdminEmptyState";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
-import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
-import { AdminModal } from "@/features/admin/components/ui/AdminModal";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
 import { AdminTable } from "@/features/admin/components/ui/AdminTable";
 import {
@@ -23,35 +23,54 @@ import {
   uploadAdminImage,
 } from "@/features/admin/services/admin-api";
 import {
-  ADMIN_INPUT_CLASS,
   ADMIN_TABLE_CELL_CLASS,
   ADMIN_TABLE_HEAD_ROW_CLASS,
   ADMIN_TABLE_THUMB_IMG_CLASS,
   ADMIN_TABLE_THUMB_WRAP_CLASS,
 } from "@/features/admin/styles/admin-panel-classes";
 import type { AdminPortfolioProject } from "@/features/admin/types/admin-data";
+import {
+  buildPortfolioImageAlt,
+  parseRecentWorkAlt,
+  portfolioHas3D,
+  portfolioHasVideo,
+  servicesListFromText,
+  servicesTextFromList,
+} from "@/features/home/content/parseRecentWorkAlt";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
-
-type PortfolioFormState = {
-  imageUrl: string;
-  imageAlt: string;
-  category: string;
-  sortOrder: string;
-  featuredOnHome: boolean;
-  published: boolean;
-};
 
 const EMPTY_FORM: PortfolioFormState = {
   imageUrl: "",
-  imageAlt: "",
+  title: "",
+  location: "",
+  servicesText: "",
+  hasVideo: false,
+  has3D: false,
   category: PORTFOLIO_MEDIA_CATEGORIES[0],
   sortOrder: "0",
   featuredOnHome: false,
   published: true,
 };
 
-const IMAGE_REQUIRED_MESSAGE = "Upload an image before saving";
+const IMAGE_REQUIRED_MESSAGE = "Upload an image before saving.";
+const TITLE_REQUIRED_MESSAGE = "Title is required.";
 const IMAGE_UPLOAD_FAILED_MESSAGE = "Upload failed";
+
+function projectToForm(item: AdminPortfolioProject): PortfolioFormState {
+  const parsed = parseRecentWorkAlt(item.imageAlt);
+  return {
+    imageUrl: item.imageUrl,
+    title: parsed.title,
+    location: parsed.location ?? "",
+    servicesText: servicesTextFromList(parsed.services),
+    hasVideo: portfolioHasVideo(item.imageAlt),
+    has3D: portfolioHas3D(item.imageAlt),
+    category: item.category,
+    sortOrder: String(item.sortOrder),
+    featuredOnHome: item.featuredOnHome,
+    published: item.published,
+  };
+}
 
 export function AdminPortfolioPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminPortfolio, []);
@@ -63,36 +82,36 @@ export function AdminPortfolioPage() {
   const [uploading, setUploading] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [imageError, setImageError] = useState<string | null>(null);
+  const [titleError, setTitleError] = useState<string | null>(null);
 
   function openCreate() {
     setEditing(null);
     setForm(EMPTY_FORM);
     setActionError(null);
+    setImageError(null);
+    setTitleError(null);
     setModalOpen(true);
   }
 
   function openEdit(item: AdminPortfolioProject) {
     setEditing(item);
-    setForm({
-      imageUrl: item.imageUrl,
-      imageAlt: item.imageAlt,
-      category: item.category,
-      sortOrder: String(item.sortOrder),
-      featuredOnHome: item.featuredOnHome,
-      published: item.published,
-    });
+    setForm(projectToForm(item));
     setActionError(null);
+    setImageError(null);
+    setTitleError(null);
     setModalOpen(true);
   }
 
   async function handleImageUpload(file: File) {
     setUploading(true);
     setActionError(null);
+    setImageError(null);
     try {
       const uploaded = await uploadAdminImage(file);
       setForm((prev) => ({ ...prev, imageUrl: uploaded.publicUrl }));
     } catch (uploadError) {
-      setActionError(
+      setImageError(
         uploadError instanceof Error ? uploadError.message : IMAGE_UPLOAD_FAILED_MESSAGE,
       );
     } finally {
@@ -101,16 +120,28 @@ export function AdminPortfolioPage() {
   }
 
   async function handleSave() {
+    const title = form.title.trim();
     if (!form.imageUrl.trim()) {
-      setActionError(IMAGE_REQUIRED_MESSAGE);
+      setImageError(IMAGE_REQUIRED_MESSAGE);
+      return;
+    }
+    if (!title) {
+      setTitleError(TITLE_REQUIRED_MESSAGE);
       return;
     }
 
     setSaving(true);
+    setActionError(null);
     try {
       const body = {
         imageUrl: form.imageUrl,
-        imageAlt: form.imageAlt,
+        imageAlt: buildPortfolioImageAlt({
+          title,
+          location: form.location,
+          services: servicesListFromText(form.servicesText),
+          hasVideo: form.hasVideo,
+          has3D: form.has3D,
+        }),
         category: form.category,
         sortOrder: Number(form.sortOrder),
         featuredOnHome: form.featuredOnHome,
@@ -134,7 +165,6 @@ export function AdminPortfolioPage() {
     if (!deleteId) {
       return;
     }
-
     setSaving(true);
     try {
       await deleteAdminPortfolioProject(deleteId);
@@ -154,150 +184,33 @@ export function AdminPortfolioPage() {
         description="Manage portfolio tiles shown on the public site."
         actions={<AdminButton onClick={openCreate}>Add project</AdminButton>}
       />
-
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {actionError && !modalOpen ? <AdminErrorState message={actionError} /> : null}
-
       {!loading && !error && items.length === 0 ? (
         <AdminEmptyState title="No projects" message="Create your first portfolio project." />
       ) : null}
-
       {!loading && !error && items.length > 0 ? (
-        <AdminTable>
-          <thead>
-            <tr className={ADMIN_TABLE_HEAD_ROW_CLASS}>
-              <th className={ADMIN_TABLE_CELL_CLASS}>Image</th>
-              <th className={ADMIN_TABLE_CELL_CLASS}>Category</th>
-              <th className={ADMIN_TABLE_CELL_CLASS}>Status</th>
-              <th className={ADMIN_TABLE_CELL_CLASS}>Order</th>
-              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item.id} className="border-b border-foreground/5">
-                <td className={ADMIN_TABLE_CELL_CLASS}>
-                  <div className={ADMIN_TABLE_THUMB_WRAP_CLASS}>
-                    {item.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element -- admin thumbnail for stored URLs
-                      <img
-                        src={normalizePublicAssetUrl(item.imageUrl)}
-                        alt={item.imageAlt}
-                        className={ADMIN_TABLE_THUMB_IMG_CLASS}
-                      />
-                    ) : null}
-                    <p className="font-medium text-brand-navy">{item.imageAlt}</p>
-                  </div>
-                </td>
-                <td className={ADMIN_TABLE_CELL_CLASS}>{item.category}</td>
-                <td className={ADMIN_TABLE_CELL_CLASS}>
-                  <div className="flex flex-wrap gap-1">
-                    {item.published ? (
-                      <AdminBadge label="Published" tone="success" />
-                    ) : (
-                      <AdminBadge label="Draft" tone="muted" />
-                    )}
-                    {item.featuredOnHome ? <AdminBadge label="Featured" /> : null}
-                  </div>
-                </td>
-                <td className={ADMIN_TABLE_CELL_CLASS}>{item.sortOrder}</td>
-                <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
-                  <div className="flex justify-end gap-2">
-                    <AdminButton variant="secondary" onClick={() => openEdit(item)}>
-                      Edit
-                    </AdminButton>
-                    <AdminButton variant="danger" onClick={() => setDeleteId(item.id)}>
-                      Delete
-                    </AdminButton>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </AdminTable>
+        <PortfolioTable items={items} onEdit={openEdit} onDelete={setDeleteId} />
       ) : null}
-
-      <AdminModal
+      <AdminPortfolioProjectModal
         open={modalOpen}
-        title={editing ? "Edit project" : "New project"}
+        editing={editing !== null}
+        form={form}
+        saving={saving}
+        uploading={uploading}
+        actionError={actionError}
+        imageError={imageError}
+        titleError={titleError}
         onClose={() => setModalOpen(false)}
-        footer={
-          <>
-            <AdminButton variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
-            </AdminButton>
-            <AdminButton
-              onClick={() => void handleSave()}
-              disabled={saving || uploading || !form.imageUrl}
-            >
-              {saving ? "Saving…" : "Save"}
-            </AdminButton>
-          </>
-        }
-      >
-        <div className="space-y-6">
-          {actionError ? <AdminErrorState message={actionError} /> : null}
-
-          <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
-            <AdminImageUploader
-              label="Image"
-              previewUrl={form.imageUrl ? normalizePublicAssetUrl(form.imageUrl) : null}
-              uploading={uploading}
-              placeholderText="Upload a project image"
-              onUpload={handleImageUpload}
-            />
-            <AdminFormField
-              label="Image alt"
-              name="imageAlt"
-              value={form.imageAlt}
-              onChange={(value) => setForm((prev) => ({ ...prev, imageAlt: value }))}
-              required
-            />
-          </section>
-
-          <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block space-y-1.5">
-                <span className="text-sm font-medium text-brand-navy">Category</span>
-                <select
-                  value={form.category}
-                  onChange={(event) =>
-                    setForm((prev) => ({ ...prev, category: event.target.value }))
-                  }
-                  className={`${ADMIN_INPUT_CLASS} h-10`}
-                >
-                  {PORTFOLIO_MEDIA_CATEGORIES.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <AdminFormField
-                label="Sort order"
-                name="sortOrder"
-                type="number"
-                value={form.sortOrder}
-                onChange={(value) => setForm((prev) => ({ ...prev, sortOrder: value }))}
-              />
-            </div>
-            <div className="grid gap-3 rounded-xl bg-neutral-50/90 p-4 sm:grid-cols-2">
-              <AdminCheckboxField
-                label="Featured on home"
-                checked={form.featuredOnHome}
-                onChange={(checked) => setForm((prev) => ({ ...prev, featuredOnHome: checked }))}
-              />
-              <AdminCheckboxField
-                label="Published"
-                checked={form.published}
-                onChange={(checked) => setForm((prev) => ({ ...prev, published: checked }))}
-              />
-            </div>
-          </section>
-        </div>
-      </AdminModal>
-
+        onSave={() => void handleSave()}
+        onFormChange={(patch) => setForm((prev) => ({ ...prev, ...patch }))}
+        onTitleChange={(value) => {
+          setTitleError(null);
+          setForm((prev) => ({ ...prev, title: value }));
+        }}
+        onUpload={handleImageUpload}
+      />
       <AdminConfirmDialog
         open={deleteId !== null}
         title="Delete project?"
@@ -307,5 +220,76 @@ export function AdminPortfolioPage() {
         busy={saving}
       />
     </>
+  );
+}
+
+function PortfolioTable({
+  items,
+  onEdit,
+  onDelete,
+}: {
+  readonly items: readonly AdminPortfolioProject[];
+  readonly onEdit: (item: AdminPortfolioProject) => void;
+  readonly onDelete: (id: string) => void;
+}) {
+  return (
+    <AdminTable>
+      <thead>
+        <tr className={ADMIN_TABLE_HEAD_ROW_CLASS}>
+          <th className={ADMIN_TABLE_CELL_CLASS}>Title</th>
+          <th className={ADMIN_TABLE_CELL_CLASS}>Category</th>
+          <th className={ADMIN_TABLE_CELL_CLASS}>Status</th>
+          <th className={ADMIN_TABLE_CELL_CLASS}>Order</th>
+          <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item) => {
+          const parsed = parseRecentWorkAlt(item.imageAlt);
+          return (
+            <tr key={item.id} className="border-b border-foreground/5">
+              <td className={ADMIN_TABLE_CELL_CLASS}>
+                <div className={ADMIN_TABLE_THUMB_WRAP_CLASS}>
+                  {item.imageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- admin thumbnail
+                    <img
+                      src={normalizePublicAssetUrl(item.imageUrl)}
+                      alt={item.imageAlt}
+                      className={ADMIN_TABLE_THUMB_IMG_CLASS}
+                    />
+                  ) : null}
+                  <p className="font-medium text-brand-navy">{parsed.title}</p>
+                  {parsed.location ? (
+                    <p className="text-xs text-muted-foreground">{parsed.location}</p>
+                  ) : null}
+                </div>
+              </td>
+              <td className={ADMIN_TABLE_CELL_CLASS}>{item.category}</td>
+              <td className={ADMIN_TABLE_CELL_CLASS}>
+                <div className="flex flex-wrap gap-1">
+                  {item.published ? (
+                    <AdminBadge label="Published" tone="success" />
+                  ) : (
+                    <AdminBadge label="Draft" tone="muted" />
+                  )}
+                  {item.featuredOnHome ? <AdminBadge label="Featured" /> : null}
+                </div>
+              </td>
+              <td className={ADMIN_TABLE_CELL_CLASS}>{item.sortOrder}</td>
+              <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
+                <div className="flex justify-end gap-2">
+                  <AdminButton variant="secondary" onClick={() => onEdit(item)}>
+                    Edit
+                  </AdminButton>
+                  <AdminButton variant="danger" onClick={() => onDelete(item.id)}>
+                    Delete
+                  </AdminButton>
+                </div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </AdminTable>
   );
 }
