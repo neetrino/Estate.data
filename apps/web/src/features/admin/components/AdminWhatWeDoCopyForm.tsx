@@ -91,6 +91,19 @@ function WhatWeDoFields({ draft, onChange }: WhatWeDoFieldsProps) {
         value={draft.reelLabel}
         onChange={(reelLabel) => onChange({ ...draft, reelLabel })}
       />
+      <AdminFormField
+        label="Reel video URL"
+        name="what-we-do-reel-url"
+        value={draft.reelUrl}
+        onChange={(reelUrl) => onChange({ ...draft, reelUrl })}
+        hint="Path or https URL for the homepage reel."
+      />
+      <AdminFormField
+        label="Reel poster URL"
+        name="what-we-do-reel-poster"
+        value={draft.reelPosterUrl}
+        onChange={(reelPosterUrl) => onChange({ ...draft, reelPosterUrl })}
+      />
     </>
   );
 }

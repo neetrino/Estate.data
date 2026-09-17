@@ -2,7 +2,6 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
 import { STUDIO_HERO_SECONDARY_BUTTON_CLASS } from "@/features/home/sections/studioSectionStyles";
 
 const OVERLAY_CLASS =
@@ -10,6 +9,8 @@ const OVERLAY_CLASS =
 const BODY_LOCK_CLASS = "overflow-hidden";
 
 type StudioReelDialogProps = {
+  readonly label: string;
+  readonly src: string;
   readonly onClose: () => void;
 };
 
@@ -21,7 +22,7 @@ function useIsClient(): boolean {
   return useSyncExternalStore(subscribeNever, () => true, () => false);
 }
 
-export function StudioReelDialog({ onClose }: StudioReelDialogProps) {
+export function StudioReelDialog({ label, src, onClose }: StudioReelDialogProps) {
   const isClient = useIsClient();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export function StudioReelDialog({ onClose }: StudioReelDialogProps) {
       className={OVERLAY_CLASS}
       role="dialog"
       aria-modal
-      aria-label="Watch the reel"
+      aria-label={label}
       onClick={onClose}
     >
       <div className="relative w-full max-w-5xl" onClick={(event) => event.stopPropagation()}>
@@ -61,7 +62,7 @@ export function StudioReelDialog({ onClose }: StudioReelDialogProps) {
         </button>
         <video
           className="w-full border border-studio-border"
-          src={STUDIO_MEDIA.promo}
+          src={src}
           controls
           autoPlay
           playsInline

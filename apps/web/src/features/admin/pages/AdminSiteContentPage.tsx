@@ -4,6 +4,7 @@ import {
   SUPERSUDO_PANEL_CONTACT_FIELDS_PATH,
   SUPERSUDO_PANEL_HERO_SLIDES_PATH,
   SUPERSUDO_PANEL_HOME_HERO_PATH,
+  SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH,
   SUPERSUDO_PANEL_MARKETING_COPY_PATH,
   SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
 } from "@/features/admin/lib/admin-paths";
@@ -34,6 +35,11 @@ const CONTENT_LINKS = [
     href: SUPERSUDO_PANEL_MARKETING_COPY_PATH,
     title: "Marketing copy",
     description: "What We Do, Web Pages, and Contact headings and body text.",
+  },
+  {
+    href: SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH,
+    title: "Homepage sections",
+    description: "Stats, offerings, team, process, before/after, and other homepage copy.",
   },
 ] as const;
 

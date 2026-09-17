@@ -1,77 +1,31 @@
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
-import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
-import {
-  HOME_SECTION_IDS,
-  homeSectionHref,
-} from "@/shared/lib/homeSectionIds";
 import { getPrisma } from "@/server/lib/db";
 import { logger } from "@/server/lib/logger";
+import { defaultMarketingCopy } from "@/server/features/site-copy/site-copy-defaults";
 import {
   SITE_COPY_KEYS,
+  beforeAfterCopySchema,
   contactMarketingCopySchema,
+  faqIntroCopySchema,
+  floorPlansCopySchema,
+  offeringsCopySchema,
+  packagesIntroCopySchema,
+  portfolioIntroCopySchema,
+  processCopySchema,
+  serviceAreaCopySchema,
+  statsCopySchema,
+  studioCopySchema,
   webPagesCopySchema,
   whatWeDoCopySchema,
-  type ContactMarketingCopy,
+  whyUsCopySchema,
   type MarketingCopyBundle,
-  type WebPagesCopy,
-  type WhatWeDoCopy,
 } from "@/server/features/site-copy/site-copy.schema";
 import type { ZodType } from "zod";
-
-function defaultWhatWeDoCopy(): WhatWeDoCopy {
-  const copy = STUDIO_PAGE_COPY.whatWeDo;
-  return {
-    eyebrow: copy.eyebrow,
-    titleLines: [copy.titleLines[0], copy.titleLines[1], copy.titleLines[2]],
-    body: copy.body,
-    primaryCta: copy.primaryCta,
-    primaryCtaHref: homeSectionHref(HOME_SECTION_IDS.quote),
-    secondaryCta: copy.secondaryCta,
-    secondaryCtaHref: homeSectionHref(HOME_SECTION_IDS.photography),
-    reelLabel: copy.reelLabel,
-  };
-}
-
-function defaultWebPagesCopy(): WebPagesCopy {
-  const copy = STUDIO_PAGE_COPY.webPages;
-  return {
-    eyebrow: copy.eyebrow,
-    title: copy.title,
-    body: copy.body,
-    ctaLabel: copy.ctaLabel,
-    href: copy.href,
-    startingPrice: copy.startingPrice,
-    includedLabel: copy.includedLabel,
-    included: [...copy.included],
-    pricing: copy.pricing.map((row) => ({ label: row.label, price: row.price })),
-  };
-}
-
-function defaultContactCopy(): ContactMarketingCopy {
-  const copy = STUDIO_PAGE_COPY.contact;
-  return {
-    eyebrow: copy.eyebrow,
-    title: copy.title,
-    body: copy.body,
-    phoneLabel: STUDIO_CONTACT.phone.label,
-    phoneHref: STUDIO_CONTACT.phone.href,
-    emailLabel: STUDIO_CONTACT.email.label,
-    emailHref: STUDIO_CONTACT.email.href,
-    hours: STUDIO_CONTACT.hours,
-    address: STUDIO_CONTACT.address,
-    social: STUDIO_CONTACT.social.map((item) => ({ label: item.label, href: item.href })),
-  };
-}
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
 
-async function readCopy<T>(
-  key: string,
-  schema: ZodType<T>,
-  fallback: T,
-): Promise<T> {
+async function readCopy<T>(key: string, schema: ZodType<T>, fallback: T): Promise<T> {
   try {
     const row = await getPrisma().siteCopy.findUnique({ where: { key } });
     if (!row) {
@@ -90,13 +44,55 @@ async function readCopy<T>(
   }
 }
 
-/** Marketing copy for What We Do, Web Pages, and Contact — CMS with static fallbacks. */
+/** Homepage and marketing copy — CMS rows with static fallbacks. */
 export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
-  const [whatWeDo, webPages, contact] = await Promise.all([
-    readCopy(SITE_COPY_KEYS.whatWeDo, whatWeDoCopySchema, defaultWhatWeDoCopy()),
-    readCopy(SITE_COPY_KEYS.webPages, webPagesCopySchema, defaultWebPagesCopy()),
-    readCopy(SITE_COPY_KEYS.contact, contactMarketingCopySchema, defaultContactCopy()),
+  const defaults = defaultMarketingCopy();
+  const [
+    whatWeDo,
+    webPages,
+    contact,
+    stats,
+    offerings,
+    process,
+    whyUs,
+    studio,
+    serviceArea,
+    beforeAfter,
+    packagesIntro,
+    portfolioIntro,
+    faqIntro,
+    floorPlans,
+  ] = await Promise.all([
+    readCopy(SITE_COPY_KEYS.whatWeDo, whatWeDoCopySchema, defaults.whatWeDo),
+    readCopy(SITE_COPY_KEYS.webPages, webPagesCopySchema, defaults.webPages),
+    readCopy(SITE_COPY_KEYS.contact, contactMarketingCopySchema, defaults.contact),
+    readCopy(SITE_COPY_KEYS.stats, statsCopySchema, defaults.stats),
+    readCopy(SITE_COPY_KEYS.offerings, offeringsCopySchema, defaults.offerings),
+    readCopy(SITE_COPY_KEYS.process, processCopySchema, defaults.process),
+    readCopy(SITE_COPY_KEYS.whyUs, whyUsCopySchema, defaults.whyUs),
+    readCopy(SITE_COPY_KEYS.studio, studioCopySchema, defaults.studio),
+    readCopy(SITE_COPY_KEYS.serviceArea, serviceAreaCopySchema, defaults.serviceArea),
+    readCopy(SITE_COPY_KEYS.beforeAfter, beforeAfterCopySchema, defaults.beforeAfter),
+    readCopy(SITE_COPY_KEYS.packagesIntro, packagesIntroCopySchema, defaults.packagesIntro),
+    readCopy(SITE_COPY_KEYS.portfolioIntro, portfolioIntroCopySchema, defaults.portfolioIntro),
+    readCopy(SITE_COPY_KEYS.faqIntro, faqIntroCopySchema, defaults.faqIntro),
+    readCopy(SITE_COPY_KEYS.floorPlans, floorPlansCopySchema, defaults.floorPlans),
   ]);
 
-  return { whatWeDo, webPages, contact };
+  return {
+    whatWeDo,
+    webPages,
+    contact,
+    stats,
+    offerings,
+    process,
+    whyUs,
+    studio,
+    serviceArea,
+    beforeAfter,
+    packagesIntro,
+    portfolioIntro,
+    faqIntro,
+    floorPlans,
+  };
 }

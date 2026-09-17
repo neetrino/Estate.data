@@ -1,6 +1,5 @@
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -10,15 +9,18 @@ import {
   STUDIO_LIGHT_SECTION_CLASS,
   STUDIO_MUTED_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
-import type { WebPagesCopy } from "@/server/features/site-copy/site-copy.schema";
+import type { OfferingsCopy, WebPagesCopy } from "@/server/features/site-copy/site-copy.schema";
 import Image from "next/image";
 
 const CARD_DELAY_STEP_MS = 80;
 
 const MEDIA_DELAY_MS = 120;
 
-export function StudioOfferings() {
-  const copy = STUDIO_PAGE_COPY.offerings;
+type StudioOfferingsProps = {
+  readonly copy: OfferingsCopy;
+};
+
+export function StudioOfferings({ copy }: StudioOfferingsProps) {
 
   return (
     <section className={`${STUDIO_LIGHT_SECTION_CLASS} border-t border-studio-border`}>

@@ -1,6 +1,6 @@
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import type { PricingCategoryDto, PricingPackageDto } from "@/server/features/pricing/pricing.schema";
+import type { PackagesIntroCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioCta } from "@/features/home/sections/StudioCta";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
@@ -24,10 +24,18 @@ const TAG_CLASS = "border border-studio-border px-4 py-2 text-xs text-studio-mut
 
 type StudioPackagesProps = {
   readonly category: PricingCategoryDto;
+  readonly copy: PackagesIntroCopy;
 };
 
-function PackageCard({ pkg, delay }: { readonly pkg: PricingPackageDto; readonly delay: number }) {
-  const copy = STUDIO_PAGE_COPY.packages;
+function PackageCard({
+  pkg,
+  delay,
+  copy,
+}: {
+  readonly pkg: PricingPackageDto;
+  readonly delay: number;
+  readonly copy: PackagesIntroCopy;
+}) {
 
   return (
     <StudioReveal
@@ -62,8 +70,13 @@ function PackageCard({ pkg, delay }: { readonly pkg: PricingPackageDto; readonly
   );
 }
 
-function CustomPackageCard({ pkg }: { readonly pkg: PricingPackageDto }) {
-  const copy = STUDIO_PAGE_COPY.packages;
+function CustomPackageCard({
+  pkg,
+  copy,
+}: {
+  readonly pkg: PricingPackageDto;
+  readonly copy: PackagesIntroCopy;
+}) {
 
   return (
     <StudioReveal className="mt-px grid gap-8 bg-studio-bg p-8 lg:grid-cols-12 lg:p-12">
@@ -89,8 +102,7 @@ function CustomPackageCard({ pkg }: { readonly pkg: PricingPackageDto }) {
   );
 }
 
-export function StudioPackages({ category }: StudioPackagesProps) {
-  const copy = STUDIO_PAGE_COPY.packages;
+export function StudioPackages({ category, copy }: StudioPackagesProps) {
   const standardPackages = category.packages.filter((pkg) => pkg.price !== CUSTOM_PRICE_LABEL);
   const customPackage = category.packages.find((pkg) => pkg.price === CUSTOM_PRICE_LABEL);
 
@@ -103,10 +115,10 @@ export function StudioPackages({ category }: StudioPackagesProps) {
         </StudioReveal>
         <div className="mt-16 grid gap-px bg-studio-border md:grid-cols-2 xl:grid-cols-4">
           {standardPackages.map((pkg, index) => (
-            <PackageCard key={pkg.id} pkg={pkg} delay={index * CARD_DELAY_STEP_MS} />
+            <PackageCard key={pkg.id} pkg={pkg} delay={index * CARD_DELAY_STEP_MS} copy={copy} />
           ))}
         </div>
-        {customPackage ? <CustomPackageCard pkg={customPackage} /> : null}
+        {customPackage ? <CustomPackageCard pkg={customPackage} copy={copy} /> : null}
       </div>
     </section>
   );

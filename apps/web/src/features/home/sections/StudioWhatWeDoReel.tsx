@@ -1,7 +1,5 @@
 "use client";
 
-import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
-
 const REEL_FRAME_CLASS =
   "relative aspect-video w-full overflow-hidden border border-studio-border bg-studio-card";
 
@@ -10,6 +8,8 @@ const REEL_BADGE_CLASS =
 
 type StudioWhatWeDoReelProps = {
   readonly label: string;
+  readonly src: string;
+  readonly poster: string;
   readonly onOpen: () => void;
 };
 
@@ -20,14 +20,14 @@ function bindReelAutoplay(node: HTMLVideoElement | null): void {
   }
 }
 
-export function StudioWhatWeDoReel({ label, onOpen }: StudioWhatWeDoReelProps) {
+export function StudioWhatWeDoReel({ label, src, poster, onOpen }: StudioWhatWeDoReelProps) {
   return (
     <div className={REEL_FRAME_CLASS}>
       <video
         ref={bindReelAutoplay}
         className="absolute inset-0 size-full object-cover"
-        src={STUDIO_MEDIA.promo}
-        poster={STUDIO_MEDIA.landingPage}
+        src={src}
+        poster={poster}
         muted
         loop
         playsInline
