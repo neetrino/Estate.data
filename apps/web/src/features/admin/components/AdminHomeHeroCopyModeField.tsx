@@ -55,7 +55,7 @@ export function AdminHomeHeroCopyModeField({ value, onChange }: AdminHomeHeroCop
         })}
       </div>
       <p className="px-4 pb-4 text-xs text-[#414141]/55">
-        Press Save hero text so this choice appears on the website.
+        Press Save so this choice appears on the website.
       </p>
     </section>
   );

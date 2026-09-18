@@ -44,17 +44,17 @@ const CONTENT_NAV_ITEMS: AdminNavItem[] = [
     href: SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
     icon: "services",
   },
-  { id: "pricing", label: "Pricing", href: SUPERSUDO_PANEL_PRICING_PATH, icon: "pricing" },
-  { id: "faq", label: "FAQ", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
+  { id: "pricing", label: "Prices", href: SUPERSUDO_PANEL_PRICING_PATH, icon: "pricing" },
+  { id: "faq", label: "Questions", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
   {
     id: "home-hero",
-    label: "Home Hero",
+    label: "Homepage top",
     href: SUPERSUDO_PANEL_HOME_HERO_PATH,
     icon: "home-hero",
   },
   {
     id: "site-content",
-    label: "Site content",
+    label: "Other homepage text",
     href: SUPERSUDO_PANEL_SITE_CONTENT_PATH,
     icon: "site-content",
   },
@@ -64,23 +64,23 @@ const CONTENT_NAV_ITEMS: AdminNavItem[] = [
 export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
   {
     id: "overview",
-    label: "Overview",
+    label: "Start here",
     items: [
-      { id: "dashboard", label: "Dashboard", href: SUPERSUDO_PANEL_PATH, icon: "dashboard" },
+      { id: "dashboard", label: "Home", href: SUPERSUDO_PANEL_PATH, icon: "dashboard" },
     ],
   },
   {
     id: "content",
-    label: "Content",
+    label: "Website",
     items: CONTENT_NAV_ITEMS,
   },
   {
     id: "inbox",
-    label: "Inbox",
+    label: "Messages",
     items: [
       {
         id: "contact-inquiries",
-        label: "Inquiries",
+        label: "Form messages",
         href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
         icon: "contact-inquiries",
       },
@@ -88,11 +88,11 @@ export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
   },
   {
     id: "insights",
-    label: "Insights",
+    label: "More",
     items: [
       {
         id: "analytics",
-        label: "Analytics",
+        label: "Reports",
         href: SUPERSUDO_PANEL_ANALYTICS_PATH,
         icon: "analytics",
       },
@@ -102,7 +102,7 @@ export const ADMIN_NAV_GROUPS: AdminNavGroup[] = [
 
 export const ADMIN_SIDEBAR_LOGOUT_ITEM: AdminNavItem = {
   id: "logout",
-  label: "Logout",
+  label: "Sign out",
   href: "#logout",
   icon: "logout",
 };

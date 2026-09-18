@@ -22,6 +22,7 @@ export type HomeHeroContentFields = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  eyebrow: string;
   copyMode: HomeHeroCopyMode;
   desktopImageUrl: string;
   mobileImageUrl: string;
@@ -65,6 +66,7 @@ export function getDefaultHomeHeroContent(): Omit<
     primaryButtonHref: HOME_HERO_COPY.primaryCta.href,
     secondaryButtonLabel: HOME_HERO_COPY.secondaryCta.label,
     secondaryButtonHref: HOME_HERO_COPY.secondaryCta.href,
+    eyebrow: HOME_HERO_COPY.locationBadge,
     copyMode: "shared",
     desktopImageUrl: DEFAULT_HOME_HERO_DESKTOP_IMAGE_URL,
     desktopImageKey: null,

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { AdminCopySection } from "@/features/admin/components/ui/AdminCopySection";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminPairListField } from "@/features/admin/components/ui/AdminPairListField";
 import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
+import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { parseIncludedLines } from "@/features/admin/lib/admin-studio-service-draft";
 import { SITE_COPY_KEYS, type WebPagesCopy } from "@/server/features/site-copy/site-copy.schema";
 
@@ -18,6 +18,12 @@ type WebPagesFieldsProps = {
   readonly draft: WebPagesCopy;
   readonly onChange: (next: WebPagesCopy) => void;
 };
+
+const WEB_PAGES_TABS = [
+  { id: "text", label: "Words", hint: "Headline and description visitors read." },
+  { id: "button", label: "Button", hint: "The button visitors press." },
+  { id: "prices", label: "Prices", hint: "Starting price, what is included, and the price list." },
+] as const satisfies readonly AdminTabItem<"text" | "button" | "prices">[];
 
 function filterPricing(draft: WebPagesCopy): WebPagesCopy {
   return {
@@ -73,6 +79,13 @@ function WebPagesPricingFields({
         hint="Shown as the from-price on the site"
       />
       <AdminFormField
+        label="Included heading"
+        name="web-pages-included-label"
+        value={draft.includedLabel}
+        onChange={(includedLabel) => onChange({ ...draft, includedLabel })}
+        hint="Small heading above the included list on /web-pages"
+      />
+      <AdminFormField
         label="What's included"
         name="web-pages-included"
         value={includedText}
@@ -99,6 +112,51 @@ function WebPagesPricingFields({
   );
 }
 
+function WebPagesTabFields({
+  draft,
+  includedText,
+  onChange,
+  onIncludedTextChange,
+}: WebPagesFieldsProps & {
+  readonly includedText: string;
+  readonly onIncludedTextChange: (value: string) => void;
+}) {
+  const [tab, setTab] = useState<(typeof WEB_PAGES_TABS)[number]["id"]>("text");
+
+  return (
+    <>
+      <AdminTabs items={WEB_PAGES_TABS} value={tab} onChange={setTab} />
+      <div className={adminTabHidden(tab === "text")}>
+        <WebPagesTextFields draft={draft} onChange={onChange} />
+      </div>
+      <div className={adminTabHidden(tab === "button")}>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <AdminFormField
+            label="Button text"
+            name="web-pages-cta"
+            value={draft.ctaLabel}
+            onChange={(ctaLabel) => onChange({ ...draft, ctaLabel })}
+          />
+          <AdminJumpTargetField
+            label="Button goes to"
+            name="web-pages-href"
+            value={draft.href}
+            onChange={(href) => onChange({ ...draft, href })}
+          />
+        </div>
+      </div>
+      <div className={adminTabHidden(tab === "prices")}>
+        <WebPagesPricingFields
+          draft={draft}
+          includedText={includedText}
+          onChange={onChange}
+          onIncludedTextChange={onIncludedTextChange}
+        />
+      </div>
+    </>
+  );
+}
+
 /** Admin editor for Web Pages marketing copy (home teaser + `/web-pages`). */
 export function AdminWebPagesCopyForm({ initial, onSaved }: AdminWebPagesCopyFormProps) {
   const [includedText, setIncludedText] = useState(initial.included.join("\n"));
@@ -115,35 +173,12 @@ export function AdminWebPagesCopyForm({ initial, onSaved }: AdminWebPagesCopyFor
       }
     >
       {(draft, setDraft) => (
-        <>
-          <AdminCopySection title="Text" description="Headline and description visitors read.">
-            <WebPagesTextFields draft={draft} onChange={setDraft} />
-          </AdminCopySection>
-          <AdminCopySection title="Button" description="The call-to-action on this section.">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <AdminFormField
-                label="Button text"
-                name="web-pages-cta"
-                value={draft.ctaLabel}
-                onChange={(ctaLabel) => setDraft({ ...draft, ctaLabel })}
-              />
-              <AdminJumpTargetField
-                label="Button goes to"
-                name="web-pages-href"
-                value={draft.href}
-                onChange={(href) => setDraft({ ...draft, href })}
-              />
-            </div>
-          </AdminCopySection>
-          <AdminCopySection title="Pricing" description="Price and what's included.">
-            <WebPagesPricingFields
-              draft={draft}
-              includedText={includedText}
-              onChange={setDraft}
-              onIncludedTextChange={setIncludedText}
-            />
-          </AdminCopySection>
-        </>
+        <WebPagesTabFields
+          draft={draft}
+          includedText={includedText}
+          onChange={setDraft}
+          onIncludedTextChange={setIncludedText}
+        />
       )}
     </AdminSiteCopyForm>
   );

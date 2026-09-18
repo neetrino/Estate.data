@@ -1,67 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { AdminServiceGalleryField } from "@/features/admin/components/AdminServiceGalleryField";
+import { AdminMatterportDemoFields } from "@/features/admin/components/AdminMatterportDemoFields";
+import { AdminExampleFields } from "@/features/admin/components/AdminExampleFields";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
+import { AdminTabs, adminTabHidden } from "@/features/admin/components/ui/AdminTabs";
 import {
-  asPricingRows,
-  asStringList,
-  formatPricingLines,
-  parseIncludedLines,
-  parsePricingLines,
+  studioServiceToDraft,
+  type StudioServiceEditorDraft,
 } from "@/features/admin/lib/admin-studio-service-draft";
+import { saveStudioServiceDraft } from "@/features/admin/lib/save-studio-service-draft";
+import { serviceEditorTabs, type ServiceEditorTabId } from "@/features/admin/lib/admin-studio-service-tabs";
 import { updateAdminStudioService, uploadAdminImage } from "@/features/admin/services/admin-api";
 import type { AdminStudioService } from "@/features/admin/types/admin-data";
 import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
+import {
+  ADMIN_HIDE_ON_WEBSITE_LABEL,
+  ADMIN_POSITION_HINT,
+  ADMIN_POSITION_LABEL,
+  ADMIN_SHOW_ON_WEBSITE_ACTION,
+} from "@/features/admin/content/adminCopy";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
-const PRICING_HINT = "One row per line: Label | Price";
-
-type ServiceDraft = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  galleryText: string;
-  includedText: string;
-  pricingText: string;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  startingPrice: string;
-  pricingUnit: string;
-  footnote: string;
-  sortOrder: string;
-};
+const PRICING_HINT = "One price per line: Size | Price. Example: Up to 2,000 sq ft | $249";
 
 type DraftFieldsProps = {
   readonly serviceId: string;
-  readonly draft: ServiceDraft;
-  readonly onChange: <K extends keyof ServiceDraft>(field: K, value: ServiceDraft[K]) => void;
+  readonly draft: StudioServiceEditorDraft;
+  readonly onChange: <K extends keyof StudioServiceEditorDraft>(
+    field: K,
+    value: StudioServiceEditorDraft[K],
+  ) => void;
 };
-
-function toDraft(service: AdminStudioService): ServiceDraft {
-  return {
-    eyebrow: service.eyebrow,
-    title: service.title,
-    description: service.description,
-    imageUrl: service.imageUrl,
-    galleryText: asStringList(service.galleryUrls).join("\n"),
-    includedText: asStringList(service.included).join("\n"),
-    pricingText: formatPricingLines(asPricingRows(service.pricing)),
-    primaryCtaLabel: service.primaryCtaLabel,
-    primaryCtaHref: service.primaryCtaHref,
-    startingPrice: service.startingPrice ?? "",
-    pricingUnit: service.pricingUnit ?? "",
-    footnote: service.footnote ?? "",
-    sortOrder: String(service.sortOrder),
-  };
-}
 
 function ServiceCopyFields({ serviceId, draft, onChange }: DraftFieldsProps) {
   return (
@@ -157,11 +133,12 @@ function ServiceCtaFields({ serviceId, draft, onChange }: DraftFieldsProps) {
         />
       </div>
       <AdminFormField
-        label="Sort order"
+        label={ADMIN_POSITION_LABEL}
         name={`sort-${serviceId}`}
         type="number"
         value={draft.sortOrder}
         onChange={(value) => onChange("sortOrder", value)}
+        hint={ADMIN_POSITION_HINT}
       />
     </>
   );
@@ -172,58 +149,30 @@ type AdminStudioServiceEditorProps = {
   readonly onSaved: () => void;
 };
 
-async function saveServiceDraft(serviceId: string, draft: ServiceDraft): Promise<string | null> {
-  const sortOrder = Number.parseInt(draft.sortOrder, 10);
-  if (!Number.isFinite(sortOrder) || sortOrder < 0) {
-    return "Sort order must be a non-negative number.";
-  }
-  try {
-    await updateAdminStudioService(serviceId, {
-      eyebrow: draft.eyebrow,
-      title: draft.title,
-      description: draft.description,
-      imageUrl: draft.imageUrl,
-      galleryUrls: parseIncludedLines(draft.galleryText),
-      included: parseIncludedLines(draft.includedText),
-      pricing: parsePricingLines(draft.pricingText),
-      primaryCtaLabel: draft.primaryCtaLabel,
-      primaryCtaHref: draft.primaryCtaHref,
-      startingPrice: draft.startingPrice.trim() || null,
-      pricingUnit: draft.pricingUnit.trim() || null,
-      footnote: draft.footnote.trim() || null,
-      sortOrder,
-    });
-    return null;
-  } catch (error) {
-    return error instanceof Error ? error.message : "Save failed";
-  }
-}
-
 /** Editor for a single studio service. */
 export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServiceEditorProps) {
-  const [draft, setDraft] = useState<ServiceDraft>(() => toDraft(service));
+  const [draft, setDraft] = useState<StudioServiceEditorDraft>(() => studioServiceToDraft(service));
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [tab, setTab] = useState<ServiceEditorTabId>("words");
   const showImage = service.sectionKey !== HOME_SECTION_IDS.aiMedia;
+  const showMatterportDemo = service.sectionKey === HOME_SECTION_IDS.tours;
+  const tabs = serviceEditorTabs(showImage, showMatterportDemo);
 
-  function setField<K extends keyof ServiceDraft>(field: K, value: ServiceDraft[K]) {
+  function setField<K extends keyof StudioServiceEditorDraft>(
+    field: K,
+    value: StudioServiceEditorDraft[K],
+  ) {
     setDraft((previous) => ({ ...previous, [field]: value }));
   }
 
-  async function uploadTo(field: "image" | "gallery", file: File) {
+  async function uploadImage(file: File) {
     setUploading(true);
     setUploadError(null);
     try {
       const uploaded = await uploadAdminImage(file);
-      if (field === "image") {
-        setField("imageUrl", uploaded.publicUrl);
-        return;
-      }
-      setDraft((previous) => {
-        const lines = parseIncludedLines(previous.galleryText);
-        return { ...previous, galleryText: [...lines, uploaded.publicUrl].join("\n") };
-      });
+      setField("imageUrl", uploaded.publicUrl);
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : UPLOAD_FAILED_MESSAGE);
     } finally {
@@ -235,30 +184,51 @@ export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServic
     <div className={`${ADMIN_CARD_CLASS} space-y-4`}>
       {uploadError ? <AdminErrorState message={uploadError} /> : null}
       {saveError ? <AdminErrorState message={saveError} /> : null}
-      <ServiceCopyFields serviceId={service.id} draft={draft} onChange={setField} />
+      <AdminTabs items={tabs} value={tab} onChange={setTab} />
+      <div className={adminTabHidden(tab === "words")}>
+        <ServiceCopyFields serviceId={service.id} draft={draft} onChange={setField} />
+      </div>
       {showImage ? (
-        <AdminImageUploader
-          label="Image"
-          previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
-          uploading={uploading}
-          placeholderText="Upload a service image"
-          onUpload={(file) => uploadTo("image", file)}
-        />
+        <div className={adminTabHidden(tab === "picture")}>
+          <AdminImageUploader
+            label="Image"
+            previewUrl={draft.imageUrl ? normalizePublicAssetUrl(draft.imageUrl) : null}
+            uploading={uploading}
+            placeholderText="Upload a service image"
+            onUpload={uploadImage}
+          />
+        </div>
       ) : null}
-      <AdminServiceGalleryField
-        serviceId={service.id}
-        galleryText={draft.galleryText}
-        uploading={uploading}
-        onGalleryTextChange={(value) => setField("galleryText", value)}
-        onUpload={(file) => uploadTo("gallery", file)}
-      />
-      <ServiceOfferFields serviceId={service.id} draft={draft} onChange={setField} />
-      <ServiceCtaFields serviceId={service.id} draft={draft} onChange={setField} />
+      {showMatterportDemo ? (
+        <div className={adminTabHidden(tab === "tour")}>
+          <AdminMatterportDemoFields
+            serviceId={service.id}
+            demoLabel={draft.demoLabel}
+            demoSpaceId={draft.demoSpaceId}
+            onLabelChange={(value) => setField("demoLabel", value)}
+            onSpaceIdChange={(value) => setField("demoSpaceId", value)}
+          />
+        </div>
+      ) : null}
+      <div className={adminTabHidden(tab === "prices")}>
+        <ServiceOfferFields serviceId={service.id} draft={draft} onChange={setField} />
+      </div>
+      <div className={adminTabHidden(tab === "example")}>
+        <AdminExampleFields
+          idPrefix={`example-${service.id}`}
+          value={draft.example}
+          onChange={(example) => setField("example", example)}
+          showEmbed={showMatterportDemo}
+        />
+      </div>
+      <div className={adminTabHidden(tab === "button")}>
+        <ServiceCtaFields serviceId={service.id} draft={draft} onChange={setField} />
+      </div>
       <div className="mt-3 flex gap-2">
         <AdminButton
           disabled={uploading}
           onClick={() =>
-            void saveServiceDraft(service.id, draft).then((message) => {
+            void saveStudioServiceDraft(service.id, draft).then((message) => {
               if (message) {
                 setSaveError(message);
                 return;
@@ -279,7 +249,7 @@ export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServic
             )
           }
         >
-          {service.published ? "Unpublish" : "Publish"}
+          {service.published ? ADMIN_HIDE_ON_WEBSITE_LABEL : ADMIN_SHOW_ON_WEBSITE_ACTION}
         </AdminButton>
       </div>
     </div>

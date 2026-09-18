@@ -109,17 +109,17 @@ export function AdminFaqPage() {
   return (
     <>
       <AdminPageHeader
-        title="FAQ"
-        description="Questions and answers shown in the home page FAQ accordion."
-        actions={<AdminButton onClick={openCreate}>Add FAQ</AdminButton>}
+        title="Questions"
+        description="These questions and answers appear on the homepage. Hidden ones stay in this list only."
+        actions={<AdminButton onClick={openCreate}>Add a question</AdminButton>}
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {actionError ? <AdminErrorState message={actionError} /> : null}
       {!loading && !error && items.length === 0 ? (
         <AdminEmptyState
-          title="No FAQ items"
-          message="Add a question and answer — published items appear on the home page."
+          title="No questions yet"
+          message="Add a question and answer. Turn on “Show on the website” so visitors can see it."
         />
       ) : null}
       {!loading && !error && items.length > 0 ? (
@@ -129,7 +129,7 @@ export function AdminFaqPage() {
               <th className={ADMIN_TABLE_CELL_CLASS}>Question</th>
               <th className={ADMIN_TABLE_CELL_CLASS}>Answer</th>
               <th className={ADMIN_TABLE_CELL_CLASS}>Status</th>
-              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
+              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}></th>
             </tr>
           </thead>
           <tbody>
@@ -143,9 +143,9 @@ export function AdminFaqPage() {
                 </td>
                 <td className={ADMIN_TABLE_CELL_CLASS}>
                   {item.published ? (
-                    <AdminBadge label="Published" tone="success" />
+                    <AdminBadge label="Visible" tone="success" />
                   ) : (
-                    <AdminBadge label="Draft" tone="muted" />
+                    <AdminBadge label="Hidden" tone="muted" />
                   )}
                 </td>
                 <td className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>
@@ -163,15 +163,15 @@ export function AdminFaqPage() {
           </tbody>
         </AdminTable>
       ) : null}
-      <AdminModal open={modalOpen} title={editing ? "Edit FAQ" : "New FAQ"} onClose={() => setModalOpen(false)} footer={<><AdminButton variant="secondary" onClick={() => setModalOpen(false)}>Cancel</AdminButton><AdminButton onClick={() => void handleSave()} disabled={saving}>{saving ? "Saving…" : "Save"}</AdminButton></>}>
+      <AdminModal open={modalOpen} title={editing ? "Edit question" : "New question"} onClose={() => setModalOpen(false)} footer={<><AdminButton variant="secondary" onClick={() => setModalOpen(false)}>Cancel</AdminButton><AdminButton onClick={() => void handleSave()} disabled={saving}>{saving ? "Saving…" : "Save"}</AdminButton></>}>
         <div className="space-y-4">
           <AdminFormField label="Question" name="question" value={form.question} onChange={(v) => setForm((p) => ({ ...p, question: v }))} required />
           <AdminFormField label="Answer" name="answer" value={form.answer} onChange={(v) => setForm((p) => ({ ...p, answer: v }))} multiline rows={6} required />
-          <AdminFormField label="Sort order" name="sortOrder" type="number" value={form.sortOrder} onChange={(v) => setForm((p) => ({ ...p, sortOrder: v }))} />
-          <AdminCheckboxField label="Published" checked={form.published} onChange={(c) => setForm((p) => ({ ...p, published: c }))} />
+          <AdminFormField label="Position" name="sortOrder" type="number" value={form.sortOrder} onChange={(v) => setForm((p) => ({ ...p, sortOrder: v }))} hint="Smaller number appears first. 1 is at the top." />
+          <AdminCheckboxField label="Show on the website" checked={form.published} onChange={(c) => setForm((p) => ({ ...p, published: c }))} />
         </div>
       </AdminModal>
-      <AdminConfirmDialog open={deleteId !== null} title="Delete FAQ?" message="This removes the item and translations." onCancel={() => setDeleteId(null)} onConfirm={() => void handleDelete()} busy={saving} />
+      <AdminConfirmDialog open={deleteId !== null} title="Delete this question?" message="This removes the question from the website." onCancel={() => setDeleteId(null)} onConfirm={() => void handleDelete()} busy={saving} />
     </>
   );
 }

@@ -45,7 +45,7 @@ export function AdminStudioServiceEditPage({ sectionKey }: AdminStudioServiceEdi
       </p>
       <AdminPageHeader
         title={service.title}
-        description={`${service.sectionKey.replaceAll("-", " ")} · edit this service only.`}
+        description="Change the words and photo for this service. Press Save when you are done."
       />
       <AdminStudioServiceEditor service={service} onSaved={reload} />
     </>

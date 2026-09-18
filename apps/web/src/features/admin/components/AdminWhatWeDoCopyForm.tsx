@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AdminCopySection } from "@/features/admin/components/ui/AdminCopySection";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminVideoUploader } from "@/features/admin/components/ui/AdminVideoUploader";
 import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
+import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { uploadAdminImage } from "@/features/admin/services/admin-api";
 import { SITE_COPY_KEYS, type WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
@@ -15,6 +15,12 @@ type AdminWhatWeDoCopyFormProps = {
   readonly initial: WhatWeDoCopy;
   readonly onSaved: () => void;
 };
+
+const WHAT_WE_DO_TABS = [
+  { id: "text", label: "Words", hint: "What visitors read next to the video." },
+  { id: "buttons", label: "Buttons", hint: "Button label, then where it should go." },
+  { id: "video", label: "Video", hint: "The reel on the right. Upload a video and a still image." },
+] as const satisfies readonly AdminTabItem<"text" | "buttons" | "video">[];
 
 type WhatWeDoFieldsProps = {
   readonly draft: WhatWeDoCopy;
@@ -158,32 +164,38 @@ export function AdminWhatWeDoCopyForm({ initial, onSaved }: AdminWhatWeDoCopyFor
       onSaved={onSaved}
     >
       {(draft, setDraft) => (
-        <>
-          <AdminCopySection title="Text" description="What visitors read next to the video.">
-            <WhatWeDoTitleFields draft={draft} onChange={setDraft} />
-          </AdminCopySection>
-          <AdminCopySection title="Buttons" description="Button label, then where it should go.">
-            <WhatWeDoButtonFields draft={draft} onChange={setDraft} />
-          </AdminCopySection>
-          <AdminCopySection
-            title="Reel"
-            description="Upload the video and a still image. No links to type."
-          >
-            <AdminFormField
-              label="Badge on the video"
-              name="what-we-do-reel"
-              value={draft.reelLabel}
-              onChange={(reelLabel) => setDraft({ ...draft, reelLabel })}
-            />
-            <WhatWeDoReelUploads
-              reelUrl={draft.reelUrl}
-              reelPosterUrl={draft.reelPosterUrl}
-              onReelUrl={(reelUrl) => setDraft({ ...draft, reelUrl })}
-              onPosterUrl={(reelPosterUrl) => setDraft({ ...draft, reelPosterUrl })}
-            />
-          </AdminCopySection>
-        </>
+        <WhatWeDoTabFields draft={draft} onChange={setDraft} />
       )}
     </AdminSiteCopyForm>
+  );
+}
+
+function WhatWeDoTabFields({ draft, onChange }: WhatWeDoFieldsProps) {
+  const [tab, setTab] = useState<(typeof WHAT_WE_DO_TABS)[number]["id"]>("text");
+
+  return (
+    <>
+      <AdminTabs items={WHAT_WE_DO_TABS} value={tab} onChange={setTab} />
+      <div className={adminTabHidden(tab === "text")}>
+        <WhatWeDoTitleFields draft={draft} onChange={onChange} />
+      </div>
+      <div className={adminTabHidden(tab === "buttons")}>
+        <WhatWeDoButtonFields draft={draft} onChange={onChange} />
+      </div>
+      <div className={adminTabHidden(tab === "video")}>
+        <AdminFormField
+          label="Badge on the video"
+          name="what-we-do-reel"
+          value={draft.reelLabel}
+          onChange={(reelLabel) => onChange({ ...draft, reelLabel })}
+        />
+        <WhatWeDoReelUploads
+          reelUrl={draft.reelUrl}
+          reelPosterUrl={draft.reelPosterUrl}
+          onReelUrl={(reelUrl) => onChange({ ...draft, reelUrl })}
+          onPosterUrl={(reelPosterUrl) => onChange({ ...draft, reelPosterUrl })}
+        />
+      </div>
+    </>
   );
 }

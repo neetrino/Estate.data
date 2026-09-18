@@ -65,9 +65,11 @@ const NAVBAR_MOBILE_BACKDROP_CLASS = [
 type NavbarProps = {
   /** Fixed over hero (home). Defaults to home route. */
   overlay?: boolean;
+  brandName?: string;
+  brandKicker?: string;
 };
 
-export function Navbar({ overlay }: NavbarProps) {
+export function Navbar({ overlay, brandName, brandKicker }: NavbarProps) {
   const pathname = usePathname();
   const hash = useLocationHash();
   const isHome = pathname === "/";
@@ -261,6 +263,8 @@ export function Navbar({ overlay }: NavbarProps) {
             >
               <LogoLink
                 tone={navTone}
+                customLabel={brandName}
+                brandKicker={brandKicker}
                 onNavigate={closeMobile}
                 onHomeClick={handleHomeLogoClick}
                 useFigmaHomeDesktopStyle={useFigmaHomeDesktopHeader}

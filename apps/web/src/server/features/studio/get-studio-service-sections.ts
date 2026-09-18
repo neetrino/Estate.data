@@ -2,6 +2,8 @@ import {
   DEFAULT_STUDIO_SERVICES,
   type StudioServiceContent,
 } from "@/features/home/content/studioServicesCopy";
+import { STUDIO_SERVICE_EXAMPLES } from "@/features/home/content/studioServiceExamples";
+import { serviceExampleSchema } from "@/server/features/studio/service-example.schema";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 import { getPrisma } from "@/server/lib/db";
 import { logger } from "@/server/lib/logger";
@@ -11,10 +13,6 @@ function asStringArray(value: unknown): string[] {
     return [];
   }
   return value.filter((item): item is string => typeof item === "string");
-}
-
-function asAssetUrlArray(value: unknown): string[] {
-  return asStringArray(value).map(normalizePublicAssetUrl);
 }
 
 function asPricing(value: unknown): StudioServiceContent["pricing"] {
@@ -36,6 +34,17 @@ function asPricing(value: unknown): StudioServiceContent["pricing"] {
 function asOptionalText(value: string | null | undefined): string | undefined {
   const trimmed = value?.trim();
   return trimmed ? trimmed : undefined;
+}
+
+function asExample(
+  value: unknown,
+  sectionKey: string,
+): StudioServiceContent["example"] {
+  const parsed = serviceExampleSchema.safeParse(value);
+  if (parsed.success) {
+    return parsed.data;
+  }
+  return STUDIO_SERVICE_EXAMPLES[sectionKey];
 }
 
 /** Published studio service blocks with static fallback. */
@@ -61,7 +70,6 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
         title: row.title,
         description: row.description,
         imageUrl: normalizePublicAssetUrl(row.imageUrl),
-        galleryUrls: asAssetUrlArray(row.galleryUrls),
         included: asStringArray(row.included),
         pricing: asPricing(row.pricing),
         primaryCtaLabel: row.primaryCtaLabel,
@@ -72,6 +80,9 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
           asOptionalText(row.startingPrice) ?? defaults?.startingPrice,
         pricingUnit: asOptionalText(row.pricingUnit) ?? defaults?.pricingUnit,
         footnote: asOptionalText(row.footnote) ?? defaults?.footnote,
+        demoLabel: asOptionalText(row.demoLabel) ?? defaults?.demoLabel,
+        demoSpaceId: asOptionalText(row.demoSpaceId) ?? defaults?.demoSpaceId,
+        example: asExample(row.example, row.sectionKey),
       };
     });
   } catch (error) {

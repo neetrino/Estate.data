@@ -1,14 +1,21 @@
 "use client";
 
-import { AdminCopySection } from "@/features/admin/components/ui/AdminCopySection";
+import { useState } from "react";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminPairListField } from "@/features/admin/components/ui/AdminPairListField";
 import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
+import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { toMailtoHref, toTelHref } from "@/features/admin/lib/admin-contact-href";
 import {
   SITE_COPY_KEYS,
   type ContactMarketingCopy,
 } from "@/server/features/site-copy/site-copy.schema";
+
+const CONTACT_TABS = [
+  { id: "text", label: "Words", hint: "Heading visitors see above the form." },
+  { id: "details", label: "Details", hint: "How people reach the studio." },
+  { id: "social", label: "Social", hint: "Network name and its page." },
+] as const satisfies readonly AdminTabItem<"text" | "details" | "social">[];
 
 type AdminContactCopyFormProps = {
   readonly initial: ContactMarketingCopy;
@@ -92,6 +99,38 @@ function filterSocial(draft: ContactMarketingCopy): ContactMarketingCopy {
   };
 }
 
+function ContactTabFields({ draft, onChange }: ContactFieldsProps) {
+  const [tab, setTab] = useState<(typeof CONTACT_TABS)[number]["id"]>("text");
+
+  return (
+    <>
+      <AdminTabs items={CONTACT_TABS} value={tab} onChange={setTab} />
+      <div className={adminTabHidden(tab === "text")}>
+        <ContactHeadingFields draft={draft} onChange={onChange} />
+      </div>
+      <div className={adminTabHidden(tab === "details")}>
+        <ContactDetailsFields draft={draft} onChange={onChange} />
+      </div>
+      <div className={adminTabHidden(tab === "social")}>
+        <AdminPairListField
+          label="Social links"
+          hint="Name on the left, page address on the right"
+          leftPlaceholder="Instagram"
+          rightPlaceholder="https://"
+          addLabel="Add a social link"
+          rows={draft.social.map((item) => ({ left: item.label, right: item.href }))}
+          onChange={(rows) =>
+            onChange({
+              ...draft,
+              social: rows.map((row) => ({ label: row.left, href: row.right })),
+            })
+          }
+        />
+      </div>
+    </>
+  );
+}
+
 /** Admin editor for Contact / Request Service heading copy and links. */
 export function AdminContactCopyForm({ initial, onSaved }: AdminContactCopyFormProps) {
   return (
@@ -104,30 +143,7 @@ export function AdminContactCopyForm({ initial, onSaved }: AdminContactCopyFormP
       beforeSave={filterSocial}
     >
       {(draft, setDraft) => (
-        <>
-          <AdminCopySection title="Text" description="Heading visitors see above the form.">
-            <ContactHeadingFields draft={draft} onChange={setDraft} />
-          </AdminCopySection>
-          <AdminCopySection title="Details" description="How people reach the studio.">
-            <ContactDetailsFields draft={draft} onChange={setDraft} />
-          </AdminCopySection>
-          <AdminCopySection title="Social" description="Network name and its page.">
-            <AdminPairListField
-              label="Social links"
-              hint="Name on the left, page address on the right"
-              leftPlaceholder="Instagram"
-              rightPlaceholder="https://"
-              addLabel="Add a social link"
-              rows={draft.social.map((item) => ({ left: item.label, right: item.href }))}
-              onChange={(rows) =>
-                setDraft({
-                  ...draft,
-                  social: rows.map((row) => ({ label: row.left, href: row.right })),
-                })
-              }
-            />
-          </AdminCopySection>
-        </>
+        <ContactTabFields draft={draft} onChange={setDraft} />
       )}
     </AdminSiteCopyForm>
   );

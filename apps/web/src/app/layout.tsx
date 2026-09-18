@@ -5,7 +5,7 @@ import {
 } from "@/shared/analytics/GoogleTagManager";
 import { SITE_BRAND_WORDMARK } from "@/shared/components/navbar/navConfig";
 import { SiteFooterGate } from "@/shared/components/footer/SiteFooterGate";
-import { SiteChrome } from "@/shared/components/navbar";
+import { SiteChromeGate } from "@/shared/components/navbar/SiteChromeGate";
 import { displayFont, siteFont } from "./site-font";
 import "./globals.css";
 
@@ -41,9 +41,9 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-studio-bg font-sans text-studio-fg">
         <GoogleTagManagerNoscript />
         <GoogleTagManager />
-        <SiteChrome>
+        <SiteChromeGate>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
-        </SiteChrome>
+        </SiteChromeGate>
         <SiteFooterGate />
       </body>
     </html>

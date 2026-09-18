@@ -17,11 +17,11 @@ export function AdminPricingPackageRow({ pkg, onEdit, onDelete }: AdminPricingPa
         </p>
         <div className="mt-1 flex flex-wrap gap-1">
           {pkg.published ? (
-            <AdminBadge label="Published" tone="success" />
+            <AdminBadge label="Visible" tone="success" />
           ) : (
-            <AdminBadge label="Draft" tone="muted" />
+            <AdminBadge label="Hidden" tone="muted" />
           )}
-          {pkg.highlighted ? <AdminBadge label="Highlighted" /> : null}
+          {pkg.highlighted ? <AdminBadge label="Picked out" /> : null}
           {pkg.badgeLabel ? <AdminBadge label={pkg.badgeLabel} /> : null}
         </div>
         <ul className="mt-2 list-disc space-y-0.5 pl-5 text-sm text-brand-navy/80">

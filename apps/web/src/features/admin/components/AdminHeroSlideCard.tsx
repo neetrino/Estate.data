@@ -16,7 +16,7 @@ import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
 const MOBILE_IMAGE_HINT =
-  "Optional. Shown on small screens; uses the desktop image when empty.";
+  "Optional. For phones. If empty, the large picture is used.";
 
 type SlideImageKind = "desktop" | "mobile";
 
@@ -141,7 +141,7 @@ function HeroSlideImageFields({
           uploading={uploadingKind === "mobile"}
           showClear={Boolean(slide.mobileImageUrl)}
           clearLabel="Remove mobile image"
-          placeholderText="No mobile image — desktop will be used"
+          placeholderText="No phone picture — the large picture will be used"
           onUpload={(file) => onUpload(file, "mobile")}
           onClear={() => {
             void updateAdminHeroSlide(slide.id, {
@@ -205,7 +205,13 @@ function HeroSlideCopyFields({
           </AdminButton>
         </>
       ) : null}
-      <AdminFormField label="Alt text" name={`alt-${slideId}`} value={alt} onChange={onAltChange} />
+      <AdminFormField
+        label="Short description of the picture"
+        name={`alt-${slideId}`}
+        value={alt}
+        onChange={onAltChange}
+        hint="For people who cannot see the image"
+      />
     </div>
   );
 }
@@ -246,7 +252,7 @@ function HeroSlideActions({
           void updateAdminHeroSlide(slide.id, { published: !slide.published }).then(onChanged)
         }
       >
-        {slide.published ? "Unpublish" : "Publish"}
+        {slide.published ? "Hide on website" : "Show on website"}
       </AdminButton>
       <AdminButton
         variant="danger"

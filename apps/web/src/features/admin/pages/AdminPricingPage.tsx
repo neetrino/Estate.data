@@ -8,6 +8,7 @@ import { AdminCheckboxField } from "@/features/admin/components/ui/AdminCheckbox
 import { AdminConfirmDialog } from "@/features/admin/components/ui/AdminConfirmDialog";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
+import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
 import { AdminModal } from "@/features/admin/components/ui/AdminModal";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
@@ -176,9 +177,9 @@ export function AdminPricingPage() {
   return (
     <>
       <AdminPageHeader
-        title="Pricing"
-        description="Shoot packages shown on the public Packages section."
-        actions={<AdminButton onClick={openCreate}>Add package</AdminButton>}
+        title="Prices"
+        description="These packages appear on the homepage. Hidden packages stay in this list only."
+        actions={<AdminButton onClick={openCreate}>Add a package</AdminButton>}
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
@@ -219,11 +220,11 @@ export function AdminPricingPage() {
           {formError ? <AdminErrorState message={formError} /> : null}
           {!editing ? (
             <AdminFormField
-              label="Package id"
-              name="id"
-              value={form.id}
-              onChange={(value) => setForm((prev) => ({ ...prev, id: value }))}
-              hint="Lowercase slug, e.g. essential"
+            label="Short name"
+            name="id"
+            value={form.id}
+            onChange={(value) => setForm((prev) => ({ ...prev, id: value }))}
+            hint="One word in lowercase letters, for example essential. You set this only once."
               error={fieldErrors.id}
               required
             />
@@ -245,7 +246,7 @@ export function AdminPricingPage() {
             required
           />
           <AdminFormField
-            label="Features (one per line)"
+            label="What is included (one line each)"
             name="features"
             value={form.features}
             onChange={(value) => setForm((prev) => ({ ...prev, features: value }))}
@@ -255,38 +256,39 @@ export function AdminPricingPage() {
             required
           />
           <AdminFormField
-            label="Book label"
+            label="Button text"
             name="bookLabel"
             value={form.bookLabel}
             onChange={(value) => setForm((prev) => ({ ...prev, bookLabel: value }))}
           />
-          <AdminFormField
-            label="Book href"
+          <AdminJumpTargetField
+            label="Button goes to"
             name="bookHref"
             value={form.bookHref}
             onChange={(value) => setForm((prev) => ({ ...prev, bookHref: value }))}
           />
           <AdminFormField
-            label="Badge label"
+            label="Small badge"
             name="badgeLabel"
             value={form.badgeLabel}
             onChange={(value) => setForm((prev) => ({ ...prev, badgeLabel: value }))}
-            hint="Optional, e.g. Most complete"
+            hint="Optional. Example: Most complete"
           />
           <AdminFormField
-            label="Sort order"
+            label="Position"
             name="sortOrder"
             type="number"
             value={form.sortOrder}
             onChange={(value) => setForm((prev) => ({ ...prev, sortOrder: value }))}
+            hint="Smaller number appears first. 1 is at the top."
           />
           <AdminCheckboxField
-            label="Highlighted"
+            label="Pick this package out"
             checked={form.highlighted}
             onChange={(checked) => setForm((prev) => ({ ...prev, highlighted: checked }))}
           />
           <AdminCheckboxField
-            label="Published"
+            label="Show on the website"
             checked={form.published}
             onChange={(checked) => setForm((prev) => ({ ...prev, published: checked }))}
           />
@@ -295,7 +297,7 @@ export function AdminPricingPage() {
       <AdminConfirmDialog
         open={deleteId !== null}
         title="Delete package?"
-        message="This removes the pricing package from the database."
+        message="This removes the package from the website."
         onCancel={() => setDeleteId(null)}
         onConfirm={() => void handleDelete()}
         busy={saving}

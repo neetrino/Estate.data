@@ -89,6 +89,7 @@ export type AdminHomeHero = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  eyebrow: string;
   copyMode: HomeHeroCopyMode;
   desktopImageUrl: string | null;
   desktopImageKey: string | null;
@@ -124,7 +125,6 @@ export type AdminStudioService = {
   title: string;
   description: string;
   imageUrl: string;
-  galleryUrls: unknown;
   included: unknown;
   pricing: unknown;
   primaryCtaLabel: string;
@@ -134,6 +134,9 @@ export type AdminStudioService = {
   startingPrice: string | null;
   pricingUnit: string | null;
   footnote: string | null;
+  demoLabel: string | null;
+  demoSpaceId: string | null;
+  example: unknown;
   sortOrder: number;
   published: boolean;
 };

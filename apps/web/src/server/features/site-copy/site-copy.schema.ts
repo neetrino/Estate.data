@@ -6,6 +6,12 @@ import {
   siteCopyTrimmed,
 } from "@/server/features/site-copy/site-copy-fields";
 import {
+  brandCopySchema,
+  packageCompareCopySchema,
+  scanToBimCopySchema,
+  servicesIntroCopySchema,
+} from "@/server/features/site-copy/site-copy-extra.schema";
+import {
   beforeAfterCopySchema,
   faqIntroCopySchema,
   floorPlansCopySchema,
@@ -34,6 +40,10 @@ export const SITE_COPY_KEYS = {
   portfolioIntro: "portfolio-intro",
   faqIntro: "faq-intro",
   floorPlans: "floor-plans",
+  brand: "brand",
+  servicesIntro: "services-intro",
+  packageCompare: "package-compare",
+  scanToBim: "scan-to-bim",
 } as const;
 
 export type SiteCopyKey = (typeof SITE_COPY_KEYS)[keyof typeof SITE_COPY_KEYS];
@@ -104,6 +114,10 @@ export const marketingCopyBundleSchema = z.object({
   portfolioIntro: portfolioIntroCopySchema,
   faqIntro: faqIntroCopySchema,
   floorPlans: floorPlansCopySchema,
+  brand: brandCopySchema,
+  servicesIntro: servicesIntroCopySchema,
+  packageCompare: packageCompareCopySchema,
+  scanToBim: scanToBimCopySchema,
 });
 
 export type MarketingCopyBundle = z.infer<typeof marketingCopyBundleSchema>;
@@ -123,10 +137,20 @@ export const updateSiteCopySchema = z.discriminatedUnion("key", [
   z.object({ key: z.literal(SITE_COPY_KEYS.portfolioIntro), value: portfolioIntroCopySchema }),
   z.object({ key: z.literal(SITE_COPY_KEYS.faqIntro), value: faqIntroCopySchema }),
   z.object({ key: z.literal(SITE_COPY_KEYS.floorPlans), value: floorPlansCopySchema }),
+  z.object({ key: z.literal(SITE_COPY_KEYS.brand), value: brandCopySchema }),
+  z.object({ key: z.literal(SITE_COPY_KEYS.servicesIntro), value: servicesIntroCopySchema }),
+  z.object({ key: z.literal(SITE_COPY_KEYS.packageCompare), value: packageCompareCopySchema }),
+  z.object({ key: z.literal(SITE_COPY_KEYS.scanToBim), value: scanToBimCopySchema }),
 ]);
 
 export type UpdateSiteCopyInput = z.infer<typeof updateSiteCopySchema>;
 
+export {
+  brandCopySchema,
+  packageCompareCopySchema,
+  scanToBimCopySchema,
+  servicesIntroCopySchema,
+} from "@/server/features/site-copy/site-copy-extra.schema";
 export {
   beforeAfterCopySchema,
   faqIntroCopySchema,
@@ -141,6 +165,12 @@ export {
   whyUsCopySchema,
 } from "@/server/features/site-copy/site-copy-sections.schema";
 
+export type {
+  BrandCopy,
+  PackageCompareCopy,
+  ScanToBimCopy,
+  ServicesIntroCopy,
+} from "@/server/features/site-copy/site-copy-extra.schema";
 export type {
   BeforeAfterCopy,
   FaqIntroCopy,

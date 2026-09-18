@@ -4,19 +4,24 @@ import { defaultMarketingCopy, withResolvedWhatWeDoMedia } from "@/server/featur
 import {
   SITE_COPY_KEYS,
   beforeAfterCopySchema,
+  brandCopySchema,
   contactMarketingCopySchema,
   faqIntroCopySchema,
   floorPlansCopySchema,
   offeringsCopySchema,
+  packageCompareCopySchema,
   packagesIntroCopySchema,
   portfolioIntroCopySchema,
   processCopySchema,
+  scanToBimCopySchema,
   serviceAreaCopySchema,
+  servicesIntroCopySchema,
   statsCopySchema,
   studioCopySchema,
   webPagesCopySchema,
   whatWeDoCopySchema,
   whyUsCopySchema,
+  type BrandCopy,
   type MarketingCopyBundle,
 } from "@/server/features/site-copy/site-copy.schema";
 import type { ZodType } from "zod";
@@ -44,9 +49,14 @@ async function readCopy<T>(key: string, schema: ZodType<T>, fallback: T): Promis
   }
 }
 
-/** Homepage and marketing copy — CMS rows with static fallbacks. */
-export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
-  const defaults = defaultMarketingCopy();
+/** Navbar wordmark and kicker — one SiteCopy key, static fallback. */
+export async function getBrandCopy(): Promise<BrandCopy> {
+  return readCopy(SITE_COPY_KEYS.brand, brandCopySchema, defaultMarketingCopy().brand);
+}
+
+async function readMarketingCopyBundle(
+  defaults: MarketingCopyBundle,
+): Promise<MarketingCopyBundle> {
   const [
     whatWeDo,
     webPages,
@@ -62,6 +72,10 @@ export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
     portfolioIntro,
     faqIntro,
     floorPlans,
+    brand,
+    servicesIntro,
+    packageCompare,
+    scanToBim,
   ] = await Promise.all([
     readCopy(SITE_COPY_KEYS.whatWeDo, whatWeDoCopySchema, defaults.whatWeDo).then(
       withResolvedWhatWeDoMedia,
@@ -79,6 +93,10 @@ export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
     readCopy(SITE_COPY_KEYS.portfolioIntro, portfolioIntroCopySchema, defaults.portfolioIntro),
     readCopy(SITE_COPY_KEYS.faqIntro, faqIntroCopySchema, defaults.faqIntro),
     readCopy(SITE_COPY_KEYS.floorPlans, floorPlansCopySchema, defaults.floorPlans),
+    readCopy(SITE_COPY_KEYS.brand, brandCopySchema, defaults.brand),
+    readCopy(SITE_COPY_KEYS.servicesIntro, servicesIntroCopySchema, defaults.servicesIntro),
+    readCopy(SITE_COPY_KEYS.packageCompare, packageCompareCopySchema, defaults.packageCompare),
+    readCopy(SITE_COPY_KEYS.scanToBim, scanToBimCopySchema, defaults.scanToBim),
   ]);
 
   return {
@@ -96,5 +114,14 @@ export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
     portfolioIntro,
     faqIntro,
     floorPlans,
+    brand,
+    servicesIntro,
+    packageCompare,
+    scanToBim,
   };
+}
+
+/** Homepage and marketing copy — CMS rows with static fallbacks. */
+export async function getMarketingCopy(): Promise<MarketingCopyBundle> {
+  return readMarketingCopyBundle(defaultMarketingCopy());
 }

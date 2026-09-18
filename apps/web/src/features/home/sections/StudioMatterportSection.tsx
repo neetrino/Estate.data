@@ -12,6 +12,12 @@ import {
   STUDIO_MUTED_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
+import {
+  DEFAULT_MATTERPORT_DEMO_LABEL,
+  DEFAULT_MATTERPORT_DEMO_TITLE,
+  DEFAULT_MATTERPORT_SPACE_ID,
+  matterportEmbedUrl,
+} from "@/shared/lib/matterportEmbed";
 
 const MEDIA_DELAY_MS = 120;
 
@@ -19,9 +25,35 @@ type StudioMatterportSectionProps = {
   readonly service: StudioServiceContent;
 };
 
+function MatterportDemoFrame({
+  label,
+  embedUrl,
+}: {
+  readonly label: string;
+  readonly embedUrl: string;
+}) {
+  return (
+    <StudioReveal className="mt-20">
+      <p className="studio-label mb-5 text-studio-muted">{label}</p>
+      <div className="aspect-video w-full overflow-hidden border border-studio-border bg-studio-bg">
+        <iframe
+          title={DEFAULT_MATTERPORT_DEMO_TITLE}
+          src={embedUrl}
+          loading="lazy"
+          allow="xr-spatial-tracking; fullscreen"
+          allowFullScreen
+          className="size-full border-0"
+        />
+      </div>
+    </StudioReveal>
+  );
+}
+
 /** Digital twins — copy and specs beside the dollhouse render, demo tour below. */
 export function StudioMatterportSection({ service }: StudioMatterportSectionProps) {
   const { lead, rest } = splitLeadParagraph(service.description);
+  const spaceId = service.demoSpaceId ?? DEFAULT_MATTERPORT_SPACE_ID;
+  const demoLabel = service.demoLabel ?? DEFAULT_MATTERPORT_DEMO_LABEL;
 
   return (
     <section
@@ -61,19 +93,7 @@ export function StudioMatterportSection({ service }: StudioMatterportSectionProp
           </StudioReveal>
         </div>
 
-        <StudioReveal className="mt-20">
-          <p className="studio-label mb-5 text-studio-muted">{STUDIO_MATTERPORT_DEMO.label}</p>
-          <div className="aspect-video w-full overflow-hidden border border-studio-border bg-studio-bg">
-            <iframe
-              title={STUDIO_MATTERPORT_DEMO.title}
-              src={STUDIO_MATTERPORT_DEMO.embedUrl}
-              loading="lazy"
-              allow="xr-spatial-tracking; fullscreen"
-              allowFullScreen
-              className="size-full border-0"
-            />
-          </div>
-        </StudioReveal>
+        <MatterportDemoFrame label={demoLabel} embedUrl={matterportEmbedUrl(spaceId)} />
       </div>
     </section>
   );

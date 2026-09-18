@@ -18,6 +18,7 @@ type HomeHeroRow = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  eyebrow: string;
   copyMode: string;
   desktopImageUrl: string | null;
   desktopImageKey: string | null;
@@ -32,6 +33,7 @@ const HOME_HERO_SELECT = {
   primaryButtonHref: true,
   secondaryButtonLabel: true,
   secondaryButtonHref: true,
+  eyebrow: true,
   copyMode: true,
   desktopImageUrl: true,
   desktopImageKey: true,
@@ -47,6 +49,7 @@ function mapRowToContent(row: HomeHeroRow): HomeHeroContent {
     primaryButtonHref: row.primaryButtonHref,
     secondaryButtonLabel: row.secondaryButtonLabel,
     secondaryButtonHref: row.secondaryButtonHref,
+    eyebrow: row.eyebrow,
     copyMode: parseHomeHeroCopyMode(row.copyMode),
     desktopImageUrl: row.desktopImageUrl,
     desktopImageKey: row.desktopImageKey,
@@ -91,6 +94,7 @@ export async function getHomeHeroForPage(): Promise<HomeHeroContentFields> {
     primaryButtonHref: hero.primaryButtonHref,
     secondaryButtonLabel: hero.secondaryButtonLabel,
     secondaryButtonHref: hero.secondaryButtonHref,
+    eyebrow: hero.eyebrow,
     copyMode: hero.copyMode,
     desktopImageUrl: images.desktopImageUrl,
     mobileImageUrl: images.mobileImageUrl,

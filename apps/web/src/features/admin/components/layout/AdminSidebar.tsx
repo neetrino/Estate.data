@@ -82,8 +82,8 @@ export function AdminSidebar() {
         target="_blank"
         rel="noopener noreferrer"
         className={ADMIN_SIDEBAR_BRAND_CLASS}
-        title="View live site"
-        aria-label="View live site"
+        title="Open the public website"
+        aria-label="Open the public website"
       >
         <span className={ADMIN_SIDEBAR_BRAND_LOGO_WRAP_CLASS}>
           <Image

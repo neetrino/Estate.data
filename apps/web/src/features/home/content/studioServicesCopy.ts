@@ -2,7 +2,8 @@ import {
   HOME_SECTION_IDS,
   homeSectionHref,
 } from "@/shared/lib/homeSectionIds";
-import { STUDIO_MEDIA, STUDIO_MEDIA_GALLERY } from "@/features/home/content/studioMedia";
+import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+import type { StudioServiceExample } from "@/features/home/content/studioServiceExamples";
 
 export type StudioPricingRow = {
   readonly label: string;
@@ -15,7 +16,6 @@ export type StudioServiceContent = {
   readonly title: string;
   readonly description: string;
   readonly imageUrl: string;
-  readonly galleryUrls: readonly string[];
   readonly included: readonly string[];
   readonly pricing: readonly StudioPricingRow[];
   readonly primaryCtaLabel: string;
@@ -27,11 +27,12 @@ export type StudioServiceContent = {
   /** Optional unit after price, e.g. "/ image". */
   readonly pricingUnit?: string;
   readonly footnote?: string;
+  readonly demoLabel?: string;
+  readonly demoSpaceId?: string;
+  readonly example?: StudioServiceExample;
 };
 
 const CONTACT_HREF = homeSectionHref(HOME_SECTION_IDS.quote);
-
-const GALLERY = STUDIO_MEDIA_GALLERY;
 
 export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
   {
@@ -41,7 +42,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Professional interior and exterior real estate photography optimized for MLS, websites, print and social media.",
     imageUrl: STUDIO_MEDIA.photography,
-    galleryUrls: GALLERY,
     included: [
       "Interior photography",
       "Exterior photography",
@@ -76,7 +76,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Professional post-production to make every image clean, balanced and marketing-ready.",
     imageUrl: STUDIO_MEDIA.portfolio3,
-    galleryUrls: GALLERY,
     included: [
       "Color correction",
       "Exposure correction",
@@ -109,7 +108,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Cinematic interior and exterior video production designed to create emotional impact and showcase the lifestyle behind the property.",
     imageUrl: STUDIO_MEDIA.portfolio1,
-    galleryUrls: GALLERY,
     included: [
       "4K video",
       "Interior walkthrough",
@@ -142,7 +140,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Additional marketing assets produced with generative and AI-assisted production workflows — built to multiply the reach of every shoot.",
     imageUrl: STUDIO_MEDIA.afterStaged,
-    galleryUrls: GALLERY,
     included: [
       "AI-enhanced property videos",
       "AI-generated social media variations",
@@ -175,7 +172,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Licensed aerial cinematography that places the property in its full context — architecture, land, neighborhood and skyline.",
     imageUrl: STUDIO_MEDIA.drone,
-    galleryUrls: GALLERY,
     included: [
       "Aerial photography",
       "Aerial video",
@@ -203,7 +199,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Create an immersive digital twin that lets buyers, tenants, owners and teams explore the property from anywhere. Using professional 3D scanning technology, we capture the property and transform it into an interactive digital twin — measurable, navigable and ready to embed anywhere you market.",
     imageUrl: STUDIO_MEDIA.matterport,
-    galleryUrls: GALLERY,
     included: [
       "Interactive 3D walkthrough",
       "Dollhouse view",
@@ -229,6 +224,8 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     primaryCtaHref: CONTACT_HREF,
     secondaryCtaLabel: "View Example",
     secondaryCtaHref: "#gallery",
+    demoLabel: "Interactive demo",
+    demoSpaceId: "SxQL3iGyoDo",
   },
   {
     sectionKey: HOME_SECTION_IDS.scanToBim,
@@ -237,7 +234,6 @@ export const DEFAULT_STUDIO_SERVICES: readonly StudioServiceContent[] = [
     description:
       "Professional 3D reality capture and Scan-to-BIM services for architects, engineers, developers and construction teams.",
     imageUrl: STUDIO_MEDIA.scanBim,
-    galleryUrls: GALLERY,
     included: [
       "On-site 3D laser scanning",
       "Point cloud generation",

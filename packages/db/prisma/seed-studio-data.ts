@@ -55,6 +55,8 @@ type StudioSeedService = {
   readonly startingPrice?: string;
   readonly pricingUnit?: string;
   readonly footnote?: string;
+  readonly demoLabel?: string;
+  readonly demoSpaceId?: string;
 };
 
 export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
@@ -241,6 +243,8 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     ],
     primaryCtaLabel: "Create My 3D Tour",
     secondaryCtaLabel: "View Example",
+    demoLabel: "Interactive demo",
+    demoSpaceId: "SxQL3iGyoDo",
   },
   {
     sectionKey: "scan-to-bim",
@@ -272,13 +276,5 @@ export const STUDIO_SEED_SERVICES: readonly StudioSeedService[] = [
     secondaryCtaLabel: "View Example",
   },
 ];
-
-export const STUDIO_SEED_GALLERY = [
-  VILLA,
-  "/assets/photography-BEgVm_0g.webp",
-  "/assets/drone-DM_DRS7C.webp",
-  "/assets/matterport-LMmMA2Nk.webp",
-  "/assets/scan-bim-gjdfWRdw.webp",
-] as const;
 
 export const STUDIO_SEED_CONTACT_HREF = CONTACT_HREF;

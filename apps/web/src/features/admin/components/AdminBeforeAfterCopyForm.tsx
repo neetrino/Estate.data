@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
 import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUploader";
 import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
+import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { uploadAdminImage } from "@/features/admin/services/admin-api";
 import {
   SITE_COPY_KEYS,
@@ -16,55 +17,102 @@ type AdminBeforeAfterCopyFormProps = {
   readonly onSaved: () => void;
 };
 
-export function AdminBeforeAfterCopyForm({ initial, onSaved }: AdminBeforeAfterCopyFormProps) {
+function beforeAfterTabs(items: BeforeAfterCopy["items"]): readonly AdminTabItem<string>[] {
+  return [
+    {
+      id: "words",
+      label: "Words",
+      hint: "Headline visitors read above the photos.",
+    },
+    ...items.map((item, index) => ({
+      id: item.id,
+      label: item.label.trim() || `Photo pair ${index + 1}`,
+      hint: "Caption and the before and after pictures.",
+    })),
+  ];
+}
+
+function BeforeAfterWordFields({
+  draft,
+  onChange,
+}: {
+  readonly draft: BeforeAfterCopy;
+  readonly onChange: (next: BeforeAfterCopy) => void;
+}) {
+  return (
+    <>
+      <AdminFormField
+        label="Small label"
+        name="before-after-eyebrow"
+        value={draft.eyebrow}
+        onChange={(eyebrow) => onChange({ ...draft, eyebrow })}
+        hint="Tiny line above the headline"
+      />
+      <AdminFormField
+        label="Title"
+        name="before-after-title"
+        value={draft.title}
+        onChange={(title) => onChange({ ...draft, title })}
+      />
+      <AdminFormField
+        label="Description"
+        name="before-after-body"
+        value={draft.body}
+        onChange={(body) => onChange({ ...draft, body })}
+        multiline
+        rows={3}
+      />
+    </>
+  );
+}
+
+function BeforeAfterTabFields({
+  draft,
+  onChange,
+}: {
+  readonly draft: BeforeAfterCopy;
+  readonly onChange: (next: BeforeAfterCopy) => void;
+}) {
+  const [tab, setTab] = useState("words");
   const [uploadingKey, setUploadingKey] = useState<string | null>(null);
+  const tabs = beforeAfterTabs(draft.items);
+  const activeTab = tabs.some((item) => item.id === tab) ? tab : "words";
 
   return (
+    <>
+      <AdminTabs items={tabs} value={activeTab} onChange={setTab} />
+      <div className={adminTabHidden(activeTab === "words")}>
+        <BeforeAfterWordFields draft={draft} onChange={onChange} />
+      </div>
+      {draft.items.map((item, index) => (
+        <div key={item.id} className={adminTabHidden(activeTab === item.id)}>
+          <BeforeAfterItemFields
+            item={item}
+            index={index}
+            uploadingKey={uploadingKey}
+            onUploadingKeyChange={setUploadingKey}
+            onChange={(next) => {
+              const items = draft.items.slice();
+              items[index] = next;
+              onChange({ ...draft, items });
+            }}
+          />
+        </div>
+      ))}
+    </>
+  );
+}
+
+export function AdminBeforeAfterCopyForm({ initial, onSaved }: AdminBeforeAfterCopyFormProps) {
+  return (
     <AdminSiteCopyForm
-      title="Before / after"
+      title="Before & after"
       copyKey={SITE_COPY_KEYS.beforeAfter}
       initial={initial}
-      saveLabel="Save before / after"
+      saveLabel="Save before & after"
       onSaved={onSaved}
     >
-      {(draft, setDraft) => (
-        <>
-          <AdminFormField
-            label="Eyebrow"
-            name="before-after-eyebrow"
-            value={draft.eyebrow}
-            onChange={(eyebrow) => setDraft({ ...draft, eyebrow })}
-          />
-          <AdminFormField
-            label="Title"
-            name="before-after-title"
-            value={draft.title}
-            onChange={(title) => setDraft({ ...draft, title })}
-          />
-          <AdminFormField
-            label="Body"
-            name="before-after-body"
-            value={draft.body}
-            onChange={(body) => setDraft({ ...draft, body })}
-            multiline
-            rows={3}
-          />
-          {draft.items.map((item, index) => (
-            <BeforeAfterItemFields
-              key={item.id}
-              item={item}
-              index={index}
-              uploadingKey={uploadingKey}
-              onUploadingKeyChange={setUploadingKey}
-              onChange={(next) => {
-                const items = draft.items.slice();
-                items[index] = next;
-                setDraft({ ...draft, items });
-              }}
-            />
-          ))}
-        </>
-      )}
+      {(draft, setDraft) => <BeforeAfterTabFields draft={draft} onChange={setDraft} />}
     </AdminSiteCopyForm>
   );
 }
@@ -96,9 +144,9 @@ function BeforeAfterItemFields({
   }
 
   return (
-    <div className="space-y-3 border-t border-neutral-200 pt-4">
+    <div className="space-y-3">
       <AdminFormField
-        label={`Pair ${index + 1} label`}
+        label={`Photo pair ${index + 1} caption`}
         name={`before-after-label-${item.id}`}
         value={item.label}
         onChange={(label) => onChange({ ...item, label })}

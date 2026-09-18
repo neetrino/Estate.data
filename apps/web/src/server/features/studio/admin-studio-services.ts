@@ -21,12 +21,30 @@ export async function listAdminStudioServices() {
   });
 }
 
+function exampleWriteValue(example: UpdateStudioServiceInput["example"]) {
+  if (!example) {
+    return undefined;
+  }
+  return {
+    label: example.label,
+    title: example.title,
+    summary: example.summary,
+    imageUrl: example.imageUrl,
+    highlights: example.highlights,
+    ...(example.embedUrl ? { embedUrl: example.embedUrl } : {}),
+  };
+}
+
 export async function updateStudioService(id: string, input: UpdateStudioServiceInput) {
-  const data: UpdateStudioServiceInput = {
-    ...input,
+  const { example, ...rest } = input;
+  const data = {
+    ...rest,
     startingPrice: emptyToNull(input.startingPrice),
     pricingUnit: emptyToNull(input.pricingUnit),
     footnote: emptyToNull(input.footnote),
+    demoLabel: emptyToNull(input.demoLabel),
+    demoSpaceId: emptyToNull(input.demoSpaceId),
+    example: exampleWriteValue(example),
   };
 
   try {

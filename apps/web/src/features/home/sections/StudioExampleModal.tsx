@@ -12,6 +12,7 @@ import {
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
 import { studioServiceBrowseWrap } from "@/features/home/lib/studioServiceBrowseOrder";
 import { studioServiceContactValue } from "@/features/home/lib/studioServiceContactValue";
+import { useStudioExampleCatalog } from "@/features/home/sections/StudioExampleCatalog";
 import { StudioExampleModalMedia } from "@/features/home/sections/StudioExampleModalMedia";
 import { HomeSectionLink } from "@/shared/components/navbar/HomeSectionLink";
 import { homeSectionHref, HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
@@ -78,7 +79,8 @@ type StudioExampleModalProps = {
 /** View Example popup — arrows page through the next and previous service examples. */
 export function StudioExampleModal({ service, onClose }: StudioExampleModalProps) {
   const [sectionKey, setSectionKey] = useState(service.sectionKey);
-  const example = studioServiceExample(sectionKey, service);
+  const catalog = useStudioExampleCatalog();
+  const example = studioServiceExample(sectionKey, service, catalog);
   const isClient = useIsClient();
 
   useExampleModalKeys(onClose, setSectionKey);

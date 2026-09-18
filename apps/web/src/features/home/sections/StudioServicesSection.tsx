@@ -1,5 +1,4 @@
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
 import { StudioServiceBlock } from "@/features/home/sections/StudioServiceBlock";
@@ -8,6 +7,7 @@ import {
   STUDIO_MUTED_SECTION_CLASS,
 } from "@/features/home/sections/studioSectionStyles";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
+import type { ServicesIntroCopy } from "@/server/features/site-copy/site-copy.schema";
 
 const BLOCK_STACK_CLASS = "mt-20 space-y-24 lg:space-y-32";
 
@@ -20,11 +20,11 @@ export const STUDIO_CORE_SERVICE_KEYS: readonly string[] = [
 
 type StudioServicesSectionProps = {
   readonly services: readonly StudioServiceContent[];
+  readonly copy: ServicesIntroCopy;
 };
 
 /** Services intro heading followed by the alternating service blocks. */
-export function StudioServicesSection({ services }: StudioServicesSectionProps) {
-  const copy = STUDIO_PAGE_COPY.servicesIntro;
+export function StudioServicesSection({ services, copy }: StudioServicesSectionProps) {
 
   return (
     <section id={HOME_SECTION_IDS.services} className={STUDIO_MUTED_SECTION_CLASS}>

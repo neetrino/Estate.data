@@ -21,7 +21,7 @@ import type { AdminPortfolioProject } from "@/features/admin/types/admin-data";
 import { parseRecentWorkAlt } from "@/features/home/content/parseRecentWorkAlt";
 import { normalizePublicAssetUrl } from "@/shared/assets/normalize-public-asset-url";
 
-const REORDER_HINT = "Drag the dots to reorder projects. This order is used on the public site.";
+const REORDER_HINT = "Hold the dots on the left and drag to change the order on the website.";
 
 type AdminPortfolioSortableListProps = {
   readonly items: readonly AdminPortfolioProject[];
@@ -195,11 +195,11 @@ function PortfolioSortableRowBody({
         </div>
         <div className="flex flex-wrap gap-1">
           {item.published ? (
-            <AdminBadge label="Published" tone="success" />
+            <AdminBadge label="Visible" tone="success" />
           ) : (
             <AdminBadge label="Draft" tone="muted" />
           )}
-          {item.featuredOnHome ? <AdminBadge label="Featured" /> : null}
+          {item.featuredOnHome ? <AdminBadge label="On homepage" /> : null}
         </div>
       </div>
       <div className={PORTFOLIO_LIST_ACTIONS_CLASS}>

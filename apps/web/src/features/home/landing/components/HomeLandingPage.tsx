@@ -35,6 +35,8 @@ import { StudioFaq } from "@/features/home/sections/StudioFaq";
 import { StudioContactSection } from "@/features/home/sections/StudioContactSection";
 import { StudioSectionViewTracker } from "@/features/home/sections/StudioSectionViewTracker";
 import { STUDIO_PAGE_CLASS } from "@/features/home/sections/studioSectionStyles";
+import { StudioExampleCatalogProvider } from "@/features/home/sections/StudioExampleCatalog";
+import type { StudioServiceExample } from "@/features/home/content/studioServiceExamples";
 
 type HomeLandingPageProps = {
   readonly projects: readonly RecentWorkProject[];
@@ -46,6 +48,21 @@ type HomeLandingPageProps = {
   readonly contactFields: readonly ContactFieldSetting[];
   readonly marketingCopy: MarketingCopyBundle;
 };
+
+function exampleCatalog(
+  services: readonly StudioServiceContent[],
+  floorPlansExample: StudioServiceExample,
+): Record<string, StudioServiceExample> {
+  const catalog: Record<string, StudioServiceExample> = {
+    [HOME_SECTION_IDS.floorPlans]: floorPlansExample,
+  };
+  for (const service of services) {
+    if (service.example) {
+      catalog[service.sectionKey] = service.example;
+    }
+  }
+  return catalog;
+}
 
 export function HomeLandingPage({
   projects,
@@ -69,22 +86,27 @@ export function HomeLandingPage({
   const scanToBim = findService(HOME_SECTION_IDS.scanToBim);
 
   return (
+    <StudioExampleCatalogProvider
+      examples={exampleCatalog(services, marketingCopy.floorPlans.example)}
+    >
     <div className={STUDIO_PAGE_CLASS}>
       <main className="relative isolate overflow-x-clip">
         <StudioHeroSection hero={hero} slides={slides} />
         <StudioWhatWeDo copy={marketingCopy.whatWeDo} stats={marketingCopy.stats} />
         <StudioOfferings copy={marketingCopy.offerings} />
-        <StudioServicesSection services={coreServices} />
+        <StudioServicesSection services={coreServices} copy={marketingCopy.servicesIntro} />
         {aiMedia ? <StudioAiMediaSection service={aiMedia} /> : null}
         {drone ? <StudioDroneSection service={drone} /> : null}
         {matterport ? <StudioMatterportSection service={matterport} /> : null}
         {matterport ? (
           <StudioFloorPlansSection service={matterport} copy={marketingCopy.floorPlans} />
         ) : null}
-        {scanToBim ? <StudioScanToBimSection service={scanToBim} /> : null}
+        {scanToBim ? (
+          <StudioScanToBimSection service={scanToBim} copy={marketingCopy.scanToBim} />
+        ) : null}
         <StudioWebPagesTeaser copy={marketingCopy.webPages} />
         <StudioPackages category={packages} copy={marketingCopy.packagesIntro} />
-        <StudioPackageCompare />
+        <StudioPackageCompare copy={marketingCopy.packageCompare} />
         <StudioPortfolio projects={projects} copy={marketingCopy.portfolioIntro} />
         <StudioBeforeAfter copy={marketingCopy.beforeAfter} />
         <StudioProcess copy={marketingCopy.process} />
@@ -96,5 +118,6 @@ export function HomeLandingPage({
         <StudioSectionViewTracker />
       </main>
     </div>
+    </StudioExampleCatalogProvider>
   );
 }
