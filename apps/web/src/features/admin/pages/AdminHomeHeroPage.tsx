@@ -50,6 +50,7 @@ const EMPTY_FORM: AdminHomeHero = {
   primaryButtonHref: "",
   secondaryButtonLabel: "",
   secondaryButtonHref: "",
+  eyebrow: "",
   copyMode: "shared",
   desktopImageUrl: null,
   desktopImageKey: null,
@@ -181,6 +182,14 @@ export function AdminHomeHeroPage() {
               <HomeHeroSection
                 title={form.copyMode === "perSlide" ? "Default text" : "Hero text"}
               >
+                <HomeHeroField
+                  id="home-hero-eyebrow"
+                  label="Small label"
+                  value={form.eyebrow}
+                  onChange={(value) => updateForm("eyebrow", value)}
+                  required
+                  hint="Tiny line above the title, such as the city and what you do."
+                />
                 <HomeHeroField
                   id="home-hero-title"
                   label="Title"

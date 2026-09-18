@@ -125,8 +125,9 @@ export function studioServiceExample(
     readonly imageUrl: string;
     readonly included: readonly string[];
   },
+  catalog?: Readonly<Record<string, StudioServiceExample>>,
 ): StudioServiceExample {
-  const authored = STUDIO_SERVICE_EXAMPLES[sectionKey];
+  const authored = catalog?.[sectionKey] ?? STUDIO_SERVICE_EXAMPLES[sectionKey];
   if (authored) {
     return authored;
   }

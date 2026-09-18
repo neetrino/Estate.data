@@ -1,6 +1,6 @@
 import { PublicAssetImage } from "@/shared/components/media/PublicAssetImage";
 import type { StudioServiceContent } from "@/features/home/content/studioServicesCopy";
-import { STUDIO_SCAN_TO_BIM } from "@/features/home/content/studioPageCopy";
+import type { ScanToBimCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioFeatureList } from "@/features/home/sections/StudioFeatureList";
 import { StudioPricingRows } from "@/features/home/sections/StudioPricingRows";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
@@ -23,10 +23,10 @@ const COLUMN_DELAY_STEP_MS = 80;
 
 type StudioScanToBimSectionProps = {
   readonly service: StudioServiceContent;
+  readonly copy: ScanToBimCopy;
 };
 
-function ChainDiagram() {
-  const steps = STUDIO_SCAN_TO_BIM.chain;
+function ChainDiagram({ steps }: { readonly steps: readonly string[] }) {
 
   return (
     <StudioReveal className="mt-20 overflow-x-auto">
@@ -47,8 +47,7 @@ function ChainDiagram() {
 }
 
 /** Reality capture — process chain, deliverables and pricing factors. */
-export function StudioScanToBimSection({ service }: StudioScanToBimSectionProps) {
-  const copy = STUDIO_SCAN_TO_BIM;
+export function StudioScanToBimSection({ service, copy }: StudioScanToBimSectionProps) {
 
   return (
     <section
@@ -78,7 +77,7 @@ export function StudioScanToBimSection({ service }: StudioScanToBimSectionProps)
           </StudioReveal>
         </div>
 
-        <ChainDiagram />
+        <ChainDiagram steps={copy.chain} />
 
         <div className="mt-20 grid gap-12 lg:grid-cols-12 lg:gap-16">
           <StudioReveal className="lg:col-span-4">

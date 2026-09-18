@@ -45,7 +45,6 @@ function HeroCopyBlock({ slide }: { readonly slide: StudioHeroSlide }) {
 }
 
 export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
-  const chrome = STUDIO_PAGE_COPY.hero;
   const [activeIndex, setActiveIndex] = useState(0);
   const onActiveIndexChange = useCallback((index: number) => setActiveIndex(index), []);
   const safeIndex = slides.length === 0 ? 0 : activeIndex % slides.length;
@@ -61,7 +60,7 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
     >
       <StudioHeroSlideshow slides={slides} onActiveIndexChange={onActiveIndexChange} />
       <div className={`${STUDIO_CONTAINER_CLASS} relative z-10 pt-32 pb-24 md:pb-28`}>
-        <p className="studio-label mb-8 text-studio-accent">{chrome.eyebrow}</p>
+        <p className="studio-label mb-8 text-studio-accent">{hero.eyebrow}</p>
         <div className="relative">
           {slides.map((slide, index) => (
             <div
@@ -89,7 +88,7 @@ export function StudioHeroSection({ hero, slides }: StudioHeroSectionProps) {
         </div>
         <div className="mt-16 flex items-center gap-4 text-studio-muted">
           <span aria-hidden className="studio-scrollcue block h-8 w-px bg-studio-accent" />
-          <span className="studio-label">{chrome.scrollLabel}</span>
+          <span className="studio-label">{STUDIO_PAGE_COPY.hero.scrollLabel}</span>
         </div>
       </div>
     </section>

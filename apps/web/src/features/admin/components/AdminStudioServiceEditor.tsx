@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AdminMatterportDemoFields } from "@/features/admin/components/AdminMatterportDemoFields";
+import { AdminExampleFields } from "@/features/admin/components/AdminExampleFields";
 import { AdminButton } from "@/features/admin/components/ui/AdminButton";
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
@@ -9,9 +10,8 @@ import { AdminImageUploader } from "@/features/admin/components/ui/AdminImageUpl
 import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminTabs, adminTabHidden } from "@/features/admin/components/ui/AdminTabs";
 import {
-  asPricingRows,
-  asStringList,
-  formatPricingLines,
+  studioServiceToDraft,
+  type StudioServiceEditorDraft,
 } from "@/features/admin/lib/admin-studio-service-draft";
 import { saveStudioServiceDraft } from "@/features/admin/lib/save-studio-service-draft";
 import { serviceEditorTabs, type ServiceEditorTabId } from "@/features/admin/lib/admin-studio-service-tabs";
@@ -26,52 +26,18 @@ import {
   ADMIN_SHOW_ON_WEBSITE_ACTION,
 } from "@/features/admin/content/adminCopy";
 import { HOME_SECTION_IDS } from "@/shared/lib/homeSectionIds";
-import { matterportShareUrl } from "@/shared/lib/matterportEmbed";
 
 const UPLOAD_FAILED_MESSAGE = "Upload failed";
 const PRICING_HINT = "One price per line: Size | Price. Example: Up to 2,000 sq ft | $249";
 
-type ServiceDraft = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  includedText: string;
-  pricingText: string;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  startingPrice: string;
-  pricingUnit: string;
-  footnote: string;
-  demoLabel: string;
-  demoSpaceId: string;
-  sortOrder: string;
-};
-
 type DraftFieldsProps = {
   readonly serviceId: string;
-  readonly draft: ServiceDraft;
-  readonly onChange: <K extends keyof ServiceDraft>(field: K, value: ServiceDraft[K]) => void;
+  readonly draft: StudioServiceEditorDraft;
+  readonly onChange: <K extends keyof StudioServiceEditorDraft>(
+    field: K,
+    value: StudioServiceEditorDraft[K],
+  ) => void;
 };
-
-function toDraft(service: AdminStudioService): ServiceDraft {
-  return {
-    eyebrow: service.eyebrow,
-    title: service.title,
-    description: service.description,
-    imageUrl: service.imageUrl,
-    includedText: asStringList(service.included).join("\n"),
-    pricingText: formatPricingLines(asPricingRows(service.pricing)),
-    primaryCtaLabel: service.primaryCtaLabel,
-    primaryCtaHref: service.primaryCtaHref,
-    startingPrice: service.startingPrice ?? "",
-    pricingUnit: service.pricingUnit ?? "",
-    footnote: service.footnote ?? "",
-    demoLabel: service.demoLabel ?? "",
-    demoSpaceId: service.demoSpaceId ? matterportShareUrl(service.demoSpaceId) : "",
-    sortOrder: String(service.sortOrder),
-  };
-}
 
 function ServiceCopyFields({ serviceId, draft, onChange }: DraftFieldsProps) {
   return (
@@ -185,7 +151,7 @@ type AdminStudioServiceEditorProps = {
 
 /** Editor for a single studio service. */
 export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServiceEditorProps) {
-  const [draft, setDraft] = useState<ServiceDraft>(() => toDraft(service));
+  const [draft, setDraft] = useState<StudioServiceEditorDraft>(() => studioServiceToDraft(service));
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -194,7 +160,10 @@ export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServic
   const showMatterportDemo = service.sectionKey === HOME_SECTION_IDS.tours;
   const tabs = serviceEditorTabs(showImage, showMatterportDemo);
 
-  function setField<K extends keyof ServiceDraft>(field: K, value: ServiceDraft[K]) {
+  function setField<K extends keyof StudioServiceEditorDraft>(
+    field: K,
+    value: StudioServiceEditorDraft[K],
+  ) {
     setDraft((previous) => ({ ...previous, [field]: value }));
   }
 
@@ -243,6 +212,14 @@ export function AdminStudioServiceEditor({ service, onSaved }: AdminStudioServic
       ) : null}
       <div className={adminTabHidden(tab === "prices")}>
         <ServiceOfferFields serviceId={service.id} draft={draft} onChange={setField} />
+      </div>
+      <div className={adminTabHidden(tab === "example")}>
+        <AdminExampleFields
+          idPrefix={`example-${service.id}`}
+          value={draft.example}
+          onChange={(example) => setField("example", example)}
+          showEmbed={showMatterportDemo}
+        />
       </div>
       <div className={adminTabHidden(tab === "button")}>
         <ServiceCtaFields serviceId={service.id} draft={draft} onChange={setField} />

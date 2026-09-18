@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { serviceExampleSchema } from "@/server/features/studio/service-example.schema";
 
 const hrefSchema = z
   .string()
@@ -38,6 +39,7 @@ export const updateStudioServiceSchema = z.object({
   footnote: z.string().trim().max(2000).nullable().optional(),
   demoLabel: z.string().trim().max(80).nullable().optional(),
   demoSpaceId: z.string().trim().max(64).nullable().optional(),
+  example: serviceExampleSchema.optional(),
   sortOrder: z.number().int().min(0).max(999).optional(),
   published: z.boolean().optional(),
 });

@@ -1,6 +1,6 @@
 import type { AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 
-export type ServiceEditorTabId = "words" | "picture" | "tour" | "prices" | "button";
+export type ServiceEditorTabId = "words" | "picture" | "tour" | "prices" | "example" | "button";
 
 /** Tabs for one studio-service editor. Picture and 3D tour only when that service has them. */
 export function serviceEditorTabs(
@@ -29,6 +29,11 @@ export function serviceEditorTabs(
       id: "prices",
       label: "Prices",
       hint: "What is included and the price list.",
+    },
+    {
+      id: "example",
+      label: "Example",
+      hint: "The popup visitors see when they press View Example.",
     },
     {
       id: "button",

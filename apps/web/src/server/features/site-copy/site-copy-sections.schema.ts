@@ -4,6 +4,7 @@ import {
   siteCopyButtonHrefSchema,
   siteCopyTrimmed,
 } from "@/server/features/site-copy/site-copy-fields";
+import { serviceExampleSchema } from "@/server/features/studio/service-example.schema";
 
 export const statsCopySchema = z.object({
   items: z
@@ -150,6 +151,7 @@ export const floorPlansCopySchema = z.object({
   title: siteCopyTrimmed(1, 200),
   body: siteCopyTrimmed(1, 2000),
   included: z.array(siteCopyTrimmed(1, 120)).min(1).max(12),
+  example: serviceExampleSchema,
 });
 
 export type FloorPlansCopy = z.infer<typeof floorPlansCopySchema>;

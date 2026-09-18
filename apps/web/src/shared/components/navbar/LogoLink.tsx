@@ -58,6 +58,7 @@ type LogoLinkProps = {
   tone?: NavTone;
   size?: LogoSize;
   customLabel?: string;
+  brandKicker?: string;
   customIconPath?: string;
   useFigmaHomeDesktopStyle?: boolean;
 };
@@ -72,6 +73,7 @@ export function LogoLink({
   tone = "dark",
   size = "nav",
   customLabel,
+  brandKicker,
   customIconPath,
   useFigmaHomeDesktopStyle = false,
 }: LogoLinkProps) {
@@ -121,7 +123,7 @@ export function LogoLink({
             {brandLabel}
           </span>
           <span className="mt-1 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-studio-muted">
-            {STUDIO_PAGE_COPY.brand.kicker}
+            {brandKicker ?? STUDIO_PAGE_COPY.brand.kicker}
           </span>
         </span>
       </Link>

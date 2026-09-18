@@ -50,6 +50,7 @@ export const homeHeroContentSchema = z.object({
   primaryButtonHref: buttonHrefSchema,
   secondaryButtonLabel: trimmedString(1, 120),
   secondaryButtonHref: buttonHrefSchema,
+  eyebrow: trimmedString(1, 120),
   copyMode: homeHeroCopyModeSchema,
   desktopImageUrl: optionalImageUrlSchema,
   desktopImageKey: optionalImageKeySchema,

@@ -79,6 +79,13 @@ function WebPagesPricingFields({
         hint="Shown as the from-price on the site"
       />
       <AdminFormField
+        label="Included heading"
+        name="web-pages-included-label"
+        value={draft.includedLabel}
+        onChange={(includedLabel) => onChange({ ...draft, includedLabel })}
+        hint="Small heading above the included list on /web-pages"
+      />
+      <AdminFormField
         label="What's included"
         name="web-pages-included"
         value={includedText}

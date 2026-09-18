@@ -249,6 +249,7 @@ model HomeHero {
   primaryButtonHref    String   @map("primary_button_href")
   secondaryButtonLabel String   @map("secondary_button_label")
   secondaryButtonHref  String   @map("secondary_button_href")
+  eyebrow              String   @default("Los Angeles · Real Estate Media + Digital Reality Capture")
   desktopImageUrl      String?  @map("desktop_image_url")
   desktopImageKey      String?  @map("desktop_image_key")
   mobileImageUrl       String?  @map("mobile_image_url")
@@ -299,6 +300,7 @@ model StudioServiceSection {
   footnote          String?  @db.Text
   demoLabel         String?  @map("demo_label")
   demoSpaceId       String?  @map("demo_space_id")
+  example           Json?
   sortOrder         Int      @default(0) @map("sort_order")
   published         Boolean  @default(true)
   createdAt         DateTime @default(now()) @map("created_at")

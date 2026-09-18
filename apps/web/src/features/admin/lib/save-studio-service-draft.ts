@@ -2,31 +2,16 @@ import { ADMIN_POSITION_ERROR } from "@/features/admin/content/adminCopy";
 import {
   parseIncludedLines,
   parsePricingLines,
+  type StudioServiceEditorDraft,
 } from "@/features/admin/lib/admin-studio-service-draft";
 import { updateAdminStudioService } from "@/features/admin/services/admin-api";
+import { serviceExampleSchema } from "@/server/features/studio/service-example.schema";
 import { parseMatterportSpaceId } from "@/shared/lib/matterportEmbed";
-
-export type StudioServiceSaveDraft = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  includedText: string;
-  pricingText: string;
-  primaryCtaLabel: string;
-  primaryCtaHref: string;
-  startingPrice: string;
-  pricingUnit: string;
-  footnote: string;
-  demoLabel: string;
-  demoSpaceId: string;
-  sortOrder: string;
-};
 
 /** Persist one studio-service editor draft. Returns an error message or null. */
 export async function saveStudioServiceDraft(
   serviceId: string,
-  draft: StudioServiceSaveDraft,
+  draft: StudioServiceEditorDraft,
 ): Promise<string | null> {
   const sortOrder = Number.parseInt(draft.sortOrder, 10);
   if (!Number.isFinite(sortOrder) || sortOrder < 0) {
@@ -37,6 +22,10 @@ export async function saveStudioServiceDraft(
     : null;
   if (draft.demoSpaceId.trim() && !demoSpaceId) {
     return "Paste a Matterport share URL (my.matterport.com/show/?m=…).";
+  }
+  const exampleParsed = serviceExampleSchema.safeParse(draft.example);
+  if (!exampleParsed.success) {
+    return "Fill in the Example tab: title, description, photo, and at least one highlight.";
   }
   try {
     await updateAdminStudioService(serviceId, {
@@ -53,6 +42,7 @@ export async function saveStudioServiceDraft(
       footnote: draft.footnote.trim() || null,
       demoLabel: draft.demoLabel.trim() || null,
       demoSpaceId,
+      example: exampleParsed.data,
       sortOrder,
     });
     return null;

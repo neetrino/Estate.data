@@ -2,6 +2,11 @@ import type { AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 
 export const HOMEPAGE_COPY_TABS = [
   {
+    id: "brand",
+    label: "Site name",
+    hint: "The name and short line next to the logo at the top of the website.",
+  },
+  {
     id: "stats",
     label: "Numbers",
     hint: "The large figures in What We Do near the top of the homepage, such as “40% Faster property sales”.",
@@ -12,14 +17,29 @@ export const HOMEPAGE_COPY_TABS = [
     hint: "Numbered cards that introduce photography, video, and the other services.",
   },
   {
+    id: "servicesIntro",
+    label: "Services heading",
+    hint: "The heading above Photography, Editing, and Video.",
+  },
+  {
     id: "floorPlans",
     label: "Floor plans",
     hint: "The floor-plans block after the 3D tour. The tour itself is under Studio services → Tours.",
   },
   {
+    id: "scanToBim",
+    label: "Scan-to-BIM extras",
+    hint: "The process chain, deliverables, and pricing-factor chips. Words and prices for that block are under Services → Scan-to-BIM.",
+  },
+  {
     id: "packagesIntro",
     label: "Packages intro",
     hint: "Headings above the price cards. Edit the packages themselves under Pricing.",
+  },
+  {
+    id: "packageCompare",
+    label: "Package compare",
+    hint: "The table that shows what is in each package.",
   },
   {
     id: "portfolioIntro",
@@ -57,10 +77,14 @@ export const HOMEPAGE_COPY_TABS = [
     hint: "The heading above the questions. Edit the questions themselves under FAQ.",
   },
 ] as const satisfies readonly AdminTabItem<
+  | "brand"
   | "stats"
   | "offerings"
+  | "servicesIntro"
   | "floorPlans"
+  | "scanToBim"
   | "packagesIntro"
+  | "packageCompare"
   | "portfolioIntro"
   | "beforeAfter"
   | "process"

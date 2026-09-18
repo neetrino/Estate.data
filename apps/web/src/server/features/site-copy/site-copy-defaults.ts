@@ -1,6 +1,8 @@
-import { SITE_NAME } from "@/shared/components/navbar/navConfig";
+import { SITE_BRAND_WORDMARK } from "@/shared/components/navbar/navConfig";
 import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
-import { STUDIO_PAGE_COPY } from "@/features/home/content/studioPageCopy";
+import { STUDIO_PACKAGE_COMPARE } from "@/features/home/content/studioPackageCompare";
+import { STUDIO_PAGE_COPY, STUDIO_SCAN_TO_BIM } from "@/features/home/content/studioPageCopy";
+import { STUDIO_SERVICE_EXAMPLES } from "@/features/home/content/studioServiceExamples";
 import { STUDIO_CONTACT } from "@/shared/lib/studioContact";
 import { HOME_SECTION_IDS, homeSectionHref } from "@/shared/lib/homeSectionIds";
 import type { MarketingCopyBundle, WhatWeDoCopy } from "@/server/features/site-copy/site-copy.schema";
@@ -15,6 +17,7 @@ export function withResolvedWhatWeDoMedia(copy: WhatWeDoCopy): WhatWeDoCopy {
 
 /** Static fallbacks used when a SiteCopy key is missing or invalid. */
 export function defaultMarketingCopy(): MarketingCopyBundle {
+  const floorPlansExample = STUDIO_SERVICE_EXAMPLES[HOME_SECTION_IDS.floorPlans];
   const whatWeDo = STUDIO_PAGE_COPY.whatWeDo;
   const webPages = STUDIO_PAGE_COPY.webPages;
   const contact = STUDIO_PAGE_COPY.contact;
@@ -88,7 +91,7 @@ export function defaultMarketingCopy(): MarketingCopyBundle {
       title: STUDIO_PAGE_COPY.studio.title,
       body: STUDIO_PAGE_COPY.studio.body,
       imageUrl: STUDIO_MEDIA.team,
-      imageAlt: `${SITE_NAME} production crew on location at a Los Angeles property shoot`,
+      imageAlt: `${SITE_BRAND_WORDMARK} production crew on location at a Los Angeles property shoot`,
       members: STUDIO_PAGE_COPY.team.map((member) => ({
         initials: member.initials,
         name: member.name,
@@ -134,6 +137,39 @@ export function defaultMarketingCopy(): MarketingCopyBundle {
       title: floorPlans.title,
       body: floorPlans.body,
       included: [...floorPlans.included],
+      example: {
+        label: floorPlansExample?.label ?? floorPlans.eyebrow,
+        title: floorPlansExample?.title ?? floorPlans.title,
+        summary: floorPlansExample?.summary ?? floorPlans.body,
+        imageUrl: floorPlansExample?.imageUrl ?? STUDIO_MEDIA.matterport,
+        highlights: [...(floorPlansExample?.highlights ?? floorPlans.included)],
+        ...(floorPlansExample?.embedUrl ? { embedUrl: floorPlansExample.embedUrl } : {}),
+      },
+    },
+    brand: {
+      name: STUDIO_PAGE_COPY.brand.name,
+      kicker: STUDIO_PAGE_COPY.brand.kicker,
+    },
+    servicesIntro: { ...STUDIO_PAGE_COPY.servicesIntro },
+    packageCompare: {
+      eyebrow: STUDIO_PACKAGE_COMPARE.eyebrow,
+      title: STUDIO_PACKAGE_COMPARE.title,
+      columns: [...STUDIO_PACKAGE_COMPARE.columns],
+      rows: STUDIO_PACKAGE_COMPARE.rows.map((row) => ({
+        service: row.service,
+        values: [...row.values],
+      })),
+    },
+    scanToBim: {
+      imageAlt: STUDIO_SCAN_TO_BIM.imageAlt,
+      workflowLabel: STUDIO_SCAN_TO_BIM.workflowLabel,
+      deliverablesLabel: STUDIO_SCAN_TO_BIM.deliverablesLabel,
+      pricingLabel: STUDIO_SCAN_TO_BIM.pricingLabel,
+      pricingFactorsLabel: STUDIO_SCAN_TO_BIM.pricingFactorsLabel,
+      chain: [...STUDIO_SCAN_TO_BIM.chain],
+      workflow: STUDIO_SCAN_TO_BIM.workflow.map((entry) => ({ ...entry })),
+      deliverables: [...STUDIO_SCAN_TO_BIM.deliverables],
+      pricingFactors: [...STUDIO_SCAN_TO_BIM.pricingFactors],
     },
   };
 }

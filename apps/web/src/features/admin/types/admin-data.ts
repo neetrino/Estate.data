@@ -89,6 +89,7 @@ export type AdminHomeHero = {
   primaryButtonHref: string;
   secondaryButtonLabel: string;
   secondaryButtonHref: string;
+  eyebrow: string;
   copyMode: HomeHeroCopyMode;
   desktopImageUrl: string | null;
   desktopImageKey: string | null;
@@ -135,6 +136,7 @@ export type AdminStudioService = {
   footnote: string | null;
   demoLabel: string | null;
   demoSpaceId: string | null;
+  example: unknown;
   sortOrder: number;
   published: boolean;
 };

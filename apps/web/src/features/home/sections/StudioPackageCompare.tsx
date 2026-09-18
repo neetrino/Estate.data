@@ -1,4 +1,4 @@
-import { STUDIO_PACKAGE_COMPARE } from "@/features/home/content/studioPackageCompare";
+import type { PackageCompareCopy } from "@/server/features/site-copy/site-copy.schema";
 import { StudioReveal } from "@/features/home/sections/StudioReveal";
 import { StudioSectionLabel } from "@/features/home/sections/StudioSectionLabel";
 import {
@@ -30,8 +30,7 @@ function CompareValue({ value }: { readonly value: string }) {
   return <span className="text-xs text-studio-muted">{value}</span>;
 }
 
-export function StudioPackageCompare() {
-  const copy = STUDIO_PACKAGE_COMPARE;
+export function StudioPackageCompare({ copy }: { readonly copy: PackageCompareCopy }) {
 
   return (
     <section className={`${STUDIO_LIGHT_SECTION_CLASS} border-t border-studio-border`}>

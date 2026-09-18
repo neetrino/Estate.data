@@ -3,6 +3,7 @@ import {
   homeSectionHref,
 } from "@/shared/lib/homeSectionIds";
 import { STUDIO_MEDIA } from "@/features/home/content/studioMedia";
+import type { StudioServiceExample } from "@/features/home/content/studioServiceExamples";
 
 export type StudioPricingRow = {
   readonly label: string;
@@ -28,6 +29,7 @@ export type StudioServiceContent = {
   readonly footnote?: string;
   readonly demoLabel?: string;
   readonly demoSpaceId?: string;
+  readonly example?: StudioServiceExample;
 };
 
 const CONTACT_HREF = homeSectionHref(HOME_SECTION_IDS.quote);

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AdminFormField } from "@/features/admin/components/ui/AdminFormField";
+import { AdminExampleFields } from "@/features/admin/components/AdminExampleFields";
 import { AdminSiteCopyForm } from "@/features/admin/components/AdminSiteCopyForm";
 import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { parseIncludedLines } from "@/features/admin/lib/admin-studio-service-draft";
@@ -166,42 +167,50 @@ export function AdminFloorPlansCopyForm({
 const FLOOR_PLANS_TABS = [
   { id: "words", label: "Words", hint: "Headline visitors read in the floor-plans block." },
   { id: "included", label: "Included", hint: "What is included in a floor-plan order." },
-] as const satisfies readonly AdminTabItem<"words" | "included">[];
+  { id: "example", label: "Example", hint: "The popup visitors see when they press View Example on floor plans." },
+] as const satisfies readonly AdminTabItem<"words" | "included" | "example">[];
 
-function FloorPlansTabFields({
-  draft,
-  onChange,
-}: {
+type FloorPlansFieldsProps = {
   readonly draft: FloorPlansCopy;
   readonly onChange: (next: FloorPlansCopy) => void;
-}) {
+};
+
+function FloorPlansWordsFields({ draft, onChange }: FloorPlansFieldsProps) {
+  return (
+    <>
+      <AdminFormField
+        label="Small label"
+        name="floor-plans-eyebrow"
+        value={draft.eyebrow}
+        onChange={(eyebrow) => onChange({ ...draft, eyebrow })}
+        hint="Tiny line above the headline"
+      />
+      <AdminFormField
+        label="Title"
+        name="floor-plans-title"
+        value={draft.title}
+        onChange={(title) => onChange({ ...draft, title })}
+      />
+      <AdminFormField
+        label="Description"
+        name="floor-plans-body"
+        value={draft.body}
+        onChange={(body) => onChange({ ...draft, body })}
+        multiline
+        rows={4}
+      />
+    </>
+  );
+}
+
+function FloorPlansTabFields({ draft, onChange }: FloorPlansFieldsProps) {
   const [tab, setTab] = useState<(typeof FLOOR_PLANS_TABS)[number]["id"]>("words");
 
   return (
     <>
       <AdminTabs items={FLOOR_PLANS_TABS} value={tab} onChange={setTab} />
       <div className={adminTabHidden(tab === "words")}>
-        <AdminFormField
-          label="Small label"
-          name="floor-plans-eyebrow"
-          value={draft.eyebrow}
-          onChange={(eyebrow) => onChange({ ...draft, eyebrow })}
-          hint="Tiny line above the headline"
-        />
-        <AdminFormField
-          label="Title"
-          name="floor-plans-title"
-          value={draft.title}
-          onChange={(title) => onChange({ ...draft, title })}
-        />
-        <AdminFormField
-          label="Description"
-          name="floor-plans-body"
-          value={draft.body}
-          onChange={(body) => onChange({ ...draft, body })}
-          multiline
-          rows={4}
-        />
+        <FloorPlansWordsFields draft={draft} onChange={onChange} />
       </div>
       <div className={adminTabHidden(tab === "included")}>
         <AdminFormField
@@ -212,6 +221,14 @@ function FloorPlansTabFields({
           multiline
           rows={5}
           hint="One item per line"
+        />
+      </div>
+      <div className={adminTabHidden(tab === "example")}>
+        <AdminExampleFields
+          idPrefix="floor-plans-example"
+          value={draft.example}
+          onChange={(example) => onChange({ ...draft, example })}
+          showEmbed
         />
       </div>
     </>
