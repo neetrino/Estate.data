@@ -102,7 +102,7 @@ export function AdminLatestInquiries({ inquiries }: AdminLatestInquiriesProps) {
     <motion.div variants={adminFadeUpItem}>
       <Card className={ADMIN_DASHBOARD_PANEL_CLASS}>
         <CardHeader className={ADMIN_DASHBOARD_PANEL_HEADER_CLASS}>
-          <CardTitle className={ADMIN_DASHBOARD_PANEL_TITLE_CLASS}>Latest inquiries</CardTitle>
+          <CardTitle className={ADMIN_DASHBOARD_PANEL_TITLE_CLASS}>Latest messages</CardTitle>
           <Link
             href={SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH}
             className={ADMIN_DASHBOARD_PANEL_LINK_CLASS}
@@ -117,9 +117,9 @@ export function AdminLatestInquiries({ inquiries }: AdminLatestInquiriesProps) {
               <span className={ADMIN_INQUIRY_EMPTY_ICON_CLASS}>
                 <Mail className={ADMIN_STAT_ICON_SIZE_CLASS} aria-hidden />
               </span>
-              <p className={ADMIN_INQUIRY_EMPTY_TITLE_CLASS}>No inquiries yet</p>
+              <p className={ADMIN_INQUIRY_EMPTY_TITLE_CLASS}>No messages yet</p>
               <p className={ADMIN_INQUIRY_EMPTY_HINT_CLASS}>
-                New contact form submissions will appear here.
+                When someone fills in the contact form, it will show up here.
               </p>
             </div>
           ) : (

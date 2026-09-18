@@ -38,7 +38,7 @@ export function AdminQuickActions({ actions }: AdminQuickActionsProps) {
     <motion.div variants={adminFadeUpItem}>
       <Card className={ADMIN_DASHBOARD_PANEL_CLASS}>
         <CardHeader className={ADMIN_DASHBOARD_PANEL_HEADER_CLASS}>
-          <CardTitle className={ADMIN_DASHBOARD_PANEL_TITLE_CLASS}>Quick actions</CardTitle>
+          <CardTitle className={ADMIN_DASHBOARD_PANEL_TITLE_CLASS}>Shortcuts</CardTitle>
         </CardHeader>
         <CardContent className={ADMIN_DASHBOARD_PANEL_BODY_CLASS}>
           <motion.ul

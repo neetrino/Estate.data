@@ -27,6 +27,8 @@ export async function updateStudioService(id: string, input: UpdateStudioService
     startingPrice: emptyToNull(input.startingPrice),
     pricingUnit: emptyToNull(input.pricingUnit),
     footnote: emptyToNull(input.footnote),
+    demoLabel: emptyToNull(input.demoLabel),
+    demoSpaceId: emptyToNull(input.demoSpaceId),
   };
 
   try {

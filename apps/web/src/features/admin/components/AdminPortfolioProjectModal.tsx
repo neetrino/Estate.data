@@ -63,7 +63,7 @@ export function AdminPortfolioProjectModal({
   return (
     <AdminModal
       open={open}
-      title={editing ? "Edit project" : "New project"}
+      title={editing ? "Edit photo" : "New photo"}
       onClose={onClose}
       footer={
         <>
@@ -93,7 +93,7 @@ export function AdminPortfolioProjectModal({
             name="title"
             value={form.title}
             onChange={onTitleChange}
-            hint="Headline on the public portfolio card"
+            hint="Headline visitors see on the card"
             error={titleError ?? undefined}
             required
           />
@@ -111,7 +111,7 @@ export function AdminPortfolioProjectModal({
             onChange={(value) => onFormChange({ servicesText: value })}
             multiline
             rows={4}
-            hint="One per line. Shown under the location, joined with ·"
+            hint="One service per line, for example Photography"
           />
           <div className="grid gap-3 rounded-xl bg-neutral-50/90 p-4 sm:grid-cols-2">
             <AdminCheckboxField
@@ -129,7 +129,7 @@ export function AdminPortfolioProjectModal({
         <section className="space-y-4 rounded-2xl border border-foreground/8 bg-white p-5 shadow-sm">
           <div className="grid gap-4">
             <label className="block space-y-1.5">
-              <span className="text-sm font-medium text-brand-navy">Media type</span>
+              <span className="text-sm font-medium text-brand-navy">Photo type</span>
               <select
                 value={form.category}
                 onChange={(event) => onFormChange({ category: event.target.value })}
@@ -145,12 +145,12 @@ export function AdminPortfolioProjectModal({
           </div>
           <div className="grid gap-3 rounded-xl bg-neutral-50/90 p-4 sm:grid-cols-2">
             <AdminCheckboxField
-              label="Featured on home"
+              label="Show on the homepage"
               checked={form.featuredOnHome}
               onChange={(checked) => onFormChange({ featuredOnHome: checked })}
             />
             <AdminCheckboxField
-              label="Published"
+              label="Show in the portfolio"
               checked={form.published}
               onChange={(checked) => onFormChange({ published: checked })}
             />

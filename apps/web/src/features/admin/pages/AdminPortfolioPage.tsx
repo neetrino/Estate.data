@@ -182,14 +182,14 @@ export function AdminPortfolioPage() {
     <>
       <AdminPageHeader
         title="Portfolio"
-        description="Manage portfolio tiles shown on the public site."
-        actions={<AdminButton onClick={openCreate}>Add project</AdminButton>}
+        description="Photos of your work on the homepage. Drag the dots to change the order. Hidden items stay in this list only."
+        actions={<AdminButton onClick={openCreate}>Add a photo</AdminButton>}
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {actionError && !modalOpen ? <AdminErrorState message={actionError} /> : null}
       {!loading && !error && items.length === 0 ? (
-        <AdminEmptyState title="No projects" message="Create your first portfolio project." />
+        <AdminEmptyState title="No photos yet" message="Add a photo. Visitors will see it in Recent Work." />
       ) : null}
       {!loading && !error && items.length > 0 ? (
         <AdminPortfolioSortableList
@@ -219,8 +219,8 @@ export function AdminPortfolioPage() {
       />
       <AdminConfirmDialog
         open={deleteId !== null}
-        title="Delete project?"
-        message="This removes the project and its translations."
+        title="Delete this photo?"
+        message="This removes it from the website."
         onCancel={() => setDeleteId(null)}
         onConfirm={() => void handleDelete()}
         busy={saving}

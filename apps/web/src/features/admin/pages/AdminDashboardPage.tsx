@@ -33,29 +33,29 @@ const LATEST_INQUIRIES_LIMIT = 5;
 const QUICK_ACTIONS = [
   {
     id: "portfolio",
-    label: "Manage portfolio",
-    description: "Projects, categories, and featured tiles",
+    label: "Portfolio photos",
+    description: "Add, hide, or reorder the work on the homepage",
     href: SUPERSUDO_PANEL_PORTFOLIO_PATH,
     icon: "portfolio",
   },
   {
     id: "pricing",
-    label: "Manage pricing",
-    description: "Shoot packages on the public site",
+    label: "Prices",
+    description: "Change the packages visitors see",
     href: SUPERSUDO_PANEL_PRICING_PATH,
     icon: "pricing",
   },
   {
     id: "faq",
-    label: "Manage FAQ",
-    description: "Questions shown on the home page",
+    label: "Questions",
+    description: "Add or edit answers on the homepage",
     href: SUPERSUDO_PANEL_FAQ_PATH,
     icon: "faq",
   },
   {
     id: "contact",
-    label: "Open inquiries",
-    description: "Review new contact form submissions",
+    label: "Form messages",
+    description: "Read what people sent from the contact form",
     href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
     icon: "contact-inquiries",
   },
@@ -73,30 +73,30 @@ type DashboardStat = {
 function getDashboardStats(summary: DashboardSummary): DashboardStat[] {
   return [
     {
-      label: "Portfolio projects",
+      label: "Portfolio photos",
       value: summary.portfolioCount,
-      sublabel: `${summary.publishedPortfolioCount} published · ${summary.featuredPortfolioCount} featured`,
+      sublabel: `${summary.publishedPortfolioCount} visible · ${summary.featuredPortfolioCount} on the homepage`,
       href: SUPERSUDO_PANEL_PORTFOLIO_PATH,
       icon: "portfolio",
       tone: "purple",
     },
     {
-      label: "Pricing packages",
+      label: "Price packages",
       value: summary.pricingPackageCount,
       href: SUPERSUDO_PANEL_PRICING_PATH,
       icon: "pricing",
       tone: "navy",
     },
     {
-      label: "FAQ items",
+      label: "Questions",
       value: summary.faqCount,
-      sublabel: `${summary.publishedFaqCount} published`,
+      sublabel: `${summary.publishedFaqCount} visible`,
       href: SUPERSUDO_PANEL_FAQ_PATH,
       icon: "faq",
       tone: "gold",
     },
     {
-      label: "Contact inquiries",
+      label: "Form messages",
       value: summary.contactInquiryCount,
       href: SUPERSUDO_PANEL_CONTACT_INQUIRIES_PATH,
       icon: "contact-inquiries",
@@ -133,11 +133,11 @@ export function AdminDashboardPage() {
   }, []);
 
   if (loading) {
-    return <AdminLoadingState label="Loading dashboard…" />;
+    return <AdminLoadingState label="Loading…" />;
   }
 
   if (error || !data) {
-    return <AdminErrorState message={error ?? "Dashboard unavailable"} onRetry={reload} />;
+    return <AdminErrorState message={error ?? "Could not load this page"} onRetry={reload} />;
   }
 
   return (

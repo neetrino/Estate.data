@@ -105,7 +105,7 @@ function AdminHeroSlidesPanelView({
   return (
     <div className="space-y-4">
       <h2 className="text-sm font-semibold uppercase tracking-[0.08em] text-[#414141]/70">
-        Slides
+        Slides (the pictures that change)
       </h2>
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={onRetry} /> : null}

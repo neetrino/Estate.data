@@ -12,9 +12,21 @@ import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
 import { fetchAdminSiteCopy } from "@/features/admin/services/admin-api";
 
 const MARKETING_TABS = [
-  { id: "whatWeDo", label: "What We Do" },
-  { id: "webPages", label: "Web Pages" },
-  { id: "contact", label: "Contact" },
+  {
+    id: "whatWeDo",
+    label: "What We Do",
+    hint: "The intro near the top: headline on the left, video on the right.",
+  },
+  {
+    id: "webPages",
+    label: "Web Pages",
+    hint: "The property-website offer on the homepage and on the Web Pages page.",
+  },
+  {
+    id: "contact",
+    label: "Contact",
+    hint: "The contact block at the bottom of the homepage: heading, phone, email, and social links.",
+  },
 ] as const satisfies readonly AdminTabItem<"whatWeDo" | "webPages" | "contact">[];
 
 type MarketingTabId = (typeof MARKETING_TABS)[number]["id"];
@@ -34,8 +46,8 @@ export function AdminMarketingCopyPage() {
   return (
     <>
       <AdminPageHeader
-        title="Marketing copy"
-        description="Pick a homepage area, edit the words visitors see, then save. Buttons use a destination list — you don’t type page links."
+        title="What We Do, Web Pages, Contact"
+        description="Pick a tab. Change the words visitors see. For buttons, choose where they go from the list — you do not type links."
       />
       <AdminTabs items={MARKETING_TABS} value={tab} onChange={setTab} />
       <div className={tab === "whatWeDo" ? "" : "hidden"}>

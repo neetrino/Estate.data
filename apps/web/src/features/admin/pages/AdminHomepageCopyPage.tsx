@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { AdminBeforeAfterCopyForm } from "@/features/admin/components/AdminBeforeAfterCopyForm";
 import {
   AdminOfferingsCopyForm,
   AdminProcessCopyForm,
-  AdminServiceAreaCopyForm,
   AdminStatsCopyForm,
-  AdminWhyUsCopyForm,
 } from "@/features/admin/components/AdminHomepageCopyForms";
+import {
+  AdminServiceAreaCopyForm,
+  AdminWhyUsCopyForm,
+} from "@/features/admin/components/AdminHomepageGroupedCopyForms";
 import {
   AdminFaqIntroCopyForm,
   AdminFloorPlansCopyForm,
@@ -18,11 +21,65 @@ import { AdminStudioCopyForm } from "@/features/admin/components/AdminStudioCopy
 import { AdminErrorState } from "@/features/admin/components/ui/AdminErrorState";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
 import { AdminPageHeader } from "@/features/admin/components/ui/AdminPageHeader";
+import { AdminTabs } from "@/features/admin/components/ui/AdminTabs";
 import { useAdminQuery } from "@/features/admin/hooks/useAdminQuery";
+import {
+  HOMEPAGE_COPY_TABS,
+  type HomepageCopyTabId,
+} from "@/features/admin/lib/admin-homepage-copy-tabs";
 import { fetchAdminSiteCopy } from "@/features/admin/services/admin-api";
+import type { MarketingCopyBundle } from "@/features/admin/types/admin-data";
 
+type HomepageCopyPanelsProps = {
+  readonly tab: HomepageCopyTabId;
+  readonly data: MarketingCopyBundle;
+  readonly onSaved: () => void;
+};
+
+function HomepageCopyPanels({ tab, data, onSaved }: HomepageCopyPanelsProps) {
+  return (
+    <>
+      <div className={tab === "stats" ? "" : "hidden"}>
+        <AdminStatsCopyForm initial={data.stats} onSaved={onSaved} />
+      </div>
+      <div className={tab === "offerings" ? "" : "hidden"}>
+        <AdminOfferingsCopyForm initial={data.offerings} onSaved={onSaved} />
+      </div>
+      <div className={tab === "floorPlans" ? "" : "hidden"}>
+        <AdminFloorPlansCopyForm initial={data.floorPlans} onSaved={onSaved} />
+      </div>
+      <div className={tab === "packagesIntro" ? "" : "hidden"}>
+        <AdminPackagesIntroCopyForm initial={data.packagesIntro} onSaved={onSaved} />
+      </div>
+      <div className={tab === "portfolioIntro" ? "" : "hidden"}>
+        <AdminPortfolioIntroCopyForm initial={data.portfolioIntro} onSaved={onSaved} />
+      </div>
+      <div className={tab === "beforeAfter" ? "" : "hidden"}>
+        <AdminBeforeAfterCopyForm initial={data.beforeAfter} onSaved={onSaved} />
+      </div>
+      <div className={tab === "process" ? "" : "hidden"}>
+        <AdminProcessCopyForm initial={data.process} onSaved={onSaved} />
+      </div>
+      <div className={tab === "whyUs" ? "" : "hidden"}>
+        <AdminWhyUsCopyForm initial={data.whyUs} onSaved={onSaved} />
+      </div>
+      <div className={tab === "studio" ? "" : "hidden"}>
+        <AdminStudioCopyForm initial={data.studio} onSaved={onSaved} />
+      </div>
+      <div className={tab === "serviceArea" ? "" : "hidden"}>
+        <AdminServiceAreaCopyForm initial={data.serviceArea} onSaved={onSaved} />
+      </div>
+      <div className={tab === "faqIntro" ? "" : "hidden"}>
+        <AdminFaqIntroCopyForm initial={data.faqIntro} onSaved={onSaved} />
+      </div>
+    </>
+  );
+}
+
+/** CMS for the remaining homepage blocks, one section at a time. */
 export function AdminHomepageCopyPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminSiteCopy, []);
+  const [tab, setTab] = useState<HomepageCopyTabId>("stats");
 
   if (loading && !data) {
     return <AdminLoadingState />;
@@ -34,22 +91,11 @@ export function AdminHomepageCopyPage() {
   return (
     <>
       <AdminPageHeader
-        title="Homepage sections"
-        description="Stats, offerings, team, process, and the other homepage blocks that were previously hardcoded."
+        title="Other homepage blocks"
+        description="Pick a tab, change the words, then Save. The top of the homepage, services, and the contact form have their own pages in the menu."
       />
-      <div className="space-y-6">
-        <AdminStatsCopyForm initial={data.stats} onSaved={reload} />
-        <AdminOfferingsCopyForm initial={data.offerings} onSaved={reload} />
-        <AdminProcessCopyForm initial={data.process} onSaved={reload} />
-        <AdminWhyUsCopyForm initial={data.whyUs} onSaved={reload} />
-        <AdminStudioCopyForm initial={data.studio} onSaved={reload} />
-        <AdminServiceAreaCopyForm initial={data.serviceArea} onSaved={reload} />
-        <AdminBeforeAfterCopyForm initial={data.beforeAfter} onSaved={reload} />
-        <AdminPackagesIntroCopyForm initial={data.packagesIntro} onSaved={reload} />
-        <AdminPortfolioIntroCopyForm initial={data.portfolioIntro} onSaved={reload} />
-        <AdminFaqIntroCopyForm initial={data.faqIntro} onSaved={reload} />
-        <AdminFloorPlansCopyForm initial={data.floorPlans} onSaved={reload} />
-      </div>
+      <AdminTabs items={HOMEPAGE_COPY_TABS} value={tab} onChange={setTab} />
+      <HomepageCopyPanels tab={tab} data={data} onSaved={reload} />
     </>
   );
 }

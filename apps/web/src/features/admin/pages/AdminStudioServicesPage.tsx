@@ -18,8 +18,8 @@ export function AdminStudioServicesPage() {
   return (
     <>
       <AdminPageHeader
-        title="Studio services"
-        description="Choose a service to edit its text, images, and pricing."
+        title="Services"
+        description="Click a service to change its words, photo, and prices. Hidden services do not appear on the website."
       />
       {loading ? <AdminLoadingState /> : null}
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
@@ -32,7 +32,7 @@ export function AdminStudioServicesPage() {
             >
               <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  {service.sectionKey.replaceAll("-", " ")}
+                  Click to edit
                 </p>
                 <h2 className="mt-1 truncate text-base font-semibold text-brand-navy">
                   {service.title}
@@ -40,7 +40,7 @@ export function AdminStudioServicesPage() {
                 <p className="mt-1 truncate text-sm text-muted-foreground">{service.eyebrow}</p>
               </div>
               <AdminBadge
-                label={service.published ? "Published" : "Hidden"}
+                label={service.published ? "Visible" : "Hidden"}
                 tone={service.published ? "success" : "muted"}
               />
             </Link>

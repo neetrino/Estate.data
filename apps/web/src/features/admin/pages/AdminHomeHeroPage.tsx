@@ -7,6 +7,7 @@ import { AdminHomeHeroCopyModeField } from "@/features/admin/components/AdminHom
 import { AdminJumpTargetField } from "@/features/admin/components/ui/AdminJumpTargetField";
 import { AdminLoadingState } from "@/features/admin/components/ui/AdminLoadingState";
 import { AdminHeroSlidesPanel } from "@/features/admin/pages/AdminHeroSlidesPage";
+import { AdminTabs, adminTabHidden, type AdminTabItem } from "@/features/admin/components/ui/AdminTabs";
 import { fetchAdminHomeHero, updateAdminHomeHero } from "@/features/admin/services/admin-api";
 import {
   HOME_HERO_EDITOR_BODY_CLASS,
@@ -26,6 +27,21 @@ import {
   HOME_HERO_SUCCESS_ALERT_CLASS,
 } from "@/features/admin/styles/admin-home-hero-classes";
 import type { AdminHomeHero } from "@/features/admin/types/admin-data";
+
+const HOME_HERO_TABS = [
+  {
+    id: "words",
+    label: "Words & buttons",
+    hint: "The title, description, and the two buttons on top of the pictures.",
+  },
+  {
+    id: "pictures",
+    label: "Pictures",
+    hint: "The photos that rotate at the top of the homepage. Add a phone picture when it should look different on a small screen.",
+  },
+] as const satisfies readonly AdminTabItem<"words" | "pictures">[];
+
+type HomeHeroTabId = (typeof HOME_HERO_TABS)[number]["id"];
 
 const EMPTY_FORM: AdminHomeHero = {
   title: "",
@@ -105,6 +121,7 @@ function HomeHeroSection({ title, children }: { readonly title: string; readonly
 export function AdminHomeHeroPage() {
   const { data, loading, error, reload } = useAdminQuery(fetchAdminHomeHero, []);
   const [draft, setDraft] = useState<AdminHomeHero | null>(null);
+  const [tab, setTab] = useState<HomeHeroTabId>("words");
   const [saving, setSaving] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -125,7 +142,7 @@ export function AdminHomeHeroPage() {
     try {
       await updateAdminHomeHero(form);
       setDraft(null);
-      setSuccessMessage("Home hero saved.");
+      setSuccessMessage("Saved. Refresh the website to see the change.");
       reload();
     } catch (saveError) {
       setActionError(saveError instanceof Error ? saveError.message : "Save failed");
@@ -140,10 +157,18 @@ export function AdminHomeHeroPage() {
       {error ? <AdminErrorState message={error} onRetry={reload} /> : null}
       {!loading && !error ? (
         <div className="space-y-6">
-          <form onSubmit={(event) => void handleSave(event)} className={HOME_HERO_EDITOR_CARD_CLASS}>
-            <header className={HOME_HERO_EDITOR_HEADER_CLASS}>
-              <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Home Hero</h1>
-            </header>
+          <header className={HOME_HERO_EDITOR_HEADER_CLASS}>
+            <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Homepage top</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Pick a tab. Words are the text on top of the pictures. Pictures are the photos that
+              change. Press Save on the words tab when you change text.
+            </p>
+          </header>
+          <AdminTabs items={HOME_HERO_TABS} value={tab} onChange={setTab} />
+          <form
+            onSubmit={(event) => void handleSave(event)}
+            className={`${HOME_HERO_EDITOR_CARD_CLASS} ${adminTabHidden(tab === "words")}`}
+          >
             <div className={HOME_HERO_EDITOR_BODY_CLASS}>
               {actionError ? <p className={HOME_HERO_ERROR_ALERT_CLASS}>{actionError}</p> : null}
               {successMessage ? (
@@ -166,8 +191,8 @@ export function AdminHomeHeroPage() {
                   required
                   hint={
                     form.copyMode === "perSlide"
-                      ? "Used when a slide has no title of its own. Line 2’s first word is accent-colored."
-                      : "Use line breaks for the multi-line hero. The first word of the second line uses the accent color."
+                      ? "Used when a slide has no title of its own."
+                      : "Press Enter to split the title onto a new line."
                   }
                 />
                 <HomeHeroField
@@ -213,15 +238,17 @@ export function AdminHomeHeroPage() {
             </div>
             <footer className={HOME_HERO_FOOTER_CLASS}>
               <button type="submit" disabled={saving} className={HOME_HERO_SAVE_BUTTON_CLASS}>
-                {saving ? "Saving…" : "Save hero text"}
+                {saving ? "Saving…" : "Save"}
               </button>
             </footer>
           </form>
-          <AdminHeroSlidesPanel
-            copyMode={form.copyMode}
-            sharedTitle={form.title}
-            sharedDescription={form.description}
-          />
+          <div className={adminTabHidden(tab === "pictures")}>
+            <AdminHeroSlidesPanel
+              copyMode={form.copyMode}
+              sharedTitle={form.title}
+              sharedDescription={form.description}
+            />
+          </div>
         </div>
       ) : null}
     </div>

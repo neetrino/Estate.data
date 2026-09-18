@@ -55,16 +55,16 @@ export function AdminDashboardHero() {
       </div>
       <div className={ADMIN_DASHBOARD_HERO_BODY_CLASS}>
         <div>
-          <p className={ADMIN_DASHBOARD_HERO_EYEBROW_CLASS}>Admin overview</p>
+          <p className={ADMIN_DASHBOARD_HERO_EYEBROW_CLASS}>Website editor</p>
           <h1 className={ADMIN_DASHBOARD_HERO_TITLE_CLASS}>{title}</h1>
           <p className={ADMIN_DASHBOARD_HERO_SUBTITLE_CLASS}>
-            Track content, inquiries, and payments from one command center.
+            Change photos and words on the website, and read messages people send from the contact form.
           </p>
           <div className={ADMIN_DASHBOARD_HERO_ACCENT_CLASS} />
         </div>
         <Button asChild size="lg" className={ADMIN_DASHBOARD_HERO_CTA_CLASS}>
           <Link href="/" target="_blank" rel="noopener noreferrer">
-            View live site
+            Open the website
             <ExternalLink className="size-3.5" aria-hidden />
           </Link>
         </Button>

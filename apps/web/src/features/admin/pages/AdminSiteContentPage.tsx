@@ -11,23 +11,23 @@ import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 const CONTENT_LINKS = [
   {
     href: SUPERSUDO_PANEL_HOME_HERO_PATH,
-    title: "Home Hero",
-    description: "Hero text, buttons, and slider images — same copy on every slide, or unique copy per image.",
+    title: "Homepage top",
+    description: "The big pictures and words at the very top of the homepage.",
   },
   {
     href: SUPERSUDO_PANEL_STUDIO_SERVICES_PATH,
-    title: "Studio services",
-    description: "Edit service section copy, images, and buttons.",
+    title: "Services",
+    description: "Photography, video, tours, and the other service blocks. Click one to edit it.",
   },
   {
     href: SUPERSUDO_PANEL_MARKETING_COPY_PATH,
-    title: "Marketing copy",
-    description: "Homepage intro, Web Pages, and Contact — words, buttons, and the reel.",
+    title: "What We Do, Web Pages, Contact",
+    description: "The intro, the property-website offer, and the contact block at the bottom.",
   },
   {
     href: SUPERSUDO_PANEL_HOMEPAGE_COPY_PATH,
-    title: "Homepage sections",
-    description: "Stats, offerings, team, process, before/after, and other homepage copy.",
+    title: "Other homepage blocks",
+    description: "Numbers, team, process, prices heading, and the rest — one tab at a time.",
   },
 ] as const;
 
@@ -35,8 +35,8 @@ export function AdminSiteContentPage() {
   return (
     <>
       <AdminPageHeader
-        title="Site content"
-        description="Marketing copy and homepage sections managed from the database."
+        title="Other homepage text"
+        description="Choose a card. Each one is a part of the homepage. Change the words, then Save."
       />
       <ul className="grid gap-4 sm:grid-cols-2">
         {CONTENT_LINKS.map((link) => (

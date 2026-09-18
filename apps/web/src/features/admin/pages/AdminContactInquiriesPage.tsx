@@ -63,8 +63,8 @@ export function AdminContactInquiriesPage() {
   return (
     <>
       <AdminPageHeader
-        title="Contact inquiries"
-        description="Submissions from the public contact form."
+        title="Form messages"
+        description="People send these from the contact form. Click a name to read the full message."
         actions={
           <AdminButton variant="secondary" onClick={reload}>
             Refresh
@@ -81,7 +81,7 @@ export function AdminContactInquiriesPage() {
             setLoading(true);
             setSearch(value);
           }}
-          hint="Filter by name, email, or address"
+          hint="Type a name, email, or address to find a message"
         />
       </div>
 
@@ -90,7 +90,7 @@ export function AdminContactInquiriesPage() {
       {actionError ? <AdminErrorState message={actionError} /> : null}
 
       {!loading && !error && items.length === 0 ? (
-        <AdminEmptyState title="No inquiries" message="New form submissions will appear here." />
+        <AdminEmptyState title="No messages yet" message="When someone sends the contact form, it will appear here." />
       ) : null}
 
       {!loading && !error && items.length > 0 ? (
@@ -100,7 +100,7 @@ export function AdminContactInquiriesPage() {
               <th className={ADMIN_TABLE_CELL_CLASS}>Contact</th>
               <th className={ADMIN_TABLE_CELL_CLASS}>Service</th>
               <th className={ADMIN_TABLE_CELL_CLASS}>Date</th>
-              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}>Actions</th>
+              <th className={`${ADMIN_TABLE_CELL_CLASS} text-right`}></th>
             </tr>
           </thead>
           <tbody>
@@ -175,8 +175,8 @@ export function AdminContactInquiriesPage() {
 
       <AdminConfirmDialog
         open={deleteId !== null}
-        title="Delete inquiry?"
-        message="This permanently removes the submission."
+        title="Delete this message?"
+        message="This cannot be undone."
         onCancel={() => setDeleteId(null)}
         onConfirm={() => void handleDelete()}
         busy={busy}

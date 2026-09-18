@@ -19,7 +19,6 @@ export const updateStudioServiceSchema = z.object({
   title: z.string().trim().min(1).max(200).optional(),
   description: z.string().trim().min(1).max(4000).optional(),
   imageUrl: z.string().trim().min(1).max(2048).optional(),
-  galleryUrls: z.array(z.string().trim().min(1).max(2048)).max(20).optional(),
   included: z.array(z.string().trim().min(1).max(200)).max(40).optional(),
   pricing: z
     .array(
@@ -37,6 +36,8 @@ export const updateStudioServiceSchema = z.object({
   startingPrice: z.string().trim().max(40).nullable().optional(),
   pricingUnit: z.string().trim().max(40).nullable().optional(),
   footnote: z.string().trim().max(2000).nullable().optional(),
+  demoLabel: z.string().trim().max(80).nullable().optional(),
+  demoSpaceId: z.string().trim().max(64).nullable().optional(),
   sortOrder: z.number().int().min(0).max(999).optional(),
   published: z.boolean().optional(),
 });

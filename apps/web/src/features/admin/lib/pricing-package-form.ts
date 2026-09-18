@@ -28,20 +28,20 @@ export function validatePricingPackageForm(
   if (input.isCreate) {
     const id = input.id.trim();
     if (!id) {
-      errors.id = "Package id is required.";
+      errors.id = "Please type a short name.";
     } else if (!PACKAGE_ID_PATTERN.test(id)) {
-      errors.id = "Use lowercase letters, numbers, and hyphens.";
+      errors.id = "Use only small letters, numbers, and hyphens.";
     }
   }
 
   if (!input.name.trim()) {
-    errors.name = "Name is required.";
+    errors.name = "Please type a name.";
   }
   if (!input.price.trim()) {
-    errors.price = "Price is required.";
+    errors.price = "Please type a price.";
   }
   if (!hasFeatureLines(input.features)) {
-    errors.features = "Add at least one feature.";
+    errors.features = "Add at least one line of what is included.";
   }
 
   return errors;

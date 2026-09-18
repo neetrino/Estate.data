@@ -13,10 +13,6 @@ function asStringArray(value: unknown): string[] {
   return value.filter((item): item is string => typeof item === "string");
 }
 
-function asAssetUrlArray(value: unknown): string[] {
-  return asStringArray(value).map(normalizePublicAssetUrl);
-}
-
 function asPricing(value: unknown): StudioServiceContent["pricing"] {
   if (!Array.isArray(value)) {
     return [];
@@ -61,7 +57,6 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
         title: row.title,
         description: row.description,
         imageUrl: normalizePublicAssetUrl(row.imageUrl),
-        galleryUrls: asAssetUrlArray(row.galleryUrls),
         included: asStringArray(row.included),
         pricing: asPricing(row.pricing),
         primaryCtaLabel: row.primaryCtaLabel,
@@ -72,6 +67,8 @@ export async function getStudioServiceSections(): Promise<StudioServiceContent[]
           asOptionalText(row.startingPrice) ?? defaults?.startingPrice,
         pricingUnit: asOptionalText(row.pricingUnit) ?? defaults?.pricingUnit,
         footnote: asOptionalText(row.footnote) ?? defaults?.footnote,
+        demoLabel: asOptionalText(row.demoLabel) ?? defaults?.demoLabel,
+        demoSpaceId: asOptionalText(row.demoSpaceId) ?? defaults?.demoSpaceId,
       };
     });
   } catch (error) {

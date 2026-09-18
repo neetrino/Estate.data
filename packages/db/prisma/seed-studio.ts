@@ -3,7 +3,6 @@ import {
   CONTACT_FIELDS,
   HERO_SLIDES,
   STUDIO_SEED_CONTACT_HREF,
-  STUDIO_SEED_GALLERY,
   STUDIO_SEED_SERVICES,
 } from "./seed-studio-data";
 import { SITE_COPY_SEED } from "./seed-site-copy-data";
@@ -23,7 +22,6 @@ export async function seedStudioCms(prisma: PrismaClient): Promise<void> {
       ...service,
       included: [...service.included],
       pricing: [...service.pricing],
-      galleryUrls: [...STUDIO_SEED_GALLERY],
       primaryCtaHref: STUDIO_SEED_CONTACT_HREF,
       secondaryCtaHref: "#gallery",
       published: true,
