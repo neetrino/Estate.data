@@ -26,16 +26,16 @@ const CONTACT_DATE_ICON_CLASS =
   "absolute right-5 top-1/2 size-4 -translate-y-1/2 text-studio-fg";
 
 const CONTACT_DATE_POPOVER_CLASS =
-  "absolute inset-x-0 z-20 mt-1 box-border w-full max-w-full min-w-0 border border-studio-border bg-studio-card p-2.5 sm:p-3";
+  "absolute left-0 z-20 mt-1 w-64 max-w-full border border-studio-border bg-studio-card p-2";
 
 const CONTACT_DATE_NAV_BUTTON_CLASS =
-  "flex size-7 shrink-0 cursor-pointer items-center justify-center text-studio-fg transition-colors hover:bg-studio-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40 sm:size-8";
+  "flex size-6 shrink-0 cursor-pointer items-center justify-center text-studio-fg transition-colors hover:bg-studio-accent/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40";
 
 const CONTACT_DATE_WEEKDAY_CLASS =
-  "flex aspect-square w-full items-center justify-center text-[0.625rem] font-semibold uppercase tracking-wide text-studio-muted sm:text-xs";
+  "flex h-6 items-center justify-center text-[0.625rem] font-semibold uppercase tracking-wide text-studio-muted";
 
 const CONTACT_DATE_DAY_BASE_CLASS =
-  "flex aspect-square w-full min-w-0 items-center justify-center rounded-md text-xs font-medium sm:rounded-lg sm:text-sm";
+  "flex size-8 items-center justify-center rounded-md text-xs font-medium";
 
 const CONTACT_DATE_DAY_INTERACTIVE_CLASS =
   "cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-accent/40";
@@ -150,7 +150,7 @@ export function ContactDatePicker({
             >
               <ChevronLeftIcon />
             </button>
-            <p className="truncate px-1 text-center text-xs font-semibold text-studio-fg sm:text-sm">
+            <p className="truncate px-1 text-center text-xs font-semibold text-studio-fg">
               {formatContactMonthYear(viewMonth)}
             </p>
             <button
@@ -163,7 +163,7 @@ export function ContactDatePicker({
             </button>
           </div>
 
-          <div className="mt-2 grid grid-cols-7 gap-0.5 sm:mt-3 sm:gap-1">
+          <div className="mt-1.5 grid grid-cols-7 gap-0.5">
             {CONTACT_DATE_WEEKDAY_LABELS.map((label) => (
               <span key={label} className={CONTACT_DATE_WEEKDAY_CLASS}>
                 {label}

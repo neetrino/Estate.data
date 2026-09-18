@@ -11,7 +11,7 @@ import { ADMIN_CARD_CLASS } from "@/features/admin/styles/admin-panel-classes";
 const CONTENT_LINKS = [
   {
     href: SUPERSUDO_PANEL_HOME_HERO_PATH,
-    title: "Homepage top",
+    title: "Slides",
     description: "The big pictures and words at the very top of the homepage.",
   },
   {
@@ -35,7 +35,7 @@ export function AdminSiteContentPage() {
   return (
     <>
       <AdminPageHeader
-        title="Other homepage text"
+        title="Content"
         description="Choose a card. Each one is a part of the homepage. Change the words, then Save."
       />
       <ul className="grid gap-4 sm:grid-cols-2">

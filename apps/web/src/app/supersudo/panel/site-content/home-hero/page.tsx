@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdminHomeHeroPage } from "@/features/admin/pages/AdminHomeHeroPage";
 
 export const metadata: Metadata = {
-  title: "Home Hero — Admin",
+  title: "Slides — Admin",
   robots: { index: false, follow: false },
 };
 

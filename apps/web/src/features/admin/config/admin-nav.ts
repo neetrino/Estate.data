@@ -48,13 +48,13 @@ const CONTENT_NAV_ITEMS: AdminNavItem[] = [
   { id: "faq", label: "Questions", href: SUPERSUDO_PANEL_FAQ_PATH, icon: "faq" },
   {
     id: "home-hero",
-    label: "Homepage top",
+    label: "Slides",
     href: SUPERSUDO_PANEL_HOME_HERO_PATH,
     icon: "home-hero",
   },
   {
     id: "site-content",
-    label: "Other homepage text",
+    label: "Content",
     href: SUPERSUDO_PANEL_SITE_CONTENT_PATH,
     icon: "site-content",
   },
