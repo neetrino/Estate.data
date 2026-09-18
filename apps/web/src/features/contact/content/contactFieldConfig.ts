@@ -60,7 +60,7 @@ export function contactServiceLabel(value: string): string {
 }
 
 export const DEFAULT_CONTACT_FIELD_SETTINGS: readonly ContactFieldSetting[] = [
-  { fieldKey: "name", label: "Name", placeholder: "Jane Smith", mode: "required", sortOrder: 10 },
+  { fieldKey: "name", label: "Full name", placeholder: "Jane Smith", mode: "required", sortOrder: 10 },
   { fieldKey: "company", label: "Company", placeholder: "Brokerage or studio", mode: "optional", sortOrder: 20 },
   { fieldKey: "email", label: "Email", placeholder: "you@example.com", mode: "required", sortOrder: 30 },
   { fieldKey: "phone", label: "Phone", placeholder: "(310) 555-0142", mode: "optional", sortOrder: 40 },

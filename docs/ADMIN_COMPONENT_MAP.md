@@ -15,16 +15,16 @@
 | Services | `/supersudo/panel/site-content/studio-services` |
 | Prices | `/supersudo/panel/pricing` |
 | Questions | `/supersudo/panel/faq` |
-| Homepage top | `/supersudo/panel/site-content/home-hero` |
-| Other homepage text | `/supersudo/panel/site-content` (hub) |
+| Slides | `/supersudo/panel/site-content/home-hero` |
+| Content | `/supersudo/panel/site-content` (hub) |
 | Form messages | `/supersudo/panel/contact-inquiries` |
 | Reports | `/supersudo/panel/analytics` |
 
-Hub-ից (`Other homepage text`) բացվում են նաև.
+Hub-ից (`Content`) բացվում են նաև.
 
 | Card | URL |
 |---|---|
-| Homepage top | `/supersudo/panel/site-content/home-hero` |
+| Slides | `/supersudo/panel/site-content/home-hero` |
 | Services | `/supersudo/panel/site-content/studio-services` |
 | What We Do, Web Pages, Contact | `/supersudo/panel/site-content/marketing-copy` |
 | Other homepage blocks | `/supersudo/panel/site-content/homepage-sections` |
@@ -40,7 +40,7 @@ Contact form-ի դաշտերը (label / placeholder / required)՝ `/supersudo/pa
 | Կայքի բլոկ (component) | Ինչ է երևում | Admin |
 |---|---|---|
 | `Navbar` + `LogoLink` | Լոգո, անուն, կարճ տող լոգոյի տակ | **Other homepage blocks → Site name** (`brand`) |
-| `StudioHeroSection` | Վերևի մեծ նկարներ, վերնագիր, 2 կոճակ, small label | **Homepage top → Words & buttons** (տեքստ, small label, կոճակներ, copy mode) և **Pictures** (slides) |
+| `StudioHeroSection` | Վերևի մեծ նկարներ, վերնագիր, 2 կոճակ, small label | **Slides → Words & buttons** (տեքստ, small label, կոճակներ, copy mode) և **Pictures** (slides) |
 | `StudioWhatWeDo` | «What we do» վերնագիր, տեքստ, 2 կոճակ, reel վիդեո | **What We Do, Web Pages, Contact → What We Do** |
 | `StudioStats` (What We Do-ի տակ) | Մեծ թվեր (`40% Faster…`) | **Other homepage blocks → Numbers** |
 | `StudioOfferings` | Համարակալված «what we offer» քարտեր | **Other homepage blocks → What we offer** |

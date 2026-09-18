@@ -1,6 +1,6 @@
 export const CONTACT_FORM_COPY = {
   fields: {
-    name: { label: "Name", placeholder: "Jane Smith" },
+    name: { label: "Full name", placeholder: "Jane Smith" },
     email: { label: "Email", placeholder: "you@example.com" },
     propertyAddress: {
       label: "Property Address",

@@ -4,7 +4,7 @@ const clientEnvSchema = z.object({
   NEXT_PUBLIC_API_URL: z.string().url().optional(),
   NEXT_PUBLIC_USE_MOCK_API: z
     .enum(["true", "false"])
-    .default("true")
+    .default("false")
     .transform((value) => value === "true"),
 });
 
@@ -15,7 +15,7 @@ function parseClientEnv(): ClientEnv {
   const result = clientEnvSchema.safeParse({
     NEXT_PUBLIC_API_URL: rawApiUrl || undefined,
     NEXT_PUBLIC_USE_MOCK_API:
-      process.env.NEXT_PUBLIC_USE_MOCK_API ?? "true",
+      process.env.NEXT_PUBLIC_USE_MOCK_API ?? "false",
   });
 
   if (!result.success) {

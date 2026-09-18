@@ -159,7 +159,7 @@ export function AdminHomeHeroPage() {
       {!loading && !error ? (
         <div className="space-y-6">
           <header className={HOME_HERO_EDITOR_HEADER_CLASS}>
-            <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Homepage top</h1>
+            <h1 className={HOME_HERO_EDITOR_TITLE_CLASS}>Slides</h1>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               Pick a tab. Words are the text on top of the pictures. Pictures are the photos that
               change. Press Save on the words tab when you change text.

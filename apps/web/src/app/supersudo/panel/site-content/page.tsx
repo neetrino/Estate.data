@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdminSiteContentPage } from "@/features/admin/pages/AdminSiteContentPage";
 
 export const metadata: Metadata = {
-  title: "Site content — Admin",
+  title: "Content — Admin",
   robots: { index: false, follow: false },
 };
 
