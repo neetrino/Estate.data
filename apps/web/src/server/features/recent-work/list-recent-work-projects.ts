@@ -36,26 +36,29 @@ function toRecentWorkProjectDto(project: {
   id: string;
   imageUrl: string;
   imageAlt: string;
+  category: string;
 }): RecentWorkProjectDto {
   return {
     id: project.id,
     imageSrc: normalizePublicAssetUrl(project.imageUrl),
     imageAlt: project.imageAlt,
+    mediaCategory: project.category,
   };
 }
 
-/** Published portfolio subset for the home page, ordered by sortOrder. */
+/** Published portfolio tiles for the home page, ordered by sortOrder. */
 export async function listRecentWorkProjects(
   limit: number,
 ): Promise<RecentWorkProjectDto[]> {
   const projects = await getPrisma().portfolioProject.findMany({
-    where: { published: true, featuredOnHome: true },
+    where: { published: true },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
     take: limit,
     select: {
       id: true,
       imageUrl: true,
       imageAlt: true,
+      category: true,
     },
   });
 
