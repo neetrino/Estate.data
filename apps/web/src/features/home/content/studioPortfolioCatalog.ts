@@ -10,6 +10,7 @@ export type StudioPortfolioCard = {
   readonly imageAlt: string;
   readonly hasVideo: boolean;
   readonly has3D: boolean;
+  readonly mediaCategory?: string;
 };
 
 type StudioPortfolioCatalogEntry = Omit<StudioPortfolioCard, "imageAlt">;

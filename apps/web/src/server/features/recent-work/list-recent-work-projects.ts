@@ -36,11 +36,13 @@ function toRecentWorkProjectDto(project: {
   id: string;
   imageUrl: string;
   imageAlt: string;
+  category: string;
 }): RecentWorkProjectDto {
   return {
     id: project.id,
     imageSrc: normalizePublicAssetUrl(project.imageUrl),
     imageAlt: project.imageAlt,
+    mediaCategory: project.category,
   };
 }
 
@@ -56,6 +58,7 @@ export async function listRecentWorkProjects(
       id: true,
       imageUrl: true,
       imageAlt: true,
+      category: true,
     },
   });
 

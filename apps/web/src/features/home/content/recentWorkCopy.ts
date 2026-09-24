@@ -7,6 +7,7 @@ export type RecentWorkProject = {
   readonly id: string;
   readonly imageSrc: string;
   readonly imageAlt: string;
+  readonly mediaCategory?: string;
 };
 
 function toRecentWorkProject(card: StudioPortfolioCard): RecentWorkProject {

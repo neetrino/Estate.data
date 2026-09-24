@@ -9,6 +9,9 @@ import {
   type StudioPortfolioCard,
 } from "@/features/home/content/studioPortfolioCatalog";
 
+const VIDEO_MEDIA_CATEGORY = "video";
+const VIDEO_FILTER = "Video";
+
 const CATEGORY_KEYWORDS: readonly { filter: string; pattern: RegExp }[] = [
   { filter: "Luxury Homes", pattern: /luxury|estate|beverly|malibu|glass house/iu },
   { filter: "Residential", pattern: /residence|residential|house|loft|villa|condo/iu },
@@ -26,22 +29,29 @@ function inferCategories(haystack: string): string[] {
   );
 }
 
+function categoriesFor(haystack: string, mediaCategory: string | undefined): string[] {
+  const inferred = inferCategories(haystack);
+  if (mediaCategory !== VIDEO_MEDIA_CATEGORY || inferred.includes(VIDEO_FILTER)) {
+    return inferred;
+  }
+  return [...inferred, VIDEO_FILTER];
+}
+
 function derivePortfolioCard(project: RecentWorkProject): StudioPortfolioCard {
   const parsed = parseRecentWorkAlt(project.imageAlt);
   const haystack = project.imageAlt;
-  const hasVideo = portfolioHasVideo(haystack);
-  const has3D = portfolioHas3D(haystack);
 
   return {
     id: project.id,
     title: parsed.title,
     location: parsed.location ?? "",
     services: parsed.services,
-    categories: inferCategories(haystack),
+    categories: categoriesFor(haystack, project.mediaCategory),
     imageSrc: project.imageSrc,
     imageAlt: project.imageAlt,
-    hasVideo,
-    has3D,
+    hasVideo: portfolioHasVideo(haystack),
+    has3D: portfolioHas3D(haystack),
+    mediaCategory: project.mediaCategory,
   };
 }
 
