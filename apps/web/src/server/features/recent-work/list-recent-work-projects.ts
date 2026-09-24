@@ -44,12 +44,12 @@ function toRecentWorkProjectDto(project: {
   };
 }
 
-/** Published portfolio subset for the home page, ordered by sortOrder. */
+/** Published portfolio tiles for the home page, ordered by sortOrder. */
 export async function listRecentWorkProjects(
   limit: number,
 ): Promise<RecentWorkProjectDto[]> {
   const projects = await getPrisma().portfolioProject.findMany({
-    where: { published: true, featuredOnHome: true },
+    where: { published: true },
     orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
     take: limit,
     select: {

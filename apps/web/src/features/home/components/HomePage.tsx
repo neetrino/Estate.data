@@ -1,4 +1,4 @@
-import { DEFAULT_RECENT_WORK_LIMIT } from "@estate/db";
+import { MAX_RECENT_WORK_LIMIT } from "@/server/features/recent-work/recent-work.constants";
 import { HomeLandingPage } from "@/features/home/landing";
 import { fetchRecentWorkProjects } from "@/features/home/services/fetchRecentWorkProjects";
 import { getHomeHeroForPage } from "@/server/features/home-hero/get-home-hero";
@@ -12,7 +12,7 @@ import { getMarketingCopy } from "@/server/features/site-copy/get-site-copy";
 export async function HomePage() {
   const [projects, hero, slides, services, pricing, faq, contactFields, marketingCopy] =
     await Promise.all([
-      fetchRecentWorkProjects(DEFAULT_RECENT_WORK_LIMIT),
+      fetchRecentWorkProjects(MAX_RECENT_WORK_LIMIT),
       getHomeHeroForPage(),
       getHomeHeroSlides(),
       getStudioServiceSections(),

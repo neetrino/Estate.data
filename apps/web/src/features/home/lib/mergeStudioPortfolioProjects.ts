@@ -5,7 +5,6 @@ import {
 } from "@/features/home/content/parseRecentWorkAlt";
 import type { RecentWorkProject } from "@/features/home/content/recentWorkCopy";
 import {
-  formatPortfolioAlt,
   STUDIO_PORTFOLIO_CATALOG,
   type StudioPortfolioCard,
 } from "@/features/home/content/studioPortfolioCatalog";
@@ -46,59 +45,27 @@ function derivePortfolioCard(project: RecentWorkProject): StudioPortfolioCard {
   };
 }
 
-function overlayCatalogCard(
-  entry: StudioPortfolioCard,
-  cmsById: Map<string, RecentWorkProject>,
-  cmsByTitle: Map<string, RecentWorkProject>,
-): StudioPortfolioCard {
-  const cms = cmsById.get(entry.id) ?? cmsByTitle.get(entry.title);
-  if (!cms) {
-    return entry;
+const CATALOG_BY_ID = new Map(
+  STUDIO_PORTFOLIO_CATALOG.map((entry) => [entry.id, entry]),
+);
+
+function withCatalogCategories(card: StudioPortfolioCard): StudioPortfolioCard {
+  if (card.categories.length > 0) {
+    return card;
   }
-
-  const parsed = parseRecentWorkAlt(cms.imageAlt);
-  const haystack = `${cms.imageAlt} ${parsed.title}`;
-  const inferred = inferCategories(haystack);
-  const structured = Boolean(parsed.location) || parsed.services.length > 0;
-
-  return {
-    ...entry,
-    title: parsed.title || entry.title,
-    location: parsed.location ?? entry.location,
-    services: parsed.services.length > 0 ? parsed.services : entry.services,
-    categories: inferred.length > 0 ? inferred : entry.categories,
-    imageSrc: cms.imageSrc,
-    imageAlt: cms.imageAlt || formatPortfolioAlt(entry),
-    hasVideo: portfolioHasVideo(haystack) || (!structured && entry.hasVideo),
-    has3D: portfolioHas3D(haystack) || (!structured && entry.has3D),
-  };
+  const catalog = CATALOG_BY_ID.get(card.id);
+  if (!catalog) {
+    return card;
+  }
+  return { ...card, categories: catalog.categories };
 }
 
 /**
- * Always show the master selected-work set, overlaying CMS images when ids
- * or titles match. Extra published CMS tiles are appended.
+ * Published CMS rows are the portfolio. Titles come from the saved alt text.
+ * The static catalog only fills filter categories when the alt has none.
  */
 export function mergeStudioPortfolioProjects(
   projects: readonly RecentWorkProject[],
 ): StudioPortfolioCard[] {
-  const cmsById = new Map(projects.map((project) => [project.id, project]));
-  const cmsByTitle = new Map(
-    projects.map((project) => [parseRecentWorkAlt(project.imageAlt).title, project]),
-  );
-  const catalogIds = new Set(STUDIO_PORTFOLIO_CATALOG.map((entry) => entry.id));
-  const catalogTitles = new Set(STUDIO_PORTFOLIO_CATALOG.map((entry) => entry.title));
-
-  const cards = STUDIO_PORTFOLIO_CATALOG.map((entry) =>
-    overlayCatalogCard(entry, cmsById, cmsByTitle),
-  );
-
-  for (const project of projects) {
-    const title = parseRecentWorkAlt(project.imageAlt).title;
-    if (catalogIds.has(project.id) || catalogTitles.has(title)) {
-      continue;
-    }
-    cards.push(derivePortfolioCard(project));
-  }
-
-  return cards;
+  return projects.map((project) => withCatalogCategories(derivePortfolioCard(project)));
 }

@@ -64,16 +64,17 @@ function HeroSlideMedia({
   );
 }
 
-/** Crossfading hero images. After the last slide, playback continues from the first. */
-export function StudioHeroSlideshow({
-  slides,
-  onActiveIndexChange,
-}: StudioHeroSlideshowProps) {
+function useHeroSlideIndex(
+  length: number,
+  reduceMotion: boolean,
+  onActiveIndexChange?: (index: number) => void,
+): number {
   const [index, setIndex] = useState(0);
-  const reduceMotion = usePrefersReducedMotion();
-  const length = slides.length;
   const activeIndex = length === 0 ? 0 : index % length;
-  const active = slides[activeIndex];
+
+  useEffect(() => {
+    onActiveIndexChange?.(activeIndex);
+  }, [activeIndex, onActiveIndexChange]);
 
   useEffect(() => {
     if (length < 2 || reduceMotion) {
@@ -81,15 +82,23 @@ export function StudioHeroSlideshow({
     }
 
     const timerId = window.setInterval(() => {
-      setIndex((current) => {
-        const next = nextSlideIndex(current, length);
-        onActiveIndexChange?.(next);
-        return next;
-      });
+      setIndex((current) => nextSlideIndex(current, length));
     }, HERO_SLIDE_INTERVAL_MS);
 
     return () => window.clearInterval(timerId);
-  }, [length, reduceMotion, onActiveIndexChange]);
+  }, [length, reduceMotion]);
+
+  return activeIndex;
+}
+
+/** Crossfading hero images. After the last slide, playback continues from the first. */
+export function StudioHeroSlideshow({
+  slides,
+  onActiveIndexChange,
+}: StudioHeroSlideshowProps) {
+  const reduceMotion = usePrefersReducedMotion();
+  const activeIndex = useHeroSlideIndex(slides.length, reduceMotion, onActiveIndexChange);
+  const active = slides[activeIndex];
 
   if (!active) {
     return null;
@@ -115,7 +124,7 @@ export function StudioHeroSlideshow({
       ))}
       <div className="studio-veil absolute inset-0" />
       <div className="absolute inset-0 bg-studio-bg/25" />
-      {length > 1 && !reduceMotion ? (
+      {slides.length > 1 && !reduceMotion ? (
         <div
           key={activeIndex}
           className="studio-hero-progress absolute bottom-0 left-0 h-0.5 w-full bg-studio-accent"
