@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@/shared/analytics/GoogleAnalytics";
 import {
   GoogleTagManager,
   GoogleTagManagerNoscript,
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-studio-bg font-sans text-studio-fg">
         <GoogleTagManagerNoscript />
         <GoogleTagManager />
+        <GoogleAnalytics />
         <SiteChromeGate>
           <div className="flex min-h-0 flex-1 flex-col">{children}</div>
         </SiteChromeGate>

@@ -86,8 +86,9 @@ Admin **Insights → Analytics** shows:
 - **Open Google Analytics** for users, sessions, page views, traffic, device, country, conversion
 - GTM status (`NEXT_PUBLIC_GTM_ID`)
 - Public site pushes `service_view` and `service_click` to `dataLayer`
+- GA4 Google tag `G-B9B7P2G10R` loads on every page via `GoogleAnalytics` (override with `NEXT_PUBLIC_GA_MEASUREMENT_ID`)
 
-Set `NEXT_PUBLIC_GTM_ID` and optional `NEXT_PUBLIC_GOOGLE_ANALYTICS_URL`. IDs are not invented in this repo.
+Set optional `NEXT_PUBLIC_GTM_ID` and `NEXT_PUBLIC_GOOGLE_ANALYTICS_URL`. The GA4 measurement id is installed in `apps/web/src/shared/analytics/gaConfig.ts`.
 
 ## 10. Web Pages as a separate page — Done
 
